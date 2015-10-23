@@ -1,0 +1,46 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+        pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="hpanel">
+            <div class="panel-heading">
+                <div class="row">
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <span class="pull-left">
+                            <a class="btn btn-info" href="#/configuration/general"  title="Back" ><span class="fa fa-arrow-circle-left fa-lg "></span> Back</a>
+                        </span>
+                    </div>
+
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="panel-body">
+                <ul class="nav nav-tabs" data-ng-init="templateCategory = 'department'">
+        <li class="active"><a  data-ng-click="templateCategory = 'department'" data-toggle="tab"> DEPARTMENT</a></li>
+        <li class=""><a  data-ng-click="templateCategory = 'predefined'" data-toggle="tab"> PRE DEFINED REPLY</a></li>
+
+    </ul>
+
+                <div class="tab-content">
+
+        <div class="tab-pane" data-ng-class="{'active' : templateCategory == 'department'}" id="step1-dashboard">
+        <div data-ng-include src="'views/configuration/general/department.html'"></div>
+
+        </div>
+        <div class="tab-pane"  data-ng-class="{'active' : templateCategory == 'predefined'}" id="step1-config">
+            <div data-ng-include src="'views/configuration/general/predefined-reply.html'"></div>
+        </div>
+
+    </div>
+
+             </div>
+            </div>
+        </div>
+
+
+</div>

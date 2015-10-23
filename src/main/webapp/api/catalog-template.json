@@ -1,0 +1,224 @@
+[
+    {
+        "id": 1,
+        "desc": "Centos 6.5 (64 bit)",
+        "zerocost": "0",
+        "url": "http://192.156.125.33:8383/jade-art-admin/app/index.html#/view/",
+        "format": "VHD",
+        "osCategory": {
+            "id": 1,
+            "name": "CentOS",
+            "osTypeList": [
+                {
+                    "id": 1,
+                    "name": "CentOS 6.5 (32-bit)"
+                },
+                {
+                    "id": 2,
+                    "name": "CentOS 6.5 (64-bit)"
+                }
+            ]
+        },
+        "osType": {
+            "id": 2,
+            "name": "Linux"
+        },
+        "detaileddescription": "CentOS (abbreviated from Community Enterprise Operating System) is a Linux distribution that attempts to provide a free, enterprise-class, community-supported computing platform which aims to be functionally compatible with its upstream source, Red Hat Enterprise Linux (RHEL).[5][6] In January 2014, CentOS announced the official joining with Red Hat while staying independent from RHEL,[7] under a new CentOS governing board.[8]The first CentOS release in May 2004, numbered as CentOS version 2, was forked from RHEL version 2.1AS.[1] Since the release of version 7.0, CentOS officially supports only the x86-64 architecture, while versions older than 7.0-1406 also support IA-32 with Physical Address Extension (PAE), with additional architectures supported in CentOS versions older than 4.7. As of June 2015, beta releases of CentOS 7 are available for the IA-32 architecture[9] and for the AArch64 variant of the ARM architecture.[10]",
+        "template": {
+            "id": 3,
+            "name": "Centos 6.5 (64 bit)"
+        },
+        "zone": {
+            "id": 1,
+            "name": "Beijing"
+        },
+        "hypervisor": "XenServer",
+        "image": "centos_logo.png",
+        "computeOffering": {
+            "id": 1,
+            "name": "Small Instance"
+        },
+        "diskOffering": {
+            "id": 1,
+            "name": "Small"
+        },
+        "ip": "10.1.10.92",
+        "network": {
+            "id": 2,
+            "name": "Isolated"
+        },
+        "state": "Ready",
+        "networkname": "DefaultIsolatedNetworkOfferingwithSourceNATService",
+        "description": "Offering for Isolated Networks with Source NAT Service",
+        "networkrate": "200",
+        "supportedservices": "Lb,VPN,SourceNAT,DHCP,PortForwarding,DNS,Firewall"
+    },
+    {
+        "id": 2,
+        "desc": "Windows 2012R ISO(64 bit)",
+        "zerocost": "0",
+        "url": "http://192.156.125.33:8383/jade-art-admin/app/index.html#/view/",
+        "format": "VHD",
+        "osCategory": {
+            "id": 1,
+            "name": "Windows",
+            "osTypeList": [
+                {
+                    "id": 1,
+                    "name": "Windows 2012R ISO (32-bit)"
+                },
+                {
+                    "id": 2,
+                    "name": "Windows 2012R ISO (64-bit)"
+                }
+            ]
+        },
+        "osType": {
+            "id": 2,
+            "name": "Windows"
+        },
+        "detaileddescription": "Windows Server 2012 R2 is the successor to Windows Server 2012, Microsoft’s enterprise server operating system. Developed under the Windows Server Blue codename, Windows Server 2012 R2 is expected to make its official debut in late 2013, with pricing to be announced at a later time.Among its many improvements, Windows Server 2012 R2 will include an enhanced Hyper-V hypervisor (Hyper-V 2012 R2) that is expected to provide the ability to compress virtual machines (VMs) during live migrations, automatic reallocation of memory between VMs running Linux as a guest on Hyper-V hosts; remote direct memory access (RDMA) support during live migrations, VM live cloning, and support for shared VHDX files.",
+        "template": {
+            "id": 1,
+            "name": "Windows 2012R ISO"
+        },
+        "zone": {
+            "id": 2,
+            "name": "Liaoning"
+        },
+        "hypervisor": "HyperV",
+        "image": "windows_logo.png",
+        "computeOffering": {
+            "id": 2,
+            "name": "Medium Instance"
+        },
+        "diskOffering": {
+            "id": 2,
+            "name": "Medium"
+        },
+        "ip": "10.1.10.93",
+        "vpc": "AZ - Restricted",
+        "network": {
+            "id": 1,
+            "name": "Shared Network"
+        },
+        "state": "Ready",
+        "networkname": "DefaultSharedNetworkOfferingwithSGService",
+        "description": "Offering for Isolated Networks with Source NAT Service",
+        "networkrate": "200",
+        "supportedservices": "Lb,VPN,SourceNAT,DHCP,PortForwarding,DNS,Firewall"
+    },
+    {
+        "id": 3,
+        "desc": "Windows Server 2008(64-bit)",
+        "zerocost": "0",
+        "url": "http://192.156.125.33:8383/jade-art-admin/app/index.html#/view/",
+        "format": "VHD",
+        "osCategory": {
+            "id": 1,
+            "name": "Windows",
+            "osTypeList": [
+                {
+                    "id": 1,
+                    "name": " Windows Server 2008(32-bit)"
+                },
+                {
+                    "id": 2,
+                    "name": " Windows Server 2008(64-bit)"
+                }
+            ]
+        },
+        "osType": {
+            "id": 2,
+            "name": " Windows"
+        },
+        "detaileddescription": "Windows Server 2008  is the  Microsoft’s enterprise server operating system. Developed under the Windows Server Blue codename, Windows Server 2008 R2 is expected to make its official debut in late 2008, with pricing to be announced at a later time.Among its many improvements, Windows Server 2008 R2 will include an enhanced Hyper-V hypervisor (Hyper-V 2008 R2) that is expected to provide the ability to compress virtual machines (VMs) during live migrations, automatic reallocation of memory between VMs running Linux as a guest on Hyper-V hosts; remote direct memory access (RDMA) support during live migrations, VM live cloning, and support for shared VHDX files.",
+        "template": {
+            "id": 2,
+            "name": " Windows Server 2008"
+        },
+        "zone": {
+            "id": 2,
+            "name": "Liaoning"
+        },
+        "hypervisor": "KVM",
+        "image": "windows_2008_logo.png",
+        "computeOffering": {
+            "id": 2,
+            "name": "Large Instance"
+        },
+        "diskOffering": {
+            "id": 2,
+            "name": "Large"
+        },
+        "ip": "10.1.30.93",
+        "vpc": "AZ - Standard",
+        "network": {
+            "id": 1,
+            "name": "Shared Network"
+        },
+        "state": "Ready",
+        "networkname": "DefaultSharedNetworkOffering",
+        "description": "Offering for Isolated Networks with Source NAT Service",
+        "networkrate": "200",
+        "supportedservices": "Lb,VPN,SourceNAT,DHCP,PortForwarding,DNS,Firewall"
+
+    },
+    {
+        "id": 4,
+        "desc": "Windows 2012R ISO(64 bit)",
+        "zerocost": "0",
+        "url": "http://192.156.125.33:8383/jade-art-admin/app/index.html#/view/",
+        "format": "VHD",
+        "osCategory": {
+            "id": 1,
+            "name": "Windows",
+            "osTypeList": [
+                {
+                    "id": 1,
+                    "name": "Windows 2012R ISO (32-bit)"
+                },
+                {
+                    "id": 2,
+                    "name": "Windows 2012R ISO (64-bit)"
+                }
+            ]
+        },
+        "osType": {
+            "id": 2,
+            "name": "Windows"
+        },
+        "detaileddescription": "Windows Server 2012 R2 is the successor to Windows Server 2012, Microsoft’s enterprise server operating system. Developed under the Windows Server Blue codename, Windows Server 2012 R2 is expected to make its official debut in late 2013, with pricing to be announced at a later time.Among its many improvements, Windows Server 2012 R2 will include an enhanced Hyper-V hypervisor (Hyper-V 2012 R2) that is expected to provide the ability to compress virtual machines (VMs) during live migrations, automatic reallocation of memory between VMs running Linux as a guest on Hyper-V hosts; remote direct memory access (RDMA) support during live migrations, VM live cloning, and support for shared VHDX files.",
+        "template": {
+            "id": 1,
+            "name": "Windows 2012R ISO"
+        },
+        "zone": {
+            "id": 2,
+            "name": "Henan"
+        },
+        "hypervisor": "VMware",
+        "image": "windows_logo.png",
+        "computeOffering": {
+            "id": 2,
+            "name": "Medium Instance"
+        },
+        "diskOffering": {
+            "id": 2,
+            "name": "Medium"
+        },
+        "ip": "10.168.10.48",
+        "vpc": "AZ - Public",
+        "network": {
+            "id": 2,
+            "name": "Isolated Network"
+        },
+        "state": "Ready",
+        "networkname": "DefaultIsolatedNetworkOfferingForVPCNetworkswithInternalLB",
+        "description": "Offering for Isolated Networks with Source NAT Service",
+        "networkrate": "200",
+        "supportedservices": "Lb,VPN,SourceNAT,DHCP,PortForwarding,DNS,Firewall"
+
+
+    }
+]
