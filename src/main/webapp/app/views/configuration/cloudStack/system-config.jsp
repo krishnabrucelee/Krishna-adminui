@@ -13,7 +13,7 @@
 
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <span class="pull-left">
-                                <a class="btn btn-info" href="#/configuration/cloudstack" title="Back" ><span class="fa fa-arrow-circle-left fa-lg "></span> Back</a>
+                                <a class="btn btn-info" href="#/configuration/cloudstack" title="Back" ><span class="fa fa-arrow-circle-left fa-lg "></span> <fmt:message key="back" bundle="${msg}" /></a>
                             </span>
                         </div>
 
@@ -25,7 +25,7 @@
                     <div class="col-md-7 col-sm-7 ">
                         <div class="form-group" data-ng-class="{'text-danger': configForm.URL.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">URL:
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="url" bundle="${msg}" />:
                                     <span class="text-danger">*</span>
                                 </label>
 
@@ -46,7 +46,7 @@
 
                         <div class="form-group" data-ng-class="{'text-danger': configForm.rootAPI.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">Root API Key:
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="rootapikey" bundle="${msg}" />:
                                     <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-7 col-sm-7">
@@ -59,7 +59,7 @@
                         </div>
                         <div class="form-group" data-ng-class="{'text-danger': configForm.secretKey.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">Secret Key:
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="secretkey" bundle="${msg}" />:
                                     <span class="text-danger">*</span>
                                 </label>
 
@@ -76,7 +76,7 @@
                         <div class="form-group" >
                             <div class="row">
                                 <span class="pull-right">
-                                    <button class="btn btn-info" type="submit" ng-disabled="form.configForm.$invalid" >Save</button>
+                                    <button class="btn btn-info" type="submit" ng-disabled="form.configForm.$invalid" ><fmt:message key="save" bundle="${msg}" /></button>
                                 </span>
                             </div>
                         </div>

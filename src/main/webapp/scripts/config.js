@@ -98,7 +98,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             url: "/configuration",
             templateUrl: VIEW_URL +  "views/common/content.jsp",
             data: {
-                pageTitle: 'Configuration'
+                pageTitle: 'configuration'
             }
         })
 
@@ -115,7 +115,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             url: "/dashboard/cloudConfig",
             templateUrl: VIEW_URL +  "views/configuration/cloudStack/system-config.jsp",
             data: {
-                pageTitle: 'System Configuration'
+                pageTitle: 'system.configuration'
             }
         })
 

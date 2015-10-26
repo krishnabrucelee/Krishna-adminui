@@ -40,6 +40,21 @@
 	                            <span ng-switch-when="true"><fmt:message key="storage" bundle="${msg}" /></span>
                             </span>
 
+                             <span ng-if="state.data.pageTitle === 'configuration'">
+	                            <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}"><fmt:message key="configuration" bundle="${msg}" /></a>
+	                            <span ng-switch-when="true"><fmt:message key="configuration" bundle="${msg}" /></span>
+                            </span>
+                            <span ng-if="state.data.pageTitle === 'cloudStack'">
+	                            <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}"><fmt:message key="cloudStack" bundle="${msg}" /></a>
+	                            <span ng-switch-when="true"><fmt:message key="cloudStack" bundle="${msg}" /></span>
+                            </span>
+
+							<span ng-if="state.data.pageTitle === 'system.configuration'">
+	                            <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}"><fmt:message key="system.configuration" bundle="${msg}" /></a>
+	                            <span ng-switch-when="true"><fmt:message key="system.configuration" bundle="${msg}" /></span>
+                            </span>
+
+
 
                         </li>
                     </ol>
