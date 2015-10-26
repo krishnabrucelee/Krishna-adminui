@@ -40,7 +40,6 @@ function globalConfig() {
         HTTP_POST: 'POST',
         HTTP_PUT: 'PUT',
         HTTP_DELETE: 'DELETE',
-        APP_URL: "http://localhost:8080/api/",
         NOTIFICATION_TEMPLATE: 'views/notification/notify.html',
         CONTENT_LIMIT: 10,
         APP_URL: "http://localhost:8080/api/",

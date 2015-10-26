@@ -19,7 +19,7 @@ angular.module('panda-ui-admin', []).controller("loginCtrl", function ($scope, $
                 'Content-Type': 'application/json'
             };
 
-            $http({method: 'POST', url: globalConfig.VIEW_URL + 'authenticate', headers: headers})
+            $http({method: 'POST', url: globalConfig.APP_URL + 'authenticate', headers: headers})
             .success(function (result) {
                 $window.sessionStorage.token = result.token;
                 window.location.href = "index#/dashboard";
