@@ -485,7 +485,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "network/list",
                 templateUrl: VIEW_URL +  "views/servicecatalog/network.jsp",
                 data: {
-                    pageTitle: 'Network'
+                    pageTitle: 'common.network'
                 }
             })
 
