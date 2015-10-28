@@ -456,13 +456,15 @@ function deleteCtrl($scope, $state, $stateParams, globalConfig, notify) {
 
 }
 
-function computeListCtrl($scope, $state, modalService, $window, notify, dialogService, crudService) {
+function computeListCtrl($scope, $state, $stateParams,modalService, $window, notify, dialogService, crudService) {
 
     $scope.computeList = {};
     $scope.paginationObject = {};
     $scope.computeForm = {};
     $scope.global = crudService.globalConfig;
-    $scope.test = "test";
+    $scope.compute = {
+    		zone: {}
+    };
     // Compute Offer List
     $scope.list = function (pageNumber) {
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
@@ -480,12 +482,18 @@ function computeListCtrl($scope, $state, modalService, $window, notify, dialogSe
     $scope.list(1);
 
     // Open dialogue box to create Compute Offer
-    $scope.compute = {};
+
 
     $scope.save = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
             var compute = $scope.compute;
+            if(!angular.isUndefined(compute.domain)) {
+            	compute.domainId = compute.domain.id;
+            }
+            if(!angular.isUndefined(compute.zone)) {
+            	compute.zoneId = compute.zone.id;
+            }
             var hasComputes = crudService.add("computes", compute);
             hasComputes.then(function (result) {  // this is only run after $http completes
                 $scope.list(1);
@@ -507,13 +515,13 @@ function computeListCtrl($scope, $state, modalService, $window, notify, dialogSe
 
     // Delete the Compute Offer
     $scope.delete = function (size, computeId) {
-        dialogService.openDialog("views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+        dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
                 $scope.deleteId = computeId;
                 $scope.ok = function (computeId) {
                     var hasComputes = crudService.delete("computes", computeId);
                     hasComputes.then(function (result) {
                         $scope.list(1);
-                        $scope.homerTemplate = 'views/notification/notify.jsp';
+                        $scope.homerTemplate = 'app/views/notification/notify.jsp';
                         notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                     });
                     $modalInstance.close();
@@ -525,77 +533,89 @@ function computeListCtrl($scope, $state, modalService, $window, notify, dialogSe
     };
 
     $scope.formElements = {
-        qosList: [
-            {
-                id: 1,
-                name: 'Hypervisor',
+    		storageTypeList :{
+    			"0" : "SHARED",
+    			"1"	: "ISOLATED"
+    		},
+            qosList: {
+                      "hypervisor": "Hypervisor",
+                      "storage": "Storage"
             },
+            diskioList:
             {
-                id: 2,
-                name: 'Storage',
-            },
-        ],
-    };
+        		"0" :"AVERAGE",
+            	"1" : "GOOD",
+            	"2" : "EXCELLENT"
+           }
+        };
     $scope.domain = {
-        domaintypeList: [
-            {id: 1, name: 'ROOT'},
-        ]
     };
+
+    // Domain List
+	var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+	var hasDomains = crudService.list("domains", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+	hasDomains.then(function (result) {  // this is only run after $http completes0
+		$scope.domain.domaintypeList = result;
+	});
+
     $scope.storagetype = {
-        storagetypeList: [
-            {id: 1, name: 'Shared'},
-            {id: 2, name: 'Isolated'},
-        ]
-    };
-    $scope.zone = {
-        zoneList: [
-            {id: 1, name: 'Beijing'},
-            {id: 2, name: 'Liaoning'},
-            {id: 3, name: 'Shanghai'},
-            {id: 4, name: 'Henan'}
-        ]
-    };
+            storagetypeList: {
+                     "0": "shared",
+                     "1": "local"
+            }
+        };
+
+    // Domain List
+	var hasZones = crudService.list("zones/list", '', {});
+	hasZones.then(function (result) {  // this is only run after $http completes0
+		$scope.formElements.zoneList = result;
+		$scope.compute.zone = $scope.formElements.zoneList[0];
+	});
+
     $scope.diskio = {
-        diskioList: [
-            {id: 1, name: 'Average'},
-            {id: 2, name: 'Good'},
-            {id: 3, name: 'Excellent'},
-        ]
+        diskioList:
+            {
+        		"0" :"AVERAGE",
+            	"1" : "GOOD",
+            	"2" : "EXCELLENT"
+           }
+
     };
-}
 
-
-function computeEditCtrl($scope, $state, $stateParams, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, dialogService, crudService) {
+    // Edit compute offerings
     $scope.edit = function (computeId) {
         var hasComputes = crudService.read("computes", computeId);
         hasComputes.then(function (result) {
             $scope.compute = result;
             console.log($scope.compute);
         });
-
     };
 
 
+
     if (!angular.isUndefined($stateParams.id) && $stateParams.id != '') {
-        $scope.edit($stateParams.id)
+        $scope.edit($stateParams.id);
     }
 
-    // Edit the Compute Offer
+    // Update the Compute Offer
     $scope.update = function (form) {
-        // Update Compute Offer
         $scope.formSubmitted = true;
         if (form.$valid) {
             var compute = $scope.compute;
-            console.log(compute);
+
             var hasComputes = crudService.update("computes", compute);
             hasComputes.then(function (result) {
 
-                $scope.homerTemplate = 'views/notification/notify.jsp';
+                $scope.homerTemplate = 'app/views/notification/notify.jsp';
                 notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                 $window.location.href = '#/compute/list';
             });
         }
     };
-
 }
-;
+
+
+function computeEditCtrl($scope, $state, $stateParams, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, dialogService, crudService) {
+
+
+};
