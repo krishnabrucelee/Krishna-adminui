@@ -14,12 +14,12 @@
             <div class=" row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="table-responsive">
-                        <table cellspacing="2" cellpadding="5"  class=" w-m table  table-hover table-striped table-mailbox table-bordered ">
-                            <tr> <td><label>Zone</label></td><td>{{ network.zone.name}}</td></tr>
-                            <tr>  <td><label>Name</label></td> <td>{{network.networkname}}</td></tr>
-                            <tr> <td><label>Description</label></td> <td>{{ network.description}}</td></tr>
-                            <tr> <td><label>Network Rate(MB)</label></td> <td>{{ network.networkrate}}</td></tr>
-                            <tr> <td><label>Supported Services</label></td><td>{{ network.supportedservices}}</td></tr>
+                        <table cellspacing="5" cellpadding="5"  class=" w-m table  table-hover table-striped table-mailbox table-bordered ">
+<!--                             <tr> <td><label>Zone</label></td><td>{{ network.zone.name}}</td></tr>
+ -->                            <tr>  <td><label><fmt:message key="common.name" bundle="${msg}" /></label></td> <td>{{network.name}}</td></tr>
+                            <tr> <td><label><fmt:message key="common.description" bundle="${msg}" /></label></td> <td>{{ network.displayText}}</td></tr>
+                            <tr> <td><label><fmt:message key="common.traffictype" bundle="${msg}" /></label></td> <td>{{ network.trafficType}}</td></tr>
+                            <tr> <td><label><fmt:message key="common.guestiptype" bundle="${msg}" /></label></td><td>{{ network.guestIpType}}</td></tr>
                         </table>
                     </div>
                 </div>

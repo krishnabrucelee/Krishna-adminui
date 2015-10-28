@@ -327,26 +327,46 @@ function storageEditCtrl($scope, $state, $stateParams, modalService, $log, promi
 }
 ;
 
-function networkListCtrl($scope, $modal, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify) {
+function networkListCtrl($scope, $modal, modalService, $log, promiseAjax, globalConfig, localStorageService, $window,crudService, notify) {
 
+	$scope.networkList = {};
+    $scope.paginationObject = {};
+    $scope.networkForm = {};
+    $scope.global = crudService.globalConfig;
+    // Network Offer List
+    $scope.list = function (pageNumber) {
+        var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+        var hasNetworks = crudService.list("networkoffer", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+        hasNetworks.then(function (result) {  // this is only run after $http completes0
 
-    localStorageService.set("networkList", null);
-    if (localStorageService.get("networkList") == null) {
-        var hasServer = promiseAjax.httpRequest("GET", "api/catalog-template.json");
-        hasServer.then(function (result) {  // this is only run after $http completes
             $scope.networkList = result;
-            localStorageService.set("networkList", result);
+
+            // For pagination
+            $scope.paginationObject.limit = limit;
+            $scope.paginationObject.currentPage = pageNumber;
+            $scope.paginationObject.totalItems = result.totalItems;
         });
-    } else {
-        $scope.networkList = localStorageService.get("networkList");
-    }
+    };
+    $scope.list(1);
+
+
+//    localStorageService.set("networkList", null);
+//    if (localStorageService.get("networkList") == null) {
+//        var hasServer = promiseAjax.httpRequest("GET", "api/catalog-template.json");
+//        hasServer.then(function (result) {  // this is only run after $http completes
+//            $scope.networkList = result;
+//            localStorageService.set("networkList", result);
+//        });
+//    } else {
+//        $scope.networkList = localStorageService.get("networkList");
+//    }
 
 
     $scope.showDescription = function (network) {
         //modalService.trigger('views/servicecatalog/viewnetwork.jsp', 'md', 'View Network Offering');
         var modalInstance = $modal.open({
             animation: $scope.animationsEnabled,
-            templateUrl: 'views/servicecatalog/viewnetwork.jsp',
+            templateUrl: 'app/views/servicecatalog/viewnetwork.jsp',
             controller: 'networkDetailsCtrl',
             size: 'md',
             backdrop: 'static',
