@@ -39,14 +39,13 @@
                         <div class="row" >
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal" ><fmt:message key="compute.storagetype" bundle="${msg}" /></label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <select data-ng-init="compute.storagetype = storagetype.storagetypeList[0]"  class="form-control input-group" name="storagetype" data-ng-model="compute.storagetype" ng-options="storagetype.name for storagetype in storagetype.storagetypeList" >
+                                <select data-ng-init="compute.storageType = formElements.storageTypeList[0]"  class="form-control input-group" name="storagetype" data-ng-model="compute.storageType" ng-options="storageType for (id, storageType) in formElements.storageTypeList" >
                                 </select>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
+
                 <div class="col-md-4  col-sm-12 col-xs-4">
                     <div class="form-group" >
                         <div class="row">
@@ -67,7 +66,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4  col-sm-12 col-xs-4">
+
+                <div class="col-md-4  col-sm-12 col-xs-4" data-ng-if="!compute.custom">
                     <div class="form-group" ng-class="{'text-danger': computeForm.memory.$invalid && formSubmitted}">
                         <div class="row">
                             <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.memory" bundle="${msg}" /><span class="text-danger">*</span></label>
@@ -78,9 +78,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4  col-sm-12 col-xs-4">
+
+                <div class="col-md-4  col-sm-12 col-xs-4" data-ng-if="!compute.custom">
                     <div class="form-group" ng-class="{'text-danger': computeForm.vcpucore.$invalid && formSubmitted}">
                         <div class="row">
                             <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="compute.vcpu.core" bundle="${msg}" /><span class="text-danger">*</span></label>
@@ -91,7 +90,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4  col-sm-12 col-xs-4">
+                <div class="col-md-4  col-sm-12 col-xs-4" data-ng-if="!compute.custom">
                     <div class="form-group" ng-class="{'text-danger': computeForm.cpuSpeed.$invalid && formSubmitted}">
                         <div class="row">
                             <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.speed" bundle="${msg}" /><span class="text-danger">*</span></label>
@@ -112,35 +111,20 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
+
                 <div class="col-md-4  col-sm-12 col-xs-4">
                     <div class="form-group"  >
                         <div class="row" >
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal" ><fmt:message key="compute.diskio" bundle="${msg}" /></label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <select data-ng-init="compute.diskio = diskio.diskioList[0]" class="form-control input-group" name="diskio" data-ng-model="compute.diskio" ng-options="diskio.name for diskio in diskio.diskioList" >
+                                <select data-ng-init="compute.diskIo = formElements.diskioList[0]" class="form-control input-group" name="diskio" data-ng-model="compute.diskIo" ng-options=" diskio for (id, diskio) in formElements.diskioList" >
                                 </select>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-4 col-sm-4">
-                                <label class="font-normal"> <input icheck type="checkbox" ng-model="compute.cpuCapacity"  ><fmt:message key="compute.cpucap" bundle="${msg}" /></label>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <label class="font-normal"> <input icheck type="checkbox" ng-model="compute.isHighAvailabilityEnabled"> <fmt:message key="compute.offerha" bundle="${msg}" /></label>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <label class="font-normal"> <input icheck type="checkbox"  ng-model="compute.public"  ng-init="compute.public = true"> <fmt:message key="compute.public" bundle="${msg}" /></label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4  col-sm-12 col-xs-4" data-ng-show="!compute.public">
+
+                <div class="col-md-4  col-sm-12 col-xs-4" data-ng-show="!compute.isPublic">
                     <div class="form-group"  >
                         <div class="row">
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal" ><fmt:message key="compute.domain" bundle="${msg}" /></label>
@@ -157,14 +141,40 @@
                         <div class="row">
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal" ><fmt:message key="compute.qostype" bundle="${msg}" /></label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <select class="form-control input-group" name="qostype" data-ng-model="compute.qostype" ng-options="hypervisor.name for hypervisor in formElements.qosList"  >
+                                <select class="form-control input-group" name="qosType" data-ng-model="compute.qosType" ng-options="qosType for (id,qosType) in formElements.qosList"  >
                                     <option value=""><fmt:message key="common.select" bundle="${msg}" /></option>
                                 </select>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qostype.id == 1">
+                 <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4">
+                                <label class="font-normal"> <input icheck type="checkbox" ng-model="compute.cpuCapacity"  ><fmt:message key="compute.cpucap" bundle="${msg}" /></label>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <label class="font-normal"> <input icheck type="checkbox" ng-model="compute.isHighAvailabilityEnabled"> <fmt:message key="compute.offerha" bundle="${msg}" /></label>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <label class="font-normal"> <input icheck type="checkbox"  ng-model="compute.isPublic"  ng-init="compute.isPublic = true"> <fmt:message key="compute.public" bundle="${msg}" /></label>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                    <div class="form-group">
+                                            <div class="row">
+
+                     <div class="col-md-4 col-sm-4">
+                                 <label class="font-normal"> <input icheck type="checkbox"  ng-model="compute.custom" > <fmt:message key="compute.custom" bundle="${msg}" /></label>
+							</div>
+							</div>
+                    </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'Hypervisor'">
                     <div class="form-group" >
                         <div class="row">
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal" ><fmt:message key="common.diskreadratebps" bundle="${msg}" />
@@ -175,7 +185,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qostype.id == 1">
+                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'Hypervisor'">
                     <div class="form-group" >
                         <div class="row">
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal" ><fmt:message key="common.diskwriteratebps" bundle="${msg}" />
@@ -186,7 +196,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qostype.id == 1">
+                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'Hypervisor'">
                     <div class="form-group">
                         <div class="row">
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.diskreadrateiops" bundle="${msg}" /></label>
@@ -196,7 +206,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qostype.id == 1" >
+                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'Hypervisor'">
                     <div class="form-group">
                         <div class="row">
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.diskwriterateiops" bundle="${msg}" /></label>
@@ -206,7 +216,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qostype.id == 2" >
+                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'Storage'" data-ng-if="!compute.isCustomIops">
                     <div class="form-group">
                         <div class="row">
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.miniops" bundle="${msg}" /></label>
@@ -216,7 +226,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qostype.id == 2">
+                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'Storage'" data-ng-if="!compute.isCustomIops">
                     <div class="form-group">
                         <div class="row">
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.maxiops" bundle="${msg}" /></label>
@@ -226,7 +236,18 @@
                         </div>
                     </div>
                 </div>
-            </div>
+                	<div class="col-md-4" data-ng-show="compute.qosType == 'Storage'">
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-6  col-sm-6 col-xs-6">
+								<label class="font-normal"> <input icheck
+									type="checkbox" ng-model="compute.isCustomIops"> <fmt:message
+									key="common.customiops" bundle="${msg}" />
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
             <div class="row  ">
                 <div class="col-md-12"> <h4><label><fmt:message key="common.pricinginfo" bundle="${msg}" /></label><hr></h4></div>
             </div>
@@ -234,57 +255,90 @@
                 <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
                     <div class="form-group">
                         <div class="row">
-                            <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.zonename" bundle="${msg}" /></label>
-                            <div class="col-md-7  col-sm-7 col-xs-7">
-                                <select data-ng-init="compute.zone.name = zone.zoneList[0]" class="form-control input-group" name="zone" data-ng-model="compute.zone.name" ng-options="zone.name for zone in zone.zoneList" >
+                            <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="common.zonename" bundle="${msg}" /></label>
+                            <div class="col-md-4  col-sm-4 col-xs-4">
+                                <select data-ng-init="compute.zone = formElements.zoneList[0]" class="form-control input-group" name="zone" data-ng-model="compute.zone" ng-options="zone.name for zone in formElements.zoneList" >
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.instancerunningcostmonth" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
-                            <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input  type="text" valid-decimal name="instancerunningmonth" data-ng-model="compute.instancerunningmonth" class="form-control" >
-                                <span class="help-block m-b-none" ng-show="computeForm.instancerunningmonth.$invalid && formSubmitted" ></span>
+                            <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.running.cost.for.vcpu.core" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
+                            <div class="col-md-3  col-sm-3 col-xs-3">
+                                <input  type="text" valid-decimal name="instanceRunningCostVcpu" data-ng-model="compute.instanceRunningCostVcpu" class="form-control" >
+                                <span class="help-block m-b-none" ng-show="computeForm.instanceRunningCostVcpu.$invalid && formSubmitted" ></span>
                             </div>
+                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceRunningCostVcpu / 720 | number:4}}hr</p></label>
                         </div>
                     </div>
-                    <div class="form-group">
+                      <div class="form-group">
                         <div class="row">
-                            <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.instancerunningcosthour" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
-                            <div class="col-md-7  col-sm-7 col-xs-7">
-                                <b> <p class="text-danger">0.00000</p></b>
+                            <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.running.cost.for.memory" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
+                            <div class="col-md-3  col-sm-3 col-xs-3">
+                                <input  type="text" valid-decimal name="instanceRunningCostMemory" data-ng-model="compute.instanceRunningCostMemory" class="form-control" >
+                                <span class="help-block m-b-none" ng-show="computeForm.instanceRunningCostMemory.$invalid && formSubmitted" ></span>
                             </div>
+                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceRunningCostMemory / 720 | number:4}}hr</p></label>
                         </div>
                     </div>
+                      <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.running.cost.for.iops" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
+                            <div class="col-md-3  col-sm-3 col-xs-3">
+                                <input  type="text" valid-decimal name="instanceRunningCostIops" data-ng-model="compute.instanceRunningCostIops" class="form-control" >
+                                <span class="help-block m-b-none" ng-show="computeForm.instanceRunningCostIops.$invalid && formSubmitted" ></span>
+                            </div>
+                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceRunningCostIops / 720 | number:4}}hr</p></label>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
-                    <div class="form-group">
+
+				<div class="form-group">
                         <div class="row">
-                            <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.instancestoppagecostmonth" bundle="${msg}" /> (<app-currency class="text-danger"></app-currency>)</label>
-                            <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input type="text" valid-decimal name="instancestop" data-ng-model="compute.instancestop" class="form-control" >
+                            <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="common.setupcost" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
+                            <div class="col-md-3  col-sm-3 col-xs-3">
+                                <input  type="text" valid-decimal name="setupCost" data-ng-model="compute.setupCost" class="form-control" >
+                                <span class="help-block m-b-none" ng-show="computeForm.setupCost.$invalid && formSubmitted" ></span>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
+                        </div>
+                 	<div class="form-group">
                         <div class="row">
-                            <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.setupcost" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
-                            <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input type="text" valid-decimal name="cost" data-ng-model="compute.cost" class="form-control" >
+                            <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.stoppage.cost.for.vcpu.core" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
+                            <div class="col-md-3  col-sm-3 col-xs-3">
+                                <input  type="text" valid-decimal name="instanceStoppageCostVcpu" data-ng-model="compute.instanceStoppageCostVcpu" class="form-control" >
+                                <span class="help-block m-b-none" ng-show="computeForm.instanceStoppageCostVcpu.$invalid && formSubmitted" ></span>
                             </div>
+                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceStoppageCostVcpu / 720 | number:4}}hr</p></label>
+                        </div>
+                        </div>
+
+                      <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.stoppage.cost.for.memory" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
+                            <div class="col-md-3  col-sm-3 col-xs-3">
+                                <input  type="text" valid-decimal name="instanceStoppageCostMemory" data-ng-model="compute.instanceStoppageCostMemory" class="form-control" >
+                                <span class="help-block m-b-none" ng-show="computeForm.instanceStoppageCostMemory.$invalid && formSubmitted" ></span>
+                            </div>
+                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceStoppageCostMemory / 720 | number:4}}hr</p></label>
                         </div>
                     </div>
-                    <div class="form-group">
+                      <div class="form-group">
                         <div class="row">
-                            <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.instancestoppagecosthour" bundle="${msg}" /> (<app-currency class="text-danger"></app-currency>)</label>
-                            <div class="col-md-7  col-sm-7 col-xs-7">
-                                <b> <p class="text-danger">0.00000</p></b>
+                            <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.stoppage.cost.for.iops" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
+                            <div class="col-md-3  col-sm-3 col-xs-3">
+                                <input  type="text" valid-decimal name="instanceStoppageCostIops" data-ng-model="compute.instanceStoppageCostIops" class="form-control" >
+                                <span class="help-block m-b-none" ng-show="computeForm.instanceStoppageCostIops.$invalid && formSubmitted" ></span>
                             </div>
+                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceStoppageCostIops / 720 | number:4}}/hr</p></label>
                         </div>
                     </div>
+
                 </div>
+				</div>
                 <div class="row">
                     <div class="col-md-12  col-sm-12">
                         <span class="pull-right">
@@ -297,5 +351,3 @@
         </div>
     </div>
 </form>
-
-
