@@ -461,6 +461,6 @@ function paginationContent() {
         link: function (scope, element, attrs) {
 
         },
-        templateUrl: "views/common/pagination-content.html",
+        templateUrl: "app/views/common/pagination-content.jsp",
     };
 }

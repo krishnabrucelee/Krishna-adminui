@@ -83,6 +83,10 @@
 										bundle="${msg}" />
 						</span>
 						</span>
+                            <span ng-if="state.data.pageTitle === 'template'">
+	                            <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}"><fmt:message key="template" bundle="${msg}" /></a>
+	                            <span ng-switch-when="true"><fmt:message key="template" bundle="${msg}" /></span>
+                            </span>
 
 						<span ng-if="state.data.pageTitle === 'system.configuration'">
 								<a ng-switch-when="false"
@@ -91,14 +95,27 @@
 								ng-switch-when="true"><fmt:message
 										key="system.configuration" bundle="${msg}" /></span>
 						</span>
+							<span ng-if="state.data.pageTitle === 'common.network'">
+								<a ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="common.network" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message
+										key="common.network" bundle="${msg}" /></span>
+						</span>
 						</li>
 					</ol>
 				</div>
 				<h2 class="font-light m-b-xs">
 					<span ng-if="$state.current.data.pageTitle === 'compute.offer'"><fmt:message
-							key="compute.offer" bundle="${msg}" /></span> <span
+							key="compute.offer" bundle="${msg}" /></span>
+					 <span
 						ng-if="$state.current.data.pageTitle === 'storage.offer'"><fmt:message
 							key="storage.offer" bundle="${msg}" /></span>
+						 <span	ng-if="$state.current.data.pageTitle === 'network'"><fmt:message
+							key="storage.offer" bundle="${msg}" /></span>
+				<span ng-if="$state.current.data.pageTitle === 'common.templatestore'"><fmt:message key="common.templatestore" bundle="${msg}" /></span>
+				 <span ng-if="$state.current.data.pageTitle === 'create.template'"><fmt:message key="create.template" bundle="${msg}" /></span>
+
 				</h2>
 				<small>{{ $state.current.data.pageDesc}}</small>
 			</div>
