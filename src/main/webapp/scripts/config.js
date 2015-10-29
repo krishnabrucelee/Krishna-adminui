@@ -464,7 +464,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "templatestore/list",
                 templateUrl: VIEW_URL +  "views/servicecatalog/templatehome.jsp",
                 data: {
-                    pageTitle: 'Template Store'
+                    pageTitle: 'template'
                 }
             })
             .state('servicecatalog.list-templatestore.list-view-template-create', {
