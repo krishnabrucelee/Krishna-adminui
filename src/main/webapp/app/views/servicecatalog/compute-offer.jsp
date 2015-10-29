@@ -221,7 +221,7 @@
                         <div class="row">
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.miniops" bundle="${msg}" /></label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input  type="text" name="diskreadrateiops" valid-number  data-ng-model="compute.miniops" class="form-control" >
+                                <input  type="text" name="diskreadrateiops" valid-number  data-ng-model="compute.minIops" class="form-control" >
                             </div>
                         </div>
                     </div>
@@ -231,7 +231,7 @@
                         <div class="row">
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.maxiops" bundle="${msg}" /></label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input  type="text" name="diskwriterateiops" valid-number  data-ng-model="compute.maxiops" class="form-control" >
+                                <input  type="text" name="diskwriterateiops" valid-number  data-ng-model="compute.maxIops" class="form-control" >
                             </div>
                         </div>
                     </div>
@@ -269,7 +269,7 @@
                                 <input  type="text" valid-decimal name="instanceRunningCostVcpu" data-ng-model="compute.instanceRunningCostVcpu" class="form-control" >
                                 <span class="help-block m-b-none" ng-show="computeForm.instanceRunningCostVcpu.$invalid && formSubmitted" ></span>
                             </div>
-                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceRunningCostVcpu / 720 | number:4}}hr</p></label>
+                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceRunningCostVcpu / 720 | number:4}}/hr</p></label>
                         </div>
                     </div>
                       <div class="form-group">
@@ -279,7 +279,7 @@
                                 <input  type="text" valid-decimal name="instanceRunningCostMemory" data-ng-model="compute.instanceRunningCostMemory" class="form-control" >
                                 <span class="help-block m-b-none" ng-show="computeForm.instanceRunningCostMemory.$invalid && formSubmitted" ></span>
                             </div>
-                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceRunningCostMemory / 720 | number:4}}hr</p></label>
+                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceRunningCostMemory / 720 | number:4}}/hr</p></label>
                         </div>
                     </div>
                       <div class="form-group">
@@ -289,7 +289,7 @@
                                 <input  type="text" valid-decimal name="instanceRunningCostIops" data-ng-model="compute.instanceRunningCostIops" class="form-control" >
                                 <span class="help-block m-b-none" ng-show="computeForm.instanceRunningCostIops.$invalid && formSubmitted" ></span>
                             </div>
-                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceRunningCostIops / 720 | number:4}}hr</p></label>
+                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceRunningCostIops / 720 | number:4}}/hr</p></label>
                         </div>
                     </div>
 
@@ -312,7 +312,7 @@
                                 <input  type="text" valid-decimal name="instanceStoppageCostVcpu" data-ng-model="compute.instanceStoppageCostVcpu" class="form-control" >
                                 <span class="help-block m-b-none" ng-show="computeForm.instanceStoppageCostVcpu.$invalid && formSubmitted" ></span>
                             </div>
-                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceStoppageCostVcpu / 720 | number:4}}hr</p></label>
+                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceStoppageCostVcpu / 720 | number:4}}/hr</p></label>
                         </div>
                         </div>
 
@@ -323,7 +323,7 @@
                                 <input  type="text" valid-decimal name="instanceStoppageCostMemory" data-ng-model="compute.instanceStoppageCostMemory" class="form-control" >
                                 <span class="help-block m-b-none" ng-show="computeForm.instanceStoppageCostMemory.$invalid && formSubmitted" ></span>
                             </div>
-                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceStoppageCostMemory / 720 | number:4}}hr</p></label>
+                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceStoppageCostMemory / 720 | number:4}}/hr</p></label>
                         </div>
                     </div>
                       <div class="form-group">

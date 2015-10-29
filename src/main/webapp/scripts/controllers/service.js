@@ -494,7 +494,7 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
             if(!angular.isUndefined(compute.zone)) {
             	compute.zoneId = compute.zone.id;
             }
-            var hasComputes = crudService.add("computes", compute);
+            var hasComputes = crudService.add("computessss", compute);
             hasComputes.then(function (result) {  // this is only run after $http completes
                 $scope.list(1);
                 notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
