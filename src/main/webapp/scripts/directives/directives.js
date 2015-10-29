@@ -418,7 +418,7 @@ function pandaModalHeader() {
             scope.pageCustomIcon = attrs["pageCustomIcon"];
             scope.hideZone = attrs["hideZone"];
         },
-        templateUrl: "views/common/modal-header.html",
+        templateUrl: "app/views/common/modal-header.jsp",
     };
 }
 

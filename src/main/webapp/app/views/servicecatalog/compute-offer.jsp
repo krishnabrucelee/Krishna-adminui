@@ -174,7 +174,7 @@
 							</div>
                     </div>
 
-                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'Hypervisor'">
+                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'HYPERVISOR'">
                     <div class="form-group" >
                         <div class="row">
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal" ><fmt:message key="common.diskreadratebps" bundle="${msg}" />
@@ -185,7 +185,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'Hypervisor'">
+                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'HYPERVISOR'">
                     <div class="form-group" >
                         <div class="row">
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal" ><fmt:message key="common.diskwriteratebps" bundle="${msg}" />
@@ -196,7 +196,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'Hypervisor'">
+                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'HYPERVISOR'">
                     <div class="form-group">
                         <div class="row">
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.diskreadrateiops" bundle="${msg}" /></label>
@@ -206,7 +206,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'Hypervisor'">
+                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'HYPERVISOR'">
                     <div class="form-group">
                         <div class="row">
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.diskwriterateiops" bundle="${msg}" /></label>
@@ -216,27 +216,27 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'Storage'" data-ng-if="!compute.isCustomIops">
+                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'STORAGE'" data-ng-if="!compute.isCustomIops">
                     <div class="form-group">
                         <div class="row">
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.miniops" bundle="${msg}" /></label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input  type="text" name="diskreadrateiops" valid-number  data-ng-model="compute.miniops" class="form-control" >
+                                <input  type="text" name="diskreadrateiops" valid-number  data-ng-model="compute.minIops" class="form-control" >
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'Storage'" data-ng-if="!compute.isCustomIops">
+                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'STORAGE'" data-ng-if="!compute.isCustomIops">
                     <div class="form-group">
                         <div class="row">
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.maxiops" bundle="${msg}" /></label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input  type="text" name="diskwriterateiops" valid-number  data-ng-model="compute.maxiops" class="form-control" >
+                                <input  type="text" name="diskwriterateiops" valid-number  data-ng-model="compute.maxIops" class="form-control" >
                             </div>
                         </div>
                     </div>
                 </div>
-                	<div class="col-md-4" data-ng-show="compute.qosType == 'Storage'">
+                	<div class="col-md-4" data-ng-show="compute.qosType == 'STORAGE'">
 					<div class="form-group">
 						<div class="row">
 							<div class="col-md-6  col-sm-6 col-xs-6">
@@ -269,7 +269,7 @@
                                 <input  type="text" valid-decimal name="instanceRunningCostVcpu" data-ng-model="compute.instanceRunningCostVcpu" class="form-control" >
                                 <span class="help-block m-b-none" ng-show="computeForm.instanceRunningCostVcpu.$invalid && formSubmitted" ></span>
                             </div>
-                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceRunningCostVcpu / 720 | number:4}}hr</p></label>
+                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceRunningCostVcpu / 720 | number:4}}/hr</p></label>
                         </div>
                     </div>
                       <div class="form-group">
@@ -279,7 +279,7 @@
                                 <input  type="text" valid-decimal name="instanceRunningCostMemory" data-ng-model="compute.instanceRunningCostMemory" class="form-control" >
                                 <span class="help-block m-b-none" ng-show="computeForm.instanceRunningCostMemory.$invalid && formSubmitted" ></span>
                             </div>
-                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceRunningCostMemory / 720 | number:4}}hr</p></label>
+                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceRunningCostMemory / 720 | number:4}}/hr</p></label>
                         </div>
                     </div>
                       <div class="form-group">
@@ -289,7 +289,7 @@
                                 <input  type="text" valid-decimal name="instanceRunningCostIops" data-ng-model="compute.instanceRunningCostIops" class="form-control" >
                                 <span class="help-block m-b-none" ng-show="computeForm.instanceRunningCostIops.$invalid && formSubmitted" ></span>
                             </div>
-                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceRunningCostIops / 720 | number:4}}hr</p></label>
+                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceRunningCostIops / 720 | number:4}}/hr</p></label>
                         </div>
                     </div>
 
@@ -312,7 +312,7 @@
                                 <input  type="text" valid-decimal name="instanceStoppageCostVcpu" data-ng-model="compute.instanceStoppageCostVcpu" class="form-control" >
                                 <span class="help-block m-b-none" ng-show="computeForm.instanceStoppageCostVcpu.$invalid && formSubmitted" ></span>
                             </div>
-                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceStoppageCostVcpu / 720 | number:4}}hr</p></label>
+                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceStoppageCostVcpu / 720 | number:4}}/hr</p></label>
                         </div>
                         </div>
 
@@ -323,7 +323,7 @@
                                 <input  type="text" valid-decimal name="instanceStoppageCostMemory" data-ng-model="compute.instanceStoppageCostMemory" class="form-control" >
                                 <span class="help-block m-b-none" ng-show="computeForm.instanceStoppageCostMemory.$invalid && formSubmitted" ></span>
                             </div>
-                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceStoppageCostMemory / 720 | number:4}}hr</p></label>
+                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceStoppageCostMemory / 720 | number:4}}/hr</p></label>
                         </div>
                     </div>
                       <div class="form-group">
