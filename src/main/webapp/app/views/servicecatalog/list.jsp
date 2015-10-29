@@ -54,7 +54,6 @@
                 </div>
                 <div class="clearfix"></div>
             </div>
-
             <div class="white-content">
                 <div class="table-responsive">
                     <table cellspacing="1" cellpadding="1" class="table table-bordered table-striped">
@@ -68,7 +67,12 @@
                                 <th><fmt:message key="common.action" bundle="${msg}" /></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody data-ng-hide="computeList.length > 0">
+                               <tr>
+                                   <td class="col-md-6 col-sm-6" colspan="6"><fmt:message key="common.no.records.found" bundle="${msg}" />!!</td>
+                               </tr>
+                           </tbody>
+                           <tbody data-ng-show="computeList.length > 0">
                             <tr data-ng-repeat="compute in computeList| filter: computeSearch">
                                 <td>
 

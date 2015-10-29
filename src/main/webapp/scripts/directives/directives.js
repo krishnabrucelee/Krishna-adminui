@@ -418,7 +418,7 @@ function pandaModalHeader() {
             scope.pageCustomIcon = attrs["pageCustomIcon"];
             scope.hideZone = attrs["hideZone"];
         },
-        templateUrl: "views/common/modal-header.html",
+        templateUrl: "app/views/common/modal-header.jsp",
     };
 }
 
@@ -456,10 +456,10 @@ function appClock(dateFilter, $timeout) {
 }
 
 function paginationContent() {
-    return { 
+    return {
         restrict: 'E',
-        link: function (scope, element, attrs) {            
-            
+        link: function (scope, element, attrs) {
+
         },
         templateUrl: "views/common/pagination-content.html",
     };

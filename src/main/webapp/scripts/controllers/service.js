@@ -494,7 +494,8 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
             if(!angular.isUndefined(compute.zone)) {
             	compute.zoneId = compute.zone.id;
             }
-            var hasComputes = crudService.add("computessss", compute);
+            console.log(compute);
+            var hasComputes = crudService.add("computes", compute);
             hasComputes.then(function (result) {  // this is only run after $http completes
                 $scope.list(1);
                 notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
@@ -538,8 +539,8 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
     			"1"	: "ISOLATED"
     		},
             qosList: {
-                      "hypervisor": "Hypervisor",
-                      "storage": "Storage"
+            	"0" : "HYPERVISOR",
+    			"1"	: "STORAGE"
             },
             diskioList:
             {
