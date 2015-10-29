@@ -12,7 +12,7 @@
                     <div class="col-md-6 col-sm-6 border-right">
                         <div class="form-group" ng-class="{'text-danger': TemplateForm.name.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">Name<span class="text-danger">*</span></label>
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="common.name" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
                                     <input required="true" type="text" name="name" data-ng-model="template.name" class="form-control" data-ng-class="{'error': TemplateForm.name.$invalid && formSubmitted}">
                                     <i  tooltip="Name of the Template" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
@@ -24,7 +24,7 @@
 
                         <div class="form-group" ng-class="{'text-danger': TemplateForm.description.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">Description<span class="text-danger">*</span></label>
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="common.description" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
                                     <div class="error-area" data-ng-show="TemplateForm.description.$invalid && formSubmitted" ><i  tooltip="Description is Required" class="fa fa-warning error-icon"></i></div>
                                     <input required="true" type="text" name="description" data-ng-model="template.description" class="form-control" data-ng-class="{'error': TemplateForm.description.$invalid && formSubmitted}" >
@@ -35,7 +35,7 @@
 
                         <div class="form-group" ng-class="{'text-danger': TemplateForm.url.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">URL<span class="text-danger">*</span></label>
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="common.url" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
                                     <input required="true" type="text" name="url" data-ng-model="template.url" class="form-control" data-ng-class="{'error': TemplateForm.url.$invalid && formSubmitted}" >
                                     <i  tooltip="Management Server will download from the specified URL" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
@@ -47,9 +47,9 @@
 
                         <div class="form-group" >
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">Reference URL</label>
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="template.refurl" bundle="${msg}" /></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
-                                    <input  type="text" name="refurl" data-ng-model="template.refurl" class="form-control" >
+                                    <input  type="text" name="refurl" data-ng-model="template.referenceUrl" class="form-control" >
                                     <i  tooltip="Reference URL" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
                                 </div>
 
@@ -58,9 +58,9 @@
 
                         <div class="form-group"ng-class="{'text-danger': TemplateForm.zone.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label ">Zone<span class="text-danger">*</span></label>
+                                <label class="col-md-3 col-sm-3 control-label "><fmt:message key="template.zone" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
-                                    <select required="true"  class="form-control " name="zone" data-ng-model="compute.zone.name" ng-options="zone.name for zone in formElements.zoneList" data-ng-class="{'error': TemplateForm.zone.$invalid && formSubmitted}" >
+                                    <select required="true"  class="form-control " name="zone" data-ng-model="template.zone" ng-options="zone.name for zone in formElements.zoneList" data-ng-class="{'error': TemplateForm.zone.$invalid && formSubmitted}" >
                                         <option value="">Select</option>
                                     </select>
                                     <i  tooltip="Choose the Zone " class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
@@ -70,7 +70,7 @@
                         </div>
 
                         <div class="form-group" ng-class="{'text-danger': TemplateForm.hypervisor.$invalid && formSubmitted}">                            <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label" >Hypervisor<span class="text-danger">*</span>
+                                <label class="col-md-3 col-sm-3 control-label" ><fmt:message key="template.hypervisor" bundle="${msg}" /><span class="text-danger">*</span>
                                 </label>
 
                                 <div class="col-md-7  col-sm-7 col-xs-7">
@@ -84,10 +84,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group" data-ng-show="template.hypervisor.id == 3">
+                        <div class="form-group" data-ng-show="template.hypervisor.id == 4">
                             <div class="row">
                                 <div class="col-md-6  col-sm-6 col-lg-6">
-                                    <label> <input icheck type="checkbox" ng-model="template.originalXsVersion"> Original XS Version is 6.1+ </label>
+                                    <label> <input icheck type="checkbox" ng-model="template.xsVersion"> <fmt:message key="template.originalxsversion" bundle="${msg}" /> </label>
                                 </div>
                                 <div class="col-md-6  col-sm-6 col-lg-6">
                                 </div>
@@ -95,11 +95,11 @@
                         </div>
 
 
-                        <div class="form-group" data-ng-show="template.hypervisor.id == 4">
+                        <div class="form-group" data-ng-show="template.hypervisor.id == 2">
                             <div class="row" >
-                                <label class="col-md-3 col-sm-3 col-xs-3 control-label" >Root disk controller</label>
+                                <label class="col-md-3 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.rootdiskcontroller" bundle="${msg}" /></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
-                                    <select class="form-control input-group" name="rootDiskController" data-ng-model="template.rootDiskController" ng-options="rootDiskController.name for rootDiskController in template.hypervisor.rootDiskControllerList" >
+                                    <select class="form-control input-group" name="rootDiskController" data-ng-model="template.rootDiskController" ng-options="rootDiskController for (id, rootDiskController) in formElements.rootDiskControllerList" >
                                         <option value="">No Thanks</option>
                                     </select>
 
@@ -109,11 +109,11 @@
                         </div>
 
 
-                        <div class="form-group" data-ng-show="template.hypervisor.id == 4">
+                        <div class="form-group" data-ng-show="template.hypervisor.id == 2">
                             <div class="row" >
-                                <label class="col-md-3 col-sm-3 col-xs-3 control-label" >NIC adapter type</label>
+                                <label class="col-md-3 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.nicadapter" bundle="${msg}" /></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
-                                    <select  class="form-control input-group" name="nicType" data-ng-model="template.nicType" ng-options="nicType.name for nicType in template.hypervisor.nicTypeList" >
+                                    <select  class="form-control input-group" name="nicType" data-ng-model="template.nicAdapter" ng-options="nicType for (id, nicType) in formElements.nicTypeList" >
                                         <option value="">No Thanks</option>
                                     </select>
 
@@ -123,11 +123,11 @@
                         </div>
 
 
-                        <div class="form-group" data-ng-show="template.hypervisor.id == 4">
+                        <div class="form-group" data-ng-show="template.hypervisor.id == 2">
                             <div class="row" >
-                                <label class="col-md-3 col-sm-3 col-xs-3 control-label" >Keyboard type</label>
+                                <label class="col-md-3 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.keyboard" bundle="${msg}" /></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
-                                    <select  class="form-control input-group" name="format" data-ng-model="template.keyboardType" ng-options="keyboardType.name for keyboardType in template.hypervisor.keyboardTypeList" >
+                                    <select  class="form-control input-group" name="format" data-ng-model="template.keyboardType" ng-options="keyboardType for (id, keyboardType) in formElements.keyboardTypeList" >
                                         <option value="">No Thanks</option>
                                     </select>
 
@@ -137,9 +137,9 @@
                         </div>
                         <div class="form-group"  ng-class="{'text-danger':TemplateForm.format.$invalid && formSubmitted}">
                             <div class="row" >
-                                <label class="col-md-3 col-sm-3 col-xs-3 control-label" >Format<span class="text-danger">*</span></label>
+                                <label class="col-md-3 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.format" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
-                                    <select required="true" class="form-control input-group" name="format" data-ng-model="template.format" ng-options="format.name for format in template.hypervisor.formatList" data-ng-class="{'error': TemplateForm.format.$invalid && formSubmitted}" >
+                                    <select required="true" class="form-control input-group" name="format" data-ng-model="template.format" ng-options="format for (id, format) in formElements.formatList[template.hypervisor.name]" data-ng-class="{'error': TemplateForm.format.$invalid && formSubmitted}" >
                                         <option value="">Select</option>
                                     </select>
                                     <i tooltip="Choose the Format"  class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
@@ -149,7 +149,7 @@
                         </div>
                         <div class="form-group" ng-class="{'text-danger': TemplateForm.cost.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">Cost(0 - for Free)<span class="text-danger">*</span></label>
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="template.cost" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
                                     <input required="true" type="text" valid-decimal name="cost" data-ng-model="template.cost" class="form-control" data-ng-class="{'error': TemplateForm.format.$invalid && formSubmitted}" >
                                     <i  tooltip="Cost" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
@@ -160,9 +160,9 @@
                         </div>
                         <div class="form-group" ng-class="{'text-danger': TemplateForm.mincore.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">Minimum Core<span class="text-danger">*</span></label>
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="template.minimumcore" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
-                                    <input required="true" valid-number type="text" name="mincore" data-ng-model="template.mincore" class="form-control" data-ng-class="{'error': TemplateForm.mincore.$invalid && formSubmitted}" >
+                                    <input required="true" valid-number type="text" name="mincore" data-ng-model="template.minimumCore" class="form-control" data-ng-class="{'error': TemplateForm.mincore.$invalid && formSubmitted}" >
                                     <i  tooltip="Minimum Core for the Template" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
                                     <div class="error-area" data-ng-show="TemplateForm.mincore.$invalid && formSubmitted" ><i  tooltip="Minimum Core  is Required" class="fa fa-warning error-icon"></i></div>
                                 </div>
@@ -170,9 +170,9 @@
                         </div>
                         <div class="form-group" ng-class="{'text-danger': TemplateForm.minmemory.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">Minimum Memory(MB)<span class="text-danger">*</span></label>
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="template.minimummemory" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
-                                    <input required="true" valid-number type="text" name="minmemory" data-ng-model="template.minmemory" class="form-control" data-ng-class="{'error': TemplateForm.minmemory.$invalid && formSubmitted}" >
+                                    <input required="true" valid-number type="text" name="minmemory" data-ng-model="template.minimumMemory" class="form-control" data-ng-class="{'error': TemplateForm.minmemory.$invalid && formSubmitted}" >
                                     <i  tooltip="Minimum Memory for the Template" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
                                     <div class="error-area" data-ng-show="TemplateForm.minmemory.$invalid && formSubmitted" ><i  tooltip="Minimum Memory  is Required" class="fa fa-warning error-icon"></i></div>
                                 </div>
@@ -186,9 +186,9 @@
                                             'text-danger'
                                             :TemplateForm.osCategory.$invalid && formSubmitted}">
                             <div class="row" >
-                                <label class="col-md-3 col-sm-3 col-xs-3 control-label" >OS Category<span class="text-danger">*</span></label>
+                                <label class="col-md-3 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.oscategory" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
-                                    <select required="true" class="form-control input-group" name="osCategory" data-ng-model="template.osCategory" ng-options="osCategory.name for osCategory in formElements.osCategoryList" data-ng-class="{'error': TemplateForm.osCategory.$invalid && formSubmitted}" >
+                                    <select required="true" class="form-control input-group" name="osCategory" data-ng-change="categoryChange()" data-ng-model="template.osCategory" ng-options="osCategory.name for osCategory in formElements.osCategoryList" data-ng-class="{'error': TemplateForm.osCategory.$invalid && formSubmitted}" >
                                         <option value="">Select</option>
                                     </select>
                                     <i tooltip="Choose the OS Category"  class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
@@ -201,9 +201,9 @@
                                             'text-danger'
                                             :TemplateForm.osType.$invalid && formSubmitted}">
                             <div class="row" >
-                                <label class="col-md-3 col-sm-3 col-xs-3 control-label" >OS Type<span class="text-danger">*</span></label>
+                                <label class="col-md-3 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.ostype" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
-                                    <select required="true" class="form-control input-group" name="osType" data-ng-model="template.osType" ng-options="osType.name for osType in template.osCategory.osTypeList" data-ng-class="{'error': TemplateForm.osType.$invalid && formSubmitted}" >
+                                    <select required="true" class="form-control input-group" name="osType" data-ng-model="template.osType" ng-options="osType.description for osType in formElements.osTypeList" data-ng-class="{'error': TemplateForm.osType.$invalid && formSubmitted}" >
                                         <option value="">Select</option>
                                     </select>
                                     <i tooltip="Choose the type"  class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
@@ -212,13 +212,25 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="form-group" ng-class="{'text-danger': TemplateForm.osVersion.$invalid && formSubmitted}">
+                            <div class="row">
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="template.osversion" bundle="${msg}" /><span class="text-danger">*</span></label>
+                                <div class="col-md-7  col-sm-7 col-xs-7">
+                                    <div class="error-area" data-ng-show="TemplateForm.osVersion.$invalid && formSubmitted" ><i  tooltip="OS Version/Release is Required" class="fa fa-warning error-icon"></i></div>
+                                    <input required="true" type="text" name="osVersion" data-ng-model="template.osVersion" class="form-control" data-ng-class="{'error': TemplateForm.osVersion.$invalid && formSubmitted}" >
+                                    <i  tooltip="OS Version/Release of the Template" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="row">
 
-                                <label class="col-md-3 col-sm-3 col-xs-3 control-label" >Architecture<span class="text-danger">*</span></label>
+                                <label class="col-md-3 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.architecture" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-6  col-sm-6 col-lg-6  col-sm-6 col-lg-6">
-                                    <label> <input icheck type="radio" name= "architecture" ng-model="template.sixfour"> 64 Bit </label>
-                                    <label class="m-l-sm"> <input icheck type="radio" name= "architecture" ng-model="template.threetwo"> 32 Bit</label>
+                                    <label> <input icheck type="radio" name= "architecture" value="64" ng-model="template.architecture"> 64 <fmt:message key="common.bit" bundle="${msg}" /> </label>
+                                    <label class="m-l-sm"> <input icheck type="radio" name= "architecture" value="32" ng-model="template.architecture"> 32 <fmt:message key="common.bit" bundle="${msg}" /></label>
                                 </div>
                             </div>
                         </div>
@@ -226,36 +238,36 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-6  col-sm-6 col-lg-6  col-sm-6 col-lg-6">
-                                    <label> <input icheck type="checkbox" ng-model="template.extractable"> <span class="m-l-sm">Extractable</span> </label>
+                                    <label> <input icheck type="checkbox" ng-model="template.extractable"> <span class="m-l-sm"><fmt:message key="template.extractable" bundle="${msg}" /></span> </label>
                                 </div>
                                 <div class="col-md-6  col-sm-6 col-lg-6  col-sm-6 col-lg-6">
-                                    <label> <input icheck type="checkbox" ng-model="template.passwordEnabled"> <span class="m-l-sm">Password Enabled</span> </label>
+                                    <label> <input icheck type="checkbox" ng-model="template.passwordEnabled"> <span class="m-l-sm"><fmt:message key="template.password.enabled" bundle="${msg}" /></span> </label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-6  col-sm-6 col-lg-6">
-                                    <label> <input icheck type="checkbox" ng-model="template.featured"> <span class="m-l-sm">Featured</span> </label>
+                                    <label> <input icheck type="checkbox" ng-model="template.featured"> <span class="m-l-sm"><fmt:message key="template.featured" bundle="${msg}" /></span> </label>
                                 </div>
                                 <div class="col-md-6  col-sm-6 col-lg-6">
-                                    <label> <input icheck type="checkbox" ng-model="template.routing"> <span class="m-l-sm">Routing </span></label>
+                                    <label> <input icheck type="checkbox" ng-model="template.routing"> <span class="m-l-sm"><fmt:message key="template.routing" bundle="${msg}" /> </span></label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
-                                    <label class="control-normal"> <input  icheck type="checkbox"  ng-model="storage.onetimecharge">  <span class="m-l-sm">One time Chargeable</span></label>
+                                    <label class="control-normal"> <input  icheck type="checkbox"  ng-model="template.oneTimeChargeable">  <span class="m-l-sm"><fmt:message key="template.onetimechargeable" bundle="${msg}" /></span></label>
                                 </div>
 
                             </div>
                         </div>
                         <div class="form-group" data-ng-class="{'text-danger': TemplateForm.summernoteTextTwo.$invalid && formSubmitted}">
                             <div class="row" >
-                                <label class="col-md-3 col-sm-3 control-label "> Detailed Description<span class="text-danger">*</span></label>
+                                <label class="col-md-3 col-sm-3 control-label "> <fmt:message key="template.detaileddescription" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-8 col-sm-8" data-ng-class="{'error': TemplateForm.summernoteTextTwo.$invalid && formSubmitted}" >
-                                    <summernote class=""  name="summernoteTextTwo" required="true" height="200"  data-ng-model="template.summernoteTextTwo"  config="summernoteOpt" data-ng-class="{'error': TemplateForm.summernoteTextTwo.$invalid && formSubmitted}" ></summernote>
+                                    <summernote class=""  name="summernoteTextTwo" required="true" height="200"  data-ng-model="template.detailedDescription"  config="summernoteOpt" data-ng-class="{'error': TemplateForm.summernoteTextTwo.$invalid && formSubmitted}" ></summernote>
                                     <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon " tooltip="Description Required" ></i>
                                 </div>
                                 <div class="error-area" data-ng-show="TemplateForm.summernoteTextTwo.$invalid && formSubmitted" ></div>
@@ -266,8 +278,8 @@
                         <div class="form-group">
                             <div class="row">
                                 <span class="pull-right">
-                                    <a class="btn btn-default btn-outline"  ui-sref="servicecatalog.list-templatestore">Cancel</a>
-                                    <button class="btn btn-info" type="submit" ng-disabled="form.TemplateForm.$invalid" >Add</button>
+                                    <a class="btn btn-default btn-outline"  ui-sref="servicecatalog.list-templatestore"><fmt:message key="common.cancel" bundle="${msg}" /></a>
+                                    <button class="btn btn-info" type="submit" ng-disabled="form.TemplateForm.$invalid" ><fmt:message key="common.add" bundle="${msg}" /></button>
                                 </span>
                             </div>
                         </div>

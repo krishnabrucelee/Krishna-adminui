@@ -10,21 +10,21 @@
                 <div class="col-md-12 col-sm-12 col-xs-12 ">
                     <div class="pull-left">
                         <div class="dashboard-box pull-left">
-                            <span class="pull-right">Total Template</span>
+                            <span class="pull-right"><fmt:message key="template.totaltemplate" bundle="${msg}" /></span>
                             <div class="clearfix"></div>
                             <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
                             <b class="pull-right">13</b>
                             <div class="clearfix"></div>
                         </div>
                         <div class="dashboard-box pull-left">
-                            <span class="pull-right">Windows Template</span>
+                            <span class="pull-right"><fmt:message key="windows.template" bundle="${msg}" /></span>
                             <div class="clearfix"></div>
                             <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
                             <b class="pull-right">04</b>
                             <div class="clearfix"></div>
                         </div>
                         <div class="dashboard-box pull-left">
-                            <span class="pull-right">Linux Template</span>
+                            <span class="pull-right"><fmt:message key="linux.template" bundle="${msg}" /></span>
                             <div class="clearfix"></div>
                             <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
                             <b class="pull-right">09</b>
@@ -34,65 +34,65 @@
                     <div class="pull-right">
                         <div class="quick-search ">
                             <div class="input-group">
-                                <input data-ng-model="templateSearch" type="text" class="form-control input-medium" placeholder="Quick Search" aria-describedby="quicksearch-go">
+                                <input data-ng-model="templateSearch" type="text" class="form-control input-medium" placeholder="<fmt:message key="common.quicksearch" bundle="${msg}" />" aria-describedby="quicksearch-go">
                                 <span class="input-group-addon" id="quicksearch-go"><span class="pe-7s-search pe-lg font-bold"></span></span>
                             </div>
                         </div>
                         <div class="clearfix"></div>
                         <span class="pull-right m-l-sm m-t-sm">
-                            <a class="btn btn-info" ui-sref="servicecatalog.list-templatestore.list-view-template-create"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span>Add</a>
-                            <a class="btn btn-info" ui-sref="" title="Refresh"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
+                            <a class="btn btn-info" ui-sref="servicecatalog.list-templatestore.list-view-template-create"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message key="common.add" bundle="${msg}" /></a>
+                            <a class="btn btn-info" ui-sref="" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
                         </span>
                     </div>
                 </div>
             </div>
             <div class="clearfix"></div>
         </div>
-
+        <pagination-content></pagination-content>
         <div class="white-content">
             <div class="table-responsive">
                 <table cellspacing="1" cellpadding="1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Template Name</th>
-                            <th>Operating System</th>
-                            <th>OS Type</th>
-                            <th>Zone</th>
-                            <th>Hypervisor</th>
-                            <th>Cost/GB/month (<app-currency></app-currency>)</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th><fmt:message key="template.name" bundle="${msg}" /></th>
+                            <th><fmt:message key="template.os" bundle="${msg}" /></th>
+                            <th><fmt:message key="template.type" bundle="${msg}" /></th>
+                            <th><fmt:message key="template.zone" bundle="${msg}" /></th>
+                            <th><fmt:message key="template.hypervisor" bundle="${msg}" /></th>
+                            <th><fmt:message key="template.cost" bundle="${msg}" /> (<app-currency></app-currency>)</th>
+                            <th><fmt:message key="common.status" bundle="${msg}" /></th>
+                            <th><fmt:message key="common.action" bundle="${msg}" /></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr data-ng-repeat="template in templateList| filter: templateSearch">
 
-                            <td> <img src="images/os/{{template.image}}" alt="" height="25" width="25" class="m-r-5">{{ template.template.name}}</td>
+                            <td> <img src="images/os/{{template.image}}" alt="" height="25" width="25" class="m-r-5">{{ template.name}}</td>
                             <td>
-                                {{ template.osType.name}}
+                                {{ template.osCategory.name}}
 
                             </td>
                             <td>
-                                {{ template.osCategory.osTypeList[1].name}}
+                                {{ template.osType.description}}
                             </td>
                             <td>{{ template.zone.name}} </td>
-                            <td>{{ template.hypervisor}}</td>
+                            <td>{{ template.hypervisor.name}}</td>
                             <td><b class="text-danger">
-                                    0.00 <span>/ month</span>
+                                    {{ template.cost}} <span>/ month</span>
                                 </b></td>
                             <td>
-                                Ready
+                                {{ template.status }}
                             </td>
                             <td>
-                                <a class="icon-button" title="Edit" ui-sref="servicecatalog.list-templatestore.list-view-template-edit({id: {{ template.id}}})"  ><span class="fa fa-edit"></span></a>
-                                <a class="icon-button" title="Delete"  data-ng-click="delete()" ><span class="fa fa-trash"></span></a>
-
+                                <a class="icon-button" title="<fmt:message key="common.edit" bundle="${msg}" />" ui-sref="servicecatalog.list-templatestore.list-view-template-edit({id: {{ template.id}}})"  ><span class="fa fa-edit"></span></a>
+                                <a class="icon-button" title="<fmt:message key="common.delete" bundle="${msg}" />" data-ng-click="delete('sm', template.id)" ><span class="fa fa-trash"></span></a>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+        <pagination-content></pagination-content>
     </div>
 
 </div>

@@ -15,12 +15,16 @@ angular
         .controller('storageListCtrl', storageListCtrl)
         .controller('storageEditCtrl', storageEditCtrl)
         .controller('templateListCtrl', templateListCtrl)
+        .controller('templateEditCtrl', templateEditCtrl)
 
-function templateListCtrl($scope, $state, $stateParams, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify) {
+function templateListCtrl($scope, $state, $stateParams, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, crudService, dialogService) {
 
-
+    $scope.templateList = {};
+    $scope.paginationObject = {};
+    $scope.templateForm = {};
+    $scope.global = crudService.globalConfig;
+    $scope.test = "test";
     $scope.summernoteTextTwo = {}
-
 
     $scope.summernoteOpt = {
         toolbar: [
@@ -31,154 +35,222 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
         ],
         disableResizeEditor: true,
     };
-    var hasServer = promiseAjax.httpRequest("GET", "api/catalog-template.json");
-    hasServer.then(function (result) {  // this is only run after $http
-										// completes
-        $scope.templateList = result;
-        if (!angular.isUndefined($stateParams.id)) {
-            var templateId = $stateParams.id - 1;
-            $scope.template = result[templateId];
-            // $state.current.data.pageTitle = result[templateId].name;
 
-        }
+    //Template list
+    $scope.list = function (pageNumber) {
+        var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+        var hasTemplates = crudService.list("templates", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+        hasTemplates.then(function (result) {  // this is only run after $http completes0
+
+            $scope.templateList = result;
+
+            // For pagination
+            $scope.paginationObject.limit = limit;
+            $scope.paginationObject.currentPage = pageNumber;
+            $scope.paginationObject.totalItems = result.totalItems;
+        });
+    };
+    $scope.list(1);
+
+     // OS Categorys list from server
+    $scope.oscategorys = {};
+    var hasOsCategoryList = crudService.listAll("oscategorys/list");
+    hasOsCategoryList.then(function (result) {
+    	$scope.formElements.osCategoryList = result;
     });
 
-
-    $scope.delete = function () {
-        modalService.trigger('views/servicecatalog/confirm-delete.jsp', 'md', 'Delete Confirmation');
+    // OS Type list from server
+    $scope.categoryChange = function() {
+        $scope.ostypes = {};
+        var hasosTypeList = crudService.filterList("ostypes/list", $scope.template.osCategory.name);
+        hasosTypeList.then(function (result) {
+    	    $scope.formElements.osTypeList = result;
+        });
     };
+
+    // Zone list from server
+    $scope.zones = {};
+    var haszoneList = crudService.listAll("zones/list");
+    haszoneList.then(function (result) {
+    	$scope.formElements.zoneList = result;
+    });
+
+    // Hypervisors list from server
+    $scope.hypervisors = {};
+    var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+    var hashypervisorList = crudService.list("hypervisors", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+    hashypervisorList.then(function (result) {
+    	$scope.formElements.hypervisorList = result;
+    });
+
+    // Open dialogue box to create templates
+    $scope.template = {};
 
     $scope.save = function (form) {
-
         $scope.formSubmitted = true;
-
         if (form.$valid) {
-            $scope.homerTemplate = 'views/notification/notify.jsp';
-            notify({message: 'Created successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+            var template = $scope.template;
 
-            $window.location.href = '#/templatestore/list';
+            var hasTemplate = crudService.add("templates", template);
+            hasTemplate.then(function (result) {  // this is only run after $http completes
+                $scope.list(1);
+                notify({message: 'Created successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
+                $window.location.href = '#/templatestore/list';
+
+            }).catch(function (result) {
+                if (!angular.isUndefined(result.data)) {
+                    angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                        $scope.template[key].$invalid = true;
+                        $scope.template[key].errorMessage = errorMessage;
+                    });
+                }
+            });
         }
     };
+
+    // Delete the template
+    $scope.delete = function (size, templateId) {
+        dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+                $scope.deleteId = templateId;
+                $scope.ok = function (templateId) {
+                    var hasStorage = crudService.delete("templates", templateId);
+                    hasStorage.then(function (result) {
+                        $scope.list(1);
+                        $scope.homerTemplate = 'app/views/notification/notify.jsp';
+                        notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+                    });
+                    $modalInstance.close();
+                },
+                $scope.cancel = function () {
+                    $modalInstance.close();
+                };
+            }]);
+    };
+
     $scope.update = function (form) {
-
         $scope.formSubmitted = true;
-
         if (form.$valid) {
             $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-
             $window.location.href = '#/templatestore/list';
         }
     };
 
     $scope.formElements = {
-        hypervisorList: [
-            {
-                id: 1,
-                name: 'Hyperv',
-                formatList: [
-                    {id: 1, name: 'VHD'},
-                    {id: 2, name: 'VHDX'},
-                ]
-            },
-            {
-                id: 2,
-                name: 'KVM',
-                formatList: [
-                    {id: 1, name: 'QCOW2'},
-                    {id: 2, name: 'RAW'},
-                    {id: 3, name: 'VHD'},
-                    {id: 4, name: 'VHDX'},
-                ]
-            },
-            {
-                id: 3,
-                name: 'XenServer',
-                formatList: [
-                    {id: 1, name: 'VHD'},
-                ]
-            },
-            {
-                id: 4,
-                name: 'VMware',
-                formatList: [
-                    {id: 1, name: 'OVA'},
-                ],
-                rootDiskControllerList: [
-                    {id: 1, name: 'SCSI'},
-                    {id: 2, name: 'IDE'},
-                ],
-                nicTypeList: [
-                    {id: 1, name: 'E1000'},
-                    {id: 2, name: 'PCNET32'},
-                    {id: 3, name: 'VMXNET2'},
-                    {id: 4, name: 'VMXNET3'},
-                ],
-                keyboardTypeList: [
-                    {id: 1, name: 'US Keyboard'},
-                    {id: 2, name: 'UK Keyboard'},
-                    {id: 3, name: 'Japanese Keyboard'},
-                    {id: 4, name: 'Simplified Chinese'},
-                ],
-            },
-            {
-                id: 5,
-                name: 'BareMetal',
-                formatList: [
-                    {id: 1, name: 'BareMetal'},
-                ]
-            },
-            {
-                id: 6,
-                name: 'Ovm',
-                formatList: [
-                    {id: 1, name: 'RAW'},
-                ]
-            },
-            {
-                id: 7,
-                name: 'LXC',
-                formatList: [
-                    {id: 1, name: 'TAR'},
-                ]
-            },
-        ],
-        osCategoryList: [
-            {
-                id: 1,
-                name: "MacOS",
-                osTypeList: [
-                    {id: 1, name: 'Apple Mac OS X 10.6 (32-bit)'},
-                    {id: 2, name: 'Apple Mac OS X 10.6 (64-bit)'}
-                ]
-            },
-            {
-                id: 2,
-                name: "Linux",
-                osTypeList: [
-                    {id: 3, name: 'CentOS 6.5 (32-bit)'},
-                    {id: 4, name: 'CentOS 6.5 (64-bit)'}
-                ]
-            },
-            {
-                id: 3,
-                name: "Windows",
-                osTypeList: [
-                    {id: 5, name: 'Windows Server 2008 (32-bit)'},
-                    {id: 6, name: 'Windows Server 2008 (64-bit)'}
-                ]
-            }
-        ],
-        zoneList: [
-            {id: 1, name: 'Beijing'},
-            {id: 2, name: 'Liaoning'},
-            {id: 3, name: 'Shanghai'},
-            {id: 4, name: 'Henan'}
-        ]
+          rootDiskControllerList: {
+              "0":"scsi",
+              "1":"ide"
+          },
+          nicTypeList: {
+        	  "0":"E1000",
+        	  "1":"PCNET32",
+        	  "2":"VMXNET2",
+        	  "3":"VMXNET3"
+          },
+          keyboardTypeList: {
+        	  "0":"US_Keyboard",
+        	  "1":"UK_Keyboard",
+        	  "2":"Japanese_Keyboard",
+        	  "3":"Simplified_Chinese"
+          },
+          formatList: {
+                       "Hyperv" : {
+			        	  "0":"VHD",
+			        	  "1":"VHDX",
+			           },
+			           "VMware" :
+			           {
+			        	  "0":"OVA",
+			           },
+			           "KVM" :
+			           {
+			        	  "0":"QCOW2",
+			        	  "1":"RAW",
+			        	  "2":"VHD",
+			        	  "3":"VMDK",
+			           },
+			           "XenServer" :
+			           {
+			        	  "0":"VHD",
+			           },
+			           "BareMetal" :
+			           {
+			        	  "0":"BareMetal",
+			           },
+			           "LXC" :
+			           {
+			        	  "0":"TAR",
+			           },
+			           "Ovm" :
+			           {
+			        	  "0":"RAW",
+			          }
+		          }
+    }
+}
+
+function templateEditCtrl($scope, $state, $stateParams, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, dialogService, crudService) {
+
+	$scope.formElements = {
+	        rootDiskControllerList: {
+	          "0":"scsi",
+	          "1":"ide"
+	        },
+	        nicTypeList: {
+	      	  "0":"E1000",
+	      	  "1":"PCNET32",
+	      	  "2":"VMXNET2",
+	      	  "3":"VMXNET3"
+	        },
+	        keyboardTypeList: {
+	      	  "0":"US_Keyboard",
+	      	  "1":"UK_Keyboard",
+	      	  "2":"Japanese_Keyboard",
+	      	  "3":"Simplified_Chinese"
+	        }
+	    }
+
+	$scope.edit = function (templateId) {
+        var hasTemplates = crudService.read("templates", templateId);
+        hasTemplates.then(function (result) {
+            $scope.template = result;
+        	$scope.getOsCategoryList();
+        });
+    };
+
+    if (!angular.isUndefined($stateParams.id) && $stateParams.id != '') {
+        $scope.edit($stateParams.id)
     }
 
+    // OS Categorys list from server
+    $scope.oscategorys = {};
+    $scope.getOsCategoryList = function() {
+	    var hasOsCategoryList = crudService.listAll("oscategorys/list");
+	    hasOsCategoryList.then(function (result) {
+	    	$scope.formElements.osCategoryList = result;
+	    	angular.forEach($scope.formElements.osCategoryList, function(obj, key) {
+	    		if(obj.id == $scope.template.osCategory.id) {
+	    			$scope.template.osCategory = obj;
+	    		}
+	    	});
+	    });
+    }
 
-}
+    // Edit the Template
+    $scope.update = function (form) {
+        $scope.formSubmitted = true;
+        if (form.$valid) {
+            var template = $scope.template;
+            var hasTemplates = crudService.update("templates", template);
+            hasTemplates.then(function (result) {
+                $scope.homerTemplate = 'views/notification/notify.jsp';
+                notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+                $window.location.href = '#/templatestore/list';
+            });
+        }
+    };
+
+};
 
 
 function storageListCtrl($scope, crudService, dialogService, modalService, $log, promiseAjax, $state, $stateParams, localStorageService, $window, notify) {

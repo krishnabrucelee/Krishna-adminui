@@ -10,18 +10,18 @@
 
             <ul class="nav nav-tabs" data-ng-init="templateCategory = 'ostemplate'">
                 <li class="active"><a href="javascript:void(0)" data-ng-click="templateCategory = 'ostemplate'" data-toggle="tab"><!--</div><i class="fa fa-cloud"></i>-->
-                        OS Template</a></li>
-                <li class=""><a  data-ng-click="templateCategory = 'apptemplate'" data-toggle="tab">    <!--<i class="fa fa-database"></i>--> App Template</a></li>
+                        <fmt:message key="template.ostemplate" bundle="${msg}" /></a></li>
+                <li class=""><a  data-ng-click="templateCategory = 'apptemplate'" data-toggle="tab">    <!--<i class="fa fa-database"></i>--> <fmt:message key="template.apptemplate" bundle="${msg}" /></a></li>
             </ul>
 
             <div class="tab-content">
 
                 <div class="tab-pane" data-ng-class="{'active' : templateCategory == 'ostemplate'}" id="step1-dashboard">
-                    <div data-ng-include src="'views/servicecatalog/templatestore.html'"></div>
+                    <div data-ng-include src="'app/views/servicecatalog/templatestore.jsp'"></div>
 
                 </div>
                 <div class="tab-pane"  data-ng-class="{'active' : templateCategory == 'apptemplate'}" id="step1-config">
-                    <div data-ng-include src="'views/servicecatalog/apptemplate.html'"></div>
+                    <div data-ng-include src="'app/views/servicecatalog/apptemplate.jsp'"></div>
                 </div>
             </div>
         </div>

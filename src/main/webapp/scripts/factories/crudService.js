@@ -9,6 +9,10 @@ function crudService($window, localStorageService, globalConfig, $stateParams, p
         return promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + moduleName +"?sortBy=ASC&limit="+data.limit, headers, data);
     };
 
+    object.listAll = function(moduleName) {
+        return promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + moduleName +"?lang=" + localStorageService.cookie.get('language'));
+    };
+
     object.add = function(moduleName, object) {
         return promiseAjax.httpTokenRequest( globalConfig.HTTP_POST, globalConfig.APP_URL + moduleName, '', object);
     };
@@ -23,6 +27,10 @@ function crudService($window, localStorageService, globalConfig, $stateParams, p
 
     object.delete = function(moduleName, id) {
         return promiseAjax.httpTokenRequest( globalConfig.HTTP_DELETE , globalConfig.APP_URL + moduleName  +"/"+id, '');
+    };
+
+    object.filterList = function(moduleName, data) {
+        return promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + moduleName +"?filter="+data);
     };
 
     return object;
