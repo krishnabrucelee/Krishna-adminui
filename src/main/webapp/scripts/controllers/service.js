@@ -32,12 +32,13 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
         disableResizeEditor: true,
     };
     var hasServer = promiseAjax.httpRequest("GET", "api/catalog-template.json");
-    hasServer.then(function (result) {  // this is only run after $http completes
+    hasServer.then(function (result) {  // this is only run after $http
+										// completes
         $scope.templateList = result;
         if (!angular.isUndefined($stateParams.id)) {
             var templateId = $stateParams.id - 1;
             $scope.template = result[templateId];
-            //  $state.current.data.pageTitle = result[templateId].name;
+            // $state.current.data.pageTitle = result[templateId].name;
 
         }
     });
@@ -185,16 +186,56 @@ function storageListCtrl($scope, crudService, dialogService, modalService, $log,
 
 
     $scope.storageList = {};
+
+
+
+
+    $scope.storage = {
+    		zoneList: {},
+            domainList:{}
+            	};
     $scope.paginationObject = {};
     $scope.storageForm = {};
     $scope.global = crudService.globalConfig;
 
+    $scope.storage.zoneList = {};
+    var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+    var hasZones = crudService.list("zones", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+    hasZones.then(function (result) {  // this is only run after $http
+										// completes0
+    	$scope.formElements.zoneList = result;
+    });
 
+    $scope.storage.domainList = {};
+    var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+    var hasDomains = crudService.list("domains", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+    hasDomains.then(function (result) {  // this is only run after $http
+										// completes0
+    	$scope.formElements.domainList = result;
+    });
+
+        // Network Offer List
+        $scope.listNetworkOffer = function (pageNumber) {
+            var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+            var hasNetworks = crudService.list("networkoffer", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+            hasNetworks.then(function (result) {  // this is only run after
+													// $http
+    												// completes0
+
+            	$scope.instance.network.networkOfferList = result;
+
+                // For pagination
+                $scope.paginationObject.limit = limit;
+                $scope.paginationObject.currentPage = pageNumber;
+                $scope.paginationObject.totalItems = result.totalItems;
+            });
+        };
     // Storage Offer List
     $scope.list = function (pageNumber) {
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasStorage = crudService.list("storages", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
-        hasStorage.then(function (result) {  // this is only run after $http completes0
+        hasStorage.then(function (result) {  // this is only run after $http
+												// completes0
 
             $scope.storageList = result;
             console.log($scope.storageList);
@@ -212,18 +253,61 @@ function storageListCtrl($scope, crudService, dialogService, modalService, $log,
     // Open dialogue box to create Storage Offer
     $scope.storage = {};
 
+
+
+    $scope.costPerHourGB = function() {
+
+        var regexp = /^[0-9]+([,.][0-9]+)?$/g;
+        $scope.costPerHourGBError = false;
+        if(!regexp.test($scope.storage.costGbPerMonth)) {
+        	$scope.costPerHourGBError = true;
+
+            $scope.storage.costGbPerMonth = "";
+            $scope.storage.costPerHourGB = "";
+            return false;
+        }
+
+
+        var cost = parseFloat($scope.storage.costGbPerMonth);
+
+        var costValue = cost / 720;
+
+        $scope.storage.costPerHourGB = costValue.toFixed(4);
+    };
+$scope.costPerHourIOPS = function() {
+
+        var regexp = /^[0-9]+([,.][0-9]+)?$/g;
+
+        $scope.costPerHourIOPSError = false;
+        if(!regexp.test($scope.storage.costIopsPerMonth)) {
+            $scope.costPerHourIOPSError = true;
+
+            $scope.storage.costIopsPerMonth = "";
+            $scope.storage.costPerHourIOPS = "";
+            return false;
+        }
+
+
+        var cost = parseFloat($scope.storage.costIopsPerMonth);
+
+        var costValue = cost / 720;
+
+        $scope.storage.costPerHourIOPS = costValue.toFixed(4);
+    };
+
+
     $scope.save = function (form) {
-        alert("test");
         console.log(form);
         $scope.formSubmitted = true;
 
         if (form.$valid) {
             var storage = $scope.storage;
             var hasStorage = crudService.add("storages", storage);
-            hasStorage.then(function (result) {  // this is only run after $http completes
+            hasStorage.then(function (result) {  // this is only run after
+													// $http completes
                 $scope.list(1);
                 notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
-//                $window.location.href = '#/templatestore/list';
+// $window.location.href = '#/templatestore/list';
 
                 $window.location.href = '#/storage/list';
 
@@ -239,7 +323,7 @@ function storageListCtrl($scope, crudService, dialogService, modalService, $log,
 
     // Delete the Storage Offer
     $scope.delete = function (size, storageId) {
-        dialogService.openDialog("views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+        dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
                 $scope.deleteId = storageId;
                 $scope.ok = function (storageId) {
                     var hasStorage = crudService.delete("storages", storageId);
@@ -262,38 +346,53 @@ function storageListCtrl($scope, crudService, dialogService, modalService, $log,
             {id: 1, name: 'ROOT'},
         ]
     };
-    $scope.storagetype = {
-        storagetypeList: [
-            {id: 1, name: 'Shared'},
-            {id: 2, name: 'Isolated'},
-        ]
+    $scope.storageType = {
+        storagetypeList: {
+                 "0": "shared",
+                 "1": "local"
+        }
     };
-    $scope.zone = {
-        zoneList: [
-            {id: 1, name: 'Beijing'},
-            {id: 2, name: 'Liaoning'},
-            {id: 3, name: 'Shanghai'},
-            {id: 4, name: 'Henan'}
-        ]
-    };
+
+
+
+
+
+
+
+  /*
+	 * $scope.zone = { zoneList: [ {id: 1, name: 'Beijing'}, {id: 2, name:
+	 * 'Liaoning'}, {id: 3, name: 'Shanghai'}, {id: 4, name: 'Henan'} ] };
+	 */
     $scope.formElements = {
-        qosList: [
-            {
-                id: 1,
-                name: 'Hypervisor'
-            },
-            {
-                id: 2,
-                name: 'Storage'
-            }
-        ]
+        qosList: {
+                  "0": "Hypervisor",
+                  "1": "Storage"
+        }
     };
 
 
 }
 
 function storageEditCtrl($scope, $state, $stateParams, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, dialogService, crudService) {
-    $scope.edit = function (storageId) {
+
+    $scope.storage = {
+    		zoneList: {},
+            domainList:{}
+            	};
+    $scope.paginationObject = {};
+    $scope.storageForm = {};
+    $scope.global = crudService.globalConfig;
+
+    $scope.storage.zoneList = {};
+    var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+    var hasZones = crudService.list("zones", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+    hasZones.then(function (result) {  // this is only run after $http
+										// completes0
+    	$scope.formElements.zoneList = result;
+    });
+
+
+	$scope.edit = function (storageId) {
         var hasStorage = crudService.read("storages", storageId);
         hasStorage.then(function (result) {
             $scope.storage = result;
@@ -324,6 +423,7 @@ function storageEditCtrl($scope, $state, $stateParams, modalService, $log, promi
         }
     };
 
+
 }
 ;
 
@@ -333,7 +433,8 @@ function networkListCtrl($scope, $modal, modalService, $log, promiseAjax, global
     localStorageService.set("networkList", null);
     if (localStorageService.get("networkList") == null) {
         var hasServer = promiseAjax.httpRequest("GET", "api/catalog-template.json");
-        hasServer.then(function (result) {  // this is only run after $http completes
+        hasServer.then(function (result) {  // this is only run after $http
+											// completes
             $scope.networkList = result;
             localStorageService.set("networkList", result);
         });
@@ -343,7 +444,8 @@ function networkListCtrl($scope, $modal, modalService, $log, promiseAjax, global
 
 
     $scope.showDescription = function (network) {
-        //modalService.trigger('views/servicecatalog/viewnetwork.jsp', 'md', 'View Network Offering');
+        // modalService.trigger('views/servicecatalog/viewnetwork.jsp', 'md',
+		// 'View Network Offering');
         var modalInstance = $modal.open({
             animation: $scope.animationsEnabled,
             templateUrl: 'views/servicecatalog/viewnetwork.jsp',
@@ -381,7 +483,8 @@ function networkDetailsCtrl($scope, network, $modalInstance) {
 
 function miscellaneousListCtrl($scope, modalService, $log, promiseAjax, $stateParams, globalConfig, localStorageService, $window, notify) {
     var hasServer = promiseAjax.httpRequest("GET", "api/catalog-miscellaneous.json");
-    hasServer.then(function (result) {  // this is only run after $http completes
+    hasServer.then(function (result) {  // this is only run after $http
+										// completes
         $scope.miscellaneousList = result;
         if (!angular.isUndefined($stateParams.id)) {
             var miscellaneousId = $stateParams.id - 1;
@@ -467,7 +570,8 @@ function computeListCtrl($scope, $state, modalService, $window, notify, dialogSe
     $scope.list = function (pageNumber) {
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasComputes = crudService.list("computes", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
-        hasComputes.then(function (result) {  // this is only run after $http completes0
+        hasComputes.then(function (result) {  // this is only run after $http
+												// completes0
 
             $scope.computeList = result;
 
@@ -487,10 +591,11 @@ function computeListCtrl($scope, $state, modalService, $window, notify, dialogSe
         if (form.$valid) {
             var compute = $scope.compute;
             var hasComputes = crudService.add("computes", compute);
-            hasComputes.then(function (result) {  // this is only run after $http completes
+            hasComputes.then(function (result) {  // this is only run after
+													// $http completes
                 $scope.list(1);
                 notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
-//                $window.location.href = '#/templatestore/list';
+// $window.location.href = '#/templatestore/list';
 
                 $window.location.href = '#/compute/list';
 

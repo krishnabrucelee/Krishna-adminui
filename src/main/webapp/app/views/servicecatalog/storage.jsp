@@ -12,21 +12,24 @@
                     <div class="col-md-12 col-sm-12 col-xs-12 ">
                         <div class="pull-left">
                             <div class="dashboard-box pull-left">
-                                <span class="pull-right">Total Offering</span>
+                                <span class="pull-right"><fmt:message
+										key="storage.totaloffering" bundle="${msg}" /></span>
                                 <div class="clearfix"></div>
                                 <span class="pull-right m-t-xs"><img src="images/volume-icon.png"></span>
                                 <b class="pull-right">13</b>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="dashboard-box pull-left">
-                                <span class="pull-right">Enabled Offering</span>
+                                <span class="pull-right"><fmt:message
+										key="storage.enabledoffering" bundle="${msg}" /></span>
                                 <div class="clearfix"></div>
                                 <span class="pull-right m-t-xs"><img src="images/volume-icon.png"></span>
                                 <b class="pull-right">04</b>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="dashboard-box pull-left">
-                                <span class="pull-right">Disabled Offering</span>
+                                <span class="pull-right"><fmt:message
+										key="storage.disabledoffering" bundle="${msg}" /></span>
                                 <div class="clearfix"></div>
                                 <span class="pull-right m-t-xs"><img src="images/volume-icon.png"></span>
                                 <b class="pull-right">09</b>
@@ -36,13 +39,15 @@
                         <div class="pull-right">
                             <div class="quick-search ">
                                 <div class="input-group">
-                                    <input data-ng-model="storageSearch" type="text" class="form-control input-medium" placeholder="Quick Search" aria-describedby="quicksearch-go">
+                                    <input data-ng-model="storageSearch" type="text" class="form-control input-medium" placeholder="<fmt:message
+										key="common.quicksearch" bundle="${msg}" />" aria-describedby="quicksearch-go">
                                     <span class="input-group-addon" id="quicksearch-go"><span class="pe-7s-search pe-lg font-bold"></span></span>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
                             <span class="pull-right m-l-sm m-t-sm">
-                                <a class="btn btn-info" ui-sref="servicecatalog.list-storage.list-storage-offer"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span>Add</a>
+                                <a class="btn btn-info" ui-sref="servicecatalog.list-storage.list-storage-offer"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message
+										key="common.add" bundle="${msg}" /></a>
                                 <a class="btn btn-info" ui-sref="servicecatalog.list-storage" title="Refresh"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
                             </span>
                         </div>
@@ -51,17 +56,17 @@
                 </div>
                 <div class="clearfix"></div>
             </div>
-
+			<pagination-content></pagination-content>
             <div class="white-content">
                 <div class="table-responsive">
                     <table cellspacing="1" cellpadding="1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Size (GB)</th>
-                                <th>Custom</th>
-                                <th>Action</th>
+                                <th><fmt:message key="common.name" bundle="${msg}" /></th>
+                                <th><fmt:message key="common.type" bundle="${msg}" /></th>
+                                <th><fmt:message key="common.size" bundle="${msg}" /></th>
+                                <th><fmt:message key="common.custom" bundle="${msg}" /></th>
+                                <th><fmt:message key="common.action" bundle="${msg}" /></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -88,6 +93,7 @@
                     </table>
                 </div>
             </div>
+        	<pagination-content></pagination-content>
         </div>
     </div>
 </div>
