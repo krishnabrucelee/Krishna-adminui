@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Configuration Controller for estalishing connectivity with cloud Stack
  */
 angular
         .module('panda-ui-admin')
@@ -17,13 +15,17 @@ function cloudStackCtrl($scope, $state,crudService, $stateParams, modalService, 
     $scope.configForm = {};
     $scope.global = crudService.globalConfig;
 
+    /**
+     * Save the configuration details.
+     */
     $scope.save = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
             var config = $scope.config;
             console.log($scope.config);
             var hasConfig = crudService.add("cloudconfiguration", config);
-            hasConfig.then(function (result) {  // this is only run after $http completes
+            hasConfig.then(function (result) {  // this is only run after $http
+												// completes
                 notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
             }).catch(function (result) {
                 angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
@@ -93,14 +95,14 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
     localStorageService.set("billingList", null);
     if (localStorageService.get("billingList") == null) {
         var hasServer = promiseAjax.httpRequest("GET", "api/billing.json");
-        hasServer.then(function (result) {  // this is only run after $http completes
+        hasServer.then(function (result) {  // this is only run after $http
+											// completes
             $scope.billingList = result;
             localStorageService.set("billingList", result);
         });
     } else {
         $scope.billingList = localStorageService.get("billingList");
     }
-
     if ($state.current.data.pageTitle == 'ConfigCategory' || $state.current.data.pageTitle == 'General' || $state.current.data.pageTitle == 'Chargeback'
             || $state.current.data.pageTitle == 'Cloudstack') {
         $state.current.data.pageTitle = $stateParams.category.substring(0, 1).toUpperCase() + $stateParams.category.substring(1).toLowerCase();
@@ -113,7 +115,8 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
     localStorageService.set("taxList", null);
     if (localStorageService.get("taxList") == null) {
         var hasServer = promiseAjax.httpRequest("GET", "api/tax.json");
-        hasServer.then(function (result) {  // this is only run after $http completes
+        hasServer.then(function (result) {  // this is only run after $http
+											// completes
             $scope.taxList = result;
             localStorageService.set("taxList", result);
         });
@@ -122,7 +125,8 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
     }
 
         var hasServer = promiseAjax.httpRequest("GET", "api/paymentGateway.json");
-        hasServer.then(function (result) {  // this is only run after $http completes
+        hasServer.then(function (result) {  // this is only run after $http
+											// completes
             $scope.paymentGateList = result;
             localStorageService.set("paymentGateList", result);
         });
@@ -131,7 +135,8 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
     localStorageService.set("promotionList", null);
     if (localStorageService.get("promotionList") == null) {
         var hasServer = promiseAjax.httpRequest("GET", "api/promotion.json");
-        hasServer.then(function (result) {  // this is only run after $http completes
+        hasServer.then(function (result) {  // this is only run after $http
+											// completes
             $scope.promotionList = result;
             localStorageService.set("promotionList", result);
         });
@@ -142,7 +147,8 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
     localStorageService.set("discountList", null);
     if (localStorageService.get("discountList") == null) {
         var hasServer = promiseAjax.httpRequest("GET", "api/discount.json");
-        hasServer.then(function (result) {  // this is only run after $http completes
+        hasServer.then(function (result) {  // this is only run after $http
+											// completes
             $scope.discountList = result;
             localStorageService.set("discountList", result);
         });
@@ -402,7 +408,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
 
             $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Created successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-            //$window.location.href='#/configuration/chargeback/tax';
+            // $window.location.href='#/configuration/chargeback/tax';
         }
     };
 
