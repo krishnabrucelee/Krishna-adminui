@@ -9,11 +9,11 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12 ">
                     <span class="pull-right m-l-sm">
-                        <a class="btn btn-info" ui-sref="servicecatalog.list-network" title="Refresh"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
+                        <a class="btn btn-info" ui-sref="servicecatalog.list-network" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
                     </span>
                     <div class="quick-search pull-right">
                         <div class="input-group">
-                            <input data-ng-model="networkSearch" type="text" class="form-control input-medium" placeholder="Quick Search" aria-describedby="quicksearch-go">
+                            <input data-ng-model="networkSearch" type="text" class="form-control input-medium" placeholder="<fmt:message key="common.quicksearch" bundle="${msg}" />" aria-describedby="quicksearch-go">
                             <span class="input-group-addon" id="quicksearch-go"><span class="pe-7s-search pe-lg font-bold"></span></span>
                         </div>
                     </div>
@@ -28,17 +28,15 @@
                 <table cellspacing="1" cellpadding="1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Zone</th>
-                            <th>Action</th>
+                                <th><fmt:message key="common.name" bundle="${msg}" /></th>
+                                <th><fmt:message key="common.action" bundle="${msg}" /></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr data-ng-repeat="network in networkList| filter: networkSearch">
                             <td>
-                                {{ network.networkname}}
+                                {{ network.name}}
                             </td>
-                            <td>{{ network.zone.name}} </td>
                             <td>
                                 <a class="icon-button" data-ng-click="showDescription(network)" title="Edit"  ><span class="fa fa-eye"></span></a>
                             </td>
