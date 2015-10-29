@@ -7,13 +7,15 @@
     <div class="hpanel">
         <div class="panel-body">
             <div class="row  ">
-                <div class="col-md-12"><h4><label>Edit Disk Offer</label><hr></h4></div>
+                <div class="col-md-12"><h4><label><fmt:message key="edit.disk.offer"
+								bundle="${msg}" /></label><hr></h4></div>
             </div>
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group" ng-class="{'text-danger': storageForm.name.$invalid && formSubmitted}">
                         <div class="row">
-                            <label class="col-md-6 col-sm-6 control-label font-normal">Name<span class="text-danger">*</span></label>
+                            <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message
+									key="common.name" bundle="${msg}" /><span class="text-danger">*</span></label>
                             <div class="col-md-6  col-sm-6 col-xs-6">
                                 <input required="true" type="text" name="name" data-ng-model="storage.name" class="form-control" data-ng-class="{'error': storageForm.name.$invalid && formSubmitted}">
                                 <div class="error-area" data-ng-show="storageForm.name.$invalid && formSubmitted" ><i  tooltip="Disk Name is Required" class="fa fa-warning error-icon"></i></div>
@@ -25,7 +27,8 @@
                 <div class="col-md-4">
                     <div class="form-group" ng-class="{'text-danger': storageForm.description.$invalid && formSubmitted}">
                         <div class="row">
-                            <label class="col-md-6 col-sm-6 control-label font-normal">Description<span class="text-danger">*</span></label>
+                            <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message
+									key="common.description" bundle="${msg}" /><span class="text-danger">*</span></label>
                             <div class="col-md-6 col-sm-6">
                                 <input required="true" type="text" name="description" data-ng-model="storage.description" class="form-control" data-ng-class="{'error': storageForm.description.$invalid && formSubmitted}">
                                 <div class="error-area" data-ng-show="storageForm.description.$invalid && formSubmitted" ><i  tooltip="Description is Required" class="fa fa-warning error-icon"></i></div>
@@ -36,7 +39,8 @@
                 <div class="col-md-4">
                     <div class="form-group" >
                         <div class="row">
-                            <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal">Public</label>
+                            <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal"><fmt:message
+										key="storage.public" bundle="${msg}" /></label>
                             <div class="col-md-6 col-sm-6 col-xs-6">
                                 <input  type="text" name="public" data-ng-model="storage.isPublic" class="form-control" readonly>
                             </div>
@@ -49,7 +53,8 @@
 
                     <div class="form-group" >
                         <div class="row">
-                            <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal" >Storage Type</label>
+                            <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal" ><fmt:message
+									key="storage.storagetype" bundle="${msg}" /></label>
                             <div class="col-md-6 col-sm-6 col-xs-6">
                                 <input  type="text" name="storagetype" data-ng-model="storage.storageType" class="form-control" readonly>
                             </div>
@@ -60,7 +65,8 @@
 
                     <div class="form-group" >
                         <div class="row">
-                            <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal">Storage Tag</label>
+                            <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal"><fmt:message
+									key="storage.storagetag" bundle="${msg}" /></label>
                             <div class="col-md-6 col-sm-6 col-xs-6">
                                 <input  type="text" name="storagetag" data-ng-model="storage.storageTags" class="form-control" readonly>
                             </div>
@@ -71,7 +77,8 @@
 
                     <div class="form-group" >
                         <div class="row">
-                            <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal" >QOS Type</label>
+                            <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal" ><fmt:message
+									key="storage.qostype" bundle="${msg}" /></label>
                             <div class="col-md-6  col-sm-6 col-xs-6">
                                 <input  type="text" name="qostype" data-ng-model="storage.qosType" class="form-control"readonly >
 
@@ -81,22 +88,11 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4" data-ng-show="storage.customdisk">
-                    <div class="form-group" >
-                        <div class="row">
-                            <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal">Custom Disk</label>
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <input  type="text" name="customdisk" data-ng-model="storage.isCustomDisk" class="form-control" readonly>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-md-4" >
-
-
                     <div class="form-group" >
                         <div class="row">
-                            <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal">Size (GB)</label>
+                            <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal"><fmt:message
+									key="common.size" bundle="${msg}" /></label>
                             <div class="col-md-6 col-sm-6 col-xs-6">
                                 <input  type="text" valid-number name="size" data-ng-model="storage.diskSize" class="form-control" readonly >
 
@@ -108,50 +104,86 @@
 
             </div>
 
-            <div class="row  ">
-                <div class="col-md-12"> <h4><label>Pricing Info</label><hr></h4></div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+<div class="row  ">
+				<div class="col-md-12">
+					<h4>
+						<label> <fmt:message key="common.pricinginfo" bundle="${msg}" /></label>
+						<hr>
+					</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+				<div class="form-group" >
+						<div class="row">
+							<label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.cost.per.gb.per.month" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)
+							</label>
+							<div class="col-md-4 col-sm-4 col-xs-4">
+								<input data-ng-change="costPerHourGB()" type="text" valid-decimal name="costmonth"
+									data-ng-model="storage.costGbPerMonth" class="form-control">
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-4">
+								<b>
+									<p class="text-danger m-t-sm">{{ storage.costPerHourGB }}/hr</p>
+								</b>
+							</div>
 
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-6 col-sm-6 control-label font-normal">Zone Name</label>
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <input  type="text" name="size" data-ng-model="storage.zone" class="form-control" readonly >
+						</div>
+					</div>
+					<div data-ng-show="storage.qosType == 'Storage'">
+						<div class="form-group">
+							<div class="row">
+								<label
+									class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.cost.per.iops" bundle="${msg}" /> (<app-currency class="text-danger"></app-currency>)
+								</label>
+								<div class="col-md-4  col-sm-4 col-xs-4">
+									<input type="text" data-ng-keyup="costPerHourIOPS()" name="costperiops" valid-number
+										data-ng-model="storage.costIopsPerMonth" class="form-control">
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4">
+								<b>
+									<p class="text-danger m-t-sm">{{ storage.costPerHourIOPS }}/hr</p>
+								</b>
+							</div>
 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-6 col-sm-6 control-label font-normal">Cost GB per hour (<app-currency class="text-danger"></app-currency>)</label>
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <b> <p class="text-danger">0.04896</p></b>
-                            </div>
-                        </div>
-                    </div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-                </div>
-                <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
-                    <div class="form-group" >
-                        <div class="row">
-                            <label class="col-md-6 col-sm-6 control-label font-normal">Cost GB per month (<app-currency class="text-danger"></app-currency>)</label>
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <input  type="text" valid-decimal name="costmonth" data-ng-model="storage.costmonth" class="form-control"  placeholder="0.01265">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12  col-sm-12">
-                        <span class="pull-right">
-                            <a class="btn btn-default btn-outline"   ui-sref="servicecatalog.list-storage">Cancel</a>
-                            <button class="btn btn-info" type="submit" ng-disabled="form.storageForm.$invalid" >Apply</button>
-                        </span>
-                    </div>
-                </div>
-            </div>
+
+
+				<div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+					<div class="form-group">
+						<div class="row">
+							<label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="common.zonename" bundle="${msg}" /></label>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+								<select data-ng-init="storage.zone.name = zone.zoneList[0]"
+									class="form-control input-group" name="zone"
+									data-ng-model="storage.zone"
+									ng-options=" zone.name for zone in formElements.zoneList">
+									<option value="" class="">Select</option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+				</div>
+
+
+				<div class="row">
+					<div class="col-md-12  col-sm-12">
+						<span class="pull-right"> <a
+							class="btn btn-default btn-outline"
+							ui-sref="servicecatalog.list-storage"><fmt:message key="common.cancel" bundle="${msg}" /></a>
+							<button class="btn btn-info" type="submit"
+								ng-disabled="form.storageForm.$invalid"><fmt:message key="common.create" bundle="${msg}" /></button>
+						</span>
+					</div>
+				</div>
+			</div>
         </div>
     </div>
 </form>
