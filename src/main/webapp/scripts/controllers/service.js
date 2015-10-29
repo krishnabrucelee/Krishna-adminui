@@ -258,16 +258,56 @@ function storageListCtrl($scope, crudService, dialogService, modalService, $log,
 
 
     $scope.storageList = {};
+
+
+
+
+    $scope.storage = {
+    		zoneList: {},
+            domainList:{}
+            	};
     $scope.paginationObject = {};
     $scope.storageForm = {};
     $scope.global = crudService.globalConfig;
 
+    $scope.storage.zoneList = {};
+    var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+    var hasZones = crudService.list("zones", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+    hasZones.then(function (result) {  // this is only run after $http
+										// completes0
+    	$scope.formElements.zoneList = result;
+    });
 
+    $scope.storage.domainList = {};
+    var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+    var hasDomains = crudService.list("domains", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+    hasDomains.then(function (result) {  // this is only run after $http
+										// completes0
+    	$scope.formElements.domainList = result;
+    });
+
+        // Network Offer List
+        $scope.listNetworkOffer = function (pageNumber) {
+            var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+            var hasNetworks = crudService.list("networkoffer", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+            hasNetworks.then(function (result) {  // this is only run after
+													// $http
+    												// completes0
+
+            	$scope.instance.network.networkOfferList = result;
+
+                // For pagination
+                $scope.paginationObject.limit = limit;
+                $scope.paginationObject.currentPage = pageNumber;
+                $scope.paginationObject.totalItems = result.totalItems;
+            });
+        };
     // Storage Offer List
     $scope.list = function (pageNumber) {
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasStorage = crudService.list("storages", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
-        hasStorage.then(function (result) {  // this is only run after $http completes0
+        hasStorage.then(function (result) {  // this is only run after $http
+												// completes0
 
             $scope.storageList = result;
             console.log($scope.storageList);
@@ -285,18 +325,61 @@ function storageListCtrl($scope, crudService, dialogService, modalService, $log,
     // Open dialogue box to create Storage Offer
     $scope.storage = {};
 
+
+
+    $scope.costPerHourGB = function() {
+
+        var regexp = /^[0-9]+([,.][0-9]+)?$/g;
+        $scope.costPerHourGBError = false;
+        if(!regexp.test($scope.storage.costGbPerMonth)) {
+        	$scope.costPerHourGBError = true;
+
+            $scope.storage.costGbPerMonth = "";
+            $scope.storage.costPerHourGB = "";
+            return false;
+        }
+
+
+        var cost = parseFloat($scope.storage.costGbPerMonth);
+
+        var costValue = cost / 720;
+
+        $scope.storage.costPerHourGB = costValue.toFixed(4);
+    };
+$scope.costPerHourIOPS = function() {
+
+        var regexp = /^[0-9]+([,.][0-9]+)?$/g;
+
+        $scope.costPerHourIOPSError = false;
+        if(!regexp.test($scope.storage.costIopsPerMonth)) {
+            $scope.costPerHourIOPSError = true;
+
+            $scope.storage.costIopsPerMonth = "";
+            $scope.storage.costPerHourIOPS = "";
+            return false;
+        }
+
+
+        var cost = parseFloat($scope.storage.costIopsPerMonth);
+
+        var costValue = cost / 720;
+
+        $scope.storage.costPerHourIOPS = costValue.toFixed(4);
+    };
+
+
     $scope.save = function (form) {
-        alert("test");
         console.log(form);
         $scope.formSubmitted = true;
 
         if (form.$valid) {
             var storage = $scope.storage;
             var hasStorage = crudService.add("storages", storage);
-            hasStorage.then(function (result) {  // this is only run after $http completes
+            hasStorage.then(function (result) {  // this is only run after
+													// $http completes
                 $scope.list(1);
                 notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
-//                $window.location.href = '#/templatestore/list';
+// $window.location.href = '#/templatestore/list';
 
                 $window.location.href = '#/storage/list';
 
@@ -312,7 +395,7 @@ function storageListCtrl($scope, crudService, dialogService, modalService, $log,
 
     // Delete the Storage Offer
     $scope.delete = function (size, storageId) {
-        dialogService.openDialog("views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+        dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
                 $scope.deleteId = storageId;
                 $scope.ok = function (storageId) {
                     var hasStorage = crudService.delete("storages", storageId);
@@ -335,38 +418,53 @@ function storageListCtrl($scope, crudService, dialogService, modalService, $log,
             {id: 1, name: 'ROOT'},
         ]
     };
-    $scope.storagetype = {
-        storagetypeList: [
-            {id: 1, name: 'Shared'},
-            {id: 2, name: 'Isolated'},
-        ]
+    $scope.storageType = {
+        storagetypeList: {
+                 "0": "shared",
+                 "1": "local"
+        }
     };
-    $scope.zone = {
-        zoneList: [
-            {id: 1, name: 'Beijing'},
-            {id: 2, name: 'Liaoning'},
-            {id: 3, name: 'Shanghai'},
-            {id: 4, name: 'Henan'}
-        ]
-    };
+
+
+
+
+
+
+
+  /*
+	 * $scope.zone = { zoneList: [ {id: 1, name: 'Beijing'}, {id: 2, name:
+	 * 'Liaoning'}, {id: 3, name: 'Shanghai'}, {id: 4, name: 'Henan'} ] };
+	 */
     $scope.formElements = {
-        qosList: [
-            {
-                id: 1,
-                name: 'Hypervisor'
-            },
-            {
-                id: 2,
-                name: 'Storage'
-            }
-        ]
+        qosList: {
+                  "0": "Hypervisor",
+                  "1": "Storage"
+        }
     };
 
 
 }
 
 function storageEditCtrl($scope, $state, $stateParams, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, dialogService, crudService) {
-    $scope.edit = function (storageId) {
+
+    $scope.storage = {
+    		zoneList: {},
+            domainList:{}
+            	};
+    $scope.paginationObject = {};
+    $scope.storageForm = {};
+    $scope.global = crudService.globalConfig;
+
+    $scope.storage.zoneList = {};
+    var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+    var hasZones = crudService.list("zones", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+    hasZones.then(function (result) {  // this is only run after $http
+										// completes0
+    	$scope.formElements.zoneList = result;
+    });
+
+
+	$scope.edit = function (storageId) {
         var hasStorage = crudService.read("storages", storageId);
         hasStorage.then(function (result) {
             $scope.storage = result;
@@ -397,29 +495,52 @@ function storageEditCtrl($scope, $state, $stateParams, modalService, $log, promi
         }
     };
 
+
 }
 ;
 
-function networkListCtrl($scope, $modal, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify) {
+function networkListCtrl($scope, $modal, modalService, $log, promiseAjax, globalConfig, localStorageService, $window,crudService, notify) {
 
+	$scope.networkList = {};
+    $scope.paginationObject = {};
+    $scope.networkForm = {};
+    $scope.global = crudService.globalConfig;
+    // Network Offer List
+    $scope.list = function (pageNumber) {
+        var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+        var hasNetworks = crudService.list("networkoffer", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+        hasNetworks.then(function (result) {  // this is only run after $http completes0
 
-    localStorageService.set("networkList", null);
-    if (localStorageService.get("networkList") == null) {
-        var hasServer = promiseAjax.httpRequest("GET", "api/catalog-template.json");
-        hasServer.then(function (result) {  // this is only run after $http completes
+											// completes
             $scope.networkList = result;
-            localStorageService.set("networkList", result);
+
+            // For pagination
+            $scope.paginationObject.limit = limit;
+            $scope.paginationObject.currentPage = pageNumber;
+            $scope.paginationObject.totalItems = result.totalItems;
         });
-    } else {
-        $scope.networkList = localStorageService.get("networkList");
-    }
+    };
+    $scope.list(1);
+
+
+//    localStorageService.set("networkList", null);
+//    if (localStorageService.get("networkList") == null) {
+//        var hasServer = promiseAjax.httpRequest("GET", "api/catalog-template.json");
+//        hasServer.then(function (result) {  // this is only run after $http completes
+//            $scope.networkList = result;
+//            localStorageService.set("networkList", result);
+//        });
+//    } else {
+//        $scope.networkList = localStorageService.get("networkList");
+//    }
 
 
     $scope.showDescription = function (network) {
-        //modalService.trigger('views/servicecatalog/viewnetwork.jsp', 'md', 'View Network Offering');
+        // modalService.trigger('views/servicecatalog/viewnetwork.jsp', 'md',
+		// 'View Network Offering');
         var modalInstance = $modal.open({
             animation: $scope.animationsEnabled,
-            templateUrl: 'views/servicecatalog/viewnetwork.jsp',
+            templateUrl: 'app/views/servicecatalog/viewnetwork.jsp',
             controller: 'networkDetailsCtrl',
             size: 'md',
             backdrop: 'static',
@@ -454,7 +575,8 @@ function networkDetailsCtrl($scope, network, $modalInstance) {
 
 function miscellaneousListCtrl($scope, modalService, $log, promiseAjax, $stateParams, globalConfig, localStorageService, $window, notify) {
     var hasServer = promiseAjax.httpRequest("GET", "api/catalog-miscellaneous.json");
-    hasServer.then(function (result) {  // this is only run after $http completes
+    hasServer.then(function (result) {  // this is only run after $http
+										// completes
         $scope.miscellaneousList = result;
         if (!angular.isUndefined($stateParams.id)) {
             var miscellaneousId = $stateParams.id - 1;
@@ -529,18 +651,21 @@ function deleteCtrl($scope, $state, $stateParams, globalConfig, notify) {
 
 }
 
-function computeListCtrl($scope, $state, modalService, $window, notify, dialogService, crudService) {
+function computeListCtrl($scope, $state, $stateParams,modalService, $window, notify, dialogService, crudService) {
 
     $scope.computeList = {};
     $scope.paginationObject = {};
     $scope.computeForm = {};
     $scope.global = crudService.globalConfig;
-    $scope.test = "test";
+    $scope.compute = {
+    		zone: {}
+    };
     // Compute Offer List
     $scope.list = function (pageNumber) {
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasComputes = crudService.list("computes", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
-        hasComputes.then(function (result) {  // this is only run after $http completes0
+        hasComputes.then(function (result) {  // this is only run after $http
+												// completes0
 
             $scope.computeList = result;
 
@@ -553,17 +678,24 @@ function computeListCtrl($scope, $state, modalService, $window, notify, dialogSe
     $scope.list(1);
 
     // Open dialogue box to create Compute Offer
-    $scope.compute = {};
+
 
     $scope.save = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
             var compute = $scope.compute;
+            if(!angular.isUndefined(compute.domain)) {
+            	compute.domainId = compute.domain.id;
+            }
+            if(!angular.isUndefined(compute.zone)) {
+            	compute.zoneId = compute.zone.id;
+            }
             var hasComputes = crudService.add("computes", compute);
-            hasComputes.then(function (result) {  // this is only run after $http completes
+            hasComputes.then(function (result) {  // this is only run after
+													// $http completes
                 $scope.list(1);
                 notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
-//                $window.location.href = '#/templatestore/list';
+// $window.location.href = '#/templatestore/list';
 
                 $window.location.href = '#/compute/list';
 
@@ -580,13 +712,13 @@ function computeListCtrl($scope, $state, modalService, $window, notify, dialogSe
 
     // Delete the Compute Offer
     $scope.delete = function (size, computeId) {
-        dialogService.openDialog("views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+        dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
                 $scope.deleteId = computeId;
                 $scope.ok = function (computeId) {
                     var hasComputes = crudService.delete("computes", computeId);
                     hasComputes.then(function (result) {
                         $scope.list(1);
-                        $scope.homerTemplate = 'views/notification/notify.jsp';
+                        $scope.homerTemplate = 'app/views/notification/notify.jsp';
                         notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                     });
                     $modalInstance.close();
@@ -598,77 +730,89 @@ function computeListCtrl($scope, $state, modalService, $window, notify, dialogSe
     };
 
     $scope.formElements = {
-        qosList: [
-            {
-                id: 1,
-                name: 'Hypervisor',
+    		storageTypeList :{
+    			"0" : "SHARED",
+    			"1"	: "ISOLATED"
+    		},
+            qosList: {
+                      "hypervisor": "Hypervisor",
+                      "storage": "Storage"
             },
+            diskioList:
             {
-                id: 2,
-                name: 'Storage',
-            },
-        ],
-    };
+        		"0" :"AVERAGE",
+            	"1" : "GOOD",
+            	"2" : "EXCELLENT"
+           }
+        };
     $scope.domain = {
-        domaintypeList: [
-            {id: 1, name: 'ROOT'},
-        ]
     };
+
+    // Domain List
+	var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+	var hasDomains = crudService.list("domains", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+	hasDomains.then(function (result) {  // this is only run after $http completes0
+		$scope.domain.domaintypeList = result;
+	});
+
     $scope.storagetype = {
-        storagetypeList: [
-            {id: 1, name: 'Shared'},
-            {id: 2, name: 'Isolated'},
-        ]
-    };
-    $scope.zone = {
-        zoneList: [
-            {id: 1, name: 'Beijing'},
-            {id: 2, name: 'Liaoning'},
-            {id: 3, name: 'Shanghai'},
-            {id: 4, name: 'Henan'}
-        ]
-    };
+            storagetypeList: {
+                     "0": "shared",
+                     "1": "local"
+            }
+        };
+
+    // Domain List
+	var hasZones = crudService.list("zones/list", '', {});
+	hasZones.then(function (result) {  // this is only run after $http completes0
+		$scope.formElements.zoneList = result;
+		$scope.compute.zone = $scope.formElements.zoneList[0];
+	});
+
     $scope.diskio = {
-        diskioList: [
-            {id: 1, name: 'Average'},
-            {id: 2, name: 'Good'},
-            {id: 3, name: 'Excellent'},
-        ]
+        diskioList:
+            {
+        		"0" :"AVERAGE",
+            	"1" : "GOOD",
+            	"2" : "EXCELLENT"
+           }
+
     };
-}
 
-
-function computeEditCtrl($scope, $state, $stateParams, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, dialogService, crudService) {
+    // Edit compute offerings
     $scope.edit = function (computeId) {
         var hasComputes = crudService.read("computes", computeId);
         hasComputes.then(function (result) {
             $scope.compute = result;
             console.log($scope.compute);
         });
-
     };
 
 
+
     if (!angular.isUndefined($stateParams.id) && $stateParams.id != '') {
-        $scope.edit($stateParams.id)
+        $scope.edit($stateParams.id);
     }
 
-    // Edit the Compute Offer
+    // Update the Compute Offer
     $scope.update = function (form) {
-        // Update Compute Offer
         $scope.formSubmitted = true;
         if (form.$valid) {
             var compute = $scope.compute;
-            console.log(compute);
+
             var hasComputes = crudService.update("computes", compute);
             hasComputes.then(function (result) {
 
-                $scope.homerTemplate = 'views/notification/notify.jsp';
+                $scope.homerTemplate = 'app/views/notification/notify.jsp';
                 notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                 $window.location.href = '#/compute/list';
             });
         }
     };
-
 }
-;
+
+
+function computeEditCtrl($scope, $state, $stateParams, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, dialogService, crudService) {
+
+
+};

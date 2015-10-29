@@ -19,13 +19,13 @@
 
 
                 <div class="tab-pane"  data-ng-class="{'active' : configElements.category == 'general'}" id="general">
-                    <div data-ng-include src="'views/configuration/general/general.html'"></div>
+                    <div data-ng-include src="'app/views/configuration/general/general.jsp'"></div>
                 </div>
                 <div class="tab-pane"  data-ng-class="{'active' : configElements.category == 'chargeback'}" id="chargeback">
-                    <div data-ng-include src="'views/configuration/chargeback/chargeback.html'"></div>
+                    <div data-ng-include src="'app/views/configuration/chargeback/chargeback.jsp'"></div>
                 </div>
                 <div class="tab-pane"  data-ng-class="{'active' : configElements.category == 'cloudstack'}" id="cloudstack">
-                    <div data-ng-include src="'views/configuration/cloudStack/cloudStack.html'"></div>
+                    <div data-ng-include src="'app/views/configuration/cloudStack/cloudStack.jsp'"></div>
                 </div>
             </div>
 
