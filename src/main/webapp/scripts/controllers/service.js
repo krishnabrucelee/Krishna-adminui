@@ -384,7 +384,6 @@ $scope.costPerHourIOPS = function() {
                 $window.location.href = '#/storage/list';
 
             }).catch(function (result) {
-
                 angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
                     $scope.storageForm[key].$invalid = true;
                     $scope.storageForm[key].errorMessage = errorMessage;
