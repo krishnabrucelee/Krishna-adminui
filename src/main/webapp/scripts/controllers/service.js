@@ -419,8 +419,8 @@ $scope.costPerHourIOPS = function() {
     };
     $scope.storageType = {
         storagetypeList: {
-                 "0": "shared",
-                 "1": "local"
+                 "0": "SHARED",
+                 "1": "LOCAL"
         }
     };
 
@@ -459,7 +459,7 @@ function storageEditCtrl($scope, $state, $stateParams, modalService, $log, promi
     var hasZones = crudService.list("zones", $scope.global.paginationHeaders(1, limit), {"limit": limit});
     hasZones.then(function (result) {  // this is only run after $http
 										// completes0
-    	$scope.formElements.zoneList = result;
+    	$scope.zoneList = result;
     });
 
 
@@ -489,7 +489,7 @@ function storageEditCtrl($scope, $state, $stateParams, modalService, $log, promi
 
                 $scope.homerTemplate = 'views/notification/notify.jsp';
                 notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-                $window.location.href = '#/compute/list';
+                $window.location.href = '#/storage/list';
             });
         }
     };

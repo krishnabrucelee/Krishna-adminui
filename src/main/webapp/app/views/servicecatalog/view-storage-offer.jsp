@@ -156,14 +156,15 @@
 				<div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
 					<div class="form-group">
 						<div class="row">
+							<label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="common.zonename" bundle="${msg}" /></label> <b>{{ zoneList[0].name }}</b>
+							 <!-- <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6"> -->
+
+						<%-- <div class="form-group">
+						<div class="row">
 							<label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="common.zonename" bundle="${msg}" /></label>
 							<div class="col-md-6 col-sm-6 col-xs-6">
-								<select data-ng-init="storage.zone.name = zone.zoneList[0]"
-									class="form-control input-group" name="zone"
-									data-ng-model="storage.zone"
-									ng-options=" zone.name for zone in formElements.zoneList">
-									<option value="" class="">Select</option>
-								</select>
+								{{ zoneList[0].name }} --%>
+
 							</div>
 						</div>
 					</div>
