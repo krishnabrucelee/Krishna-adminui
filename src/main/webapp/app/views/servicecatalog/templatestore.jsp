@@ -12,22 +12,22 @@
                         <div class="dashboard-box pull-left">
                             <span class="pull-right"><fmt:message key="template.totaltemplate" bundle="${msg}" /></span>
                             <div class="clearfix"></div>
-                            <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
-                            <b class="pull-right">13</b>
+                            <span class="pull-right m-t-xs"><img src="images/icon-template.png"></span>
+                            <b class="pull-right">{{LinuxTemplate.Count}}</b>
                             <div class="clearfix"></div>
                         </div>
                         <div class="dashboard-box pull-left">
                             <span class="pull-right"><fmt:message key="windows.template" bundle="${msg}" /></span>
                             <div class="clearfix"></div>
-                            <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
-                            <b class="pull-right">04</b>
+                            <span class="pull-right m-t-xs"><img src="images/icon-template.png"></span>
+                            <b class="pull-right">{{windowsTemplate.Count}}</b>
                             <div class="clearfix"></div>
                         </div>
                         <div class="dashboard-box pull-left">
                             <span class="pull-right"><fmt:message key="linux.template" bundle="${msg}" /></span>
                             <div class="clearfix"></div>
-                            <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
-                            <b class="pull-right">09</b>
+                            <span class="pull-right m-t-xs"><img src="images/icon-template.png"></span>
+                            <b class="pull-right">{{LinuxTemplate.Count - windowsTemplate.Count}}</b>
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                     <tbody>
                         <tr data-ng-repeat="template in templateList| filter: templateSearch">
 
-                            <td> <img src="images/os/{{template.image}}" alt="" height="25" width="25" class="m-r-5">{{ template.name}}</td>
+                            <td>{{ template.name}}</td>
                             <td>
                                 {{ template.osCategory.name}}
 

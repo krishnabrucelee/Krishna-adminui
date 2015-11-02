@@ -11,7 +11,7 @@
     <!-- Page title set in pageTitle directive -->
     <title page-title></title>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!--<link rel="shortcut icon" type="image/ico" href="favicon.ico" />-->
+   <link rel="shortcut icon" type="image/x-ico" href="favicon.ico" />
 
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->

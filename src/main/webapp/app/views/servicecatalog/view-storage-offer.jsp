@@ -180,7 +180,7 @@
 							class="btn btn-default btn-outline"
 							ui-sref="servicecatalog.list-storage"><fmt:message key="common.cancel" bundle="${msg}" /></a>
 							<button class="btn btn-info" type="submit"
-								ng-disabled="form.storageForm.$invalid"><fmt:message key="common.create" bundle="${msg}" /></button>
+								ng-disabled="form.storageForm.$invalid"><fmt:message key="common.apply" bundle="${msg}" /></button>
 						</span>
 					</div>
 				</div>

@@ -28,12 +28,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group" ng-class="{'text-danger': TemplateForm.url.$invalid && formSubmitted}">
+                        <div class="form-group" >
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="common.url" bundle="${msg}" /><span class="text-danger">*</span></label>
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="common.url" bundle="${msg}" /></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
-                                    <input required="true" type="text" name="url" data-ng-model="template.url" class="form-control" data-ng-class="{'error': TemplateForm.url.$invalid && formSubmitted}">
-                                    <div class="error-area" data-ng-show="TemplateForm.url.$invalid && formSubmitted" ><i  tooltip="URL is Required" class="fa fa-warning error-icon"></i></div>
+                                    <input type="text" name="url" data-ng-model="template.url" class="form-control" readonly >
                                 </div>
                             </div>
                         </div>
@@ -41,7 +40,7 @@
                             <div class="row">
                                 <label class="col-md-3 col-sm-3 control-label"><fmt:message key="template.refurl" bundle="${msg}" /></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
-                                    <input required="true" type="text" name="url" data-ng-model="template.url" class="form-control" >
+                                    <input type="text" name="url" data-ng-model="template.url" class="form-control" readonly >
                                 </div>
                             </div>
                         </div>
@@ -67,7 +66,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group" data-ng-show="template.hypervisor.id == 3">
+                        <div class="form-group" data-ng-show="template.hypervisor.id == 4">
                             <div class="row">
                                 <div class="col-md-6  col-sm-6 col-lg-6">
                                     <label> <input icheck type="checkbox" ng-model="template.originalXsVersion"> <fmt:message key="template.originalxsversion" bundle="${msg}" /> </label>
@@ -76,7 +75,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group" data-ng-show="template.hypervisor.id == 4">
+                        <div class="form-group" data-ng-show="template.hypervisor.id == 2">
                             <div class="row" >
                                 <label class="col-md-3 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.rootdiskcontroller" bundle="${msg}" /></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
@@ -86,7 +85,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group" data-ng-show="template.hypervisor.id == 4">
+                        <div class="form-group" data-ng-show="template.hypervisor.id == 2">
                             <div class="row" >
                                 <label class="col-md-3 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.nicadapter" bundle="${msg}" /></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
@@ -96,7 +95,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group" data-ng-show="template.hypervisor.id == 4">
+                        <div class="form-group" data-ng-show="template.hypervisor.id == 2">
                             <div class="row" >
                                 <label class="col-md-3 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.keyboard" bundle="${msg}" /></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">

@@ -16,7 +16,7 @@
 										key="storage.totaloffering" bundle="${msg}" /></span>
                                 <div class="clearfix"></div>
                                 <span class="pull-right m-t-xs"><img src="images/volume-icon.png"></span>
-                                <b class="pull-right">13</b>
+                                <b class="pull-right">{{storageList.Count}}</b>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="dashboard-box pull-left">
@@ -24,7 +24,7 @@
 										key="storage.enabledoffering" bundle="${msg}" /></span>
                                 <div class="clearfix"></div>
                                 <span class="pull-right m-t-xs"><img src="images/volume-icon.png"></span>
-                                <b class="pull-right">04</b>
+                                <b class="pull-right">{{storageList.Count}}</b>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="dashboard-box pull-left">
@@ -32,7 +32,7 @@
 										key="storage.disabledoffering" bundle="${msg}" /></span>
                                 <div class="clearfix"></div>
                                 <span class="pull-right m-t-xs"><img src="images/volume-icon.png"></span>
-                                <b class="pull-right">09</b>
+                                <b class="pull-right">0</b>
                                 <div class="clearfix"></div>
                             </div>
                         </div>
@@ -75,7 +75,8 @@
                                     {{ storage.name}}
                                 </td>
                                 <td>{{ storage.storageType}} </td>
-                                <td>{{ storage.diskSize}}</td>
+                                <td><span data-ng-if="storage.diskSize <= 0">0</span><span data-ng-if="storage.diskSize > 0">{{ storage.diskSize}}</span></td>
+                                <!--  <td>{{ storage.diskSize}}</td>-->
                                 <td>{{ storage.isCustomDisk}}</td>
                                 <td>
                                     <a class="icon-button"  ui-sref="servicecatalog.list-storage.list-view-storage-offer({id: {{ storage.id}}})" title="Edit"  ><span class="fa fa-edit m-r"></span></a>

@@ -137,7 +137,7 @@
 									data-ng-model="storage.diskSize" class="form-control"
 									data-ng-class="{'error': storageForm.size.$invalid && formSubmitted}">
 								<div class="error-area"
-									data-ng-show="storageForm.size.$invalid && formSubmitted">
+									data-ng-if="storageForm.size.$invalid && formSubmitted">
 									<i tooltip="<fmt:message
 									key="storage.disksize.required" bundle="${msg}" />"
 										class="fa fa-warning error-icon"></i>
@@ -311,11 +311,11 @@
 						<div class="row">
 							<label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="common.zonename" bundle="${msg}" /></label>
 							<div class="col-md-6 col-sm-6 col-xs-6">
-								<select data-ng-init="storage.zone.name = zone.zoneList[0]"
+								<select data-ng-init="storage.zone = zoneList[0]"
 									class="form-control input-group" name="zone"
 									data-ng-model="storage.zone"
-									ng-options=" zone.name for zone in formElements.zoneList">
-									<option value="" class="">Select</option>
+									ng-options=" zone.name for zone in zoneList">
+									<!-- <option value="" class="">{{ zoneList[0].name }}</option> -->
 								</select>
 							</div>
 						</div>

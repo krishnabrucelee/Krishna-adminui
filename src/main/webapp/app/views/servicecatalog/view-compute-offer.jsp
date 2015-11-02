@@ -241,7 +241,9 @@
                         <div class="row">
                             <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="common.zonename" bundle="${msg}" /></label>
                             <div class="col-md-4  col-sm-4 col-xs-4">
-                                <input  type="text" name="zonename" data-ng-model="compute.zone.name" class="form-control" readonly >
+<!--                                 <input  type="text" name="zonename"  data-ng-model="compute.zone" class="form-control" readonly >
+ -->
+ 							  <b>{{ compute.zone.name }}</b>
 
                             </div>
                         </div>
@@ -326,7 +328,7 @@
                 <div class="row">
                     <div class="col-md-12  col-sm-12">
                         <span class="pull-right">
-                            <a class="btn btn-default btn-outline"  ui-sref="servicecompute.list-compute"><fmt:message key="common.cancel" bundle="${msg}" /></a>
+                            <a class="btn btn-default btn-outline"  ui-sref="servicecatalog.list-compute"><fmt:message key="common.cancel" bundle="${msg}" /></a>
                             <button class="btn btn-info" type="submit" ng-disabled="form.computeForm.$invalid" ><fmt:message key="common.apply" bundle="${msg}" /></button>
                         </span>
                     </div>

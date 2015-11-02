@@ -25,6 +25,8 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
     $scope.global = crudService.globalConfig;
     $scope.test = "test";
     $scope.summernoteTextTwo = {}
+    $scope.windowsTemplate = {};
+    $scope.LinuxTemplate = {};
 
     $scope.summernoteOpt = {
         toolbar: [
@@ -43,6 +45,17 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
         hasTemplates.then(function (result) {  // this is only run after $http completes0
 
             $scope.templateList = result;
+
+            $scope.windowsTemplate.Count = 0;
+            for (i = 0; i < result.length; i++) {
+            	if($scope.templateList[i].osType.description.indexOf("Windows") > -1) {
+            		$scope.windowsTemplate.Count++;
+            	}
+            }
+            $scope.LinuxTemplate.Count = 0;
+            if(result.length != 0) {
+            	$scope.LinuxTemplate.Count = result.length;
+            }
 
             // For pagination
             $scope.paginationObject.limit = limit;
@@ -130,7 +143,7 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
     $scope.update = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-            $scope.homerTemplate = 'views/notification/notify.jsp';
+            $scope.homerTemplate = 'app/views/notification/notify.jsp';
             notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
             $window.location.href = '#/templatestore/list';
         }
@@ -243,7 +256,7 @@ function templateEditCtrl($scope, $state, $stateParams, modalService, $log, prom
             var template = $scope.template;
             var hasTemplates = crudService.update("templates", template);
             hasTemplates.then(function (result) {
-                $scope.homerTemplate = 'views/notification/notify.jsp';
+                $scope.homerTemplate = 'app/views/notification/notify.jsp';
                 notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                 $window.location.href = '#/templatestore/list';
             });
@@ -264,7 +277,8 @@ function storageListCtrl($scope, crudService, dialogService, modalService, $log,
 
     $scope.storage = {
     		zoneList: {},
-            domainList:{}
+            domainList:{},
+            zone: {}
             	};
     $scope.paginationObject = {};
     $scope.storageForm = {};
@@ -275,7 +289,8 @@ function storageListCtrl($scope, crudService, dialogService, modalService, $log,
     var hasZones = crudService.list("zones", $scope.global.paginationHeaders(1, limit), {"limit": limit});
     hasZones.then(function (result) {  // this is only run after $http
 										// completes0
-    	$scope.formElements.zoneList = result;
+    	$scope.zoneList = result;
+    	$scope.storage.zone = $scope.zoneList[0];
     });
 
     $scope.storage.domainList = {};
@@ -312,6 +327,11 @@ function storageListCtrl($scope, crudService, dialogService, modalService, $log,
             $scope.storageList = result;
             console.log($scope.storageList);
 
+            $scope.storageList.Count = 0;
+            if(result.length != 0) {
+            	$scope.storageList.Count = result.length;
+            }
+
             // For pagination
             $scope.paginationObject.limit = limit;
             $scope.paginationObject.currentPage = pageNumber;
@@ -323,7 +343,6 @@ function storageListCtrl($scope, crudService, dialogService, modalService, $log,
 
 
     // Open dialogue box to create Storage Offer
-    $scope.storage = {};
 
 
 
@@ -400,7 +419,7 @@ $scope.costPerHourIOPS = function() {
                     var hasStorage = crudService.delete("storages", storageId);
                     hasStorage.then(function (result) {
                         $scope.list(1);
-                        $scope.homerTemplate = 'views/notification/notify.jsp';
+                        $scope.homerTemplate = 'app/views/notification/notify.jsp';
                         notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                     });
                     $modalInstance.close();
@@ -419,8 +438,8 @@ $scope.costPerHourIOPS = function() {
     };
     $scope.storageType = {
         storagetypeList: {
-                 "0": "SHARED",
-                 "1": "LOCAL"
+                 "0": "shared",
+                 "1": "local"
         }
     };
 
@@ -487,7 +506,7 @@ function storageEditCtrl($scope, $state, $stateParams, modalService, $log, promi
             var hasStorage = crudService.update("storages", storage);
             hasStorage.then(function (result) {
 
-                $scope.homerTemplate = 'views/notification/notify.jsp';
+                $scope.homerTemplate = 'app/views/notification/notify.jsp';
                 notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                 $window.location.href = '#/storage/list';
             });
@@ -535,7 +554,7 @@ function networkListCtrl($scope, $modal, modalService, $log, promiseAjax, global
 
 
     $scope.showDescription = function (network) {
-        // modalService.trigger('views/servicecatalog/viewnetwork.jsp', 'md',
+        // modalService.trigger('app/views/servicecatalog/viewnetwork.jsp', 'md',
 		// 'View Network Offering');
         var modalInstance = $modal.open({
             animation: $scope.animationsEnabled,
@@ -585,14 +604,14 @@ function miscellaneousListCtrl($scope, modalService, $log, promiseAjax, $statePa
     });
 
     $scope.delete = function () {
-        modalService.trigger('views/servicecatalog/confirm-delete.jsp', 'md', 'Delete Confirmation');
+        modalService.trigger('app/views/servicecatalog/confirm-delete.jsp', 'md', 'Delete Confirmation');
     };
 
     $scope.save = function (form) {
         $scope.formSubmitted = true;
         console.log(form);
         if (form.$valid) {
-            $scope.homerTemplate = 'views/notification/notify.jsp';
+            $scope.homerTemplate = 'app/views/notification/notify.jsp';
             notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
 
 
@@ -623,7 +642,7 @@ function deleteCtrl($scope, $state, $stateParams, globalConfig, notify) {
     $scope.global = globalConfig;
     $scope.activity = {};
     $scope.delete = function () {
-        $scope.homerTemplate = 'views/notification/notify.jsp';
+        $scope.homerTemplate = 'app/views/notification/notify.jsp';
         notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
         $scope.cancel();
     };
@@ -633,7 +652,7 @@ function deleteCtrl($scope, $state, $stateParams, globalConfig, notify) {
         if ($scope.activity.type == null && $scope.activity.startDate == null && $scope.activity.endDate == null) {
             alert("Please enter any Field ");
         } else {
-            $scope.homerTemplate = 'views/notification/notify.jsp';
+            $scope.homerTemplate = 'app/views/notification/notify.jsp';
             notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
             $scope.cancel();
         }
@@ -655,6 +674,7 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
     $scope.computeList = {};
     $scope.paginationObject = {};
     $scope.computeForm = {};
+    $scope.computeOffering = {};
     $scope.global = crudService.globalConfig;
     $scope.compute = {
     		zone: {}
@@ -667,6 +687,11 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
 												// completes0
 
             $scope.computeList = result;
+
+            $scope.computeOffering.Count = 0;
+            if(result.length != 0) {
+            	$scope.computeOffering.Count = result.length;
+            }
 
             // For pagination
             $scope.paginationObject.limit = limit;
@@ -731,8 +756,8 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
 
     $scope.formElements = {
     		storageTypeList :{
-    			"0" : "SHARED",
-    			"1"	: "ISOLATED"
+    			"0" : "shared",
+    			"1"	: "local"
     		},
             qosList: {
             	"0" : "HYPERVISOR",
@@ -784,6 +809,7 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
         var hasComputes = crudService.read("computes", computeId);
         hasComputes.then(function (result) {
             $scope.compute = result;
+    		$scope.compute.zone = $scope.formElements.zoneList[0];
             console.log($scope.compute);
         });
     };

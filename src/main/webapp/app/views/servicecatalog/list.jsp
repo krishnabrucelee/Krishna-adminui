@@ -19,21 +19,21 @@
                                 <span class="pull-right"><fmt:message key="compute.totalcompute" bundle="${msg}" /></span>
                                 <div class="clearfix"></div>
                                 <span class="pull-right m-t-xs"><img src="images/instance-icon.png"></span>
-                                <b class="pull-right">13</b>
+                                <b class="pull-right">{{computeOffering.Count}}</b>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="dashboard-box pull-left">
                                 <span class="pull-right"><fmt:message key="compute.enabledcompute" bundle="${msg}" /></span>
                                 <div class="clearfix"></div>
                                 <span class="pull-right m-t-xs"><img src="images/instance-icon.png"></span>
-                                <b class="pull-right">13</b>
+                                <b class="pull-right">{{computeOffering.Count}}</b>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="dashboard-box pull-left">
                                 <span class="pull-right"><fmt:message key="compute.disabledcompute" bundle="${msg}" /></span>
                                 <div class="clearfix"></div>
                                 <span class="pull-right m-t-xs"><img src="images/instance-icon.png"></span>
-                                <b class="pull-right">13</b>
+                                <b class="pull-right">0</b>
                                 <div class="clearfix"></div>
                             </div>
                         </div>
