@@ -50,7 +50,7 @@
             </ul>
         </li>
          <li ng-class="{active: $state.includes('reports')}">
-             <a href="#"><img src="images/icon-report.png" border="0" class="sidemenu-icons"/><span class="nav-label"><fmt:message key="common.reports" bundle="${msg}" /></span><span class="fa arrow"></span> </a>
+             <a href="#"><span class="pe-7s-file pe-2x nav-menu-icons"></span><span class="nav-label"><fmt:message key="common.reports" bundle="${msg}" /></span><span class="fa arrow"></span> </a>
             <ul class="nav nav-second-level" ng-class="{in: $state.includes('reports')}">
                 <li ui-sref-active="active"><a ui-sref="reports.signup"><fmt:message key="common.signupreport" bundle="${msg}" /></a></li>
                 <li ui-sref-active="active"><a ui-sref="reports.billable-items"><fmt:message key="common.billableitemreport" bundle="${msg}" /></a></li>

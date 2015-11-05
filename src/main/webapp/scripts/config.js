@@ -98,7 +98,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             url: "/configuration",
             templateUrl: VIEW_URL +  "views/common/content.jsp",
             data: {
-                pageTitle: 'Configuration'
+                pageTitle: 'configuration'
             }
         })
 
@@ -115,7 +115,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             url: "/dashboard/cloudConfig",
             templateUrl: VIEW_URL +  "views/configuration/cloudStack/system-config.jsp",
             data: {
-                pageTitle: 'System Configuration'
+                pageTitle: 'system.configuration'
             }
         })
 
@@ -464,7 +464,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "templatestore/list",
                 templateUrl: VIEW_URL +  "views/servicecatalog/templatehome.jsp",
                 data: {
-                    pageTitle: 'Template Store'
+                    pageTitle: 'template'
                 }
             })
             .state('servicecatalog.list-templatestore.list-view-template-create', {
@@ -485,7 +485,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "network/list",
                 templateUrl: VIEW_URL +  "views/servicecatalog/network.jsp",
                 data: {
-                    pageTitle: 'Network'
+                    pageTitle: 'common.network'
                 }
             })
 

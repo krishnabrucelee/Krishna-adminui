@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Configuration Controller for estalishing connectivity with cloud Stack
  */
 angular
         .module('panda-ui-admin')
@@ -17,13 +15,17 @@ function cloudStackCtrl($scope, $state,crudService, $stateParams, modalService, 
     $scope.configForm = {};
     $scope.global = crudService.globalConfig;
 
+    /**
+     * Save the configuration details.
+     */
     $scope.save = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
             var config = $scope.config;
             console.log($scope.config);
             var hasConfig = crudService.add("cloudconfiguration", config);
-            hasConfig.then(function (result) {  // this is only run after $http completes
+            hasConfig.then(function (result) {  // this is only run after $http
+												// completes
                 notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
             }).catch(function (result) {
                 angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
@@ -58,7 +60,7 @@ function cloudStackCtrl($scope, $state,crudService, $stateParams, modalService, 
     $scope.validateZone = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Saved successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
 
         }
@@ -93,14 +95,14 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
     localStorageService.set("billingList", null);
     if (localStorageService.get("billingList") == null) {
         var hasServer = promiseAjax.httpRequest("GET", "api/billing.json");
-        hasServer.then(function (result) {  // this is only run after $http completes
+        hasServer.then(function (result) {  // this is only run after $http
+											// completes
             $scope.billingList = result;
             localStorageService.set("billingList", result);
         });
     } else {
         $scope.billingList = localStorageService.get("billingList");
     }
-
     if ($state.current.data.pageTitle == 'ConfigCategory' || $state.current.data.pageTitle == 'General' || $state.current.data.pageTitle == 'Chargeback'
             || $state.current.data.pageTitle == 'Cloudstack') {
         $state.current.data.pageTitle = $stateParams.category.substring(0, 1).toUpperCase() + $stateParams.category.substring(1).toLowerCase();
@@ -113,7 +115,8 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
     localStorageService.set("taxList", null);
     if (localStorageService.get("taxList") == null) {
         var hasServer = promiseAjax.httpRequest("GET", "api/tax.json");
-        hasServer.then(function (result) {  // this is only run after $http completes
+        hasServer.then(function (result) {  // this is only run after $http
+											// completes
             $scope.taxList = result;
             localStorageService.set("taxList", result);
         });
@@ -122,7 +125,8 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
     }
 
         var hasServer = promiseAjax.httpRequest("GET", "api/paymentGateway.json");
-        hasServer.then(function (result) {  // this is only run after $http completes
+        hasServer.then(function (result) {  // this is only run after $http
+											// completes
             $scope.paymentGateList = result;
             localStorageService.set("paymentGateList", result);
         });
@@ -131,7 +135,8 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
     localStorageService.set("promotionList", null);
     if (localStorageService.get("promotionList") == null) {
         var hasServer = promiseAjax.httpRequest("GET", "api/promotion.json");
-        hasServer.then(function (result) {  // this is only run after $http completes
+        hasServer.then(function (result) {  // this is only run after $http
+											// completes
             $scope.promotionList = result;
             localStorageService.set("promotionList", result);
         });
@@ -142,7 +147,8 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
     localStorageService.set("discountList", null);
     if (localStorageService.get("discountList") == null) {
         var hasServer = promiseAjax.httpRequest("GET", "api/discount.json");
-        hasServer.then(function (result) {  // this is only run after $http completes
+        hasServer.then(function (result) {  // this is only run after $http
+											// completes
             $scope.discountList = result;
             localStorageService.set("discountList", result);
         });
@@ -284,7 +290,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
         $scope.formSubmitted = true;
         if (form.$valid) {
 
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
 
         }
@@ -294,7 +300,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
         $scope.formSubmitted = true;
         if (form.$valid) {
             $scope.cancel();
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
 
         }
@@ -303,7 +309,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
     $scope.validatePromotion = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
 
         }
@@ -313,7 +319,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
         $scope.formSubmitted = true;
         if (form.$valid) {
 
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
 
         }
@@ -323,7 +329,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
         $scope.formSubmitted = true;
         if (form.$valid) {
 
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
 
         }
@@ -332,7 +338,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
     $scope.validateBilling = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Saved successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
 
         }
@@ -343,7 +349,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
         $scope.formSubmitted = true;
         if (form.$valid) {
 
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
 
         }
@@ -356,7 +362,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
         $scope.formSubmitted = true;
         if (form.$valid) {
 
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Saved successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
 
         }
@@ -366,7 +372,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
         $scope.formSubmitted = true;
         if (form.$valid) {
 
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Saved successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
 
         }
@@ -379,7 +385,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
         $scope.formSubmitted = true;
         if (form.$valid) {
 
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
 
         }
@@ -389,7 +395,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
         $scope.formSubmitted = true;
         if (form.$valid) {
 
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
         }
     };
@@ -400,9 +406,9 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
         $scope.formSubmitted = true;
         if (form.$valid) {
 
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Created successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-            //$window.location.href='#/configuration/chargeback/tax';
+            // $window.location.href='#/configuration/chargeback/tax';
         }
     };
 
@@ -413,7 +419,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
         $scope.formSubmitted = true;
         if (form.$valid) {
             $scope.cancel();
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Password changed successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
 
         }
@@ -426,7 +432,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
         $scope.formSubmitted = true;
         if (form.$valid) {
             $scope.cancel();
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Permission granted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
 
         }
@@ -439,31 +445,31 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
         $scope.formSubmitted = true;
         if (form.$valid) {
 
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
 
         }
     };
 
     $scope.openDeleteContainer = function (size) {
-        modalService.trigger('views/configuration/chargeback/deleteTax.html', size);
+        modalService.trigger('views/configuration/chargeback/deleteTax.jsp', size);
     };
 
     $scope.openAddContainer = function (size) {
-        modalService.trigger('views/configuration/general/add.html', size);
+        modalService.trigger('views/configuration/general/add.jsp', size);
     };
 
     $scope.openResetContainer = function (size) {
-        modalService.trigger('views/configuration/general/reset.html', size);
+        modalService.trigger('views/configuration/general/reset.jsp', size);
     };
     $scope.openGrantAPIContainer = function (size) {
-        modalService.trigger('views/configuration/general/grant-api.html', size);
+        modalService.trigger('views/configuration/general/grant-api.jsp', size);
     };
 
     $scope.openImportContainer = function (size, name) {
         $scope.name = name;
         var modalInstance = $modal.open({
-            templateUrl: 'views/configuration/cloudStack/importData.html',
+            templateUrl: 'views/configuration/cloudStack/importData.jsp',
             controller: 'importCtrl',
             size: size,
             backdrop: 'static',
@@ -501,7 +507,7 @@ function importCtrl($scope, name, notify, $modalInstance) {
     $scope.validateImport = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Imported successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
             $scope.cancel();
         }
@@ -516,10 +522,10 @@ function retailManagementCtrl($scope, globalConfig, notify) {
     $scope.validateRetailManagementLimit = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Updated successfully', classes: 'alert-success', "timeOut": "1000", templateUrl: $scope.homerTemplate});
         } else {
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Please fill all the fields', classes: 'alert-danger', "timeOut": "1000", templateUrl: $scope.homerTemplate});
         }
     };
