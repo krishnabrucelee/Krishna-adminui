@@ -88,9 +88,6 @@
                                 <td>
 
                                     <a class="icon-button" title="Edit" ui-sref="servicecatalog.list-compute.list-view-compute-offer({id: {{ compute.id}}})"   ><span class="fa fa-edit m-r"></span></a>
-                                    <a class="icon-button" title="Start" data-ng-hide="instance.state == 'Running'">
-                                        <span class="fa fa-play m-r" ></span>
-                                    </a>
                                     <a class="icon-button" title="Stop" data-ng-show="instance.state == 'Running'">
                                         <span class="fa fa-ban m-r" ></span>
                                     </a>
