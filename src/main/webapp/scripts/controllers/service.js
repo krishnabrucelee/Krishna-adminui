@@ -707,13 +707,15 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
     $scope.save = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-            var compute = $scope.compute;
+            var compute = angular.copy($scope.compute);
             if(!angular.isUndefined(compute.domain)) {
             	compute.domainId = compute.domain.id;
             }
             if(!angular.isUndefined(compute.zone)) {
             	compute.zoneId = compute.zone.id;
             }
+            compute.computeCost = [];
+            compute.computeCost[0] = $scope.compute.computeCost;
             console.log(compute);
             var hasComputes = crudService.add("computes", compute);
             hasComputes.then(function (result) {  // this is only run after
@@ -791,7 +793,7 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
 	var hasZones = crudService.list("zones/list", '', {});
 	hasZones.then(function (result) {  // this is only run after $http completes0
 		$scope.formElements.zoneList = result;
-		$scope.compute.zone = $scope.formElements.zoneList[0];
+		$scope.compute.computeCost.zone = $scope.formElements.zoneList[0];
 	});
 
     $scope.diskio = {
