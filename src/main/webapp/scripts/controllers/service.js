@@ -97,12 +97,15 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
     });
 
     // Open dialogue box to create templates
-    $scope.template = {};
+    $scope.template = {
+    		templateCost: []
+    };
 
     $scope.save = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-            var template = $scope.template;
+
+            var template = angular.copy($scope.template);
 
             var hasTemplate = crudService.add("templates", template);
             hasTemplate.then(function (result) {  // this is only run after $http completes
@@ -112,10 +115,15 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
 
             }).catch(function (result) {
                 if (!angular.isUndefined(result.data)) {
-                    angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
-                        $scope.template[key].$invalid = true;
-                        $scope.template[key].errorMessage = errorMessage;
-                    });
+                	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                  	    var msg = result.data.globalError[0];
+                	    notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                    } else if (result.data.fieldErrors != null) {
+                        angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                            $scope.TemplateForm[key].$invalid = true;
+                            $scope.TemplateForm[key].errorMessage = errorMessage;
+                        });
+                	}
                 }
             });
         }
@@ -204,6 +212,8 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
 
 function templateEditCtrl($scope, $state, $stateParams, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, dialogService, crudService) {
 
+	$scope.templateForm = {};
+
 	$scope.formElements = {
 	        rootDiskControllerList: {
 	          "0":"scsi",
@@ -249,16 +259,31 @@ function templateEditCtrl($scope, $state, $stateParams, modalService, $log, prom
 	    });
     }
 
+    $scope.template = {
+    		templateCost: []
+    };
+
     // Edit the Template
     $scope.update = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-            var template = $scope.template;
+
+            var template = angular.copy($scope.template);
+
             var hasTemplates = crudService.update("templates", template);
             hasTemplates.then(function (result) {
                 $scope.homerTemplate = 'app/views/notification/notify.jsp';
                 notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                 $window.location.href = '#/templatestore/list';
+            }).catch(function (result) {
+                if (!angular.isUndefined(result.data)) {
+                	if (result.data.fieldErrors != null) {
+                        angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                            $scope.TemplateForm[key].$invalid = true;
+                            $scope.TemplateForm[key].errorMessage = errorMessage;
+                        });
+                	}
+                }
             });
         }
     };
