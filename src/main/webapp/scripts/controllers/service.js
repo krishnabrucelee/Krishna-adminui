@@ -159,8 +159,8 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
 
     $scope.formElements = {
           rootDiskControllerList: {
-              "0":"scsi",
-              "1":"ide"
+              "0":"SCSI",
+              "1":"IDE"
           },
           nicTypeList: {
         	  "0":"E1000",
@@ -169,10 +169,10 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
         	  "3":"VMXNET3"
           },
           keyboardTypeList: {
-        	  "0":"US_Keyboard",
-        	  "1":"UK_Keyboard",
-        	  "2":"Japanese_Keyboard",
-        	  "3":"Simplified_Chinese"
+        	  "0":"US_KEYBOARD",
+        	  "1":"UK_KEYBOARD",
+        	  "2":"JAPANESE_KEYBOARD",
+        	  "3":"SIMPLIFIED_CHINESE"
           },
           formatList: {
                        "Hyperv" : {
@@ -196,7 +196,7 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
 			           },
 			           "BareMetal" :
 			           {
-			        	  "0":"BareMetal",
+			        	  "0":"BAREMETAL",
 			           },
 			           "LXC" :
 			           {
@@ -216,8 +216,8 @@ function templateEditCtrl($scope, $state, $stateParams, modalService, $log, prom
 
 	$scope.formElements = {
 	        rootDiskControllerList: {
-	          "0":"scsi",
-	          "1":"ide"
+	          "0":"SCSI",
+	          "1":"IDE"
 	        },
 	        nicTypeList: {
 	      	  "0":"E1000",
@@ -226,10 +226,10 @@ function templateEditCtrl($scope, $state, $stateParams, modalService, $log, prom
 	      	  "3":"VMXNET3"
 	        },
 	        keyboardTypeList: {
-	      	  "0":"US_Keyboard",
-	      	  "1":"UK_Keyboard",
-	      	  "2":"Japanese_Keyboard",
-	      	  "3":"Simplified_Chinese"
+	      	  "0":"US_KEYBOARD",
+	      	  "1":"UK_KEYBOARD",
+	      	  "2":"JAPANESE_KEYBOARD",
+	      	  "3":"SIMPLIFIED_CHINESE"
 	        }
 	    }
 
