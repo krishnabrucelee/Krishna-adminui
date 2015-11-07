@@ -109,6 +109,39 @@
 								ng-switch-when="true"><fmt:message
 										key="common.network" bundle="${msg}" /></span>
 						</span>
+						<span ng-if="state.data.pageTitle === 'applications'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="common.applications" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="common.applications"
+										bundle="${msg}" />
+						</span>
+						</span>
+							<span ng-if="state.data.pageTitle === 'clients'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="common.clients" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="common.clients"
+										bundle="${msg}" />
+						</span>
+						</span>
+							<span ng-if="state.data.pageTitle === 'projects'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="common.projects" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="common.projects"
+										bundle="${msg}" />
+
+						</span>
+						</span>
+							<span ng-if="state.data.pageTitle === 'users'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="common.users" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="common.users"
+										bundle="${msg}" />
+						</span>
+						</span>
 						</li>
 					</ol>
 				</div>
