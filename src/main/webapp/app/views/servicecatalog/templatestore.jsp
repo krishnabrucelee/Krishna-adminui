@@ -78,7 +78,7 @@
                             <td>{{ template.zone.name}} </td>
                             <td>{{ template.hypervisor.name}}</td>
                             <td><b class="text-danger">
-                                    {{ template.cost}} <span>/ month</span>
+                                    {{ template.templateCost[0].cost}} <span>/ month</span>
                                 </b></td>
                             <td>
                                 {{ template.status }}
