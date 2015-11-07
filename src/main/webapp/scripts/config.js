@@ -92,6 +92,15 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 }
             })
 
+            // Client-Applications
+            .state('client.application', {
+                url: "client/application",
+                templateUrl: VIEW_URL + "views/client/application/list.jsp",
+                data: {
+                    pageTitle: 'applications'
+                }
+            })
+
             //Configuration
              .state('configuration', {
             abstract: true,
@@ -204,6 +213,14 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             templateUrl: VIEW_URL +  "views/configuration/chargeback/currency.jsp",
             data: {
                 pageTitle: 'Currency'
+            }
+        })
+
+        .state('configuration.home.resourceAllocation', {
+            url: "/resourceAllocations",
+            templateUrl: VIEW_URL + "views/configuration/chargeback/resource-allocation.jsp",
+            data: {
+                pageTitle: 'Resource Allocations'
             }
         })
 

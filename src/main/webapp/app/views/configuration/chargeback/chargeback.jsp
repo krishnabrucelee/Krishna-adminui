@@ -15,5 +15,5 @@
     <div class="col-md-3 col-sm-4 m-b-md"><button class="btn btn-info box w-100" ui-sref="configuration.home.late-fee" type="button"><i class="fa fa-bullhorn fa-3x"></i> <h5>Late Fee</h5></button></div>
     <div class="col-md-3 col-sm-4 m-b-md"><button class="btn btn-info box w-100" ui-sref="configuration.home.paymentGateway" type="button"><i class="fa fa-cc-paypal fa-3x"></i> <h5>Payment Gateway</h5></button></div>
     <div class="col-md-3 col-sm-4 m-b-md"><button class="btn btn-info box w-100" ui-sref="configuration.home.currency" type="button"><i class="pe pe-7s-cash pe-3x"></i> <h5>Currency</h5></button></div>
-
+    <div class="col-md-3 col-sm-4 m-b-md"><button class="btn btn-info box w-100" ui-sref="configuration.home.resourceAllocation" type="button"><i class="fa fa-sliders fa-3x"></i> <h5>Resource Allocation</h5></button></div>
 </div>
