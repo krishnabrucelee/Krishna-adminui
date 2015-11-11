@@ -36,6 +36,13 @@ function cloudStackCtrl($scope, $state,crudService, $stateParams, modalService, 
             });
         }
     }
+
+    $scope.zones = {};
+    var haszoneList = crudService.listAll("zones/list");
+    haszoneList.then(function (result) {
+    	$scope.formElements.zoneList = result;
+    	alert($scope.formElements.zoneList);
+    });
     $scope.summernoteTextTwo = {}
     $scope.summernoteOpt = {
         toolbar: [
@@ -72,15 +79,7 @@ function cloudStackCtrl($scope, $state,crudService, $stateParams, modalService, 
 
 function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, promiseAjax, notify, localStorageService, modalService) {
 
-	var VIEW_URL = "app/";
-
-	var hasServer = promiseAjax.httpRequest("GET", "api/resource-allocation.json");
-    hasServer.then(function (result) {  // this is only run after $http completes
-        $scope.config = result;
-
-    });
-
-	$scope.global = globalConfig;
+    $scope.global = globalConfig;
     $scope.activity = {};
 
     $scope.paymentList = {};
@@ -200,10 +199,6 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
         departmentList: [
             {id: 1, name: 'Developing'},
             {id: 2, name: 'Testing'}
-        ],
-        projectList: [
-            {id: 1, name: 'Panda'},
-            {id: 2, name: 'Alussa'}
         ],
         taxList: [
             {id: 1, name: 'N/A'},
@@ -545,5 +540,6 @@ function retailManagementCtrl($scope, globalConfig, notify) {
     };
 }
 ;
+
 
 

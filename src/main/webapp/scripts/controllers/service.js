@@ -97,15 +97,12 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
     });
 
     // Open dialogue box to create templates
-    $scope.template = {
-    		templateCost: []
-    };
+    $scope.template = {};
 
     $scope.save = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-
-            var template = angular.copy($scope.template);
+            var template = $scope.template;
 
             var hasTemplate = crudService.add("templates", template);
             hasTemplate.then(function (result) {  // this is only run after $http completes
@@ -115,15 +112,10 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
 
             }).catch(function (result) {
                 if (!angular.isUndefined(result.data)) {
-                	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
-                  	    var msg = result.data.globalError[0];
-                	    notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-                    } else if (result.data.fieldErrors != null) {
-                        angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
-                            $scope.TemplateForm[key].$invalid = true;
-                            $scope.TemplateForm[key].errorMessage = errorMessage;
-                        });
-                	}
+                    angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                        $scope.template[key].$invalid = true;
+                        $scope.template[key].errorMessage = errorMessage;
+                    });
                 }
             });
         }
@@ -159,8 +151,8 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
 
     $scope.formElements = {
           rootDiskControllerList: {
-              "0":"SCSI",
-              "1":"IDE"
+              "0":"scsi",
+              "1":"ide"
           },
           nicTypeList: {
         	  "0":"E1000",
@@ -169,10 +161,10 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
         	  "3":"VMXNET3"
           },
           keyboardTypeList: {
-        	  "0":"US_KEYBOARD",
-        	  "1":"UK_KEYBOARD",
-        	  "2":"JAPANESE_KEYBOARD",
-        	  "3":"SIMPLIFIED_CHINESE"
+        	  "0":"US_Keyboard",
+        	  "1":"UK_Keyboard",
+        	  "2":"Japanese_Keyboard",
+        	  "3":"Simplified_Chinese"
           },
           formatList: {
                        "Hyperv" : {
@@ -196,7 +188,7 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
 			           },
 			           "BareMetal" :
 			           {
-			        	  "0":"BAREMETAL",
+			        	  "0":"BareMetal",
 			           },
 			           "LXC" :
 			           {
@@ -212,12 +204,10 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
 
 function templateEditCtrl($scope, $state, $stateParams, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, dialogService, crudService) {
 
-	$scope.templateForm = {};
-
 	$scope.formElements = {
 	        rootDiskControllerList: {
-	          "0":"SCSI",
-	          "1":"IDE"
+	          "0":"scsi",
+	          "1":"ide"
 	        },
 	        nicTypeList: {
 	      	  "0":"E1000",
@@ -226,10 +216,10 @@ function templateEditCtrl($scope, $state, $stateParams, modalService, $log, prom
 	      	  "3":"VMXNET3"
 	        },
 	        keyboardTypeList: {
-	      	  "0":"US_KEYBOARD",
-	      	  "1":"UK_KEYBOARD",
-	      	  "2":"JAPANESE_KEYBOARD",
-	      	  "3":"SIMPLIFIED_CHINESE"
+	      	  "0":"US_Keyboard",
+	      	  "1":"UK_Keyboard",
+	      	  "2":"Japanese_Keyboard",
+	      	  "3":"Simplified_Chinese"
 	        }
 	    }
 
@@ -259,31 +249,16 @@ function templateEditCtrl($scope, $state, $stateParams, modalService, $log, prom
 	    });
     }
 
-    $scope.template = {
-    		templateCost: []
-    };
-
     // Edit the Template
     $scope.update = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-
-            var template = angular.copy($scope.template);
-
+            var template = $scope.template;
             var hasTemplates = crudService.update("templates", template);
             hasTemplates.then(function (result) {
                 $scope.homerTemplate = 'app/views/notification/notify.jsp';
                 notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                 $window.location.href = '#/templatestore/list';
-            }).catch(function (result) {
-                if (!angular.isUndefined(result.data)) {
-                	if (result.data.fieldErrors != null) {
-                        angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
-                            $scope.TemplateForm[key].$invalid = true;
-                            $scope.TemplateForm[key].errorMessage = errorMessage;
-                        });
-                	}
-                }
             });
         }
     };
@@ -375,49 +350,56 @@ function storageListCtrl($scope, crudService, dialogService, modalService, $log,
 
         var regexp = /^[0-9]+([,.][0-9]+)?$/g;
         $scope.costPerHourGBError = false;
-        if(!regexp.test($scope.storage.costGbPerMonth)) {
+        if(!regexp.test($scope.storage.storagePrice[0].costGbPerMonth)) {
         	$scope.costPerHourGBError = true;
 
-            $scope.storage.costGbPerMonth = "";
+            $scope.storage.storagePrice[0].costGbPerMonth = "";
             $scope.storage.costPerHourGB = "";
             return false;
         }
 
 
-        var cost = parseFloat($scope.storage.costGbPerMonth);
+        var cost = parseFloat($scope.storage.storagePrice[0].costGbPerMonth);
 
         var costValue = cost / 720;
 
         $scope.storage.costPerHourGB = costValue.toFixed(4);
     };
+
+
 $scope.costPerHourIOPS = function() {
 
         var regexp = /^[0-9]+([,.][0-9]+)?$/g;
 
         $scope.costPerHourIOPSError = false;
-        if(!regexp.test($scope.storage.costIopsPerMonth)) {
+        if(!regexp.test($scope.storage.storagePrice[0].costIopsPerMonth)) {
             $scope.costPerHourIOPSError = true;
 
-            $scope.storage.costIopsPerMonth = "";
+            $scope.storage.storagePrice[0].costIopsPerMonth = "";
             $scope.storage.costPerHourIOPS = "";
             return false;
         }
 
 
-        var cost = parseFloat($scope.storage.costIopsPerMonth);
+        var cost = parseFloat($scope.storage.storagePrice[0].costIopsPerMonth);
 
         var costValue = cost / 720;
 
         $scope.storage.costPerHourIOPS = costValue.toFixed(4);
     };
 
+    $scope.storage = {
+    		storagePrice: []
+    };
 
     $scope.save = function (form) {
         console.log(form);
         $scope.formSubmitted = true;
 
         if (form.$valid) {
-            var storage = $scope.storage;
+            var storage = angular.copy($scope.storage);
+//            storage.storagePrice = [];
+//            storage.storagePrice[0] = $scope.storage.storagePrice;
             var hasStorage = crudService.add("storages", storage);
             hasStorage.then(function (result) {  // this is only run after
 													// $http completes
@@ -428,10 +410,18 @@ $scope.costPerHourIOPS = function() {
                 $window.location.href = '#/storage/list';
 
             }).catch(function (result) {
-                angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
-                    $scope.storageForm[key].$invalid = true;
-                    $scope.storageForm[key].errorMessage = errorMessage;
-                });
+            	console.log(result);
+            	if (!angular.isUndefined(result.data)) {
+                	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                  	    var msg = result.data.globalError[0];
+                	    notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                    } else if (result.data.fieldErrors != null) {
+                        angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                            $scope.storageForm[key].$invalid = true;
+                            $scope.storageForm[key].errorMessage = errorMessage;
+                        });
+                	}
+                }
             });
         }
     };
@@ -521,6 +511,9 @@ function storageEditCtrl($scope, $state, $stateParams, modalService, $log, promi
         $scope.edit($stateParams.id)
     }
 
+    $scope.storage = {
+    		storagePrice: []
+    };
     // Edit the Compute Offer
     $scope.update = function (form) {
         // Update Compute Offer
@@ -643,7 +636,12 @@ function miscellaneousListCtrl($scope, modalService, $log, promiseAjax, $statePa
         }
     };
 
-
+//    $scope.networkType = {
+//            networktypeList: {
+//                     "0": "shared",
+//                     "1": "isolated"
+//            }
+//        };
 
     $scope.qos = {
         qosList: [
@@ -868,4 +866,5 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
 function computeEditCtrl($scope, $state, $stateParams, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, dialogService, crudService) {
 
 
+};
 };
