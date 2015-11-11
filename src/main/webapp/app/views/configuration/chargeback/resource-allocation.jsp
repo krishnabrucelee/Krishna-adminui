@@ -27,7 +27,7 @@
                                             'text-danger'
                                             : configForm.domain.$invalid && formSubmitted}">
                                 <div class="row">
-                                    <label class="col-md-3 col-sm-3 control-label"><fmt:message key="compute.domain" bundle="${msg}" />:
+                                    <label class="col-md-3 col-sm-3 control-label"><fmt:message key="common.domain" bundle="${msg}" />:
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-md-5 col-sm-6">
