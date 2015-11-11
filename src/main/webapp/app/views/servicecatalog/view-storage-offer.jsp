@@ -120,7 +120,7 @@
 							</label>
 							<div class="col-md-4 col-sm-4 col-xs-4">
 								<input data-ng-change="costPerHourGB()" type="text" valid-decimal name="costmonth"
-									data-ng-model="storage.costGbPerMonth" class="form-control">
+									data-ng-model="storage.storagePrice[0].costGbPerMonth" class="form-control">
 							</div>
 							<div class="col-md-4 col-sm-4 col-xs-4">
 								<b>
@@ -138,7 +138,7 @@
 								</label>
 								<div class="col-md-4  col-sm-4 col-xs-4">
 									<input type="text" data-ng-keyup="costPerHourIOPS()" name="costperiops" valid-number
-										data-ng-model="storage.costIopsPerMonth" class="form-control">
+										data-ng-model="storage.storagePrice[0].costIopsPerMonth" class="form-control">
 								</div>
 								<div class="col-md-4 col-sm-4 col-xs-4">
 								<b>
