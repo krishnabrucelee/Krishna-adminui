@@ -861,9 +861,3 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
     };
 }
 
-
-function computeEditCtrl($scope, $state, $stateParams, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, dialogService, crudService) {
-
-
-};
-};
