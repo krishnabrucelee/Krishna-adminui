@@ -79,6 +79,12 @@ function cloudStackCtrl($scope, $state,crudService, $stateParams, modalService, 
 
 function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, promiseAjax, notify, localStorageService, modalService) {
 
+	var VIEW_URL = "app/";
+	var hasServer = promiseAjax.httpRequest("GET", "api/resource-allocation.json");
+    hasServer.then(function (result) {  // this is only run after $http completes
+        $scope.config = result;
+
+    });
     $scope.global = globalConfig;
     $scope.activity = {};
 
