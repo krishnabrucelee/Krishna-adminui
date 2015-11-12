@@ -136,6 +136,7 @@
 <script src="bower_components/iCheck/icheck.min.js"></script>
 <script src="scripts/directives/touchSpin.js"></script>
 
+<script src="scripts/controllers/client/client.js"></script>
 <script src="scripts/controllers/client/application.js"></script>
 <script src="scripts/controllers/client/project.js"></script>
 <script src="scripts/controllers/client/user.js"></script>

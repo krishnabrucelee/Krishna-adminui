@@ -92,6 +92,31 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 }
             })
 
+             // Client-clients
+            .state('client.client', {
+                url: "client/client",
+                templateUrl: VIEW_URL +  "views/client/clients/list.jsp",
+                data: {
+                    pageTitle: 'Clients'
+                }
+            })
+
+            .state('client.client.add', {
+                url: "/addClient",
+                templateUrl: VIEW_URL +  "views/client/clients/add.jsp",
+                data: {
+                    pageTitle: 'Add Client'
+                }
+            })
+
+              .state('client.client.edit', {
+                url: "/editClient",
+                templateUrl: VIEW_URL +  "views/client/clients/edit.jsp",
+                data: {
+                    pageTitle: 'Edit Client'
+                }
+            })
+
             // Client-Applications
             .state('client.application', {
                 url: "client/application",
