@@ -83,6 +83,22 @@
 										bundle="${msg}" />
 						</span>
 						</span>
+						<span ng-if="state.data.pageTitle === 'resource.allocation'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="resource.allocation" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="resource.allocation"
+										bundle="${msg}" />
+						</span>
+						</span>
+						<span ng-if="state.data.pageTitle === 'import.data'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="import.data" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="import.data"
+										bundle="${msg}" />
+						</span>
+						</span>
                         <span ng-if="state.data.pageTitle === 'template'">
 	                         <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}"><fmt:message key="template" bundle="${msg}" /></a>
 	                         <span ng-switch-when="true"><fmt:message key="template" bundle="${msg}" /></span>
@@ -132,6 +148,30 @@
 								ng-switch-when="true"><fmt:message key="common.projects"
 										bundle="${msg}" />
 
+						</span>
+						</span>
+						<span ng-if="state.data.pageTitle === 'client'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="common.client" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="common.client"
+										bundle="${msg}" />
+						</span>
+						</span>
+						<span ng-if="state.data.pageTitle === 'add.client'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="add.client" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="add.client"
+										bundle="${msg}" />
+						</span>
+						</span>
+						<span ng-if="state.data.pageTitle === 'edit.client'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="edit.client" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="edit.client"
+										bundle="${msg}" />
 						</span>
 						</span>
 							<span ng-if="state.data.pageTitle === 'users'"> <a
