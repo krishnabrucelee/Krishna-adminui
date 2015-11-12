@@ -443,12 +443,6 @@ $scope.costPerHourIOPS = function() {
         }
     };
 
-
-
-
-
-
-
   /*
 	 * $scope.zone = { zoneList: [ {id: 1, name: 'Beijing'}, {id: 2, name:
 	 * 'Liaoning'}, {id: 3, name: 'Shanghai'}, {id: 4, name: 'Henan'} ] };
@@ -678,7 +672,9 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
     $scope.global = crudService.globalConfig;
     $scope.compute = {
     		zone: {}
-    };
+     };
+
+
     // Compute Offer List
     $scope.list = function (pageNumber) {
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
@@ -703,6 +699,9 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
 
     // Open dialogue box to create Compute Offer
 
+    $scope.compute = {
+    		computeCost: []
+    };
 
     $scope.save = function (form) {
         $scope.formSubmitted = true;
@@ -714,8 +713,8 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
             if(!angular.isUndefined(compute.zone)) {
             	compute.zoneId = compute.zone.id;
             }
-            compute.computeCost = [];
-            compute.computeCost[0] = $scope.compute.computeCost;
+            compute.customized = (compute.customized == null) ? false : true;
+            compute.customizedIops = (compute.customizedIops === null) ? true : false;
             console.log(compute);
             var hasComputes = crudService.add("computes", compute);
             hasComputes.then(function (result) {  // this is only run after
