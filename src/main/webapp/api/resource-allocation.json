@@ -1,0 +1,13 @@
+ {
+    "maxVolume": "20",
+    "maxUser": "1",
+    "maxTemplates": "20",
+    "maxNetworks": "20",
+    "maxSnapshots": "20",
+    "maxPublicIPs": "20",
+    "maxVpcs":"20",
+    "maxCPU":"10",
+    "maxMemory":"40960",
+    "maxPrimary":"200",
+    "maxSecondary":"400"
+}

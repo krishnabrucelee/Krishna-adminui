@@ -83,11 +83,18 @@
 										bundle="${msg}" />
 						</span>
 						</span>
-                            <span ng-if="state.data.pageTitle === 'template'">
-	                            <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}"><fmt:message key="template" bundle="${msg}" /></a>
-	                            <span ng-switch-when="true"><fmt:message key="template" bundle="${msg}" /></span>
-                            </span>
-
+                        <span ng-if="state.data.pageTitle === 'template'">
+	                         <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}"><fmt:message key="template" bundle="${msg}" /></a>
+	                         <span ng-switch-when="true"><fmt:message key="template" bundle="${msg}" /></span>
+                        </span>
+                        <span ng-if="state.data.pageTitle === 'Create Template'">
+	                         <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}"><fmt:message key="create.template" bundle="${msg}" /></a>
+	                         <span ng-switch-when="true"><fmt:message key="create.template" bundle="${msg}" /></span>
+                        </span>
+                        <span ng-if="state.data.pageTitle === 'Edit Template'">
+	                         <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}"><fmt:message key="common.templatestore" bundle="${msg}" /></a>
+	                         <span ng-switch-when="true"><fmt:message key="common.templatestore" bundle="${msg}" /></span>
+                        </span>
 						<span ng-if="state.data.pageTitle === 'system.configuration'">
 								<a ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
@@ -102,6 +109,39 @@
 								ng-switch-when="true"><fmt:message
 										key="common.network" bundle="${msg}" /></span>
 						</span>
+						<span ng-if="state.data.pageTitle === 'applications'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="common.applications" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="common.applications"
+										bundle="${msg}" />
+						</span>
+						</span>
+							<span ng-if="state.data.pageTitle === 'clients'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="common.clients" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="common.clients"
+										bundle="${msg}" />
+						</span>
+						</span>
+							<span ng-if="state.data.pageTitle === 'projects'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="common.projects" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="common.projects"
+										bundle="${msg}" />
+
+						</span>
+						</span>
+							<span ng-if="state.data.pageTitle === 'users'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="common.users" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="common.users"
+										bundle="${msg}" />
+						</span>
+						</span>
 						</li>
 					</ol>
 				</div>
@@ -113,8 +153,9 @@
 							key="storage.offer" bundle="${msg}" /></span>
 						 <span	ng-if="$state.current.data.pageTitle === 'network'"><fmt:message
 							key="storage.offer" bundle="${msg}" /></span>
-				<span ng-if="$state.current.data.pageTitle === 'common.templatestore'"><fmt:message key="common.templatestore" bundle="${msg}" /></span>
-				 <span ng-if="$state.current.data.pageTitle === 'create.template'"><fmt:message key="create.template" bundle="${msg}" /></span>
+				<span ng-if="$state.current.data.pageTitle === 'Edit Template'"><fmt:message key="common.templatestore" bundle="${msg}" /></span>
+				<span ng-if="$state.current.data.pageTitle === 'Create Template'"><fmt:message key="create.template" bundle="${msg}" /></span>
+				<span ng-if="$state.current.data.pageTitle === 'template'"><fmt:message key="template" bundle="${msg}" /></span>
 
 				</h2>
 				<small>{{ $state.current.data.pageDesc}}</small>

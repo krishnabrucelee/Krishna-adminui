@@ -15,8 +15,8 @@
                                 <label class="col-md-3 col-sm-3 control-label"><fmt:message key="common.name" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
                                     <input required="true" type="text" name="name" data-ng-model="template.name" class="form-control" data-ng-class="{'error': TemplateForm.name.$invalid && formSubmitted}">
-                                    <i  tooltip="Name of the Template" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
-                                    <div class="error-area" data-ng-show="TemplateForm.name.$invalid && formSubmitted" ><i  tooltip="Template Name is Required" class="fa fa-warning error-icon"></i></div>
+                                    <i  tooltip="<fmt:message key="template.name.tooltip" bundle="${msg}" />" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+                                    <div class="error-area" data-ng-show="TemplateForm.name.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="template.name.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
                                 </div>
 
                             </div>
@@ -26,9 +26,9 @@
                             <div class="row">
                                 <label class="col-md-3 col-sm-3 control-label"><fmt:message key="common.description" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
-                                    <div class="error-area" data-ng-show="TemplateForm.description.$invalid && formSubmitted" ><i  tooltip="Description is Required" class="fa fa-warning error-icon"></i></div>
+                                    <div class="error-area" data-ng-show="TemplateForm.description.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="template.description.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
                                     <input required="true" type="text" name="description" data-ng-model="template.description" class="form-control" data-ng-class="{'error': TemplateForm.description.$invalid && formSubmitted}" >
-                                    <i  tooltip="Description of the Template" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+                                    <i  tooltip="<fmt:message key="template.description.tooltip" bundle="${msg}" />" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
                                 </div>
                             </div>
                         </div>
@@ -38,8 +38,10 @@
                                 <label class="col-md-3 col-sm-3 control-label"><fmt:message key="common.url" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
                                     <input required="true" type="text" name="url" data-ng-model="template.url" class="form-control" data-ng-class="{'error': TemplateForm.url.$invalid && formSubmitted}" >
-                                    <i  tooltip="Management Server will download from the specified URL" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
-                                    <div class="error-area" data-ng-show="TemplateForm.url.$invalid && formSubmitted" ><i  tooltip="URL is Required" class="fa fa-warning error-icon"></i></div>
+                                    <i  tooltip="<fmt:message key="template.url.tooltip" bundle="${msg}" />" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+                                    <div class="error-area" data-ng-show="TemplateForm.url.$invalid && formSubmitted" >
+                                        <i  tooltip="<fmt:message key="template.url.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i>
+                                    </div>
                                 </div>
 
                             </div>
@@ -50,7 +52,7 @@
                                 <label class="col-md-3 col-sm-3 control-label"><fmt:message key="template.refurl" bundle="${msg}" /></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
                                     <input  type="text" name="refurl" data-ng-model="template.referenceUrl" class="form-control" >
-                                    <i  tooltip="Reference URL" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+                                    <i  tooltip="<fmt:message key="template.refurl.tooltip" bundle="${msg}" />" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
                                 </div>
 
                             </div>
@@ -63,8 +65,8 @@
                                     <select required="true"  class="form-control " name="zone" data-ng-model="template.zone" ng-options="zone.name for zone in formElements.zoneList" data-ng-class="{'error': TemplateForm.zone.$invalid && formSubmitted}" >
                                         <option value="">Select</option>
                                     </select>
-                                    <i  tooltip="Choose the Zone " class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
-                                    <div class="error-area" data-ng-show="TemplateForm.zone.$invalid && formSubmitted" ><i  tooltip="Zone is Required" class="fa fa-warning error-icon"></i></div>
+                                    <i  tooltip="<fmt:message key="template.zone.tooltip" bundle="${msg}" />" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+                                    <div class="error-area" data-ng-show="TemplateForm.zone.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="template.zone.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -77,8 +79,8 @@
                                     <select required="true" class="form-control input-group" name="hypervisor" data-ng-model="template.hypervisor" ng-options="hypervisor.name for hypervisor in formElements.hypervisorList" data-ng-class="{'error': TemplateForm.hypervisor.$invalid && formSubmitted}" >
                                         <option value="">Select</option>
                                     </select>
-                                    <i tooltip="Choose the hypervisor"  class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
-                                    <div class="error-area" data-ng-show="TemplateForm.hypervisor.$invalid && formSubmitted" ><i  tooltip="Hypervisor is Required" class="fa fa-warning error-icon"></i></div>
+                                    <i tooltip="<fmt:message key="template.hypervisor.tooltip" bundle="${msg}" />"  class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+                                    <div class="error-area" data-ng-show="TemplateForm.hypervisor.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="template.hypervisor.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
                                 </div>
 
                             </div>
@@ -103,7 +105,7 @@
                                         <option value="">No Thanks</option>
                                     </select>
 
-                                    <i tooltip="Choose the Root disk controller"  class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+                                    <i tooltip="<fmt:message key="template.rootdiskcontroller.tooltip" bundle="${msg}" />"  class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +119,7 @@
                                         <option value="">No Thanks</option>
                                     </select>
 
-                                    <i tooltip="Choose the Nic adapter type list"  class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+                                    <i tooltip="<fmt:message key="template.nicadapter.tooltip" bundle="${msg}" />"  class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
                                 </div>
                             </div>
                         </div>
@@ -131,7 +133,7 @@
                                         <option value="">No Thanks</option>
                                     </select>
 
-                                    <i tooltip="Choose the Keyboard type"  class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+                                    <i tooltip="<fmt:message key="template.keyboard.tooltip" bundle="${msg}" />"  class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
                                 </div>
                             </div>
                         </div>
@@ -142,8 +144,8 @@
                                     <select required="true" class="form-control input-group" name="format" data-ng-model="template.format" ng-options="format for (id, format) in formElements.formatList[template.hypervisor.name]" data-ng-class="{'error': TemplateForm.format.$invalid && formSubmitted}" >
                                         <option value="">Select</option>
                                     </select>
-                                    <i tooltip="Choose the Format"  class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
-                                    <div class="error-area" data-ng-show="TemplateForm.format.$invalid && formSubmitted" ><i  tooltip="Format is Required" class="fa fa-warning error-icon"></i></div>
+                                    <i tooltip="<fmt:message key="template.format.tooltip" bundle="${msg}" />"  class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+                                    <div class="error-area" data-ng-show="TemplateForm.format.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="template.format.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -151,9 +153,9 @@
                             <div class="row">
                                 <label class="col-md-3 col-sm-3 control-label"><fmt:message key="template.cost" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
-                                    <input required="true" type="text" valid-decimal name="cost" data-ng-model="template.cost" class="form-control" data-ng-class="{'error': TemplateForm.format.$invalid && formSubmitted}" >
-                                    <i  tooltip="Cost" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
-                                    <div class="error-area" data-ng-show="TemplateForm.cost.$invalid && formSubmitted" ><i  tooltip="Cost is Required" class="fa fa-warning error-icon"></i></div>
+                                    <input required="true" type="text" valid-decimal name="cost" data-ng-model="template.templateCost[0].cost" class="form-control" data-ng-class="{'error': TemplateForm.format.$invalid && formSubmitted}" >
+                                    <i  tooltip="<fmt:message key="template.cost.tooltip" bundle="${msg}" />" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+                                    <div class="error-area" data-ng-show="TemplateForm.cost.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="template.cost.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
 
                                 </div>
                             </div>
@@ -163,8 +165,8 @@
                                 <label class="col-md-3 col-sm-3 control-label"><fmt:message key="template.minimumcore" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
                                     <input required="true" valid-number type="text" name="mincore" data-ng-model="template.minimumCore" class="form-control" data-ng-class="{'error': TemplateForm.mincore.$invalid && formSubmitted}" >
-                                    <i  tooltip="Minimum Core for the Template" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
-                                    <div class="error-area" data-ng-show="TemplateForm.mincore.$invalid && formSubmitted" ><i  tooltip="Minimum Core  is Required" class="fa fa-warning error-icon"></i></div>
+                                    <i  tooltip="<fmt:message key="template.minimumcore.tooltip" bundle="${msg}" />" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+                                    <div class="error-area" data-ng-show="TemplateForm.mincore.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="template.minimumcore.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -173,8 +175,8 @@
                                 <label class="col-md-3 col-sm-3 control-label"><fmt:message key="template.minimummemory" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
                                     <input required="true" valid-number type="text" name="minmemory" data-ng-model="template.minimumMemory" class="form-control" data-ng-class="{'error': TemplateForm.minmemory.$invalid && formSubmitted}" >
-                                    <i  tooltip="Minimum Memory for the Template" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
-                                    <div class="error-area" data-ng-show="TemplateForm.minmemory.$invalid && formSubmitted" ><i  tooltip="Minimum Memory  is Required" class="fa fa-warning error-icon"></i></div>
+                                    <i  tooltip="<fmt:message key="template.minimummemory.tooltip" bundle="${msg}" />" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+                                    <div class="error-area" data-ng-show="TemplateForm.minmemory.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="template.minimummemory.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -191,8 +193,8 @@
                                     <select required="true" class="form-control input-group" name="osCategory" data-ng-change="categoryChange()" data-ng-model="template.osCategory" ng-options="osCategory.name for osCategory in formElements.osCategoryList" data-ng-class="{'error': TemplateForm.osCategory.$invalid && formSubmitted}" >
                                         <option value="">Select</option>
                                     </select>
-                                    <i tooltip="Choose the OS Category"  class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
-                                    <div class="error-area" data-ng-show="TemplateForm.osCategory.$invalid && formSubmitted" ><i  tooltip="OS Category is Required" class="fa fa-warning error-icon"></i></div>
+                                    <i tooltip="<fmt:message key="template.oscategory.tooltip" bundle="${msg}" />"  class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+                                    <div class="error-area" data-ng-show="TemplateForm.osCategory.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="template.oscategory.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
 
                                 </div>
                             </div>
@@ -206,8 +208,8 @@
                                     <select required="true" class="form-control input-group" name="osType" data-ng-model="template.osType" ng-options="osType.description for osType in formElements.osTypeList" data-ng-class="{'error': TemplateForm.osType.$invalid && formSubmitted}" >
                                         <option value="">Select</option>
                                     </select>
-                                    <i tooltip="Choose the type"  class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
-                                    <div class="error-area" data-ng-show="TemplateForm.osType.$invalid && formSubmitted" ><i  tooltip="OS Type is Required" class="fa fa-warning error-icon"></i></div>
+                                    <i tooltip="<fmt:message key="template.ostype.tooltip" bundle="${msg}" />"  class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+                                    <div class="error-area" data-ng-show="TemplateForm.osType.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="template.ostype.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
 
                                 </div>
                             </div>
@@ -217,9 +219,9 @@
                             <div class="row">
                                 <label class="col-md-3 col-sm-3 control-label"><fmt:message key="template.osversion" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
-                                    <div class="error-area" data-ng-show="TemplateForm.osVersion.$invalid && formSubmitted" ><i  tooltip="OS Version/Release is Required" class="fa fa-warning error-icon"></i></div>
+                                    <div class="error-area" data-ng-show="TemplateForm.osVersion.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="template.osversion.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
                                     <input required="true" type="text" name="osVersion" data-ng-model="template.osVersion" class="form-control" data-ng-class="{'error': TemplateForm.osVersion.$invalid && formSubmitted}" >
-                                    <i  tooltip="OS Version/Release of the Template" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+                                    <i  tooltip="<fmt:message key="template.osversion.tooltip" bundle="${msg}" />" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
                                 </div>
                             </div>
                         </div>
@@ -268,7 +270,7 @@
                                 <label class="col-md-3 col-sm-3 control-label "> <fmt:message key="template.detaileddescription" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-8 col-sm-8" data-ng-class="{'error': TemplateForm.summernoteTextTwo.$invalid && formSubmitted}" >
                                     <summernote class=""  name="summernoteTextTwo" required="true" height="200"  data-ng-model="template.detailedDescription"  config="summernoteOpt" data-ng-class="{'error': TemplateForm.summernoteTextTwo.$invalid && formSubmitted}" ></summernote>
-                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon " tooltip="Description Required" ></i>
+                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon " tooltip="<fmt:message key="template.detaileddescription.tooltip" bundle="${msg}" />" ></i>
                                 </div>
                                 <div class="error-area" data-ng-show="TemplateForm.summernoteTextTwo.$invalid && formSubmitted" ></div>
 
@@ -289,4 +291,3 @@
         </div>
     </div>
 </form>
-
