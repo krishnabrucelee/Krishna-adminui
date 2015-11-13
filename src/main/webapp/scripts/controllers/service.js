@@ -7,7 +7,6 @@
 angular
         .module('panda-ui-admin')
         .controller('computeListCtrl', computeListCtrl)
-        .controller('computeEditCtrl', computeEditCtrl)
         .controller('deleteCtrl', deleteCtrl)
         .controller('miscellaneousListCtrl', miscellaneousListCtrl)
         .controller('networkListCtrl', networkListCtrl)
