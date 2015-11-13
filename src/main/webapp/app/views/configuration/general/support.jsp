@@ -29,11 +29,11 @@
                 <div class="tab-content">
 
         <div class="tab-pane" data-ng-class="{'active' : templateCategory == 'department'}" id="step1-dashboard">
-        <div data-ng-include src="'views/configuration/general/department.html'"></div>
+        <div data-ng-include src="'app/views/configuration/general/department.jsp'"></div>
 
         </div>
         <div class="tab-pane"  data-ng-class="{'active' : templateCategory == 'predefined'}" id="step1-config">
-            <div data-ng-include src="'views/configuration/general/predefined-reply.html'"></div>
+            <div data-ng-include src="'app/views/configuration/general/predefined-reply.jsp'"></div>
         </div>
 
     </div>

@@ -1,0 +1,48 @@
+[
+    {
+        "id": 1,
+     "gatewayName":"PayPal",
+        "gatewayType": "ADVANCED",
+        "processingFeePercent":" ",
+       "processingFeeAmount":"0.00 ",
+       "default":false
+    },
+    {
+
+        "id": 2,
+     "gatewayName":"CCAvenue",
+        "gatewayType": "SEAMLESS",
+        "processingFeePercent":" ",
+       "processingFeeAmount":"0.00 ",
+       "default":true
+    },
+      {
+
+        "id": 3,
+     "gatewayName":"Brain Tree",
+        "gatewayType": "ADVANCED",
+        "processingFeePercent":" 2",
+       "processingFeeAmount":"10.00 ",
+       "default":false
+    },
+     {
+
+        "id": 4,
+     "gatewayName":"MoneyBooker",
+        "gatewayType": "SEAMLESS",
+        "processingFeePercent":"2",
+       "processingFeeAmount":"10.00 ",
+       "default":false
+    },
+       {
+
+        "id": 5,
+     "gatewayName":"NAB",
+        "gatewayType": "SEAMLESS",
+        "processingFeePercent":"2",
+       "processingFeeAmount":"10.00 ",
+       "default":false
+    }
+
+
+]
