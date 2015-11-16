@@ -11,6 +11,7 @@ angular
 function cloudStackCtrl($scope, $state,crudService, $stateParams, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify) {
 
 	var VIEW_URL = "app/";
+	$scope.zoneList = {};
     $scope.configList = {};
     $scope.paginationObject = {};
     $scope.configForm = {};
@@ -37,44 +38,22 @@ function cloudStackCtrl($scope, $state,crudService, $stateParams, modalService, 
         }
     }
 
-    $scope.zones = {};
-    var haszoneList = crudService.listAll("zones/list");
-    haszoneList.then(function (result) {
-    	$scope.formElements.zoneList = result;
-    	alert($scope.formElements.zoneList);
-    });
-    $scope.summernoteTextTwo = {}
-    $scope.summernoteOpt = {
-        toolbar: [
-            ['headline', ['style']],
-            ['style', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'strikethrough', 'clear']],
-            ['textsize', ['fontsize']],
-            ['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],
-        ],
-        disableResizeEditor: true,
+    // Zone List
+    $scope.list = function (pageNumber) {
+       var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+       var hasZones = crudService.list("zones", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+       hasZones.then(function (result) {  // this is only run after $http completes0
+       $scope.zoneList = result;
+
+        // For pagination
+        $scope.paginationObject.limit = limit;
+        $scope.paginationObject.currentPage = pageNumber;
+        $scope.paginationObject.totalItems = result.totalItems;
+         });
+      };
+      $scope.list(1);
+
     };
-
-    $scope.configElements = {
-        category: "general",
-        oneItemSelected: {},
-        selectedAll: {}
-    };
-
-    $scope.language = {
-    };
-    $scope.formSubmitted = false;
-
-
-    $scope.validateZone = function (form) {
-        $scope.formSubmitted = true;
-        if (form.$valid) {
-            $scope.homerTemplate = 'app/views/notification/notify.jsp';
-            notify({message: 'Saved successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-
-        }
-    };
-    $scope.value = 'Advanced';
-};
 
 
 function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, promiseAjax, notify, localStorageService, modalService) {
