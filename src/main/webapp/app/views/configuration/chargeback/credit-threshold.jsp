@@ -30,14 +30,14 @@
                 <div class="tab-content">
 
         <div class="tab-pane" data-ng-class="{'active' : templateCategory == 'trialManagement'}" id="step1-dashboard">
-        <div data-ng-include src="'views/configuration/chargeback/trial-management.html'"></div>
+        <div data-ng-include src= "'app/views/configuration/chargeback/trial-management.jsp'"></div>
 
         </div>
         <div class="tab-pane"  data-ng-class="{'active' : templateCategory == 'retailManagement'}" id="step1-config">
-            <div data-ng-include src="'views/configuration/chargeback/retail-management.html'"></div>
+            <div data-ng-include src="'app/views/configuration/chargeback/retail-management.jsp'"></div>
         </div>
         <div class="tab-pane"  data-ng-class="{'active' : templateCategory == 'creditLimit'}" id="step1-config">
-            <div data-ng-include src="'views/configuration/chargeback/credit-limit.html'"></div>
+            <div data-ng-include src="'app/views/configuration/chargeback/credit-limit.jsp'"></div>
         </div>
 
     </div>

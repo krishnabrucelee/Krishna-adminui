@@ -16,6 +16,8 @@
         <li ng-class="{active: $state.includes('client')}">
             <a href="#"><span class="pe-7s-users pe-2x nav-menu-icons"></span> <span class="nav-label"><fmt:message key="common.clients" bundle="${msg}" /></span><span class="fa arrow"></span> </a>
             <ul class="nav nav-second-level" ng-class="{in: $state.includes('client')}">
+                <li ui-sref-active="active"><a ui-sref="client.client"><fmt:message key="common.client" bundle="${msg}" /></a></li>
+                <li ui-sref-active="active"><a ui-sref="client.application"><fmt:message key="common.applications" bundle="${msg}" /></a></li>
                 <li ui-sref-active="active"><a ui-sref="client.project"><fmt:message key="common.projects" bundle="${msg}" /></a></li>
                 <li ui-sref-active="active"><a ui-sref="client.user"><fmt:message key="common.users" bundle="${msg}" /></a></li>
             </ul>

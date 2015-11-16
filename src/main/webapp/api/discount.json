@@ -1,0 +1,21 @@
+[
+    {
+        "id": 1,
+     "name":"ComputingOffer ",
+        "type": "User Based",
+        "value":"50",
+       "billingCycles":"1 ",
+       "user":"Panda "
+    },
+    {
+
+        "id": 2,
+     "name":"DiskOffer ",
+        "type": "Plan Based",
+        "value":"80 ",
+       "billingCycles":" 1",
+       "user":"Logistics "
+    }
+
+
+]

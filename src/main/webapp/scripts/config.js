@@ -52,7 +52,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "/views",
                 templateUrl: VIEW_URL +  "views/common/content.jsp",
                 data: {
-                    pageTitle: 'App Views'
+                    pageTitle: 'app views'
                 }
             })
 
@@ -62,7 +62,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "/",
                 templateUrl: VIEW_URL +  "views/common/content.jsp",
                 data: {
-                    pageTitle: 'Clients'
+                    pageTitle: 'clients'
                 }
             })
 
@@ -71,7 +71,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "client/project",
                 templateUrl: VIEW_URL +  "views/client/project/list.jsp",
                 data: {
-                    pageTitle: 'Projects'
+                    pageTitle: 'projects'
                 }
             })
 
@@ -79,7 +79,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "/view/:id",
                 templateUrl: VIEW_URL +  "views/client/project/view.jsp",
                 data: {
-                    pageTitle: 'View Project'
+                    pageTitle: 'view project'
                 }
             })
 
@@ -88,7 +88,41 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "client/user",
                 templateUrl: VIEW_URL +  "views/client/user/list.jsp",
                 data: {
-                    pageTitle: 'Users'
+                    pageTitle: 'users'
+                }
+            })
+
+             // Client-clients
+            .state('client.client', {
+                url: "client/client",
+                templateUrl: VIEW_URL +  "views/client/clients/list.jsp",
+                data: {
+                    pageTitle: 'client'
+                }
+            })
+
+            .state('client.client.add', {
+                url: "/addClient",
+                templateUrl: VIEW_URL +  "views/client/clients/add.jsp",
+                data: {
+                    pageTitle: 'add.client'
+                }
+            })
+
+              .state('client.client.edit', {
+                url: "/editClient",
+                templateUrl: VIEW_URL +  "views/client/clients/edit.jsp",
+                data: {
+                    pageTitle: 'edit.client'
+                }
+            })
+
+            // Client-Applications
+            .state('client.application', {
+                url: "client/application",
+                templateUrl: VIEW_URL + "views/client/application/list.jsp",
+                data: {
+                    pageTitle: 'applications'
                 }
             })
 
@@ -119,19 +153,11 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             }
         })
 
-        .state('configuration.home.domain', {
-            url: "/domain",
-            templateUrl: VIEW_URL +  "views/configuration/cloudStack/domain-config.jsp",
-            data: {
-                pageTitle: 'Domain Configuration'
-            }
-        })
-
         .state('configuration.home.import', {
             url: "/importData",
             templateUrl: VIEW_URL +  "views/configuration/cloudStack/import.jsp",
             data: {
-                pageTitle: 'Import'
+                pageTitle: 'import.data'
             }
         })
 
@@ -204,6 +230,14 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             templateUrl: VIEW_URL +  "views/configuration/chargeback/currency.jsp",
             data: {
                 pageTitle: 'Currency'
+            }
+        })
+
+        .state('configuration.home.resourceAllocation', {
+            url: "/resourceAllocations",
+            templateUrl: VIEW_URL + "views/configuration/chargeback/resource-allocation.jsp",
+            data: {
+                pageTitle: 'resource.allocation'
             }
         })
 

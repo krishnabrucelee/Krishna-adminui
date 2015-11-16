@@ -7,7 +7,6 @@
 angular
         .module('panda-ui-admin')
         .controller('computeListCtrl', computeListCtrl)
-        .controller('computeEditCtrl', computeEditCtrl)
         .controller('deleteCtrl', deleteCtrl)
         .controller('miscellaneousListCtrl', miscellaneousListCtrl)
         .controller('networkListCtrl', networkListCtrl)
@@ -97,12 +96,15 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
     });
 
     // Open dialogue box to create templates
-    $scope.template = {};
+    $scope.template = {
+    		templateCost: []
+    };
 
     $scope.save = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-            var template = $scope.template;
+
+            var template = angular.copy($scope.template);
 
             var hasTemplate = crudService.add("templates", template);
             hasTemplate.then(function (result) {  // this is only run after $http completes
@@ -112,10 +114,15 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
 
             }).catch(function (result) {
                 if (!angular.isUndefined(result.data)) {
-                    angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
-                        $scope.template[key].$invalid = true;
-                        $scope.template[key].errorMessage = errorMessage;
-                    });
+                	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                  	    var msg = result.data.globalError[0];
+                	    notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                    } else if (result.data.fieldErrors != null) {
+                        angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                            $scope.TemplateForm[key].$invalid = true;
+                            $scope.TemplateForm[key].errorMessage = errorMessage;
+                        });
+                	}
                 }
             });
         }
@@ -151,8 +158,8 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
 
     $scope.formElements = {
           rootDiskControllerList: {
-              "0":"scsi",
-              "1":"ide"
+              "0":"SCSI",
+              "1":"IDE"
           },
           nicTypeList: {
         	  "0":"E1000",
@@ -161,10 +168,10 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
         	  "3":"VMXNET3"
           },
           keyboardTypeList: {
-        	  "0":"US_Keyboard",
-        	  "1":"UK_Keyboard",
-        	  "2":"Japanese_Keyboard",
-        	  "3":"Simplified_Chinese"
+        	  "0":"US_KEYBOARD",
+        	  "1":"UK_KEYBOARD",
+        	  "2":"JAPANESE_KEYBOARD",
+        	  "3":"SIMPLIFIED_CHINESE"
           },
           formatList: {
                        "Hyperv" : {
@@ -188,7 +195,7 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
 			           },
 			           "BareMetal" :
 			           {
-			        	  "0":"BareMetal",
+			        	  "0":"BAREMETAL",
 			           },
 			           "LXC" :
 			           {
@@ -204,10 +211,12 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
 
 function templateEditCtrl($scope, $state, $stateParams, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, dialogService, crudService) {
 
+	$scope.templateForm = {};
+
 	$scope.formElements = {
 	        rootDiskControllerList: {
-	          "0":"scsi",
-	          "1":"ide"
+	          "0":"SCSI",
+	          "1":"IDE"
 	        },
 	        nicTypeList: {
 	      	  "0":"E1000",
@@ -216,10 +225,10 @@ function templateEditCtrl($scope, $state, $stateParams, modalService, $log, prom
 	      	  "3":"VMXNET3"
 	        },
 	        keyboardTypeList: {
-	      	  "0":"US_Keyboard",
-	      	  "1":"UK_Keyboard",
-	      	  "2":"Japanese_Keyboard",
-	      	  "3":"Simplified_Chinese"
+	      	  "0":"US_KEYBOARD",
+	      	  "1":"UK_KEYBOARD",
+	      	  "2":"JAPANESE_KEYBOARD",
+	      	  "3":"SIMPLIFIED_CHINESE"
 	        }
 	    }
 
@@ -249,16 +258,31 @@ function templateEditCtrl($scope, $state, $stateParams, modalService, $log, prom
 	    });
     }
 
+    $scope.template = {
+    		templateCost: []
+    };
+
     // Edit the Template
     $scope.update = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-            var template = $scope.template;
+
+            var template = angular.copy($scope.template);
+
             var hasTemplates = crudService.update("templates", template);
             hasTemplates.then(function (result) {
                 $scope.homerTemplate = 'app/views/notification/notify.jsp';
                 notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                 $window.location.href = '#/templatestore/list';
+            }).catch(function (result) {
+                if (!angular.isUndefined(result.data)) {
+                	if (result.data.fieldErrors != null) {
+                        angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                            $scope.TemplateForm[key].$invalid = true;
+                            $scope.TemplateForm[key].errorMessage = errorMessage;
+                        });
+                	}
+                }
             });
         }
     };
@@ -350,49 +374,56 @@ function storageListCtrl($scope, crudService, dialogService, modalService, $log,
 
         var regexp = /^[0-9]+([,.][0-9]+)?$/g;
         $scope.costPerHourGBError = false;
-        if(!regexp.test($scope.storage.costGbPerMonth)) {
+        if(!regexp.test($scope.storage.storagePrice[0].costGbPerMonth)) {
         	$scope.costPerHourGBError = true;
 
-            $scope.storage.costGbPerMonth = "";
+            $scope.storage.storagePrice[0].costGbPerMonth = "";
             $scope.storage.costPerHourGB = "";
             return false;
         }
 
 
-        var cost = parseFloat($scope.storage.costGbPerMonth);
+        var cost = parseFloat($scope.storage.storagePrice[0].costGbPerMonth);
 
         var costValue = cost / 720;
 
         $scope.storage.costPerHourGB = costValue.toFixed(4);
     };
+
+
 $scope.costPerHourIOPS = function() {
 
         var regexp = /^[0-9]+([,.][0-9]+)?$/g;
 
         $scope.costPerHourIOPSError = false;
-        if(!regexp.test($scope.storage.costIopsPerMonth)) {
+        if(!regexp.test($scope.storage.storagePrice[0].costIopsPerMonth)) {
             $scope.costPerHourIOPSError = true;
 
-            $scope.storage.costIopsPerMonth = "";
+            $scope.storage.storagePrice[0].costIopsPerMonth = "";
             $scope.storage.costPerHourIOPS = "";
             return false;
         }
 
 
-        var cost = parseFloat($scope.storage.costIopsPerMonth);
+        var cost = parseFloat($scope.storage.storagePrice[0].costIopsPerMonth);
 
         var costValue = cost / 720;
 
         $scope.storage.costPerHourIOPS = costValue.toFixed(4);
     };
 
+    $scope.storage = {
+    		storagePrice: []
+    };
 
     $scope.save = function (form) {
         console.log(form);
         $scope.formSubmitted = true;
 
         if (form.$valid) {
-            var storage = $scope.storage;
+            var storage = angular.copy($scope.storage);
+//            storage.storagePrice = [];
+//            storage.storagePrice[0] = $scope.storage.storagePrice;
             var hasStorage = crudService.add("storages", storage);
             hasStorage.then(function (result) {  // this is only run after
 													// $http completes
@@ -403,10 +434,18 @@ $scope.costPerHourIOPS = function() {
                 $window.location.href = '#/storage/list';
 
             }).catch(function (result) {
-                angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
-                    $scope.storageForm[key].$invalid = true;
-                    $scope.storageForm[key].errorMessage = errorMessage;
-                });
+            	console.log(result);
+            	if (!angular.isUndefined(result.data)) {
+                	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                  	    var msg = result.data.globalError[0];
+                	    notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                    } else if (result.data.fieldErrors != null) {
+                        angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                            $scope.storageForm[key].$invalid = true;
+                            $scope.storageForm[key].errorMessage = errorMessage;
+                        });
+                	}
+                }
             });
         }
     };
@@ -442,12 +481,6 @@ $scope.costPerHourIOPS = function() {
                  "1": "local"
         }
     };
-
-
-
-
-
-
 
   /*
 	 * $scope.zone = { zoneList: [ {id: 1, name: 'Beijing'}, {id: 2, name:
@@ -496,6 +529,9 @@ function storageEditCtrl($scope, $state, $stateParams, modalService, $log, promi
         $scope.edit($stateParams.id)
     }
 
+    $scope.storage = {
+    		storagePrice: []
+    };
     // Edit the Compute Offer
     $scope.update = function (form) {
         // Update Compute Offer
@@ -618,7 +654,12 @@ function miscellaneousListCtrl($scope, modalService, $log, promiseAjax, $statePa
         }
     };
 
-
+//    $scope.networkType = {
+//            networktypeList: {
+//                     "0": "shared",
+//                     "1": "isolated"
+//            }
+//        };
 
     $scope.qos = {
         qosList: [
@@ -678,7 +719,9 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
     $scope.global = crudService.globalConfig;
     $scope.compute = {
     		zone: {}
-    };
+     };
+
+
     // Compute Offer List
     $scope.list = function (pageNumber) {
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
@@ -703,17 +746,22 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
 
     // Open dialogue box to create Compute Offer
 
+    $scope.compute = {
+    		computeCost: []
+    };
 
     $scope.save = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-            var compute = $scope.compute;
+            var compute = angular.copy($scope.compute);
             if(!angular.isUndefined(compute.domain)) {
             	compute.domainId = compute.domain.id;
             }
             if(!angular.isUndefined(compute.zone)) {
             	compute.zoneId = compute.zone.id;
             }
+            compute.customized = (compute.customized == null) ? false : true;
+            compute.customizedIops = (compute.customizedIops === null) ? true : false;
             console.log(compute);
             var hasComputes = crudService.add("computes", compute);
             hasComputes.then(function (result) {  // this is only run after
@@ -791,7 +839,7 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
 	var hasZones = crudService.list("zones/list", '', {});
 	hasZones.then(function (result) {  // this is only run after $http completes0
 		$scope.formElements.zoneList = result;
-		$scope.compute.zone = $scope.formElements.zoneList[0];
+		$scope.compute.computeCost.zone = $scope.formElements.zoneList[0];
 	});
 
     $scope.diskio = {
@@ -837,8 +885,3 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
     };
 }
 
-
-function computeEditCtrl($scope, $state, $stateParams, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, dialogService, crudService) {
-
-
-};

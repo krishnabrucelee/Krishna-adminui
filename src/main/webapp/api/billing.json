@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name":"ComputingOffer",
+        "taxName": "N/A",
+        "taxPercentage":"0"
+
+    },
+    {
+        "id": 2,
+        "name":"DiskOffer",
+        "taxName": "N/A",
+        "taxPercentage":"0"
+    },
+     {
+        "id": 3,
+        "name":"Snapshot",
+        "taxName": "N/A",
+        "taxPercentage":"0"
+    },
+     {
+        "id": 4,
+        "name":"Template",
+        "taxName": "N/A",
+        "taxPercentage":"0"
+    },
+     {
+        "id": 5,
+        "name":"BandWidth",
+        "taxName": "N/A",
+        "taxPercentage":"0"
+    },
+     {
+        "id":6 ,
+        "name":"Late Fee",
+        "taxName": "N/A",
+        "taxPercentage":"0"
+    }
+
+
+
+]

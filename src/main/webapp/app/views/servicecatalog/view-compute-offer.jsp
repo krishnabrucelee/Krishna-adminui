@@ -234,97 +234,144 @@
             <div class="row  ">
                 <div class="col-md-12"> <h4><label><fmt:message key="common.pricinginfo" bundle="${msg}" /></label><hr></h4></div>
             </div>
+
+
             <div class="row">
-                <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="common.zonename" bundle="${msg}" /></label>
+                                <div class="col-md-4  col-sm-4 col-xs-4">
+                                    <select data-ng-init="compute.computeCost[0].zone = formElements.zoneList[0]" class="form-control input-group" name="zone" data-ng-model="compute.computeCost[0].zone" ng-options="zone.name for zone in formElements.zoneList" >
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                        <div class="row" data-ng-show="compute.customized">
+                                <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.running.cost.per.vcpu.core" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
+                                <div class="col-md-3  col-sm-3 col-xs-3">
+                                    <input  type="text" valid-decimal name="instanceRunningCostVcpu" data-ng-model="compute.computeCost[0].instanceRunningCostPerVcpu" class="form-control" >
+                                    <span class="help-block m-b-none" ng-show="computeForm.instanceRunningCostVcpu.$invalid && formSubmitted" ></span>
+                                </div>
+                                <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ (compute.computeCost[0].instanceRunningCostVcpu * compute.computeCost[0].instanceRunningCostPerVcpu) | number:4}}/hr</p></label>
+                            </div>
+                            <div class="row" data-ng-show="!compute.customized">
+                                <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.running.cost.for.vcpu.core" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
+                                <div class="col-md-3  col-sm-3 col-xs-3">
+                                    <input  type="text" valid-decimal name="instanceRunningCostVcpu" data-ng-model="compute.computeCost[0].instanceRunningCostVcpu" class="form-control" >
+                                    <span class="help-block m-b-none" ng-show="computeForm.instanceRunningCostVcpu.$invalid && formSubmitted" ></span>
+                                </div>
+                                <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.computeCost[0].instanceRunningCostVcpu / 720 | number:4}}/hr</p></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                         <div class="row" data-ng-show="compute.customized">
+                                <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.running.cost.per.memory" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
+                                <div class="col-md-3  col-sm-3 col-xs-3">
+                                    <input  type="text" valid-decimal name="instanceRunningCostMemory" data-ng-model="compute.computeCost[0].instanceRunningCostMemory" class="form-control" >
+                                    <span class="help-block m-b-none" ng-show="computeForm.instanceRunningCostMemory.$invalid && formSubmitted" ></span>
+                                </div>
+                                <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.computeCost[0].instanceRunningCostMemory / 720 | number:4}}/hr</p></label>
+                            </div>
+                            <div class="row" data-ng-show="!compute.customized">
+                                <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.running.cost.for.memory" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
+                                <div class="col-md-3  col-sm-3 col-xs-3">
+                                    <input  type="text" valid-decimal name="instanceRunningCostMemory" data-ng-model="compute.computeCost[0].instanceRunningCostMemory" class="form-control" >
+                                    <span class="help-block m-b-none" ng-show="computeForm.instanceRunningCostMemory.$invalid && formSubmitted" ></span>
+                                </div>
+                                <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.computeCost[0].instanceRunningCostMemory / 720 | number:4}}/hr</p></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                        <div class="row" data-ng-show="compute.customizedIops">
+                                <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.running.cost.per.iops" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
+                                <div class="col-md-3  col-sm-3 col-xs-3">
+                                    <input  type="text" valid-decimal name="instanceRunningCostIops" data-ng-model="compute.computeCost[0].instanceRunningCostPerIops" class="form-control" >
+                                    <span class="help-block m-b-none" ng-show="computeForm.instanceRunningCostIops.$invalid && formSubmitted" ></span>
+                                </div>
+                                <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ (compute.computeCost[0].instanceRunningCostIops * compute.computeCost[0].instanceRunningCostPerIops) | number:4}}/hr</p></label>
+                            </div>
+                            <div class="row" data-ng-show="!compute.customizedIops">
+                                <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.running.cost.for.iops" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
+                                <div class="col-md-3  col-sm-3 col-xs-3">
+                                    <input  type="text" valid-decimal name="instanceRunningCostIops" data-ng-model="compute.computeCost[0].instanceRunningCostIops" class="form-control" >
+                                    <span class="help-block m-b-none" ng-show="computeForm.instanceRunningCostIops.$invalid && formSubmitted" ></span>
+                                </div>
+                                <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.computeCost[0].instanceRunningCostIops / 720 | number:4}}/hr</p></label>
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="common.zonename" bundle="${msg}" /></label>
-                            <div class="col-md-4  col-sm-4 col-xs-4">
-<!--                                 <input  type="text" name="zonename"  data-ng-model="compute.zone" class="form-control" readonly >
- -->
- 							  <b>{{ compute.zone.name }}</b>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
 
+                        <div class="form-group">
+                            <div class="row">
+                                <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="common.setupcost" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
+                                <div class="col-md-3  col-sm-3 col-xs-3">
+                                    <input  type="text" valid-decimal name="setupCost" data-ng-model="compute.computeCost[0].setupCost" class="form-control" >
+                                    <span class="help-block m-b-none" ng-show="computeForm.setupCost.$invalid && formSubmitted" ></span>
+                                </div>
                             </div>
                         </div>
-					</div>
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.running.cost.for.vcpu.core" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
-                            <div class="col-md-3  col-sm-3 col-xs-3">
-                                <input  type="text" valid-decimal name="instanceRunningCostVcpu" data-ng-model="compute.instanceRunningCostVcpu" class="form-control" >
-                                <span class="help-block m-b-none" ng-show="computeForm.instanceRunningCostVcpu.$invalid && formSubmitted" ></span>
+                        <div class="form-group">
+                        <div class="row" data-ng-show="compute.customized">
+                                <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.stoppage.cost.per.vcpu.core" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
+                                <div class="col-md-3  col-sm-3 col-xs-3">
+                                    <input  type="text" valid-decimal name="instanceStoppageCostVcpu" data-ng-model="compute.computeCost[0].instanceStoppageCostPerVcpu" class="form-control" >
+                                    <span class="help-block m-b-none" ng-show="computeForm.instanceStoppageCostVcpu.$invalid && formSubmitted" ></span>
+                                </div>
+                                <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.computeCost[0].instanceStoppageCostVcpu * compute.computeCost[0].instanceStoppageCostPerVcpu | number:4}}/hr</p></label>
                             </div>
-                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceRunningCostVcpu / 720 | number:4}}/hr</p></label>
-                        </div>
-                    </div>
-                      <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.running.cost.for.memory" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
-                            <div class="col-md-3  col-sm-3 col-xs-3">
-                                <input  type="text" valid-decimal name="instanceRunningCostMemory" data-ng-model="compute.instanceRunningCostMemory" class="form-control" >
-                                <span class="help-block m-b-none" ng-show="computeForm.instanceRunningCostMemory.$invalid && formSubmitted" ></span>
+                            <div class="row" data-ng-show="!compute.customized">
+                                <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.stoppage.cost.for.vcpu.core" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
+                                <div class="col-md-3  col-sm-3 col-xs-3">
+                                    <input  type="text" valid-decimal name="instanceStoppageCostVcpu" data-ng-model="compute.computeCost[0].instanceStoppageCostVcpu" class="form-control" >
+                                    <span class="help-block m-b-none" ng-show="computeForm.instanceStoppageCostVcpu.$invalid && formSubmitted" ></span>
+                                </div>
+                                <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.computeCost[0].instanceStoppageCostVcpu / 720 | number:4}}/hr</p></label>
                             </div>
-                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceRunningCostMemory / 720 | number:4}}/hr</p></label>
                         </div>
-                    </div>
-                      <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.running.cost.for.iops" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
-                            <div class="col-md-3  col-sm-3 col-xs-3">
-                                <input  type="text" valid-decimal name="instanceRunningCostIops" data-ng-model="compute.instanceRunningCostIops" class="form-control" >
-                                <span class="help-block m-b-none" ng-show="computeForm.instanceRunningCostIops.$invalid && formSubmitted" ></span>
-                            </div>
-                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceRunningCostIops / 720 | number:4}}/hr</p></label>
-                        </div>
-                    </div>
 
+                        <div class="form-group">
+                        <div class="row" data-ng-show="compute.customized">
+                                <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.stoppage.cost.per.memory" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
+                                <div class="col-md-3  col-sm-3 col-xs-3">
+                                    <input  type="text" valid-decimal name="instanceStoppageCostMemory" data-ng-model="compute.computeCost[0].instanceStoppageCostPerMB" class="form-control" >
+                                    <span class="help-block m-b-none" ng-show="computeForm.instanceStoppageCostMemory.$invalid && formSubmitted" ></span>
+                                </div>
+                                <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.computeCost[0].instanceStoppageCostMemory * compute.computeCost[0].instanceStoppageCostPerMB | number:4}}/hr</p></label>
+                            </div>
+                            <div class="row" data-ng-show="!compute.customized">
+                                <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.stoppage.cost.for.memory" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
+                                <div class="col-md-3  col-sm-3 col-xs-3">
+                                    <input  type="text" valid-decimal name="instanceStoppageCostMemory" data-ng-model="compute.computeCost[0].instanceStoppageCostMemory" class="form-control" >
+                                    <span class="help-block m-b-none" ng-show="computeForm.instanceStoppageCostMemory.$invalid && formSubmitted" ></span>
+                                </div>
+                                <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.computeCost[0].instanceStoppageCostMemory / 720 | number:4}}/hr</p></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                        <div class="row" data-ng-show="compute.customizedIops">
+                                <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.stoppage.cost.per.iops" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
+                                <div class="col-md-3  col-sm-3 col-xs-3">
+                                    <input  type="text" valid-decimal name="instanceStoppageCostIops" data-ng-model="compute.computeCost[0].instanceStoppageCostPerIops" class="form-control" >
+                                    <span class="help-block m-b-none" ng-show="computeForm.instanceStoppageCostIops.$invalid && formSubmitted" ></span>
+                                </div>
+                                <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.computeCost[0].instanceStoppageCostIops * compute.computeCost[0].instanceStoppageCostPerIops | number:4}}/hr</p></label>
+                            </div>
+                            <div class="row" data-ng-show="!compute.customizedIops">
+                                <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.stoppage.cost.for.iops" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
+                                <div class="col-md-3  col-sm-3 col-xs-3">
+                                    <input  type="text" valid-decimal name="instanceStoppageCostIops" data-ng-model="compute.computeCost[0].instanceStoppageCostIops" class="form-control" >
+                                    <span class="help-block m-b-none" ng-show="computeForm.instanceStoppageCostIops.$invalid && formSubmitted" ></span>
+                                </div>
+                                <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.computeCost[0].instanceStoppageCostIops / 720 | number:4}}/hr</p></label>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-                <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
-
-				<div class="form-group">
-                        <div class="row">
-                            <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="common.setupcost" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
-                            <div class="col-md-3  col-sm-3 col-xs-3">
-                                <input  type="text" valid-decimal name="setupCost" data-ng-model="compute.setupCost" class="form-control" >
-                                <span class="help-block m-b-none" ng-show="computeForm.setupCost.$invalid && formSubmitted" ></span>
-                            </div>
-                        </div>
-                        </div>
-                 	<div class="form-group">
-                        <div class="row">
-                            <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.stoppage.cost.for.vcpu.core" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
-                            <div class="col-md-3  col-sm-3 col-xs-3">
-                                <input  type="text" valid-decimal name="instanceStoppageCostVcpu" data-ng-model="compute.instanceStoppageCostVcpu" class="form-control" >
-                                <span class="help-block m-b-none" ng-show="computeForm.instanceStoppageCostVcpu.$invalid && formSubmitted" ></span>
-                            </div>
-                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceStoppageCostVcpu / 720 | number:4}}/hr</p></label>
-                        </div>
-                        </div>
-
-                      <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.stoppage.cost.for.memory" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
-                            <div class="col-md-3  col-sm-3 col-xs-3">
-                                <input  type="text" valid-decimal name="instanceStoppageCostMemory" data-ng-model="compute.instanceStoppageCostMemory" class="form-control" >
-                                <span class="help-block m-b-none" ng-show="computeForm.instanceStoppageCostMemory.$invalid && formSubmitted" ></span>
-                            </div>
-                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceStoppageCostMemory / 720 | number:4}}/hr</p></label>
-                        </div>
-                    </div>
-                      <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.stoppage.cost.for.iops" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
-                            <div class="col-md-3  col-sm-3 col-xs-3">
-                                <input  type="text" valid-decimal name="instanceStoppageCostIops" data-ng-model="compute.instanceStoppageCostIops" class="form-control" >
-                                <span class="help-block m-b-none" ng-show="computeForm.instanceStoppageCostIops.$invalid && formSubmitted" ></span>
-                            </div>
-                            <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.instanceStoppageCostIops / 720 | number:4}}/hr</p></label>
-                        </div>
-                    </div>
-
-                </div>
-				</div>
                 <div class="row">
                     <div class="col-md-12  col-sm-12">
                         <span class="pull-right">

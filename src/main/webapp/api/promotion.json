@@ -1,0 +1,25 @@
+[
+    {
+        "id": 1,
+     "code":"1232",
+        "type": "Fixed",
+        "value":"80 ",
+       "startDate":"2015-09-10",
+       "endDate":"2015-09-30",
+       "maximumUses":"3",
+       "adminNotes":""
+    },
+    {
+
+        "id": 2,
+     "code":"4661",
+        "type": "Fixed",
+        "value":"60 ",
+       "startDate":"2015-09-10",
+       "endDate":"2015-09-26 ",
+       "maximumUses":"4",
+       "adminNotes":""
+    }
+
+
+]
