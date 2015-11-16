@@ -6,6 +6,7 @@
 
 <div class="row">
     <div class="col-md-12 col-sm-12">
+    <div ng-controller="cloudStackCtrl">
         <div class="hpanel">
             <div class="panel-heading">
                 <div class="row">
@@ -21,8 +22,9 @@
             </div>
             <div class="panel-body">
           <label>Zone:</label>
-         <div>Panda-Zone1</div>
-            </div>
+            <li data-ng-repeat="zone in zoneList">{{zone.name}}</li>
+           </div>
+        </div>
         </div>
     </div>
 </div>
