@@ -93,13 +93,23 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             })
 
              // Client-clients
+
             .state('client.client', {
-                url: "client/client",
+                url: "client/company",
                 templateUrl: VIEW_URL +  "views/client/clients/list.jsp",
                 data: {
                     pageTitle: 'client'
                 }
             })
+
+              .state('client.client.quotalimit', {
+                url: "/:quotaType/:id",
+                templateUrl: VIEW_URL +  "views/client/clients/quota.jsp",
+                data: {
+                    pageTitle: 'View Quota Limit'
+                }
+            })
+
 
             .state('client.client.add', {
                 url: "/addClient",
@@ -240,6 +250,14 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 pageTitle: 'resource.allocation'
             }
         })
+
+            .state('configuration.home.resourceAllocation.view', {
+                url: "view/:id",
+                templateUrl: VIEW_URL +  "views/configuration/chargeback/resource-allocation.jsp",
+                data: {
+                    pageTitle: 'View Quota Limit'
+                }
+            })
 
             .state('configuration.home.billing', {
             url: "/billableItem",

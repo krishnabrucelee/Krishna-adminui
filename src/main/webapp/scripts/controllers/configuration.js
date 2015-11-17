@@ -56,14 +56,55 @@ function cloudStackCtrl($scope, $state,crudService, $stateParams, modalService, 
     };
 
 
-function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, promiseAjax, notify, localStorageService, modalService) {
+function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $stateParams, promiseAjax, notify, localStorageService, modalService) {
 
-	var VIEW_URL = "app/";
-	var hasServer = promiseAjax.httpRequest("GET", "api/resource-allocation.json");
-    hasServer.then(function (result) {  // this is only run after $http completes
-        $scope.config = result;
+	  $scope.paginationObject = {};
+	    $scope.global = crudService.globalConfig;
+		$scope.domainList = {};
 
-    });
+	    // Compute Offer List
+	    $scope.list = function (pageNumber) {
+	        var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+	        var hasDomains = crudService.list("domains", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+	        hasDomains.then(function (result) {  // this is only run after $http
+													// completes0
+
+	        	$scope.domainList = result;
+	            $scope.stateid =$stateParams.id;
+	            $scope.type = $stateParams.quotaType;
+console.log($scope.type);
+	            // For pagination
+	            $scope.paginationObject.limit = limit;
+	            $scope.paginationObject.currentPage = pageNumber;
+	            $scope.paginationObject.totalItems = result.totalItems;
+
+	            console.log($scope.domain );
+
+
+	        });
+
+	    };
+	    $scope.list(1);
+
+
+/*		angular.forEach($scope.domainList, function(obj, key) {
+    		if(obj.id == $scope.domain.id) {
+    			$scope.domain = obj;
+    			console.log($scope.domain );
+    		}
+    	});
+*/
+
+
+
+
+
+//	var VIEW_URL = "app/";
+//	var hasServer = promiseAjax.httpRequest("GET", "api/resource-allocation.json");
+//    hasServer.then(function (result) {  // this is only run after $http completes
+//        $scope.config = result;
+//
+//    });
     $scope.global = globalConfig;
     $scope.activity = {};
 

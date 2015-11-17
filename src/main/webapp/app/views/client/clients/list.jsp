@@ -41,12 +41,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr data-ng-repeat="client  in clientList| filter: clientSearch">
-                                            <td>{{ client.companyName}}</td>
+                                        <tr data-ng-repeat="domain  in domainList | filter: clientSearch">
+                                            <td>{{ domain.name}}</td>
                                             <td>{{ client.headquarter}}</td>
                                             <td>{{ client.contactName}} </td>
                                             <td>{{ client.phoneNo}} </td>
-                                            <td><a class="icon-button" ui-sref="client.client.edit" title="<fmt:message key="common.edit" bundle="${msg}" />" > <span class="fa fa-edit"></span></a>
+                                            <td>
+                                            <a class="icon-button" ui-sref="client.client.edit" title="<fmt:message key="common.edit" bundle="${msg}" />" > <span class="fa fa-edit"></span></a>
+
+												<a class="icon-button"  ui-sref="client.client.quotalimit({id: {{domain.id}}, quotaType: 'client-quota'})" title="<fmt:message key="common.quota.limit" bundle="${msg}" />"  ><span class="fa font-bold pe-7s-edit"></span></a>
+
 												<a class="icon-button" title="<fmt:message key="common.delete" bundle="${msg}" />" data-ng-click="delete('sm')"><span class="fa fa-trash"></span></a>
 										    </td>
                                         </tr>
