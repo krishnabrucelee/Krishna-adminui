@@ -50,7 +50,7 @@
                         <div class="row">
                             <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="compute.hosttag" bundle="${msg}" /></label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input type="text" name="hosttag" data-ng-model="compute.hostTags" class="form-control" readonly >
+                                <input  type="text" name="hosttag" data-ng-model="compute.hostTags" class="form-control" readonly >
                             </div>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                         <div class="row">
                             <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="compute.storagetag" bundle="${msg}" /></label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input type="text" name="storagetag" data-ng-model="compute.storageTags" class="form-control" readonly>
+                                <input   type="text" name="storagetag" data-ng-model="compute.storageTags" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                         <div class="row" >
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal" ><fmt:message key="compute.diskio" bundle="${msg}" /></label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <select  class="form-control input-group" name="diskio" data-ng-model="compute.diskIo" ng-options="diskio for (id, diskio) in formElements.diskioList" >
+                                <select readonly class="form-control input-group" name="diskio" data-ng-model="compute.diskIo" ng-options="diskio for (id, diskio) in formElements.diskioList" >
                                 </select>
 
                             </div>
@@ -130,7 +130,7 @@
                             <label class="col-md-4 col-sm-4 control-label font-normal" ><fmt:message key="common.diskreadratebps" bundle="${msg}" />
                             </label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input type="text" valid-number name="diskreadrate" data-ng-model="compute.diskBytesReadRate" class="form-control" >
+                                <input type="text" valid-number name="diskreadrate" data-ng-model="compute.diskBytesReadRate" class="form-control" readonly>
 
                             </div>
 
@@ -144,7 +144,7 @@
                             <label class="col-md-4 col-sm-4 control-label font-normal" ><fmt:message key="common.diskwriteratebps" bundle="${msg}" />
                             </label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input type="text" valid-number name="diskwriterate" data-ng-model="compute.diskBytesWriteRate" class="form-control" >
+                                <input type="text" valid-number name="diskwriterate" data-ng-model="compute.diskBytesWriteRate" class="form-control" readonly >
 
                             </div>
                         </div>
@@ -156,7 +156,7 @@
                         <div class="row">
                             <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.diskreadrateiops" bundle="${msg}" /></label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input  type="text" valid-number  name="diskreadrateiops" data-ng-model="compute.diskIopsReadRate" class="form-control" >
+                                <input  type="text" valid-number  name="diskreadrateiops" data-ng-model="compute.diskIopsReadRate" class="form-control" readonly >
 
                             </div>
                         </div>
@@ -170,7 +170,7 @@
                         <div class="row">
                             <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.diskwriterateiops" bundle="${msg}" /></label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input  type="text" valid-number name="diskwriterateiops" data-ng-model="compute.diskIopsWriteRate" class="form-control" >
+                                <input  type="text" valid-number name="diskwriterateiops" data-ng-model="compute.diskIopsWriteRate" class="form-control" readonly>
 
                             </div>
                         </div>
@@ -181,7 +181,7 @@
                         <div class="row">
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.miniops" bundle="${msg}" /></label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input  type="text" name="diskreadrateiops" valid-number  data-ng-model="compute.minIops" class="form-control" >
+                                <input  type="text" name="diskreadrateiops" valid-number  data-ng-model="compute.minIops" class="form-control" readonly >
                             </div>
                         </div>
                     </div>
@@ -191,7 +191,7 @@
                         <div class="row">
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.maxiops" bundle="${msg}" /></label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input  type="text" name="diskwriterateiops" valid-number  data-ng-model="compute.maxIops" class="form-control" >
+                                <input  type="text" name="diskwriterateiops" valid-number  data-ng-model="compute.maxIops" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
