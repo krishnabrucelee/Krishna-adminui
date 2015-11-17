@@ -99,6 +99,14 @@
 										bundle="${msg}" />
 						</span>
 						</span>
+						<span ng-if="state.data.pageTitle === 'zone.description'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="zone.description" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="zone.description"
+										bundle="${msg}" />
+						</span>
+						</span>
                         <span ng-if="state.data.pageTitle === 'template'">
 	                         <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}"><fmt:message key="template" bundle="${msg}" /></a>
 	                         <span ng-switch-when="true"><fmt:message key="template" bundle="${msg}" /></span>
