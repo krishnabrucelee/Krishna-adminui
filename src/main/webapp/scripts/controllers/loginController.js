@@ -10,10 +10,8 @@ angular.module('panda-ui-admin', []).controller("loginCtrl", function ($scope, $
         var username = document.getElementById("username").value;
         var password = document.getElementById("password").value;
 
-        if (username == "admin" && password == "admin")
-        {
              var headers = {
-                "x-requested-with": 'sample',
+                "x-requested-with": 'BACKEND_ADMIN',
                 "x-auth-username": username,
                 "x-auth-password": password,
                 'Content-Type': 'application/json'
@@ -23,15 +21,15 @@ angular.module('panda-ui-admin', []).controller("loginCtrl", function ($scope, $
             .success(function (result) {
                 $window.sessionStorage.token = result.token;
                 window.location.href = "index#/dashboard";
-            }).error(function (data, status, headers, config) {
-                delete $window.sessionStorage.token;
+            }).catch(function (result) {
+            	delete $window.sessionStorage.token;
+                if (!angular.isUndefined(result.data)) {
+                	var target = document.getElementById("errorMsg");
+                    target.innerHTML = result.data.message;
+                    target.style.display = 'block';
+                    target.style["margin-bottom"] = '10px';
+                }
             });
 
-        } else {
-            var target = document.getElementById("errorMsg");
-            target.innerHTML = "Invalid Username or Password";
-            target.style.display = 'block';
-            target.style["margin-bottom"] = '10px';
-        }
     }
 });
