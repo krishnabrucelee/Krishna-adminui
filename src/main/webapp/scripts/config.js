@@ -369,7 +369,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             url: "/zoneDescription",
             templateUrl: VIEW_URL +  "views/configuration/cloudStack/zone-description.jsp",
             data: {
-                pageTitle: 'Zone Description'
+                pageTitle: 'zone.description'
             }
         })
 
