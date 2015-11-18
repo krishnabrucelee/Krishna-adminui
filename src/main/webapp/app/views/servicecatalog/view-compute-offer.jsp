@@ -116,8 +116,8 @@
                         <div class="row" >
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal" ><fmt:message key="compute.diskio" bundle="${msg}" /></label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <select readonly class="form-control input-group" name="diskio" data-ng-model="compute.diskIo" ng-options="diskio for (id, diskio) in formElements.diskioList" >
-                                </select>
+
+                               <input type="text"  name="diskio" data-ng-model="compute.diskIo" class="form-control" readonly>
 
                             </div>
 
@@ -240,11 +240,11 @@
                     <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
                         <div class="form-group">
                             <div class="row">
-                                <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="common.zonename" bundle="${msg}" /></label>
-                                <div class="col-md-4  col-sm-4 col-xs-4">
+                                <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="common.zonename" bundle="${msg}" /></label><b>{{formElements.zoneList[0].name}}</b>
+                               <!--  <div class="col-md-4  col-sm-4 col-xs-4">
                                     <select data-ng-init="compute.computeCost[0].zone = formElements.zoneList[0]" class="form-control input-group" name="zone" data-ng-model="compute.computeCost[0].zone" ng-options="zone.name for zone in formElements.zoneList" >
                                     </select>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="form-group">

@@ -773,12 +773,24 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
                 $window.location.href = '#/compute/list';
 
             }).catch(function (result) {
-                if (!angular.isUndefined(result.data)) {
+
+            	 if(!angular.isUndefined(result) && result.data != null) {
+             		if(result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])){
+                        	 var msg = result.data.globalError[0];
+                        	 notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                     }
+                     angular.forEach(result.data.fieldErrors, function(errorMessage, key) {
+                    	 computeForm[key].$invalid = true;
+                     	computeForm[key].errorMessage = errorMessage;
+                     });
+             	}
+
+          /*      if (!angular.isUndefined(result.data)) {
                     angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
                         $scope.computeForm[key].$invalid = true;
                         $scope.computeForm[key].errorMessage = errorMessage;
                     });
-                }
+                }*/
             });
         }
     };
