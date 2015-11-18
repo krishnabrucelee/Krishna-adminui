@@ -275,7 +275,7 @@
                         </div>
                         <div class="form-group">
                         <div class="row" data-ng-show="compute.customized">
-                                <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.stoppage.cost.per.memory" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
+                                <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.running.cost.per.memory" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
                                 <div class="col-md-3  col-sm-3 col-xs-3">
                                     <input  type="text" valid-decimal name="instanceRunningCostMemory" data-ng-model="compute.computeCost[0].instanceRunningCostPerMB" class="form-control" >
                                     <span class="help-block m-b-none" ng-show="computeForm.instanceRunningCostMemory.$invalid && formSubmitted" ></span>
