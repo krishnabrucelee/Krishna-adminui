@@ -124,7 +124,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4  col-sm-12 col-xs-4">
+                <div class="col-md-4  col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'HYPERVISOR'">
                     <div class="form-group" >
                         <div class="row">
                             <label class="col-md-4 col-sm-4 control-label font-normal" ><fmt:message key="common.diskreadratebps" bundle="${msg}" />
@@ -138,7 +138,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4  col-sm-12 col-xs-4">
+                <div class="col-md-4  col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'HYPERVISOR'">
                     <div class="form-group" >
                         <div class="row">
                             <label class="col-md-4 col-sm-4 control-label font-normal" ><fmt:message key="common.diskwriteratebps" bundle="${msg}" />
@@ -151,7 +151,7 @@
                     </div>
 
                 </div>
-                <div class="col-md-4  col-sm-12 col-xs-4">
+                <div class="col-md-4  col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'HYPERVISOR'">
                     <div class="form-group">
                         <div class="row">
                             <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.diskreadrateiops" bundle="${msg}" /></label>
@@ -165,7 +165,7 @@
             </div>
             <div class="row">
 
-                <div class="col-md-4  col-sm-12 col-xs-4">
+                <div class="col-md-4  col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'HYPERVISOR'">
                     <div class="form-group">
                         <div class="row">
                             <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.diskwriterateiops" bundle="${msg}" /></label>
@@ -176,7 +176,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-12 col-xs-4" >
+                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'STORAGE'">
                     <div class="form-group">
                         <div class="row">
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.miniops" bundle="${msg}" /></label>
@@ -186,7 +186,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-12 col-xs-4" >
+                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'STORAGE'">
                     <div class="form-group">
                         <div class="row">
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.maxiops" bundle="${msg}" /></label>
@@ -274,7 +274,7 @@
                                 </div>
                                 <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.computeCost[0].instanceRunningCostMemory / 720 | number:4}}/hr</p></label>
                             </div>
-                            <div class="row" data-ng-show="!compute.customized">
+                            <div class="row" data-ng-show="!compute.customized && compute.qosType == 'STORAGE'">
                                 <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.running.cost.for.memory" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
                                 <div class="col-md-3  col-sm-3 col-xs-3">
                                     <input  type="text" valid-decimal name="instanceRunningCostMemory" data-ng-model="compute.computeCost[0].instanceRunningCostMemory" class="form-control" >
@@ -292,7 +292,7 @@
                                 </div>
                                 <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ (compute.computeCost[0].instanceRunningCostIops * compute.computeCost[0].instanceRunningCostPerIops) | number:4}}/hr</p></label>
                             </div>
-                            <div class="row" data-ng-show="!compute.customizedIops">
+                            <div class="row" data-ng-show="!compute.customizedIops  && compute.qosType == 'STORAGE'">
                                 <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.running.cost.for.iops" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
                                 <div class="col-md-3  col-sm-3 col-xs-3">
                                     <input  type="text" valid-decimal name="instanceRunningCostIops" data-ng-model="compute.computeCost[0].instanceRunningCostIops" class="form-control" >
@@ -323,7 +323,7 @@
                                 </div>
                                 <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.computeCost[0].instanceStoppageCostVcpu * compute.computeCost[0].instanceStoppageCostPerVcpu | number:4}}/hr</p></label>
                             </div>
-                            <div class="row" data-ng-show="!compute.customized">
+                            <div class="row" data-ng-show="!compute.customized && compute.qosType == 'STORAGE'">
                                 <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.stoppage.cost.for.vcpu.core" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
                                 <div class="col-md-3  col-sm-3 col-xs-3">
                                     <input  type="text" valid-decimal name="instanceStoppageCostVcpu" data-ng-model="compute.computeCost[0].instanceStoppageCostVcpu" class="form-control" >
@@ -352,7 +352,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                        <div class="row" data-ng-show="compute.customizedIops">
+                        <div class="row" data-ng-show="compute.customizedIops && compute.qosType == 'STORAGE'">
                                 <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.stoppage.cost.per.iops" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
                                 <div class="col-md-3  col-sm-3 col-xs-3">
                                     <input  type="text" valid-decimal name="instanceStoppageCostIops" data-ng-model="compute.computeCost[0].instanceStoppageCostPerIops" class="form-control" >
@@ -360,7 +360,7 @@
                                 </div>
                                 <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.computeCost[0].instanceStoppageCostIops * compute.computeCost[0].instanceStoppageCostPerIops | number:4}}/hr</p></label>
                             </div>
-                            <div class="row" data-ng-show="!compute.customizedIops">
+                            <div class="row" data-ng-show="!compute.customizedIops && compute.qosType == 'STORAGE'">
                                 <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.stoppage.cost.for.iops" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
                                 <div class="col-md-3  col-sm-3 col-xs-3">
                                     <input  type="text" valid-decimal name="instanceStoppageCostIops" data-ng-model="compute.computeCost[0].instanceStoppageCostIops" class="form-control" >

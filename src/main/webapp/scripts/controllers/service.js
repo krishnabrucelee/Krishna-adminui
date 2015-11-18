@@ -761,7 +761,7 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
             	compute.zoneId = compute.zone.id;
             }
             compute.customized = (compute.customized == null) ? false : true;
-            compute.customizedIops = (compute.customizedIops === null) ? true : false;
+            compute.customizedIops = (compute.customizedIops == null) ? false : true;
             console.log(compute);
             var hasComputes = crudService.add("computes", compute);
             hasComputes.then(function (result) {  // this is only run after
