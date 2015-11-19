@@ -11,10 +11,11 @@
                 <div class="panel-heading">
                     <div class="row">
 
-                        <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12"  data-ng-hide="stateid">
                             <span class="pull-left">
                                 <a class="btn btn-info" href="#/configuration/chargeback"  title="<fmt:message key="common.back" bundle="${msg}" />" ><span class="fa fa-arrow-circle-left fa-lg "></span> <fmt:message key="common.back" bundle="${msg}" /></a>
                             </span>
+
                         </div>
 
                     </div>
@@ -22,7 +23,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="col-md-12 col-sm-12 m-b-md border-bottom">
-                        <div class="col-md-4 col-sm-4">
+                        <div class="col-md-4 col-sm-4" data-ng-if="type == 'client-quota' || !type">
                             <div class="form-group" ng-class="{
                                             'text-danger'
                                             : configForm.domain.$invalid && formSubmitted}">
@@ -30,8 +31,10 @@
                                     <label class="col-md-3 col-sm-3 control-label"><fmt:message key="common.domain" bundle="${msg}" />:
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <div class="col-md-5 col-sm-6">
-                                        <select required="true" class="form-control input-group" name="domain"  data-ng-model="config.domain" ng-options="domain.name for domain in formElements.domainList" data-ng-class="{'error': configForm.domain.$invalid && formSubmitted}" >
+                                     <div class="col-md-5 col-sm-6" >
+                                    </div>
+                                    <div class="col-md-5 col-sm-6" >
+                                        <select required="true"  class="form-control input-group" name="domain"  data-ng-model="domain.name" ng-options="domain.name for domain in domainList" data-ng-class="{'error': configForm.domain.$invalid && formSubmitted}" >
                                             <option value="">Select</option>
                                         </select>
                                         <div class="error-area" data-ng-show="configForm.domain.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="domain.is.required" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
@@ -39,7 +42,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-4">
+                        <div class="col-md-4 col-sm-4" data-ng-if="type == 'department-quota'|| !type">
                             <div class="form-group">
                                 <div class="row">
                                     <label class="col-md-3 col-sm-4 control-label"><fmt:message key="common.department" bundle="${msg}" />:
@@ -52,7 +55,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-4">
+                        <div class="col-md-4 col-sm-4" data-ng-if="type == 'project-quota'|| !type">
                             <div class="form-group">
                                 <div class="row">
                                     <label class="col-md-2 col-sm-3 control-label"><fmt:message key="common.project" bundle="${msg}" />:

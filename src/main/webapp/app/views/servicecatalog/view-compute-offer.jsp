@@ -50,7 +50,7 @@
                         <div class="row">
                             <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="compute.hosttag" bundle="${msg}" /></label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input type="text" name="hosttag" data-ng-model="compute.hostTags" class="form-control" readonly >
+                                <input  type="text" name="hosttag" data-ng-model="compute.hostTags" class="form-control" readonly >
                             </div>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                         <div class="row">
                             <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="compute.storagetag" bundle="${msg}" /></label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input type="text" name="storagetag" data-ng-model="compute.storageTags" class="form-control" readonly>
+                                <input   type="text" name="storagetag" data-ng-model="compute.storageTags" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
@@ -116,21 +116,21 @@
                         <div class="row" >
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal" ><fmt:message key="compute.diskio" bundle="${msg}" /></label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <select  class="form-control input-group" name="diskio" data-ng-model="compute.diskIo" ng-options="diskio for (id, diskio) in formElements.diskioList" >
-                                </select>
+
+                               <input type="text"  name="diskio" data-ng-model="compute.diskIo" class="form-control" readonly>
 
                             </div>
 
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4  col-sm-12 col-xs-4">
+                <div class="col-md-4  col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'HYPERVISOR'">
                     <div class="form-group" >
                         <div class="row">
                             <label class="col-md-4 col-sm-4 control-label font-normal" ><fmt:message key="common.diskreadratebps" bundle="${msg}" />
                             </label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input type="text" valid-number name="diskreadrate" data-ng-model="compute.diskBytesReadRate" class="form-control" >
+                                <input type="text" valid-number name="diskreadrate" data-ng-model="compute.diskBytesReadRate" class="form-control" readonly>
 
                             </div>
 
@@ -138,25 +138,25 @@
                     </div>
                 </div>
 
-                <div class="col-md-4  col-sm-12 col-xs-4">
+                <div class="col-md-4  col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'HYPERVISOR'">
                     <div class="form-group" >
                         <div class="row">
                             <label class="col-md-4 col-sm-4 control-label font-normal" ><fmt:message key="common.diskwriteratebps" bundle="${msg}" />
                             </label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input type="text" valid-number name="diskwriterate" data-ng-model="compute.diskBytesWriteRate" class="form-control" >
+                                <input type="text" valid-number name="diskwriterate" data-ng-model="compute.diskBytesWriteRate" class="form-control" readonly >
 
                             </div>
                         </div>
                     </div>
 
                 </div>
-                <div class="col-md-4  col-sm-12 col-xs-4">
+                <div class="col-md-4  col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'HYPERVISOR'">
                     <div class="form-group">
                         <div class="row">
                             <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.diskreadrateiops" bundle="${msg}" /></label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input  type="text" valid-number  name="diskreadrateiops" data-ng-model="compute.diskIopsReadRate" class="form-control" >
+                                <input  type="text" valid-number  name="diskreadrateiops" data-ng-model="compute.diskIopsReadRate" class="form-control" readonly >
 
                             </div>
                         </div>
@@ -165,33 +165,33 @@
             </div>
             <div class="row">
 
-                <div class="col-md-4  col-sm-12 col-xs-4">
+                <div class="col-md-4  col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'HYPERVISOR'">
                     <div class="form-group">
                         <div class="row">
                             <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.diskwriterateiops" bundle="${msg}" /></label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input  type="text" valid-number name="diskwriterateiops" data-ng-model="compute.diskIopsWriteRate" class="form-control" >
+                                <input  type="text" valid-number name="diskwriterateiops" data-ng-model="compute.diskIopsWriteRate" class="form-control" readonly>
 
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-12 col-xs-4" >
+                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'STORAGE'">
                     <div class="form-group">
                         <div class="row">
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.miniops" bundle="${msg}" /></label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input  type="text" name="diskreadrateiops" valid-number  data-ng-model="compute.minIops" class="form-control" >
+                                <input  type="text" name="diskreadrateiops" valid-number  data-ng-model="compute.minIops" class="form-control" readonly >
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-12 col-xs-4" >
+                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'STORAGE'">
                     <div class="form-group">
                         <div class="row">
                             <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.maxiops" bundle="${msg}" /></label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input  type="text" name="diskwriterateiops" valid-number  data-ng-model="compute.maxIops" class="form-control" >
+                                <input  type="text" name="diskwriterateiops" valid-number  data-ng-model="compute.maxIops" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
@@ -240,11 +240,11 @@
                     <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
                         <div class="form-group">
                             <div class="row">
-                                <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="common.zonename" bundle="${msg}" /></label>
-                                <div class="col-md-4  col-sm-4 col-xs-4">
+                                <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="common.zonename" bundle="${msg}" /></label><b>{{formElements.zoneList[0].name}}</b>
+                               <!--  <div class="col-md-4  col-sm-4 col-xs-4">
                                     <select data-ng-init="compute.computeCost[0].zone = formElements.zoneList[0]" class="form-control input-group" name="zone" data-ng-model="compute.computeCost[0].zone" ng-options="zone.name for zone in formElements.zoneList" >
                                     </select>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="form-group">
@@ -274,7 +274,7 @@
                                 </div>
                                 <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.computeCost[0].instanceRunningCostMemory / 720 | number:4}}/hr</p></label>
                             </div>
-                            <div class="row" data-ng-show="!compute.customized">
+                            <div class="row" data-ng-show="!compute.customized && compute.qosType == 'STORAGE'">
                                 <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.running.cost.for.memory" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
                                 <div class="col-md-3  col-sm-3 col-xs-3">
                                     <input  type="text" valid-decimal name="instanceRunningCostMemory" data-ng-model="compute.computeCost[0].instanceRunningCostMemory" class="form-control" >
@@ -292,7 +292,7 @@
                                 </div>
                                 <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ (compute.computeCost[0].instanceRunningCostIops * compute.computeCost[0].instanceRunningCostPerIops) | number:4}}/hr</p></label>
                             </div>
-                            <div class="row" data-ng-show="!compute.customizedIops">
+                            <div class="row" data-ng-show="!compute.customizedIops  && compute.qosType == 'STORAGE'">
                                 <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.running.cost.for.iops" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
                                 <div class="col-md-3  col-sm-3 col-xs-3">
                                     <input  type="text" valid-decimal name="instanceRunningCostIops" data-ng-model="compute.computeCost[0].instanceRunningCostIops" class="form-control" >
@@ -323,7 +323,7 @@
                                 </div>
                                 <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.computeCost[0].instanceStoppageCostVcpu * compute.computeCost[0].instanceStoppageCostPerVcpu | number:4}}/hr</p></label>
                             </div>
-                            <div class="row" data-ng-show="!compute.customized">
+                            <div class="row" data-ng-show="!compute.customized && compute.qosType == 'STORAGE'">
                                 <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.stoppage.cost.for.vcpu.core" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
                                 <div class="col-md-3  col-sm-3 col-xs-3">
                                     <input  type="text" valid-decimal name="instanceStoppageCostVcpu" data-ng-model="compute.computeCost[0].instanceStoppageCostVcpu" class="form-control" >
@@ -352,7 +352,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                        <div class="row" data-ng-show="compute.customizedIops">
+                        <div class="row" data-ng-show="compute.customizedIops && compute.qosType == 'STORAGE'">
                                 <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.stoppage.cost.per.iops" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
                                 <div class="col-md-3  col-sm-3 col-xs-3">
                                     <input  type="text" valid-decimal name="instanceStoppageCostIops" data-ng-model="compute.computeCost[0].instanceStoppageCostPerIops" class="form-control" >
@@ -360,7 +360,7 @@
                                 </div>
                                 <label class="col-md-2 col-sm-2  no-padding m-t-sm"> <p class="text-danger"> {{ compute.computeCost[0].instanceStoppageCostIops * compute.computeCost[0].instanceStoppageCostPerIops | number:4}}/hr</p></label>
                             </div>
-                            <div class="row" data-ng-show="!compute.customizedIops">
+                            <div class="row" data-ng-show="!compute.customizedIops && compute.qosType == 'STORAGE'">
                                 <label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message key="instance.stoppage.cost.for.iops" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)</label>
                                 <div class="col-md-3  col-sm-3 col-xs-3">
                                     <input  type="text" valid-decimal name="instanceStoppageCostIops" data-ng-model="compute.computeCost[0].instanceStoppageCostIops" class="form-control" >
