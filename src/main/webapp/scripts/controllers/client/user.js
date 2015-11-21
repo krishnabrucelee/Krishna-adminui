@@ -22,7 +22,6 @@ function userListCtrl($scope, crudService) {
         });
     };
     $scope.list(1);
-
     $scope.active = {};
 	$scope.inActive = {};
 

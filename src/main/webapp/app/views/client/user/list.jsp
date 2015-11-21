@@ -79,7 +79,7 @@
                                 </table>
                             </div>
                         </div>
-                        <pagination-content></pagination-content>
+                    <pagination-content></pagination-content>
                     </div>
                 </div>
 
