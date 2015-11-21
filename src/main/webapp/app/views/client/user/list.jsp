@@ -59,7 +59,12 @@
                                         	<th><fmt:message key="common.status" bundle="${msg}" /></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody data-ng-hide="accountList.length > 0">
+                               			<tr>
+                                  			<td class="col-md-6 col-sm-6" colspan="6"><fmt:message key="common.no.records.found" bundle="${msg}" />!!</td>
+                               			</tr>
+                           			</tbody>
+                                    <tbody data-ng-show="accountList.length > 0">
                                         <tr data-ng-repeat="account in accountList| filter: userSearch">
                                         	<td>{{ account.userName}}</td>
                                             <td>{{ account.firstName}}</td>
@@ -74,7 +79,7 @@
                                 </table>
                             </div>
                         </div>
-                        <pagination-content></pagination-content>
+                    <pagination-content></pagination-content>
                     </div>
                 </div>
 
