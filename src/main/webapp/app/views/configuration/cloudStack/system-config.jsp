@@ -88,8 +88,10 @@
 						<div class="form-group">
 							<div class="row">
 								<span class="pull-right">
-									<button class="btn btn-info" type="submit"
+								<get-loader-image data-ng-show="showLoader"></get-loader-image>
+									<button class="btn btn-info" type="submit"  data-ng-hide="showLoader"
 										ng-disabled="form.configForm.$invalid">
+
 										<fmt:message key="common.save" bundle="${msg}" />
 									</button>
 								</span>

@@ -23,6 +23,7 @@ angular
         .directive('appCurrencyLabel', appCurrencyLabel)
         .directive('appClock', appClock)
         .directive('paginationContent', paginationContent)
+        .directive('getLoaderImage', getLoaderImage)
 
 /**
  * pageTitle - Directive for set Page title - mata title
@@ -463,4 +464,14 @@ function paginationContent() {
         },
         templateUrl: "app/views/common/pagination-content.jsp",
     };
+}
+
+function getLoaderImage() {
+	return {
+		restrict: 'E',
+        link: function (scope, element, attrs) {
+
+        },
+        templateUrl: "app/views/common/loader-image.jsp",
+	}
 }
