@@ -18,7 +18,6 @@ function userListCtrl($scope, crudService) {
             $scope.paginationObject.limit  = limit;
             $scope.paginationObject.currentPage = pageNumber;
             $scope.paginationObject.totalItems = result.totalItems;
-            $scope.totalUser = result.totalItems;
         });
     };
     $scope.list(1);
@@ -29,7 +28,7 @@ function userListCtrl($scope, crudService) {
     $scope.list = function () {
     	var active = 0;
     	var inActive = 0;
-        var hasUsers = crudService.listAll("users/list");
+        var hasUsers = crudService.listAll("users/listbydomain");
         hasUsers.then(function (result) {  // this is only run after $http completes0
         	angular.forEach(result, function(value, key) {
             	if (value.isActive)
@@ -45,6 +44,9 @@ function userListCtrl($scope, crudService) {
         		$scope.inActive = 0;
         	else
         		$scope.inActive = inActive;
+
+        	$scope.totalUser = $scope.active + $scope.inActive;
+
         });
     };
     $scope.list();
