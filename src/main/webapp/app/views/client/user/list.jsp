@@ -12,21 +12,21 @@
                     <div class="col-md-12 col-sm-12 col-xs-12 ">
                         <div class="pull-left">
                             <div class="dashboard-box pull-left">
-                                <span class="pull-right">Total Users</span>
+                                <span class="pull-right"><fmt:message key="total.users" bundle="${msg}" /></span>
                                 <div class="clearfix"></div>
                                 <span class="pull-left m-t-xs"><img src="images/user-icon.png"></span>
                                 <b class="pull-right">{{totalUser}}</b>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="dashboard-box pull-left">
-                                <span class="pull-right">Active Users</span>
+                                <span class="pull-right"><fmt:message key="active.users" bundle="${msg}" /></span>
                                 <div class="clearfix"></div>
                                 <span class="pull-left m-t-xs"><img src="images/user-icon.png"></span>
                                 <b class="pull-right">{{active}}</b>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="dashboard-box pull-left">
-                                <span class="pull-right">Inactive Users</span>
+                                <span class="pull-right"><fmt:message key="inactive.users" bundle="${msg}" /></span>
                                 <div class="clearfix"></div>
                                 <span class="pull-left m-t-xs"><img src="images/user-icon.png"></span>
                                 <b class="pull-right">{{inActive}}</b>
@@ -36,7 +36,7 @@
                         <div class="pull-right">
                             <div class="quick-search pull-right m-t-xl">
                                 <div class="input-group">
-                                    <input data-ng-model="userSearch" type="text" class="form-control input-medium" placeholder="Quick Search" aria-describedby="quicksearch-go">
+                                    <input data-ng-model="userSearch" type="text" class="form-control input-medium" placeholder="<fmt:message key="common.quick.search" bundle="${msg}" />" aria-describedby="quicksearch-go">
                                     <span class="input-group-addon" id="quicksearch-go"><span class="pe-7s-search pe-lg font-bold"></span></span>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr data-ng-repeat="account in accountList| filter: quickSearch">
+                                        <tr data-ng-repeat="account in accountList| filter: userSearch">
                                         	<td>{{ account.userName}}</td>
                                             <td>{{ account.firstName}}</td>
                                             <td>{{ account.type}}</td>
