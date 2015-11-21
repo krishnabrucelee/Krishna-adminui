@@ -58,9 +58,18 @@ function cloudStackCtrl($scope, $state,crudService, $stateParams, modalService, 
 
 function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $stateParams, promiseAjax, notify, localStorageService, modalService) {
 
-	  $scope.paginationObject = {};
-	    $scope.global = crudService.globalConfig;
-		$scope.domainList = {};
+	$scope.adminUserList = {};
+    $scope.paginationObject = {};
+    $scope.configForm = {};
+    $scope.domainList = {};
+    $scope.global = crudService.globalConfig;
+
+    // Admin User List
+    var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+    var hasUsers = promiseAjax.httpTokenRequest( crudService.globalConfig.HTTP_GET, crudService.globalConfig.APP_URL + "users/listbydomainandrole");
+    hasUsers.then(function (result) {  // this is only run after $http completes0
+    	$scope.adminUserList = result;
+    });
 
 	    // Compute Offer List
 	    $scope.list = function (pageNumber) {
