@@ -33,6 +33,10 @@ function crudService($window, localStorageService, globalConfig, $stateParams, p
         return promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + moduleName +"?filter="+data);
     };
 
+    object.softDelete = function(moduleName, object) {
+        return promiseAjax.httpTokenRequest( globalConfig.HTTP_DELETE , globalConfig.APP_URL + moduleName  +"/delete/"+object.id+"?lang=" + localStorageService.cookie.get('language'), '', object);
+    };
+
     return object;
 };
 
