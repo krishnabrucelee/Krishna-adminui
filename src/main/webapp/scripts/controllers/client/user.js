@@ -38,8 +38,14 @@ function userListCtrl($scope, crudService) {
             	else
             		inActive++;
             });
-        	$scope.active = active;
-        	$scope.inActive = inActive;
+        	if (active == 0)
+        		$scope.active = 0;
+        	else
+        		$scope.active = active;
+        	if (inActive == 0)
+        		$scope.inActive = 0;
+        	else
+        		$scope.inActive = inActive;
         });
     };
     $scope.list();
