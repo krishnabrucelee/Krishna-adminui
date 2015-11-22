@@ -62,7 +62,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $s
 	    $scope.global = crudService.globalConfig;
 		$scope.domainList = {};
 
-	    // Compute Offer List
+	    // Domain List
 	    $scope.list = function (pageNumber) {
 	        var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
 	        var hasDomains = crudService.list("domains", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
@@ -85,6 +85,9 @@ console.log($scope.type);
 
 	    };
 	    $scope.list(1);
+
+
+
 
 
 /*		angular.forEach($scope.domainList, function(obj, key) {
