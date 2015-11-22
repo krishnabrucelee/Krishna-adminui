@@ -12,31 +12,31 @@
                     <div class="col-md-12 col-sm-12 col-xs-12 ">
                         <div class="pull-left">
                             <div class="dashboard-box pull-left">
-                                <span class="pull-right">Total Users</span>
+                                <span class="pull-right"><fmt:message key="total.users" bundle="${msg}" /></span>
                                 <div class="clearfix"></div>
                                 <span class="pull-left m-t-xs"><img src="images/user-icon.png"></span>
-                                <b class="pull-right">13</b>
+                                <b class="pull-right">{{totalUser}}</b>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="dashboard-box pull-left">
-                                <span class="pull-right">Enabled Users</span>
+                                <span class="pull-right"><fmt:message key="active.users" bundle="${msg}" /></span>
                                 <div class="clearfix"></div>
                                 <span class="pull-left m-t-xs"><img src="images/user-icon.png"></span>
-                                <b class="pull-right">04</b>
+                                <b class="pull-right">{{active}}</b>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="dashboard-box pull-left">
-                                <span class="pull-right">Disabled Users</span>
+                                <span class="pull-right"><fmt:message key="inactive.users" bundle="${msg}" /></span>
                                 <div class="clearfix"></div>
                                 <span class="pull-left m-t-xs"><img src="images/user-icon.png"></span>
-                                <b class="pull-right">09</b>
+                                <b class="pull-right">{{inActive}}</b>
                                 <div class="clearfix"></div>
                             </div>
                         </div>
                         <div class="pull-right">
                             <div class="quick-search pull-right m-t-xl">
                                 <div class="input-group">
-                                    <input data-ng-model="userSearch" type="text" class="form-control input-medium" placeholder="Quick Search" aria-describedby="quicksearch-go">
+                                    <input data-ng-model="userSearch" type="text" class="form-control input-medium" placeholder="<fmt:message key="common.quick.search" bundle="${msg}" />" aria-describedby="quicksearch-go">
                                     <span class="input-group-addon" id="quicksearch-go"><span class="pe-7s-search pe-lg font-bold"></span></span>
                                 </div>
                             </div>
@@ -46,35 +46,40 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12 ">
-
+                    <pagination-content></pagination-content>
                         <div class="white-content">
                             <div class="table-responsive">
                                 <table cellspacing="1" cellpadding="1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Username</th>
-                                            <th>Reference Id</th>
-                                            <th>Domain</th>
-                                            <th>Email</th>
-                                            <th>Status</th>
+                                        	<th><fmt:message key="user.name" bundle="${msg}" /></th>
+                                        	<th><fmt:message key="first.name" bundle="${msg}" /></th>
+                                        	<th><fmt:message key="user.type" bundle="${msg}" /></th>
+                                        	<th><fmt:message key="common.email" bundle="${msg}" /></th>
+                                        	<th><fmt:message key="common.status" bundle="${msg}" /></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr data-ng-repeat="user in userList| filter: userSearch">
-                                            <td>{{ user.userName}}</td>
-                                            <td>{{ user.uuid}}</td>
-                                            <td>{{ user.domainName}} </td>
-                                            <td>{{ user.email}} </td>
+                                    <tbody data-ng-hide="accountList.length > 0">
+                               			<tr>
+                                  			<td class="col-md-6 col-sm-6" colspan="6"><fmt:message key="common.no.records.found" bundle="${msg}" />!!</td>
+                               			</tr>
+                           			</tbody>
+                                    <tbody data-ng-show="accountList.length > 0">
+                                        <tr data-ng-repeat="account in accountList| filter: userSearch">
+                                        	<td>{{ account.userName}}</td>
+                                            <td>{{ account.firstName}}</td>
+                                            <td>{{ account.type}}</td>
+                                            <td>{{ account.email}} </td>
                                             <td>
-                                                <label class="icon-button btn btn-success btn-sm" data-ng-show="user.enabled" title="Enabled"  >Enabled</label>
-                                                <label class="icon-button btn btn-danger btn-sm" data-ng-hide="user.enabled" title="Disabled"  >Disabled</label>
-
+                                            	<label class="badge badge-success p-xs" data-ng-if="account.isActive == true"> Active </label>
+                                                <label class="badge badge-danger p-xs" data-ng-if="account.isActive == false"> Inactive </label>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+                    <pagination-content></pagination-content>
                     </div>
                 </div>
 

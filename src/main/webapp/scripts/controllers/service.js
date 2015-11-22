@@ -796,11 +796,11 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
     };
 
     // Delete the Compute Offer
-    $scope.delete = function (size, computeId) {
+    $scope.delete = function (size, compute) {
         dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
-                $scope.deleteId = computeId;
+                $scope.deleteId = compute.id;
                 $scope.ok = function (computeId) {
-                    var hasComputes = crudService.delete("computes", computeId);
+                    var hasComputes = crudService.softDelete("computes", compute);
                     hasComputes.then(function (result) {
                         $scope.list(1);
                         $scope.homerTemplate = 'app/views/notification/notify.jsp';

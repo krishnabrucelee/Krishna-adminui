@@ -92,7 +92,7 @@
                                         <span class="fa fa-ban m-r" ></span>
                                     </a>
 
-                                    <a class="icon-button" title="Delete"  data-ng-click="delete('sm', compute.id)"  ><span class="fa fa-trash"></span></a>
+                                    <a class="icon-button" title="Delete"  data-ng-click="delete('sm', compute)"  ><span class="fa fa-trash"></span></a>
 
                                 </td>
                             </tr>

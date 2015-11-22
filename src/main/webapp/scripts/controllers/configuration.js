@@ -24,11 +24,11 @@ function cloudStackCtrl($scope, $state,crudService, $stateParams, modalService, 
         $scope.formSubmitted = true;
         if (form.$valid) {
             var config = $scope.config;
-            console.log($scope.config);
+            $scope.showLoader = true;
             var hasConfig = crudService.add("cloudconfiguration", config);
             hasConfig.then(function (result) {  // this is only run after $http
-												// completes
-                notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
+            	$scope.showLoader = false;
+            	notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
             }).catch(function (result) {
                 angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
                     $scope.computeForm[key].$invalid = true;
