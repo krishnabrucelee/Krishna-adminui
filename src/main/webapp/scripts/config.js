@@ -33,9 +33,6 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 }
             })
 
-
-
-
             // Common views
             .state('common', {
                 abstract: true,
@@ -154,7 +151,6 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             }
         })
 
-
         .state('configuration.home.system', {
             url: "/dashboard/cloudConfig",
             templateUrl: VIEW_URL +  "views/configuration/cloudStack/system-config.jsp",
@@ -207,7 +203,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             url: "/adminUser",
             templateUrl: VIEW_URL +  "views/configuration/general/admin-user.jsp",
             data: {
-                pageTitle: 'Admin User'
+                pageTitle: 'admin.user'
             }
         })
 
@@ -215,7 +211,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             url: "/addAdmin",
             templateUrl: VIEW_URL +  "views/configuration/general/add.jsp",
             data: {
-                pageTitle: 'Add Admin User'
+                pageTitle: 'add.admin.user'
             }
         })
 

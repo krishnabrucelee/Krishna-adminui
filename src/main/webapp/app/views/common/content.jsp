@@ -75,6 +75,22 @@
 										bundle="${msg}" />
 						</span>
 						</span>
+						<span ng-if="state.data.pageTitle === 'admin.user'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="admin.user" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="admin.user"
+										bundle="${msg}" />
+						</span>
+						</span>
+						<span ng-if="state.data.pageTitle === 'add.admin.user'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="add.admin.user" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="add.admin.user"
+										bundle="${msg}" />
+						</span>
+						</span>
 						<span ng-if="state.data.pageTitle === 'Chargeback'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
