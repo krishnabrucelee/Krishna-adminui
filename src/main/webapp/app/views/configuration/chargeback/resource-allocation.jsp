@@ -232,6 +232,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                         <div class="form-group" ng-class="{
                                             'text-danger'
