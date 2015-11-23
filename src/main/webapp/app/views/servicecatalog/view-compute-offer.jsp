@@ -16,8 +16,10 @@
                             <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.name" bundle="${msg}" /><span class="text-danger">*</span></label>
                             <div class="col-md-7  col-sm-7 col-xs-7">
                                 <input required="true" type="text" name="name" data-ng-model="compute.name" class="form-control" data-ng-class="{'error': computeForm.name.$invalid && formSubmitted}">
-                                <div class="error-area" data-ng-show="computeForm.name.$invalid && formSubmitted" ><i  tooltip="Compute Offer Name is Required" class="fa fa-warning error-icon"></i></div>
-                            </div>
+                               <div class="error-area" data-ng-show="computeForm.name.$invalid && formSubmitted">
+									<i ng-attr-tooltip="{{ computeForm.name.errorMessage || '<fmt:message key="compute.offer.required" bundle="${msg}" />' }}"	class="fa fa-warning error-icon"></i>
+								</div>
+							 </div>
                         </div>
                     </div>
                 </div>

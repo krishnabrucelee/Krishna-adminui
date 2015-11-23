@@ -28,12 +28,10 @@
                                             'text-danger'
                                             : resourceAllocationForm.domain.$invalid && formSubmitted}">
                                 <div class="row">
-                                    <label class="col-md-3 col-sm-3 control-label"><fmt:message key="common.domain" bundle="${msg}" />:
+                                    <label class="col-md-4 col-sm-12 control-label"><fmt:message key="common.domain" bundle="${msg}" />:
                                         <span class="text-danger">*</span>
                                     </label>
-                                     <div class="col-md-5 col-sm-6" >
-                                    </div>
-                                    <div class="col-md-5 col-sm-6" >
+                                    <div class="col-md-8 col-sm-12" >
                                         <select required="true" data-ng-change="getDepartmentsByDomain()"  class="form-control input-group" name="domain"
                                         data-ng-model="resourceQuota.domain" ng-options="domain.name for domain in domainList"
                                         data-ng-class="{'error': resourceAllocationForm.domain.$invalid && formSubmitted}" >
@@ -48,9 +46,9 @@
                         <div class="col-md-4 col-sm-4" data-ng-if="type == 'department-quota'|| !type">
                             <div class="form-group">
                                 <div class="row">
-                                    <label class="col-md-3 col-sm-4 control-label"><fmt:message key="common.department" bundle="${msg}" />:
+                                    <label class="col-md-4 col-sm-12 control-label"><fmt:message key="common.department" bundle="${msg}" />:
                                     </label>
-                                    <div class="col-md-5 col-sm-6">
+                                    <div class="col-md-8 col-sm-12">
                                         <select  class="form-control input-group" data-ng-disabled="isDisabledDepartment"  name="department" data-ng-change="getProjectsByDepartment()" data-ng-model="resourceQuota.department" ng-options="department.userName for department in departmentList" >
                                             <option value="">Select</option>
                                         </select>
@@ -61,9 +59,9 @@
                         <div class="col-md-4 col-sm-4" data-ng-if="type == 'project-quota'|| !type">
                             <div class="form-group">
                                 <div class="row">
-                                    <label class="col-md-2 col-sm-3 control-label"><fmt:message key="common.project" bundle="${msg}" />:
+                                    <label class="col-md-4 col-sm-12 control-label"><fmt:message key="common.project" bundle="${msg}" />:
                                     </label>
-                                    <div class="col-md-5 col-sm-6">
+                                    <div class="col-md-8 col-sm-12">
                                         <select  class="form-control input-group" data-ng-disabled="isDisabledProject" name="project" data-ng-change="getProjectResourceLimits()" data-ng-model="resourceQuota.project" ng-options="project.name for project in projectList" >
                                             <option value="">Select</option>
                                         </select>
