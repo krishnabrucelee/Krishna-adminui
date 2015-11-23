@@ -74,7 +74,7 @@
 										<td>{{ project.projectOwner.userName }}</td>
 										<td>{{ project.domain.name}}</td>
 										<td>{{ project.description}}</td>
-										<td>{{ project.department.name}}</td>
+										<td>{{ project.department.userName}}</td>
 										<!-- <td>{{ project.totalPaid}}</td> -->
 										<td><label class="icon-button btn btn-success  btn-sm"
 											title="{{ project.status}}">{{
