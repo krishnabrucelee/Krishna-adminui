@@ -226,6 +226,9 @@
                                 <div class="col-md-6 col-sm-6">
                                     <label class="control-normal"> <input  icheck type="checkbox"  ng-model="template.onetimecharge">  <fmt:message key="template.onetimechargeable" bundle="${msg}" /></label>
                                 </div>
+                                <div class="col-md-6  col-sm-6 col-lg-6">
+                                    <label> <input icheck type="checkbox" ng-model="template.share"> <fmt:message key="template.share" bundle="${msg}" /> </label>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group"  data-ng-class="{'text-danger': TemplateForm.summernoteTextTwo.$invalid && formSubmitted}">

@@ -262,7 +262,9 @@
                                 <div class="col-md-6 col-sm-6">
                                     <label class="control-normal"> <input  icheck type="checkbox"  ng-model="template.oneTimeChargeable">  <span class="m-l-sm"><fmt:message key="template.onetimechargeable" bundle="${msg}" /></span></label>
                                 </div>
-
+								 <div class="col-md-6  col-sm-6 col-lg-6">
+                                    <label> <input icheck type="checkbox" ng-model="template.share"> <span class="m-l-sm"><fmt:message key="template.share" bundle="${msg}" /></span> </label>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group" data-ng-class="{'text-danger': TemplateForm.summernoteTextTwo.$invalid && formSubmitted}">
