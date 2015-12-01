@@ -52,9 +52,10 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
     // Save Resource limits based on the quota type.
 	$scope.save = function(form) {
 		//if(form.$valid) {
-		if(!angular.isUndefined($scope.resourceQuota.project)) {
+		console.log($scope.resourceQuota);
+		if(!angular.isUndefined($scope.resourceQuota.project) && $scope.resourceQuota.project != "" && $scope.resourceQuota.project != null) {
 			$scope.saveProjectQuota(form);
-		} else if(!angular.isUndefined($scope.resourceQuota.department)) {
+		} else if(!angular.isUndefined($scope.resourceQuota.department) && $scope.resourceQuota.department != "" && $scope.resourceQuota.department != null) {
 			$scope.saveDepartmentQuota(form);
 		} else {
 			$scope.saveDomainQuota(form);
@@ -190,6 +191,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 
 	// Get the departments by domain.
 	$scope.getDepartmentsByDomain = function() {
+		$scope.resourceQuota.department = "";
 		if(angular.isUndefined($scope.resourceQuota.domain)) {
 			$scope.resourceQuota.domain = {id:0};
 		}
@@ -232,7 +234,8 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 
 	// Get the projects by department.
 	$scope.getProjectsByDepartment = function() {
-		if(angular.isUndefined($scope.resourceQuota.department)) {
+		$scope.resourceQuota.project="";
+		if(angular.isUndefined($scope.resourceQuota.department) || $scope.resourceQuota.department == null) {
 			$scope.resourceQuota.department = {id:0};
 		}
 		var hasResource = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceDepartments/department/"+$scope.resourceQuota.department.id);
@@ -265,7 +268,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 	};
 
 	$scope.getProjectResourceLimits = function() {
-		if(angular.isUndefined($scope.resourceQuota.project)) {
+		if(angular.isUndefined($scope.resourceQuota.project) || $scope.resourceQuota.project == null) {
 			$scope.resourceQuota.project = {id:0};
 		}
 		var hasResource = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceProjects/project/"+$scope.resourceQuota.project.id);
