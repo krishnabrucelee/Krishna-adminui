@@ -20,13 +20,10 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-
                          <div class="col-md-12 col-sm-12 col-xs-12 m-b-sm">
-
-
-                        <div class="pull-right">
-                            <div class="quick-search ">
-                                <div class="input-group">
+                         	<div class="pull-right">
+                           	 <div class="quick-search ">
+                             	<div class="input-group">
                                     <input data-ng-model="adminUserSearch" type="text" class="form-control input-medium" placeholder="<fmt:message key="common.quick.search" bundle="${msg}" />" aria-describedby="quicksearch-go">
                                     <span class="input-group-addon" id="quicksearch-go"><span class="pe-7s-search pe-lg font-bold"></span></span>
                                 </div>
@@ -34,10 +31,10 @@
                             <div class="clearfix"></div>
                             <span class="pull-right m-l-sm m-t-sm">
                                 <a class="btn btn-info" ui-sref="configuration.home.add-admin-user"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message key="common.add" bundle="${msg}" /></a>
-
                             </span>
+                        	</div>
                         </div>
-                    </div></div>
+                    </div>
                     <div class="row">
                     	<div class="col-md-12 col-sm-12">
                         	<table cellspacing="1" cellpadding="1" class="table table-bordered table-striped">
@@ -48,8 +45,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>admin</td>
+                            <tr data-ng-repeat=" adminUser in adminUserList | filter: adminUserSearch">
+                                <td>{{adminUser.userName}}</td>
                                 <td>
                                     <span>
                                     	<a class="btn btn-info" data-ng-click="openResetContainer()"> Reset Password</a>
