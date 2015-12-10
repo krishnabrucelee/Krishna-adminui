@@ -138,6 +138,13 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
                         $scope.list(1);
                         $scope.homerTemplate = 'app/views/notification/notify.jsp';
                         notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+                    }).catch(function (result) {
+                        if (!angular.isUndefined(result.data)) {
+                        	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                          	    var msg = result.data.globalError[0];
+                        	    notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                            }
+                        }
                     });
                     $modalInstance.close();
                 },

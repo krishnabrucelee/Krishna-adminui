@@ -7,7 +7,9 @@
 <div class="row">
     <div class="col-md-8 font-bold">
         <span class="ver-align-mid"><i class="{{ pageIcon }} pe-lg" data-ng-hide="pageCustomIcon" title="{{ pageTitle }}"></i>
-            <img src="{{pageCustomIcon}}" style="width:22px; height:22px;" data-ng-show="pageCustomIcon"  alt="{{pageTitle}}">
+        	<span data-ng-if="pageCustomIcon">
+            <img data-ng-src="pageCustomIcon" style="width:22px; height:22px;"  alt="{{pageTitle}}">
+            </span>
         </span>
         <span class="ver-align-mid" >{{ pageTitle }}</span>
     </div>

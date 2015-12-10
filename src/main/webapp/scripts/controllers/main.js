@@ -8,7 +8,7 @@ angular
     .module('panda-ui-admin')
     .controller('appCtrl', appCtrl);
 
-function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageService) {
+function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageService, promiseAjax) {
 
     // For iCheck purpose only
     $scope.checkOne = true;
@@ -228,6 +228,19 @@ function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageSer
                 localStorageService.cookie.set('language', 'en');
         }
         $window.location.reload();
+    }
+
+    /**
+     *  Logout a user.
+     */
+    $scope.logout = function() {
+    	var hasResponse = promiseAjax.httpTokenRequest(globalConfig.HTTP_GET, globalConfig.APP_URL + "logout", '');
+    	hasResponse.then(function (result) {
+    		if(result) {
+    			$window.sessionStorage.removeItem("loginSession")
+    		    window.location.href = "login";
+    	    }
+        });
     }
 
 

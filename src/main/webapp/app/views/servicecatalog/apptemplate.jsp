@@ -13,22 +13,22 @@
                         <div class="dashboard-box pull-left">
                             <span class="pull-right">Total Template</span>
                             <div class="clearfix"></div>
-                            <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
-                            <b class="pull-right">13</b>
+                            <span class="pull-right m-t-xs"><img src="images/icon-template.png"></span>
+                            <b class="pull-right">0</b>
                             <div class="clearfix"></div>
                         </div>
                         <div class="dashboard-box pull-left">
                             <span class="pull-right">Windows Template</span>
                             <div class="clearfix"></div>
-                            <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
-                            <b class="pull-right">04</b>
+                            <span class="pull-right m-t-xs"><img src="images/icon-template.png"></span>
+                            <b class="pull-right">0</b>
                             <div class="clearfix"></div>
                         </div>
                         <div class="dashboard-box pull-left">
                             <span class="pull-right">Linux Template</span>
                             <div class="clearfix"></div>
-                            <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
-                            <b class="pull-right">09</b>
+                            <span class="pull-right m-t-xs"><img src="images/icon-template.png"></span>
+                            <b class="pull-right">0</b>
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                         <div class="clearfix"></div>
                         <span class="pull-right m-l-sm m-t-sm">
                             <a class="btn btn-info" ui-sref="servicecatalog.list-templatestore.list-view-template-create"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span>Add</a>
-                            <a class="btn btn-info" ui-sref="" title="Refresh"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
+                            <a class="btn btn-info" ui-sref="servicecatalog.list-templatestore" title="Refresh"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
                         </span>
                     </div>
                 </div>
