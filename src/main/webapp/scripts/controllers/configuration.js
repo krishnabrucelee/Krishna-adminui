@@ -55,10 +55,9 @@ function cloudStackCtrl($scope, $state,crudService, $stateParams, modalService, 
 
     };
 
-
 function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $stateParams, promiseAjax, notify, localStorageService, modalService) {
 
-	$scope.adminUserList = {};
+	//$scope.adminUserList = {};
     $scope.paginationObject = {};
     $scope.configForm = {};
     $scope.domainList = {};
@@ -66,7 +65,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $s
 
     // Admin User List
     var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-    var hasUsers = promiseAjax.httpTokenRequest( crudService.globalConfig.HTTP_GET, crudService.globalConfig.APP_URL + "users/listbydomainandrole");
+    var hasUsers = promiseAjax.httpTokenRequest( crudService.globalConfig.HTTP_GET, crudService.globalConfig.APP_URL + "users/listbyrootadmin");
     hasUsers.then(function (result) {  // this is only run after $http completes0
     	$scope.adminUserList = result;
     });
@@ -75,51 +74,22 @@ function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $s
 	    $scope.list = function (pageNumber) {
 	        var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
 	        var hasDomains = crudService.list("domains", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
-	        hasDomains.then(function (result) {  // this is only run after $http
-													// completes0
-
+	        hasDomains.then(function (result) {
 	        	$scope.domainList = result;
 	            $scope.stateid =$stateParams.id;
 	            $scope.type = $stateParams.quotaType;
-console.log($scope.type);
+                console.log($scope.type);
 	            // For pagination
 	            $scope.paginationObject.limit = limit;
 	            $scope.paginationObject.currentPage = pageNumber;
 	            $scope.paginationObject.totalItems = result.totalItems;
-
 	            console.log($scope.domain );
-
-
 	        });
-
 	    };
 	    $scope.list(1);
 
-
-
-
-
-/*		angular.forEach($scope.domainList, function(obj, key) {
-    		if(obj.id == $scope.domain.id) {
-    			$scope.domain = obj;
-    			console.log($scope.domain );
-    		}
-    	});
-*/
-
-
-
-
-
-//	var VIEW_URL = "app/";
-//	var hasServer = promiseAjax.httpRequest("GET", "api/resource-allocation.json");
-//    hasServer.then(function (result) {  // this is only run after $http completes
-//        $scope.config = result;
-//
-//    });
     $scope.global = globalConfig;
     $scope.activity = {};
-
     $scope.paymentList = {};
 
     $scope.updatePaymentDefault = function (payment, index) {
@@ -134,9 +104,6 @@ console.log($scope.type);
                 $scope.paymentGateList[key].isDefault = false;
         });
     };
-
-
-
 
     localStorageService.set("billingList", null);
     if (localStorageService.get("billingList") == null) {
@@ -161,8 +128,7 @@ console.log($scope.type);
     localStorageService.set("taxList", null);
     if (localStorageService.get("taxList") == null) {
         var hasServer = promiseAjax.httpRequest("GET", "api/tax.json");
-        hasServer.then(function (result) {  // this is only run after $http
-											// completes
+        hasServer.then(function (result) {
             $scope.taxList = result;
             localStorageService.set("taxList", result);
         });
@@ -171,8 +137,7 @@ console.log($scope.type);
     }
 
         var hasServer = promiseAjax.httpRequest("GET", "api/paymentGateway.json");
-        hasServer.then(function (result) {  // this is only run after $http
-											// completes
+        hasServer.then(function (result) {
             $scope.paymentGateList = result;
             localStorageService.set("paymentGateList", result);
         });
@@ -181,8 +146,7 @@ console.log($scope.type);
     localStorageService.set("promotionList", null);
     if (localStorageService.get("promotionList") == null) {
         var hasServer = promiseAjax.httpRequest("GET", "api/promotion.json");
-        hasServer.then(function (result) {  // this is only run after $http
-											// completes
+        hasServer.then(function (result) {
             $scope.promotionList = result;
             localStorageService.set("promotionList", result);
         });
@@ -193,8 +157,7 @@ console.log($scope.type);
     localStorageService.set("discountList", null);
     if (localStorageService.get("discountList") == null) {
         var hasServer = promiseAjax.httpRequest("GET", "api/discount.json");
-        hasServer.then(function (result) {  // this is only run after $http
-											// completes
+        hasServer.then(function (result) {
             $scope.discountList = result;
             localStorageService.set("discountList", result);
         });
@@ -202,10 +165,7 @@ console.log($scope.type);
         $scope.discountList = localStorageService.get("discountList");
     }
 
-
     $scope.summernoteTextTwo = {}
-
-
     $scope.summernoteOpt = {
         toolbar: [
             ['headline', ['style']],
@@ -215,8 +175,6 @@ console.log($scope.type);
         ],
         disableResizeEditor: true,
     };
-
-
 
     $scope.configElements = {
         category: $stateParams.category,
@@ -232,7 +190,6 @@ console.log($scope.type);
         languageList: [
             {id: 1, name: 'Chinese'},
             {id: 2, name: 'English'}
-
         ],
         departmentList: [
             {id: 1, name: 'Developing'},
@@ -281,7 +238,6 @@ console.log($scope.type);
             {id: 7, name: 'Network Offerings'},
             {id: 8, name: 'Network'},
             {id: 9, name: 'Project'}
-
         ],
         dateFormatList: [
             {id: 1, name: 'DD/MM/YYYY'},
@@ -321,25 +277,19 @@ console.log($scope.type);
             {id: 29},
             {id: 30},
             {id: 31}
-
         ],
         domainList: [
             {id: 1, name: 'Root'},
             {id: 2, name: 'Admin'},
             {id: 3, name: 'Domain'}
         ]
-
-
     };
-
 
     $scope.validateDomain = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
             notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-
         }
     };
 
@@ -349,7 +299,6 @@ console.log($scope.type);
             $scope.cancel();
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
             notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-
         }
     };
 
@@ -358,17 +307,14 @@ console.log($scope.type);
         if (form.$valid) {
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
             notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-
         }
     };
 
     $scope.validateInvoice = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
             notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-
         }
     };
 
@@ -387,7 +333,6 @@ console.log($scope.type);
         if (form.$valid) {
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
             notify({message: 'Saved successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-
         }
     };
 
@@ -395,64 +340,50 @@ console.log($scope.type);
     $scope.validateLanguage = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
             notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-
         }
     };
 
     $scope.formSubmitted = false;
-
-
     $scope.validateDepartment = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
             notify({message: 'Saved successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-
         }
     };
 
     $scope.validateEditTax = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
             notify({message: 'Saved successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-
         }
     };
 
     $scope.validateLogin = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
             notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-
         }
     };
 
     $scope.validateSignUP = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
             notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
         }
     };
+
     $scope.formSubmitted = false;
-
-
     $scope.validateAdd = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
             notify({message: 'Created successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-            // $window.location.href='#/configuration/chargeback/tax';
         }
     };
 
@@ -465,33 +396,25 @@ console.log($scope.type);
             $scope.cancel();
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
             notify({message: 'Password changed successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-
         }
     };
 
     $scope.formSubmitted = false;
-
-
     $scope.validateGrant = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
             $scope.cancel();
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
             notify({message: 'Permission granted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-
         }
     };
 
     $scope.formSubmitted = false;
-
-
     $scope.validatePredefined = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
             notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-
         }
     };
 
@@ -537,9 +460,7 @@ console.log($scope.type);
 
         $scope.activity[currentDateField] = true;
     };
-
-}
-;
+};
 
 function importCtrl($scope, name, notify, $modalInstance) {
 
@@ -547,7 +468,6 @@ function importCtrl($scope, name, notify, $modalInstance) {
     $scope.name = name;
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
-
     };
     $scope.validateImport = function (form) {
         $scope.formSubmitted = true;
@@ -556,11 +476,8 @@ function importCtrl($scope, name, notify, $modalInstance) {
             notify({message: 'Imported successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
             $scope.cancel();
         }
-
     }
-
-}
-;
+};
 
 function retailManagementCtrl($scope, globalConfig, notify) {
 
@@ -576,8 +493,7 @@ function retailManagementCtrl($scope, globalConfig, notify) {
             notify({message: 'Please fill all the fields', classes: 'alert-danger', "timeOut": "1000", templateUrl: $scope.homerTemplate});
         }
     };
-}
-;
+};
 
 
 
