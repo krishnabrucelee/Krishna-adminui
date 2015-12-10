@@ -183,12 +183,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{
+                                            'text-danger'
+                                            :TemplateForm.architecture.$invalid && formSubmitted}">
                             <div class="row">
                                 <label class="col-md-3 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.architecture" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-6  col-sm-6 col-lg-6  col-sm-6 col-lg-6">
-                                    <label> <input icheck type="radio" name= "architecture" ng-checked="template.architecture=='64'" value="64" ng-model="template.architecture"> 64 Bit </label>
-                                    <label  class="m-l-sm"> <input icheck type="radio" name= "architecture" ng-checked="template.architecture=='32'" value="32" ng-model="template.architecture"> 32 Bit</label>
+                                    <label> <input required="true" icheck type="radio" name= "architecture" ng-checked="template.architecture=='64'" value="64" ng-model="template.architecture"> 64 Bit </label>
+                                    <label  class="m-l-sm"> <input required="true" icheck type="radio" name= "architecture" ng-checked="template.architecture=='32'" value="32" ng-model="template.architecture"> 32 Bit</label>
+                                    <div class="error-area" data-ng-show="TemplateForm.architecture.$invalid && formSubmitted" >
+                                    	<i  ng-attr-tooltip="<fmt:message key="template.architecture.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
