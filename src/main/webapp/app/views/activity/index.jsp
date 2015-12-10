@@ -39,13 +39,13 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane"  data-ng-class="{'active' : activity.category == 'events'}" id="events">
-                                <div data-ng-include src="'views/activity/events.html'"></div>
+                                <div data-ng-include src="'app/views/activity/events.jsp'"></div>
                             </div>
                             <div class="tab-pane"  data-ng-class="{'active' : activity.category == 'alerts'}" id="alerts">
-                                <div data-ng-include src="'views/activity/alerts.html'"></div>
+                                <div data-ng-include src="'app/views/activity/alerts.jsp'"></div>
                             </div>
                             <div class="tab-pane"  data-ng-class="{'active' : activity.category == 'notifications'}" id="notifications">
-                                <div data-ng-include src="'views/activity/notifications.html'"></div>
+                                <div data-ng-include src="'app/views/activity/notifications.jsp'"></div>
                             </div>
                         </div>
                     </div>

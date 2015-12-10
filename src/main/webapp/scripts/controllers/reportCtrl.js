@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -17,7 +17,7 @@ function reportCtrl($scope, globalConfig, notify, $state, $stateParams, modalSer
     $scope.report = {};
     $scope.reports = {};
     $scope.archive = function () {
-        $scope.homerTemplate = 'views/notification/notify.html';
+        $scope.homerTemplate = 'views/notification/notify.jsp';
         notify({message: 'Archived successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
         $scope.cancel();
     };

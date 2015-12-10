@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -15,7 +15,7 @@ function archiveCtrl($scope, globalConfig, notify, $state, $stateParams) {
     $scope.global = globalConfig;
     $scope.activity = {};
     $scope.archive = function () {
-        $scope.homerTemplate = 'views/notification/notify.html';
+        $scope.homerTemplate = 'views/notification/notify.jsp';
         notify({message: 'Archived successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
         $scope.cancel();
     };
@@ -29,7 +29,7 @@ function archiveCtrl($scope, globalConfig, notify, $state, $stateParams) {
         $scope.formSubmitted = true;
 
         if (form.$valid) {
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Archived successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
             $scope.cancel();
         }
@@ -51,7 +51,7 @@ function deleteCtrl($scope, $state, $stateParams, globalConfig, notify) {
     $scope.global = globalConfig;
     $scope.activity = {};
     $scope.delete = function () {
-        $scope.homerTemplate = 'views/notification/notify.html';
+        $scope.homerTemplate = 'views/notification/notify.jsp';
         notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
         $scope.cancel();
     };
@@ -61,7 +61,7 @@ function deleteCtrl($scope, $state, $stateParams, globalConfig, notify) {
         $scope.formSubmitted = true;
 
         if (form.$valid) {
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
             $scope.cancel();
         }
@@ -86,7 +86,7 @@ function activityViewCtrl($scope, $state, $stateParams, promiseAjax, localStorag
         angular.forEach($scope.activityList, function (item, key) {
             if (item.id == activityId) {
                 $scope.activity = item;
-                modalService.trigger('views/activity/activity-description.html', 'md', "#" + $scope.activity.id);
+                modalService.trigger('views/activity/activity-description.jsp', 'md', "#" + $scope.activity.id);
             }
         });
 
@@ -121,19 +121,19 @@ function activityCtrl($scope, $modal, promiseAjax, localStorageService, modalSer
     $scope.getActivityByCategory($scope.activity.category);
 
     $scope.archiveGlobal = function () {
-        modalService.trigger('views/activity/archive.html', 'md', 'Archive ' + $scope.pageTitle);
+        modalService.trigger('views/activity/archive.jsp', 'md', 'Archive ' + $scope.pageTitle);
     };
 
     $scope.deleteGlobal = function () {
-        modalService.trigger('views/activity/delete.html', 'md', 'Delete ' + $scope.pageTitle);
+        modalService.trigger('views/activity/delete.jsp', 'md', 'Delete ' + $scope.pageTitle);
     };
 
     $scope.delete = function () {
-        modalService.trigger('views/activity/confirm-delete.html', 'md', 'Delete Confirmation');
+        modalService.trigger('views/activity/confirm-delete.jsp', 'md', 'Delete Confirmation');
     };
 
     $scope.archive = function () {
-        modalService.trigger('views/activity/confirm-archive.html', 'md', 'Archive Confirmation');
+        modalService.trigger('views/activity/confirm-archive.jsp', 'md', 'Archive Confirmation');
     };
 
 
@@ -177,7 +177,7 @@ function activityCtrl($scope, $modal, promiseAjax, localStorageService, modalSer
 
         var modalInstance = $modal.open({
             animation: $scope.animationsEnabled,
-            templateUrl: 'views/activity/activity-description.html',
+            templateUrl: 'views/activity/activity-description.jsp',
             controller: 'activityDescriptionCtrl',
             size: 'md',
             backdrop: 'static',

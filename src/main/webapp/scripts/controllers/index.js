@@ -36,7 +36,7 @@ app.controller('alertCtrl', function($scope, $mdDialog) {
   $scope.showAdvanced = function(ev) {
     $mdDialog.show({
       controller: DialogController,
-      templateUrl: 'views/common/templates/dialog2.tmpl.html',
+      templateUrl: 'views/common/templates/dialog2.tmpl.jsp',
       parent: angular.element(document.body),
       targetEvent: ev,
       clickOutsideToClose:false
@@ -68,7 +68,7 @@ app.controller('DemoCtrl', DemoCtrl);
     description: 'Panda',
     rate: 500
   };
-  
+
     // list of `state` value/display objects
     self.states        = loadAll();
     self.selectedItem  = null;
@@ -113,8 +113,8 @@ app.controller('DemoCtrl', DemoCtrl);
       };
     }
   }
-  
-  
+
+
 app.controller('AppCtrl', function($scope) {
   $scope.project = {
     description: 'Nuclear Missile Defense System',

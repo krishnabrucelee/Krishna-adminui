@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -41,7 +41,7 @@ function infrastructureCtrl($scope, $modal, promiseAjax, localStorageService, mo
         $scope.formSubmitted = true;
         if (form.$valid) {
 
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Uploaded successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
 
         }
@@ -54,7 +54,7 @@ function infrastructureCtrl($scope, $modal, promiseAjax, localStorageService, mo
         $scope.formSubmitted = true;
         if (form.$valid) {
 
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Uploaded successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
 
         }
@@ -72,15 +72,15 @@ function infraCtrl($scope, $modal, $log, promiseAjax, localStorageService, notif
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasVms = crudService.list("vms/listVms", $scope.global.paginationHeaders(1, limit), {"limit": limit});
         hasVms.then(function (result) {  // this is only run after $http completes0
-            
+
             $scope.instanceList = result.listvirtualmachinesresponse.virtualmachine;
             $scope.paginationObject.limit  = limit;
             $scope.paginationObject.currentPage = 1;
         });
-       
+
 
     //};
-    
+
     localStorageService.set("volumes", null);
     if (localStorageService.get("volumes") == null) {
         var hasServer = promiseAjax.httpRequest("GET", "api/cloud/volume.json");
@@ -285,7 +285,7 @@ function vpcviewCtrl($scope, $modal, $log, promiseAjax, $stateParams, $state, gl
     $scope.addPrivateGateway = function (size) {
 
         var modalInstance = $modal.open({
-            templateUrl: 'views/cloud/vpc/gateway.html',
+            templateUrl: 'views/cloud/vpc/gateway.jsp',
             controller: 'modalCtrl',
             size: size,
             backdrop: 'static',
@@ -361,7 +361,7 @@ function modalCtrl($scope, notify, $modalInstance) {
     $scope.addGateway = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Created successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
             $scope.cancel();
         }
