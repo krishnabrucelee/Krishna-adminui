@@ -16,15 +16,15 @@ function promiseAjax($http, $window, globalConfig, notify) {
             var data = {};
             data.limit = global.CONTENT_LIMIT;
         };
-        var loginSession = globalConfig.sessionValues;
-        if(loginSession == null) {
+        var pandaUserSession = globalConfig.sessionValues;
+        if(pandaUserSession == null) {
         	window.location.href = "login";
         }
         var config = {
             "method": method,
             "data": data,
             "url": url,
-            "headers": {'x-auth-token': loginSession.token, 'Content-Type': 'application/json', 'Range': "items=0-9"}
+            "headers": {'x-auth-token': pandaUserSession.token, 'Content-Type': 'application/json', 'Range': "items=0-9"}
         };
 
 

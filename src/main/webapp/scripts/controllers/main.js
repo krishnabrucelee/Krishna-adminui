@@ -237,7 +237,7 @@ function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageSer
     	var hasResponse = promiseAjax.httpTokenRequest(globalConfig.HTTP_GET, globalConfig.APP_URL + "logout", '');
     	hasResponse.then(function (result) {
     		if(result) {
-    			$window.sessionStorage.removeItem("loginSession")
+    			$window.sessionStorage.removeItem("pandaUserSession")
     		    window.location.href = "login";
     	    }
         });
