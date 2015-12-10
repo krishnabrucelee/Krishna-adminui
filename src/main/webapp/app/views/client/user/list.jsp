@@ -14,21 +14,21 @@
                             <div class="dashboard-box pull-left">
                                 <span class="pull-right"><fmt:message key="total.users" bundle="${msg}" /></span>
                                 <div class="clearfix"></div>
-                                <span class="pull-left m-t-xs"><img src="images/user-icon.png"></span>
+                                <span class="pull-left m-t-xs"><!-- <img src="images/user-icon.png"> --></span>
                                 <b class="pull-right">{{totalUser}}</b>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="dashboard-box pull-left">
                                 <span class="pull-right"><fmt:message key="active.users" bundle="${msg}" /></span>
                                 <div class="clearfix"></div>
-                                <span class="pull-left m-t-xs"><img src="images/user-icon.png"></span>
+                                <span class="pull-left m-t-xs"><!-- <img src="images/user-icon.png"> --></span>
                                 <b class="pull-right">{{active}}</b>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="dashboard-box pull-left">
                                 <span class="pull-right"><fmt:message key="inactive.users" bundle="${msg}" /></span>
                                 <div class="clearfix"></div>
-                                <span class="pull-left m-t-xs"><img src="images/user-icon.png"></span>
+                                <span class="pull-left m-t-xs"><!-- <img src="images/user-icon.png"> --></span>
                                 <b class="pull-right">{{inActive}}</b>
                                 <div class="clearfix"></div>
                             </div>

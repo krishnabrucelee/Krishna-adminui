@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -38,7 +38,7 @@ function addTicketCtrl($scope, globalConfig, $window, notify) {
         $scope.formSubmitted = true;
         if (form.$valid) {
             $scope.cancel();
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Ticket added successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
 
         }
@@ -47,7 +47,7 @@ function addTicketCtrl($scope, globalConfig, $window, notify) {
         $scope.formSubmitted = true;
         if (form.$valid) {
             $scope.cancel();
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
 
         }
@@ -56,7 +56,7 @@ function addTicketCtrl($scope, globalConfig, $window, notify) {
         $scope.formSubmitted = true;
         if (form.$valid) {
             $scope.cancel();
-            $scope.homerTemplate = 'views/notification/notify.html';
+            $scope.homerTemplate = 'views/notification/notify.jsp';
             notify({message: 'Ticket Archived', classes: 'alert-success', templateUrl: $scope.homerTemplate});
 
         }
@@ -84,19 +84,19 @@ function supportListCtrl($scope, $modal, $log, $timeout, promiseAjax, globalConf
     $scope.oneItemSelected = false;
 
     $scope.openAddTicketContainer = function (size) {
-        modalService.trigger('views/support/add.html', size);
+        modalService.trigger('views/support/add.jsp', size);
     };
     $scope.openDeleteTicketContainer = function (size) {
-        modalService.trigger('views/support/delete.html', size);
+        modalService.trigger('views/support/delete.jsp', size);
     };
     $scope.openDeleteContainer = function (size) {
-        modalService.trigger('views/support/confirm-delete.html', size);
+        modalService.trigger('views/support/confirm-delete.jsp', size);
     };
     $scope.delete = function (size) {
-        modalService.trigger('views/support/delete.html', size);
+        modalService.trigger('views/support/delete.jsp', size);
     };
     $scope.archive = function (size) {
-        modalService.trigger('views/support/archive.html', size);
+        modalService.trigger('views/support/archive.jsp', size);
     };
 
     $scope.checkAll = function () {
@@ -131,7 +131,7 @@ function supportListCtrl($scope, $modal, $log, $timeout, promiseAjax, globalConf
     $scope.showDescription = function (support) {
         var modalInstance = $modal.open({
             animation: $scope.animationsEnabled,
-            templateUrl: 'views/support/view-description.html',
+            templateUrl: 'views/support/view-description.jsp',
             controller: 'supportDetailsCtrl',
             size: 'lg',
             backdrop: 'static',

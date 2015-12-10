@@ -10,10 +10,10 @@
     </div>
     <div class="modal-body">
         <div data-ng-show="activity.category == 'events'">
-            <div data-ng-include src="'views/activity/event-description.html'" ></div>
+            <div data-ng-include src="'views/activity/event-description.jsp'" ></div>
         </div>
         <div data-ng-hide="activity.category == 'events'">
-            <div data-ng-include src="'views/activity/other-description.html'" ></div>
+            <div data-ng-include src="'views/activity/other-description.jsp'" ></div>
         </div>
     </div>
     <div class="modal-footer">
