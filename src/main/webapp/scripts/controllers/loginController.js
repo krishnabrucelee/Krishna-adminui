@@ -20,10 +20,10 @@ angular.module('panda-ui-admin', []).controller("loginCtrl", function ($scope, $
             $http({method: 'POST', url: globalConfig.APP_URL + 'authenticate', headers: headers})
             .success(function (result) {
                 //$window.sessionStorage.token = result.token;
-                $window.sessionStorage.setItem("loginSession", JSON.stringify(result));
+                $window.sessionStorage.setItem("pandaUserSession", JSON.stringify(result));
                 window.location.href = "index#/dashboard";
             }).catch(function (result) {
-            	$window.sessionStorage.removeItem("loginSession")
+            	$window.sessionStorage.removeItem("pandaUserSession")
                 if (!angular.isUndefined(result.data)) {
                 	var target = document.getElementById("errorMsg");
                     target.innerHTML = result.data.message;

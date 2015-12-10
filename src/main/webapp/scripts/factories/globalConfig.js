@@ -59,7 +59,7 @@ function globalConfig($window) {
         getViewPageUrl: function(url) {
                 return appGlobalConfig.VIEW_URL + url;
         },
-        sessionValues:  JSON.parse($window.sessionStorage.getItem("loginSession"))
+        sessionValues:  JSON.parse($window.sessionStorage.getItem("pandaUserSession"))
     };
 
     return appGlobalConfig;
