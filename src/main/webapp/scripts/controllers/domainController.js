@@ -34,7 +34,7 @@ function domainListCtrl($scope,$state, promiseAjax, $log, notify, crudService, d
 
     // User List
     $scope.list = function (pageNumber) {
-    	alert("1");
+    	
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasDomain = crudService.list("domains", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
         hasDomain.then(function (result) {  // this is only run after $http completes0
