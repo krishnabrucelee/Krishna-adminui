@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<form name="clientForm" data-ng-submit="validateAdd(clientForm)" method="post" novalidate="" data-ng-controller="clientListCtrl">
+<form name="clientForm" data-ng-submit="save(clientForm)" method="post" novalidate="" data-ng-controller="clientListCtrl">
 
     <div class="row">
         <div class="col-md-12 col-sm-12">
