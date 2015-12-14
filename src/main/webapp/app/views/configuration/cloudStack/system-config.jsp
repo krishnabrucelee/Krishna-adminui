@@ -32,9 +32,10 @@
 								</label>
 
 								<div class="col-md-7 col-sm-7">
-									<input required="true" type="text" name="URL"
+									<input required="true" type="url" name="URL"
 										class="form-control" data-ng-model="config.apiURL"
 										data-ng-class="{'error': configForm.URL.$invalid && formSubmitted}">
+										
 									<div class="error-area"
 										data-ng-show="configForm.URL.$invalid && formSubmitted">
 										<i tooltip="URL  is Required" class="fa fa-warning error-icon"></i>

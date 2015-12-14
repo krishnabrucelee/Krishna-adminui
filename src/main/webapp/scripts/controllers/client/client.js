@@ -9,12 +9,23 @@ angular
 
 function clientListCtrl($scope, $state, $stateParams, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, dialogService, crudService) {
 
-/*	var VIEW_URL = "app/";
-	var hasServer = promiseAjax.httpRequest("GET", "api/client.json");
-    hasServer.then(function (result) {  // this is only run after $http completes
-        $scope.client = result;
+	 $scope.domains = {
+		        category: "domains",
+		        oneItemSelected: {},
+		        selectedAll: {},
+		        totalcount: 0
+		    };
 
-    });*/
+		    $scope.default_option = true
+		    $scope.domainList = {};
+		    $scope.revokes = false;
+		    $scope.paginationObject = {};
+		    $scope.domainForm = {};
+		    $scope.global = crudService.globalConfig;
+		    $scope.domain = {};
+		    $scope.domainElements={
+
+		    };
     $scope.paginationObject = {};
     $scope.global = crudService.globalConfig;
 	$scope.domainList = {};
@@ -49,15 +60,50 @@ function clientListCtrl($scope, $state, $stateParams, modalService, $log, promis
         modalService.trigger('app/views/client/clients/delete.jsp', size);
     };
 
-    $scope.validateAdd = function (form) {
-        $scope.formSubmitted = true;
-        if (form.$valid) {
+    // Opened user add window
+    $scope.addDomain = function (size,domain) {
+        dialogService.openDialog("app/views/domain/add-domain.jsp", size, $scope, ['$scope', '$modalInstance', '$rootScope', function ($scope, $modalInstance, $rootScope) {
+        	$scope.save = function (form) {
+                $scope.formSubmitted = true;
+                if (form.$valid) {
 
-            $scope.homerTemplate = 'app/views/notification/notify.jsp';
-            notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+                    $scope.formSubmitted = true;
+                    if (form.$valid) {
+                        var user = angular.copy($scope.user);
+                        	var hasServer = crudService.add("domains", domain);
+                        	hasServer.then(function (result) {  // this is only run after $http completes
+                        		$scope.list(1);
+                        		notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                        		$modalInstance.close();
+                        		$scope.domain.name = "";
+                        		$scope.domain.companyNameAbbreviation = "";
+                        		$scope.domain.portalUserName = "";
+                        		$scope.domain.password = "";
+                        		$scope.domain.confirmPassword = "";
+                        		$scope.domain.cityHeadquarter = "";
+                        		$scope.domain.companyAddress = "";
+                        		$scope.domain.primaryFirstName = "";
+                        		$scope.domain.lastName = "";
+                        		$scope.domain.email = "";
+                        		$scope.domain.phone = "";
+                        		$scope.domain.secondaryContact = "";
+                        	}).catch(function (result) {
+                        		if(!angular.isUndefined(result) && result.data != null) {
+                        			angular.forEach(result.data.fieldErrors, function(errorMessage, key) {
+                                	   $scope.domainForm[key].$invalid = true;
+                                	   $scope.domainForm[key].errorMessage = errorMessage;
+                        			});
+                        		}
+                        	});
+                    }
+                }
+            },
+            $scope.cancel = function () {
+                $modalInstance.close();
+            };
+         }]);
+    };
 
-        }
-     };
 
      $scope.validateEdit = function (form) {
          $scope.formSubmitted = true;

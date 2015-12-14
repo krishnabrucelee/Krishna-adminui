@@ -234,13 +234,8 @@ function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageSer
      *  Logout a user.
      */
     $scope.logout = function() {
-    	var hasResponse = promiseAjax.httpTokenRequest(globalConfig.HTTP_GET, globalConfig.APP_URL + "logout", '');
-    	hasResponse.then(function (result) {
-    		if(result) {
-    			$window.sessionStorage.removeItem("pandaUserSession")
-    		    window.location.href = "login";
-    	    }
-        });
+    	$window.sessionStorage.removeItem("pandaUserSession")
+	    window.location.href = "login";
     }
 
 
