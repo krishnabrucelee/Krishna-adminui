@@ -161,7 +161,7 @@
 <script src="scripts/controllers/reportCtrl.js"></script>
 <script src="scripts/controllers/configuration.js"></script>
 <script src="scripts/controllers/resourceAllocation.js"></script>
-
+<script src="scripts/controllers/domainController.js"></script>
 
 <script src="scripts/factories/promiseAjax.js"></script>
 <script src="scripts/factories/globalConfig.js"></script>
