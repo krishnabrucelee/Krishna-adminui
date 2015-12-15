@@ -333,14 +333,17 @@ function projectInfraLimitCtrl($scope, globalConfig, notify) {
 };
 
 function projectListCtrl($scope, promiseAjax,crudService,notify) {
+	$scope.showLoader = true;
 	$scope.projectList = {};
 		var hasUsers = crudService.listAll("projects/listall");
         hasUsers.then(function (result) {  // this is only run after $http completes0
        		$scope.projectList = result;
+       		$scope.showLoader = false;
 	}).catch(function (result) {
 			console.log(result.data.globalError[0]);
 	         if(result.data.globalError[0] != null){
 	        	 var msg = result.data.globalError[0];
+	        	 $scope.showLoader = false;
 	        	 notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
 
 	             }

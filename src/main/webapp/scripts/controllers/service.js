@@ -39,6 +39,7 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
 
     //Template list
     $scope.list = function (pageNumber) {
+    	$scope.showLoader = true;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasTemplates = crudService.list("templates", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
         hasTemplates.then(function (result) {  // this is only run after $http completes0
@@ -60,6 +61,7 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
             $scope.paginationObject.limit = limit;
             $scope.paginationObject.currentPage = pageNumber;
             $scope.paginationObject.totalItems = result.totalItems;
+            $scope.showLoader = false;
         });
     };
     $scope.list(1);
@@ -103,12 +105,13 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
     $scope.save = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-
+        	$scope.showLoader = true;
             var template = angular.copy($scope.template);
 
             var hasTemplate = crudService.add("templates", template);
             hasTemplate.then(function (result) {  // this is only run after $http completes
                 $scope.list(1);
+                $scope.showLoader = false;
                 notify({message: 'Created successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
                 $window.location.href = '#/templatestore/list';
 
@@ -116,6 +119,7 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
                 if (!angular.isUndefined(result.data)) {
                 	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
                   	    var msg = result.data.globalError[0];
+                  	  $scope.showLoader = false;
                 	    notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                     } else if (result.data.fieldErrors != null) {
                         angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
@@ -133,15 +137,18 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
         dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
                 $scope.deleteId = templateId;
                 $scope.ok = function (templateId) {
+                	$scope.showLoader = true;
                     var hasStorage = crudService.delete("templates", templateId);
                     hasStorage.then(function (result) {
                         $scope.list(1);
                         $scope.homerTemplate = 'app/views/notification/notify.jsp';
+                        $scope.showLoader = false;
                         notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                     }).catch(function (result) {
                         if (!angular.isUndefined(result.data)) {
                         	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
                           	    var msg = result.data.globalError[0];
+                          	  $scope.showLoader = false;
                         	    notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                             }
                         }
@@ -273,17 +280,19 @@ function templateEditCtrl($scope, $state, $stateParams, modalService, $log, prom
     $scope.update = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-
+        	$scope.showLoader = true;
             var template = angular.copy($scope.template);
 
             var hasTemplates = crudService.update("templates", template);
             hasTemplates.then(function (result) {
                 $scope.homerTemplate = 'app/views/notification/notify.jsp';
+                $scope.showLoader = false;
                 notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                 $window.location.href = '#/templatestore/list';
             }).catch(function (result) {
                 if (!angular.isUndefined(result.data)) {
                 	if (result.data.fieldErrors != null) {
+                		$scope.showLoader = false;
                         angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
                             $scope.TemplateForm[key].$invalid = true;
                             $scope.TemplateForm[key].errorMessage = errorMessage;
@@ -350,6 +359,7 @@ function storageListCtrl($scope, crudService, dialogService, modalService, $log,
         };
     // Storage Offer List
     $scope.list = function (pageNumber) {
+    	$scope.showLoader = true;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasStorage = crudService.list("storages", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
         hasStorage.then(function (result) {  // this is only run after $http
@@ -367,6 +377,7 @@ function storageListCtrl($scope, crudService, dialogService, modalService, $log,
             $scope.paginationObject.limit = limit;
             $scope.paginationObject.currentPage = pageNumber;
             $scope.paginationObject.totalItems = result.totalItems;
+            $scope.showLoader = false;
         });
     };
     $scope.list(1);
@@ -428,6 +439,7 @@ $scope.costPerHourIOPS = function() {
         $scope.formSubmitted = true;
 
         if (form.$valid) {
+        	$scope.showLoader = true;
             var storage = angular.copy($scope.storage);
 //            storage.storagePrice = [];
 //            storage.storagePrice[0] = $scope.storage.storagePrice;
@@ -435,6 +447,7 @@ $scope.costPerHourIOPS = function() {
             hasStorage.then(function (result) {  // this is only run after
 													// $http completes
                 $scope.list(1);
+                $scope.showLoader = false;
                 notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
 // $window.location.href = '#/templatestore/list';
 
@@ -445,6 +458,7 @@ $scope.costPerHourIOPS = function() {
             	if (!angular.isUndefined(result.data)) {
                 	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
                   	    var msg = result.data.globalError[0];
+                  	  $scope.showLoader = false;
                 	    notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                     } else if (result.data.fieldErrors != null) {
                         angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
@@ -462,10 +476,12 @@ $scope.costPerHourIOPS = function() {
         dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
                 $scope.deleteId = storageId;
                 $scope.ok = function (storageId) {
+                	$scope.showLoader = true;
                     var hasStorage = crudService.delete("storages", storageId);
                     hasStorage.then(function (result) {
                         $scope.list(1);
                         $scope.homerTemplate = 'app/views/notification/notify.jsp';
+                        $scope.showLoader = false;
                         notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                     });
                     $modalInstance.close();
@@ -592,12 +608,14 @@ $scope.costPerHourIOPS = function() {
         // Update Compute Offer
         $scope.formSubmitted = true;
         if (form.$valid) {
+        	$scope.showLoader = true;
             var storage = $scope.storage;
             console.log(storage);
             var hasStorage = crudService.update("storages", storage);
             hasStorage.then(function (result) {
 
                 $scope.homerTemplate = 'app/views/notification/notify.jsp';
+                $scope.showLoader = false;
                 notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                 $window.location.href = '#/storage/list';
             });
@@ -616,6 +634,7 @@ function networkListCtrl($scope, $modal, modalService, $log, promiseAjax, global
     $scope.global = crudService.globalConfig;
     // Network Offer List
     $scope.list = function (pageNumber) {
+    	$scope.showLoader = true;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasNetworks = crudService.list("networkoffer", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
         hasNetworks.then(function (result) {  // this is only run after $http completes0
@@ -627,6 +646,7 @@ function networkListCtrl($scope, $modal, modalService, $log, promiseAjax, global
             $scope.paginationObject.limit = limit;
             $scope.paginationObject.currentPage = pageNumber;
             $scope.paginationObject.totalItems = result.totalItems;
+            $scope.showLoader = false;
         });
     };
     $scope.list(1);
@@ -779,6 +799,7 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
 
     // Compute Offer List
     $scope.list = function (pageNumber) {
+    	$scope.showLoader = true;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasComputes = crudService.list("computes", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
         hasComputes.then(function (result) {  // this is only run after $http
@@ -795,6 +816,7 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
             $scope.paginationObject.limit = limit;
             $scope.paginationObject.currentPage = pageNumber;
             $scope.paginationObject.totalItems = result.totalItems;
+            $scope.showLoader = false;
         });
     };
     $scope.list(1);
@@ -808,6 +830,7 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
     $scope.save = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
+        	$scope.showLoader = true;
             var compute = angular.copy($scope.compute);
             if(!angular.isUndefined(compute.domain)) {
             	compute.domainId = compute.domain.id;
@@ -822,6 +845,7 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
             hasComputes.then(function (result) {  // this is only run after
 													// $http completes
                 $scope.list(1);
+                $scope.showLoader = false;
                 notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
 // $window.location.href = '#/templatestore/list';
 
@@ -832,6 +856,7 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
             	 if(!angular.isUndefined(result) && result.data != null) {
              		if(result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])){
                         	 var msg = result.data.globalError[0];
+                        	 $scope.showLoader = false;
                         	 notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                      }
                      angular.forEach(result.data.fieldErrors, function(errorMessage, key) {
@@ -855,10 +880,12 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
         dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
                 $scope.deleteId = compute.id;
                 $scope.ok = function (computeId) {
+                	$scope.showLoader = true;
                     var hasComputes = crudService.softDelete("computes", compute);
                     hasComputes.then(function (result) {
                         $scope.list(1);
                         $scope.homerTemplate = 'app/views/notification/notify.jsp';
+                        $scope.showLoader = false;
                         notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                     });
                     $modalInstance.close();
@@ -939,12 +966,14 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
     $scope.update = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
+        	$scope.showLoader = true;
             var compute = $scope.compute;
 
             var hasComputes = crudService.update("computes", compute);
             hasComputes.then(function (result) {
 
                 $scope.homerTemplate = 'app/views/notification/notify.jsp';
+                $scope.showLoader = false;
                 notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                 $window.location.href = '#/compute/list';
             }).catch(function (result) {
@@ -952,6 +981,7 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
             	 if(!angular.isUndefined(result) && result.data != null) {
              		if(result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])){
                         	 var msg = result.data.globalError[0];
+                        	 $scope.showLoader = false;
                         	 notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                      }
                      angular.forEach(result.data.fieldErrors, function(errorMessage, key) {
