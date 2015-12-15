@@ -251,9 +251,12 @@
                             <div class="row">
                                 <label class="col-md-4 col-sm-5 control-label">
                                 </label>
+                                <get-loader-image data-ng-show="showLoader"></get-loader-image>
                                 <div class="col-md-4 col-sm-5">
                                     <a class="btn btn-default btn-outline"  href="#/configuration/chargeback"><fmt:message key="common.cancel" bundle="${msg}" /></a>
-                                    <button class="btn btn-info" type="submit"><fmt:message key="common.update" bundle="${msg}" /></button>
+                                   <button class="btn btn-info" has-permission="DOMAIN_QUOTA" data-ng-hide="showLoader" type="submit"><fmt:message key="common.update" bundle="${msg}" /></button>
+	                                <button data-ng-if="type == 'department-quota'" class="btn btn-info" has-permission="DEPARTMENT_QUOTA_EDIT" data-ng-hide="showLoader" type="submit"><fmt:message key="common.update" bundle="${msg}" /></button>
+                        			<button data-ng-if="type == 'project-quota'" class="btn btn-info" has-permission="PROJECT_QUOTA_EDIT" data-ng-hide="showLoader" type="submit"><fmt:message key="common.update" bundle="${msg}" /></button>
                                 </div>
                             </div>
                         </div>
