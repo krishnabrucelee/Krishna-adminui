@@ -35,14 +35,17 @@ function domainListCtrl($scope,$state, promiseAjax, $log, notify, crudService, d
 
     // User List
     $scope.list = function (pageNumber) {
+    	$scope.showLoader = true;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasDomain = crudService.list("domains", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
         hasDomain.then(function (result) {  // this is only run after $http completes0
+        	$scope.showLoader = true;
             $scope.domainList = result;
             // For pagination
             $scope.paginationObject.limit  = limit;
             $scope.paginationObject.currentPage = pageNumber;
             $scope.paginationObject.totalItems = result.totalItems;
+            $scope.showLoader = false;
         });
     };
     $scope.list(1);
@@ -64,11 +67,13 @@ function domainListCtrl($scope,$state, promiseAjax, $log, notify, crudService, d
 
                     $scope.formSubmitted = true;
                     if (form.$valid) {
+                    	$scope.showLoader = true;
                         var domain = angular.copy($scope.domain);
                            if (domain.password == $scope.account.confirmPassword) {
                         	var hasServer = crudService.add("domains", domain);
                         	hasServer.then(function (result) {  // this is only run after $http completes
                         		$scope.list(1);
+                        		$scope.showLoader = false;
                         		notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                         		$modalInstance.close();
                         		$scope.domain.name = "";
@@ -88,6 +93,7 @@ function domainListCtrl($scope,$state, promiseAjax, $log, notify, crudService, d
                         		$scope.domain.secondaryContactPhone = "";
                         	}).catch(function (result) {
                         		if(!angular.isUndefined(result) && result.data != null) {
+                        			$scope.showLoader = false;
                         			angular.forEach(result.data.fieldErrors, function(errorMessage, key) {
                                 	   $scope.domainForm[key].$invalid = true;
                                 	   $scope.domainForm[key].errorMessage = errorMessage;
@@ -118,15 +124,18 @@ function domainListCtrl($scope,$state, promiseAjax, $log, notify, crudService, d
                 $scope.update = function (form) {
                     $scope.formSubmitted = true;
                     if (form.$valid) {
+                    	$scope.showLoader = true;
                         var domain = $scope.domain;
                         var hasServer = crudService.update("domains", domain);
                         hasServer.then(function (result) {
                         	$scope.domain={};
                             $scope.list(1);
+                            $scope.showLoader = false;
                             notify({message: 'Updated successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
                             $modalInstance.close();
                         }).catch(function (result) {
                         	if(!angular.isUndefined(result) && result.data != null) {
+                        		$scope.showLoader = false;
 	                            angular.forEach(result.data.fieldErrors, function(errorMessage, key) {
 	                            	$scope.domainForm[key].$invalid = true;
 	                                $scope.domainForm[key].errorMessage = errorMessage;
@@ -148,16 +157,19 @@ function domainListCtrl($scope,$state, promiseAjax, $log, notify, crudService, d
         dialogService.openDialog("app/views/common/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
                 $scope.deleteObject = domain;
                 $scope.ok = function (deleteObject) {
+                	$scope.showLoader = true;
                     var hasServer = crudService.softDelete("domains", deleteObject);
                     hasServer.then(function (result) {
 
                         $scope.list(1);
+                        $scope.showLoader = false;
                         notify({message: 'Deleted successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
                     }).catch(function (result) {
 
                    	 if(!angular.isUndefined(result) && result.data != null) {
                     		if(result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])){
                                	 var msg = result.data.globalError[0];
+                               	$scope.showLoader = false;
                                	 notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                             }
                             angular.forEach(result.data.fieldErrors, function(errorMessage, key) {
