@@ -30,12 +30,24 @@ function domainListCtrl($scope,$state, promiseAjax, $log, notify, crudService, d
 
     };
 
+<<<<<<< HEAD
+
+
     // User List
     $scope.list = function (pageNumber) {
+    	
+=======
+    // User List
+    $scope.list = function (pageNumber) {
+>>>>>>> upstream/master
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasDomain = crudService.list("domains", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
         hasDomain.then(function (result) {  // this is only run after $http completes0
             $scope.domainList = result;
+<<<<<<< HEAD
+            console.log("Result"+result);
+=======
+>>>>>>> upstream/master
             // For pagination
             $scope.paginationObject.limit  = limit;
             $scope.paginationObject.currentPage = pageNumber;
@@ -50,12 +62,22 @@ function domainListCtrl($scope,$state, promiseAjax, $log, notify, crudService, d
     $scope.disabled = false;
     localStorageService.set("edit", null);
 
+<<<<<<< HEAD
+
+
+
+=======
+>>>>>>> upstream/master
     // Opened user add window
     $scope.addDomain = function (size,domain) {
         dialogService.openDialog("app/views/client/clients/add-domain.jsp", size, $scope, ['$scope', '$modalInstance', '$rootScope', function ($scope, $modalInstance, $rootScope) {
         	$scope.save = function (form) {
                 $scope.formSubmitted = true;
                 if (form.$valid) {
+<<<<<<< HEAD
+
+=======
+>>>>>>> upstream/master
                     $scope.formSubmitted = true;
                     if (form.$valid) {
                         var domain = angular.copy($scope.domain);
@@ -90,7 +112,11 @@ function domainListCtrl($scope,$state, promiseAjax, $log, notify, crudService, d
                         	});
                         }
                         else {  // Add tool tip message for confirmation password in add-user
+<<<<<<< HEAD
+                        	var key = 'confirmpassword';
+=======
                         	var key = 'confirmPassword';
+>>>>>>> upstream/master
                         	$scope.domainForm[key].$invalid = true;
                         	$scope.domainForm[key].errorMessage = document.getElementById("passwordErrorMessage").value;
                         }
@@ -106,8 +132,11 @@ function domainListCtrl($scope,$state, promiseAjax, $log, notify, crudService, d
 
     // Edit the Domain
     $scope.edit = function (size, domain) {
+<<<<<<< HEAD
+=======
     	$scope.domain.password = "";
 		$scope.domain.confirmPassword = "";
+>>>>>>> upstream/master
         dialogService.openDialog("app/views/client/clients/edit-domain.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
                 // Update department
                 $scope.domain = angular.copy(domain);
@@ -138,6 +167,10 @@ function domainListCtrl($scope,$state, promiseAjax, $log, notify, crudService, d
             }]);
     };
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> upstream/master
     // Delete the Domain
     $scope.delete = function (size, domain) {
         dialogService.openDialog("app/views/common/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
@@ -170,4 +203,108 @@ function domainListCtrl($scope,$state, promiseAjax, $log, notify, crudService, d
             }]);
     };
 
+<<<<<<< HEAD
+
+
+
+
+/*
+    // Delete user data from database
+    $scope.deleteUser = function (size) {
+     var user = {};
+   	 angular.forEach($scope.accountList, function (item, key) {
+
+            if (item['isSelected']) {
+           	 user = item;
+            }
+   	 });
+
+     var hasServer = crudService.delete("users", user.id);
+     hasServer.then(function (result) {
+         $scope.list(1);
+         notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
+         $modalInstance.close();
+     });
+
+    modalService.trigger('app/views/account/delete-user.jsp', size);
+    };*/
+
+/*    $scope.deleteUsers = function () {
+        $scope.cancel();
+    }*/
+
+    // Edit user data
+   /* $scope.editUser = function (size) {
+    	var user = {};
+    	 angular.forEach($scope.accountList, function (item, key) {
+
+             if (item['isSelected']) {
+            	 user = item;
+             }
+    	 });
+
+    	// dialogService.openDialog("app/views/account/edit-user.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+    	dialogService.openDialog("app/views/account/edit-user.jsp", size, $scope, ['$scope', '$modalInstance', '$rootScope', function ($scope, $modalInstance, $rootScope) {
+    	$scope.user = angular.copy(user);
+    	$scope.userForm = {};
+    	$scope.saveUser = function (form) {
+    		console.log(form);
+    		var user = $scope.user;
+    		$scope.formSubmitted = true;
+    		if (form.$valid) {
+    		var hasServer = crudService.update("users",user);
+    		hasServer.then(function (result) {
+    			$scope.list(1);
+    		    notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
+    		    $scope.cancel();
+    		}).catch(function (result) {
+        		if(!angular.isUndefined(result) && result.data != null) {
+        			angular.forEach(result.data.fieldErrors, function(errorMessage, key) {
+        				console.log($scope.userForm);
+                	    $scope.userForm[key].$invalid = true;
+                	    $scope.userForm[key].errorMessage = errorMessage;
+        			});
+        		}
+        	});
+    		}
+    		},
+            $scope.cancel = function () {
+                 $modalInstance.close();
+             };
+         }]);
+    };*/
+
+    /*$scope.ok = function () {
+        $timeout($scope.generateLoad, 3000);
+
+    };
+    $scope.generateLoad = function () {
+        $scope.activates = true;
+        $scope.revokes=false;
+        $scope.cancel();
+        $state.reload();
+
+    }
+
+    $scope.generateRevoke = function () {
+        $scope.revokes = true;
+        $scope.activates = false;
+
+        $scope.cancel();
+        $state.reload();
+    }
+
+    $scope.revok = function () {
+        $timeout($scope.generateRevoke, 3000);
+    };
+
+    $scope.revoking = function () {
+        modalService.trigger('views/account/revoke.html', 'md');
+    }
+
+    $scope.activating = function () {
+        modalService.trigger('views/account/activate.html', 'md');
+    }*/
+=======
+>>>>>>> upstream/master
 }

@@ -10,8 +10,8 @@
 		<panda-modal-header page-icon="fa fa-user-plus" hide-zone="false" page-title='Edit Domain'></panda-modal-header>
 	</div>
 	<div class="modal-body">
-	<div class="row"  >
-	                <div class="col-md-12">
+			<div class="row">
+				<div class="col-md-12">
 					<div class="row">
 						<div class="col-md-6 col-sm-6">
 							<div class="form-group"
@@ -20,13 +20,13 @@
 									<label class="col-md-4 col-sm-4 control-label"><fmt:message key="company.name" bundle="${msg}" /><span class="text-danger">*</span>
 									</label>
 									<div class="col-md-6 col-sm-6">
-										<input required="true" type="text" name="name"
+										<input required="true" type="text" id="name" name="name"
 											data-ng-model="domain.name" class="form-control"
 											data-ng-class="{'error': domainForm.name.$invalid && formSubmitted}">
 										<i tooltip="Name of the company"
 											class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 										<div class="error-area"
-											data-ng-show="domainForm.name.$invalid && formSubmitted">
+											data-ng-show="domainForm.name.$invalid && formSubmitted"> 
 											<i
 												ng-attr-tooltip="{{ domainForm.name.errorMessage || 'Name required' }}"
 												class="fa fa-warning error-icon"></i>
@@ -42,50 +42,48 @@
 									</label>
 									<div class="col-md-6 col-sm-6">
 										<input required="true" type="text" name="companyNameAbb"
-											data-ng-model="domain.companyNameAbb" class="form-control"
+											data-ng-model="domain.companyNameAbbreviation" class="form-control"
 											data-ng-class="{'error': domainForm.companyNameAbb.$invalid && formSubmitted}">
 										<i tooltip="Abbreviation of the company name"
 											class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 										<div class="error-area"
 											data-ng-show="domainForm.companyNameAbb.$invalid && formSubmitted">
-											<i
-												ng-attr-tooltip="{{ domainForm.companyNameAbb.errorMessage || 'company Name Abbreviation required' }}"
+											<i ng-attr-tooltip="{{ domainForm.companyNameAbb.errorMessage || 'company Name Abbreviation required' }}"
 												class="fa fa-warning error-icon"></i>
 										</div>
 									</div>
 								</div>
-							</div>
-
+							</div> 
+							
 							<div class="form-group"
 								ng-class="{'text-danger': domainForm.companyAddress.$invalid && formSubmitted}">
 								<div class="row">
 									<label class="col-md-4 col-sm-4 control-label"><fmt:message key="company.address" bundle="${msg}" /><span class="text-danger">*</span>
 									</label>
 									<div class="col-md-6 col-sm-6">
-										<input type="text" name="companyAddress"
+										<input required="true" type="text" name="companyAddress"
 											data-ng-model="domain.companyAddress" class="form-control"
 											data-ng-class="{'error': domainForm.companyAddress.$invalid && formSubmitted}">
 										<i tooltip="Company address of the company"
-											class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+											class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>  
 										<div class="error-area"
 											data-ng-show="domainForm.companyAddress.$invalid && formSubmitted">
-											<i
-												ng-attr-tooltip="{{ domainForm.companyAddress.errorMessage || 'Company Address required' }}"
+											<i ng-attr-tooltip="{{ domainForm.companyAddress.errorMessage || 'Company Address required' }}"
 												class="fa fa-warning error-icon"></i>
 										</div>
 									</div>
 								</div>
-							</div>
+							</div>      
+
 						</div>
 						<div class="col-md-6 col-sm-6">
-
-						<div class="form-group"
+							<div class="form-group"
 								ng-class="{'text-danger': domainForm.portalUserName.$invalid && formSubmitted}">
 								<div class="row">
 									<label class="col-md-4 col-sm-4 control-label"><fmt:message key="portal.user.name" bundle="${msg}" /><span class="text-danger">*</span>
 									</label>
 									<div class="col-md-6 col-sm-6">
-										<input type="text" name="portalUserName"
+										<input required="true" type="text" name="portalUserName"
 											data-ng-model="domain.portalUserName" class="form-control"
 											data-ng-class="{'error': domainForm.portalUserName.$invalid && formSubmitted}">
 										<i tooltip="Name of the portal user"
@@ -178,7 +176,7 @@
 										<label class="col-md-4 col-sm-4 control-label"><fmt:message key="email.id" bundle="${msg}" /><span
 											class="text-danger">*</span></label>
 										<div class="col-md-6 col-sm-6">
-											<input required="true" type="email" name="email"
+											<input type="text" name="email"
 												data-ng-model="domain.email" class="form-control"
 												data-ng-class="{'error': domainForm.email.$invalid && formSubmitted}">
 											<i tooltip="Email of the company"
@@ -217,24 +215,6 @@
 						</div>
 
 
-						<!-- Second column -->
-
-
-
-
-
-						<!--       <div class="form-group" ng-class="{'text-danger': domainForm.secondaryContact.$invalid && formSubmitted}">
-                	<div class="row">
-						<label class="col-md-4 col-sm-4 control-label">Secondary Contact<span class="text-danger">*</span></label>
-							<div class="col-md-6 col-sm-6">
-								<input type="text" name="secondaryContact" data-ng-model="domain.secondaryContact" class="form-control" data-ng-class="{'error': domainForm.secondaryContact.$invalid && formSubmitted}">
-								<i tooltip="Secondary contact of the company" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
-									<div class="error-area" data-ng-show="domainForm.secondaryContact.$invalid && formSubmitted" >
-										<i ng-attr-tooltip="{{ domainForm.secondaryContact.errorMessage || 'Secondary contact required' }}" class="fa fa-warning error-icon"></i>
-								</div>
-							</div>
-					</div>
-                    </div> -->
 						<div class="col-md-6 col-sm-6">
 
 							<fieldset class="scheduler-border ">
@@ -244,7 +224,7 @@
 										<label class="col-md-4 col-sm-4 control-label"><fmt:message key="first.name" bundle="${msg}" /></label>
 										<div class="col-md-6 col-sm-6">
 											<input type="text" name="primaryFirstName"
-												data-ng-model="domain.primaryFirstName" class="form-control">
+												data-ng-model="domain.secondaryContactName" class="form-control">
 											<i tooltip="Secondary first name of the company"
 												class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 										</div>
@@ -256,7 +236,7 @@
 										<label class="col-md-4 col-sm-4 control-label"><fmt:message key="last.name" bundle="${msg}" /></label>
 										<div class="col-md-6 col-sm-6">
 											<input type="text" name="lastName"
-												data-ng-model="domain.lastName" class="form-control">
+												data-ng-model="domain.secondaryContactLastName" class="form-control">
 											<i tooltip="Last name of the company"
 												class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 										</div>
@@ -265,9 +245,10 @@
 
 								<div class="form-group">
 									<div class="row">
-										<label class="col-md-4 col-sm-4 control-label"><fmt:message key="email.id" bundle="${msg}" /></label>
+								<label class="col-md-4 col-sm-4 control-label"><fmt:message key="email.id" bundle="${msg}" /></label>
+
 										<div class="col-md-6 col-sm-6">
-											<input type="email" name="email" data-ng-model="domain.email"
+											<input type="text" name="email" data-ng-model="domain.secondaryContactEmail"
 												class="form-control"> <i
 												tooltip="Email of the company"
 												class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
@@ -280,7 +261,7 @@
 										<label class="col-md-4 col-sm-4 control-label"><fmt:message key="phone.number" bundle="${msg}" /></label>
 										<div class="col-md-6 col-sm-6">
 											<input type="text" valid-number name="phone"
-												data-ng-model="domain.phone" class="form-control">
+												data-ng-model="domain.secondaryContactPhone" class="form-control">
 											<i tooltip="Phone of the company"
 												class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 
@@ -291,8 +272,8 @@
 						</div>
 					</div>
 				</div>
-            </div>
-        </div>
+			</div>
+		</div>
         <div class="modal-footer">
 
             <a class="btn btn-default"  data-ng-click="cancel()"><fmt:message key="common.cancel" bundle="${msg}" /></a>
