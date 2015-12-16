@@ -7,8 +7,9 @@ angular
         .module('panda-ui-admin')
         .controller('userListCtrl', userListCtrl)
 
-function userListCtrl($scope, crudService) {
+function userListCtrl($scope, crudService, filterFilter) {
 	$scope.paginationObject = {};
+	$scope.activeUsers = [];
     // User List
     $scope.list = function (pageNumber) {
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
@@ -23,31 +24,10 @@ function userListCtrl($scope, crudService) {
     $scope.list(1);
     $scope.active = {};
 	$scope.inActive = {};
-
-    // User List for count active user
-    $scope.list = function () {
-    	var active = 0;
-    	var inActive = 0;
-        var hasUsers = crudService.listAll("users/listbydomain");
-        hasUsers.then(function (result) {  // this is only run after $http completes0
-        	angular.forEach(result, function(value, key) {
-            	if (value.isActive)
-            		active++;
-            	else
-            		inActive++;
-            });
-        	if (active == 0)
-        		$scope.active = 0;
-        	else
-        		$scope.active = active;
-        	if (inActive == 0)
-        		$scope.inActive = 0;
-        	else
-        		$scope.inActive = inActive;
-
-        	$scope.totalUser = $scope.active + $scope.inActive;
-
-        });
-    };
-    $scope.list();
+	
+	var hasUsers = crudService.listAll("users/list");
+    hasUsers.then(function (result) {  // this is only run after $http completes0
+    	$scope.activeUsers = result;
+    	
+    });
 };
