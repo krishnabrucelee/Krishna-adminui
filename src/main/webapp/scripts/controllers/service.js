@@ -840,6 +840,7 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
             }
             compute.customized = (compute.customized == null) ? false : true;
             compute.customizedIops = (compute.customizedIops == null) ? false : true;
+            compute.isHighAvailabilityEnabled = (compute.isHighAvailabilityEnabled == null) ? false : true;
             console.log(compute);
             var hasComputes = crudService.add("computes", compute);
             hasComputes.then(function (result) {  // this is only run after
