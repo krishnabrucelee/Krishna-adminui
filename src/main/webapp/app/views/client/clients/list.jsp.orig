@@ -38,10 +38,7 @@ Navigation
                         <div class="col-md-12 col-sm-12 col-xs-12 ">
                         <pagination-content></pagination-content>
                             <div class="white-content">
-                            <div data-ng-show = "showLoader" style="margin: 1%">
-    				  		<get-loader-image data-ng-show="showLoader"></get-loader-image>
-      						</div>
-                                <div data-ng-hide="showLoader" class="table-responsive">
+                                <div class="table-responsive">
                                     <table cellspacing="1" cellpadding="1" class="table table-bordered table-striped ">
                                         <thead>
                                         <tr>
@@ -60,7 +57,11 @@ Navigation
                                                 <td>{{domain.name}}</td>
                                                 <td>{{domain.portalUserName}}</td>
                                                 <td>{{domain.cityHeadquarter}}</td>
+<<<<<<< HEAD
+                                                <td>{{domain.hod.email}}</td>
+=======
                                                 <td>{{domain.email}}</td>
+>>>>>>> upstream/master
                                                 <td>{{domain.phone}}</td>
                                                 <td>
                                                 <a class="icon-button" title="<fmt:message key="common.edit" bundle="${msg}" />" data-ng-click="edit('lg', domain)">
