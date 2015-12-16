@@ -9,6 +9,7 @@ angular
 
 function userListCtrl($scope, $state, $stateParams, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, crudService, dialogService) {
 	$scope.paginationObject = {};
+	$scope.activeUsers = [];
     // User List
     $scope.list = function (pageNumber) {
     	$scope.showLoader = true;
@@ -26,32 +27,11 @@ function userListCtrl($scope, $state, $stateParams, modalService, $log, promiseA
     $scope.list(1);
     $scope.active = {};
 	$scope.inActive = {};
-
-    // User List for count active user
-    $scope.list = function () {
+	
+	var hasUsers = crudService.listAll("users/list");
     	$scope.showLoader = true;
-    	var active = 0;
-    	var inActive = 0;
-        var hasUsers = crudService.listAll("users/listbydomain");
-        hasUsers.then(function (result) {  // this is only run after $http completes0
-        	angular.forEach(result, function(value, key) {
-            	if (value.isActive)
-            		active++;
-            	else
-            		inActive++;
-            });
-        	if (active == 0)
-        		$scope.active = 0;
-        	else
-        		$scope.active = active;
-        	if (inActive == 0)
-        		$scope.inActive = 0;
-        	else
-        		$scope.inActive = inActive;
-
-        	$scope.totalUser = $scope.active + $scope.inActive;
-
-        });
-    };
-    $scope.list();
+    hasUsers.then(function (result) {  // this is only run after $http completes0
+    	$scope.activeUsers = result;
+    	
+    });
 };
