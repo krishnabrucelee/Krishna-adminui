@@ -52,6 +52,7 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/css">
     <link rel="stylesheet" href="scripts/easyTree.css">
+    <link rel="stylesheet" href="styles/custom-style.css">
     <!-- endbuild -->
 
 
