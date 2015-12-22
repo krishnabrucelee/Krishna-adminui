@@ -23,8 +23,6 @@
         </p>
     </div>
 </div>
-
-
-
 </div>
+<div id="footer" ng-include="'app/views/common/footer.jsp'"></div>
 </div>
