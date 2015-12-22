@@ -26,7 +26,7 @@
 										<i tooltip="Name of the company"
 											class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 										<div class="error-area"
-											data-ng-show="domainForm.name.$invalid && formSubmitted"> 
+											data-ng-show="domainForm.name.$invalid && formSubmitted">
 											<i
 												ng-attr-tooltip="{{ domainForm.name.errorMessage || 'Name required' }}"
 												class="fa fa-warning error-icon"></i>
@@ -53,8 +53,8 @@
 										</div>
 									</div>
 								</div>
-							</div> 
-							
+							</div>
+
 							<div class="form-group"
 								ng-class="{'text-danger': domainForm.companyAddress.$invalid && formSubmitted}">
 								<div class="row">
@@ -65,7 +65,7 @@
 											data-ng-model="domain.companyAddress" class="form-control"
 											data-ng-class="{'error': domainForm.companyAddress.$invalid && formSubmitted}">
 										<i tooltip="Company address of the company"
-											class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>  
+											class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 										<div class="error-area"
 											data-ng-show="domainForm.companyAddress.$invalid && formSubmitted">
 											<i ng-attr-tooltip="{{ domainForm.companyAddress.errorMessage || 'Company Address required' }}"
@@ -73,7 +73,7 @@
 										</div>
 									</div>
 								</div>
-							</div>      
+							</div>
 
 						</div>
 						<div class="col-md-6 col-sm-6">
