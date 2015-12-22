@@ -37,13 +37,7 @@
                             </div>
                         </div>
                         <div class="pull-right">
-                            <div class="quick-search ">
-                                <div class="input-group">
-                                    <input data-ng-model="storageSearch" type="text" class="form-control input-medium" placeholder="<fmt:message
-										key="common.quicksearch" bundle="${msg}" />" aria-describedby="quicksearch-go">
-                                    <span class="input-group-addon" id="quicksearch-go"><span class="pe-7s-search pe-lg font-bold"></span></span>
-                                </div>
-                            </div>
+						<panda-quick-search></panda-quick-search>
                             <div class="clearfix"></div>
                             <span class="pull-right m-l-sm m-t-sm">
                                 <a class="btn btn-info" ui-sref="servicecatalog.list-storage.list-storage-offer"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message
@@ -62,7 +56,7 @@
     				  		<get-loader-image data-ng-show="showLoader"></get-loader-image>
       						</div>
             <div class="table-responsive" data-ng-hide="showLoader">
-                
+
                     <table cellspacing="1" cellpadding="1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -74,7 +68,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr data-ng-repeat="storage in storageList| filter: storageSearch">
+                            <tr data-ng-repeat="storage in filteredCount = (storageList| filter: quickSearch)">
                                 <td>
                                     {{ storage.name}}
                                 </td>

@@ -38,12 +38,7 @@
                             </div>
                         </div>
                         <div class="pull-right">
-                            <div class="quick-search">
-                                <div class="input-group">
-                                    <input data-ng-model="computeSearch" type="text" class="form-control input-medium" placeholder="<fmt:message key="common.quicksearch" bundle="${msg}" />" aria-describedby="quicksearch-go">
-                                    <span class="input-group-addon" id="quicksearch-go"><span class="pe-7s-search pe-lg font-bold"></span></span>
-                                </div>
-                            </div>
+							<panda-quick-search></panda-quick-search>
                             <div class="clearfix"></div>
                             <span class="pull-right m-l-sm m-t-sm">
                                 <a class="btn btn-info" ui-sref="servicecatalog.list-compute.list-compute-offer"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message key="common.add" bundle="${msg}" /></a>
@@ -77,7 +72,7 @@
                                </tr>
                            </tbody>
                            <tbody data-ng-show="computeList.length > 0">
-                            <tr data-ng-repeat="compute in computeList| filter: computeSearch">
+                            <tr data-ng-repeat="compute in filteredCount = (computeList| filter: quickSearch)">
                                 <td>
 
                                     <!--<a class="text-info" ui-sref="servicecatalog.list-compute.view-catalog({id: {{ catalog.id}}})"  title="View Catalog" >{{ catalog.name}}</a>-->

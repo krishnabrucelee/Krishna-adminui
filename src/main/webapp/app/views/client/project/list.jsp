@@ -34,15 +34,7 @@
 							</div>
 						</div>
 						<div class="pull-right">
-							<div class="quick-search pull-right m-t-xl">
-								<div class="input-group">
-									<input data-ng-model="projectSearch" type="text"
-										class="form-control input-medium" placeholder="<fmt:message key="common.quick.search" bundle="${msg}" />"
-										aria-describedby="quicksearch-go"> <span
-										class="input-group-addon" id="quicksearch-go"><span
-										class="pe-7s-search pe-lg font-bold"></span></span>
-								</div>
-							</div>
+							<panda-quick-search></panda-quick-search>
 						</div>
 
 					</div>
@@ -50,6 +42,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12 ">
+				<pagination-content></pagination-content>
 					<div class="white-content">
 					 <div data-ng-show = "showLoader" style="margin: 1%">
     				  		<get-loader-image data-ng-show="showLoader"></get-loader-image>
@@ -70,7 +63,7 @@
 								</thead>
 								<tbody>
 									<tr
-										data-ng-repeat="project in projectList| filter: projectSearch">
+										data-ng-repeat="project in filteredCount = (projectList| filter: quickSearch)">
 										<td><a class="text-info"
 											ui-sref="client.project.view({id: {{ project.id}}})"
 											title="View Project">{{ project.id}}</a></td>
@@ -87,6 +80,7 @@
 							</table>
 						</div>
 					</div>
+					<pagination-content></pagination-content>
 				</div>
 			</div>
 		</div>

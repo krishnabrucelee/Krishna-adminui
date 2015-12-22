@@ -16,12 +16,7 @@
                             </div>
                         </div>
                         <div class="pull-right">
-                            <div class="quick-search">
-                                <div class="input-group">
-                                    <input data-ng-model="applicationSearch" type="text" class="form-control input-medium" placeholder="<fmt:message key="common.quick.search" bundle="${msg}" />" aria-describedby="quicksearch-go">
-                                    <span class="input-group-addon" id="quicksearch-go"><span class="pe-7s-search pe-lg font-bold"></span></span>
-                                </div>
-                            </div>
+					<panda-quick-search></panda-quick-search>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -29,7 +24,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12 ">
-
+<pagination-content></pagination-content>
                     <div class="white-content">
                     <div data-ng-show = "showLoader" style="margin: 1%">
     				  		<get-loader-image data-ng-show="showLoader"></get-loader-image>
@@ -44,7 +39,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr data-ng-repeat=" application in applicationList| filter: applicationSearch">
+                                    <tr data-ng-repeat=" application in filteredCount = (applicationList| filter: quickSearch)">
                                         <td>{{ application.type}}</td>
                                         <td>{{ application.description}}</td>
                                         <td>{{ application.status}}</td>
@@ -53,6 +48,7 @@
                             </table>
                         </div>
                     </div>
+                    <pagination-content></pagination-content>
                 </div>
             </div>
 

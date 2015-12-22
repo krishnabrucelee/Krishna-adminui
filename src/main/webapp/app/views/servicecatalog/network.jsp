@@ -11,12 +11,7 @@
                     <span class="pull-right m-l-sm">
                         <a class="btn btn-info" ui-sref="servicecatalog.list-network" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
                     </span>
-                    <div class="quick-search pull-right">
-                        <div class="input-group">
-                            <input data-ng-model="networkSearch" type="text" class="form-control input-medium" placeholder="<fmt:message key="common.quicksearch" bundle="${msg}" />" aria-describedby="quicksearch-go">
-                            <span class="input-group-addon" id="quicksearch-go"><span class="pe-7s-search pe-lg font-bold"></span></span>
-                        </div>
-                    </div>
+					<panda-quick-search></panda-quick-search>
                 </div>
 
             </div>
@@ -36,7 +31,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr data-ng-repeat="network in networkList| filter: networkSearch">
+                        <tr data-ng-repeat="network in filteredCount = (networkList| filter: quickSearch)">
                             <td>
                                 {{ network.name}}
                             </td>
