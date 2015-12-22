@@ -32,12 +32,7 @@
                         </div>
                     </div>
                     <div class="pull-right">
-                        <div class="quick-search ">
-                            <div class="input-group">
-                                <input data-ng-model="templateSearch" type="text" class="form-control input-medium" placeholder="<fmt:message key="common.quicksearch" bundle="${msg}" />" aria-describedby="quicksearch-go">
-                                <span class="input-group-addon" id="quicksearch-go"><span class="pe-7s-search pe-lg font-bold"></span></span>
-                            </div>
-                        </div>
+						<panda-quick-search></panda-quick-search>
                         <div class="clearfix"></div>
                         <span class="pull-right m-l-sm m-t-sm">
                             <a has-permission="REGISTER_TEMPLATE" class="btn btn-info" ui-sref="servicecatalog.list-templatestore.list-view-template-create"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message key="common.add" bundle="${msg}" /></a>
@@ -68,7 +63,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr data-ng-repeat="template in templateList| filter: templateSearch">
+                        <tr data-ng-repeat="template in filteredCount = (templateList| filter: quickSearch)">
 
                             <td>{{ template.name}}</td>
                             <td>

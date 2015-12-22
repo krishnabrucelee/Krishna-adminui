@@ -55,7 +55,7 @@ Navigation
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            <tr data-ng-class="{'bg-row text-white' : domain.isSelected == true }"  data-ng-repeat="domain in domainList| filter: quickSearch">
+                                            <tr data-ng-class="{'bg-row text-white' : domain.isSelected == true }"  data-ng-repeat="domain in filteredCount = (domainList| filter: quickSearch)">
 
                                                 <td>{{domain.name}}</td>
                                                 <td>{{domain.portalUserName}}</td>

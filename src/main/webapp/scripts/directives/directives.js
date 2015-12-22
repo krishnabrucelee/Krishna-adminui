@@ -26,6 +26,7 @@ angular
         .directive('getLoaderImage', getLoaderImage)
         .directive('validInteger', validInteger)
         .directive('hasPermission', hasPermission)
+        .directive('pandaQuickSearch', pandaQuickSearch)
 
 /**
  * pageTitle - Directive for set Page title - mata title
@@ -541,6 +542,15 @@ function appClock(dateFilter, $timeout) {
 
             updateTime();
         }
+    };
+}
+
+function pandaQuickSearch() {
+    return {
+        restrict: 'E',
+        link: function (scope, element, attrs) {
+        },
+        templateUrl: "app/views/common/quick-search.jsp",
     };
 }
 
