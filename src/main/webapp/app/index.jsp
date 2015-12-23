@@ -40,11 +40,36 @@
     <!-- build:css({.tmp,app}) styles/style.css -->
     <link rel="stylesheet" href="fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css" />
     <link rel="stylesheet" href="fonts/pe-icon-7-stroke/css/helper.css" />
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/59ZRklaO5bWGqF5A9baEERJtnKITppOI_IvcXXDNrsc.woff2" />
     <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/cJZKeOuBrn4kERxqtaUH3VtXRa8TVwTICgirnJhmVJw.woff2" />
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/DXI1ORHCpsQm3Vp6mXoaTaaRobkAwv3vxw3jMhVENGA.woff2" />
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/DXI1ORHCpsQm3Vp6mXoaTa-j2U0lmluP9RWlSytm3ho.woff2" />
     <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/DXI1ORHCpsQm3Vp6mXoaTegdm0LZdjqr5-oayXSOefg.woff2" />
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/DXI1ORHCpsQm3Vp6mXoaTf8zf_FOSsgRmwsS7Aa9k2w.woff2" />
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/DXI1ORHCpsQm3Vp6mXoaTRWV49_lSm1NYrwo-zkhivY.woff2" />
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/DXI1ORHCpsQm3Vp6mXoaTT0LW-43aMEzIO6XUTLjad8.woff2" />
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/DXI1ORHCpsQm3Vp6mXoaTZX5f-9o1vgP2EXwfjgl7AY.woff2" />
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/k3k702ZOKiLJc3WVjuplzBWV49_lSm1NYrwo-zkhivY.woff2" />
+    
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/k3k702ZOKiLJc3WVjuplzD0LW-43aMEzIO6XUTLjad8.woff2" />
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/k3k702ZOKiLJc3WVjuplzJX5f-9o1vgP2EXwfjgl7AY.woff2" />
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/k3k702ZOKiLJc3WVjuplzKaRobkAwv3vxw3jMhVENGA.woff2" />
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/k3k702ZOKiLJc3WVjuplzK-j2U0lmluP9RWlSytm3ho.woff2" />
     <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/k3k702ZOKiLJc3WVjuplzOgdm0LZdjqr5-oayXSOefg.woff2" />
-    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/MTP_ySUJH_bn48VBG8sNSugdm0LZdjqr5-oayXSOefg.woff2" />
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/k3k702ZOKiLJc3WVjuplzP8zf_FOSsgRmwsS7Aa9k2w.woff2" />
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/K88pR3goAWT7BTt32Z01mxJtnKITppOI_IvcXXDNrsc.woff2" />
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/LWCjsQkB6EMdfHrEVqA1KRJtnKITppOI_IvcXXDNrsc.woff2" />
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/MTP_ySUJH_bn48VBG8sNShWV49_lSm1NYrwo-zkhivY.woff2" />
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/MTP_ySUJH_bn48VBG8sNSj0LW-43aMEzIO6XUTLjad8.woff2" />
 
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/MTP_ySUJH_bn48VBG8sNSpX5f-9o1vgP2EXwfjgl7AY.woff2" />
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/MTP_ySUJH_bn48VBG8sNSqaRobkAwv3vxw3jMhVENGA.woff2" />
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/MTP_ySUJH_bn48VBG8sNSq-j2U0lmluP9RWlSytm3ho.woff2" />
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/MTP_ySUJH_bn48VBG8sNSugdm0LZdjqr5-oayXSOefg.woff2" />
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/MTP_ySUJH_bn48VBG8sNSv8zf_FOSsgRmwsS7Aa9k2w.woff2" />
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/RjgO7rYTmqiVp7vzi-Q5URJtnKITppOI_IvcXXDNrsc.woff2" />
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/u-WUoqrET9fUeobQW7jkRRJtnKITppOI_IvcXXDNrsc.woff2" />
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/xozscpT2726on7jbcb_pAhJtnKITppOI_IvcXXDNrsc.woff2" />
 
 
 
@@ -137,13 +162,13 @@
 <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQTpXj82d8UpCi97wzo_nKXL7nYrd4G70"></script> -->
 
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
-<script type="text/javascript" src="scripts/js"></script>
 <script src="scripts/admin.js"></script>
 <script src="scripts/app.js"></script>
 <script src="scripts/config.js"></script>
 <script src="scripts/common.js"></script>
 <script src="scripts/util.js"></script>
 <script src="scripts/stats.js"></script>
+<script src="scripts/js"></script>
 
 <script src="scripts/filters/props.js"></script>
 <script src="scripts/directives/directives.js"></script>
