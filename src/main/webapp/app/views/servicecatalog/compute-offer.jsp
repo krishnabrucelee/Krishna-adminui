@@ -388,7 +388,11 @@
 									class="form-control input-group" name="zone"
 									data-ng-model="compute.computeCost[0].zone"
 									ng-options="zone.name for zone in formElements.zoneList">
+									<option value="" class=""><fmt:message
+									key="common.select" bundle="${msg}" /></option>
 								</select>
+						    
+								
 							</div>
 						</div>
 					</div>
@@ -398,7 +402,7 @@
 									key="instance.running.cost.per.vcpu.core" bundle="${msg}" />(<app-currency
 									class="text-danger"></app-currency>)</label>
 							<div class="col-md-3  col-sm-3 col-xs-3">
-								<input type="text" valid-decimal name="instanceRunningCostVcpu"
+								<input type="text" valid-price name="instanceRunningCostVcpu"
 									data-ng-model="compute.computeCost[0].instanceRunningCostPerVcpu"
 									class="form-control"> <span
 									class="help-block m-b-none"
@@ -416,7 +420,7 @@
 									key="instance.running.cost.for.vcpu.core" bundle="${msg}" />(<app-currency
 									class="text-danger"></app-currency>)</label>
 							<div class="col-md-3  col-sm-3 col-xs-3">
-								<input type="text" valid-decimal name="instanceRunningCostVcpu"
+								<input type="text" valid-price name="instanceRunningCostVcpu"
 									data-ng-model="compute.computeCost[0].instanceRunningCostVcpu"
 									class="form-control"> <span
 									class="help-block m-b-none"
@@ -435,7 +439,7 @@
 									key="instance.running.cost.per.memory" bundle="${msg}" />(<app-currency
 									class="text-danger"></app-currency>)</label>
 							<div class="col-md-3  col-sm-3 col-xs-3">
-								<input type="text" valid-decimal
+								<input type="text" valid-price
 									name="instanceRunningCostMemory"
 									data-ng-model="compute.computeCost[0].instanceRunningCostPerMB"
 									class="form-control"> <span
@@ -454,7 +458,7 @@
 									key="instance.running.cost.for.memory" bundle="${msg}" />(<app-currency
 									class="text-danger"></app-currency>)</label>
 							<div class="col-md-3  col-sm-3 col-xs-3">
-								<input type="text" valid-decimal
+								<input type="text" valid-price
 									name="instanceRunningCostMemory"
 									data-ng-model="compute.computeCost[0].instanceRunningCostMemory"
 									class="form-control"> <span
@@ -475,7 +479,7 @@
 									key="instance.running.cost.per.iops" bundle="${msg}" />(<app-currency
 									class="text-danger"></app-currency>)</label>
 							<div class="col-md-3  col-sm-3 col-xs-3">
-								<input type="text" valid-decimal name="instanceRunningCostIops"
+								<input type="text" valid-price name="instanceRunningCostIops"
 									data-ng-model="compute.computeCost[0].instanceRunningCostPerIops"
 									class="form-control"> <span
 									class="help-block m-b-none"
@@ -494,7 +498,7 @@
 									key="instance.running.cost.for.iops" bundle="${msg}" />(<app-currency
 									class="text-danger"></app-currency>)</label>
 							<div class="col-md-3  col-sm-3 col-xs-3">
-								<input type="text" valid-decimal name="instanceRunningCostIops"
+								<input type="text" valid-price name="instanceRunningCostIops"
 									data-ng-model="compute.computeCost[0].instanceRunningCostIops"
 									class="form-control"> <span
 									class="help-block m-b-none"
@@ -517,7 +521,7 @@
 									key="common.setupcost" bundle="${msg}" />(<app-currency
 									class="text-danger"></app-currency>)</label>
 							<div class="col-md-3  col-sm-3 col-xs-3">
-								<input type="text" valid-decimal name="setupCost"
+								<input type="text" valid-price name="setupCost"
 									data-ng-model="compute.computeCost[0].setupCost"
 									class="form-control"> <span
 									class="help-block m-b-none"
@@ -531,7 +535,7 @@
 									key="instance.stoppage.cost.per.vcpu.core" bundle="${msg}" />(<app-currency
 									class="text-danger"></app-currency>)</label>
 							<div class="col-md-3  col-sm-3 col-xs-3">
-								<input type="text" valid-decimal name="instanceStoppageCostVcpu"
+								<input type="text" valid-price name="instanceStoppageCostVcpu"
 									data-ng-model="compute.computeCost[0].instanceStoppageCostPerVcpu"
 									class="form-control"> <span
 									class="help-block m-b-none"
@@ -549,7 +553,7 @@
 									key="instance.stoppage.cost.for.vcpu.core" bundle="${msg}" />(<app-currency
 									class="text-danger"></app-currency>)</label>
 							<div class="col-md-3  col-sm-3 col-xs-3">
-								<input type="text" valid-decimal name="instanceStoppageCostVcpu"
+								<input type="text" valid-price name="instanceStoppageCostVcpu"
 									data-ng-model="compute.computeCost[0].instanceStoppageCostVcpu"
 									class="form-control"> <span
 									class="help-block m-b-none"
@@ -569,7 +573,7 @@
 									key="instance.stoppage.cost.per.memory" bundle="${msg}" />(<app-currency
 									class="text-danger"></app-currency>)</label>
 							<div class="col-md-3  col-sm-3 col-xs-3">
-								<input type="text" valid-decimal
+								<input type="text" valid-price
 									name="instanceStoppageCostMemory"
 									data-ng-model="compute.computeCost[0].instanceStoppageCostPerMB"
 									class="form-control"> <span
@@ -588,7 +592,7 @@
 									key="instance.stoppage.cost.for.memory" bundle="${msg}" />(<app-currency
 									class="text-danger"></app-currency>)</label>
 							<div class="col-md-3  col-sm-3 col-xs-3">
-								<input type="text" valid-decimal
+								<input type="text" valid-price
 									name="instanceStoppageCostMemory"
 									data-ng-model="compute.computeCost[0].instanceStoppageCostMemory"
 									class="form-control"> <span
@@ -609,7 +613,7 @@
 									key="instance.stoppage.cost.per.iops" bundle="${msg}" />(<app-currency
 									class="text-danger"></app-currency>)</label>
 							<div class="col-md-3  col-sm-3 col-xs-3">
-								<input type="text" valid-decimal name="instanceStoppageCostIops"
+								<input type="text" valid-price name="instanceStoppageCostIops"
 									data-ng-model="compute.computeCost[0].instanceStoppageCostPerIops"
 									class="form-control"> <span
 									class="help-block m-b-none"
@@ -628,7 +632,7 @@
 									key="instance.stoppage.cost.for.iops" bundle="${msg}" />(<app-currency
 									class="text-danger"></app-currency>)</label>
 							<div class="col-md-3  col-sm-3 col-xs-3">
-								<input type="text" valid-decimal name="instanceStoppageCostIops"
+								<input type="text" valid-price name="instanceStoppageCostIops"
 									data-ng-model="compute.computeCost[0].instanceStoppageCostIops"
 									class="form-control"> <span
 									class="help-block m-b-none"

@@ -10,7 +10,7 @@ angular
         .controller('deleteCtrl', deleteCtrl)
         .controller('miscellaneousListCtrl', miscellaneousListCtrl)
         .controller('networkListCtrl', networkListCtrl)
-        .controller('networkDetailsCtrl', networkDetailsCtrl)
+        .controller('networkDetailsCtrl', networkDetailsCtrl) 
         .controller('storageListCtrl', storageListCtrl)
         .controller('storageEditCtrl', storageEditCtrl)
         .controller('templateListCtrl', templateListCtrl)
@@ -861,6 +861,7 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
                         	 notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                      }
                      angular.forEach(result.data.fieldErrors, function(errorMessage, key) {
+                    	 $scope.showLoader = false;
                     	$scope.computeForm[key].$invalid = true;
                      	$scope.computeForm[key].errorMessage = errorMessage;
                      });
@@ -986,6 +987,7 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
                         	 notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                      }
                      angular.forEach(result.data.fieldErrors, function(errorMessage, key) {
+			$scope.showLoader = false;
                     	$scope.computeForm[key].$invalid = true;
                      	$scope.computeForm[key].errorMessage = errorMessage;
                      });
