@@ -18,3 +18,6 @@ fieldset.scheduler-border legend{border-bottom:none !important; margin-bottom:0p
 .shown-page{width:100% !important;}
 .shown-entry{width:100% !important;}
 }
+
+#wrapper > .content ~ .content {min-height:0px;}
+#wrapper > .content {min-height:700px;}
