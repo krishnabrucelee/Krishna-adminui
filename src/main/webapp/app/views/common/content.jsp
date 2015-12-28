@@ -212,9 +212,13 @@
 				<h2 class="font-light m-b-xs">
 					<span ng-if="$state.current.data.pageTitle === 'compute.offer'"><fmt:message
 							key="compute.offer" bundle="${msg}" /></span>
-					 <span
-						ng-if="$state.current.data.pageTitle === 'storage.offer'"><fmt:message
-							key="storage.offer" bundle="${msg}" /></span>
+					 <span ng-if="$state.current.data.pageTitle === 'storage.offer'">
+						<a ng-switch-when="false" ng-href="{{'#' + state.url.format($stateParams)}}"><fmt:message key="view.storage" bundle="${msg}" /></a>
+						<%-- <fmt:message
+							key="storage.offer" bundle="${msg}" />--%>
+							 <span ng-switch-when="true">{{ state.data.pageName }
+							</span></span>
+
 						 <span	ng-if="$state.current.data.pageTitle === 'network'"><fmt:message
 							key="storage.offer" bundle="${msg}" /></span>
 				<span ng-if="$state.current.data.pageTitle === 'Edit Template'"><fmt:message key="common.templatestore" bundle="${msg}" /></span>

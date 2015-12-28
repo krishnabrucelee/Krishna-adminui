@@ -19,6 +19,167 @@
 			<div class="row">
                 <div class="col-md-6  col-sm-6 col-xs-4 col-lg-6 border-right" >
                 <div class="row">
+	                <div class="col-md-6  col-sm-6 col-xs-4 col-lg-6 " >
+						<div class="form-group"
+						ng-class="{'text-danger': storageForm.name.$invalid && formSubmitted}">
+						<div class="row">
+							<label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message
+									key="common.name" bundle="${msg}" /><span class="text-danger">*</span></label>
+							<div class="col-md-8  col-sm-6 col-xs-6">
+								<input required="true" type="text" name="name"
+									data-ng-model="storage.name" class="form-control"
+									data-ng-class="{'error': storageForm.name.$invalid && formSubmitted}">
+								<div class="error-area" data-ng-show="storageForm.name.$invalid && formSubmitted">
+
+
+<div class="error-area" data-ng-show="storageForm.name.$invalid && formSubmitted" >
+<i ng-attr-tooltip="{{ '<fmt:message key="storage.offer.required" bundle="${msg}" />' || '<fmt:message key="storage.name.size.error" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i>
+</div>
+								</div>
+							</div>
+						</div>
+					</div>
+	                </div>
+	                <div class="col-md-6  col-sm-6 col-xs-4 col-lg-6 " >
+						<div class="form-group"
+						ng-class="{'text-danger': storageForm.description.$invalid && formSubmitted}">
+						<div class="row">
+							<label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message
+									key="common.description" bundle="${msg}" /><span
+								class="text-danger">*</span></label>
+							<div class="col-md-8 col-sm-6">
+								<input required="true" type="text" name="description"
+									data-ng-model="storage.description" class="form-control"
+									data-ng-class="{'error': storageForm.description.$invalid && formSubmitted}">
+								<div class="error-area"
+									data-ng-show="storageForm.description.$invalid && formSubmitted">
+			<!--<i tooltip="<fmt:message key="storage.description.required" bundle="${msg}" />" class="fa fa-warning error-icon"></i> -->
+
+
+<div class="error-area" data-ng-show="storageForm.description.$invalid && formSubmitted" >
+<i ng-attr-tooltip="{{ '<fmt:message key="storage.description.required" bundle="${msg}" />' || '<fmt:message key="storage.description.size.error" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i>
+</div>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+	                </div>
+                </div>
+                <div class="row">
+	                <div class="col-md-6  col-sm-6 col-xs-4 col-lg-6 " >
+						<div class="form-group">
+						<div class="row">
+							<label
+								class="col-md-4 col-sm-4 col-xs-6 control-label font-normal"><fmt:message
+									key="storage.storagetag" bundle="${msg}" /></label>
+							<div class="col-md-8 col-sm-6 col-xs-6">
+								<input type="text" name="storagetag"
+									data-ng-model="storage.storageTags" class="form-control">
+							</div>
+						</div>
+					</div>
+	                </div>
+	                <div class="col-md-6  col-sm-6 col-xs-4 col-lg-6 " >
+						<div class="form-group">
+						<div class="row">
+							<label
+								class="col-md-4 col-sm-4 col-xs-6 control-label font-normal"><fmt:message
+									key="storage.storagetype" bundle="${msg}" /></label>
+							<div class="col-md-8 col-sm-6 col-xs-6">
+								<select
+									data-ng-init="storage.storageType = storageType.storagetypeList[0]"
+									class="form-control input-group" name="storageType"
+									data-ng-model="storage.storageType"
+									ng-options="storageType for  (id, storageType)  in storageType.storagetypeList">
+								</select>
+							</div>
+						</div>
+					</div>
+	                </div>
+                </div>
+                <div class="row">
+	                <div class="col-md-6  col-sm-6 col-xs-4 col-lg-6 " >
+						<div class="form-group">
+						<div class="row">
+							<label
+								class="col-md-4 col-sm-4 col-xs-6 control-label font-normal"><fmt:message
+									key="storage.qostype" bundle="${msg}" /></label>
+							<div class="col-md-8  col-sm-6 col-xs-6">
+								<select class="form-control input-group" name="qosType"
+									data-ng-model="storage.qosType"
+									ng-options="qosType for  (id, qosType)  in formElements.qosList">
+									<option value="">Select</option>
+								</select>
+							</div>
+						</div>
+					</div>
+	                </div>
+	                <div class="col-md-6  col-sm-6 col-xs-4 col-lg-6 " >
+						<div class="form-group">
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<label class="font-normal"> <input  icheck
+									type="checkbox" ng-model="storage.isPublic"
+									ng-init="storage.isPublic = true"> <fmt:message
+										key="storage.public" bundle="${msg}" />
+								</label>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<label class="font-normal"> <input icheck
+									type="checkbox" ng-model="storage.isCustomDisk"> <fmt:message
+										key="storage.customdisk" bundle="${msg}" />
+								</label>
+							</div>
+						</div>
+					</div>
+
+	                </div>
+                </div>
+                <div class="row">
+	                <div class="col-md-6  col-sm-6 col-xs-4 col-lg-6 " >
+						<div class="form-group" data-ng-if="!storage.isCustomDisk "
+					data-ng-class="{'text-danger': storageForm.size.$invalid && formSubmitted}">
+						<div class="row" data-ng-required="false">
+							<label
+								class="col-md-4 col-sm-4 col-xs-6 control-label font-normal"><fmt:message
+									key="common.size" bundle="${msg}" /><span class="text-danger">*</span>
+							</label>
+							<div class="col-md-8 col-sm-6 col-xs-6">
+								<input valid-number type="text "
+									ng-required="!storage.isCustomDisk" name="size"
+									data-ng-model="storage.diskSize" class="form-control"
+									data-ng-class="{'error': storageForm.size.$invalid && formSubmitted}">
+								<div class="error-area"
+									data-ng-if="storageForm.size.$invalid && formSubmitted">
+									<i tooltip="<fmt:message
+									key="storage.disksize.required" bundle="${msg}" />"
+										class="fa fa-warning error-icon"></i>
+								</div>
+
+							</div>
+						</div>
+					</div>
+	                </div>
+	                <div class="col-md-6  col-sm-6 col-xs-4 col-lg-6 " >
+						<div class="form-group" data-ng-if="!storage.isPublic">
+						<div class="row">
+							<label
+								class="col-md-4 col-sm-4 col-xs-6 control-label font-normal"><fmt:message
+									key="storage.domain" bundle="${msg}" /></label>
+							<div class="col-md-8 col-sm-6 col-xs-6">
+								<select class="form-control input-group" name="domain"
+									data-ng-model="storage.domain"
+									ng-options="domain.name for domain in formElements.domainList">
+									<option value="">Select</option>
+								</select>
+							</div>
+						</div>
+					</div>
+	                </div>
+                </div>
+                <%-- <div class="row">
                                 <div class="col-md-6  col-sm-6 col-xs-4 col-lg-6 " >
 
 					<div class="form-group"
@@ -165,7 +326,7 @@
 
 
 					</div>
-					</div>
+					</div> --%>
 
                 </div>
 
@@ -270,7 +431,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
-				<div class="form-group" data-ng-if="!storage.isCustomDisk " >
+					<div class="form-group" data-ng-if="!storage.isCustomDisk " >
 						<div class="row">
 							<label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.cost.per.month" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)
 							</label>
@@ -302,6 +463,27 @@
 
 						</div>
 					</div>
+					</div>
+					<div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+					<div class="form-group">
+						<div class="row">
+							<label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="common.zonename" bundle="${msg}" /></label>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+								<select data-ng-init="storage.zone = zoneList[0]"
+									class="form-control input-group" name="zone"
+									data-ng-model="storage.storagePrice[0].zone"
+									ng-options=" zone.name for zone in zoneList">
+									<option value="" class="">Select</option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+				</div>
+				<div class="row">
+				<div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
 					<div data-ng-show="storage.qosType == 'Storage'" >
 						<div class="form-group" data-ng-if="!storage.isCustomizedIops">
 							<div class="row">
@@ -320,7 +502,18 @@
 
 							</div>
 						</div>
-							<div class="form-group" data-ng-if="storage.isCustomizedIops">
+
+					</div>
+					</div>
+					</div>
+				</div>
+
+
+
+				</div>
+				<%-- <div class="row">
+				<div data-ng-show="storage.qosType == 'Storage'" >
+					<div class="form-group" data-ng-if="storage.isCustomizedIops">
 							<div class="row">
 								<label
 									class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.cost.per.iops" bundle="${msg}" /> (<app-currency class="text-danger"></app-currency>)
@@ -337,28 +530,8 @@
 
 							</div>
 						</div>
-					</div>
-				</div>
-
-
-				<div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
-					<div class="form-group">
-						<div class="row">
-							<label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="common.zonename" bundle="${msg}" /></label>
-							<div class="col-md-6 col-sm-6 col-xs-6">
-								<select data-ng-init="storage.zone = zoneList[0]"
-									class="form-control input-group" name="zone"
-									data-ng-model="storage.storagePrice[0].zone"
-									ng-options=" zone.name for zone in zoneList">
-									<option value="" class="">Select</option>
-								</select>
-							</div>
 						</div>
-					</div>
-
-
-				</div>
-				</div>
+				</div> --%>
 				<div class="row">
 					<div class="col-md-12  col-sm-12">
 						<span class="pull-right"> <a
