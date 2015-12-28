@@ -50,7 +50,7 @@
     <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/DXI1ORHCpsQm3Vp6mXoaTT0LW-43aMEzIO6XUTLjad8.woff2" />
     <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/DXI1ORHCpsQm3Vp6mXoaTZX5f-9o1vgP2EXwfjgl7AY.woff2" />
     <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/k3k702ZOKiLJc3WVjuplzBWV49_lSm1NYrwo-zkhivY.woff2" />
-    
+
     <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/k3k702ZOKiLJc3WVjuplzD0LW-43aMEzIO6XUTLjad8.woff2" />
     <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/k3k702ZOKiLJc3WVjuplzJX5f-9o1vgP2EXwfjgl7AY.woff2" />
     <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/k3k702ZOKiLJc3WVjuplzKaRobkAwv3vxw3jMhVENGA.woff2" />
@@ -190,7 +190,8 @@
 <script src="scripts/controllers/resourceAllocation.js"></script>
 <script src="scripts/controllers/domainController.js"></script>
 
-
+<script src="scripts/factories/appService.js"></script>
+<script src="scripts/factories/utilService.js"></script>
 <script src="scripts/factories/promiseAjax.js"></script>
 <script src="scripts/factories/globalConfig.js"></script>
 <script src="scripts/factories/modalService.js"></script>

@@ -10,18 +10,18 @@ angular
         .controller('deleteCtrl', deleteCtrl)
         .controller('miscellaneousListCtrl', miscellaneousListCtrl)
         .controller('networkListCtrl', networkListCtrl)
-        .controller('networkDetailsCtrl', networkDetailsCtrl) 
+        .controller('networkDetailsCtrl', networkDetailsCtrl)
         .controller('storageListCtrl', storageListCtrl)
         .controller('storageEditCtrl', storageEditCtrl)
         .controller('templateListCtrl', templateListCtrl)
         .controller('templateEditCtrl', templateEditCtrl)
 
-function templateListCtrl($scope, $state, $stateParams, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, crudService, dialogService) {
+function templateListCtrl($scope, $state, $stateParams, $log, $window, appService) {
 
     $scope.templateList = {};
     $scope.paginationObject = {};
     $scope.templateForm = {};
-    $scope.global = crudService.globalConfig;
+    $scope.global = appService.globalConfig;
     $scope.test = "test";
     $scope.summernoteTextTwo = {}
     $scope.windowsTemplate = {};
@@ -41,7 +41,7 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
     $scope.list = function (pageNumber) {
     	$scope.showLoader = true;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-        var hasTemplates = crudService.list("templates", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+        var hasTemplates = appService.crudService.list("templates", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
         hasTemplates.then(function (result) {  // this is only run after $http completes0
 
             $scope.templateList = result;
@@ -68,7 +68,7 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
 
      // OS Categorys list from server
     $scope.oscategorys = {};
-    var hasOsCategoryList = crudService.listAll("oscategorys/list");
+    var hasOsCategoryList = appService.crudService.listAll("oscategorys/list");
     hasOsCategoryList.then(function (result) {
     	$scope.formElements.osCategoryList = result;
     });
@@ -76,7 +76,7 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
     // OS Type list from server
     $scope.categoryChange = function() {
         $scope.ostypes = {};
-        var hasosTypeList = crudService.filterList("ostypes/list", $scope.template.osCategory.name);
+        var hasosTypeList = appService.crudService.filterList("ostypes/list", $scope.template.osCategory.name);
         hasosTypeList.then(function (result) {
     	    $scope.formElements.osTypeList = result;
         });
@@ -84,7 +84,7 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
 
     // Zone list from server
     $scope.zones = {};
-    var haszoneList = crudService.listAll("zones/list");
+    var haszoneList = appService.crudService.listAll("zones/list");
     haszoneList.then(function (result) {
     	$scope.formElements.zoneList = result;
     });
@@ -92,7 +92,7 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
     // Hypervisors list from server
     $scope.hypervisors = {};
     var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-    var hashypervisorList = crudService.list("hypervisors", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+    var hashypervisorList = appService.crudService.list("hypervisors", $scope.global.paginationHeaders(1, limit), {"limit": limit});
     hashypervisorList.then(function (result) {
     	$scope.formElements.hypervisorList = result;
     });
@@ -107,12 +107,20 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
         if (form.$valid) {
         	$scope.showLoader = true;
             var template = angular.copy($scope.template);
+            template.zoneId = template.zone.id;
+            template.hypervisorId = template.hypervisor.id;
+            template.osCategoryId = template.osCategory.id;
+            template.osTypeId = template.osType.id;
 
-            var hasTemplate = crudService.add("templates", template);
+            delete template.zone;
+            delete template.hypervisor;
+            delete template.osCategory;
+            delete template.osType;
+            var hasTemplate = appService.crudService.add("templates", template);
             hasTemplate.then(function (result) {  // this is only run after $http completes
                 $scope.list(1);
                 $scope.showLoader = false;
-                notify({message: 'Created successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
+                appService.notify({message: 'Created successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
                 $window.location.href = '#/templatestore/list';
 
             }).catch(function (result) {
@@ -120,7 +128,7 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
                 	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
                   	    var msg = result.data.globalError[0];
                   	  $scope.showLoader = false;
-                	    notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                  	appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                     } else if (result.data.fieldErrors != null) {
                         angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
                             $scope.TemplateForm[key].$invalid = true;
@@ -134,22 +142,22 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
 
     // Delete the template
     $scope.delete = function (size, templateId) {
-        dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+    	appService.dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
                 $scope.deleteId = templateId;
                 $scope.ok = function (templateId) {
                 	$scope.showLoader = true;
-                    var hasStorage = crudService.delete("templates", templateId);
+                    var hasStorage = appService.crudService.delete("templates", templateId);
                     hasStorage.then(function (result) {
                         $scope.list(1);
                         $scope.homerTemplate = 'app/views/notification/notify.jsp';
                         $scope.showLoader = false;
-                        notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+                        appService.notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                     }).catch(function (result) {
                         if (!angular.isUndefined(result.data)) {
                         	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
                           	    var msg = result.data.globalError[0];
                           	  $scope.showLoader = false;
-                        	    notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                          	appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                             }
                         }
                     });
@@ -165,7 +173,7 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
         $scope.formSubmitted = true;
         if (form.$valid) {
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
-            notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+            appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
             $window.location.href = '#/templatestore/list';
         }
     };
@@ -223,7 +231,7 @@ function templateListCtrl($scope, $state, $stateParams, modalService, $log, prom
     }
 }
 
-function templateEditCtrl($scope, $state, $stateParams, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, dialogService, crudService) {
+function templateEditCtrl($scope, $state, $stateParams, $log, $window, appService) {
 
 	$scope.templateForm = {};
 
@@ -247,7 +255,7 @@ function templateEditCtrl($scope, $state, $stateParams, modalService, $log, prom
 	    }
 
 	$scope.edit = function (templateId) {
-        var hasTemplates = crudService.read("templates", templateId);
+        var hasTemplates = appService.crudService.read("templates", templateId);
         hasTemplates.then(function (result) {
             $scope.template = result;
         	$scope.getOsCategoryList();
@@ -261,7 +269,7 @@ function templateEditCtrl($scope, $state, $stateParams, modalService, $log, prom
     // OS Categorys list from server
     $scope.oscategorys = {};
     $scope.getOsCategoryList = function() {
-	    var hasOsCategoryList = crudService.listAll("oscategorys/list");
+	    var hasOsCategoryList = appService.crudService.listAll("oscategorys/list");
 	    hasOsCategoryList.then(function (result) {
 	    	$scope.formElements.osCategoryList = result;
 	    	angular.forEach($scope.formElements.osCategoryList, function(obj, key) {
@@ -282,12 +290,20 @@ function templateEditCtrl($scope, $state, $stateParams, modalService, $log, prom
         if (form.$valid) {
         	$scope.showLoader = true;
             var template = angular.copy($scope.template);
+            template.zoneId = template.zone.id;
+            template.hypervisorId = template.hypervisor.id;
+            template.osCategoryId = template.osCategory.id;
+            template.osTypeId = template.osType.id;
 
-            var hasTemplates = crudService.update("templates", template);
+            delete template.zone;
+            delete template.hypervisor;
+            delete template.osCategory;
+            delete template.osType;
+            var hasTemplates = appService.crudService.update("templates", template);
             hasTemplates.then(function (result) {
                 $scope.homerTemplate = 'app/views/notification/notify.jsp';
                 $scope.showLoader = false;
-                notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+                appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                 $window.location.href = '#/templatestore/list';
             }).catch(function (result) {
                 if (!angular.isUndefined(result.data)) {
@@ -321,7 +337,7 @@ function storageListCtrl($scope, crudService, dialogService, modalService, $log,
             	};
     $scope.paginationObject = {};
     $scope.storageForm = {};
-    $scope.global = crudService.globalConfig;
+    $scope.global = appService.globalConfig;
 
     $scope.storage.zoneList = {};
     var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
