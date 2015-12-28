@@ -41,13 +41,13 @@
 							<div class="form-group"
 								ng-class="{'text-danger': domainForm.companyNameAbb.$invalid && formSubmitted}">
 								<div class="row">
-									<label class="col-md-4 col-sm-4 control-label"><fmt:message key="company.name.abbreviation" bundle="${msg}" /><span class="text-danger">*</span>
+									<label class="col-md-4 col-sm-4 control-label"><fmt:message key="company.name.abbreviation(domain.name)" bundle="${msg}" /><span class="text-danger">*</span>
 									</label>
 									<div class="col-md-6 col-sm-6">
 										<input required="true" type="text" name="companyNameAbb"
 											data-ng-model="domain.companyNameAbbreviation" class="form-control"
 											data-ng-class="{'error': domainForm.companyNameAbb.$invalid && formSubmitted}">
-										<i tooltip="Abbreviation of the company name"
+										<i tooltip="This is will be Domain Name"
 											class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 										<div class="error-area"
 											data-ng-show="domainForm.companyNameAbb.$invalid && formSubmitted">
@@ -169,7 +169,7 @@
 										<label class="col-md-4 col-sm-4 control-label"><fmt:message key="first.name" bundle="${msg}" /><span class="text-danger">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6">
-											<input required="true" type="text" name="primaryFirstName"
+											<input type="text"  required="true" name="primaryFirstName"
 												data-ng-model="domain.primaryFirstName" class="form-control"
 												data-ng-class="{'error': domainForm.primaryFirstName.$invalid && formSubmitted}">
 											<i tooltip="Primary first name of the company"
@@ -189,7 +189,7 @@
 										<label class="col-md-4 col-sm-4 control-label"><fmt:message key="last.name" bundle="${msg}" /><span class="text-danger">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6">
-											<input required="true" type="text" name="lastName"
+											<input type="text"  required="true" name="lastName"
 												data-ng-model="domain.lastName" class="form-control"
 												data-ng-class="{'error': domainForm.lastName.$invalid && formSubmitted}">
 											<i tooltip="Last name of the company"
@@ -210,7 +210,7 @@
 										<label class="col-md-4 col-sm-4 control-label"><fmt:message key="email.id" bundle="${msg}" /><span
 											class="text-danger">*</span></label>
 										<div class="col-md-6 col-sm-6">
-											<input type="text" name="email"
+											<input required="true"type="text" name="email"
 												data-ng-model="domain.email" class="form-control"
 												data-ng-class="{'error': domainForm.email.$invalid && formSubmitted}">
 											<i tooltip="Email of the company"
