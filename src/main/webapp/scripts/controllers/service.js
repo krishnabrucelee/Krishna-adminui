@@ -322,7 +322,7 @@ function templateEditCtrl($scope, $state, $stateParams, $log, $window, appServic
 };
 
 
-function storageListCtrl($scope, crudService, dialogService, modalService, $log, promiseAjax, $state, $stateParams, localStorageService, $window, notify) {
+function storageListCtrl($scope, $log, $state, $stateParams, $window, appService) {
 
 
 
@@ -341,7 +341,7 @@ function storageListCtrl($scope, crudService, dialogService, modalService, $log,
 
     $scope.storage.zoneList = {};
     var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-    var hasZones = crudService.list("zones", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+    var hasZones = appService.crudService.list("zones", $scope.global.paginationHeaders(1, limit), {"limit": limit});
     hasZones.then(function (result) {  // this is only run after $http
 										// completes0
     	$scope.zoneList = result;
@@ -350,7 +350,7 @@ function storageListCtrl($scope, crudService, dialogService, modalService, $log,
 
     $scope.storage.domainList = {};
     var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-    var hasDomains = crudService.list("domains", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+    var hasDomains = appService.crudService.list("domains", $scope.global.paginationHeaders(1, limit), {"limit": limit});
     hasDomains.then(function (result) {  // this is only run after $http
 										// completes0
     	$scope.formElements.domainList = result;
@@ -359,7 +359,7 @@ function storageListCtrl($scope, crudService, dialogService, modalService, $log,
         // Network Offer List
         $scope.listNetworkOffer = function (pageNumber) {
             var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-            var hasNetworks = crudService.list("networkoffer", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+            var hasNetworks = appService.crudService.list("networkoffer", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
             hasNetworks.then(function (result) {  // this is only run after
 													// $http
     												// completes0
@@ -376,7 +376,7 @@ function storageListCtrl($scope, crudService, dialogService, modalService, $log,
     $scope.list = function (pageNumber) {
     	$scope.showLoader = true;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-        var hasStorage = crudService.list("storages", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+        var hasStorage = appService.crudService.list("storages", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
         hasStorage.then(function (result) {  // this is only run after $http
 												// completes0
 
@@ -458,12 +458,12 @@ $scope.costPerHourIOPS = function() {
             var storage = angular.copy($scope.storage);
 //            storage.storagePrice = [];
 //            storage.storagePrice[0] = $scope.storage.storagePrice;
-            var hasStorage = crudService.add("storages", storage);
+            var hasStorage = appService.crudService.add("storages", storage);
             hasStorage.then(function (result) {  // this is only run after
 													// $http completes
                 $scope.list(1);
                 $scope.showLoader = false;
-                notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
+                appService.notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
 // $window.location.href = '#/templatestore/list';
 
                 $window.location.href = '#/storage/list';
@@ -474,7 +474,7 @@ $scope.costPerHourIOPS = function() {
                 	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
                   	    var msg = result.data.globalError[0];
                   	  $scope.showLoader = false;
-                	    notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                  	appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                     } else if (result.data.fieldErrors != null) {
                         angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
                             $scope.storageForm[key].$invalid = true;
@@ -488,16 +488,16 @@ $scope.costPerHourIOPS = function() {
 
     // Delete the Storage Offer
     $scope.delete = function (size, storageId) {
-        dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+    	appService.dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
                 $scope.deleteId = storageId;
                 $scope.ok = function (storageId) {
                 	$scope.showLoader = true;
-                    var hasStorage = crudService.delete("storages", storageId);
+                    var hasStorage = appService.crudService.delete("storages", storageId);
                     hasStorage.then(function (result) {
                         $scope.list(1);
                         $scope.homerTemplate = 'app/views/notification/notify.jsp';
                         $scope.showLoader = false;
-                        notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+                        appService.notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                     });
                     $modalInstance.close();
                 },
@@ -534,7 +534,7 @@ $scope.costPerHourIOPS = function() {
 
 }
 
-function storageEditCtrl($scope, $state, $stateParams, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, dialogService, crudService) {
+function storageEditCtrl($scope, $state, $stateParams, $log, $window, appService) {
 
     $scope.storage = {
     		zoneList: {},
@@ -542,11 +542,11 @@ function storageEditCtrl($scope, $state, $stateParams, modalService, $log, promi
             	};
     $scope.paginationObject = {};
     $scope.storageForm = {};
-    $scope.global = crudService.globalConfig;
+    $scope.global = appService.globalConfig;
 
     $scope.storage.zoneList = {};
     var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-    var hasZones = crudService.list("zones", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+    var hasZones = appService.crudService.list("zones", $scope.global.paginationHeaders(1, limit), {"limit": limit});
     hasZones.then(function (result) {  // this is only run after $http
 										// completes0
     	$scope.zoneList = result;
@@ -554,7 +554,7 @@ function storageEditCtrl($scope, $state, $stateParams, modalService, $log, promi
 
 
 	$scope.edit = function (storageId) {
-        var hasStorage = crudService.read("storages", storageId);
+        var hasStorage = appService.crudService.read("storages", storageId);
         hasStorage.then(function (result) {
             $scope.storage = result;
             console.log($scope.storage);
@@ -626,12 +626,12 @@ $scope.costPerHourIOPS = function() {
         	$scope.showLoader = true;
             var storage = $scope.storage;
             console.log(storage);
-            var hasStorage = crudService.update("storages", storage);
+            var hasStorage = appService.crudService.update("storages", storage);
             hasStorage.then(function (result) {
 
                 $scope.homerTemplate = 'app/views/notification/notify.jsp';
                 $scope.showLoader = false;
-                notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+                appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                 $window.location.href = '#/storage/list';
             });
         }
