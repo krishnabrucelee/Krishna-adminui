@@ -136,13 +136,13 @@
 								<label
 									class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.cost.per.iops" bundle="${msg}" /> (<app-currency class="text-danger"></app-currency>)
 								</label>
-								<div class="col-md-4  col-sm-4 col-xs-4">
-									<input type="text" data-ng-keyup="costPerHourIOPS()" name="costperiops" valid-number
-										data-ng-model="storage.storagePrice[0].costIopsPerMonth" class="form-control">
+								<div class="col-md-1  col-sm-2 col-xs-4"> <b>{{storage.storagePrice[0].costIopsPerMonth || " N/A "}} </b>
+<!-- 									<input type="text" data-ng-keyup="costPerHourIOPS()" name="costperiops" valid-number
+										data-ng-model="storage.storagePrice[0].costIopsPerMonth" class="form-control"> -->
 								</div>
 								<div class="col-md-4 col-sm-4 col-xs-4">
 								<b>
-									<p class="text-danger m-t-sm">{{ storage.costPerHourIOPS }}/hr</p>
+									<p class="text-danger m-t-xxs">{{ storage.costPerHourIOPS }}/hr</p>
 								</b>
 							</div>
 
