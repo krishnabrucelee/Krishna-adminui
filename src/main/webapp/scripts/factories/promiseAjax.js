@@ -59,6 +59,24 @@ function promiseAjax($http, $window, globalConfig, notify) {
         		setTimeout(function() {
         			window.location.href = "login";
         		}, 2000);
+            } else if(result.status != null && result.status === 401 && result.statusText === "Unauthorized") {
+        		notify({
+    				message : "Unauthorized log-in user. Please log-in again",
+    				classes : 'alert-danger',
+    				templateUrl : global.NOTIFICATION_TEMPLATE
+    			});
+        		setTimeout(function() {
+        			window.location.href = "login";
+        		}, 2000);
+            } else if(result.status != null && result.status === 500) {
+        		notify({
+    				message : result.statusText,
+    				classes : 'alert-danger',
+    				templateUrl : global.NOTIFICATION_TEMPLATE
+    			});
+        		setTimeout(function() {
+        			window.location.href = "login";
+        		}, 2000);
             } else {
             	throw result;
             }
