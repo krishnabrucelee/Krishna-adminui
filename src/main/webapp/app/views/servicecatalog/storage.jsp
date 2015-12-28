@@ -78,12 +78,12 @@
                                 <td>{{ storage.isCustomDisk}}</td>
                                 <td>
                                     <a class="icon-button"  ui-sref="servicecatalog.list-storage.list-view-storage-offer({id: {{ storage.id}}})" title="Edit"  ><span class="fa fa-edit m-r"></span></a>
-                                    <a class="icon-button" title="Enable" data-ng-hide="storage.state == 'Enable'">
+<!--                                     <a class="icon-button" title="Enable" data-ng-hide="storage.state == 'Enable'">
                                         <span class="fa fa-play m-r" ></span>
-                                    </a>
-                                    <a class="icon-button" title="Disable" data-ng-show="storage.state == 'Disable'">
+                                    </a> -->
+<!--                                     <a class="icon-button" title="Disable" data-ng-show="storage.state == 'Disable'">
                                         <span class="fa fa-ban m-r" ></span>
-                                    </a>
+                                    </a> -->
 
                                     <a class="icon-button" title="Delete" data-ng-click="delete('sm', storage.id)" ><span class="fa fa-trash"></span></a>
                                 </td>

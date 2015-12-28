@@ -41,9 +41,9 @@
                         <div class="row">
                             <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal"><fmt:message
 										key="storage.public" bundle="${msg}" /></label>
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <input  type="text" name="public" data-ng-model="storage.isPublic" class="form-control" readonly>
-                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6"> <b>{{storage.isPublic || " N/A "}} </b>
+<!--                                 <input  type="text" name="public" data-ng-model="storage.isPublic" class="form-control" readonly>
+ -->                            </div>
                         </div>
                     </div>
                 </div>
@@ -55,9 +55,9 @@
                         <div class="row">
                             <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal" ><fmt:message
 									key="storage.storagetype" bundle="${msg}" /></label>
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <input  type="text" name="storagetype" data-ng-model="storage.storageType" class="form-control" readonly>
-                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6"> <b>{{storage.storageType || " N/A "}} </b>
+<!--                                 <input  type="text" name="storagetype" data-ng-model="storage.storageType" class="form-control" readonly>
+ -->                            </div>
                         </div>
                     </div>
                 </div>
@@ -67,9 +67,9 @@
                         <div class="row">
                             <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal"><fmt:message
 									key="storage.storagetag" bundle="${msg}" /></label>
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <input  type="text" name="storagetag" data-ng-model="storage.storageTags" class="form-control" readonly>
-                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6"> <b>{{storage.storageTags || " N/A "}} </b>
+<!--                                 <input  type="text" name="storagetag" data-ng-model="storage.storageTags" class="form-control" readonly>
+ -->                            </div>
                         </div>
                     </div>
                 </div>
@@ -79,9 +79,9 @@
                         <div class="row">
                             <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal" ><fmt:message
 									key="storage.qostype" bundle="${msg}" /></label>
-                            <div class="col-md-6  col-sm-6 col-xs-6">
-                                <input  type="text" name="qostype" data-ng-model="storage.qosType" class="form-control"readonly >
-
+                            <div class="col-md-6  col-sm-6 col-xs-6"> <b>{{storage.qosType || " N/A "}} </b>
+<!--                                 <input  type="text" name="qostype" data-ng-model="storage.qosType" class="form-control"readonly >
+ -->
                             </div>
                         </div>
                     </div>
@@ -93,9 +93,9 @@
                         <div class="row">
                             <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal"><fmt:message
 									key="common.size" bundle="${msg}" /></label>
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <input  type="text" valid-number name="size" data-ng-model="storage.diskSize" class="form-control" readonly >
-
+                            <div class="col-md-6 col-sm-6 col-xs-6"> <b>{{storage.diskSize || " N/A "}} </b>
+<!--                                 <input  type="text" valid-number name="size" data-ng-model="storage.diskSize" class="form-control" readonly >
+ -->
                             </div>
                         </div>
 
@@ -118,13 +118,13 @@
 						<div class="row">
 							<label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.cost.per.gb.per.month" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)
 							</label>
-							<div class="col-md-4 col-sm-4 col-xs-4">
-								<input data-ng-change="costPerHourGB()" type="text" valid-decimal name="costmonth"
-									data-ng-model="storage.storagePrice[0].costGbPerMonth" class="form-control">
+							<div class="col-md-1 col-sm-2 col-xs-4"> <b>{{storage.storagePrice[0].costGbPerMonth || " N/A "}} </b>
+								<!-- <input data-ng-change="costPerHourGB()" type="text" valid-decimal name="costmonth"
+									data-ng-model="storage.storagePrice[0].costGbPerMonth" class="form-control"> -->
 							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4">
+							<div class="col-md-4 col-sm-4 col-xs-4" data-ng-show="storage.storagePrice[0].costGbPerMonth">
 								<b>
-									<p class="text-danger m-t-sm">{{ storage.costPerHourGB }}/hr</p>
+									<p class="text-danger m-t-xxs">{{ storage.costPerHourGB }}/hr</p>
 								</b>
 							</div>
 

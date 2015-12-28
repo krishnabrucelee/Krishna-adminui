@@ -314,7 +314,6 @@ function storageListCtrl($scope, crudService, dialogService, modalService, $log,
 
 
 
-
     $scope.storage = {
     		zoneList: {},
             domainList:{},
