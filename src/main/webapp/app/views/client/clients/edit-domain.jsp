@@ -38,7 +38,7 @@
 							<div class="form-group"
 								ng-class="{'text-danger': domainForm.companyNameAbb.$invalid && formSubmitted}">
 								<div class="row">
-									<label class="col-md-4 col-sm-4 control-label"><fmt:message key="company.name.abbreviation" bundle="${msg}" /><span class="text-danger">*</span>
+									<label class="col-md-4 col-sm-4 control-label"><fmt:message key="company.name.abbreviation(domain.name)" bundle="${msg}" /><span class="text-danger">*</span>
 									</label>
 									<div class="col-md-6 col-sm-6">
 										<input required="true" type="text" name="companyNameAbb"

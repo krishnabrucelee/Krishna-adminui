@@ -831,12 +831,15 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
         $scope.formSubmitted = true;
         if (form.$valid) {
         	$scope.showLoader = true;
+                        console.log($scope.compute);
             var compute = angular.copy($scope.compute);
             if(!angular.isUndefined(compute.domain)) {
             	compute.domainId = compute.domain.id;
+		delete compute.domain;
             }
-            if(!angular.isUndefined(compute.zone)) {
-            	compute.zoneId = compute.zone.id;
+            if(!angular.isUndefined(compute.computeCost.zone)) {
+            	compute.computeCost.zoneId = compute.computeCost.zone.id;
+            	delete compute.computeCost.zone;
             }
             compute.customized = (compute.customized == null) ? false : true;
             compute.customizedIops = (compute.customizedIops == null) ? false : true;
