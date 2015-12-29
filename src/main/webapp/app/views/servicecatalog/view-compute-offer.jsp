@@ -9,12 +9,12 @@
             <div class="row  ">
                 <div class="col-md-12"><h4><label><fmt:message key="edit.compute.offering" bundle="${msg}" /></label><hr></h4></div>
             </div>
-            <div class="row">
-                <div class="col-md-4  col-sm-12 col-xs-4">
+            <div class="row clear-form-div">
+                <div class="col-md-4  col-sm-12 col-xs-4 clear-form">
                     <div class="form-group" ng-class="{'text-danger': computeForm.name.$invalid && formSubmitted}">
                         <div class="row">
-                            <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.name" bundle="${msg}" /><span class="text-danger">*</span></label>
-                            <div class="col-md-7  col-sm-7 col-xs-7">
+                            <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="common.name" bundle="${msg}" /><span class="text-danger">*</span></label>
+                            <div class="col-md-6  col-sm-6 col-xs-7">
                                 <input required="true" type="text" name="name" data-ng-model="compute.name" class="form-control" data-ng-class="{'error': computeForm.name.$invalid && formSubmitted}">
                                <div class="error-area" data-ng-show="computeForm.name.$invalid && formSubmitted">
 									<i ng-attr-tooltip="{{ computeForm.name.errorMessage || '<fmt:message key="compute.offer.required" bundle="${msg}" />' }}"	class="fa fa-warning error-icon"></i>
@@ -23,210 +23,192 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4  col-sm-12 col-xs-4">
+                <div class="col-md-4  col-sm-12 col-xs-4 clear-form">
                     <div class="form-group" ng-class="{'text-danger': computeForm.description.$invalid && formSubmitted}">
                         <div class="row">
-                            <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.description" bundle="${msg}" /><span class="text-danger">*</span></label>
-                            <div class="col-md-7  col-sm-7 col-xs-7">
+                            <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="common.description" bundle="${msg}" /><span class="text-danger">*</span></label>
+                            <div class="col-md-6  col-sm-6 col-xs-7">
                                 <input required="true" type="text" name="displayText" data-ng-model="compute.displayText" class="form-control" data-ng-class="{'error': computeForm.displayText.$invalid && formSubmitted}">
                                 <div class="error-area" data-ng-show="computeForm.displayText.$invalid && formSubmitted" ><i  tooltip="Description is Required" class="fa fa-warning error-icon"></i></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4  col-sm-12 col-xs-4">
+                <div class="col-md-4  col-sm-12 col-xs-4 clear-form">
                     <div class="form-group" >
                         <div class="row" >
-                            <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal" ><fmt:message key="compute.storagetype" bundle="${msg}" /></label>
-                            <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input  type="text" name="storageType" data-ng-model="compute.storageType" class="form-control" readonly>
+                            <label class="col-md-6 col-sm-6 col-xs-4 control-label font-normal" ><fmt:message key="compute.storagetype" bundle="${msg}" /></label>
+                            <div class="col-md-6  col-sm-6 col-xs-7">
+                            	{{compute.storageType || " N/A "}}
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-4  col-sm-12 col-xs-4">
+                <div class="col-md-4  col-sm-12 col-xs-4 clear-form">
                     <div class="form-group" >
                         <div class="row">
-                            <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="compute.hosttag" bundle="${msg}" /></label>
-                            <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input  type="text" name="hosttag" data-ng-model="compute.hostTags" class="form-control" readonly >
+                            <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="compute.hosttag" bundle="${msg}" /></label>
+                            <div class="col-md-6  col-sm-6 col-xs-7">
+                                  {{compute.hostTags || " N/A "}}
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-4  col-sm-12 col-xs-4">
+                <div class="col-md-4  col-sm-12 col-xs-4 clear-form">
                     <div class="form-group" >
                         <div class="row">
-                            <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="compute.storagetag" bundle="${msg}" /></label>
-                            <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input   type="text" name="storagetag" data-ng-model="compute.storageTags" class="form-control" readonly>
+                            <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="compute.storagetag" bundle="${msg}" /></label>
+                            <div class="col-md-6  col-sm-6 col-xs-7">
+                                 {{compute.storageTags || " N/A "}}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4  col-sm-12 col-xs-4">
+                <div class="col-md-4  col-sm-12 col-xs-4 clear-form" data-ng-show="!compute.customized">
                     <div class="form-group" >
                         <div class="row">
-                            <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.memory" bundle="${msg}" /><span class="text-danger">*</span></label>
-                            <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input type="text" valid-number name="memory" data-ng-model="compute.memory" class="form-control" readonly >
+                            <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="common.memory" bundle="${msg}" /><span class="text-danger">*</span></label>
+                            <div class="col-md-6  col-sm-6 col-xs-7">
+                                 {{compute.memory }}
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4  col-sm-12 col-xs-4">
+                <div class="col-md-4  col-sm-12 col-xs-4 clear-form" data-ng-show="!compute.customized">
                     <div class="form-group" >
                         <div class="row">
-                            <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="compute.vcpu.core" bundle="${msg}" /><span class="text-danger">*</span></label>
-                            <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input  type="text" valid-number name="vcpucore" data-ng-model="compute.numberOfCores" class="form-control"readonly >
+                            <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="compute.vcpu.core" bundle="${msg}" /><span class="text-danger">*</span></label>
+                            <div class="col-md-6  col-sm-6 col-xs-7">
+                                 {{compute.numberOfCores}}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4  col-sm-12 col-xs-4">
+                <div class="col-md-4  col-sm-12 col-xs-4 clear-form" data-ng-show="!compute.customized">
                     <div class="form-group" >
                         <div class="row">
-                            <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.speed" bundle="${msg}" /><span class="text-danger">*</span></label>
-                            <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input valid-number type="text" name="speed" data-ng-model="compute.clockSpeed" class="form-control" readonly >
+                            <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="common.speed" bundle="${msg}" /><span class="text-danger">*</span></label>
+                            <div class="col-md-6  col-sm-6 col-xs-7">
+                                 {{compute.clockSpeed}}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4  col-sm-12 col-xs-4">
+                <div class="col-md-4  col-sm-12 col-xs-4 clear-form">
                     <div class="form-group">
                         <div class="row">
-                            <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.networkrate" bundle="${msg}" /></label>
-                            <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input  type="text" valid-number name="network" data-ng-model="compute.networkRate" class="form-control"readonly >
-
+                            <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="common.networkrate" bundle="${msg}" /></label>
+                            <div class="col-md-6  col-sm-6 col-xs-7">
+							    {{compute.networkRate || " N/A "}}
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-            <div class="col-md-4  col-sm-12 col-xs-4">
+            <div class="col-md-4  col-sm-12 col-xs-4 clear-form">
                     <div class="form-group"  >
                         <div class="row" >
-                            <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal" ><fmt:message key="compute.diskio" bundle="${msg}" /></label>
-                            <div class="col-md-7  col-sm-7 col-xs-7">
-
-                               <input type="text"  name="diskio" data-ng-model="compute.diskIo" class="form-control" readonly>
-
+                            <label class="col-md-6 col-sm-6 col-xs-4 control-label font-normal" ><fmt:message key="compute.diskio" bundle="${msg}" /></label>
+                            <div class="col-md-6  col-sm-6 col-xs-7">
+							    {{compute.diskIo}}
                             </div>
 
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4  col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'HYPERVISOR'">
+                <div class="col-md-4  col-sm-12 col-xs-4 clear-form" data-ng-show="compute.qosType == 'HYPERVISOR'">
                     <div class="form-group" >
                         <div class="row">
-                            <label class="col-md-4 col-sm-4 control-label font-normal" ><fmt:message key="common.diskreadratebps" bundle="${msg}" />
+                            <label class="col-md-6 col-sm-6 control-label font-normal" ><fmt:message key="common.diskreadratebps" bundle="${msg}" />
                             </label>
-                            <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input type="text" valid-number name="diskreadrate" data-ng-model="compute.diskBytesReadRate" class="form-control" readonly>
-
+                            <div class="col-md-6  col-sm-6 col-xs-7">
+							   {{compute.diskBytesReadRate}}
                             </div>
 
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-4  col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'HYPERVISOR'">
+                <div class="col-md-4  col-sm-12 col-xs-4 clear-form" data-ng-show="compute.qosType == 'HYPERVISOR'">
                     <div class="form-group" >
                         <div class="row">
-                            <label class="col-md-4 col-sm-4 control-label font-normal" ><fmt:message key="common.diskwriteratebps" bundle="${msg}" />
+                            <label class="col-md-6 col-sm-6 control-label font-normal" ><fmt:message key="common.diskwriteratebps" bundle="${msg}" />
                             </label>
-                            <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input type="text" valid-number name="diskwriterate" data-ng-model="compute.diskBytesWriteRate" class="form-control" readonly >
-
+                            <div class="col-md-6  col-sm-6 col-xs-7">
+							   {{compute.diskBytesWriteRate}}
                             </div>
                         </div>
                     </div>
 
                 </div>
-                <div class="col-md-4  col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'HYPERVISOR'">
+                <div class="col-md-4  col-sm-12 col-xs-4 clear-form" data-ng-show="compute.qosType == 'HYPERVISOR'">
                     <div class="form-group">
                         <div class="row">
-                            <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.diskreadrateiops" bundle="${msg}" /></label>
-                            <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input  type="text" valid-number  name="diskreadrateiops" data-ng-model="compute.diskIopsReadRate" class="form-control" readonly >
+                            <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="common.diskreadrateiops" bundle="${msg}" /></label>
+                            <div class="col-md-6  col-sm-6 col-xs-7">
+							   {{compute.diskIopsReadRate}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="col-md-4  col-sm-12 col-xs-4 clear-form" data-ng-show="compute.qosType == 'HYPERVISOR'">
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-6 col-sm-4 control-label font-normal"><fmt:message key="common.diskwriterateiops" bundle="${msg}" /></label>
+                            <div class="col-md-6 col-sm-6 col-xs-7">
+							    {{compute.diskIopsWriteRate}}							   
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-
-                <div class="col-md-4  col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'HYPERVISOR'">
+                <div class="col-md-4 col-sm-12 col-xs-4 clear-form" data-ng-show="compute.qosType == 'STORAGE'">
                     <div class="form-group">
                         <div class="row">
-                            <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.diskwriterateiops" bundle="${msg}" /></label>
-                            <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input  type="text" valid-number name="diskwriterateiops" data-ng-model="compute.diskIopsWriteRate" class="form-control" readonly>
-
+                            <label class="col-md-6 col-sm-6 col-xs-4 control-label font-normal"><fmt:message key="common.miniops" bundle="${msg}" /></label>
+                            <div class="col-md-6  col-sm-6 col-xs-7">
+							    {{compute.minIops}}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'STORAGE'">
+                <div class="col-md-4 col-sm-12 col-xs-4 clear-form" data-ng-show="compute.qosType == 'STORAGE'">
                     <div class="form-group">
                         <div class="row">
-                            <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.miniops" bundle="${msg}" /></label>
-                            <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input  type="text" name="diskreadrateiops" valid-number  data-ng-model="compute.minIops" class="form-control" readonly >
+                            <label class="col-md-6 col-sm-6 col-xs-4 control-label font-normal"><fmt:message key="common.maxiops" bundle="${msg}" /></label>
+                            <div class="col-md-6  col-sm-6 col-xs-7">
+							    {{compute.maxIops}}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-12 col-xs-4" data-ng-show="compute.qosType == 'STORAGE'">
+                <div class="col-md-4 clear-form">
                     <div class="form-group">
                         <div class="row">
-                            <label class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.maxiops" bundle="${msg}" /></label>
-                            <div class="col-md-7  col-sm-7 col-xs-7">
-                                <input  type="text" name="diskwriterateiops" valid-number  data-ng-model="compute.maxIops" class="form-control" readonly>
+                            <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="compute.cpucap" bundle="${msg}" /></label>
+                            <div class="col-md-6 col-sm-6">
+                                    {{compute.cpuCapacity || "N/A"}}
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4 clear-form">
                     <div class="form-group">
                         <div class="row">
-                            <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="compute.cpucap" bundle="${msg}" /></label>
-                            <div class="col-md-7 col-sm-7">
-                                <input  type="text" name="cpucap" data-ng-model="compute.cpuCapacity" class="form-control"readonly >
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="compute.offerha" bundle="${msg}" /></label>
-                            <div class="col-md-7 col-sm-7">
-                                <input  type="text" name="offerha" data-ng-model="compute.isHighAvailabilityEnabled" class="form-control"readonly >
+                            <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="compute.offerha" bundle="${msg}" /></label>
+                            <div class="col-md-6 col-sm-6">
+                            {{compute.isHighAvailabilityEnabled}}
                             </div>
                         </div>
                     </div>
                 </div>
-                 <div class="col-md-4">
+                 <div class="col-md-4 clear-form">
                     <div class="form-group">
                         <div class="row">
-                            <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="compute.public" bundle="${msg}" /></label>
-                            <div class="col-md-7 col-sm-7">
-                                <input  type="text" name="isPublic" data-ng-model="compute.isPublic" class="form-control"readonly >
+                            <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="compute.public" bundle="${msg}" /></label>
+                            <div class="col-md-6 col-sm-6">
+                            <b>{{compute.isPublic}}</b>
+                      
                             </div>
                         </div>
                     </div>

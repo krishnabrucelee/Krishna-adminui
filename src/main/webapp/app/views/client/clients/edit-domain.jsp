@@ -83,9 +83,7 @@
 									<label class="col-md-4 col-sm-4 control-label"><fmt:message key="portal.user.name" bundle="${msg}" /><span class="text-danger">*</span>
 									</label>
 									<div class="col-md-6 col-sm-6">
-										<input required="true" type="text" name="portalUserName"
-											data-ng-model="domain.portalUserName" class="form-control"
-											data-ng-class="{'error': domainForm.portalUserName.$invalid && formSubmitted}">
+										{{domain.portalUserName}}
 										<i tooltip="Name of the portal user"
 											class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 										<div class="error-area"
@@ -118,6 +116,8 @@
 									</div>
 								</div>
 							</div>
+							
+							
 						</div>
 					</div>
 
@@ -128,8 +128,7 @@
 
 							<fieldset class="scheduler-border ">
 								<legend class="scheduler-border"><fmt:message key="primary.contact" bundle="${msg}" /></legend>
-								<div class="form-group"
-									ng-class="{'text-danger': domainForm.primaryFirstName.$invalid && formSubmitted}">
+								<div class="form-group" ng-class="{'text-danger': domainForm.primaryFirstName.$invalid && formSubmitted}">
 									<div class="row">
 										<label class="col-md-4 col-sm-4 control-label"><fmt:message key="first.name" bundle="${msg}" /><span class="text-danger">*</span>
 										</label>

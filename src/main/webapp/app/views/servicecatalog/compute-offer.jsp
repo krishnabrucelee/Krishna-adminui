@@ -177,10 +177,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-md-6  col-sm-12 col-xs-4">
-							
-								<div class="form-group m-t-md " data-ng-show="!compute.isPublic">
+							<div class="form-group m-t-md " data-ng-show="!compute.isPublic">
 									<div class="row">
 										<label
 											class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message
@@ -195,6 +192,24 @@
 										</div>
 									</div>
 								</div>
+						</div>
+						<div class="col-md-6  col-sm-12 col-xs-4">
+							<div class="form-group">
+								<div class="row">
+									<label
+										class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message
+											key="compute.diskio" bundle="${msg}" /></label>
+									<div class="col-md-7  col-sm-7 col-xs-7">
+										<select
+											data-ng-init="compute.diskIo = formElements.diskioList[0]"
+											class="form-control input-group" name="diskio"
+											data-ng-model="compute.diskIo"
+											ng-options=" diskio for (id, diskio) in formElements.diskioList">
+										</select>
+									</div>
+								</div>
+							</div>
+								
 						</div>
 					</div>
 					

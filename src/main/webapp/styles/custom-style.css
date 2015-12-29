@@ -21,3 +21,6 @@ fieldset.scheduler-border legend{border-bottom:none !important; margin-bottom:0p
 
 #wrapper > .content ~ .content {min-height:0px;}
 #wrapper > .content {min-height:700px;}
+
+/*.clear-form-div .clear-form:nth-child(3n){clear:left;}*/
+.clear-form-div .clear-form{min-height:50px;}
