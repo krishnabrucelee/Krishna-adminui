@@ -29,13 +29,6 @@
                                 <b class="pull-right">{{computeOffering.Count}}</b>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="dashboard-box pull-left">
-                                <span class="pull-right"><fmt:message key="compute.disabledcompute" bundle="${msg}" /></span>
-                                <div class="clearfix"></div>
-                                <span class="pull-right m-t-xs"><img src="images/instance-icon.png"></span>
-                                <b class="pull-right">0</b>
-                                <div class="clearfix"></div>
-                            </div>
                         </div>
                         <div class="pull-right">
 							<panda-quick-search></panda-quick-search>
@@ -84,13 +77,15 @@
                                 <td>{{ compute.storageType}} </td>
 
                                 <td>
+                                  <a class="icon-button" title="<fmt:message key="common.edit" bundle="${msg}" />" data-ng-click="edit('lg', domain)">
+                                                    <span class="fa fa-edit"> </span>
+                                                </a>
 
-                                    <a class="icon-button" title="Edit" ui-sref="servicecatalog.list-compute.list-view-compute-offer({id: {{ compute.id}}})"   ><span class="fa fa-edit m-r"></span></a>
                                     <a class="icon-button" title="Stop" data-ng-show="instance.state == 'Running'">
                                         <span class="fa fa-ban m-r" ></span>
                                     </a>
 
-                                    <a class="icon-button" title="Delete"  data-ng-click="delete('sm', compute)"  ><span class="fa fa-trash"></span></a>
+                                    <a class="icon-button" 	title="<fmt:message key="common.delete" bundle="${msg}" /> " data-ng-click="delete('sm', compute)"  ><span class="fa fa-trash"></span></a>
 
                                 </td>
                             </tr>
