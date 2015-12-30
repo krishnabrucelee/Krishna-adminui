@@ -143,6 +143,7 @@ function domainListCtrl($scope,$state, promiseAjax, $log, notify, crudService, d
         dialogService.openDialog("app/views/common/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
                 $scope.deleteObject = domain;
                 $scope.ok = function (deleteObject) {
+                 console.log(deleteObject);
                     var hasServer = crudService.softDelete("domains", deleteObject);
                     hasServer.then(function (result) {
 
