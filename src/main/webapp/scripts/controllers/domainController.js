@@ -54,9 +54,10 @@ function domainListCtrl($scope,$state, promiseAjax, $log, notify, crudService, d
     $scope.addDomain = function (size,domain) {
         dialogService.openDialog("app/views/client/clients/add-domain.jsp", size, $scope, ['$scope', '$modalInstance', '$rootScope', function ($scope, $modalInstance, $rootScope) {
         	$scope.save = function (form) {
-                $scope.showLoader = true;
+                
                 $scope.formSubmitted = true;
                 if (form.$valid) {
+			 $scope.showLoader = true;
                     $scope.formSubmitted = true;
                     if (form.$valid) {
                         var domain = angular.copy($scope.domain);
@@ -85,6 +86,7 @@ function domainListCtrl($scope,$state, promiseAjax, $log, notify, crudService, d
                         	}).catch(function (result) {
                         		if(!angular.isUndefined(result) && result.data != null) {
                         			angular.forEach(result.data.fieldErrors, function(errorMessage, key) {
+					    $scope.showLoader = false;
                                 	   $scope.domainForm[key].$invalid = true;
                                 	   $scope.domainForm[key].errorMessage = errorMessage;
                         			});
@@ -114,7 +116,7 @@ function domainListCtrl($scope,$state, promiseAjax, $log, notify, crudService, d
                 // Update department
                 $scope.domain = angular.copy(domain);
                 $scope.update = function (form) {
-                $scope.showLoader = true;
+
                     $scope.formSubmitted = true;
                     if (form.$valid) {
                         var domain = $scope.domain;
@@ -128,6 +130,7 @@ function domainListCtrl($scope,$state, promiseAjax, $log, notify, crudService, d
                         }).catch(function (result) {
                         	if(!angular.isUndefined(result) && result.data != null) {
 	                            angular.forEach(result.data.fieldErrors, function(errorMessage, key) {
+
 	                            	$scope.domainForm[key].$invalid = true;
 	                                $scope.domainForm[key].errorMessage = errorMessage;
 	                            });
