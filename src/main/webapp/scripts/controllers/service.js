@@ -800,13 +800,13 @@ function deleteCtrl($scope, $state, $stateParams, globalConfig, notify) {
 
 }
 
-function computeListCtrl($scope, $state, $stateParams,modalService, $window, notify, dialogService, crudService) {
+function computeListCtrl($scope, $state, $stateParams,appService,$window) {
 
     $scope.computeList = {};
     $scope.paginationObject = {};
     $scope.computeForm = {};
     $scope.computeOffering = {};
-    $scope.global = crudService.globalConfig;
+    $scope.global = appService.crudService.globalConfig;
     $scope.compute = {
     		zone: {}
      };
@@ -816,7 +816,7 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
     $scope.list = function (pageNumber) {
     	$scope.showLoader = true;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-        var hasComputes = crudService.list("computes", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+        var hasComputes = appService.crudService.list("computes", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
         hasComputes.then(function (result) {  // this is only run after $http
 												// completes0
 
@@ -860,12 +860,12 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
             compute.customizedIops = (compute.customizedIops == null) ? false : true;
             compute.isHighAvailabilityEnabled = (compute.isHighAvailabilityEnabled == null) ? false : true;
             console.log(compute);
-            var hasComputes = crudService.add("computes", compute);
+            var hasComputes = appService.crudService.add("computes", compute);
             hasComputes.then(function (result) {  // this is only run after
 													// $http completes
                 $scope.list(1);
                 $scope.showLoader = false;
-                notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
+                appService.notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
 // $window.location.href = '#/templatestore/list';
 
                 $window.location.href = '#/compute/list';
@@ -897,22 +897,22 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
 
     // Delete the Compute Offer
     $scope.delete = function (size, compute) {
-        dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+        appService.dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
                 $scope.deleteId = compute.id;
                 $scope.ok = function (computeId) {
                 	$scope.showLoader = true;
-                    var hasComputes = crudService.softDelete("computes", compute);
+                    var hasComputes = appService.crudService.softDelete("computes", compute);
                     hasComputes.then(function (result) {
                         $scope.list(1);
                         $scope.homerTemplate = 'app/views/notification/notify.jsp';
                         $scope.showLoader = false;
-                        notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+                        appService.notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                     }).catch(function (result) {
                     	if(!angular.isUndefined(result) && result.data != null) {
                     		if(result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])){
                         	 var msg = result.data.globalError[0];
                         	 $scope.showLoader = false;
-                        	 notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                        	 appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                     		}
                     		angular.forEach(result.data.fieldErrors, function(errorMessage, key) {
                     			$scope.showLoader = false;
@@ -950,7 +950,7 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
 
     // Domain List
 	var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-	var hasDomains = crudService.list("domains", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+	var hasDomains = appService.crudService.list("domains", $scope.global.paginationHeaders(1, limit), {"limit": limit});
 	hasDomains.then(function (result) {  // this is only run after $http completes0
 		$scope.domain.domaintypeList = result;
 	});
@@ -963,7 +963,7 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
         };
 
     // Domain List
-	var hasZones = crudService.list("zones/list", '', {});
+	var hasZones = appService.crudService.list("zones/list", '', {});
 	hasZones.then(function (result) {  // this is only run after $http completes0
 		$scope.formElements.zoneList = result;
 		$scope.compute.computeCost.zone = $scope.formElements.zoneList[0];
@@ -981,7 +981,7 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
 
     // Edit compute offerings
     $scope.edit = function (computeId) {
-        var hasComputes = crudService.read("computes", computeId);
+        var hasComputes = appService.crudService.read("computes", computeId);
         hasComputes.then(function (result) {
             $scope.compute = result;
     		$scope.compute.zone = $scope.formElements.zoneList[0];
@@ -1002,12 +1002,12 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
         	$scope.showLoader = true;
             var compute = $scope.compute;
 
-            var hasComputes = crudService.update("computes", compute);
+            var hasComputes = appService.crudService.update("computes", compute);
             hasComputes.then(function (result) {
 
                 $scope.homerTemplate = 'app/views/notification/notify.jsp';
                 $scope.showLoader = false;
-                notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+                appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                 $window.location.href = '#/compute/list';
             }).catch(function (result) {
 
@@ -1015,7 +1015,7 @@ function computeListCtrl($scope, $state, $stateParams,modalService, $window, not
              		if(result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])){
                         	 var msg = result.data.globalError[0];
                         	 $scope.showLoader = false;
-                        	 notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                        	 appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                      }
                      angular.forEach(result.data.fieldErrors, function(errorMessage, key) {
 			$scope.showLoader = false;
