@@ -54,6 +54,7 @@ function domainListCtrl($scope,$state, promiseAjax, $log, notify, crudService, d
     $scope.addDomain = function (size,domain) {
         dialogService.openDialog("app/views/client/clients/add-domain.jsp", size, $scope, ['$scope', '$modalInstance', '$rootScope', function ($scope, $modalInstance, $rootScope) {
         	$scope.save = function (form) {
+                $scope.showLoader = true;
                 $scope.formSubmitted = true;
                 if (form.$valid) {
                     $scope.formSubmitted = true;
@@ -80,6 +81,7 @@ function domainListCtrl($scope,$state, promiseAjax, $log, notify, crudService, d
                         		$scope.domain.secondaryContactLastName = "";
                         		$scope.domain.secondaryContactEmail = "";
                         		$scope.domain.secondaryContactPhone = "";
+					 $scope.showLoader = false;
                         	}).catch(function (result) {
                         		if(!angular.isUndefined(result) && result.data != null) {
                         			angular.forEach(result.data.fieldErrors, function(errorMessage, key) {
@@ -112,6 +114,7 @@ function domainListCtrl($scope,$state, promiseAjax, $log, notify, crudService, d
                 // Update department
                 $scope.domain = angular.copy(domain);
                 $scope.update = function (form) {
+                $scope.showLoader = true;
                     $scope.formSubmitted = true;
                     if (form.$valid) {
                         var domain = $scope.domain;
@@ -121,6 +124,7 @@ function domainListCtrl($scope,$state, promiseAjax, $log, notify, crudService, d
                             $scope.list(1);
                             notify({message: 'Updated successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
                             $modalInstance.close();
+                         $scope.showLoader = false;
                         }).catch(function (result) {
                         	if(!angular.isUndefined(result) && result.data != null) {
 	                            angular.forEach(result.data.fieldErrors, function(errorMessage, key) {
@@ -169,5 +173,5 @@ function domainListCtrl($scope,$state, promiseAjax, $log, notify, crudService, d
                         };
             }]);
     };
-
-}
+   
+   }
