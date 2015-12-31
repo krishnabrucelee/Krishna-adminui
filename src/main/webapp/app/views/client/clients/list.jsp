@@ -47,6 +47,7 @@ Navigation
                                         <tr>
 
                                         <th><fmt:message key="company.name" bundle="${msg}" /></th>
+                                        <th><fmt:message key="domain.name" bundle="${msg}" /></th>
                                         <th><fmt:message key="portal.user.name" bundle="${msg}" /></th>
                                         <th><fmt:message key="city.headquarters" bundle="${msg}" /></th>
                                         <th><fmt:message key="email.id" bundle="${msg}" /></th>
@@ -58,14 +59,15 @@ Navigation
                                             <tr data-ng-class="{'bg-row text-white' : domain.isSelected == true }"  data-ng-repeat="domain in filteredCount = (domainList| filter: quickSearch)">
 
                                                 <td>{{domain.name}}</td>
+                                                <td>{{domain.companyNameAbbreviation}}</td>
                                                 <td>{{domain.portalUserName}}</td>
                                                 <td>{{domain.cityHeadquarter}}</td>
                                                 <td>{{domain.email}}</td>
                                                 <td>{{domain.phone}}</td>
                                                 <td>
-                                                <a class="icon-button" title="<fmt:message key="common.edit" bundle="${msg}" />" data-ng-click="edit('lg', domain)">
+											    <a class="icon-button" title="<fmt:message key="common.edit" bundle="${msg}" />" data-ng-click="edit('lg', domain)">
                                                     <span class="fa fa-edit"> </span>
-                                                </a>
+                                                </a>                                   
                                                 <a class="icon-button" title="<fmt:message key="common.delete" bundle="${msg}" />" data-ng-click="delete('sm', domain)" ><span class="fa fa-trash"></span></a>
                                                 </td>
                                             </tr>
