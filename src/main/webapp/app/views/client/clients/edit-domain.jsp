@@ -7,7 +7,7 @@
 <form name="domainForm" data-ng-submit="update(domainForm)" method="post" novalidate="">
 	<div class="inmodal" >
 	<div class="modal-header">
-		<panda-modal-header page-icon="fa fa-user-plus" hide-zone="false" page-title='Edit Domain'></panda-modal-header>
+		<panda-modal-header page-icon="fa fa-user-plus" hide-zone="false" page-title='Edit Company'></panda-modal-header>
 	</div>
 	<div class="modal-body">
 			<div class="row">
@@ -116,7 +116,7 @@
 										</div>
 									</div>
 								</div>
-							</div>						
+							</div>
 						</div>
 					</div>
 
@@ -150,7 +150,7 @@
 										</label>
 										<div class="col-md-6 col-sm-6">
 											<input type="text" name="lastName" readonly
-												data-ng-model="domain.lastName" class="form-control">		
+												data-ng-model="domain.lastName" class="form-control">
 											<i tooltip="Last name of the company"
 												class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 											<div class="error-area"
@@ -169,7 +169,7 @@
 										<label class="col-md-4 col-sm-4 control-label"><fmt:message key="email.id" bundle="${msg}" /></label>
 										<div class="col-md-6 col-sm-6">
 											<input type="text" name="email" readonly
-												data-ng-model="domain.email" class="form-control">										
+												data-ng-model="domain.email" class="form-control">
 											<i tooltip="Email of the company"
 												class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 											<div class="error-area"
