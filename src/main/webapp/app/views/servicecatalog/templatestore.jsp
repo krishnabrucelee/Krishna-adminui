@@ -12,21 +12,21 @@
                         <div class="dashboard-box pull-left">
                             <span class="pull-right"><fmt:message key="template.totaltemplate" bundle="${msg}" /></span>
                             <div class="clearfix"></div>
-                            <span class="pull-right m-t-xs"><img src="images/icon-template.png"></span>
+                            <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
                             <b class="pull-right">{{LinuxTemplate.Count}}</b>
                             <div class="clearfix"></div>
                         </div>
                         <div class="dashboard-box pull-left">
                             <span class="pull-right"><fmt:message key="windows.template" bundle="${msg}" /></span>
                             <div class="clearfix"></div>
-                            <span class="pull-right m-t-xs"><img src="images/icon-template.png"></span>
+                            <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
                             <b class="pull-right">{{windowsTemplate.Count}}</b>
                             <div class="clearfix"></div>
                         </div>
                         <div class="dashboard-box pull-left">
                             <span class="pull-right"><fmt:message key="linux.template" bundle="${msg}" /></span>
                             <div class="clearfix"></div>
-                            <span class="pull-right m-t-xs"><img src="images/icon-template.png"></span>
+                            <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
                             <b class="pull-right">{{LinuxTemplate.Count - windowsTemplate.Count}}</b>
                             <div class="clearfix"></div>
                         </div>

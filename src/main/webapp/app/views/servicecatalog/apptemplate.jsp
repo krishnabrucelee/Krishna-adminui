@@ -13,21 +13,21 @@
                         <div class="dashboard-box pull-left">
                             <span class="pull-right">Total Template</span>
                             <div class="clearfix"></div>
-                            <span class="pull-right m-t-xs"><img src="images/icon-template.png"></span>
+                            <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
                             <b class="pull-right">0</b>
                             <div class="clearfix"></div>
                         </div>
                         <div class="dashboard-box pull-left">
                             <span class="pull-right">Windows Template</span>
                             <div class="clearfix"></div>
-                            <span class="pull-right m-t-xs"><img src="images/icon-template.png"></span>
+                            <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
                             <b class="pull-right">0</b>
                             <div class="clearfix"></div>
                         </div>
                         <div class="dashboard-box pull-left">
                             <span class="pull-right">Linux Template</span>
                             <div class="clearfix"></div>
-                            <span class="pull-right m-t-xs"><img src="images/icon-template.png"></span>
+                            <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
                             <b class="pull-right">0</b>
                             <div class="clearfix"></div>
                         </div>

@@ -129,7 +129,7 @@
                             <div class="row" >
                                 <label class="col-md-3 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.keyboard" bundle="${msg}" /></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
-                                    <select  class="form-control input-group" name="format" data-ng-model="template.keyboardType" ng-options="keyboardType for (id, keyboardType) in formElements.keyboardTypeList" >
+                                    <select  class="form-control input-group" name="keyboardType" data-ng-model="template.keyboardType" ng-options="keyboardType for (id, keyboardType) in formElements.keyboardTypeList" >
                                         <option value="">No Thanks</option>
                                     </select>
 
@@ -153,7 +153,7 @@
                             <div class="row">
                                 <label class="col-md-3 col-sm-3 control-label"><fmt:message key="template.cost" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
-                                    <input required="true" type="text" valid-decimal name="cost" data-ng-model="template.templateCost[0].cost" class="form-control" data-ng-class="{'error': TemplateForm.format.$invalid && formSubmitted}" >
+                                    <input required="true" type="text" valid-number name="cost" data-ng-model="template.templateCost[0].cost" class="form-control" data-ng-class="{'error': TemplateForm.cost.$invalid && formSubmitted}" >
                                     <i  tooltip="<fmt:message key="template.cost.tooltip" bundle="${msg}" />" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
                                     <div class="error-area" data-ng-show="TemplateForm.cost.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="template.cost.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
 
@@ -234,7 +234,7 @@
                                     <label> <input required="true" icheck type="radio" name= "architecture" value="64" ng-model="template.architecture"> 64 Bit</label>
                                     <label class="m-l-sm"> <input required="true" icheck type="radio" name= "architecture" value="32" ng-model="template.architecture"> 32 Bit</label>
                                     <div class="error-area" data-ng-show="TemplateForm.architecture.$invalid && formSubmitted" >
-                                    	<i  ng-attr-tooltip="<fmt:message key="template.architecture.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i>
+                                    	<i  ng-attr-tooltip="<fmt:message key="template.architecture.error" bundle="${msg}" />" class="fa error-icon"></i>
                                     </div>
                                 </div>
                             </div>
@@ -285,7 +285,7 @@
                         <div class="form-group">
                             <div class="row">
                       	 <get-loader-image data-ng-show="showLoader"></get-loader-image>
-                            
+
                                 <span  data-ng-hide="showLoader" class="pull-right">
                                     <a class="btn btn-default btn-outline"  data-ng-hide="showLoader" ui-sref="servicecatalog.list-templatestore"><fmt:message key="common.cancel" bundle="${msg}" /></a>
                                     <button class="btn btn-info" type="submit"  data-ng-hide="showLoader" ng-disabled="form.TemplateForm.$invalid" ><fmt:message key="common.add" bundle="${msg}" /></button>
