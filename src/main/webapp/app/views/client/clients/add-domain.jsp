@@ -10,7 +10,7 @@
 		<div class="inmodal">
 		<div class="modal-header">
 			<panda-modal-header page-icon="fa fa-user-plus" hide-zone="false"
-				page-title='Add Domain'></panda-modal-header>
+				page-title='Add Company'></panda-modal-header>
 		</div>
 		<div class="modal-body">
 			<div class="row">
@@ -108,7 +108,7 @@
 										class="text-danger">*</span></label>
 									<div class="col-md-6 col-sm-6">
 										  <input required="true" type="password" id="password" name="password"
-											data-ng-model="domain.password" class="form-control"    
+											data-ng-model="domain.password" class="form-control"
 											data-ng-class="{'error': domainForm.password.$invalid && formSubmitted}">
 										<i tooltip="Password of the portal user name"
 											class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
@@ -120,9 +120,9 @@
 							<div class="form-group" ng-class="{'text-danger': domainForm.confirmPassword.$invalid && formSubmitted}">
 								<div class="row">
 									<label class="col-md-4 col-sm-4 control-label"><fmt:message key="confirm.password" bundle="${msg}" /><span class="text-danger">*</span>
-									</label>    
+									</label>
 									<div class="col-md-6 col-sm-6">
-										<input required="true" type="password" id="confirmPassword" name="confirmPassword"  
+										<input required="true" type="password" id="confirmPassword" name="confirmPassword"
 											data-ng-model="account.confirmPassword" class="form-control"
 											data-ng-class="{'error': domainForm.confirmPassword.$invalid && formSubmitted}">
 										<i tooltip="Confirm Password of the company"
@@ -223,7 +223,7 @@
 											</div>
 										</div>
 									</div>
-								</div> 
+								</div>
 
 								<div class="form-group"
 									ng-class="{'text-danger': domainForm.phone.$invalid && formSubmitted}">
@@ -234,7 +234,7 @@
 											<input type = "text" required="true" ng-model="domain.phone" name="phone" ng-pattern="/^\d+$/" maxlength="12" class="form-control"
 												data-ng-class="{'error': domainForm.email.$invalid && formSubmitted}">
 											<span ng-show="domainForm.phone.$error.pattern">Not a valid number!</span>
-											
+
 											<i tooltip="Phone of the company"
 												class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 											<div class="error-area"
@@ -262,7 +262,7 @@
 										</div>
 									</div>
 								</div>
-    
+
 								<div class="form-group">
 									<div class="row">
 										<label class="col-md-4 col-sm-4 control-label"><fmt:message key="last.name" bundle="${msg}" /></label>
