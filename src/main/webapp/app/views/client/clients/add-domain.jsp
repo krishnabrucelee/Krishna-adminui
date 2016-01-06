@@ -81,6 +81,28 @@
 							</div>
 
 							<div class="form-group"
+								ng-class="{'text-danger': domainForm.cityHeadquarter.$invalid && formSubmitted}">
+								<div class="row">
+									<label class="col-md-4 col-sm-4 control-label"><fmt:message key="city.headquarters" bundle="${msg}" /><span class="text-danger">*</span>
+									</label>
+									<div class="col-md-6 col-sm-6">
+										<input required="true" type="text" name="cityHeadquarter"
+											data-ng-model="domain.cityHeadquarter" class="form-control"
+											data-ng-class="{'error': domainForm.cityHeadquarter.$invalid && formSubmitted}">
+										<i tooltip="City head quarter of the company"
+											class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+										<div class="error-area"
+											data-ng-show="domainForm.cityHeadquarter.$invalid && formSubmitted">
+											<i
+												ng-attr-tooltip="{{ domainForm.cityHeadquarter.errorMessage || 'City head quarter required' }}"
+												class="fa fa-warning error-icon"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+				    	</div>
+						<div class="col-md-6 col-sm-6">
+						     <div class="form-group"
 								ng-class="{'text-danger': domainForm.portalUserName.$invalid && formSubmitted}">
 								<div class="row">
 									<label class="col-md-4 col-sm-4 control-label"><fmt:message key="portal.user.name" bundle="${msg}" /><span class="text-danger">*</span>
@@ -99,8 +121,6 @@
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-md-6 col-sm-6">
 							<div class="form-group"
 								ng-class="{'text-danger': domainForm.password.$invalid && formSubmitted}">
 								<div class="row">
@@ -136,26 +156,7 @@
 							</div>
 
 
-							<div class="form-group"
-								ng-class="{'text-danger': domainForm.cityHeadquarter.$invalid && formSubmitted}">
-								<div class="row">
-									<label class="col-md-4 col-sm-4 control-label"><fmt:message key="city.headquarters" bundle="${msg}" /><span class="text-danger">*</span>
-									</label>
-									<div class="col-md-6 col-sm-6">
-										<input required="true" type="text" name="cityHeadquarter"
-											data-ng-model="domain.cityHeadquarter" class="form-control"
-											data-ng-class="{'error': domainForm.cityHeadquarter.$invalid && formSubmitted}">
-										<i tooltip="City head quarter of the company"
-											class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
-										<div class="error-area"
-											data-ng-show="domainForm.cityHeadquarter.$invalid && formSubmitted">
-											<i
-												ng-attr-tooltip="{{ domainForm.cityHeadquarter.errorMessage || 'City head quarter required' }}"
-												class="fa fa-warning error-icon"></i>
-										</div>
-									</div>
-								</div>
-							</div>
+
 						</div>
 					</div>
 
