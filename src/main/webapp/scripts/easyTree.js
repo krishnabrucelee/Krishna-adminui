@@ -209,7 +209,6 @@
 
 
 
-                console.log($(this).text());
                 var children = $(this).parent('li.parent_li').find(' > ul > li');
                 if (children.is(':visible')) {
                     children.hide('fast');

@@ -340,7 +340,6 @@ function projectListCtrl($scope, promiseAjax,crudService,notify) {
        		$scope.projectList = result;
        		$scope.showLoader = false;
 	}).catch(function (result) {
-			console.log(result.data.globalError[0]);
 	         if(result.data.globalError[0] != null){
 	        	 var msg = result.data.globalError[0];
 	        	 $scope.showLoader = false;

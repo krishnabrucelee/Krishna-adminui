@@ -92,12 +92,10 @@ function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $s
 	        	$scope.domainList = result;
 	            $scope.stateid =$stateParams.id;
 	            $scope.type = $stateParams.quotaType;
-                console.log($scope.type);
 	            // For pagination
 	            $scope.paginationObject.limit = limit;
 	            $scope.paginationObject.currentPage = pageNumber;
 	            $scope.paginationObject.totalItems = result.totalItems;
-	            console.log($scope.domain );
 	        });
 	    };
 	    $scope.list(1);
