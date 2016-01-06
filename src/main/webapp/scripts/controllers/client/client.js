@@ -143,7 +143,6 @@ function clientListCtrl($scope, $state, $stateParams, modalService, $log, promis
          $scope.formSubmitted = true;
          if (form.$valid) {
              var quota = $scope.quota;
-             console.log(storage);
              var hasStorage = crudService.update("quota", quota);
              hasStorage.then(function (result) {
 

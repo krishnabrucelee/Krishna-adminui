@@ -381,7 +381,6 @@ function storageListCtrl($scope, $log, $state, $stateParams, $window, appService
 												// completes0
 
             $scope.storageList = result;
-            console.log($scope.storageList);
 
             $scope.storageList.Count = 0;
             if(result.length != 0) {
@@ -450,7 +449,6 @@ $scope.costPerHourIOPS = function() {
     };
 
     $scope.save = function (form) {
-        console.log(form);
         $scope.formSubmitted = true;
 
         if (form.$valid) {
@@ -469,7 +467,7 @@ $scope.costPerHourIOPS = function() {
                 $window.location.href = '#/storage/list';
 
             }).catch(function (result) {
-            	console.log(result);
+
             	if (!angular.isUndefined(result.data)) {
                 	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
                   	    var msg = result.data.globalError[0];
@@ -557,7 +555,6 @@ function storageEditCtrl($scope, $state, $stateParams, $log, $window, appService
         var hasStorage = appService.crudService.read("storages", storageId);
         hasStorage.then(function (result) {
             $scope.storage = result;
-            console.log($scope.storage);
         });
 
     };
@@ -625,7 +622,6 @@ $scope.costPerHourIOPS = function() {
         if (form.$valid) {
         	$scope.showLoader = true;
             var storage = $scope.storage;
-            console.log(storage);
             var hasStorage = appService.crudService.update("storages", storage);
             hasStorage.then(function (result) {
 
@@ -725,7 +721,6 @@ function miscellaneousListCtrl($scope, modalService, $log, promiseAjax, $statePa
         if (!angular.isUndefined($stateParams.id)) {
             var miscellaneousId = $stateParams.id - 1;
             $scope.miscellaneous = result[miscellaneousId];
-            console.log($scope.miscellaneousList);
         }
     });
 
@@ -735,7 +730,6 @@ function miscellaneousListCtrl($scope, modalService, $log, promiseAjax, $statePa
 
     $scope.save = function (form) {
         $scope.formSubmitted = true;
-        console.log(form);
         if (form.$valid) {
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
             notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
@@ -846,7 +840,6 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
         $scope.formSubmitted = true;
         if (form.$valid) {
         	$scope.showLoader = true;
-                        console.log($scope.compute);
             var compute = angular.copy($scope.compute);
             if(!angular.isUndefined(compute.domain)) {
             	compute.domainId = compute.domain.id;
@@ -859,14 +852,12 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
             compute.customized = (compute.customized == null) ? false : true;
             compute.customizedIops = (compute.customizedIops == null) ? false : true;
             compute.isHighAvailabilityEnabled = (compute.isHighAvailabilityEnabled == null) ? false : true;
-            console.log(compute);
             var hasComputes = appService.crudService.add("computes", compute);
             hasComputes.then(function (result) {  // this is only run after
 													// $http completes
                 $scope.list(1);
                 $scope.showLoader = false;
                 appService.notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
-// $window.location.href = '#/templatestore/list';
 
                 $window.location.href = '#/compute/list';
 
@@ -985,7 +976,6 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
         hasComputes.then(function (result) {
             $scope.compute = result;
     		$scope.compute.zone = $scope.formElements.zoneList[0];
-            console.log($scope.compute);
         });
     };
 

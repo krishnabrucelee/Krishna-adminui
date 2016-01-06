@@ -52,7 +52,6 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
     // Save Resource limits based on the quota type.
 	$scope.save = function(form) {
 		//if(form.$valid) {
-		console.log($scope.resourceQuota);
 		if(!angular.isUndefined($scope.resourceQuota.project) && $scope.resourceQuota.project != "" && $scope.resourceQuota.project != null) {
 			$scope.saveProjectQuota(form);
 		} else if(!angular.isUndefined($scope.resourceQuota.department) && $scope.resourceQuota.department != "" && $scope.resourceQuota.department != null) {
@@ -97,6 +96,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 	            	    notify({message: msg, classes: 'alert-info', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
 	                } else if (result.data.fieldErrors != null) {
 	                    angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+	                    	  $scope.showLoader = false;
 	                        $scope.resourceAllocationForm[key].$invalid = true;
 	                        $scope.resourceAllocationForm[key].errorMessage = errorMessage;
 	                    });
@@ -140,6 +140,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 	            	    notify({message: msg, classes: 'alert-info', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
 	                } else if (result.data.fieldErrors != null) {
 	                    angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+	                    	  $scope.showLoader = false;
 	                        $scope.resourceAllocationForm[key].$invalid = true;
 	                        $scope.resourceAllocationForm[key].errorMessage = errorMessage;
 	                    });
@@ -186,6 +187,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 	            	    notify({message: msg, classes: 'alert-info', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
 	                } else if (result.data.fieldErrors != null) {
 	                    angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+	                    	  $scope.showLoader = false;
 	                        $scope.resourceAllocationForm[key].$invalid = true;
 	                        $scope.resourceAllocationForm[key].errorMessage = errorMessage;
 	                    });
@@ -215,6 +217,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 				$scope.isDisabledDepartment = true;
 				$scope.isDisabledProject = true;
 				$scope.resourceQuota.domain = resourceQuota.domain;
+				  $scope.showLoader = false;
 				notify({message: "Please add the resource limit for company", classes: 'alert-info', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
 			}
 
@@ -260,6 +263,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 				$scope.isDisabledProject = true;
 				$scope.resourceQuota.domain = resourceQuota.domain;
 				$scope.resourceQuota.department = resourceQuota.department;
+				  $scope.showLoader = false;
 				notify({message: "Please add the resource limit for department", classes: 'alert-info', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
 			}
 

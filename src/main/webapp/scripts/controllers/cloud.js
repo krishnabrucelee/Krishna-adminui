@@ -259,25 +259,21 @@ function vpcviewCtrl($scope, $modal, $log, promiseAjax, $stateParams, $state, gl
             $scope.ipList = result;
             var ssn = [];
             for (ssn in $scope.ipList) {
-                console.log($scope.ipList[ssn]);
                 if ($scope.ipList[ssn].isSSVPN == true) {
                     $scope.SSVPN.push($scope.ipList[ssn]);
                 }
             }
-            console.log($scope.SSVPN);
             localStorageService.set("ipList", result);
         });
     } else {
         $scope.ipList = localStorageService.get("ipList");
         var ssn = [];
         for (ssn in $scope.ipList) {
-            console.log($scope.ipList[ssn]);
             if ($scope.ipList[ssn].isSSVPN == true) {
                 $scope.SSVPN.push($scope.ipList[ssn]);
             }
         }
 
-        console.log($scope.SSVPN);
     }
 
 
