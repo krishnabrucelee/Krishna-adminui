@@ -57,18 +57,18 @@
       						</div>
             <div class="table-responsive" data-ng-hide="showLoader">
 
-                    <table cellspacing="1" cellpadding="1" class="table table-bordered table-striped">
+                    <table cellspacing="1" cellpadding="1" class="table dataTable table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th><fmt:message key="common.name" bundle="${msg}" /></th>
-                                <th><fmt:message key="common.type" bundle="${msg}" /></th>
-                                <th><fmt:message key="common.size" bundle="${msg}" /></th>
-                                <th><fmt:message key="common.custom" bundle="${msg}" /></th>
-                                <th><fmt:message key="common.action" bundle="${msg}" /></th>
+                               <th data-ng-click="changeSorting('name')" data-ng-class="sort.descending && sort.column =='name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.name" bundle="${msg}" /></th>
+                               <th data-ng-click="changeSorting('storageType')" data-ng-class="sort.descending && sort.column =='storageType'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.type" bundle="${msg}" /></th>
+                               <th data-ng-click="changeSorting('diskSize')" data-ng-class="sort.descending && sort.column =='diskSize'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.size" bundle="${msg}" /></th>
+                               <th data-ng-click="changeSorting('isCustomDisk')" data-ng-class="sort.descending && sort.column =='isCustomDisk'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.custom" bundle="${msg}" /></th>
+                               <th><fmt:message key="common.action" bundle="${msg}" /></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr data-ng-repeat="storage in filteredCount = (storageList| filter: quickSearch)">
+                            <tr data-ng-repeat="storage in filteredCount = (storageList| filter: quickSearch| orderBy:sort.column:sort.descending)">
                                 <td>
                                     {{ storage.name}}
                                 </td>

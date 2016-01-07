@@ -23,15 +23,16 @@
     				  		<get-loader-image data-ng-show="showLoader"></get-loader-image>
       						</div>
               <div data-ng-hide = "showLoader" class="table-responsive">
-                <table cellspacing="1" cellpadding="1" class="table table-bordered table-striped">
+                <table cellspacing="1" cellpadding="1" class="table dataTable table-bordered table-striped">
                     <thead>
                         <tr>
-                                <th><fmt:message key="common.name" bundle="${msg}" /></th>
+                               <th data-ng-click="changeSorting('name')" data-ng-class="sort.descending && sort.column =='name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.name" bundle="${msg}" /></th>
+                        
                                 <th><fmt:message key="common.action" bundle="${msg}" /></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr data-ng-repeat="network in filteredCount = (networkList| filter: quickSearch)">
+                        <tr data-ng-repeat="network in filteredCount = (networkList| filter: quickSearch | orderBy:sort.column:sort.descending)">
                             <td>
                                 {{ network.name}}
                             </td>

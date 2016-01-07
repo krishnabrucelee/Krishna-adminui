@@ -49,21 +49,21 @@
     				  		<get-loader-image data-ng-show="showLoader"></get-loader-image>
       						</div>
             <div class="table-responsive" data-ng-hide="showLoader">
-                <table cellspacing="1" cellpadding="1" class="table table-bordered table-striped">
+                <table cellspacing="1" cellpadding="1" class="table dataTable table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th><fmt:message key="template.name" bundle="${msg}" /></th>
-                            <th><fmt:message key="template.os" bundle="${msg}" /></th>
-                            <th><fmt:message key="template.type" bundle="${msg}" /></th>
-                            <th><fmt:message key="template.zone" bundle="${msg}" /></th>
-                            <th><fmt:message key="template.hypervisor" bundle="${msg}" /></th>
-                            <th><fmt:message key="template.cost" bundle="${msg}" /> (<app-currency></app-currency>)</th>
-                            <th><fmt:message key="common.status" bundle="${msg}" /></th>
+                            <th data-ng-click="changeSorting('name')" data-ng-class="sort.descending && sort.column =='name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.name" bundle="${msg}" /></th>
+                            <th data-ng-click="changeSorting('osCategory.name')" data-ng-class="sort.descending && sort.column =='osCategory.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.os" bundle="${msg}" /></th>
+                            <th data-ng-click="changeSorting('osType.description')" data-ng-class="sort.descending && sort.column =='osType.description'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.type" bundle="${msg}" /></th>
+                            <th data-ng-click="changeSorting('zone.name')" data-ng-class="sort.descending && sort.column =='zone.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.zone" bundle="${msg}" /></th>
+                            <th data-ng-click="changeSorting('hypervisor.name')" data-ng-class="sort.descending && sort.column =='hypervisor.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.hypervisor" bundle="${msg}" /></th>
+                            <th data-ng-click="changeSorting('templateCost[0].cost')" data-ng-class="sort.descending && sort.column =='templateCost[0].cost'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.cost" bundle="${msg}" />(<app-currency></app-currency>)</th>
+                            <th data-ng-click="changeSorting('status')" data-ng-class="sort.descending && sort.column =='status'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.status" bundle="${msg}" /></th>
                             <th><fmt:message key="common.action" bundle="${msg}" /></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr data-ng-repeat="template in filteredCount = (templateList| filter: quickSearch)">
+                        <tr data-ng-repeat="template in filteredCount = (templateList| filter: quickSearch | orderBy:sort.column:sort.descending)">
 
                             <td>{{ template.name}}</td>
                             <td>

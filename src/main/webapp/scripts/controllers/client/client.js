@@ -7,8 +7,9 @@ angular
         .module('panda-ui-admin')
         .controller('clientListCtrl', clientListCtrl)
 
-function clientListCtrl($scope, $state, $stateParams, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, dialogService, crudService) {
+function clientListCtrl($scope, $state, $stateParams,appService, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, dialogService, crudService) {
 
+	
 	 $scope.domains = {
 		        category: "domains",
 		        oneItemSelected: {},
@@ -23,6 +24,8 @@ function clientListCtrl($scope, $state, $stateParams, modalService, $log, promis
 		    $scope.domainForm = {};
 		    $scope.global = crudService.globalConfig;
 		    $scope.domain = {};
+		    $scope.sort = appService.globalConfig.sort;
+		    $scope.changeSorting = appService.utilService.changeSorting;
 		    $scope.domainElements={
 
 		    };

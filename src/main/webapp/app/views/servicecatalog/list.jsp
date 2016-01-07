@@ -48,14 +48,14 @@
 						<get-loader-image data-ng-show="showLoader"></get-loader-image>
 					</div>
 					<div data-ng-hide = "showLoader" class="table-responsive">
-                    <table cellspacing="1" cellpadding="1" class="table table-bordered table-striped">
+                    <table cellspacing="1" cellpadding="1" class="table dataTable table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th><fmt:message key="common.name" bundle="${msg}" /></th>
-                                <th><fmt:message key="common.vcpu" bundle="${msg}" /></th>
-                                <th><fmt:message key="common.speed" bundle="${msg}" /></th>
-                                <th><fmt:message key="common.memory" bundle="${msg}" /></th>
-                                <th><fmt:message key="common.type" bundle="${msg}" /></th>
+                            	<th data-ng-click="changeSorting('name')" data-ng-class="sort.descending && sort.column =='name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.name" bundle="${msg}" /></th>
+                            	<th data-ng-click="changeSorting('numberOfCores')" data-ng-class="sort.descending && sort.column =='numberOfCores'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.vcpu" bundle="${msg}" /></th>
+                            	<th data-ng-click="changeSorting('clockSpeed')" data-ng-class="sort.descending && sort.column =='clockSpeed'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.speed" bundle="${msg}" /></th>
+                            	<th data-ng-click="changeSorting('memory')" data-ng-class="sort.descending && sort.column =='memory'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.memory" bundle="${msg}" /></th>
+                            	<th data-ng-click="changeSorting('storageType')" data-ng-class="sort.descending && sort.column =='storageType'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.type" bundle="${msg}" /></th>
                                 <th><fmt:message key="common.action" bundle="${msg}" /></th>
                             </tr>
                         </thead>
@@ -65,7 +65,7 @@
                                </tr>
                            </tbody>
                            <tbody data-ng-show="computeList.length > 0">
-                            <tr data-ng-repeat="compute in filteredCount = (computeList| filter: quickSearch)">
+                            <tr data-ng-repeat="compute in filteredCount = (computeList| filter: quickSearch| orderBy:sort.column:sort.descending)">
                                 <td>
 
                                     <!--<a class="text-info" ui-sref="servicecatalog.list-compute.view-catalog({id: {{ catalog.id}}})"  title="View Catalog" >{{ catalog.name}}</a>-->

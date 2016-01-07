@@ -10,11 +10,13 @@ angular
         .module('panda-ui-admin')
         .controller('applicationListCtrl', applicationListCtrl)
 
-function applicationListCtrl($scope, notify, promiseAjax, dialogService, crudService) {
+function applicationListCtrl($scope, notify, promiseAjax, dialogService,appService, crudService) {
     $scope.applicationList = {};
     $scope.paginationObject = {};
     $scope.applicationForm = {};
     $scope.global = crudService.globalConfig;
+    $scope.sort = appService.globalConfig.sort;
+    $scope.changeSorting = appService.utilService.changeSorting;
 
 
     // Application List

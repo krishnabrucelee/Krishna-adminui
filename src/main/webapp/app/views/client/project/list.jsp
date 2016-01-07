@@ -49,21 +49,21 @@
       						</div>
 						<div class="table-responsive" data-ng-hide="showLoader">
 							<table cellspacing="1" cellpadding="1"
-								class="table table-bordered table-striped">
+								class="table table-bordered dataTable table-striped">
 								<thead>
 									<tr>
-										<th><fmt:message key="project.id" bundle="${msg}" /></th>
-										<th><fmt:message key="user.name" bundle="${msg}" /></th>
-										<th><fmt:message key="common.company" bundle="${msg}" /></th>
-										<th><fmt:message key="common.description" bundle="${msg}" /></th>
-										<th><fmt:message key="common.department" bundle="${msg}" /></th>
-										<!-- <th>Paid (CNY)</th> -->
-										<th><fmt:message key="common.status" bundle="${msg}" /></th>
+										<th data-ng-click="changeSorting('id')" data-ng-class="sort.descending && sort.column =='id'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="project.id" bundle="${msg}" /></th>
+										<th data-ng-click="changeSorting('projectOwner.userName')" data-ng-class="sort.descending && sort.column =='projectOwner.userName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="user.name" bundle="${msg}" /></th>
+										<th data-ng-click="changeSorting('domain.name')" data-ng-class="sort.descending && sort.column =='domain.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.company" bundle="${msg}" /></th>
+										<th data-ng-click="changeSorting('description')" data-ng-class="sort.descending && sort.column =='description'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.description" bundle="${msg}" /></th>
+										<th data-ng-click="changeSorting('department.userName')" data-ng-class="sort.descending && sort.column =='department.userName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.department" bundle="${msg}" /></th>
+										<th data-ng-click="changeSorting('status')" data-ng-class="sort.descending && sort.column =='status'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.status" bundle="${msg}" /></th>
+									    <!-- <th>Paid (CNY)</th> -->
 									</tr>
 								</thead>
 								<tbody>
 									<tr
-										data-ng-repeat="project in filteredCount = (projectList| filter: quickSearch)">
+										data-ng-repeat="project in filteredCount = (projectList| filter: quickSearch| orderBy:sort.column:sort.descending)">
 										<td><a class="text-info"
 											ui-sref="client.project.view({id: {{ project.id}}})"
 											title="View Project">{{ project.id}}</a></td>

@@ -7,9 +7,12 @@ angular
         .module('panda-ui-admin')
         .controller('userListCtrl', userListCtrl)
 
-function userListCtrl($scope, $state, $stateParams, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, crudService, dialogService) {
+function userListCtrl($scope, $state, $stateParams, modalService,appService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, crudService, dialogService) {
 	$scope.paginationObject = {};
 	$scope.activeUsers = [];
+	$scope.sort = appService.globalConfig.sort;
+	$scope.changeSorting = appService.utilService.changeSorting;
+	    
     // User List
     $scope.list = function (pageNumber) {
     	$scope.showLoader = true;
