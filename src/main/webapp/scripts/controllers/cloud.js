@@ -14,7 +14,7 @@ angular
         .controller('vpcviewCtrl', vpcviewCtrl)
         .controller('modalCtrl', modalCtrl)
 
-function infrastructureCtrl($scope, $modal, promiseAjax, localStorageService, modalService) {
+function infrastructureCtrl($scope, $state, $stateParams, $log, $modal, promiseAjax, localStorageService, modalService, appService, $window) {
 
     $scope.configElements = {
         category: "general",
@@ -33,9 +33,6 @@ function infrastructureCtrl($scope, $modal, promiseAjax, localStorageService, mo
 
         ]
     };
-
-
-
 
     $scope.validateLanguage = function (form) {
         $scope.formSubmitted = true;

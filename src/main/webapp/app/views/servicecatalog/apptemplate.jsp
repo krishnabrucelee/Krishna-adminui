@@ -10,50 +10,87 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12 ">
                     <div class="pull-left">
-                        <div class="dashboard-box pull-left">
-                            <span class="pull-right">Total Template</span>
+						<div class="dashboard-box pull-left">
+                            <span class="pull-right"><fmt:message key="template.totaltemplate" bundle="${msg}" /></span>
                             <div class="clearfix"></div>
                             <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
-                            <b class="pull-right">0</b>
+                            <b class="pull-right">{{LinuxTemplate.Count}}</b>
                             <div class="clearfix"></div>
                         </div>
                         <div class="dashboard-box pull-left">
-                            <span class="pull-right">Windows Template</span>
+                            <span class="pull-right"><fmt:message key="windows.template" bundle="${msg}" /></span>
                             <div class="clearfix"></div>
                             <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
-                            <b class="pull-right">0</b>
+                            <b class="pull-right">{{windowsTemplate.Count}}</b>
                             <div class="clearfix"></div>
                         </div>
                         <div class="dashboard-box pull-left">
-                            <span class="pull-right">Linux Template</span>
+                            <span class="pull-right"><fmt:message key="linux.template" bundle="${msg}" /></span>
                             <div class="clearfix"></div>
                             <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
-                            <b class="pull-right">0</b>
+                            <b class="pull-right">{{LinuxTemplate.Count - windowsTemplate.Count}}</b>
                             <div class="clearfix"></div>
                         </div>
                     </div>
                     <div class="pull-right">
-                        <div class="quick-search ">
-                            <div class="input-group">
-                                <input data-ng-model="templateSearch" type="text" class="form-control input-medium" placeholder="Quick Search" aria-describedby="quicksearch-go">
-                                <span class="input-group-addon" id="quicksearch-go"><span class="pe-7s-search pe-lg font-bold"></span></span>
-                            </div>
-                        </div>
+						<panda-quick-search></panda-quick-search>
                         <div class="clearfix"></div>
                         <span class="pull-right m-l-sm m-t-sm">
-                            <a class="btn btn-info" ui-sref="servicecatalog.list-templatestore.list-view-template-create"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span>Add</a>
+                            <a class="btn btn-info" ui-sref="servicecatalog.list-apptemplate-iso-create"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span>Add</a>
                             <a class="btn btn-info" ui-sref="servicecatalog.list-templatestore" title="Refresh"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
                         </span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="panel-body">
-            <div class="row">
-                <label><p>You dont have any App Template yet. Create One Now</p>
-                </label>
-                </div>
+        <pagination-content></pagination-content>
+        <div class="white-content">
+        <div data-ng-show = "showLoader" style="margin: 1%">
+    				  		<get-loader-image data-ng-show="showLoader"></get-loader-image>
+      						</div>
+            <div class="table-responsive" data-ng-hide="showLoader">
+                <table cellspacing="1" cellpadding="1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th><fmt:message key="template.name" bundle="${msg}" /></th>
+                            <th><fmt:message key="template.os" bundle="${msg}" /></th>
+                            <th><fmt:message key="template.type" bundle="${msg}" /></th>
+                            <th><fmt:message key="template.zone" bundle="${msg}" /></th>
+                            <th><fmt:message key="template.hypervisor" bundle="${msg}" /></th>
+                            <th><fmt:message key="template.cost" bundle="${msg}" /> (<app-currency></app-currency>)</th>
+                            <th><fmt:message key="common.status" bundle="${msg}" /></th>
+                            <th><fmt:message key="common.action" bundle="${msg}" /></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-ng-repeat="template in filteredCount = (isoList| filter: quickSearch)">
+
+                            <td>{{ template.name}}</td>
+                            <td>
+                                {{ template.osCategory.name}}
+
+                            </td>
+                            <td>
+                                {{ template.osType.description}}
+                            </td>
+                            <td>{{ template.zone.name}} </td>
+                            <td>{{ template.hypervisor.name}}</td>
+                            <td><b class="text-danger">
+                                    {{ template.templateCost[0].cost}} <span>/ month</span>
+                                </b></td>
+                            <td>
+                                {{ template.status }}
+                            </td>
+                            <td>
+                                <a class="icon-button" title="<fmt:message key="common.edit" bundle="${msg}" />" ui-sref="servicecatalog.list-apptemplate-iso-edit({id: {{ template.id}}})"  ><span class="fa fa-edit"></span></a>
+                                <a has-permission="DELETE_MY_TEMPLATE" class="icon-button" title="<fmt:message key="common.delete" bundle="${msg}" />" data-ng-click="delete('sm', template.id)" ><span class="fa fa-trash"></span></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+        <pagination-content></pagination-content>
 
     </div>
 </div>

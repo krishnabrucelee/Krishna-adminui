@@ -508,6 +508,20 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                     pageTitle: 'App Templates'
                 }
             })
+            .state('servicecatalog.list-apptemplate-iso-create', {
+                url: "iso/create",
+                templateUrl: VIEW_URL +  "views/servicecatalog/isocreate.jsp",
+                data: {
+                    pageTitle: 'create.iso'
+                }
+            })
+            .state('servicecatalog.list-apptemplate-iso-edit', {
+                url: "view/:id",
+                templateUrl: VIEW_URL +  "views/servicecatalog/view-iso.jsp",
+                data: {
+                    pageTitle: 'edit.iso'
+                }
+            })
             .state('servicecatalog.list-templatestore', {
                 url: "templatestore/list",
                 templateUrl: VIEW_URL +  "views/servicecatalog/templatehome.jsp",
