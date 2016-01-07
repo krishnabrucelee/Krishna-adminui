@@ -21,6 +21,10 @@ function globalConfig($window) {
             currency : "¥",
             currencyLabel:"CNY"
         },
+        sort : {
+    		column : '',
+    		descending : false
+    	},
         networks:{
             name:''
         },

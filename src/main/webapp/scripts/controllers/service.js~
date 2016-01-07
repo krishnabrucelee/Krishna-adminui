@@ -807,9 +807,6 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
     $scope.computeForm = {};
     $scope.computeOffering = {};
     $scope.global = appService.crudService.globalConfig;
-    $scope.sort = appService.globalConfig.sort;
-    $scope.changeSorting = appService.utilService.changeSorting;
-
     $scope.compute = {
     		zone: {}
      };

@@ -42,21 +42,20 @@ Navigation
     				  		<get-loader-image data-ng-show="showLoader"></get-loader-image>
       						</div>
                                 <div data-ng-hide="showLoader" class="table-responsive">
-                                    <table cellspacing="1" cellpadding="1" class="table table-bordered table-striped ">
+                                    <table cellspacing="1" cellpadding="1" class="table dataTable table-bordered table-striped ">
                                         <thead>
                                         <tr>
-
-                                        <th><fmt:message key="company.name" bundle="${msg}" /></th>
-                                        <th><fmt:message key="domain.name" bundle="${msg}" /></th>
-                                        <th><fmt:message key="portal.user.name" bundle="${msg}" /></th>
-                                        <th><fmt:message key="city.headquarters" bundle="${msg}" /></th>
-                                        <th><fmt:message key="email.id" bundle="${msg}" /></th>
-                                        <th><fmt:message key="phone.number" bundle="${msg}" /></th>
+										<th data-ng-click="changeSorting('name')" data-ng-class="sort.descending && sort.column =='name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="company.name" bundle="${msg}" /></th>
+										<th data-ng-click="changeSorting('companyNameAbbreviation')" data-ng-class="sort.descending && sort.column =='companyNameAbbreviation'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="domain.name" bundle="${msg}" /></th>
+										<th data-ng-click="changeSorting('portalUserName')" data-ng-class="sort.descending && sort.column =='portalUserName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="portal.user.name" bundle="${msg}" /></th>
+										<th data-ng-click="changeSorting('cityHeadquarter')" data-ng-class="sort.descending && sort.column =='cityHeadquarter'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="city.headquarters" bundle="${msg}" /></th>
+										<th data-ng-click="changeSorting('email')" data-ng-class="sort.descending && sort.column =='email'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="email.id" bundle="${msg}" /></th>
+										<th data-ng-click="changeSorting('phone')" data-ng-class="sort.descending && sort.column =='phone'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="phone.number" bundle="${msg}" /></th>
                                         <th><fmt:message key="common.action" bundle="${msg}" /></th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            <tr data-ng-class="{'bg-row text-white' : domain.isSelected == true }"  data-ng-repeat="domain in filteredCount = (domainList| filter: quickSearch)">
+                                            <tr data-ng-class="{'bg-row text-white' : domain.isSelected == true }"  data-ng-repeat="domain in filteredCount = (domainList| filter: quickSearch | orderBy:sort.column:sort.descending)">
 
                                                 <td>{{domain.name}}</td>
                                                 <td>{{domain.companyNameAbbreviation}}</td>

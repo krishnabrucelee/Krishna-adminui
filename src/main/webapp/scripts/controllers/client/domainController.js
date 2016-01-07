@@ -10,8 +10,11 @@ angular
 
 
 // Load list page of user
-function domainListCtrl($scope,$state, promiseAjax, $log, notify, crudService, dialogService, $timeout, localStorageService) {
+function domainListCtrl($scope,$state, promiseAjax, $log,appService, notify, crudService, dialogService, $timeout, localStorageService) {
 
+	$scope.sort = appService.globalConfig.sort;
+    $scope.changeSorting = appService.utilService.changeSorting;
+    
    $scope.domains = {
         category: "domains",
         oneItemSelected: {},

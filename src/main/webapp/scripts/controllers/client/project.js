@@ -15,7 +15,10 @@ angular.module('panda-ui-admin').controller('projectListCtrl', projectListCtrl)
 				'projectViewCtrl', projectViewCtrl)
 
 function projectViewCtrl($scope, $state, $stateParams, $window, promiseAjax,
-		modalService, notify, crudService) {
+		modalService, notify,appService, crudService) {
+	
+	 $scope.sort = appService.globalConfig.sort;
+	    $scope.changeSorting = appService.utilService.changeSorting;
 
 	if ($stateParams.id > 0) {
 		var hasServer = promiseAjax.httpRequest("GET", "api/projects.json");
@@ -332,9 +335,12 @@ function projectInfraLimitCtrl($scope, globalConfig, notify) {
 	};
 };
 
-function projectListCtrl($scope, promiseAjax,crudService,notify) {
+function projectListCtrl($scope, promiseAjax,crudService,notify,appService) {
+	 $scope.sort = appService.globalConfig.sort;
+	    $scope.changeSorting = appService.utilService.changeSorting;
 	$scope.showLoader = true;
 	$scope.projectList = {};
+	
 		var hasUsers = crudService.listAll("projects/listall");
         hasUsers.then(function (result) {  // this is only run after $http completes0
        		$scope.projectList = result;

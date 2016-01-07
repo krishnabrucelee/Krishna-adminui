@@ -48,14 +48,16 @@
 						<get-loader-image data-ng-show="showLoader"></get-loader-image>
 					</div>
                             <div class="table-responsive" data-ng-hide="showLoader">
-                                <table cellspacing="1" cellpadding="1" class="table table-bordered table-striped">
+                                <table cellspacing="1" cellpadding="1" class="table dataTable table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                        	<th><fmt:message key="user.name" bundle="${msg}" /></th>
-                                        	<th><fmt:message key="first.name" bundle="${msg}" /></th>
-                                        	<th><fmt:message key="user.type" bundle="${msg}" /></th>
-                                        	<th><fmt:message key="common.email" bundle="${msg}" /></th>
-                                        	<th><fmt:message key="common.status" bundle="${msg}" /></th>
+                                        	<th data-ng-click="changeSorting('userName')" data-ng-class="sort.descending && sort.column =='userName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="user.name" bundle="${msg}" /></th>
+                                        	<th data-ng-click="changeSorting('firstName')" data-ng-class="sort.descending && sort.column =='firstName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="first.name" bundle="${msg}" /></th>
+                                        	<th data-ng-click="changeSorting('type')" data-ng-class="sort.descending && sort.column =='type'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="user.type" bundle="${msg}" /></th>
+                                        	<th data-ng-click="changeSorting('email')" data-ng-class="sort.descending && sort.column =='email'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.email" bundle="${msg}" /></th>
+                                        	<th data-ng-click="changeSorting('isActive')" data-ng-class="sort.descending && sort.column =='isActive'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.status" bundle="${msg}" /></th>
+                                        
+                                        	
                                         </tr>
                                     </thead>
                                     <tbody data-ng-hide="accountList.length > 0">
@@ -64,7 +66,7 @@
                                			</tr>
                            			</tbody>
                                     <tbody data-ng-show="accountList.length > 0">
-                                        <tr data-ng-repeat="account in filteredCount = (accountList| filter: quickSearch)">
+                                        <tr data-ng-repeat="account in filteredCount = (accountList| filter: quickSearch| orderBy:sort.column:sort.descending)">
                                         	<td>{{ account.userName}}</td>
                                             <td>{{ account.firstName}}</td>
                                             <td>{{ account.type}}</td>
