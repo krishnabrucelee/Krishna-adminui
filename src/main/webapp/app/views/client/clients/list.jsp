@@ -26,7 +26,8 @@ Navigation
                                     <div class="clearfix"></div>
                                     <span class="pull-right m-l-sm m-t-sm">
                                         <a class="btn btn-info" data-ng-click="addDomain('lg',domain)"><span class="pe-7s-add-user pe-lg font-bold m-r-xs"></span><fmt:message key="add.company" bundle="${msg}" /></a>
-                                        <a class="btn btn-info " ui-sref="project.home" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
+                                        <a class="btn btn-info " ui-sref="client.client" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
+
                                     </span>
                                 </div>
 
@@ -67,7 +68,7 @@ Navigation
                                                 <td>
 											    <a class="icon-button" title="<fmt:message key="common.edit" bundle="${msg}" />" data-ng-click="edit('lg', domain)">
                                                     <span class="fa fa-edit"> </span>
-                                                </a>                                   
+                                                </a>
                                                 <a class="icon-button" title="<fmt:message key="common.delete" bundle="${msg}" />" data-ng-click="delete('sm', domain)" ><span class="fa fa-trash"></span></a>
                                                 </td>
                                             </tr>
