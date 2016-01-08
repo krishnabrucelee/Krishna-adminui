@@ -917,7 +917,7 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
              		if(result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])){
                         	 var msg = result.data.globalError[0];
                         	 $scope.showLoader = false;
-                        	 notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                        	 appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                      }
                      angular.forEach(result.data.fieldErrors, function(errorMessage, key) {
                     	 $scope.showLoader = false;
