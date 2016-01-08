@@ -143,7 +143,6 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
             template.hypervisorId = template.hypervisor.id;
             template.osCategoryId = template.osCategory.id;
             template.osTypeId = template.osType.id;
-
             delete template.zone;
             delete template.hypervisor;
             delete template.osCategory;
