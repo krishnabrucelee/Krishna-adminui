@@ -19,7 +19,7 @@ angular
 function templateListCtrl($scope, $state, $stateParams, $log, $window, appService) {
 
     $scope.templateList = {};
-    $scope.isoList = {};
+//    $scope.isoList = {};
     $scope.paginationObject = {};
     $scope.templateForm = {};
     $scope.global = appService.globalConfig;
@@ -152,8 +152,8 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
             hasTemplate.then(function (result) {  // this is only run after $http completes
                 $scope.showLoader = false;
                 appService.notify({message: 'Created successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
-                if(template.flag == "true") {
-                	$window.location.href = '#/templatestore/AppTemplatelist';
+                if(template.format == "8") {
+                	$window.location.href = '#/templatestore/apptemplatelist';
                 } else {
                 	$window.location.href = '#/templatestore/list';
                 }
@@ -176,17 +176,21 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
     };
 
     // Delete the template
-    $scope.delete = function (size, templateId) {
+    $scope.delete = function (size, template) {
     	appService.dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
-                $scope.deleteId = templateId;
-                $scope.ok = function (templateId) {
+                $scope.deleteId = template.id;
+                $scope.ok = function (deleteId) {
                 	$scope.showLoader = true;
-                    var hasStorage = appService.crudService.delete("templates", templateId);
+                    var hasStorage = appService.crudService.delete("templates", deleteId);
                     hasStorage.then(function (result) {
-                        $scope.list(1);
                         $scope.homerTemplate = 'app/views/notification/notify.jsp';
                         $scope.showLoader = false;
                         appService.notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+                        if(template.format == "ISO") {
+                        	$window.location.href = '#/templatestore/apptemplatelist';
+                        } else {
+                        	$scope.list(1);
+                        }
                     }).catch(function (result) {
                         if (!angular.isUndefined(result.data)) {
                         	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
@@ -210,7 +214,7 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
             appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
             if(template.flag == 'true') {
-            	$window.location.href = '#/templatestore/AppTemplatelist';
+            	$window.location.href = '#/templatestore/apptemplatelist';
             } else {
             	$window.location.href = '#/templatestore/list';
             }
@@ -343,8 +347,8 @@ function templateEditCtrl($scope, $state, $stateParams, $log, $window, appServic
                 $scope.homerTemplate = 'app/views/notification/notify.jsp';
                 $scope.showLoader = false;
                 appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-                if(template.flag == true) {
-                	$window.location.href = '#/templatestore/AppTemplatelist';
+                if(template.format == "ISO") {
+                	$window.location.href = '#/templatestore/apptemplatelist';
                 } else {
                 	$window.location.href = '#/templatestore/list';
                 }
