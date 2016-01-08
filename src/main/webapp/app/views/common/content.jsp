@@ -135,6 +135,14 @@
 	                         <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}"><fmt:message key="common.templatestore" bundle="${msg}" /></a>
 	                         <span ng-switch-when="true"><fmt:message key="common.templatestore" bundle="${msg}" /></span>
                         </span>
+                        <span ng-if="state.data.pageTitle === 'edit.iso'">
+	                         <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}"><fmt:message key="edit.iso" bundle="${msg}" /></a>
+	                         <span ng-switch-when="true"><fmt:message key="edit.iso" bundle="${msg}" /></span>
+                        </span>
+                        <span ng-if="state.data.pageTitle === 'create.iso'">
+	                         <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}"><fmt:message key="create.iso" bundle="${msg}" /></a>
+	                         <span ng-switch-when="true"><fmt:message key="create.iso" bundle="${msg}" /></span>
+                        </span>
 						<span ng-if="state.data.pageTitle === 'system.configuration'">
 								<a ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message

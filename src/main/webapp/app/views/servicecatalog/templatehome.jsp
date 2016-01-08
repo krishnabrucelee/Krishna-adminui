@@ -21,7 +21,7 @@
 
                 </div>
                 <div class="tab-pane"  data-ng-class="{'active' : templateCategory == 'apptemplate'}" id="step1-config">
-                    <div data-ng-include src="'app/views/servicecatalog/apptemplate.jsp'"></div>
+                    <div data-ng-include src="'app/views/servicecatalog/apptemplate.jsp'" ></div>
                 </div>
             </div>
         </div>
