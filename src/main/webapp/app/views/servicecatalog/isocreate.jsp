@@ -115,13 +115,6 @@
                                 </div>
                             </div>
                         </div>
-                       <div class="form-group">
-                            <div class="row" >
-                                <div class="col-md-7  col-sm-7 col-xs-7">
-                                    <input type="hidden" class="form-control input-group" name="flag" data-ng-model="template.flag" ng-init="template.flag = 'true'" >
-                                </div>
-                            </div>
-                        </div>
 
                     </div>
                     <div class="col-md-6 col-sm-6">
