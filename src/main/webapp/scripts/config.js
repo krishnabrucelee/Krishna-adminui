@@ -550,7 +550,6 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                     pageTitle: 'common.network'
                 }
             })
-
             .state('servicecatalog.list-storage.list-storage-offer', {
                 url: "storage/offer",
                 templateUrl: VIEW_URL +  "views/servicecatalog/storage-offer.jsp",
