@@ -104,7 +104,7 @@
 						<div class="form-group">
                         	<div class="row">
                                  <div class="col-md-7  col-sm-7 col-xs-7">
-                                    <input type="hidden" class="form-control input-group" name="hypervisor" data-ng-model="template.hypervisor" ng-init="template.hypervisor = '8'" >
+                                    <input type="hidden" class="form-control input-group" name="hypervisor" data-ng-model="template.hypervisor" ng-init="template.hypervisor.id = '8'" >
  								</div>
                             </div>
                         </div>
