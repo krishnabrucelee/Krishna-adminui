@@ -19,6 +19,7 @@ angular
 function templateListCtrl($scope, $state, $stateParams, $log, $window, appService) {
 
     $scope.templateList = {};
+//    $scope.isoList = {};
     $scope.paginationObject = {};
     $scope.templateForm = {};
     $scope.global = appService.globalConfig;
@@ -42,8 +43,8 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
     //Template list
     $scope.list = function (pageNumber) {
     	$scope.showLoader = true;
-        var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-        var hasTemplates = appService.crudService.list("templates", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+
+        var hasTemplates = appService.crudService.listAll("templates/category?type=template");
         hasTemplates.then(function (result) {  // this is only run after $http completes0
 
             $scope.templateList = result;
@@ -67,6 +68,34 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
         });
     };
     $scope.list(1);
+
+    //Isolist
+    $scope.isoList = function (pageNumber) {
+    	$scope.showLoader = true;
+        var hasIso = appService.crudService.listAll("templates/category?type=iso");
+        hasIso.then(function (result) {  // this is only run after $http completes0
+
+            $scope.isoList = result;
+
+            $scope.windowsTemplate.Count = 0;
+            for (i = 0; i < result.length; i++) {
+            	if($scope.isoList[i].osType.description.indexOf("Windows") > -1) {
+            		$scope.windowsTemplate.Count++;
+            	}
+            }
+            $scope.LinuxTemplate.Count = 0;
+            if(result.length != 0) {
+            	$scope.LinuxTemplate.Count = result.length;
+            }
+
+            // For pagination
+            $scope.paginationObject.limit = limit;
+            $scope.paginationObject.currentPage = pageNumber;
+            $scope.paginationObject.totalItems = result.totalItems;
+            $scope.showLoader = false;
+        });
+    };
+    $scope.isoList(1);
 
      // OS Categorys list from server
     $scope.oscategorys = {};
@@ -105,12 +134,13 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
     };
 
     $scope.save = function (form) {
+
         $scope.formSubmitted = true;
         if (form.$valid) {
         	$scope.showLoader = true;
             var template = angular.copy($scope.template);
             template.zoneId = template.zone.id;
-            template.hypervisorId = template.hypervisor.id;
+            template.hypervisorId = template.hypervisor;
             template.osCategoryId = template.osCategory.id;
             template.osTypeId = template.osType.id;
 
@@ -120,10 +150,13 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
             delete template.osType;
             var hasTemplate = appService.crudService.add("templates", template);
             hasTemplate.then(function (result) {  // this is only run after $http completes
-                $scope.list(1);
                 $scope.showLoader = false;
                 appService.notify({message: 'Created successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
-                $window.location.href = '#/templatestore/list';
+                if(template.format == "8") {
+                	$window.location.href = '#/templatestore/apptemplatelist';
+                } else {
+                	$window.location.href = '#/templatestore/list';
+                }
 
             }).catch(function (result) {
                 if (!angular.isUndefined(result.data)) {
@@ -143,17 +176,21 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
     };
 
     // Delete the template
-    $scope.delete = function (size, templateId) {
+    $scope.delete = function (size, template) {
     	appService.dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
-                $scope.deleteId = templateId;
-                $scope.ok = function (templateId) {
+                $scope.deleteId = template.id;
+                $scope.ok = function (deleteId) {
                 	$scope.showLoader = true;
-                    var hasStorage = appService.crudService.delete("templates", templateId);
+                    var hasStorage = appService.crudService.delete("templates", deleteId);
                     hasStorage.then(function (result) {
-                        $scope.list(1);
                         $scope.homerTemplate = 'app/views/notification/notify.jsp';
                         $scope.showLoader = false;
                         appService.notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+                        if(template.format == "ISO") {
+                        	$window.location.href = '#/templatestore/apptemplatelist';
+                        } else {
+                        	$scope.list(1);
+                        }
                     }).catch(function (result) {
                         if (!angular.isUndefined(result.data)) {
                         	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
@@ -176,7 +213,11 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
         if (form.$valid) {
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
             appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-            $window.location.href = '#/templatestore/list';
+            if(template.flag == 'true') {
+            	$window.location.href = '#/templatestore/apptemplatelist';
+            } else {
+            	$window.location.href = '#/templatestore/list';
+            }
         }
     };
 
@@ -306,7 +347,11 @@ function templateEditCtrl($scope, $state, $stateParams, $log, $window, appServic
                 $scope.homerTemplate = 'app/views/notification/notify.jsp';
                 $scope.showLoader = false;
                 appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-                $window.location.href = '#/templatestore/list';
+                if(template.format == "ISO") {
+                	$window.location.href = '#/templatestore/apptemplatelist';
+                } else {
+                	$window.location.href = '#/templatestore/list';
+                }
             }).catch(function (result) {
                 if (!angular.isUndefined(result.data)) {
                 	if (result.data.fieldErrors != null) {
@@ -919,7 +964,7 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
                     			$scope.computeForm[key].$invalid = true;
                     			$scope.computeForm[key].errorMessage = errorMessage;
                     		});
-                    	}        
+                    	}
                     });
                     	$modalInstance.close();
                 	},
