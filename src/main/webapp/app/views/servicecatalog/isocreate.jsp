@@ -118,7 +118,6 @@
 
                     </div>
                     <div class="col-md-6 col-sm-6">
-
                         <div class="form-group" ng-class="{
                                             'text-danger'
                                             :TemplateForm.osCategory.$invalid && formSubmitted}">
