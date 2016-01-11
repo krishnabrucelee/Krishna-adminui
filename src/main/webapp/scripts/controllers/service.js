@@ -679,7 +679,6 @@ $scope.costPerHourIOPS = function() {
                 appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                 $window.location.href = '#/storage/list';
             }).catch(function (result) {
-
             	if (!angular.isUndefined(result.data)) {
                 	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
                   	    var msg = result.data.globalError[0];
