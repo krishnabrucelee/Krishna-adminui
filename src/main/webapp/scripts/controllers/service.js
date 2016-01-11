@@ -680,6 +680,19 @@ $scope.costPerHourIOPS = function() {
                 $scope.showLoader = false;
                 appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                 $window.location.href = '#/storage/list';
+            }).catch(function (result) {
+            	if (!angular.isUndefined(result.data)) {
+                	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                  	    var msg = result.data.globalError[0];
+                  	  $scope.showLoader = false;
+                  	appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                    } else if (result.data.fieldErrors != null) {
+                        angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                            $scope.storageForm[key].$invalid = true;
+                            $scope.storageForm[key].errorMessage = errorMessage;
+                        });
+                	}
+                }
             });
         }
     };
