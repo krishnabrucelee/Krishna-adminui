@@ -337,20 +337,34 @@ function projectInfraLimitCtrl($scope, globalConfig, notify) {
 
 function projectListCtrl($scope, promiseAjax,crudService,notify,appService) {
 	 $scope.sort = appService.globalConfig.sort;
-	    $scope.changeSorting = appService.utilService.changeSorting;
-	$scope.showLoader = true;
-	$scope.projectList = {};
-	
-		var hasUsers = crudService.listAll("projects/listall");
-        hasUsers.then(function (result) {  // this is only run after $http completes0
-       		$scope.projectList = result;
-       		$scope.showLoader = false;
-	}).catch(function (result) {
+	 $scope.changeSorting = appService.utilService.changeSorting;
+	 $scope.showLoader = true;
+	 $scope.projectList = {};
+	 $scope.paginationObject = {};
+
+        $scope.list = function (pageNumber) {
+        	
+        	$scope.showLoader = true;
+            var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+            var hasProjects = appService.crudService.list("projects", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+            hasProjects.then(function (result) {  // this is only run after $http completes0
+                $scope.projectList = result;
+                $scope.projectList.Count = 0;
+                if (result.length != 0) {
+                    $scope.projectList.Count = result.totalItems;
+                }
+                // For pagination
+                $scope.paginationObject.limit  = limit;
+                $scope.paginationObject.currentPage = pageNumber;
+                $scope.paginationObject.totalItems = result.totalItems;
+                $scope.showLoader = false;
+            }).catch(function (result) {
 	         if(result.data.globalError[0] != null){
 	        	 var msg = result.data.globalError[0];
 	        	 $scope.showLoader = false;
 	        	 notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-
 	             }
               });
+        };
+        $scope.list(1);
 };

@@ -15,21 +15,21 @@
 								<span class="pull-right"><fmt:message key="total.project" bundle="${msg}" /></span>
 								<div class="clearfix"></div>
 								<span class="pull-left m-t-xs"><!-- <img
-									src="images/project-icon.png"> --></span> <b class="pull-right">{{projectList.length}}</b>
+									src="images/project-icon.png"> --></span> <b class="pull-right">{{projectList.Count}}</b>
 								<div class="clearfix"></div>
 							</div>
 							<div class="dashboard-box pull-left">
 								<span class="pull-right"><fmt:message key="retail.project" bundle="${msg}" /></span>
 								<div class="clearfix"></div>
 								<span class="pull-left m-t-xs"><!-- <img
-									src="images/project-icon.png"> --></span> <b class="pull-right">{{projectList.length - projectList.length }}</b>
+									src="images/project-icon.png"> --></span> <b class="pull-right">0</b>
 								<div class="clearfix"></div>
 							</div>
 							<div class="dashboard-box pull-left">
 								<span class="pull-right"><fmt:message key="trial.project" bundle="${msg}" /></span>
 								<div class="clearfix"></div>
 								<span class="pull-left m-t-xs"><!-- <img
-									src="images/project-icon.png"> --></span> <b class="pull-right">{{projectList.length}}</b>
+									src="images/project-icon.png"> --></span> <b class="pull-right">{{projectList.Count}}</b>
 								<div class="clearfix"></div>
 							</div>
 						</div>
