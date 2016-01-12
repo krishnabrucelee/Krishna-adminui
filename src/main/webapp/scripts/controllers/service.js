@@ -21,12 +21,15 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
     $scope.templateList = {};
 //    $scope.isoList = {};
     $scope.paginationObject = {};
+    $scope.paginationObjectIso = {};
     $scope.templateForm = {};
     $scope.global = appService.globalConfig;
     $scope.test = "test";
     $scope.summernoteTextTwo = {}
     $scope.windowsTemplate = {};
     $scope.LinuxTemplate = {};
+    $scope.windowsIsoTemplate = {};
+    $scope.LinuxIsoTemplate = {};
     $scope.sort = appService.globalConfig.sort;
     $scope.changeSorting = appService.utilService.changeSorting;
 
@@ -77,21 +80,21 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
 
             $scope.isoList = result;
 
-            $scope.windowsTemplate.Count = 0;
+            $scope.windowsIsoTemplate.Count = 0;
             for (i = 0; i < result.length; i++) {
             	if($scope.isoList[i].osType.description.indexOf("Windows") > -1) {
-            		$scope.windowsTemplate.Count++;
+            		$scope.windowsIsoTemplate.Count++;
             	}
             }
-            $scope.LinuxTemplate.Count = 0;
+            $scope.LinuxIsoTemplate.Count = 0;
             if(result.length != 0) {
-            	$scope.LinuxTemplate.Count = result.length;
+            	$scope.LinuxIsoTemplate.Count = result.length;
             }
 
             // For pagination
-            $scope.paginationObject.limit = limit;
-            $scope.paginationObject.currentPage = pageNumber;
-            $scope.paginationObject.totalItems = result.totalItems;
+            $scope.paginationObjectIso.limit = limit;
+            $scope.paginationObjectIso.currentPage = pageNumber;
+            $scope.paginationObjectIso.totalItems = result.totalItems;
             $scope.showLoader = false;
         });
     };
@@ -140,10 +143,9 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
         	$scope.showLoader = true;
             var template = angular.copy($scope.template);
             template.zoneId = template.zone.id;
-            template.hypervisorId = template.hypervisor;
+            template.hypervisorId = template.hypervisor.id;
             template.osCategoryId = template.osCategory.id;
             template.osTypeId = template.osType.id;
-
             delete template.zone;
             delete template.hypervisor;
             delete template.osCategory;
@@ -678,6 +680,19 @@ $scope.costPerHourIOPS = function() {
                 $scope.showLoader = false;
                 appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                 $window.location.href = '#/storage/list';
+            }).catch(function (result) {
+            	if (!angular.isUndefined(result.data)) {
+                	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                  	    var msg = result.data.globalError[0];
+                  	  $scope.showLoader = false;
+                  	appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                    } else if (result.data.fieldErrors != null) {
+                        angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                            $scope.storageForm[key].$invalid = true;
+                            $scope.storageForm[key].errorMessage = errorMessage;
+                        });
+                	}
+                }
             });
         }
     };
