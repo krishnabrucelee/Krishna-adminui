@@ -16,10 +16,9 @@ angular
         .controller('templateListCtrl', templateListCtrl)
         .controller('templateEditCtrl', templateEditCtrl)
 
-function templateListCtrl($scope, $state, $stateParams, $log, $window, appService) {
+function templateListCtrl($scope, $state, $stateParams, $log, $window, appService, promiseAjax) {
 
     $scope.templateList = {};
-//    $scope.isoList = {};
     $scope.paginationObject = {};
     $scope.paginationObjectIso = {};
     $scope.templateForm = {};
@@ -27,9 +26,9 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
     $scope.test = "test";
     $scope.summernoteTextTwo = {}
     $scope.windowsTemplate = {};
-    $scope.LinuxTemplate = {};
+    $scope.linuxTemplate = {};
     $scope.windowsIsoTemplate = {};
-    $scope.LinuxIsoTemplate = {};
+    $scope.linuxIsoTemplate = {};
     $scope.sort = appService.globalConfig.sort;
     $scope.changeSorting = appService.utilService.changeSorting;
 
@@ -47,21 +46,20 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
     $scope.list = function (pageNumber) {
     	$scope.showLoader = true;
 
-        var hasTemplates = appService.crudService.listAll("templates/category?type=template");
+    	var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+    	var hasTemplates = promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL
+        		+ "templates/listall?sortBy=ASC&type=template&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
         hasTemplates.then(function (result) {  // this is only run after $http completes0
 
             $scope.templateList = result;
 
-            $scope.windowsTemplate.Count = 0;
-            for (i = 0; i < result.length; i++) {
-            	if($scope.templateList[i].osType.description.indexOf("Windows") > -1) {
-            		$scope.windowsTemplate.Count++;
-            	}
-            }
-            $scope.LinuxTemplate.Count = 0;
-            if(result.length != 0) {
-            	$scope.LinuxTemplate.Count = result.length;
-            }
+            // Get the count of the listings
+       		var hasTemplateCount =  appService.crudService.listAll("templates/templateCounts");
+       		hasTemplateCount.then(function(result) {
+       			$scope.windowsTemplate = result.windowsCount;
+       			$scope.linuxTemplate = result.linuxCount;
+       			$scope.totalCount = result.totalCount;
+    		});
 
             // For pagination
             $scope.paginationObject.limit = limit;
@@ -73,23 +71,23 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
     $scope.list(1);
 
     //Isolist
-    $scope.isoList = function (pageNumber) {
+    $scope.isolist = function (pageNumber) {
     	$scope.showLoader = true;
-        var hasIso = appService.crudService.listAll("templates/category?type=iso");
+
+    	var limit = (angular.isUndefined($scope.paginationObjectIso.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObjectIso.limit;
+        var hasIso = promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL
+        		+ "templates/listall?sortBy=ASC&type=iso&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
         hasIso.then(function (result) {  // this is only run after $http completes0
 
             $scope.isoList = result;
 
-            $scope.windowsIsoTemplate.Count = 0;
-            for (i = 0; i < result.length; i++) {
-            	if($scope.isoList[i].osType.description.indexOf("Windows") > -1) {
-            		$scope.windowsIsoTemplate.Count++;
-            	}
-            }
-            $scope.LinuxIsoTemplate.Count = 0;
-            if(result.length != 0) {
-            	$scope.LinuxIsoTemplate.Count = result.length;
-            }
+            // Get the count of the listings
+       		var hasIsoTemplateCount =  appService.crudService.listAll("templates/templateCounts");
+       		hasIsoTemplateCount.then(function(result) {
+       			$scope.windowsIsoTemplate = result.windowsIsoCount;
+       			$scope.linuxIsoTemplate = result.linuxIsoCount;
+       			$scope.totalIsoCount = result.totalIsoCount;
+    		});
 
             // For pagination
             $scope.paginationObjectIso.limit = limit;
@@ -98,7 +96,7 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
             $scope.showLoader = false;
         });
     };
-    $scope.isoList(1);
+    $scope.isolist(1);
 
      // OS Categorys list from server
     $scope.oscategorys = {};
