@@ -14,21 +14,21 @@
                             <span class="pull-right"><fmt:message key="template.totaltemplate" bundle="${msg}" /></span>
                             <div class="clearfix"></div>
                             <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
-                            <b class="pull-right">{{LinuxTemplate.Count}}</b>
+                            <b class="pull-right">{{totalIsoCount}}</b>
                             <div class="clearfix"></div>
                         </div>
                         <div class="dashboard-box pull-left">
                             <span class="pull-right"><fmt:message key="windows.template" bundle="${msg}" /></span>
                             <div class="clearfix"></div>
                             <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
-                            <b class="pull-right">{{windowsTemplate.Count}}</b>
+                            <b class="pull-right">{{windowsIsoTemplate}}</b>
                             <div class="clearfix"></div>
                         </div>
                         <div class="dashboard-box pull-left">
                             <span class="pull-right"><fmt:message key="linux.template" bundle="${msg}" /></span>
                             <div class="clearfix"></div>
                             <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
-                            <b class="pull-right">{{LinuxTemplate.Count - windowsTemplate.Count}}</b>
+                            <b class="pull-right">{{linuxIsoTemplate}}</b>
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                 </div>
             </div>
         </div>
-        <pagination-content></pagination-content>
+        <pagination-content-iso></pagination-content-iso>
         <div class="white-content">
         <div data-ng-show = "showLoader" style="margin: 1%">
     				  		<get-loader-image data-ng-show="showLoader"></get-loader-image>
@@ -90,7 +90,7 @@
                 </table>
             </div>
         </div>
-        <pagination-content></pagination-content>
+        <pagination-content-iso></pagination-content-iso>
 
     </div>
 </div>
