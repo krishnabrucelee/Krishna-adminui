@@ -15,7 +15,7 @@ function cloudStackCtrl($scope, $state,crudService, $stateParams, modalService, 
     $scope.configList = {};
     $scope.paginationObject = {};
     $scope.configForm = {};
-    $scope.global = crudService.globalConfig;         	
+    $scope.global = crudService.globalConfig;
 
     var hasConfigs = crudService.listAll("cloudconfiguration/configlist");
     hasConfigs.then(function (result) {  // this is only run after $http completes0
