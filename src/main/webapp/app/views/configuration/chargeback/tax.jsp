@@ -39,6 +39,7 @@
                             </span>
                         </div>
                     </div></div>
+                    <pagination-content></pagination-content>
                     <div class="row">
                     <div class="col-md-12 col-sm-12">
 
@@ -79,7 +80,7 @@
 
 
                     </div></div>
-
+					<pagination-content></pagination-content>
 
                 </div>
             </div>
