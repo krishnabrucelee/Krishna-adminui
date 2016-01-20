@@ -8,14 +8,13 @@ angular
         .controller('importCtrl', importCtrl)
         .controller('retailManagementCtrl', retailManagementCtrl)
 
-function cloudStackCtrl($scope, $state, $stateParams, $log, $window, appService, promiseAjax) {
+function cloudStackCtrl($scope, $state, $stateParams, $log, $window, appService) {
 
     var VIEW_URL = "app/";
     $scope.zoneList = {};
     $scope.configList = {};
     $scope.paginationObject = {};
     $scope.configForm = {};
-    $scope.global = appService.globalConfig;
 
     var hasConfigs = appService.crudService.listAll("cloudconfiguration/configlist");
     hasConfigs.then(function (result) {  // this is only run after $http completes0
@@ -33,7 +32,7 @@ function cloudStackCtrl($scope, $state, $stateParams, $log, $window, appService,
             var hasConfig = appService.crudService.add("cloudconfiguration", config);
             hasConfig.then(function (result) {  // this is only run after $http
                 $scope.showLoader = false;
-                appService.notify({message: 'System configured successfully. Please login again to continue.', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
+                appService.notify({message: 'System configured successfully. Please login again to continue.', classes: 'alert-success', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
                     setTimeout(function() {
             	    $window.sessionStorage.removeItem("pandaUserSession");
         		    window.location.href = "login";
@@ -44,7 +43,7 @@ function cloudStackCtrl($scope, $state, $stateParams, $log, $window, appService,
                     if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
                         var msg = result.data.globalError[0];
                         $scope.showLoader = false;
-                        appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
+                        appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
                     } else if (result.data.fieldErrors != null) {
                         angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
                             $scope.configForm[key].$invalid = true;
@@ -58,8 +57,8 @@ function cloudStackCtrl($scope, $state, $stateParams, $log, $window, appService,
 
     // Zone List
     $scope.list = function (pageNumber) {
-    var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-    var hasZones = appService.crudService.list("zones", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+    var limit = (angular.isUndefined($scope.paginationObject.limit)) ? appService.globalConfig.CONTENT_LIMIT : $scope.paginationObject.limit;
+    var hasZones = appService.crudService.list("zones", appService.globalConfig.paginationHeaders(pageNumber, limit), {"limit": limit});
     hasZones.then(function (result) {  // this is only run after $http completes0
         $scope.zoneList = result;
 
