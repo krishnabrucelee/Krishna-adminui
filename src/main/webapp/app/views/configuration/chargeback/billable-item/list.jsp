@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<form name="configForm"  method="post" novalidate="" data-ng-controller="configurationCtrl">
+<form name="configForm"  method="post" novalidate="" data-ng-controller="billableItemsCtrl">
     <div class="row">
         <div class="col-md-12 col-sm-12">
             <div class="hpanel">
@@ -33,30 +33,33 @@
                                 </div>
                             </div>
                             <div class="clearfix"></div>
+                            <span class="pull-right m-l-sm m-t-sm">
+                                <a class="btn btn-info" href="javascript:void(0);" data-ng-click="createBillableItem()"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message key="common.add" bundle="${msg}" /></a>
+
+                            </span>
                         </div>
                     </div></div>
 
+					<pagination-content></pagination-content>
                     <div class="row">
                     <div class="col-md-12 col-sm-12">
-
-
-                    <table cellspacing="1" cellpadding="1" class="table table-bordered table-striped">
+	                    <table cellspacing="1" cellpadding="1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th class="col-md-2 col-sm-2">Name</th>
-                                <th class="col-md-2 col-sm-2">Tax Name</th>
-                                <th class="col-md-3 col-sm-3">Tax Percentage(%)</th>
+                                <th class="col-md-2 col-sm-2">Unit</th>
+                                <th class="col-md-3 col-sm-3">Type</th>
                                 <th class="col-md-2 col-sm-2">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr data-ng-repeat="billing in billingList | filter:billingSearch">
+                            <tr data-ng-repeat="billing in billableItems | filter:billingSearch">
                                 <td>
                                     {{ billing.name }}
 
                                 </td>
-                                <td>{{ billing.taxName }}</td>
-                                <td>{{ billing.taxPercentage }}</td>
+                                <td>{{ billing.billableUnit }}</td>
+                                <td>{{ billing.billableType }}</td>
 
                                 <td>
 
@@ -69,11 +72,8 @@
                             </tr>
                         </tbody>
                     </table>
-
-
-
                     </div></div>
-
+					<pagination-content></pagination-content>
 
                 </div>
             </div>
