@@ -8,20 +8,19 @@ angular
         .controller('importCtrl', importCtrl)
         .controller('retailManagementCtrl', retailManagementCtrl)
 
-function cloudStackCtrl($scope, $state,crudService, $stateParams, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify) {
+function cloudStackCtrl($scope, $state, $stateParams, $log, $window, appService, promiseAjax) {
 
 	var VIEW_URL = "app/";
 	$scope.zoneList = {};
     $scope.configList = {};
     $scope.paginationObject = {};
     $scope.configForm = {};
-    $scope.global = crudService.globalConfig;
+    $scope.global = appService.globalConfig;
 
-    var hasConfigs = crudService.listAll("cloudconfiguration/configlist");
+    var hasConfigs = appService.crudService.listAll("cloudconfiguration/configlist");
     hasConfigs.then(function (result) {  // this is only run after $http completes0
-    $scope.config = result[0];
+        $scope.config = result[0];
     });
-
 
     /**
      * Save the configuration details.
@@ -31,10 +30,10 @@ function cloudStackCtrl($scope, $state,crudService, $stateParams, modalService, 
         if (form.$valid) {
             var config = $scope.config;
             $scope.showLoader = true;
-            var hasConfig = crudService.add("cloudconfiguration", config);
+            var hasConfig = appService.crudService.add("cloudconfiguration", config);
             hasConfig.then(function (result) {  // this is only run after $http
             	$scope.showLoader = false;
-            	notify({message: 'System configured successfully. Please login again to continue.', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
+            	appService.notify({message: 'System configured successfully. Please login again to continue.', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
             	setTimeout(function() {
             		$window.sessionStorage.removeItem("pandaUserSession");
         			window.location.href = "login";
@@ -45,7 +44,7 @@ function cloudStackCtrl($scope, $state,crudService, $stateParams, modalService, 
                             if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
                                 var msg = result.data.globalError[0];
                                 $scope.showLoader = false;
-                                notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
+                                appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
                             } else if (result.data.fieldErrors != null) {
                                 angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
                                     $scope.configForm[key].$invalid = true;
@@ -59,19 +58,18 @@ function cloudStackCtrl($scope, $state,crudService, $stateParams, modalService, 
 
     // Zone List
     $scope.list = function (pageNumber) {
-       var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-       var hasZones = crudService.list("zones", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
-       hasZones.then(function (result) {  // this is only run after $http completes0
-       $scope.zoneList = result;
+    var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+    var hasZones = appService.crudService.list("zones", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+    hasZones.then(function (result) {  // this is only run after $http completes0
+        $scope.zoneList = result;
 
         // For pagination
         $scope.paginationObject.limit = limit;
         $scope.paginationObject.currentPage = pageNumber;
         $scope.paginationObject.totalItems = result.totalItems;
-         });
-      };
-      $scope.list(1);
-
+    });
+    };
+    $scope.list(1);
     };
 
 function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $stateParams, promiseAjax, notify, localStorageService, modalService) {
