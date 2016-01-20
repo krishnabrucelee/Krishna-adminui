@@ -34,7 +34,12 @@ function cloudStackCtrl($scope, $state,crudService, $stateParams, modalService, 
             var hasConfig = crudService.add("cloudconfiguration", config);
             hasConfig.then(function (result) {  // this is only run after $http
             	$scope.showLoader = false;
-            	notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
+            	notify({message: 'System configured successfully. Please login again to continue.', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
+            	setTimeout(function() {
+            		$window.sessionStorage.removeItem("pandaUserSession");
+        			window.location.href = "login";
+        		}, 4000);
+
             }).catch(function (result) {
                 if (!angular.isUndefined(result.data)) {
                             if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
