@@ -8,7 +8,7 @@ angular
         .controller('importCtrl', importCtrl)
         .controller('retailManagementCtrl', retailManagementCtrl)
 
-function cloudStackCtrl($scope, $state, $stateParams, $log, $window, appService) {
+function cloudStackCtrl($scope, $window, appService) {
 
     var VIEW_URL = "app/";
     $scope.zoneList = {};
