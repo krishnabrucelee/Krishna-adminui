@@ -10,8 +10,8 @@ angular
 
 function cloudStackCtrl($scope, $state, $stateParams, $log, $window, appService, promiseAjax) {
 
-	var VIEW_URL = "app/";
-	$scope.zoneList = {};
+    var VIEW_URL = "app/";
+    $scope.zoneList = {};
     $scope.configList = {};
     $scope.paginationObject = {};
     $scope.configForm = {};
@@ -32,26 +32,26 @@ function cloudStackCtrl($scope, $state, $stateParams, $log, $window, appService,
             $scope.showLoader = true;
             var hasConfig = appService.crudService.add("cloudconfiguration", config);
             hasConfig.then(function (result) {  // this is only run after $http
-            	$scope.showLoader = false;
-            	appService.notify({message: 'System configured successfully. Please login again to continue.', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
-            	setTimeout(function() {
-            		$window.sessionStorage.removeItem("pandaUserSession");
-        			window.location.href = "login";
-        		}, 4000);
+                $scope.showLoader = false;
+                appService.notify({message: 'System configured successfully. Please login again to continue.', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
+                    setTimeout(function() {
+            	    $window.sessionStorage.removeItem("pandaUserSession");
+        		    window.location.href = "login";
+        	    }, 4000);
 
             }).catch(function (result) {
                 if (!angular.isUndefined(result.data)) {
-                            if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
-                                var msg = result.data.globalError[0];
-                                $scope.showLoader = false;
-                                appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
-                            } else if (result.data.fieldErrors != null) {
-                                angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
-                                    $scope.configForm[key].$invalid = true;
-                                    $scope.configForm[key].errorMessage = errorMessage;
-                                });
-                            }
-                        }
+                    if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
+                        var msg = result.data.globalError[0];
+                        $scope.showLoader = false;
+                        appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
+                    } else if (result.data.fieldErrors != null) {
+                        angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                            $scope.configForm[key].$invalid = true;
+                            $scope.configForm[key].errorMessage = errorMessage;
+                        });
+                    }
+                }
             });
         }
     }
