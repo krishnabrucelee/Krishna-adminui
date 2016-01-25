@@ -3,8 +3,8 @@
  */
 function loginSession(globalConfig, $window, $http, $injector, $moment) {
 
-	 return {
-	     authLogin: function(config) {
+    return {
+	    authLogin: function(config) {
 	        if (globalConfig.sessionValues == null) {
 	            return config;
 	        } else {
