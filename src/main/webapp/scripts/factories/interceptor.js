@@ -55,4 +55,3 @@ angular.module('panda-ui-admin')
 .config([ '$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('interceptorAPI');
 } ]);
-

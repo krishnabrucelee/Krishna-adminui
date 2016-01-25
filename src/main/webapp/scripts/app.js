@@ -28,4 +28,3 @@
         'angular-momentjs'          // AngularJS moment
     ])
 })();
-
