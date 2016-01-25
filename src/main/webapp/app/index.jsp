@@ -195,4 +195,3 @@
 <script src="scripts/panda-script.js"></script>
 </body>
 </html>
-
