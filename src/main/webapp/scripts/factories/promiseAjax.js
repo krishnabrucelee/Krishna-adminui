@@ -6,7 +6,6 @@
  * @author - Jamseer N
  */
 
-
 function promiseAjax($http, $window, globalConfig, notify) {
      var global = globalConfig;
      var httpTokenRequest = function (method, url, headers, data) {
@@ -26,7 +25,6 @@ function promiseAjax($http, $window, globalConfig, notify) {
             "url": url,
             "headers": {'x-auth-token': globalConfig.sessionValues.token, 'x-requested-with': '', 'Content-Type': 'application/json', 'Range': "items=0-9"}
         };
-
 
         if(headers != null && !angular.isUndefined(headers)) {
             angular.forEach(headers, (function(value, key) {
@@ -58,16 +56,11 @@ function promiseAjax($http, $window, globalConfig, notify) {
     var httpRequest = function(method, url, data) {
         return $http({method:method, url:url}).then(function(result){
             return result.data;
-        }).catch(function(result){
-
         });
     };
 
-
-
     return { httpRequest: httpRequest, httpTokenRequest: httpTokenRequest };
 }
-
 
 /**
  * Pass function into module
@@ -75,5 +68,3 @@ function promiseAjax($http, $window, globalConfig, notify) {
 angular
     .module('panda-ui-admin')
     .factory('promiseAjax', promiseAjax)
-
-
