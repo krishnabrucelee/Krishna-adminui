@@ -50,6 +50,34 @@ function globalConfig($window) {
         CONTENT_LIMIT: 10,
         VIEW_URL : 'app/views/',
         NOTIFICATION_TEMPLATE: 'app/views/notification/notify.jsp',
+        BILLABLE_ITEM: {
+        	BILLABLE_TYPE : {
+        		/** Infrastructure billable type is the default billable items of cloudstack. */
+                INFRASTRUCTURE: "Infrastructure",
+
+                /** Additional billable items for panda portal. */
+                MANAGED: "Managed",
+
+                /** Optional billable items for panda portal. */
+                OPTIONAL: "Optional",
+        	},
+        	BILLABLE_UNIT: {
+        		/** Billable unit per Core per Hour. */
+                PER_CORE_PER_HOUR: "Per Core Per Hour",
+
+                /** Billable unit per GB per Hour. */
+                PER_GB_PER_HOUR: "Per GB Per Hour",
+
+                /** Billable unit per OS per Hour. */
+                PER_OS_PER_HOUR: "Per OS PerHour",
+
+                /** Billable unit per DB per Hour. */
+                PER_DB_PER_HOUR: "Per DB Per Hour",
+
+                /** Billable unit per APP per Hour. */
+                PER_APP_PER_HOUR: "Per App Per Hour",
+        	}
+        },
 
         paginationHeaders: function(pageNumber, limit) {
             var headers = {};
