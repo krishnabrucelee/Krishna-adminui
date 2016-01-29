@@ -9,7 +9,7 @@ function utilService(globalConfig) {
     	};
     	return referenceObject;
     };
-    
+
     object.changeSorting = function(column) {
 		var sort = globalConfig.sort;
 
@@ -21,6 +21,11 @@ function utilService(globalConfig) {
 		}
 		return sort.descending;
 	};
+
+	object.getBillablTypes = function() {
+
+	};
+
     return object;
 };
 
