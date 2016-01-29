@@ -209,10 +209,10 @@
 									</div>
 								</div>
 							</div>
-								
+
 						</div>
 					</div>
-					
+
 					<%-- <div class="row">
 						<div class="col-md-6  col-sm-12 col-xs-4">
 							<div class="form-group"
@@ -442,9 +442,12 @@
 												key="common.speed" bundle="${msg}" /><span
 											class="text-danger">*</span></label>
 										<div class="col-md-6  col-sm-6 col-xs-6">
-											<input required="true" valid-number type="text" name="speed"
-												data-ng-model="compute.clockSpeed" class="form-control"
+											<input required="true"  valid-number type="text" name="speed"
+												data-ng-model="compute.clockSpeed"  minlength= "4" maxlength ="4" class="form-control"
 												data-ng-class="{'error': computeForm.speed.$invalid && formSubmitted}">
+											<span style="color:red" ng-show="computeForm.speed.$error.minlength"><fmt:message key="not.a.valid.range" bundle="${msg}" /></span>
+											<span style="color:red" ng-show="computeForm.speed.$error.maxength"><fmt:message key="not.a.valid.range" bundle="${msg}" /></span>
+
 											<div class="error-area"
 												data-ng-show="computeForm.speed.$invalid && formSubmitted">
 												<i
@@ -869,8 +872,8 @@
 									<option value="" class=""><fmt:message
 									key="common.select" bundle="${msg}" /></option>
 								</select>
-						    
-								
+
+
 							</div>
 						</div>
 					</div>
@@ -1130,8 +1133,8 @@
 				<div class="col-md-12  col-sm-12">
 				 <get-loader-image data-ng-show="showLoader"></get-loader-image>
 					<span data-ng-hide="showLoader" class="pull-right">
-			          
-					
+
+
 					 <a	class="btn btn-default btn-outline" data-ng-hide="showLoader" ui-sref="servicecatalog.list-compute"><fmt:message	key="common.cancel" bundle="${msg}" /></a>
 						<button class="btn btn-info" type="submit" data-ng-hide="showLoader" ng-disabled="form.computeForm.$invalid"> <fmt:message key="common.create" bundle="${msg}" />
 						</button>
