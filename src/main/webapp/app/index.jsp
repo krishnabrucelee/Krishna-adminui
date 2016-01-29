@@ -33,7 +33,6 @@
     <link rel="stylesheet" href="bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" />
     <link rel="stylesheet" href="bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" />
     <link rel="stylesheet" href="bower_components/blueimp-gallery/css/blueimp-gallery.min.css" />
-    <!--<link rel="stylesheet" href="bower_components/angularjs-slider/dist/rzslider.css" />-->
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -71,16 +70,11 @@
     <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/u-WUoqrET9fUeobQW7jkRRJtnKITppOI_IvcXXDNrsc.woff2" />
     <link rel="stylesheet" href="fonts/pe-icon-7-stroke/fonts/xozscpT2726on7jbcb_pAhJtnKITppOI_IvcXXDNrsc.woff2" />
 
-
-
-
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/css">
     <link rel="stylesheet" href="scripts/easyTree.css">
     <link rel="stylesheet" href="styles/custom-style.css">
     <!-- endbuild -->
-
-
 
 </head>
 
@@ -106,7 +100,6 @@
 <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
 <script src="bower_components/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="bower_components/angular/angular.min.js"></script>
-
 <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
 <script src="bower_components/angular-animate/angular-animate.min.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -149,7 +142,6 @@
 <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
 <script src="bower_components/angularjs-slider/rzslider.js"></script>
 
-
 <!-- endbuild -->
 
 <!--
@@ -159,15 +151,12 @@
  After your sign up replace the key in the URL below..
 -->
 
-<!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQTpXj82d8UpCi97wzo_nKXL7nYrd4G70"></script> -->
-
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="scripts/angular-momentjs.js"></script>
+<script src="scripts/moment-timezone.js"></script>
 <script src="scripts/admin.js"></script>
 <script src="scripts/app.js"></script>
 <script src="scripts/config.js"></script>
-<script src="scripts/common.js"></script>
-<script src="scripts/util.js"></script>
-<script src="scripts/stats.js"></script>
 <script src="scripts/js"></script>
 
 <script src="scripts/filters/props.js"></script>
@@ -194,6 +183,8 @@
 
 <script src="scripts/factories/appService.js"></script>
 <script src="scripts/factories/utilService.js"></script>
+<script src="scripts/factories/loginService.js"></script>
+<script src="scripts/factories/interceptor.js"></script>
 <script src="scripts/factories/promiseAjax.js"></script>
 <script src="scripts/factories/globalConfig.js"></script>
 <script src="scripts/factories/modalService.js"></script>
@@ -205,4 +196,3 @@
 <script src="scripts/panda-script.js"></script>
 </body>
 </html>
-

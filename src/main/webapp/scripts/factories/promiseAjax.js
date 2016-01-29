@@ -6,9 +6,7 @@
  * @author - Jamseer N
  */
 
-
 function promiseAjax($http, $window, globalConfig, notify) {
-
      var global = globalConfig;
      var httpTokenRequest = function (method, url, headers, data) {
 
@@ -16,17 +14,17 @@ function promiseAjax($http, $window, globalConfig, notify) {
             var data = {};
             data.limit = global.CONTENT_LIMIT;
         };
-        var pandaUserSession = globalConfig.sessionValues;
-        if(pandaUserSession == null) {
+
+        if(globalConfig.sessionValues == null) {
         	window.location.href = "login";
         }
+
         var config = {
             "method": method,
             "data": data,
             "url": url,
-            "headers": {'x-auth-token': pandaUserSession.token, 'Content-Type': 'application/json', 'Range': "items=0-9"}
+            "headers": {'x-auth-token': globalConfig.sessionValues.token, 'x-requested-with': '', 'Content-Type': 'application/json', 'Range': "items=0-9"}
         };
-
 
         if(headers != null && !angular.isUndefined(headers)) {
             angular.forEach(headers, (function(value, key) {
@@ -50,40 +48,19 @@ function promiseAjax($http, $window, globalConfig, notify) {
             }
             return data;
         }).catch(function (result) {
-        	if(result.data != null && result.data.status === 401 && result.data.message === "INVALID_TOKEN") {
-        		notify({
-    				message : "Your session has expired. Please log-in again",
-    				classes : 'alert-danger',
-    				templateUrl : global.NOTIFICATION_TEMPLATE
-    			});
-        		setTimeout(function() {
-        			window.location.href = "login";
-        		}, 2000);
-            } else if(result.status != null && result.status === 401 && result.statusText === "Unauthorized") {
-        		notify({
-    				message : "Unauthorized log-in user. Please log-in again",
-    				classes : 'alert-danger',
-    				templateUrl : global.NOTIFICATION_TEMPLATE
-    			});
-        		setTimeout(function() {
-        			window.location.href = "login";
-        		}, 2000);
-            } else {
-            	throw result;
-            }
+            throw result;
         });
 
     };
 
     var httpRequest = function(method, url, data) {
-
         return $http({method:method, url:url}).then(function(result){
             return result.data;
         });
     };
+
     return { httpRequest: httpRequest, httpTokenRequest: httpTokenRequest };
 }
-
 
 /**
  * Pass function into module
@@ -91,5 +68,3 @@ function promiseAjax($http, $window, globalConfig, notify) {
 angular
     .module('panda-ui-admin')
     .factory('promiseAjax', promiseAjax)
-
-
