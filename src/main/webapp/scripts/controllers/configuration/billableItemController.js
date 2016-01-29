@@ -35,15 +35,15 @@ function billableItemsCtrl($scope, appService) {
 	      $scope.formElements.taxList = result;
 	});
 
-	var billableType = appService.globalConfig.BILLABLE_ITEM.BILLABLE_TYPE;
-	$scope.formElements.billableTypeList = {
+	var itemType = appService.globalConfig.BILLABLE_ITEM.BILLABLE_TYPE;
+	$scope.formElements.itemTypeList = {
         "Infrastructure": "INFRASTRUCTURE",
         "Managed": "MANAGED",
         "Optional": "OPTIONAL"
 	};
 
-	var billableUnit = appService.globalConfig.BILLABLE_ITEM.BILLABLE_UNIT;
-	$scope.formElements.billableUnitList = {
+	var itemUnit = appService.globalConfig.BILLABLE_ITEM.BILLABLE_UNIT;
+	$scope.formElements.itemUnitList = {
 	    "Per Core per Hour": "PER_CORE_PER_HOUR",
 	    "Per GB per Hour": "PER_GB_PER_HOUR",
 	    "Per OS per Hour": "PER_OS_PER_HOUR",

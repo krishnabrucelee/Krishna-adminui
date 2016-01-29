@@ -59,8 +59,8 @@
                                     {{ billing.name }}
 
                                 </td>
-                                <td>{{ global.BILLABLE_ITEM.BILLABLE_UNIT[billing.billableUnit] }}</td>
-                                <td>{{ global.BILLABLE_ITEM.BILLABLE_TYPE[billing.billableType] }}</td>
+                                <td>{{ global.BILLABLE_ITEM.BILLABLE_UNIT[billing.itemUnit] }}</td>
+                                <td>{{ global.BILLABLE_ITEM.BILLABLE_TYPE[billing.itemType] }}</td>
 								<td>{{ (billing.tax.name) ? billing.tax.name : "NA"  }}</td>
                                 <td>
 

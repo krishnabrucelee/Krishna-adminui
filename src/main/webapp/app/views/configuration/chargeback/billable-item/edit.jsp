@@ -40,7 +40,7 @@
 									<fmt:message key="common.type" bundle="${msg}" />:
 								</label>
 								<div class="col-md-6 col-sm-7">
-									{{ global.BILLABLE_ITEM.BILLABLE_TYPE[billableItem.billableType] }}
+									{{ global.BILLABLE_ITEM.BILLABLE_TYPE[billableItem.itemType] }}
 								</div>
 
 							</div>
@@ -50,7 +50,7 @@
 								<label class="col-md-4 col-sm-5 control-label"><fmt:message key="common.unit" bundle="${msg}" />:
 								</label>
 								<div class="col-md-6 col-sm-7">
-									{{ global.BILLABLE_ITEM.BILLABLE_UNIT[billableItem.billableUnit] }}
+									{{ global.BILLABLE_ITEM.BILLABLE_UNIT[billableItem.itemUnit] }}
 								</div>
 
 							</div>
@@ -73,7 +73,7 @@
                             <div class="row">
                                 <label class="col-md-4 col-sm-5 control-label"><fmt:message key="common.discountable" bundle="${msg}" />: </label>
                                 <div class="col-md-6 col-sm-7">
-                                    {{ (billableItem.isDiscountable) ? "Yes": "No"}}
+                                    {{ (billableItem.hasDiscount) ? "Yes": "No"}}
                                 </div>
                             </div>
                         </div>
