@@ -188,6 +188,7 @@
 <script src="scripts/controllers/reportCtrl.js"></script>
 <script src="scripts/controllers/configuration.js"></script>
 <script src="scripts/controllers/configuration/taxController.js"></script>
+<script src="scripts/controllers/configuration/billableItemController.js"></script>
 <script src="scripts/controllers/resourceAllocation.js"></script>
 <script src="scripts/controllers/domainController.js"></script>
 

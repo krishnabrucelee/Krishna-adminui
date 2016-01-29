@@ -257,9 +257,9 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
 
             .state('configuration.home.billing', {
             url: "/billableItem",
-            templateUrl: VIEW_URL +  "views/configuration/chargeback/billable-items.jsp",
+            templateUrl: VIEW_URL +  "views/configuration/chargeback/billable-item/list.jsp",
             data: {
-                pageTitle: 'Billable Items'
+                pageTitle: 'billable.items'
             }
         })
 
