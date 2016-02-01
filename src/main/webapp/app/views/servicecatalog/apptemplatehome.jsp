@@ -7,19 +7,19 @@
     <div class="hpanel">
         <div class="row m-l-sm m-r-sm panel-body" ng-controller="infrastructureCtrl">
             <ul class="nav nav-tabs" data-ng-init="templateCategory = 'ostemplate'">
-                <li class="active">
+                <li class="">
                     <a href="index#/templatestore/list">
                         <fmt:message key="template.ostemplate" bundle="${msg}" />
                     </a>
                 </li>
-                <li class="">
-                    <a href="index#/templatestore/apptemplatelist">
+                <li class="active">
+                	<a href="index#/templatestore/apptemplatelist">
                         <fmt:message key="template.apptemplate" bundle="${msg}" />
                     </a>
                 </li>
             </ul>
             <div class="tab-content">
-				<div data-ng-include src="'app/views/servicecatalog/templatestore.jsp'"></div>
+                <div data-ng-include src="'app/views/servicecatalog/apptemplate.jsp'" ></div>
             </div>
         </div>
     </div>
