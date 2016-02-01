@@ -222,6 +222,14 @@
 										bundle="${msg}" />
 						</span>
 						</span>
+						<span ng-if="state.data.pageTitle === 'Tax'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="billable.items" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="common.tax"
+										bundle="${msg}" />
+						</span>
+						</span>
 						</li>
 					</ol>
 				</div>
