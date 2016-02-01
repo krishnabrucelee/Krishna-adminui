@@ -187,7 +187,7 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
                         $scope.showLoader = false;
                         appService.notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                         if(template.format == "ISO") {
-                        	$window.location.href = '#/templatestore/apptemplatelist';
+                        	$scope.isolist(1);
                         } else {
                         	$scope.list(1);
                         }
@@ -195,8 +195,8 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
                         if (!angular.isUndefined(result.data)) {
                         	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
                           	    var msg = result.data.globalError[0];
-                          	  $scope.showLoader = false;
-                          	appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                          	    $scope.showLoader = false;
+                          	    appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                             }
                         }
                     });

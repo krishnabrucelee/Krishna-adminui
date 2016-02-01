@@ -503,9 +503,9 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             })
             .state('servicecatalog.list-apptemplate', {
                 url: "templatestore/apptemplatelist",
-                templateUrl: VIEW_URL +  "views/servicecatalog/apptemplate.jsp",
+                templateUrl: VIEW_URL +  "views/servicecatalog/apptemplatehome.jsp",
                 data: {
-                    pageTitle: 'App Templates'
+                    pageTitle: 'template.iso'
                 }
             })
             .state('servicecatalog.list-templatestore.list-apptemplate-iso-create', {
@@ -533,14 +533,14 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "templatestore/create",
                 templateUrl: VIEW_URL +  "views/servicecatalog/templateCreate.jsp",
                 data: {
-                    pageTitle: 'Create Template'
+                    pageTitle: 'create.template'
                 }
             })
             .state('servicecatalog.list-templatestore.list-view-template-edit', {
                 url: "view/:id",
                 templateUrl: VIEW_URL +  "views/servicecatalog/view-template.jsp",
                 data: {
-                    pageTitle: 'Edit Template'
+                    pageTitle: 'edit.template'
                 }
             })
             .state('servicecatalog.list-network', {
