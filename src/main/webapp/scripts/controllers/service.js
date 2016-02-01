@@ -140,7 +140,7 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
         if (form.$valid) {
         	$scope.showLoader = true;
             var template = angular.copy($scope.template);
-            template.zoneId = template.zone.id;
+            	template.zoneId = template.zone.id;
             template.hypervisorId = template.hypervisor.id;
             template.osCategoryId = template.osCategory.id;
             template.osTypeId = template.osType.id;
@@ -503,6 +503,14 @@ $scope.costPerHourIOPS = function() {
         if (form.$valid) {
         	$scope.showLoader = true;
             var storage = angular.copy($scope.storage);
+            if(!angular.isUndefined(storage.domain) && storage.domain != null) {
+            	storage.domainId = storage.domain.id;
+            	delete storage.domain;
+            }
+            if(!angular.isUndefined(storage.zone) && storage.zone != null) {
+            	storage.zoneId = storage.zone.id;
+            	delete storage.zone;
+            }
 //            storage.storagePrice = [];
 //            storage.storagePrice[0] = $scope.storage.storagePrice;
             var hasStorage = appService.crudService.add("storages", storage);
