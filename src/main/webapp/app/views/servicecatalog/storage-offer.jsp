@@ -465,21 +465,29 @@
 					</div>
 					</div>
 					<div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
-					<div class="form-group">
+					<div class="form-group" ng-class="{'text-danger': storageForm.zone.$invalid && formSubmitted}">
 						<div class="row">
-							<label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="common.zonename" bundle="${msg}" /></label>
+							<label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="common.zonename" bundle="${msg}" />
+							<span class="text-danger">*</span></label>
 							<div class="col-md-6 col-sm-6 col-xs-6">
-								<select data-ng-init="storage.zone = zoneList[0]"
+								<select data-ng-init="storage.zone = zoneList[0]" required="true"
 									class="form-control input-group" name="zone"
 									data-ng-model="storage.storagePrice[0].zone"
-									ng-options=" zone.name for zone in zoneList">
+									ng-options=" zone.name for zone in zoneList"
+									data-ng-class="{'error': storageForm.zone.$invalid && formSubmitted}">
 									<option value="" class="">Select</option>
 								</select>
+								<div class="error-area"
+									data-ng-show="storageForm.zone.$invalid && formSubmitted">
+									<div class="error-area"
+										data-ng-show="storageForm.zone.$invalid && formSubmitted">
+										<i ng-attr-tooltip="{{ '<fmt:message key="template.zone.error" bundle="${msg}" />' }}"
+											class="fa fa-warning error-icon"></i>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-
-
 				</div>
 				</div>
 				<div class="row">

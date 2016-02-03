@@ -27,14 +27,14 @@
                                 <b class="pull-right">{{storageList.Count}}</b>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="dashboard-box pull-left">
+<%--                             <div class="dashboard-box pull-left">
                                 <span class="pull-right"><fmt:message
 										key="storage.disabledoffering" bundle="${msg}" /></span>
                                 <div class="clearfix"></div>
                                 <span class="pull-right m-t-xs"><img src="images/volume-icon.png"></span>
                                 <b class="pull-right">0</b>
                                 <div class="clearfix"></div>
-                            </div>
+                            </div> --%>
                         </div>
                         <div class="pull-right">
 						<panda-quick-search></panda-quick-search>
@@ -85,7 +85,7 @@
                                         <span class="fa fa-ban m-r" ></span>
                                     </a> -->
 
-                                    <a class="icon-button" title="Delete" data-ng-click="delete('sm', storage.id)" ><span class="fa fa-trash"></span></a>
+                                    <a class="icon-button" title="Delete" data-ng-click="delete('sm', storage)" ><span class="fa fa-trash"></span></a>
                                 </td>
                             </tr>
                         </tbody>

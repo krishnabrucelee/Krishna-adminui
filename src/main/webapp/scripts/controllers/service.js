@@ -431,11 +431,7 @@ function storageListCtrl($scope, $log, $state, $stateParams, $window, appService
 												// completes0
 
             $scope.storageList = result;
-
-            $scope.storageList.Count = 0;
-            if(result.length != 0) {
-            	$scope.storageList.Count = result.length;
-            }
+            $scope.storageList.Count = result.totalItems;
 
             // For pagination
             $scope.paginationObject.limit = limit;
@@ -504,6 +500,14 @@ $scope.costPerHourIOPS = function() {
         if (form.$valid) {
         	$scope.showLoader = true;
             var storage = angular.copy($scope.storage);
+            if(!angular.isUndefined($scope.storage.domain) && storage.domain != null) {
+            	storage.domainId = storage.domain.id;
+            	delete storage.domain;
+            }
+            if(!angular.isUndefined($scope.storage.zone) && storage.zone != null) {
+            	storage.zoneId = storage.zone.id;
+            	delete storage.zone;
+            }
 //            storage.storagePrice = [];
 //            storage.storagePrice[0] = $scope.storage.storagePrice;
             var hasStorage = appService.crudService.add("storages", storage);
@@ -535,12 +539,13 @@ $scope.costPerHourIOPS = function() {
     };
 
     // Delete the Storage Offer
-    $scope.delete = function (size, storageId) {
+    $scope.delete = function (size, storage) {
     	appService.dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
-                $scope.deleteId = storageId;
+                $scope.deleteId = storage.id;
                 $scope.ok = function (storageId) {
                 	$scope.showLoader = true;
-                    var hasStorage = appService.crudService.delete("storages", storageId);
+                	console.log(storage);
+                    var hasStorage = appService.crudService.softDelete("storages", storage);
                     hasStorage.then(function (result) {
                         $scope.list(1);
                         $scope.homerTemplate = 'app/views/notification/notify.jsp';
