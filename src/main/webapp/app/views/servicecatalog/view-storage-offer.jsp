@@ -40,8 +40,8 @@
                     <div class="form-group" >
                         <div class="row">
                             <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal"><fmt:message
-										key="storage.public" bundle="${msg}" /></label>
-                            <div class="col-md-6 col-sm-6 col-xs-6"> <b>{{storage.isPublic || " N/A "}} </b>
+										key="common.company" bundle="${msg}" /></label>
+                            <div class="col-md-6 col-sm-6 col-xs-6"> <b>{{storage.domain.name || " - "}} </b>
 <!--                                 <input  type="text" name="public" data-ng-model="storage.isPublic" class="form-control" readonly>
  -->                            </div>
                         </div>
@@ -67,7 +67,7 @@
                         <div class="row">
                             <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal"><fmt:message
 									key="storage.storagetag" bundle="${msg}" /></label>
-                            <div class="col-md-6 col-sm-6 col-xs-6"> <b>{{storage.storageTags || " N/A "}} </b>
+                            <div class="col-md-6 col-sm-6 col-xs-6"> <b>{{storage.storageTags || " - "}} </b>
 <!--                                 <input  type="text" name="storagetag" data-ng-model="storage.storageTags" class="form-control" readonly>
  -->                            </div>
                         </div>
@@ -118,9 +118,9 @@
 						<div class="row">
 							<label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.cost.per.gb.per.month" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)
 							</label>
-							<div class="col-md-1 col-sm-2 col-xs-4"> <b>{{storage.storagePrice[0].costGbPerMonth || " N/A "}} </b>
-								<!-- <input data-ng-change="costPerHourGB()" type="text" valid-decimal name="costmonth"
-									data-ng-model="storage.storagePrice[0].costGbPerMonth" class="form-control"> -->
+							<div class="col-md-4 col-sm-4 col-xs-4"> <!-- <b>{{storage.storagePrice[0].costGbPerMonth || " N/A "}} </b> -->
+								<input data-ng-change="costPerHourGB()" type="text" valid-decimal name="costmonth"
+									data-ng-model="storage.storagePrice[0].costGbPerMonth" class="form-control">
 							</div>
 							<div class="col-md-4 col-sm-4 col-xs-4" data-ng-show="storage.storagePrice[0].costGbPerMonth">
 								<b>
@@ -136,9 +136,9 @@
 								<label
 									class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.cost.per.iops" bundle="${msg}" /> (<app-currency class="text-danger"></app-currency>)
 								</label>
-								<div class="col-md-1  col-sm-2 col-xs-4"> <b>{{storage.storagePrice[0].costIopsPerMonth || " N/A "}} </b>
-<!-- 									<input type="text" data-ng-keyup="costPerHourIOPS()" name="costperiops" valid-number
-										data-ng-model="storage.storagePrice[0].costIopsPerMonth" class="form-control"> -->
+								<div class="col-md-4  col-sm-4 col-xs-4"> <!-- <b>{{storage.storagePrice[0].costIopsPerMonth || " N/A "}} </b> -->
+									<input type="text" data-ng-keyup="costPerHourIOPS()" name="costperiops" valid-number
+										data-ng-model="storage.storagePrice[0].costIopsPerMonth" class="form-control">
 								</div>
 								<div class="col-md-4 col-sm-4 col-xs-4">
 								<b>
