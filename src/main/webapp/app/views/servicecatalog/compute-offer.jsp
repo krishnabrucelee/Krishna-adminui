@@ -357,7 +357,7 @@
 									data-ng-show="compute.qosType == 'STORAGE'"
 									data-ng-if="!compute.customizedIops">
 									<div class="row">
-										<label>
+										<label
 											class="col-md-6 col-sm-6 col-xs-4 control-label font-normal"><fmt:message
 												key="common.maxiops" bundle="${msg}" />
 										</label>
