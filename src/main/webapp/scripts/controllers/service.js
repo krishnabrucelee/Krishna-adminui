@@ -888,11 +888,7 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
 												// completes0
 
             $scope.computeList = result;
-
-            $scope.computeOffering.Count = 0;
-            if(result.length != 0) {
-            	$scope.computeOffering.Count = result.length;
-            }
+		   $scope.computeOffering.Count = result.totalItems;
 
             // For pagination
             $scope.paginationObject.limit = limit;
