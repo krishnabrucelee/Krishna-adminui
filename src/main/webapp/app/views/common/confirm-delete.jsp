@@ -5,8 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <div class="inmodal" >
     <div class="modal-header">
-        <panda-modal-header hide-zone="false" page-icon="fa fa-warning" page-title="<fmt:message key='common.delete.confirmation' bundle='${msg}' />"</panda-modal-header>
-        <!--<h2 class="modal-title" id="myModalLabel">Confirm Detach Volume</h2>-->
+        <panda-modal-header hide-zone="false" page-icon="fa fa-warning" page-title="<fmt:message key='common.delete.confirmation' bundle='${msg}' />"></panda-modal-header>
     </div>
 
     <div class="modal-body">
