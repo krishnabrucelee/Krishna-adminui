@@ -78,13 +78,12 @@ function taxCtrl($scope, appService) {
     	// update tax
 	    $scope.updateTax = function (form) {
 	        $scope.formSubmitted = true;
+	        console.log(form);
 	        if (form.$valid) {
 	        	$scope.showLoader = true;
 	            var tax = angular.copy($scope.tax);
-
 	            var hasServer = appService.crudService.update("tax", tax);
-	            hasServer.then(function (result) {  // this is only run after $http completes
-	            	//$rootScope.department={};
+	            hasServer.then(function (result) {
 	            	$scope.formSubmitted = false;
 	                $scope.showLoader = false;
 	                $scope.list(1);

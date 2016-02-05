@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<form name="configForm" data-ng-submit="updateTax(configForm)" method="post" novalidate="" >
+<form name="taxForm" data-ng-submit="updateTax(taxForm)" method="post" novalidate="" >
 	<div class="inmodal">
 		<div class="modal-header">
 			<panda-modal-header hide-zone="true" page-icon="fa fa-edit" page-title="<fmt:message key="tax.edit" bundle="${msg}" />"></panda-modal-header>
@@ -43,7 +43,7 @@
 								<div class="col-md-6 col-sm-7">
 									<input required="true" type="text" name="description"
 										data-ng-model="tax.description" class="form-control"
-										ng-class="{'error':taxForm.percentage.$invalid && formSubmitted}">
+										ng-class="{'error':taxForm.description.$invalid && formSubmitted}">
 									<i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"
 										tooltip="<fmt:message key="tax.help.description" bundle="${msg}" />"></i>
 									<div class="error-area"
