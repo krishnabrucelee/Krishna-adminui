@@ -78,7 +78,6 @@ function taxCtrl($scope, appService) {
     	// update tax
 	    $scope.updateTax = function (form) {
 	        $scope.formSubmitted = true;
-	        console.log(form);
 	        if (form.$valid) {
 	        	$scope.showLoader = true;
 	            var tax = angular.copy($scope.tax);
