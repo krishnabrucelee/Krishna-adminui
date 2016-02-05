@@ -24,7 +24,6 @@
             </div>
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12 ">
-<pagination-content></pagination-content>
                     <div class="white-content">
                     <div data-ng-show = "showLoader" style="margin: 1%">
     				  		<get-loader-image data-ng-show="showLoader"></get-loader-image>
@@ -36,8 +35,8 @@
                                     	<th class="col-md-2 col-sm-3" data-ng-click="changeSorting('type')" data-ng-class="sort.descending && sort.column =='type'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.type" bundle="${msg}" /></th>
                                     	<th class="col-md-4 col-sm-5" data-ng-click="changeSorting('description')" data-ng-class="sort.descending && sort.column =='description'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.description" bundle="${msg}" /></th>
                                     	<th class="col-md-1 col-sm-2" data-ng-click="changeSorting('status')" data-ng-class="sort.descending && sort.column =='status'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.status" bundle="${msg}" /></th>
-                                    
-                                   
+
+
                                     </tr>
                                 </thead>
                                 <tbody>
