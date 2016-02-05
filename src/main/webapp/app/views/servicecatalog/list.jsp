@@ -42,7 +42,6 @@
                 </div>
                 <div class="clearfix"></div>
             </div>
-            <pagination-content></pagination-content>
             <div class="white-content">
 					<div data-ng-show="showLoader" style="margin: 1%">
 						<get-loader-image data-ng-show="showLoader"></get-loader-image>
