@@ -63,13 +63,16 @@
                                 <td>{{ global.BILLABLE_ITEM.BILLABLE_TYPE[billing.itemType] }}</td>
 								<td>{{ (billing.tax.name) ? billing.tax.name : "NA"  }}</td>
                                 <td>
-
-                                    <span>
-                               <a class="btn btn-info" data-ng-click="edit('md', billing)"> <fmt:message key="common.edit" bundle="${msg}" /></a>
-                            	<a class="btn btn-info" data-ng-click="delete('sm', billing)" > <fmt:message key="common.delete" bundle="${msg}" /></a>
-                            </span>
-
-                                </td>
+	                                <span data-ng-if="global.BILLABLE_ITEM.BILLABLE_TYPE[billing.itemType] != 'Infrastructure'">
+	                                		<a class="btn btn-info"
+												data-ng-click="edit('md', billing)"> <fmt:message
+														key="common.edit" bundle="${msg}" /></a> <a
+												class="btn btn-info" data-ng-click="delete('sm', billing)">
+													<fmt:message key="common.delete" bundle="${msg}" />
+											</a>
+									</span>
+									<span data-ng-if="global.BILLABLE_ITEM.BILLABLE_TYPE[billing.itemType] == 'Infrastructure'">-</span>
+								</td>
                             </tr>
                         </tbody>
                     </table>
