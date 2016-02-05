@@ -4,7 +4,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <div ui-view >
-
     <div ng-controller="userListCtrl">
         <div class="hpanel">
             <div class="panel-heading">
@@ -34,7 +33,7 @@
                             </div>
                         </div>
                         <div class="pull-right">
-<panda-quick-search></panda-quick-search>
+							<panda-quick-search></panda-quick-search>
                         </div>
                     </div>
                 </div>
@@ -82,8 +81,6 @@
                     </div>
                 </div>
            <pagination-content></pagination-content>
-
-
         </div>
     </div>
 </div>
