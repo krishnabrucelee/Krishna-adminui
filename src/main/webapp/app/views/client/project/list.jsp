@@ -63,9 +63,7 @@
 								<tbody>
 									<tr
 										data-ng-repeat="project in filteredCount = (projectList| filter: quickSearch| orderBy:sort.column:sort.descending)">
-										<td><a class="text-info"
-											ui-sref="client.project.view({id: {{ project.id}}})"
-											title="View Project">{{ project.id}}</a></td>
+										<td><a class="text-info" title="View Project">{{ project.id}}</a></td>
 										<td>{{ project.name}}</td>
 										<td>{{ project.domain.name}}</td>
 										<td>{{ project.description}}</td>
