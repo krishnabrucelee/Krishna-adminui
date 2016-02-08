@@ -124,7 +124,7 @@
 							</div>
 							<div class="col-md-4 col-sm-4 col-xs-4" data-ng-show="storage.storagePrice[0].costGbPerMonth">
 								<b>
-									<p class="text-danger m-t-xxs">{{ storage.costPerHourGB }}/hr</p>
+									<p class="text-danger m-t-xxs">{{ storage.costPerHourGB }}/day</p>
 								</b>
 							</div>
 
@@ -142,7 +142,7 @@
 								</div>
 								<div class="col-md-4 col-sm-4 col-xs-4">
 								<b>
-									<p class="text-danger m-t-xxs">{{ storage.costPerHourIOPS }}/hr</p>
+									<p class="text-danger m-t-xxs">{{ storage.costPerHourIOPS }}/day</p>
 								</b>
 							</div>
 

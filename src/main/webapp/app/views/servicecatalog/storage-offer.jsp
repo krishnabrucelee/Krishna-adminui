@@ -441,7 +441,7 @@
 							</div>
 							<div class="col-md-4 col-sm-4 col-xs-4">
 								<b>
-									<p class="text-danger m-t-sm">{{ storage.costPerHourGB }}/hr</p>
+									<p class="text-danger m-t-sm">{{ storage.costPerHourGB }}/day</p>
 								</b>
 							</div>
 
@@ -457,7 +457,7 @@
 							</div>
 							<div class="col-md-4 col-sm-4 col-xs-4">
 								<b>
-									<p class="text-danger m-t-sm">{{ storage.costPerHourGB}}/hr</p>
+									<p class="text-danger m-t-sm">{{ storage.costPerHourGB}}/day</p>
 								</b>
 							</div>
 
@@ -467,7 +467,7 @@
 					<div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
 					<div class="form-group" ng-class="{'text-danger': storageForm.zone.$invalid && formSubmitted}">
 						<div class="row">
-							<label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="common.zonename" bundle="${msg}" />
+							<label class="col-md-6 col-sm-6 control -label font-normal"><fmt:message key="common.zonename" bundle="${msg}" />
 							<span class="text-danger">*</span></label>
 							<div class="col-md-6 col-sm-6 col-xs-6">
 								<select data-ng-init="storage.zone = zoneList[0]" required="true"
@@ -504,7 +504,24 @@
 								</div>
 								<div class="col-md-4 col-sm-4 col-xs-4">
 								<b>
-									<p class="text-danger m-t-sm">{{ storage.costPerHourIOPS }}/hr</p>
+									<p class="text-danger m-t-sm">{{ storage.costPerHourIOPS }}/day</p>
+								</b>
+							</div>
+
+							</div>
+						</div>
+						<div class="form-group" data-ng-if="storage.isCustomizedIops">
+							<div class="row">
+								<label
+									class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.cost.per.iops" bundle="${msg}" /> (<app-currency class="text-danger"></app-currency>)
+								</label>
+								<div class="col-md-4  col-sm-4 col-xs-4">
+									<input type="text" data-ng-keyup="costPerHourIOPS()" name="costperiops" valid-number
+										data-ng-model="storage.storagePrice[0].costIopsPerMonth" class="form-control">
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4">
+								<b>
+									<p class="text-danger m-t-sm">{{ storage.costPerHourIOPS }}/day</p>
 								</b>
 							</div>
 
@@ -519,7 +536,7 @@
 
 
 				</div>
-				<%-- <div class="row">
+<%-- 				<div class="row">
 				<div data-ng-show="storage.qosType == 'Storage'" >
 					<div class="form-group" data-ng-if="storage.isCustomizedIops">
 							<div class="row">

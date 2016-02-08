@@ -463,7 +463,7 @@ function storageListCtrl($scope, $log, $state, $stateParams, $window, appService
 
         var cost = parseFloat($scope.storage.storagePrice[0].costGbPerMonth);
 
-        var costValue = cost / 720;
+        var costValue = cost / 24;
 
         $scope.storage.costPerHourGB = costValue.toFixed(4);
     };
@@ -485,7 +485,7 @@ $scope.costPerHourIOPS = function() {
 
         var cost = parseFloat($scope.storage.storagePrice[0].costIopsPerMonth);
 
-        var costValue = cost / 720;
+        var costValue = cost / 24;
 
         $scope.storage.costPerHourIOPS = costValue.toFixed(4);
     };
@@ -638,7 +638,7 @@ function storageEditCtrl($scope, $state, $stateParams, $log, $window, appService
 
         var cost = parseFloat($scope.storage.storagePrice[0].costGbPerMonth);
 
-        var costValue = cost / 720;
+        var costValue = cost / 24;
 
         $scope.storage.costPerHourGB = costValue.toFixed(4);
     };
@@ -660,7 +660,7 @@ $scope.costPerHourIOPS = function() {
 
         var cost = parseFloat($scope.storage.storagePrice[0].costIopsPerMonth);
 
-        var costValue = cost / 720;
+        var costValue = cost / 24;
 
         $scope.storage.costPerHourIOPS = costValue.toFixed(4);
     };
