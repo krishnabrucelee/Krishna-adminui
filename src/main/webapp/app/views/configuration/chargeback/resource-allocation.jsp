@@ -70,7 +70,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-7 col-sm-7">
+					<div data-ng-if="showLoader" style="margin: 20%">
+						<get-loader-image data-ng-if="showLoader"></get-loader-image>
+					</div>
+					<div class="col-md-7 col-sm-7"  data-ng-if="!showLoader">
                         <div class="form-group"  ng-class="{
                                             'text-danger'
                                             : resourceAllocationForm.Volume.$invalid && formSubmitted}">

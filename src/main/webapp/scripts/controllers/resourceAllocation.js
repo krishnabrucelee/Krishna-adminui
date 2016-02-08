@@ -312,6 +312,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 				}
 				$scope.resourceQuota[object.resourceType] = object.max;
 			});
+			$scope.showLoader = false;
         });
 	}
 };
