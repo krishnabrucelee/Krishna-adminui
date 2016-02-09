@@ -99,6 +99,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 	                    	  $scope.showLoader = false;
 	                        $scope.resourceAllocationForm[key].$invalid = true;
 	                        $scope.resourceAllocationForm[key].errorMessage = errorMessage;
+	                        $scope.showLoader = false;
 	                    });
 	            	}
 	            }
@@ -143,6 +144,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 	                    	  $scope.showLoader = false;
 	                        $scope.resourceAllocationForm[key].$invalid = true;
 	                        $scope.resourceAllocationForm[key].errorMessage = errorMessage;
+	                        $scope.showLoader = false;
 	                    });
 	            	}
 	            }
@@ -190,6 +192,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 	                    	  $scope.showLoader = false;
 	                        $scope.resourceAllocationForm[key].$invalid = true;
 	                        $scope.resourceAllocationForm[key].errorMessage = errorMessage;
+	                        $scope.showLoader = false;
 	                    });
 	            	}
 	            }
@@ -309,6 +312,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 				}
 				$scope.resourceQuota[object.resourceType] = object.max;
 			});
+			$scope.showLoader = false;
         });
 	}
 };
