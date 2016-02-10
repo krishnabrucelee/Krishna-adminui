@@ -157,7 +157,7 @@
                         <div class="row">
                             <label class="col-md-6 col-sm-4 control-label font-normal"><fmt:message key="common.diskwriterateiops" bundle="${msg}" /></label>
                             <div class="col-md-6 col-sm-6 col-xs-7">
-							    {{compute.diskIopsWriteRate}}							   
+							    {{compute.diskIopsWriteRate}}
                             </div>
                         </div>
                     </div>
@@ -208,7 +208,7 @@
                             <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="compute.public" bundle="${msg}" /></label>
                             <div class="col-md-6 col-sm-6">
                             <b>{{compute.isPublic}}</b>
-                      
+
                             </div>
                         </div>
                     </div>
@@ -244,9 +244,8 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									(compute.computeCost[0].instanceRunningCostVcpu *
-									compute.computeCost[0].instanceRunningCostPerVcpu)|
-									number:4}}/hr</p>
+									compute.computeCost[0].instanceRunningCostPerVcpu / 24|
+									number:4}}/day</p>
 							</label>
 						</div>
 						<div class="row" data-ng-show="!compute.customized">
@@ -262,8 +261,8 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceRunningCostVcpu / 720 |
-									number:4}}/hr</p>
+									compute.computeCost[0].instanceRunningCostVcpu / 24 |
+									number:4}}/day</p>
 							</label>
 						</div>
 					</div>
@@ -282,9 +281,8 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceStoppageCostMemory *
-									compute.computeCost[0].instanceStoppageCostPerMB |
-									number:4}}/hr</p>
+										compute.computeCost[0].instanceStoppageCostPerMB / 24 |
+									number:4}}/day</p>
 							</label>
 						</div>
 						<div class="row" data-ng-show="!compute.customized">
@@ -301,8 +299,8 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceRunningCostMemory / 720 |
-									number:4}}/hr</p>
+									compute.computeCost[0].instanceRunningCostMemory / 24 |
+									number:4}}/day</p>
 							</label>
 						</div>
 					</div>
@@ -321,9 +319,8 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									(compute.computeCost[0].instanceRunningCostIops *
-									compute.computeCost[0].instanceRunningCostPerIops)|
-									number:4}}/hr</p>
+									compute.computeCost[0].instanceRunningCostPerIops / 24|
+									number:4}}/day</p>
 							</label>
 						</div>
 						<div class="row" data-ng-show="!compute.customizedIops"
@@ -340,8 +337,8 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceRunningCostIops / 720 |
-									number:4}}/hr</p>
+									compute.computeCost[0].instanceRunningCostIops / 24 |
+									number:4}}/day</p>
 							</label>
 						</div>
 					</div>
@@ -377,9 +374,8 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceStoppageCostVcpu *
-									compute.computeCost[0].instanceStoppageCostPerVcpu |
-									number:4}}/hr</p>
+									compute.computeCost[0].instanceStoppageCostPerVcpu / 24|
+									number:4}}/day</p>
 							</label>
 						</div>
 						<div class="row" data-ng-show="!compute.customized">
@@ -395,8 +391,8 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceStoppageCostVcpu / 720 |
-									number:4}}/hr</p>
+									compute.computeCost[0].instanceStoppageCostVcpu / 24 |
+									number:4}}/day</p>
 							</label>
 						</div>
 					</div>
@@ -416,9 +412,9 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">
-									{{compute.computeCost[0].instanceStoppageCostMemory *
-									compute.computeCost[0].instanceStoppageCostPerMB |
-									number:4}}/hr</p>
+									{{
+									compute.computeCost[0].instanceStoppageCostPerMB / 24 |
+									number:4}}/day</p>
 							</label>
 						</div>
 						<div class="row" data-ng-show="!compute.customized">
@@ -435,8 +431,8 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceStoppageCostMemory / 720 |
-									number:4}}/hr</p>
+									compute.computeCost[0].instanceStoppageCostMemory / 24 |
+									number:4}}/day</p>
 							</label>
 						</div>
 					</div>
@@ -455,9 +451,8 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceStoppageCostIops *
-									compute.computeCost[0].instanceStoppageCostPerIops |
-									number:4}}/hr</p>
+									compute.computeCost[0].instanceStoppageCostPerIops /24 |
+									number:4}}/day</p>
 							</label>
 						</div>
 						<div class="row" data-ng-show="!compute.customizedIops"
@@ -474,12 +469,11 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceStoppageCostIops / 720 |
-									number:4}}/hr</p>
+									compute.computeCost[0].instanceStoppageCostIops / 24 |
+									number:4}}/day</p>
 							</label>
 						</div>
 					</div>
-
 				</div>
 			</div>
 				<div class="row">
