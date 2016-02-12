@@ -175,18 +175,24 @@
 									</div>
 								</div>
 							</div>
-							<div class="form-group m-t-md " data-ng-show="!compute.isPublic">
+							<div class="form-group m-t-md " ng-class="{'text-danger': computeForm.domain.$invalid && formSubmitted}" data-ng-if="!compute.isPublic">
 									<div class="row">
 										<label
 											class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message
-												key="compute.domain" bundle="${msg}" /></label>
+												key="compute.domain" bundle="${msg}" /><span class="text-danger">*</span> </label>
 										<div class="col-md-7 col-sm-7 col-xs-7">
-											<select class="form-control input-group" name="domain"
+											<select required = "true" class="form-control input-group" name="domain"
 												data-ng-model="compute.domain"
-												ng-options="domain.name for domain in domain.domaintypeList">
+												ng-options="domain.name for domain in domain.domaintypeList" data-ng-class="{'error': computeForm.domain.$invalid && formSubmitted}">
 												<option value=""><fmt:message key="common.select"
 														bundle="${msg}" /></option>
 											</select>
+											<div class="error-area"
+											data-ng-show="computeForm.domain.$invalid && formSubmitted">
+											<i ng-attr-tooltip="{{ computeForm.domain.errorMessage || '<fmt:message key="domain.required" bundle="${msg}" />' }}"
+												class="fa fa-warning error-icon">
+											</i>
+										</div>
 										</div>
 									</div>
 								</div>
@@ -394,21 +400,27 @@
 			</div>
 			<div class="row">
 				<div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
-					<div class="form-group">
+					<div class="form-group" ng-class="{'text-danger': computeForm.zone.$invalid && formSubmitted}">
 						<div class="row">
 							<label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message
-									key="common.zonename" bundle="${msg}" />
+									key="common.zonename" bundle="${msg}" /><span class="text-danger">*</span>
 							</label>
 							<div class="col-md-4  col-sm-4 col-xs-4">
-								<select
+								<select required = "true"
 									data-ng-init="compute.computeCost[0].zone = formElements.zoneList[0]"
 									class="form-control input-group" name="zone"
 									data-ng-model="compute.computeCost[0].zone"
-									ng-options="zone.name for zone in formElements.zoneList">
+									ng-options="zone.name for zone in formElements.zoneList" data-ng-class="{'error': computeForm.zone.$invalid && formSubmitted}">
 									<option value="" class=""><fmt:message
 									key="common.select" bundle="${msg}" />
 									</option>
 								</select>
+								<div class="error-area"
+											data-ng-show="computeForm.zone.$invalid && formSubmitted">
+											<i ng-attr-tooltip="{{ computeForm.zone.errorMessage || '<fmt:message key="zone.is.required" bundle="${msg}" />' }}"
+												class="fa fa-warning error-icon">
+											</i>
+										</div>
 							</div>
 						</div>
 					</div>

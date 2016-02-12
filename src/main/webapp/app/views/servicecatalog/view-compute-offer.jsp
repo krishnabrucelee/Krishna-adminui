@@ -219,17 +219,33 @@
                 <div class="col-md-12"> <h4><label><fmt:message key="common.pricinginfo" bundle="${msg}" /></label><hr></h4></div>
             </div>
 
-<div class="row">
+		<div class="row">
 				<div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
-					<div class="form-group">
+					<div class="form-group"  ng-class="{'text-danger': computeForm.zone.$invalid && formSubmitted}">
 						<div class="row">
 							<label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message
-									key="common.zonename" bundle="${msg}" /></label>
+									key="common.zonename" bundle="${msg}" /><span class="text-danger">*</span>
+							</label>
 							<div class="col-md-4  col-sm-4 col-xs-4">
-								<b>{{formElements.zoneList[0].name}}</b>
+								<select required = "true"
+
+									class="form-control input-group" name="zone"
+									data-ng-model="compute.zone" data-ng-class="{'error': computeForm.zone.$invalid && formSubmitted}"
+									ng-options="zone.name for zone in formElements.zoneList">
+									<option value="" class=""><fmt:message
+									key="common.select" bundle="${msg}" />
+									</option>
+								</select>
+								<div class="error-area"
+											data-ng-show="computeForm.zone.$invalid && formSubmitted">
+											<i ng-attr-tooltip="{{ computeForm.zone.errorMessage || '<fmt:message key="zone.is.required" bundle="${msg}" />' }}"
+												class="fa fa-warning error-icon">
+											</i>
+										</div>
 							</div>
 						</div>
 					</div>
+
 					<div class="form-group">
 						<div class="row" data-ng-show="compute.customized">
 							<label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message
