@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <div ui-view>
-<div class="row" data-ng-hide="viewContent" ng-controller="storageListCtrl">
+<div class="row" data-ng-hide="viewContent" data-ng-controller="storageListCtrl">
     <div class="" >
         <div class="hpanel">
             <div class="panel-heading">
@@ -50,11 +50,11 @@
                 </div>
                 <div class="clearfix"></div>
             </div>
-            <div class="white-content">
              <div data-ng-show = "showLoader" style="margin: 1%">
     				  		<get-loader-image data-ng-show="showLoader"></get-loader-image>
       						</div>
             <div class="table-responsive" data-ng-hide="showLoader">
+            <div class="white-content">
 
                     <table cellspacing="1" cellpadding="1" class="table dataTable table-bordered table-striped">
                         <thead>

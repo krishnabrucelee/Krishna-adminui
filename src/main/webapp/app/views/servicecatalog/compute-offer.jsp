@@ -175,18 +175,24 @@
 									</div>
 								</div>
 							</div>
-							<div class="form-group m-t-md " data-ng-show="!compute.isPublic">
+							<div class="form-group m-t-md " ng-class="{'text-danger': computeForm.domain.$invalid && formSubmitted}" data-ng-if="!compute.isPublic">
 									<div class="row">
 										<label
 											class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message
-												key="compute.domain" bundle="${msg}" /></label>
+												key="compute.domain" bundle="${msg}" /><span class="text-danger">*</span> </label>
 										<div class="col-md-7 col-sm-7 col-xs-7">
-											<select class="form-control input-group" name="domain"
+											<select required = "true" class="form-control input-group" name="domain"
 												data-ng-model="compute.domain"
-												ng-options="domain.name for domain in domain.domaintypeList">
+												ng-options="domain.name for domain in domain.domaintypeList" data-ng-class="{'error': computeForm.domain.$invalid && formSubmitted}">
 												<option value=""><fmt:message key="common.select"
 														bundle="${msg}" /></option>
 											</select>
+											<div class="error-area"
+											data-ng-show="computeForm.domain.$invalid && formSubmitted">
+											<i ng-attr-tooltip="{{ computeForm.domain.errorMessage || '<fmt:message key="domain.required" bundle="${msg}" />' }}"
+												class="fa fa-warning error-icon">
+											</i>
+										</div>
 										</div>
 									</div>
 								</div>
@@ -394,21 +400,27 @@
 			</div>
 			<div class="row">
 				<div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
-					<div class="form-group">
+					<div class="form-group" ng-class="{'text-danger': computeForm.zone.$invalid && formSubmitted}">
 						<div class="row">
 							<label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message
-									key="common.zonename" bundle="${msg}" />
+									key="common.zonename" bundle="${msg}" /><span class="text-danger">*</span>
 							</label>
 							<div class="col-md-4  col-sm-4 col-xs-4">
-								<select
+								<select required = "true"
 									data-ng-init="compute.computeCost[0].zone = formElements.zoneList[0]"
 									class="form-control input-group" name="zone"
 									data-ng-model="compute.computeCost[0].zone"
-									ng-options="zone.name for zone in formElements.zoneList">
+									ng-options="zone.name for zone in formElements.zoneList" data-ng-class="{'error': computeForm.zone.$invalid && formSubmitted}">
 									<option value="" class=""><fmt:message
 									key="common.select" bundle="${msg}" />
 									</option>
 								</select>
+								<div class="error-area"
+											data-ng-show="computeForm.zone.$invalid && formSubmitted">
+											<i ng-attr-tooltip="{{ computeForm.zone.errorMessage || '<fmt:message key="zone.is.required" bundle="${msg}" />' }}"
+												class="fa fa-warning error-icon">
+											</i>
+										</div>
 							</div>
 						</div>
 					</div>
@@ -447,9 +459,8 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									(compute.computeCost[0].instanceRunningCostVcpu *
-									compute.computeCost[0].instanceRunningCostPerVcpu)|
-									number:4}}/hr</p>
+									compute.computeCost[0].instanceRunningCostPerVcpu / 24 |
+									number:4}}/day</p>
 							</label>
 						</div>
 						<div class="row" data-ng-show="!compute.customized">
@@ -466,8 +477,8 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceRunningCostVcpu / 720 |
-									number:4}}/hr</p>
+									compute.computeCost[0].instanceRunningCostVcpu / 24 |
+									number:4}}/day</p>
 							</label>
 						</div>
 					</div>
@@ -487,9 +498,8 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceStoppageCostVcpu *
-									compute.computeCost[0].instanceStoppageCostPerVcpu |
-									number:4}}/hr</p>
+									compute.computeCost[0].instanceStoppageCostPerVcpu / 24|
+									number:4}}/day</p>
 							</label>
 						</div>
 						<div class="row" data-ng-show="!compute.customized">
@@ -506,8 +516,8 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceStoppageCostVcpu / 720 |
-									number:4}}/hr</p>
+									compute.computeCost[0].instanceStoppageCostVcpu / 24 |
+									number:4}}/day</p>
 							</label>
 						</div>
 					</div>
@@ -530,9 +540,8 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceStoppageCostMemory *
-									compute.computeCost[0].instanceStoppageCostPerMB |
-									number:4}}/hr</p>
+									compute.computeCost[0].instanceRunningCostPerMB /24 |
+									number:4}}/day</p>
 							</label>
 						</div>
 						<div class="row" data-ng-show="!compute.customized">
@@ -549,8 +558,8 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceRunningCostMemory / 720 |
-									number:4}}/hr</p>
+									compute.computeCost[0].instanceRunningCostMemory / 24 |
+									number:4}}/day</p>
 							</label>
 						</div>
 					</div>
@@ -571,9 +580,7 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">
-									{{compute.computeCost[0].instanceStoppageCostMemory *
-									compute.computeCost[0].instanceStoppageCostPerMB |
-									number:4}}/hr</p>
+									{{compute.computeCost[0].instanceStoppageCostPerMB /24 | number:4}}/day</p>
 							</label>
 						</div>
 						<div class="row" data-ng-show="!compute.customized">
@@ -590,8 +597,8 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceStoppageCostMemory / 720 |
-									number:4}}/hr</p>
+									compute.computeCost[0].instanceStoppageCostMemory / 24 |
+									number:4}}/day</p>
 							</label>
 						</div>
 					</div>
@@ -614,9 +621,8 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									(compute.computeCost[0].instanceRunningCostIops *
-									compute.computeCost[0].instanceRunningCostPerIops)|
-									number:4}}/hr</p>
+									compute.computeCost[0].instanceRunningCostPerIops /24|
+									number:4}}/day</p>
 							</label>
 						</div>
 						<div class="row" data-ng-show="!compute.customizedIops"
@@ -633,8 +639,8 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceRunningCostIops / 720 |
-									number:4}}/hr</p>
+									compute.computeCost[0].instanceRunningCostIops / 24 |
+									number:4}}/day</p>
 							</label>
 						</div>
 					</div>
@@ -648,17 +654,17 @@
 									class="text-danger"></app-currency>)
 							</label>
 							<div class="col-md-3  col-sm-3 col-xs-3">
-								<input type="text" valid-price name="instanceStoppageCostIops"
+								<input data-ng-change="costPerIops()" type="text" valid-decimal name="instanceStoppageCostIops"
 									data-ng-model="compute.computeCost[0].instanceStoppageCostPerIops"
-									class="form-control"> <span
+									class="form-control">
+									<span
 									class="help-block m-b-none"
 									ng-show="computeForm.instanceStoppageCostIops.$invalid && formSubmitted"></span>
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceStoppageCostIops *
-									compute.computeCost[0].instanceStoppageCostPerIops |
-									number:4}}/hr</p>
+									compute.computeCost[0].instanceStoppageCostPerIops/24 |
+									number:4}}/day</p>
 							</label>
 						</div>
 						<div class="row" data-ng-show="!compute.customizedIops"
@@ -676,8 +682,8 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceStoppageCostIops / 720 |
-									number:4}}/hr</p>
+									compute.computeCost[0].instanceStoppageCostIops / 24 |
+									number:4}}/day</p>
 							</label>
 						</div>
 					</div>
