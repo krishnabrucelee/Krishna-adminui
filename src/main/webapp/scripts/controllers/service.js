@@ -302,6 +302,7 @@ function templateEditCtrl($scope, $state, $stateParams, $log, $window, appServic
         var hasTemplates = appService.crudService.read("templates", templateId);
         hasTemplates.then(function (result) {
             $scope.template = result;
+            $state.current.data.pageName = result.name;
         	$scope.getOsCategoryList();
         });
     };
