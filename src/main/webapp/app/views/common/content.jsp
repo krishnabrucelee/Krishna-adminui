@@ -9,7 +9,7 @@
 <!-- Main Wrapper -->
 <div id="wrapper">
 	<div small-header class="normalheader transition ng-scope small-header">
-		<div class="hpanel" tour-step order="1" title="Page header"
+		<div class="hpanel" tour-step order="1"
 			content="Place your page title and breadcrumb. Select small or large header or give the user choice to change the size."
 			placement="bottom">
 			<div class="panel-body">
@@ -19,227 +19,247 @@
 									bundle="${msg}" /></a></li>
 						<li ng-repeat="state in $state.$current.path"
 							ng-switch="$last || !!state.abstract" ng-class="{active: $last}">
-							<span ng-if="state.data.pageTitle === 'compute.offer'"> <a
+							<span ng-if="state.data.pageTitle === 'create.compute.offer'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
-										key="compute.offer" bundle="${msg}" /></a> <span
-								ng-switch-when="true"><fmt:message key="compute.offer"
+										key="create.compute.offer" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="create.compute.offer"
 										bundle="${msg}" /></span>
-						</span> <span ng-if="state.data.pageTitle === 'compute'"> <a
+							</span>
+							<span ng-if="state.data.pageTitle === 'edit.compute.offer'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="edit.compute.offer" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="edit.compute.offer"
+										bundle="${msg}" /></span>
+							</span>
+							<span ng-if="state.data.pageTitle === 'compute'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="compute" bundle="${msg}" /></a> <span ng-switch-when="true"><fmt:message
 										key="compute" bundle="${msg}" /></span>
-						</span> <span ng-if="state.data.pageTitle === 'service'"> <a
+							</span>
+							<span ng-if="state.data.pageTitle === 'service'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="service" bundle="${msg}" /></a> <span ng-switch-when="true"><fmt:message
 										key="service" bundle="${msg}" /></span>
-						</span> <span ng-if="state.data.pageTitle === 'storage.offer'"> <a
+							</span>
+							<span ng-if="state.data.pageTitle === 'create.storage.offer'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
-										key="storage.offer" bundle="${msg}" /></a> <span
-								ng-switch-when="true"><fmt:message key="storage.offer"
+										key="create.storage.offer" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="create.storage.offer"
 										bundle="${msg}" /></span>
-						</span> <span ng-if="state.data.pageTitle === 'storage'"> <a
+							</span>
+							<span ng-if="state.data.pageTitle === 'edit.storage.offer'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="edit.storage.offer" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="edit.storage.offer"
+										bundle="${msg}" /></span>
+							</span>
+							<span ng-if="state.data.pageTitle === 'storage'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="storage" bundle="${msg}" /></a> <span ng-switch-when="true"><fmt:message
 										key="storage" bundle="${msg}" /></span>
-						</span> <span ng-if="state.data.pageTitle === 'miscellaneous'"> <a
+							</span>
+							<span ng-if="state.data.pageTitle === 'common.miscellaneous'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
-										key="miscellaneous" bundle="${msg}" /></a> <span
-								ng-switch-when="true"><fmt:message key="storage"
+										key="common.miscellaneous" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="common.miscellaneous"
 										bundle="${msg}" /></span>
-						</span> <span ng-if="state.data.pageTitle === 'configuration'"> <a
+							</span>
+							<span ng-if="state.data.pageTitle === 'configuration'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="configuration" bundle="${msg}" /></a> <span
 								ng-switch-when="true"><fmt:message key="configuration"
 										bundle="${msg}" /></span>
-						</span>
-						<span ng-if="state.data.pageTitle === 'Cloudstack'"> <a
+							</span>
+							<span ng-if="state.data.pageTitle === 'Cloudstack'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="Cloudstack" bundle="${msg}" /></a> <span
 								ng-switch-when="true"><fmt:message key="Cloudstack"
 										bundle="${msg}" />
-						</span>
-						</span>
-						<span ng-if="state.data.pageTitle === 'General'"> <a
+							</span>
+							</span>
+							<span ng-if="state.data.pageTitle === 'General'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="General" bundle="${msg}" /></a> <span
 								ng-switch-when="true"><fmt:message key="General"
 										bundle="${msg}" />
-						</span>
-						</span>
-						<span ng-if="state.data.pageTitle === 'admin.user'"> <a
+							</span>
+							</span>
+							<span ng-if="state.data.pageTitle === 'admin.user'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="admin.user" bundle="${msg}" /></a> <span
 								ng-switch-when="true"><fmt:message key="admin.user"
 										bundle="${msg}" />
-						</span>
-						</span>
-						<span ng-if="state.data.pageTitle === 'add.admin.user'"> <a
+							</span>
+							</span>
+							<span ng-if="state.data.pageTitle === 'add.admin.user'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="add.admin.user" bundle="${msg}" /></a> <span
 								ng-switch-when="true"><fmt:message key="add.admin.user"
 										bundle="${msg}" />
-						</span>
-						</span>
-						<span ng-if="state.data.pageTitle === 'Chargeback'"> <a
+							</span>
+							</span>
+							<span ng-if="state.data.pageTitle === 'Chargeback'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="Chargeback" bundle="${msg}" /></a> <span
 								ng-switch-when="true"><fmt:message key="Chargeback"
 										bundle="${msg}" />
-						</span>
-						</span>
-						<span ng-if="state.data.pageTitle === 'resource.allocation'"> <a
+							</span>
+							</span>
+							<span ng-if="state.data.pageTitle === 'resource.allocation'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="resource.allocation" bundle="${msg}" /></a> <span
 								ng-switch-when="true"><fmt:message key="resource.allocation"
 										bundle="${msg}" />
-						</span>
-						</span>
-						<span ng-if="state.data.pageTitle === 'import.data'"> <a
+							</span>
+							</span>
+							<span ng-if="state.data.pageTitle === 'import.data'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="import.data" bundle="${msg}" /></a> <span
 								ng-switch-when="true"><fmt:message key="import.data"
 										bundle="${msg}" />
-						</span>
-						</span>
-						<span ng-if="state.data.pageTitle === 'zone.description'"> <a
+							</span>
+							</span>
+							<span ng-if="state.data.pageTitle === 'zone.description'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="zone.description" bundle="${msg}" /></a> <span
 								ng-switch-when="true"><fmt:message key="zone.description"
 										bundle="${msg}" />
-						</span>
-						</span>
-                        <span ng-if="state.data.pageTitle === 'template'">
+							</span>
+							</span>
+                        	<span ng-if="state.data.pageTitle === 'template'">
 	                         <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}">
 	                         <fmt:message key="template" bundle="${msg}" /></a>
 	                         <span ng-switch-when="true"><fmt:message key="template" bundle="${msg}" /></span>
-                        </span>
-                        <span ng-if="state.data.pageTitle === 'create.template'">
+                        	</span>
+                        	<span ng-if="state.data.pageTitle === 'create.template'">
 	                         <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}">
 	                         <fmt:message key="create.template" bundle="${msg}" /></a>
 	                         <span ng-switch-when="true"><fmt:message key="create.template" bundle="${msg}" /></span>
-                        </span>
-                        <span ng-if="state.data.pageTitle === 'edit.template'">
+                        	</span>
+                        	<span ng-if="state.data.pageTitle === 'edit.template'">
 	                         <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}">
 	                         <fmt:message key="edit.template" bundle="${msg}" /></a>
 	                         <span ng-switch-when="true"><fmt:message key="edit.template" bundle="${msg}" /></span>
-                        </span>
-                        <span ng-if="state.data.pageTitle === 'template.iso'">
+                        	</span>
+                        	<span ng-if="state.data.pageTitle === 'template.iso'">
 	                         <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}">
 	                         <fmt:message key="template.iso" bundle="${msg}" /></a>
 	                         <span ng-switch-when="true"><fmt:message key="template.iso" bundle="${msg}" /></span>
-                        </span>
-                        <span ng-if="state.data.pageTitle === 'edit.iso'">
+                        	</span>
+                        	<span ng-if="state.data.pageTitle === 'edit.iso'">
 	                         <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}">
 	                         <fmt:message key="edit.iso" bundle="${msg}" /></a>
 	                         <span ng-switch-when="true"><fmt:message key="edit.iso" bundle="${msg}" /></span>
-                        </span>
-                        <span ng-if="state.data.pageTitle === 'create.iso'">
+                        	</span>
+                        	<span ng-if="state.data.pageTitle === 'create.iso'">
 	                         <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}">
 	                         <fmt:message key="create.iso" bundle="${msg}" /></a>
 	                         <span ng-switch-when="true"><fmt:message key="create.iso" bundle="${msg}" /></span>
-                        </span>
-						<span ng-if="state.data.pageTitle === 'system.configuration'">
+                        	</span>
+							<span ng-if="state.data.pageTitle === 'system.configuration'">
 								<a ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="system.configuration" bundle="${msg}" /></a> <span
 								ng-switch-when="true"><fmt:message
 										key="system.configuration" bundle="${msg}" /></span>
-						</span>
+							</span>
 							<span ng-if="state.data.pageTitle === 'common.network'">
 								<a ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="common.network" bundle="${msg}" /></a> <span
 								ng-switch-when="true"><fmt:message
 										key="common.network" bundle="${msg}" /></span>
-						</span>
-						<span ng-if="state.data.pageTitle === 'applications'"> <a
+							</span>
+							<span ng-if="state.data.pageTitle === 'common.applications'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="common.applications" bundle="${msg}" /></a> <span
 								ng-switch-when="true"><fmt:message key="common.applications"
 										bundle="${msg}" />
-						</span>
-						</span>
+							</span>
+							</span>
 							<span ng-if="state.data.pageTitle === 'clients'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="common.clients" bundle="${msg}" /></a> <span
 								ng-switch-when="true"><fmt:message key="common.clients"
 										bundle="${msg}" />
-						</span>
-						</span>
-							<span ng-if="state.data.pageTitle === 'projects'"> <a
+							</span>
+							</span>
+							<span ng-if="state.data.pageTitle === 'common.projects'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="common.projects" bundle="${msg}" /></a> <span
 								ng-switch-when="true"><fmt:message key="common.projects"
 										bundle="${msg}" />
 
-						</span>
-						</span>
-						<span ng-if="state.data.pageTitle === 'client'"> <a
+							</span>
+							</span>
+							<span ng-if="state.data.pageTitle === 'common.company'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
-										key="common.client" bundle="${msg}" /></a> <span
-								ng-switch-when="true"><fmt:message key="common.client"
+										key="common.company" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="common.company"
 										bundle="${msg}" />
-						</span>
-						</span>
-						<span ng-if="state.data.pageTitle === 'add.client'"> <a
+							</span>
+							</span>
+							<span ng-if="state.data.pageTitle === 'add.client'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="add.client" bundle="${msg}" /></a> <span
 								ng-switch-when="true"><fmt:message key="add.client"
 										bundle="${msg}" />
-						</span>
-						</span>
-						<span ng-if="state.data.pageTitle === 'edit.client'"> <a
+							</span>
+							</span>
+							<span ng-if="state.data.pageTitle === 'edit.client'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="edit.client" bundle="${msg}" /></a> <span
 								ng-switch-when="true"><fmt:message key="edit.client"
 										bundle="${msg}" />
-						</span>
-						</span>
-							<span ng-if="state.data.pageTitle === 'users'"> <a
+							</span>
+							</span>
+							<span ng-if="state.data.pageTitle === 'common.users'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="common.users" bundle="${msg}" /></a> <span
 								ng-switch-when="true"><fmt:message key="common.users"
 										bundle="${msg}" />
-						</span>
-						</span>
-						<span ng-if="state.data.pageTitle === 'billable.items'"> <a
+							</span>
+							</span>
+							<span ng-if="state.data.pageTitle === 'billable.items'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="billable.items" bundle="${msg}" /></a> <span
 								ng-switch-when="true"><fmt:message key="billable.items"
 										bundle="${msg}" />
-						</span>
-						</span>
-						<span ng-if="state.data.pageTitle === 'Tax'"> <a
+							</span>
+							</span>
+							<span ng-if="state.data.pageTitle === 'Tax'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="billable.items" bundle="${msg}" /></a> <span
 								ng-switch-when="true"><fmt:message key="common.tax"
 										bundle="${msg}" />
-						</span>
-						</span>
+							</span>
+							</span>
 						</li>
 					</ol>
 				</div>
@@ -256,6 +276,14 @@
 				     <span ng-if="$state.current.data.pageTitle === 'template.iso'"><fmt:message key="template.iso" bundle="${msg}" /></span>
 				     <span ng-if="$state.current.data.pageTitle === 'edit.iso'"><fmt:message key="edit.iso" bundle="${msg}" /></span>
 				     <span ng-if="$state.current.data.pageTitle === 'create.iso'"><fmt:message key="create.iso" bundle="${msg}" /></span>
+	                 <span ng-if="$state.current.data.pageTitle === 'create.storage.offer'"><fmt:message key="create.storage.offer" bundle="${msg}" /></span>
+	                 <span ng-if="$state.current.data.pageTitle === 'create.compute.offer'"><fmt:message key="create.compute.offer" bundle="${msg}" /></span>
+	                 <span ng-if="$state.current.data.pageTitle === 'edit.compute.offer'"><fmt:message key="edit.compute.offer" bundle="${msg}" /></span>
+	                 <span ng-if="$state.current.data.pageTitle === 'edit.storage.offer'"><fmt:message key="edit.storage.offer" bundle="${msg}" /></span>
+				     <span ng-if="$state.current.data.pageTitle === 'common.company'"><fmt:message key="common.company" bundle="${msg}" /></span>
+				     <span ng-if="$state.current.data.pageTitle === 'common.applications'"><fmt:message key="common.applications" bundle="${msg}" /></span>
+				     <span ng-if="$state.current.data.pageTitle === 'common.projects'"><fmt:message key="common.projects" bundle="${msg}" /></span>
+				     <span ng-if="$state.current.data.pageTitle === 'common.users'"><fmt:message key="common.users" bundle="${msg}" /></span>
 				</h2>
 				<small>{{ $state.current.data.pageDesc}}</small>
 			</div>

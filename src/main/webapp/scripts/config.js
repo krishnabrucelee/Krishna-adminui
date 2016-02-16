@@ -68,7 +68,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "client/project",
                 templateUrl: VIEW_URL +  "views/client/project/list.jsp",
                 data: {
-                    pageTitle: 'projects'
+                    pageTitle: 'common.projects'
                 }
             })
 
@@ -85,7 +85,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "client/user",
                 templateUrl: VIEW_URL +  "views/client/user/list.jsp",
                 data: {
-                    pageTitle: 'users'
+                    pageTitle: 'common.users'
                 }
             })
 
@@ -95,7 +95,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "client/company",
                 templateUrl: VIEW_URL +  "views/client/clients/list.jsp",
                 data: {
-                    pageTitle: 'client'
+                    pageTitle: 'common.company'
                 }
             })
 
@@ -129,7 +129,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "client/application",
                 templateUrl: VIEW_URL + "views/client/application/list.jsp",
                 data: {
-                    pageTitle: 'applications'
+                    pageTitle: 'common.applications'
                 }
             })
 
@@ -477,14 +477,14 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "compute/offer",
                 templateUrl: VIEW_URL +  "views/servicecatalog/compute-offer.jsp",
                 data: {
-                    pageTitle: 'compute.offer'
+                    pageTitle: 'create.compute.offer'
                 }
             })
             .state('servicecatalog.list-compute.list-view-compute-offer', {
                 url: "/view/:id",
                 templateUrl: VIEW_URL +  "views/servicecatalog/view-compute-offer.jsp",
                 data: {
-                    pageTitle: 'View Compute Offer'
+                    pageTitle: 'edit.compute.offer'
                 }
             })
             .state('servicecatalog.list-storage', {
@@ -498,7 +498,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "miscellaneous/list",
                 templateUrl: VIEW_URL +  "views/servicecatalog/miscellaneous/index.jsp",
                 data: {
-                    pageTitle: 'Miscellaneous'
+                    pageTitle: 'common.miscellaneous'
                 }
             })
             .state('servicecatalog.list-apptemplate', {
@@ -554,14 +554,14 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "storage/offer",
                 templateUrl: VIEW_URL +  "views/servicecatalog/storage-offer.jsp",
                 data: {
-                    pageTitle: 'storage.offer'
+                    pageTitle: 'create.storage.offer'
                 }
             })
             .state('servicecatalog.list-storage.list-view-storage-offer', {
                 url: "view/:id",
                 templateUrl: VIEW_URL +  "views/servicecatalog/view-storage-offer.jsp",
                 data: {
-                    pageTitle: 'View Storage Offer'
+                    pageTitle: 'edit.storage.offer'
                 }
             })
 
