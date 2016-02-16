@@ -145,8 +145,8 @@
 							</span>
                         	<span ng-if="state.data.pageTitle === 'template'">
 	                         <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}">
-	                         <fmt:message key="template" bundle="${msg}" /></a>
-	                         <span ng-switch-when="true"><fmt:message key="template" bundle="${msg}" /></span>
+	                         <fmt:message key="common.templates" bundle="${msg}" /></a>
+	                         <span ng-switch-when="true"><fmt:message key="common.templates" bundle="${msg}" /></span>
                         	</span>
                         	<span ng-if="state.data.pageTitle === 'create.template'">
 	                         <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}">
@@ -156,7 +156,7 @@
                         	<span ng-if="state.data.pageTitle === 'edit.template'">
 	                         <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}">
 	                         <fmt:message key="edit.template" bundle="${msg}" /></a>
-	                         <span ng-switch-when="true"><fmt:message key="edit.template" bundle="${msg}" /></span>
+	                         <span ng-switch-when="true">{{ state.data.pageName }}</span>
                         	</span>
                         	<span ng-if="state.data.pageTitle === 'template.iso'">
 	                         <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}">
@@ -166,7 +166,7 @@
                         	<span ng-if="state.data.pageTitle === 'edit.iso'">
 	                         <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}">
 	                         <fmt:message key="edit.iso" bundle="${msg}" /></a>
-	                         <span ng-switch-when="true"><fmt:message key="edit.iso" bundle="${msg}" /></span>
+	                         <span ng-switch-when="true">{{ state.data.pageName }}</span>
                         	</span>
                         	<span ng-if="state.data.pageTitle === 'create.iso'">
 	                         <a ng-switch-when="false"  href="{{'#' + state.url.format($state.params)}}">
@@ -272,7 +272,7 @@
 					 <span ng-if="$state.current.data.pageTitle === 'network'"><fmt:message key="storage.offer" bundle="${msg}" /></span>
 				     <span ng-if="$state.current.data.pageTitle === 'edit.template'"><fmt:message key="edit.template" bundle="${msg}" /></span>
 				     <span ng-if="$state.current.data.pageTitle === 'create.template'"><fmt:message key="create.template" bundle="${msg}" /></span>
-				     <span ng-if="$state.current.data.pageTitle === 'template'"><fmt:message key="template" bundle="${msg}" /></span>
+				     <span ng-if="$state.current.data.pageTitle === 'template'"><fmt:message key="common.templates" bundle="${msg}" /></span>
 				     <span ng-if="$state.current.data.pageTitle === 'template.iso'"><fmt:message key="template.iso" bundle="${msg}" /></span>
 				     <span ng-if="$state.current.data.pageTitle === 'edit.iso'"><fmt:message key="edit.iso" bundle="${msg}" /></span>
 				     <span ng-if="$state.current.data.pageTitle === 'create.iso'"><fmt:message key="create.iso" bundle="${msg}" /></span>

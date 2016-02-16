@@ -39,6 +39,7 @@ function cloudStackCtrl($scope, $window, appService) {
         	    }, 4000);
 
             }).catch(function (result) {
+            	$scope.showLoader = false;
                 if (!angular.isUndefined(result.data)) {
                     if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
                         var msg = result.data.globalError[0];

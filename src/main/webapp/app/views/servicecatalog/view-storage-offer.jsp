@@ -42,8 +42,7 @@
                             <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal"><fmt:message
 										key="common.company" bundle="${msg}" /></label>
                             <div class="col-md-6 col-sm-6 col-xs-6"> <b>{{storage.domain.name || " - "}} </b>
-<!--                                 <input  type="text" name="public" data-ng-model="storage.isPublic" class="form-control" readonly>
- -->                            </div>
+                           </div>
                         </div>
                     </div>
                 </div>
@@ -56,8 +55,7 @@
                             <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal" ><fmt:message
 									key="storage.storagetype" bundle="${msg}" /></label>
                             <div class="col-md-6 col-sm-6 col-xs-6"> <b>{{storage.storageType || " N/A "}} </b>
-<!--                                 <input  type="text" name="storagetype" data-ng-model="storage.storageType" class="form-control" readonly>
- -->                            </div>
+                           </div>
                         </div>
                     </div>
                 </div>
@@ -68,8 +66,7 @@
                             <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal"><fmt:message
 									key="storage.storagetag" bundle="${msg}" /></label>
                             <div class="col-md-6 col-sm-6 col-xs-6"> <b>{{storage.storageTags || " - "}} </b>
-<!--                                 <input  type="text" name="storagetag" data-ng-model="storage.storageTags" class="form-control" readonly>
- -->                            </div>
+                           </div>
                         </div>
                     </div>
                 </div>
@@ -80,8 +77,6 @@
                             <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal" ><fmt:message
 									key="storage.qostype" bundle="${msg}" /></label>
                             <div class="col-md-6  col-sm-6 col-xs-6"> <b>{{storage.qosType || " N/A "}} </b>
-<!--                                 <input  type="text" name="qostype" data-ng-model="storage.qosType" class="form-control"readonly >
- -->
                             </div>
                         </div>
                     </div>
@@ -94,8 +89,6 @@
                             <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal"><fmt:message
 									key="common.size" bundle="${msg}" /></label>
                             <div class="col-md-6 col-sm-6 col-xs-6"> <b>{{storage.diskSize || " N/A "}} </b>
-<!--                                 <input  type="text" valid-number name="size" data-ng-model="storage.diskSize" class="form-control" readonly >
- -->
                             </div>
                         </div>
 
@@ -114,65 +107,98 @@
 			</div>
 			<div class="row">
 				<div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
-				<div class="form-group" >
+						<div class="form-group" data-ng-if="!storage.isCustomDisk " >
+						<div class="row">
+							<label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.cost.per.month" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)
+							</label>
+							<div class="col-md-4 col-sm-4 col-xs-4">
+								<input type="text" valid-price name="costmonth"
+									data-ng-model="storage.storagePrice[0].costPerMonth" class="form-control">
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-4">
+								<b>
+								<p class="text-danger">{{
+									storage.storagePrice[0].costPerMonth /24 |
+									number:4}}/day </p>
+									<!-- <p class="text-danger m-t-sm">{{ storage.costPerHourGB / 24 }}/day</p> -->
+								</b>
+							</div>
+						</div>
+					</div>
+							<div class="form-group" data-ng-if="storage.isCustomDisk " >
 						<div class="row">
 							<label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.cost.per.gb.per.month" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)
 							</label>
-							<div class="col-md-4 col-sm-4 col-xs-4"> <!-- <b>{{storage.storagePrice[0].costGbPerMonth || " N/A "}} </b> -->
-								<input data-ng-change="costPerHourGB()" type="text" valid-decimal name="costmonth"
+							<div class="col-md-4 col-sm-4 col-xs-4">
+								<input data-ng-change= "costPerHourGB()" type="text" valid-price name="costmonth"
 									data-ng-model="storage.storagePrice[0].costGbPerMonth" class="form-control">
 							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4" data-ng-show="storage.storagePrice[0].costGbPerMonth">
-								<b>
-									<p class="text-danger m-t-xxs">{{ storage.costPerHourGB }}/day</p>
+							<div class="col-md-4 col-sm-4 col-xs-4">
+								<b>	<p class="text-danger">{{
+									storage.storagePrice[0].costGbPerMonth / 24 |
+									number:4}}/day </p>
 								</b>
 							</div>
-
 						</div>
 					</div>
-					<div data-ng-show="storage.qosType == 'Storage'">
-						<div class="form-group">
+							<div class="form-group" data-ng-if="!storage.isCustomizedIops">
+							<div class="row">
+								<label
+									class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.cost.for.iops" bundle="${msg}" /> (<app-currency class="text-danger"></app-currency>)
+								</label>
+								<div class="col-md-4  col-sm-4 col-xs-4">
+									<input type="text" name="costperiops" valid-price
+										data-ng-model="storage.storagePrice[0].costPerIops" class="form-control">
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4">
+								<b>
+									<p class="text-danger">{{ storage.storagePrice[0].costPerIops /24 |
+									number:4 }}/day </p>
+								</b>
+							</div>
+							</div>
+						</div>
+						<div class="form-group" data-ng-if="storage.isCustomizedIops">
 							<div class="row">
 								<label
 									class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.cost.per.iops" bundle="${msg}" /> (<app-currency class="text-danger"></app-currency>)
 								</label>
-								<div class="col-md-4  col-sm-4 col-xs-4"> <!-- <b>{{storage.storagePrice[0].costIopsPerMonth || " N/A "}} </b> -->
-									<input type="text" data-ng-keyup="costPerHourIOPS()" name="costperiops" valid-number
+								<div class="col-md-4  col-sm-4 col-xs-4">
+									<input type="text" data-ng-keyup="costPerHourIOPS()" name="costperiops" valid-price
 										data-ng-model="storage.storagePrice[0].costIopsPerMonth" class="form-control">
 								</div>
 								<div class="col-md-4 col-sm-4 col-xs-4">
 								<b>
-									<p class="text-danger m-t-xxs">{{ storage.costPerHourIOPS }}/day</p>
+									<p class="text-danger m-t-sm">{{ storage.storagePrice[0].costIopsPerMonth / 24 |
+									number:4}}/day </p>
 								</b>
 							</div>
-
 							</div>
 						</div>
-					</div>
 				</div>
-
-
-
 				<div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
-					<div class="form-group">
+					<div class="form-group" ng-class="{'text-danger': storageForm.zone.$invalid && formSubmitted}">
 						<div class="row">
-							<label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="common.zonename" bundle="${msg}" /></label> <b>{{ zoneList[0].name }}</b>
-							 <!-- <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6"> -->
+							<label class="col-md-4 col-sm-6 control-label font-normal"><fmt:message key="common.zonename" bundle="${msg}" /><span class="text-danger">*</span></label>
+							<div class="col-md-6  col-sm-5 col-xs-4">
+								<select required="true"
 
-						<%-- <div class="form-group">
-						<div class="row">
-							<label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="common.zonename" bundle="${msg}" /></label>
-							<div class="col-md-6 col-sm-6 col-xs-6">
-								{{ zoneList[0].name }} --%>
-
-							</div>
+									class="form-control input-group" name="zone"
+									data-ng-model="storage.zone" data-ng-class="{'error': storageForm.zone.$invalid && formSubmitted}"
+									ng-options="zone.name for zone in zoneList">
+									<option value="" class=""><fmt:message
+									key="common.select" bundle="${msg}" />
+									</option>
+								</select>
+								<div class="error-area"
+											data-ng-show="storageForm.zone.$invalid && formSubmitted">
+											<i ng-attr-tooltip="{{ storageForm.zone.errorMessage || '<fmt:message key="zone.is.required" bundle="${msg}" />' }}"
+												class="fa fa-warning error-icon">
+											</i>
+										</div>
+							</div>							</div>
 						</div>
 					</div>
-
-
-				</div>
-				</div>
-
 
 				<div class="row">
 					<div class="col-md-12  col-sm-12">
@@ -184,9 +210,9 @@
 						</span>
 					</div>
 				</div>
+				</div>
+				</div>
 			</div>
-        </div>
-    </div>
 </form>
 
 

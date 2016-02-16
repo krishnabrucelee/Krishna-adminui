@@ -302,6 +302,7 @@ function templateEditCtrl($scope, $state, $stateParams, $log, $window, appServic
         var hasTemplates = appService.crudService.read("templates", templateId);
         hasTemplates.then(function (result) {
             $scope.template = result;
+            $state.current.data.pageName = result.name;
         	$scope.getOsCategoryList();
         });
     };
@@ -603,13 +604,20 @@ function storageEditCtrl($scope, $state, $stateParams, $log, $window, appService
     hasZones.then(function (result) {  // this is only run after $http
 										// completes0
     	$scope.zoneList = result;
+
     });
 
-
+$scope.storage.zone= {};
 	$scope.edit = function (storageId) {
         var hasStorage = appService.crudService.read("storages", storageId);
         hasStorage.then(function (result) {
             $scope.storage = result;
+  	     $scope.storage.zone = $scope.zoneList[0];
+	     angular.forEach($scope.zoneList, function (obj, key) {
+                if (obj.id == $scope.storage.zone.id) {
+                    $scope.storage.zone = obj;
+                }
+            });
         });
 
     };
@@ -1045,6 +1053,12 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
         hasComputes.then(function (result) {
             $scope.compute = result;
     		$scope.compute.zone = $scope.formElements.zoneList[0];
+	       angular.forEach($scope.formElements.zoneList, function (obj, key) {
+                if (obj.id == $scope.compute.zone.id) {
+                    $scope.compute.zone = obj;
+                }
+            });
+	
         });
     };
 
