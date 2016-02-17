@@ -138,7 +138,7 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
 
         $scope.formSubmitted = true;
         if (form.$valid) {
-        	$scope.showLoader = true;
+            $scope.showLoader = true;
             var template = angular.copy($scope.template);
             template.zoneId = template.zone.id;
             template.hypervisorId = template.hypervisor.id;
@@ -499,7 +499,7 @@ $scope.costPerHourIOPS = function() {
         $scope.formSubmitted = true;
 
         if (form.$valid) {
-        	$scope.showLoader = true;
+            $scope.showLoader = true;
             var storage = angular.copy($scope.storage);
             if(!angular.isUndefined($scope.storage.domain) && storage.domain != null) {
             	storage.domainId = storage.domain.id;
@@ -544,8 +544,7 @@ $scope.costPerHourIOPS = function() {
     	appService.dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
                 $scope.deleteId = storage.id;
                 $scope.ok = function (storageId) {
-                	$scope.showLoader = true;
-                	console.log(storage);
+                    $scope.showLoader = true;
                     var hasStorage = appService.crudService.softDelete("storages", storage);
                     hasStorage.then(function (result) {
                         $scope.list(1);
@@ -920,7 +919,7 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
             var compute = angular.copy($scope.compute);
             if(!angular.isUndefined(compute.domain)) {
             	compute.domainId = compute.domain.id;
-		delete compute.domain;
+		        delete compute.domain;
             }
             if(!angular.isUndefined(compute.computeCost.zone)) {
             	compute.computeCost.zoneId = compute.computeCost.zone.id;
@@ -1058,7 +1057,7 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
                     $scope.compute.zone = obj;
                 }
             });
-	
+
         });
     };
 
@@ -1072,8 +1071,16 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
     $scope.update = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-        	$scope.showLoader = true;
-            var compute = $scope.compute;
+            $scope.showLoader = true;
+            var compute = angular.copy($scope.compute);
+            if(!angular.isUndefined(compute.domain) && $scope.compute.domain != null) {
+            	compute.domainId = compute.domain.id;
+		        delete compute.domain;
+            }
+            if(!angular.isUndefined(compute.computeCost.zone) && $scope.compute.computeCost.zone != null) {
+            	compute.computeCost.zoneId = compute.computeCost.zone.id;
+            	delete compute.computeCost.zone;
+            }
 
             var hasComputes = appService.crudService.update("computes", compute);
             hasComputes.then(function (result) {

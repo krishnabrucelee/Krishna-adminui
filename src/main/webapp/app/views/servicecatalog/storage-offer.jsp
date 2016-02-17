@@ -375,10 +375,11 @@
 
 				<div class="row">
 					<div class="col-md-12  col-sm-12">
-						<span class="pull-right"> <a
-							class="btn btn-default btn-outline"
-							ui-sref="servicecatalog.list-storage"><fmt:message key="common.cancel" bundle="${msg}" /></a>
-							<button class="btn btn-info" type="submit"
+						<span class="pull-right">
+						<get-loader-image data-ng-show="showLoader"></get-loader-image>
+						<a data-ng-hide="showLoader" class="btn btn-default" ui-sref="servicecatalog.list-storage">
+						    <fmt:message key="common.cancel" bundle="${msg}" /></a>
+							<button data-ng-hide="showLoader" class="btn btn-info" type="submit"
 								ng-disabled="form.storageForm.$invalid"><fmt:message key="common.create" bundle="${msg}" /></button>
 						</span>
 					</div>
