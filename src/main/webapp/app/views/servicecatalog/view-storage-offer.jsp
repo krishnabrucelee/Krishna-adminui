@@ -118,7 +118,7 @@
 							<div class="col-md-4 col-sm-4 col-xs-4">
 								<b>
 								<p class="text-danger">{{
-									storage.storagePrice[0].costPerMonth /24 |
+									storage.storagePrice[0].costPerMonth /30 |
 									number:4}}/day </p>
 									<!-- <p class="text-danger m-t-sm">{{ storage.costPerHourGB / 24 }}/day</p> -->
 								</b>
@@ -135,7 +135,7 @@
 							</div>
 							<div class="col-md-4 col-sm-4 col-xs-4">
 								<b>	<p class="text-danger">{{
-									storage.storagePrice[0].costGbPerMonth / 24 |
+									storage.storagePrice[0].costGbPerMonth / 30 |
 									number:4}}/day </p>
 								</b>
 							</div>
@@ -152,7 +152,7 @@
 								</div>
 								<div class="col-md-4 col-sm-4 col-xs-4">
 								<b>
-									<p class="text-danger">{{ storage.storagePrice[0].costPerIops /24 |
+									<p class="text-danger">{{ storage.storagePrice[0].costPerIops /30 |
 									number:4 }}/day </p>
 								</b>
 							</div>
@@ -169,7 +169,7 @@
 								</div>
 								<div class="col-md-4 col-sm-4 col-xs-4">
 								<b>
-									<p class="text-danger m-t-sm">{{ storage.storagePrice[0].costIopsPerMonth / 24 |
+									<p class="text-danger m-t-sm">{{ storage.storagePrice[0].costIopsPerMonth / 30 |
 									number:4}}/day </p>
 								</b>
 							</div>
