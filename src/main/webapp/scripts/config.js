@@ -59,7 +59,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "/",
                 templateUrl: VIEW_URL +  "views/common/content.jsp",
                 data: {
-                    pageTitle: 'clients'
+                    pageTitle: 'Clients'
                 }
             })
 
@@ -68,7 +68,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "client/project",
                 templateUrl: VIEW_URL +  "views/client/project/list.jsp",
                 data: {
-                    pageTitle: 'common.projects'
+                    pageTitle: 'Projects'
                 }
             })
 
@@ -85,7 +85,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "client/user",
                 templateUrl: VIEW_URL +  "views/client/user/list.jsp",
                 data: {
-                    pageTitle: 'common.users'
+                    pageTitle: 'Users'
                 }
             })
 
@@ -95,7 +95,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "client/company",
                 templateUrl: VIEW_URL +  "views/client/clients/list.jsp",
                 data: {
-                    pageTitle: 'common.company'
+                    pageTitle: 'Company'
                 }
             })
 
@@ -112,7 +112,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "/addClient",
                 templateUrl: VIEW_URL +  "views/client/clients/add.jsp",
                 data: {
-                    pageTitle: 'add.client'
+                    pageTitle: 'Add Client'
                 }
             })
 
@@ -120,7 +120,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "/editClient",
                 templateUrl: VIEW_URL +  "views/client/clients/edit.jsp",
                 data: {
-                    pageTitle: 'edit.client'
+                    pageTitle: 'Edit Client'
                 }
             })
 
@@ -129,7 +129,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "client/application",
                 templateUrl: VIEW_URL + "views/client/application/list.jsp",
                 data: {
-                    pageTitle: 'common.applications'
+                    pageTitle: 'Applications'
                 }
             })
 
@@ -139,7 +139,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             url: "/configuration",
             templateUrl: VIEW_URL +  "views/common/content.jsp",
             data: {
-                pageTitle: 'configuration'
+                pageTitle: 'Configuration'
             }
         })
 
@@ -155,7 +155,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             url: "/dashboard/cloudConfig",
             templateUrl: VIEW_URL +  "views/configuration/cloudStack/system-config.jsp",
             data: {
-                pageTitle: 'system.configuration'
+                pageTitle: 'System Configuration'
             }
         })
 
@@ -163,7 +163,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             url: "/importData",
             templateUrl: VIEW_URL +  "views/configuration/cloudStack/import.jsp",
             data: {
-                pageTitle: 'import.data'
+                pageTitle: 'Import Data'
             }
         })
 
@@ -203,7 +203,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             url: "/adminUser",
             templateUrl: VIEW_URL +  "views/configuration/general/admin-user.jsp",
             data: {
-                pageTitle: 'admin.user'
+                pageTitle: 'Admin User'
             }
         })
 
@@ -211,7 +211,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             url: "/addAdmin",
             templateUrl: VIEW_URL +  "views/configuration/general/add.jsp",
             data: {
-                pageTitle: 'add.admin.user'
+                pageTitle: 'Add Admin User'
             }
         })
 
@@ -243,7 +243,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             url: "/resourceAllocations",
             templateUrl: VIEW_URL + "views/configuration/chargeback/resource-allocation.jsp",
             data: {
-                pageTitle: 'resource.allocation'
+                pageTitle: 'Resource Allocation'
             }
         })
 
@@ -259,7 +259,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             url: "/billableItem",
             templateUrl: VIEW_URL +  "views/configuration/chargeback/billable-item/list.jsp",
             data: {
-                pageTitle: 'billable.items'
+                pageTitle: 'Billable Items'
             }
         })
 
@@ -383,7 +383,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             url: "/zoneDescription",
             templateUrl: VIEW_URL +  "views/configuration/cloudStack/zone-description.jsp",
             data: {
-                pageTitle: 'zone.description'
+                pageTitle: 'Zone Description'
             }
         })
 
@@ -455,7 +455,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "/",
                 templateUrl: VIEW_URL +  "views/common/content.jsp",
                 data: {
-                    pageTitle: 'service'
+                    pageTitle: 'Service'
                 }
             })
 
@@ -470,98 +470,98 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 url: "compute/list",
                 templateUrl: VIEW_URL +  "views/servicecatalog/list.jsp",
                 data: {
-                    pageTitle: 'compute'
+                    pageTitle: 'Compute'
                 }
             })
             .state('servicecatalog.list-compute.list-compute-offer', {
                 url: "compute/offer",
                 templateUrl: VIEW_URL +  "views/servicecatalog/compute-offer.jsp",
                 data: {
-                    pageTitle: 'create.compute.offer'
+                    pageTitle: 'Create Compute Offer'
                 }
             })
             .state('servicecatalog.list-compute.list-view-compute-offer', {
                 url: "/view/:id",
                 templateUrl: VIEW_URL +  "views/servicecatalog/view-compute-offer.jsp",
                 data: {
-                    pageTitle: 'edit.compute.offer'
+                    pageTitle: 'Edit Compute Offer'
                 }
             })
             .state('servicecatalog.list-storage', {
                 url: "storage/list",
                 templateUrl: VIEW_URL +  "views/servicecatalog/storage.jsp",
                 data: {
-                    pageTitle: 'storage'
+                    pageTitle: 'Storage'
                 }
             })
             .state('servicecatalog.list-miscellaneous', {
                 url: "miscellaneous/list",
                 templateUrl: VIEW_URL +  "views/servicecatalog/miscellaneous/index.jsp",
                 data: {
-                    pageTitle: 'common.miscellaneous'
+                    pageTitle: 'Miscellaneous'
                 }
             })
             .state('servicecatalog.list-apptemplate', {
                 url: "templatestore/apptemplatelist",
                 templateUrl: VIEW_URL +  "views/servicecatalog/apptemplatehome.jsp",
                 data: {
-                    pageTitle: 'template.iso'
+                    pageTitle: 'Template ISO'
                 }
             })
             .state('servicecatalog.list-apptemplate.list-apptemplate-iso-create', {
                 url: "iso/create",
                 templateUrl: VIEW_URL +  "views/servicecatalog/isocreate.jsp",
                 data: {
-                    pageTitle: 'create.iso'
+                    pageTitle: 'Create ISO'
                 }
             })
             .state('servicecatalog.list-apptemplate.list-apptemplate-iso-edit', {
                 url: "view/:id",
                 templateUrl: VIEW_URL +  "views/servicecatalog/view-iso.jsp",
                 data: {
-                    pageTitle: 'edit.iso'
+                    pageTitle: 'Edit ISO'
                 }
             })
             .state('servicecatalog.list-templatestore', {
                 url: "templatestore/list",
                 templateUrl: VIEW_URL +  "views/servicecatalog/templatehome.jsp",
                 data: {
-                    pageTitle: 'template'
+                    pageTitle: 'Template'
                 }
             })
             .state('servicecatalog.list-templatestore.list-view-template-create', {
                 url: "templatestore/create",
                 templateUrl: VIEW_URL +  "views/servicecatalog/templateCreate.jsp",
                 data: {
-                    pageTitle: 'create.template'
+                    pageTitle: 'Create Template'
                 }
             })
             .state('servicecatalog.list-templatestore.list-view-template-edit', {
                 url: "view/:id",
                 templateUrl: VIEW_URL +  "views/servicecatalog/view-template.jsp",
                 data: {
-                    pageTitle: 'edit.template'
+                    pageTitle: 'Edit Template'
                 }
             })
             .state('servicecatalog.list-network', {
                 url: "network/list",
                 templateUrl: VIEW_URL +  "views/servicecatalog/network.jsp",
                 data: {
-                    pageTitle: 'common.network'
+                    pageTitle: 'Network'
                 }
             })
             .state('servicecatalog.list-storage.list-storage-offer', {
                 url: "storage/offer",
                 templateUrl: VIEW_URL +  "views/servicecatalog/storage-offer.jsp",
                 data: {
-                    pageTitle: 'create.storage.offer'
+                    pageTitle: 'Create Storage Offer'
                 }
             })
             .state('servicecatalog.list-storage.list-view-storage-offer', {
                 url: "view/:id",
                 templateUrl: VIEW_URL +  "views/servicecatalog/view-storage-offer.jsp",
                 data: {
-                    pageTitle: 'edit.storage.offer'
+                    pageTitle: 'Edit Storage Offer'
                 }
             })
 
