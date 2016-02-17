@@ -260,7 +260,7 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceRunningCostPerVcpu / 24|
+									compute.computeCost[0].instanceRunningCostPerVcpu / 30|
 									number:4}}/day</p>
 							</label>
 						</div>
@@ -277,7 +277,7 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceRunningCostVcpu / 24 |
+									compute.computeCost[0].instanceRunningCostVcpu / 30 |
 									number:4}}/day</p>
 							</label>
 						</div>
@@ -297,7 +297,7 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-										compute.computeCost[0].instanceStoppageCostPerMB / 24 |
+										compute.computeCost[0].instanceStoppageCostPerMB / 30 |
 									number:4}}/day</p>
 							</label>
 						</div>
@@ -315,7 +315,7 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceRunningCostMemory / 24 |
+									compute.computeCost[0].instanceRunningCostMemory / 30 |
 									number:4}}/day</p>
 							</label>
 						</div>
@@ -356,7 +356,7 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceRunningCostPerIops / 24|
+									compute.computeCost[0].instanceRunningCostPerIops / 30|
 									number:4}}/day</p>
 							</label>
 						</div>
@@ -374,7 +374,7 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceRunningCostIops / 24 |
+									compute.computeCost[0].instanceRunningCostIops / 30 |
 									number:4}}/day</p>
 							</label>
 						</div>
@@ -411,7 +411,7 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceStoppageCostPerVcpu / 24|
+									compute.computeCost[0].instanceStoppageCostPerVcpu / 30|
 									number:4}}/day</p>
 							</label>
 						</div>
@@ -428,7 +428,7 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceStoppageCostVcpu / 24 |
+									compute.computeCost[0].instanceStoppageCostVcpu / 30 |
 									number:4}}/day</p>
 							</label>
 						</div>
@@ -450,7 +450,7 @@
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">
 									{{
-									compute.computeCost[0].instanceStoppageCostPerMB / 24 |
+									compute.computeCost[0].instanceStoppageCostPerMB / 30 |
 									number:4}}/day</p>
 							</label>
 						</div>
@@ -468,7 +468,7 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceStoppageCostMemory / 24 |
+									compute.computeCost[0].instanceStoppageCostMemory / 30 |
 									number:4}}/day</p>
 							</label>
 						</div>
@@ -527,7 +527,7 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceStoppageCostIops / 24 |
+									compute.computeCost[0].instanceStoppageCostIops / 30 |
 									number:4}}/day</p>
 							</label>
 						</div>
