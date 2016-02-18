@@ -391,8 +391,7 @@ function storageListCtrl($scope, $log, $state, $stateParams, $window, appService
     $scope.global = appService.globalConfig;
 
     $scope.storage.zoneList = {};
-    var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-    var hasZones = appService.crudService.list("zones", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+    var hasZones = appService.crudService.listAll("zones/list");
     hasZones.then(function (result) {  // this is only run after $http
 										// completes0
     	$scope.zoneList = result;
@@ -400,8 +399,7 @@ function storageListCtrl($scope, $log, $state, $stateParams, $window, appService
     });
 
     $scope.storage.domainList = {};
-    var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-    var hasDomains = appService.crudService.list("domains", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+    var hasDomains = appService.crudService.listAll("domains/list");
     hasDomains.then(function (result) {  // this is only run after $http
 										// completes0
     	$scope.formElements.domainList = result;
@@ -598,8 +596,7 @@ function storageEditCtrl($scope, $state, $stateParams, $log, $window, appService
     $scope.global = appService.globalConfig;
 
     $scope.storage.zoneList = {};
-    var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-    var hasZones = appService.crudService.list("zones", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+    var haszones = appService.crudService.listAll("zones/list");
     hasZones.then(function (result) {  // this is only run after $http
 										// completes0
     	$scope.zoneList = result;
@@ -1016,8 +1013,7 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
     };
 
     // Domain List
-	var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-	var hasDomains = appService.crudService.list("domains", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+        var hasDomains = appService.crudService.listAll("domains/list");
 	hasDomains.then(function (result) {  // this is only run after $http completes0
 		$scope.domain.domaintypeList = result;
 	});
@@ -1030,7 +1026,7 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
         };
 
     // Domain List
-	var hasZones = appService.crudService.list("zones/list", '', {});
+	var hasZones = appService.crudService.listAll("zones/list", '', {});
 	hasZones.then(function (result) {  // this is only run after $http completes0
 		$scope.formElements.zoneList = result;
 		$scope.compute.computeCost.zone = $scope.formElements.zoneList[0];
