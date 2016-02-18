@@ -138,7 +138,7 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
 
         $scope.formSubmitted = true;
         if (form.$valid) {
-        	$scope.showLoader = true;
+            $scope.showLoader = true;
             var template = angular.copy($scope.template);
             template.zoneId = template.zone.id;
             template.hypervisorId = template.hypervisor.id;
@@ -391,8 +391,7 @@ function storageListCtrl($scope, $log, $state, $stateParams, $window, appService
     $scope.global = appService.globalConfig;
 
     $scope.storage.zoneList = {};
-    var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-    var hasZones = appService.crudService.list("zones", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+    var hasZones = appService.crudService.listAll("zones/list");
     hasZones.then(function (result) {  // this is only run after $http
 										// completes0
     	$scope.zoneList = result;
@@ -400,8 +399,7 @@ function storageListCtrl($scope, $log, $state, $stateParams, $window, appService
     });
 
     $scope.storage.domainList = {};
-    var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-    var hasDomains = appService.crudService.list("domains", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+    var hasDomains = appService.crudService.listAll("domains/list");
     hasDomains.then(function (result) {  // this is only run after $http
 										// completes0
     	$scope.formElements.domainList = result;
@@ -499,7 +497,7 @@ $scope.costPerHourIOPS = function() {
         $scope.formSubmitted = true;
 
         if (form.$valid) {
-        	$scope.showLoader = true;
+            $scope.showLoader = true;
             var storage = angular.copy($scope.storage);
             if(!angular.isUndefined($scope.storage.domain) && storage.domain != null) {
             	storage.domainId = storage.domain.id;
@@ -544,8 +542,7 @@ $scope.costPerHourIOPS = function() {
     	appService.dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
                 $scope.deleteId = storage.id;
                 $scope.ok = function (storageId) {
-                	$scope.showLoader = true;
-                	console.log(storage);
+                    $scope.showLoader = true;
                     var hasStorage = appService.crudService.softDelete("storages", storage);
                     hasStorage.then(function (result) {
                         $scope.list(1);
@@ -599,8 +596,7 @@ function storageEditCtrl($scope, $state, $stateParams, $log, $window, appService
     $scope.global = appService.globalConfig;
 
     $scope.storage.zoneList = {};
-    var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-    var hasZones = appService.crudService.list("zones", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+    var haszones = appService.crudService.listAll("zones/list");
     hasZones.then(function (result) {  // this is only run after $http
 										// completes0
     	$scope.zoneList = result;
@@ -920,7 +916,7 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
             var compute = angular.copy($scope.compute);
             if(!angular.isUndefined(compute.domain)) {
             	compute.domainId = compute.domain.id;
-		delete compute.domain;
+		        delete compute.domain;
             }
             if(!angular.isUndefined(compute.computeCost.zone)) {
             	compute.computeCost.zoneId = compute.computeCost.zone.id;
@@ -1017,8 +1013,7 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
     };
 
     // Domain List
-	var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-	var hasDomains = appService.crudService.list("domains", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+        var hasDomains = appService.crudService.listAll("domains/list");
 	hasDomains.then(function (result) {  // this is only run after $http completes0
 		$scope.domain.domaintypeList = result;
 	});
@@ -1031,7 +1026,7 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
         };
 
     // Domain List
-	var hasZones = appService.crudService.list("zones/list", '', {});
+	var hasZones = appService.crudService.listAll("zones/list", '', {});
 	hasZones.then(function (result) {  // this is only run after $http completes0
 		$scope.formElements.zoneList = result;
 		$scope.compute.computeCost.zone = $scope.formElements.zoneList[0];
@@ -1058,7 +1053,7 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
                     $scope.compute.zone = obj;
                 }
             });
-	
+
         });
     };
 
@@ -1072,8 +1067,16 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
     $scope.update = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-        	$scope.showLoader = true;
-            var compute = $scope.compute;
+            $scope.showLoader = true;
+            var compute = angular.copy($scope.compute);
+            if(!angular.isUndefined(compute.domain) && $scope.compute.domain != null) {
+            	compute.domainId = compute.domain.id;
+		        delete compute.domain;
+            }
+            if(!angular.isUndefined(compute.computeCost.zone) && $scope.compute.computeCost.zone != null) {
+            	compute.computeCost.zoneId = compute.computeCost.zone.id;
+            	delete compute.computeCost.zone;
+            }
 
             var hasComputes = appService.crudService.update("computes", compute);
             hasComputes.then(function (result) {

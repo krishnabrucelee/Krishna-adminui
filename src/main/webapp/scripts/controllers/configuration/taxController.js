@@ -117,9 +117,11 @@ $scope.delete = function (size, tax) {
     appService.dialogService.openDialog("app/views/common/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
             $scope.deleteObject = tax;
             $scope.ok = function (deleteObject) {
+            	$scope.showLoader = true;
                 var hasServer = appService.crudService.softDelete("tax", tax);
                 hasServer.then(function (result) {
                     $scope.list(1);
+                    $scope.showLoader = false;
                     appService.notify({message: 'Tax deleted successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
                 }).catch(function (result) {
 

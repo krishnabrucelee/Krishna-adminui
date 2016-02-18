@@ -14,7 +14,7 @@ function domainListCtrl($scope,$state, promiseAjax, $log,appService, notify, cru
 
 	$scope.sort = appService.globalConfig.sort;
     $scope.changeSorting = appService.utilService.changeSorting;
-    
+
    $scope.domains = {
         category: "domains",
         oneItemSelected: {},
@@ -125,13 +125,14 @@ function domainListCtrl($scope,$state, promiseAjax, $log,appService, notify, cru
                 // Update department
                 $scope.domain = angular.copy(domain);
                 $scope.update = function (form) {
+                    $scope.showLoader = true;
                     $scope.formSubmitted = true;
                     if (form.$valid) {
                     	$scope.showLoader = true;
                         var domain = $scope.domain;
                         var hasServer = crudService.update("domains", domain);
                         hasServer.then(function (result) {
-                        	$scope.domain={};
+                            $scope.domain={};
                             $scope.list(1);
                             $scope.showLoader = false;
                             notify({message: 'Updated successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});

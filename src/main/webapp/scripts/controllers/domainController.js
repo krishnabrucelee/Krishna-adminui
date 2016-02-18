@@ -14,7 +14,7 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
 
 	$scope.sort = appService.globalConfig.sort;
     $scope.changeSorting = appService.utilService.changeSorting;
-    
+
    $scope.domains = {
         category: "domains",
         oneItemSelected: {},
@@ -57,7 +57,7 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
     $scope.addDomain = function (size,domain) {
         dialogService.openDialog("app/views/client/clients/add-domain.jsp", size, $scope, ['$scope', '$modalInstance', '$rootScope', function ($scope, $modalInstance, $rootScope) {
         	$scope.save = function (form) {
-                
+
                 $scope.formSubmitted = true;
                 if (form.$valid) {
 			 $scope.showLoader = true;
@@ -85,15 +85,18 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
                         		$scope.domain.secondaryContactLastName = "";
                         		$scope.domain.secondaryContactEmail = "";
                         		$scope.domain.secondaryContactPhone = "";
-					 $scope.showLoader = false;
+					$scope.showLoader = false;
                         	}).catch(function (result) {
                         		if(!angular.isUndefined(result) && result.data != null) {
                         			angular.forEach(result.data.fieldErrors, function(errorMessage, key) {
-					    $scope.showLoader = false;
+					                   $scope.showLoader = false;
                                 	   $scope.domainForm[key].$invalid = true;
                                 	   $scope.domainForm[key].errorMessage = errorMessage;
                         			});
                         		}
+                                  $scope.showLoader = false;
+                                  $modalInstance.close();
+                                  $state.reload();
                         	});
                         }
                         else {  // Add tool tip message for confirmation password in add-user
@@ -119,26 +122,28 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
                 // Update department
                 $scope.domain = angular.copy(domain);
                 $scope.update = function (form) {
-
                     $scope.formSubmitted = true;
                     if (form.$valid) {
                         var domain = $scope.domain;
+                        $scope.showLoader = true;
                         var hasServer = crudService.update("domains", domain);
                         hasServer.then(function (result) {
-                        	$scope.domain={};
+                            $scope.domain={};
                             $scope.list(1);
                             notify({message: 'Updated successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
                             $modalInstance.close();
-                         $scope.showLoader = false;
+                            $scope.showLoader = false;
                         }).catch(function (result) {
                         	if(!angular.isUndefined(result) && result.data != null) {
 	                            angular.forEach(result.data.fieldErrors, function(errorMessage, key) {
-
+                                        $scope.showLoader = false;
 	                            	$scope.domainForm[key].$invalid = true;
 	                                $scope.domainForm[key].errorMessage = errorMessage;
 	                            });
                         	}
-
+                                $scope.showLoader = false;
+                                $modalInstance.close();
+                                $state.reload();
                         });
                     }
                 },
@@ -153,10 +158,11 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
         dialogService.openDialog("app/views/common/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
                 $scope.deleteObject = domain;
                 $scope.ok = function (deleteObject) {
+                	$scope.showLoader = true;
                     var hasServer = crudService.softDelete("domains", deleteObject);
                     hasServer.then(function (result) {
-
                         $scope.list(1);
+                        $scope.showLoader = false;
                         notify({message: 'Deleted successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
                     }).catch(function (result) {
 
@@ -179,5 +185,5 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
                         };
             }]);
     };
-   
+
    }

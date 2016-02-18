@@ -224,8 +224,9 @@
                         <div class="form-group">
                             <div class="row">
                                 <span class="pull-right">
-                                    <a class="btn btn-default btn-outline"  ui-sref="servicecatalog.list-templatestore"><fmt:message key="common.cancel" bundle="${msg}" /></a>
-                                    <button class="btn btn-info" type="submit" ng-disabled="form.computeForm.$invalid" ><fmt:message key="common.apply" bundle="${msg}" /></button>
+                                    <get-loader-image data-ng-show="showLoader"></get-loader-image>
+                                    <a data-ng-hide="showLoader" class="btn btn-default"  ui-sref="servicecatalog.list-templatestore"><fmt:message key="common.cancel" bundle="${msg}" /></a>
+                                    <button data-ng-hide="showLoader" class="btn btn-info" type="submit" ng-disabled="form.computeForm.$invalid" ><fmt:message key="common.apply" bundle="${msg}" /></button>
                                 </span>
                             </div>
                         </div>

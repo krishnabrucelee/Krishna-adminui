@@ -320,6 +320,27 @@
 							</label>
 						</div>
 					</div>
+						<div class="form-group">
+						<div class="row" data-ng-show="compute.customized">
+							<label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message
+									key="instance.running.cost.per.mhz.speed" bundle="${msg}" />(<app-currency
+									class="text-danger"></app-currency>)</label>
+							<div class="col-md-3  col-sm-3 col-xs-3">
+								<input type="text" valid-price
+									name="instanceRunningCostSpeed"
+									data-ng-model="compute.computeCost[0].instanceRunningCostPerMhz"
+									class="form-control"> <span
+									class="help-block m-b-none"
+									ng-show="computeForm.instanceRunningCostSpeed.$invalid && formSubmitted"></span>
+							</div>
+							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
+								<p class="text-danger">
+									{{
+									compute.computeCost[0].instanceRunningCostPerMhz / 24 |
+									number:4}}/day</p>
+							</label>
+						</div>
+					</div>
 					<div class="form-group">
 						<div class="row" data-ng-show="compute.customizedIops"
 							data-ng-if="compute.qosType == 'STORAGE'">
@@ -448,6 +469,27 @@
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
 									compute.computeCost[0].instanceStoppageCostMemory / 30 |
+									number:4}}/day</p>
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="row" data-ng-show="compute.customized">
+							<label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message
+									key="instance.stoppage.cost.per.mhz.speed" bundle="${msg}" />(<app-currency
+									class="text-danger"></app-currency>)</label>
+							<div class="col-md-3  col-sm-3 col-xs-3">
+								<input type="text" valid-price
+									name="instanceStoppageCostSpeed"
+									data-ng-model="compute.computeCost[0].instanceStoppageCostPerMhz"
+									class="form-control"> <span
+									class="help-block m-b-none"
+									ng-show="computeForm.instanceStoppageCostSpeed.$invalid && formSubmitted"></span>
+							</div>
+							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
+								<p class="text-danger">
+									{{
+									compute.computeCost[0].instanceStoppageCostPerMhz / 24 |
 									number:4}}/day</p>
 							</label>
 						</div>
