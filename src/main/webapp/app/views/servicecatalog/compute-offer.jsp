@@ -540,7 +540,7 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceRunningCostPerMB /24 |
+									compute.computeCost[0].instanceRunningCostPerMB /30 |
 									number:4}}/day</p>
 							</label>
 						</div>
@@ -580,7 +580,7 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">
-									{{compute.computeCost[0].instanceStoppageCostPerMB /24 | number:4}}/day</p>
+									{{compute.computeCost[0].instanceStoppageCostPerMB /30 | number:4}}/day</p>
 							</label>
 						</div>
 						<div class="row" data-ng-show="!compute.customized">
@@ -621,7 +621,7 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceRunningCostPerIops /24|
+									compute.computeCost[0].instanceRunningCostPerIops /30|
 									number:4}}/day</p>
 							</label>
 						</div>
@@ -663,7 +663,7 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceStoppageCostPerIops/24 |
+									compute.computeCost[0].instanceStoppageCostPerIops/30 |
 									number:4}}/day</p>
 							</label>
 						</div>
@@ -705,7 +705,7 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceRunningCostPerMhz / 24|
+									compute.computeCost[0].instanceRunningCostPerMhz / 30|
 									number:4}}/day</p>
 							</label>
 						</div>
@@ -726,7 +726,7 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceStoppageCostPerMhz / 24|
+									compute.computeCost[0].instanceStoppageCostPerMhz / 30|
 									number:4}}/day</p>
 							</label>
 						</div>
