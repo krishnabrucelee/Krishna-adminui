@@ -457,6 +457,15 @@
 	<div id="footer" ng-include="'app/views/common/footer.jsp'"></div>
 </div>
 
+<!-- Redirect to login when passing the wrong URL -->
+<script>
+    var pageUrl = window.location.href;
+    if(pageUrl.indexOf("index#/login") > -1 || pageUrl.endsWith("index#/")) {
+        var contextPath = '<%= request.getContextPath() %>';
+        var baseUrl = window.location.protocol + "//" + window.location.host + contextPath + '/login';
+        window.location = baseUrl;
+    }
+</script>
 <script>
 	$(window).load(function() {
 		$('.easy-tree').EasyTree({

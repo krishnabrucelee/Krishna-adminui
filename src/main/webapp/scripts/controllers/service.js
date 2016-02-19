@@ -596,7 +596,7 @@ function storageEditCtrl($scope, $state, $stateParams, $log, $window, appService
     $scope.global = appService.globalConfig;
 
     $scope.storage.zoneList = {};
-    var haszones = appService.crudService.listAll("zones/list");
+    var hasZones = appService.crudService.listAll("zones/list");
     hasZones.then(function (result) {  // this is only run after $http
 										// completes0
     	$scope.zoneList = result;
