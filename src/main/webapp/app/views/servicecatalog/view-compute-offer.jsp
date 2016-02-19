@@ -336,7 +336,7 @@
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">
 									{{
-									compute.computeCost[0].instanceRunningCostPerMhz / 24 |
+									compute.computeCost[0].instanceRunningCostPerMhz / 30 |
 									number:4}}/day</p>
 							</label>
 						</div>
@@ -489,7 +489,7 @@
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">
 									{{
-									compute.computeCost[0].instanceStoppageCostPerMhz / 24 |
+									compute.computeCost[0].instanceStoppageCostPerMhz / 30 |
 									number:4}}/day</p>
 							</label>
 						</div>
@@ -509,7 +509,7 @@
 							</div>
 							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
 								<p class="text-danger">{{
-									compute.computeCost[0].instanceStoppageCostPerIops /24 |
+									compute.computeCost[0].instanceStoppageCostPerIops /30 |
 									number:4}}/day</p>
 							</label>
 						</div>
