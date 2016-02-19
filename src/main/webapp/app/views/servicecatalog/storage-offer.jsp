@@ -155,21 +155,29 @@
 					</div>
 	                </div>
 	                <div class="col-md-6  col-sm-6 col-xs-4 col-lg-6 " >
-						<div class="form-group" data-ng-if="!storage.isPublic">
+						<div class="form-group" data-ng-if="!storage.isPublic" ng-class="{'text-danger': storageForm.domain.$invalid && formSubmitted}">
 						<div class="row">
 							<label
 								class="col-md-4 col-sm-4 col-xs-6 control-label font-normal"><fmt:message
-									key="storage.domain" bundle="${msg}" /></label>
+									key="storage.domain" bundle="${msg}" /><span class="text-danger">*</span></label>
 							<div class="col-md-8 col-sm-6 col-xs-6">
-								<select class="form-control input-group" name="domain"
+								<select required = "true" class="form-control input-group" name="domain"
 									data-ng-model="storage.domain"
-									ng-options="domain.name for domain in formElements.domainList">
+									ng-options="domain.name for domain in formElements.domainList" data-ng-class="{'error': storageForm.domain.$invalid && formSubmitted}">
 									<option value="">Select</option>
 								</select>
+								<div class="error-area"
+									data-ng-show="storageForm.domain.$invalid && formSubmitted">
+									<i ng-attr-tooltip="{{ storage.domain.errorMessage || '<fmt:message key="domain.is.required" bundle="${msg}" />' }}"
+										class="fa fa-warning error-icon">
+									</i>
+									<i ng-attr-tooltip="{{ '<fmt:message key="domain.is.required" bundle="${msg}" />' }}"
+											class="fa fa-warning error-icon"></i>
+								</div>
 							</div>
 						</div>
-					</div>
-	                </div>
+					    </div>
+	               </div>
                 </div>
                 </div>
                  <div class="col-md-6  col-sm-6 col-xs-4 col-lg-4 " data-ng-show="storage.qosType">

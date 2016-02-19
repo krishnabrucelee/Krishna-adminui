@@ -189,7 +189,7 @@
 											</select>
 											<div class="error-area"
 											data-ng-show="computeForm.domain.$invalid && formSubmitted">
-											<i ng-attr-tooltip="{{ computeForm.domain.errorMessage || '<fmt:message key="domain.required" bundle="${msg}" />' }}"
+											<i ng-attr-tooltip="{{ computeForm.domain.errorMessage || '<fmt:message key="domain.is.required" bundle="${msg}" />' }}"
 												class="fa fa-warning error-icon">
 											</i>
 										</div>
