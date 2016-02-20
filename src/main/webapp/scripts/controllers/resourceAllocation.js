@@ -59,13 +59,11 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
     // Save Resource limits based on the quota type.
 	$scope.save = function(form) {
 		//if(form.$valid) {
-		console.log(form);
 		if(!angular.isUndefined($scope.resourceQuota.project) && $scope.resourceQuota.project != "" && $scope.resourceQuota.project != null) {
 			$scope.saveProjectQuota(form);
 		} else if(!angular.isUndefined($scope.resourceQuota.department) && $scope.resourceQuota.department != "" && $scope.resourceQuota.department != null) {
 			$scope.saveDepartmentQuota(form);
 		} else {
-			console.log("akhdf");
 			$scope.saveDomainQuota(form);
 		}
 		//}
