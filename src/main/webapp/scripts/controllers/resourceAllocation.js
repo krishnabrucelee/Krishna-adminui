@@ -46,17 +46,26 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
     var hasDomains = crudService.listAll("domains");
     hasDomains.then(function (result) {
     	$scope.domainList = result;
+    	$state.current.data.pageName = result.name;
     });
 
+    if($stateParams.id > 0) {
+    	 var hasDomains = crudService.read("domains",$stateParams.id);
+    	    hasDomains.then(function (result) {
+    	    	$state.current.data.pageName = result.name;
+    	    });
+    }
 
     // Save Resource limits based on the quota type.
 	$scope.save = function(form) {
 		//if(form.$valid) {
+		console.log(form);
 		if(!angular.isUndefined($scope.resourceQuota.project) && $scope.resourceQuota.project != "" && $scope.resourceQuota.project != null) {
 			$scope.saveProjectQuota(form);
 		} else if(!angular.isUndefined($scope.resourceQuota.department) && $scope.resourceQuota.department != "" && $scope.resourceQuota.department != null) {
 			$scope.saveDepartmentQuota(form);
 		} else {
+			console.log("akhdf");
 			$scope.saveDomainQuota(form);
 		}
 		//}
@@ -82,24 +91,22 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 
 			var hasResource = promiseAjax.httpTokenRequest( globalConfig.HTTP_POST , globalConfig.APP_URL + "resourceDomains/create" , '', quotaList);
 			hasResource.then(function (result) {  // this is only run after $http completes
+				angular.forEach(result, function(obj, key) {
+					$scope.resourceQuota[$scope.resourceTypeList[i]+"id"] = obj.id;
+				});
 				$scope.showLoader = false;
 				$scope.formSubmitted = false;
 				$scope.isDisabledDepartment = false;
 				$scope.isDisabledProject = false;
 	            notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
-
+	            //$scope.getDepartmentsByDomain();
 	        }).catch(function (result) {
 	            if (!angular.isUndefined(result.data)) {
-	            	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
-	              	    var msg = result.data.globalError[0];
-	              	  $scope.showLoader = false;
-	            	    notify({message: msg, classes: 'alert-info', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-	                } else if (result.data.fieldErrors != null) {
+	            	if (result.data.fieldErrors != null) {
 	                    angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
 	                    	  $scope.showLoader = false;
 	                        $scope.resourceAllocationForm[key].$invalid = true;
 	                        $scope.resourceAllocationForm[key].errorMessage = errorMessage;
-	                        $scope.showLoader = false;
 	                    });
 	            	}
 	            }
@@ -126,25 +133,22 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					quotaList.push(resourceObject);
 				}
 			}
-
 			var hasResource = promiseAjax.httpTokenRequest( globalConfig.HTTP_POST , globalConfig.APP_URL + "resourceDepartments/create" , '', quotaList);
 			hasResource.then(function (result) {  // this is only run after $http completes
+				angular.forEach(result, function(obj, key) {
+					$scope.resourceQuota[$scope.resourceTypeList[i]+"id"] = obj.id;
+				});
 				$scope.showLoader = false;
 				$scope.isDisabledProject = false;
 				$scope.formSubmitted = false;
 	            notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
 	        }).catch(function (result) {
 	            if (!angular.isUndefined(result.data)) {
-	            	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
-	              	    var msg = result.data.globalError[0];
-	              	  $scope.showLoader = false;
-	            	    notify({message: msg, classes: 'alert-info', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-	                } else if (result.data.fieldErrors != null) {
+	            	 if (result.data.fieldErrors != null) {
 	                    angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
 	                    	  $scope.showLoader = false;
 	                        $scope.resourceAllocationForm[key].$invalid = true;
 	                        $scope.resourceAllocationForm[key].errorMessage = errorMessage;
-	                        $scope.showLoader = false;
 	                    });
 	            	}
 	            }
@@ -177,22 +181,19 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 
 			var hasResource = promiseAjax.httpTokenRequest( globalConfig.HTTP_POST , globalConfig.APP_URL + "resourceProjects/create" , '', quotaList);
 			hasResource.then(function (result) {  // this is only run after $http completes
+				angular.forEach(result, function(obj, key) {
+					$scope.resourceQuota[$scope.resourceTypeList[i]+"id"] = obj.id;
+				});
 				$scope.formSubmitted = false;
 				$scope.showLoader = false;
 	            notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
-
 	        }).catch(function (result) {
 	            if (!angular.isUndefined(result.data)) {
-	            	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
-	              	    var msg = result.data.globalError[0];
-	              	  $scope.showLoader = false;
-	            	    notify({message: msg, classes: 'alert-info', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-	                } else if (result.data.fieldErrors != null) {
+	            	 if (result.data.fieldErrors != null) {
 	                    angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
 	                    	  $scope.showLoader = false;
 	                        $scope.resourceAllocationForm[key].$invalid = true;
 	                        $scope.resourceAllocationForm[key].errorMessage = errorMessage;
-	                        $scope.showLoader = false;
 	                    });
 	            	}
 	            }
@@ -207,6 +208,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 	$scope.getDepartmentsByDomain = function() {
 		$scope.showLoader = true;
 		$scope.resourceQuota.department = "";
+		$scope.resourceQuota.project = "";
 		if(angular.isUndefined($scope.resourceQuota.domain)) {
 			$scope.resourceQuota.domain = {id:0};
 		}
@@ -220,7 +222,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 				$scope.isDisabledDepartment = true;
 				$scope.isDisabledProject = true;
 				$scope.resourceQuota.domain = resourceQuota.domain;
-				  $scope.showLoader = false;
+				$scope.showLoader = false;
 				notify({message: "Please add the resource limit for company", classes: 'alert-info', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
 			}
 
@@ -232,6 +234,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					$scope.loadEditOption($scope.domainList, $scope.resourceQuota.domain, object.domain);
 				}
 				$scope.resourceQuota[object.resourceType] = object.max;
+				$scope.resourceQuota[object.resourceType+"id"] = object.id;
 			});
         })
 
@@ -252,7 +255,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 	// Get the projects by department.
 	$scope.getProjectsByDepartment = function() {
 		$scope.showLoader = true;
-		$scope.resourceQuota.project="";
+		$scope.resourceQuota.project= "";
 		if(angular.isUndefined($scope.resourceQuota.department) || $scope.resourceQuota.department == null) {
 			$scope.resourceQuota.department = {id:0};
 		}
@@ -277,6 +280,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					$scope.loadEditOption($scope.departmentList, $scope.resourceQuota.department, object.department);
 				}
 				$scope.resourceQuota[object.resourceType] = object.max;
+				$scope.resourceQuota[object.resourceType+"id"] = object.id;
 			});
         });
 
@@ -311,8 +315,14 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					$scope.loadEditOption($scope.projectList, $scope.resourceQuota.project, object.project);
 				}
 				$scope.resourceQuota[object.resourceType] = object.max;
+				$scope.resourceQuota[object.resourceType+"id"] = object.id;
 			});
 			$scope.showLoader = false;
         });
 	}
+	$scope.type = $stateParams.view;
+//	if($stateParams.quotaType == 'domain-quota') {
+//		$scope.
+//;
+//	}
 };
