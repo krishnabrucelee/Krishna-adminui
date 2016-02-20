@@ -140,7 +140,7 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
         if (form.$valid) {
             $scope.showLoader = true;
             var template = angular.copy($scope.template);
-            template.zoneId = template.zone.id;
+            	template.zoneId = template.zone.id;
             template.hypervisorId = template.hypervisor.id;
             template.osCategoryId = template.osCategory.id;
             template.osTypeId = template.osType.id;
