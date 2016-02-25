@@ -43,7 +43,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 	$scope.domainList = {};
 
     // Domain List
-    var hasDomains = crudService.listAll("domains");
+    var hasDomains = crudService.listAll("domains/list");
     hasDomains.then(function (result) {
     	$scope.domainList = result;
     	$state.current.data.pageName = result.name;
@@ -52,9 +52,41 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
     if($stateParams.id > 0) {
     	 var hasDomains = crudService.read("domains",$stateParams.id);
     	    hasDomains.then(function (result) {
+    	    	 $scope.resourceQuota.domain = result;
     	    	$state.current.data.pageName = result.name;
+    	    	$scope.domainName = $state.current.data.pageName;
+    	    	$scope.type = "domain-quota";
+    	    	$scope.getDomain($scope.resourceQuota.domain);
     	    });
     }
+
+	$scope.getDomain = function(domain) {
+		var hasResource = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceDomains/domain/"+ domain.id);
+		hasResource.then(function (result) {
+			$scope.showLoader = false;
+			var i=0;
+			if(result.length == 0) {
+				var resourceQuota = $scope.resourceQuota;
+				$scope.resourceQuota = {};
+				$scope.isDisabledDepartment = true;
+				$scope.isDisabledProject = true;
+				$scope.resourceQuota.domain = resourceQuota.domain;
+				$scope.showLoader = false;
+				notify({message: "Please add the resource limit for company", classes: 'alert-info', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+			}
+
+			angular.forEach(result, function(object, key) {
+				i++;
+				if(i == 1) {
+					$scope.isDisabledDepartment = false;
+					$scope.isDisabledProject = false;
+					$scope.loadEditOption($scope.domainList, $scope.resourceQuota.domain, object.domain);
+				}
+				$scope.resourceQuota[object.resourceType] = object.max;
+				$scope.resourceQuota[object.resourceType+"id"] = object.id;
+			});
+        })
+	};
 
     // Save Resource limits based on the quota type.
 	$scope.save = function(form) {
