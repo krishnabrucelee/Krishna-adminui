@@ -67,7 +67,7 @@ Navigation
 											    <a class="icon-button" title="<fmt:message key="common.edit" bundle="${msg}" />" data-ng-click="edit('lg', domain)">
                                                     <span class="fa fa-edit"> </span>
                                                 </a>
-												<a class="icon-button" ui-sref="client.client.quota({id: {{ domain.id }}, view: 'client-quota'})" title="<fmt:message key="common.edit.quota" bundle="${msg}" />">
+												<a class="icon-button" data-ng-click="getDepartmentsByDomain(domain.id)" ui-sref="client.client.quota({id: {{ domain.id }}, view: 'client-quota'})" title="<fmt:message key="common.edit.quota" bundle="${msg}" />">
                                                     <span class="fa font-bold pe-7s-edit"> </span>
                                                 </a>
                                                 <a class="icon-button" title="<fmt:message key="common.delete" bundle="${msg}" />" data-ng-click="delete('sm', domain)" ><span class="fa fa-trash"></span></a>

@@ -11,9 +11,15 @@
                 <div class="panel-heading">
                     <div class="row">
 
-                        <div class="col-md-12 col-sm-12 col-xs-12"  data-ng-hide="stateid">
+                        <div class="col-md-12 col-sm-12 col-xs-12" data-ng-if="type != 'domain-quota'"  data-ng-hide="stateid">
                             <span class="pull-left">
                                 <a class="btn btn-info" href="#/configuration/chargeback"  title="<fmt:message key="common.back" bundle="${msg}" />" ><span class="fa fa-arrow-circle-left fa-lg "></span> <fmt:message key="common.back" bundle="${msg}" /></a>
+                            </span>
+
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12" data-ng-if="type == 'domain-quota'" data-ng-hide="stateid">
+                            <span class="pull-left">
+                                <a class="btn btn-info" href="#/client/company"  title="<fmt:message key="common.back" bundle="${msg}" />" ><span class="fa fa-arrow-circle-left fa-lg "></span> <fmt:message key="common.back" bundle="${msg}" /></a>
                             </span>
 
                         </div>
@@ -23,6 +29,11 @@
                 </div>
                 <div class="panel-body">
                     <div class="col-md-12 col-sm-12 m-b-md border-bottom">
+
+                    <label class="col-md-4 col-sm-12 control-label" data-ng-if="type == 'domain-quota'">
+                    	<fmt:message key="common.domain" bundle="${msg}" />: {{domainName}} </label>
+
+
                         <div class="col-md-4 col-sm-4" data-ng-if="type == 'client-quota' || !type">
                             <div class="form-group" ng-class="{
                                             'text-danger'
@@ -37,9 +48,11 @@
                                         data-ng-class="{'error': resourceAllocationForm.domain.$invalid && formSubmitted}" >
                                             <option value="">Select</option>
                                         </select>
+
                                         <div class="error-area" data-ng-show="resourceAllocationForm.domain.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="domain.is.required" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
 
                                     </div>
+                                      <label data-ng-if="type"> {{resourceQuota.domain.name}} </label>
                                 </div>
                             </div>
                         </div>
@@ -256,7 +269,8 @@
                                 </label>
                                 <get-loader-image data-ng-show="showLoader"></get-loader-image>
                                 <div class="col-md-4 col-sm-5" data-ng-hide="showLoader">
-                                    <a class="btn btn-default btn-outline"  href="#/configuration/chargeback"><fmt:message key="common.cancel" bundle="${msg}" /></a>
+                                    <a class="btn btn-default btn-outline" data-ng-if="type != 'domain-quota'"  href="#/configuration/chargeback"><fmt:message key="common.cancel" bundle="${msg}" /></a>
+                                    <a class="btn btn-default btn-outline" data-ng-if="type == 'domain-quota'"  href="#/client/company"><fmt:message key="common.cancel" bundle="${msg}" /></a>
                                    <button class="btn btn-info" has-permission="DOMAIN_QUOTA" data-ng-hide="showLoader" type="submit"><fmt:message key="common.update" bundle="${msg}" /></button>
 	                                <button data-ng-if="type == 'department-quota'" class="btn btn-info" has-permission="DEPARTMENT_QUOTA_EDIT" data-ng-hide="showLoader" type="submit"><fmt:message key="common.update" bundle="${msg}" /></button>
                         			<button data-ng-if="type == 'project-quota'" class="btn btn-info" has-permission="PROJECT_QUOTA_EDIT" data-ng-hide="showLoader" type="submit"><fmt:message key="common.update" bundle="${msg}" /></button>
