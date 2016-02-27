@@ -42,7 +42,6 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12 ">
-				<pagination-content></pagination-content>
 					<div class="white-content">
 					 <div data-ng-show = "showLoader" style="margin: 1%">
     				  		<get-loader-image data-ng-show="showLoader"></get-loader-image>
@@ -64,9 +63,7 @@
 								<tbody>
 									<tr
 										data-ng-repeat="project in filteredCount = (projectList| filter: quickSearch| orderBy:sort.column:sort.descending)">
-										<td><a class="text-info"
-											ui-sref="client.project.view({id: {{ project.id}}})"
-											title="View Project">{{ project.id}}</a></td>
+										<td><a class="text-info" title="View Project">{{ project.id}}</a></td>
 										<td>{{ project.name}}</td>
 										<td>{{ project.domain.name}}</td>
 										<td>{{ project.description}}</td>

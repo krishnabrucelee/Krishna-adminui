@@ -14,7 +14,7 @@ function domainListCtrl($scope,$state, promiseAjax, $log,appService, notify, cru
 
 	$scope.sort = appService.globalConfig.sort;
     $scope.changeSorting = appService.utilService.changeSorting;
-    
+
    $scope.domains = {
         category: "domains",
         oneItemSelected: {},
@@ -125,13 +125,14 @@ function domainListCtrl($scope,$state, promiseAjax, $log,appService, notify, cru
                 // Update department
                 $scope.domain = angular.copy(domain);
                 $scope.update = function (form) {
+                    $scope.showLoader = true;
                     $scope.formSubmitted = true;
                     if (form.$valid) {
                     	$scope.showLoader = true;
                         var domain = $scope.domain;
                         var hasServer = crudService.update("domains", domain);
                         hasServer.then(function (result) {
-                        	$scope.domain={};
+                            $scope.domain={};
                             $scope.list(1);
                             $scope.showLoader = false;
                             notify({message: 'Updated successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
@@ -153,6 +154,49 @@ function domainListCtrl($scope,$state, promiseAjax, $log,appService, notify, cru
                         };
             }]);
     };
+
+	// Get the departments by domain.
+	$scope.getDepartmentsByDomain = function(resourceQuota.domain) {
+		$scope.showLoader = true;
+		if(angular.isUndefined($scope.resourceQuota.domain)) {
+			$scope.resourceQuota.domain = {id:0};
+		}
+		var hasResource = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceDomains/domain/"+$scope.resourceQuota.domain.id);
+		hasResource.then(function (result) {
+			$scope.showLoader = false;
+			var i=0;
+			if(result.length == 0) {
+				var resourceQuota = $scope.resourceQuota;
+				$scope.resourceQuota = {};
+				$scope.resourceQuota.domain = resourceQuota.domain;
+				$scope.showLoader = false;
+				notify({message: "Please add the resource limit for company", classes: 'alert-info', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+			}
+
+			angular.forEach(result, function(object, key) {
+				i++;
+				if(i == 1) {
+					$scope.loadEditOption($scope.domainList, $scope.resourceQuota.domain, object.domain);
+				}
+				$scope.resourceQuota[object.resourceType] = object.max;
+				$scope.resourceQuota[object.resourceType+"id"] = object.id;
+			});
+        })
+
+		var hasdomainId = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "departments/domain/"+$scope.resourceQuota.domain.id);
+		hasdomainId.then(function (result) {  // this is only run after $http completes
+			$scope.departmentList = result;
+        });
+	};
+
+	$scope.loadEditOption = function(list, scopeObject, object) {
+		angular.forEach(list, function(domainObject, domainKey) {
+			 if(domainObject.id == object.id) {
+				 scopeObject = domainObject;
+			 }
+		 });
+	};
+
 
 
     // Delete the Domain

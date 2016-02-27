@@ -9,6 +9,13 @@
     transition: all 0.4s ease 0s;
 }
 
+table.dataTable thead .sorting::after, table.dataTable thead .sorting_asc::after, table.dataTable thead .sorting_desc::after{
+font-family: 'FontAwesome'; font-size: 16px; color: #000;
+}
+
+table.dataTable thead .sorting_asc::after {content: "\f0de";}
+table.dataTable thead .sorting_desc::after {content: "\f0dd";}
+
 fieldset { border:1px solid #e5e5e5 }
 fieldset.scheduler-border{padding:20px;border:1px solid #e5e5e5;font-size:90%;}
 fieldset.scheduler-border legend{border-bottom:none !important; margin-bottom:0px!important; padding:0px 10px; width:auto !important;}

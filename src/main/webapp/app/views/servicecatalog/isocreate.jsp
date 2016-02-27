@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-        pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<form name="TemplateForm" data-ng-submit="save(TemplateForm)" method="post" novalidate="" data-ng-controller="templateListCtrl">
 
+<form name="TemplateForm" data-ng-submit="save(TemplateForm)" method="post" novalidate="" data-ng-controller="templateListCtrl">
     <div class="row">
         <div class="col-md-12 col-sm-12">
             <div class="hpanel">
@@ -18,10 +17,8 @@
                                     <i  tooltip="<fmt:message key="iso.name.tooltip" bundle="${msg}" />" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
                                     <div class="error-area" data-ng-show="TemplateForm.name.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="iso.name.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
                                 </div>
-
                             </div>
                         </div>
-
                         <div class="form-group" ng-class="{'text-danger': TemplateForm.description.$invalid && formSubmitted}">
                             <div class="row">
                                 <label class="col-md-3 col-sm-3 control-label"><fmt:message key="common.description" bundle="${msg}" /><span class="text-danger">*</span></label>
@@ -32,7 +29,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-group" ng-class="{'text-danger': TemplateForm.url.$invalid && formSubmitted}">
                             <div class="row">
                                 <label class="col-md-3 col-sm-3 control-label"><fmt:message key="common.url" bundle="${msg}" /><span class="text-danger">*</span></label>
@@ -43,10 +39,8 @@
                                         <i  tooltip="<fmt:message key="iso.url.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
-
                         <div class="form-group" >
                             <div class="row">
                                 <label class="col-md-3 col-sm-3 control-label"><fmt:message key="iso.refurl" bundle="${msg}" /></label>
@@ -54,10 +48,8 @@
                                     <input  type="text" name="refurl" data-ng-model="template.referenceUrl" class="form-control" >
                                     <i  tooltip="<fmt:message key="iso.refurl.tooltip" bundle="${msg}" />" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
                                 </div>
-
                             </div>
                         </div>
-
                         <div class="form-group"ng-class="{'text-danger': TemplateForm.zone.$invalid && formSubmitted}">
                             <div class="row">
                                 <label class="col-md-3 col-sm-3 control-label "><fmt:message key="iso.zone" bundle="${msg}" /><span class="text-danger">*</span></label>
@@ -72,12 +64,11 @@
                         </div>
                         <div class="form-group" ng-class="{'text-danger': TemplateForm.cost.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="iso.cost" bundle="${msg}" /><span class="text-danger">*</span></label>
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="template.cost" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
                                     <input required="true" type="text" valid-number name="cost" data-ng-model="template.templateCost[0].cost" class="form-control" data-ng-class="{'error': TemplateForm.cost.$invalid && formSubmitted}" >
                                     <i  tooltip="<fmt:message key="iso.cost.tooltip" bundle="${msg}" />" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
                                     <div class="error-area" data-ng-show="TemplateForm.cost.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="iso.cost.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
-
                                 </div>
                             </div>
                         </div>
@@ -115,12 +106,9 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div class="col-md-6 col-sm-6">
-                        <div class="form-group" ng-class="{
-                                            'text-danger'
-                                            :TemplateForm.osCategory.$invalid && formSubmitted}">
+                        <div class="form-group" ng-class="{'text-danger': TemplateForm.osCategory.$invalid && formSubmitted}">
                             <div class="row" >
                                 <label class="col-md-3 col-sm-3 col-xs-3 control-label" ><fmt:message key="iso.oscategory" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
@@ -129,13 +117,10 @@
                                     </select>
                                     <i tooltip="<fmt:message key="iso.oscategory.tooltip" bundle="${msg}" />"  class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
                                     <div class="error-area" data-ng-show="TemplateForm.osCategory.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="iso.oscategory.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
-
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group" ng-class="{
-                                            'text-danger'
-                                            :TemplateForm.osType.$invalid && formSubmitted}">
+                        <div class="form-group" ng-class="{'text-danger': TemplateForm.osType.$invalid && formSubmitted}">
                             <div class="row" >
                                 <label class="col-md-3 col-sm-3 col-xs-3 control-label" ><fmt:message key="iso.ostype" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
@@ -144,11 +129,9 @@
                                     </select>
                                     <i tooltip="<fmt:message key="iso.ostype.tooltip" bundle="${msg}" />"  class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
                                     <div class="error-area" data-ng-show="TemplateForm.osType.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="iso.ostype.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
-
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-group" ng-class="{'text-danger': TemplateForm.osVersion.$invalid && formSubmitted}">
                             <div class="row">
                                 <label class="col-md-3 col-sm-3 control-label"><fmt:message key="iso.osversion" bundle="${msg}" /><span class="text-danger">*</span></label>
@@ -159,21 +142,18 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-group" ng-class="{'text-danger': TemplateForm.architecture.$invalid && formSubmitted}">
                             <div class="row">
-
                                 <label class="col-md-3 col-sm-3 col-xs-3 control-label" ><fmt:message key="iso.architecture" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-6  col-sm-6 col-lg-6  col-sm-6 col-lg-6">
-                                    <label> <input required="true" icheck type="radio" name= "architecture" value="64" ng-model="template.architecture"> 64 Bit</label>
-                                    <label class="m-l-sm"> <input required="true" icheck type="radio" name= "architecture" value="32" ng-model="template.architecture"> 32 Bit</label>
+                                    <label> <input required="true" icheck type="radio" name= "architecture" value="64" ng-model="template.architecture"> 64 <fmt:message key="common.bit" bundle="${msg}" /></label>
+                                    <label class="m-l-sm"> <input required="true" icheck type="radio" name= "architecture" value="32" ng-model="template.architecture"> 32 <fmt:message key="common.bit" bundle="${msg}" /></label>
                                     <div class="error-area" data-ng-show="TemplateForm.architecture.$invalid && formSubmitted" >
                                     	<i  ng-attr-tooltip="<fmt:message key="iso.architecture.error" bundle="${msg}" />" class="fa error-icon"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-6  col-sm-6 col-lg-6  col-sm-6 col-lg-6">
@@ -209,16 +189,13 @@
                                     <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon " tooltip="<fmt:message key="iso.detaileddescription.tooltip" bundle="${msg}" />" ></i>
                                 </div>
                                 <div class="error-area" data-ng-show="TemplateForm.summernoteTextTwo.$invalid && formSubmitted" ></div>
-
                             </div>
                         </div>
-
                         <div class="form-group">
                             <div class="row">
                       	 <get-loader-image data-ng-show="showLoader"></get-loader-image>
-
                                 <span  data-ng-hide="showLoader" class="pull-right">
-                                    <a class="btn btn-default btn-outline"  data-ng-hide="showLoader" ui-sref="servicecatalog.list-templatestore"><fmt:message key="common.cancel" bundle="${msg}" /></a>
+                                    <a class="btn btn-default btn-outline"  data-ng-hide="showLoader" ui-sref="servicecatalog.list-apptemplate"><fmt:message key="common.cancel" bundle="${msg}" /></a>
                                     <button class="btn btn-info" type="submit"  data-ng-hide="showLoader" ng-disabled="form.TemplateForm.$invalid" ><fmt:message key="common.add" bundle="${msg}" /></button>
                                 </span>
                             </div>

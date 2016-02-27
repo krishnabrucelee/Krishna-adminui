@@ -26,8 +26,9 @@
 
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default " ng-click="cancel()" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-default btn-danger2" ng-click="detach()" data-dismiss="modal">Ok</button>
+            <get-loader-image data-ng-if="showLoader"></get-loader-image>
+            <button type="button" data-ng-if="!showLoader" class="btn btn-default " ng-click="cancel()" data-dismiss="modal">Cancel</button>
+            <button type="submit" data-ng-if="!showLoader" class="btn btn-default btn-danger2" ng-click="detach()" data-dismiss="modal">Ok</button>
 
         </div>
     </div>

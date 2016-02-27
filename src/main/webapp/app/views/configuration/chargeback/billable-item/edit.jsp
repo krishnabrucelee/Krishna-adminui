@@ -60,11 +60,10 @@
 							<div class="row">
 								<label class="col-md-4 col-sm-5 control-label">
 									<fmt:message key="common.tax" bundle="${msg}" />:
-									<span class="text-danger">*</span>
 								</label>
 
 								<div class="col-md-6 col-sm-7">
-									{{ billableItem.tax.name }}
+									{{ (billableItem.tax.name) ? billableItem.tax.name : "NA"  }}
 								</div>
 							</div>
 						</div>

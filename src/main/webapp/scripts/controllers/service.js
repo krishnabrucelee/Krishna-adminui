@@ -138,7 +138,7 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
 
         $scope.formSubmitted = true;
         if (form.$valid) {
-        	$scope.showLoader = true;
+            $scope.showLoader = true;
             var template = angular.copy($scope.template);
             	template.zoneId = template.zone.id;
             template.hypervisorId = template.hypervisor.id;
@@ -151,7 +151,7 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
             var hasTemplate = appService.crudService.add("templates", template);
             hasTemplate.then(function (result) {  // this is only run after $http completes
                 $scope.showLoader = false;
-                appService.notify({message: 'Created successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
+                appService.notify({message: 'Template created successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
                 if(template.format == "8") {
                 	$window.location.href = '#/templatestore/apptemplatelist';
                 } else {
@@ -185,9 +185,10 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
                     hasStorage.then(function (result) {
                         $scope.homerTemplate = 'app/views/notification/notify.jsp';
                         $scope.showLoader = false;
-                        appService.notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+                        $modalInstance.close();
+                        appService.notify({message: 'Template deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                         if(template.format == "ISO") {
-                        	$window.location.href = '#/templatestore/apptemplatelist';
+                        	$scope.isolist(1);
                         } else {
                         	$scope.list(1);
                         }
@@ -195,12 +196,12 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
                         if (!angular.isUndefined(result.data)) {
                         	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
                           	    var msg = result.data.globalError[0];
-                          	  $scope.showLoader = false;
-                          	appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                          	    $scope.showLoader = false;
+                          	    appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                             }
+                        	$modalInstance.close();
                         }
                     });
-                    $modalInstance.close();
                 },
                 $scope.cancel = function () {
                     $modalInstance.close();
@@ -212,7 +213,7 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
         $scope.formSubmitted = true;
         if (form.$valid) {
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
-            appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+            appService.notify({message: 'Template updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
             if(template.flag == 'true') {
             	$window.location.href = '#/templatestore/apptemplatelist';
             } else {
@@ -301,6 +302,7 @@ function templateEditCtrl($scope, $state, $stateParams, $log, $window, appServic
         var hasTemplates = appService.crudService.read("templates", templateId);
         hasTemplates.then(function (result) {
             $scope.template = result;
+            $state.current.data.pageName = result.name;
         	$scope.getOsCategoryList();
         });
     };
@@ -346,7 +348,7 @@ function templateEditCtrl($scope, $state, $stateParams, $log, $window, appServic
             hasTemplates.then(function (result) {
                 $scope.homerTemplate = 'app/views/notification/notify.jsp';
                 $scope.showLoader = false;
-                appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+                appService.notify({message: 'Template updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
                 if(template.format == "ISO") {
                 	$window.location.href = '#/templatestore/apptemplatelist';
                 } else {
@@ -389,8 +391,7 @@ function storageListCtrl($scope, $log, $state, $stateParams, $window, appService
     $scope.global = appService.globalConfig;
 
     $scope.storage.zoneList = {};
-    var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-    var hasZones = appService.crudService.list("zones", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+    var hasZones = appService.crudService.listAll("zones/list");
     hasZones.then(function (result) {  // this is only run after $http
 										// completes0
     	$scope.zoneList = result;
@@ -398,8 +399,7 @@ function storageListCtrl($scope, $log, $state, $stateParams, $window, appService
     });
 
     $scope.storage.domainList = {};
-    var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-    var hasDomains = appService.crudService.list("domains", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+    var hasDomains = appService.crudService.listAll("domains/list");
     hasDomains.then(function (result) {  // this is only run after $http
 										// completes0
     	$scope.formElements.domainList = result;
@@ -430,11 +430,7 @@ function storageListCtrl($scope, $log, $state, $stateParams, $window, appService
 												// completes0
 
             $scope.storageList = result;
-
-            $scope.storageList.Count = 0;
-            if(result.length != 0) {
-            	$scope.storageList.Count = result.length;
-            }
+            $scope.storageList.Count = result.totalItems;
 
             // For pagination
             $scope.paginationObject.limit = limit;
@@ -466,7 +462,7 @@ function storageListCtrl($scope, $log, $state, $stateParams, $window, appService
 
         var cost = parseFloat($scope.storage.storagePrice[0].costGbPerMonth);
 
-        var costValue = cost / 720;
+        var costValue = cost / 24;
 
         $scope.storage.costPerHourGB = costValue.toFixed(4);
     };
@@ -488,7 +484,7 @@ $scope.costPerHourIOPS = function() {
 
         var cost = parseFloat($scope.storage.storagePrice[0].costIopsPerMonth);
 
-        var costValue = cost / 720;
+        var costValue = cost / 24;
 
         $scope.storage.costPerHourIOPS = costValue.toFixed(4);
     };
@@ -501,13 +497,13 @@ $scope.costPerHourIOPS = function() {
         $scope.formSubmitted = true;
 
         if (form.$valid) {
-        	$scope.showLoader = true;
+            $scope.showLoader = true;
             var storage = angular.copy($scope.storage);
-            if(!angular.isUndefined(storage.domain) && storage.domain != null) {
+            if(!angular.isUndefined($scope.storage.domain) && storage.domain != null) {
             	storage.domainId = storage.domain.id;
             	delete storage.domain;
             }
-            if(!angular.isUndefined(storage.zone) && storage.zone != null) {
+            if(!angular.isUndefined($scope.storage.zone) && storage.zone != null) {
             	storage.zoneId = storage.zone.id;
             	delete storage.zone;
             }
@@ -542,12 +538,12 @@ $scope.costPerHourIOPS = function() {
     };
 
     // Delete the Storage Offer
-    $scope.delete = function (size, storageId) {
+    $scope.delete = function (size, storage) {
     	appService.dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
-                $scope.deleteId = storageId;
+                $scope.deleteId = storage.id;
                 $scope.ok = function (storageId) {
-                	$scope.showLoader = true;
-                    var hasStorage = appService.crudService.delete("storages", storageId);
+                    $scope.showLoader = true;
+                    var hasStorage = appService.crudService.softDelete("storages", storage);
                     hasStorage.then(function (result) {
                         $scope.list(1);
                         $scope.homerTemplate = 'app/views/notification/notify.jsp';
@@ -600,18 +596,24 @@ function storageEditCtrl($scope, $state, $stateParams, $log, $window, appService
     $scope.global = appService.globalConfig;
 
     $scope.storage.zoneList = {};
-    var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-    var hasZones = appService.crudService.list("zones", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+    var hasZones = appService.crudService.listAll("zones/list");
     hasZones.then(function (result) {  // this is only run after $http
 										// completes0
     	$scope.zoneList = result;
+
     });
 
-
+$scope.storage.zone= {};
 	$scope.edit = function (storageId) {
         var hasStorage = appService.crudService.read("storages", storageId);
         hasStorage.then(function (result) {
             $scope.storage = result;
+  	     $scope.storage.zone = $scope.zoneList[0];
+	     angular.forEach($scope.zoneList, function (obj, key) {
+                if (obj.id == $scope.storage.zone.id) {
+                    $scope.storage.zone = obj;
+                }
+            });
         });
 
     };
@@ -640,7 +642,7 @@ function storageEditCtrl($scope, $state, $stateParams, $log, $window, appService
 
         var cost = parseFloat($scope.storage.storagePrice[0].costGbPerMonth);
 
-        var costValue = cost / 720;
+        var costValue = cost / 24;
 
         $scope.storage.costPerHourGB = costValue.toFixed(4);
     };
@@ -662,7 +664,7 @@ $scope.costPerHourIOPS = function() {
 
         var cost = parseFloat($scope.storage.storagePrice[0].costIopsPerMonth);
 
-        var costValue = cost / 720;
+        var costValue = cost / 24;
 
         $scope.storage.costPerHourIOPS = costValue.toFixed(4);
     };
@@ -890,11 +892,7 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
 												// completes0
 
             $scope.computeList = result;
-
-            $scope.computeOffering.Count = 0;
-            if(result.length != 0) {
-            	$scope.computeOffering.Count = result.length;
-            }
+		   $scope.computeOffering.Count = result.totalItems;
 
             // For pagination
             $scope.paginationObject.limit = limit;
@@ -918,7 +916,7 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
             var compute = angular.copy($scope.compute);
             if(!angular.isUndefined(compute.domain)) {
             	compute.domainId = compute.domain.id;
-		delete compute.domain;
+		        delete compute.domain;
             }
             if(!angular.isUndefined(compute.computeCost.zone)) {
             	compute.computeCost.zoneId = compute.computeCost.zone.id;
@@ -1015,8 +1013,7 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
     };
 
     // Domain List
-	var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-	var hasDomains = appService.crudService.list("domains", $scope.global.paginationHeaders(1, limit), {"limit": limit});
+        var hasDomains = appService.crudService.listAll("domains/list");
 	hasDomains.then(function (result) {  // this is only run after $http completes0
 		$scope.domain.domaintypeList = result;
 	});
@@ -1029,7 +1026,7 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
         };
 
     // Domain List
-	var hasZones = appService.crudService.list("zones/list", '', {});
+	var hasZones = appService.crudService.listAll("zones/list", '', {});
 	hasZones.then(function (result) {  // this is only run after $http completes0
 		$scope.formElements.zoneList = result;
 		$scope.compute.computeCost.zone = $scope.formElements.zoneList[0];
@@ -1051,6 +1048,12 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
         hasComputes.then(function (result) {
             $scope.compute = result;
     		$scope.compute.zone = $scope.formElements.zoneList[0];
+	       angular.forEach($scope.formElements.zoneList, function (obj, key) {
+                if (obj.id == $scope.compute.zone.id) {
+                    $scope.compute.zone = obj;
+                }
+            });
+
         });
     };
 
@@ -1064,8 +1067,16 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
     $scope.update = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-        	$scope.showLoader = true;
-            var compute = $scope.compute;
+            $scope.showLoader = true;
+            var compute = angular.copy($scope.compute);
+            if(!angular.isUndefined(compute.domain) && $scope.compute.domain != null) {
+            	compute.domainId = compute.domain.id;
+		        delete compute.domain;
+            }
+            if(!angular.isUndefined(compute.computeCost.zone) && $scope.compute.computeCost.zone != null) {
+            	compute.computeCost.zoneId = compute.computeCost.zone.id;
+            	delete compute.computeCost.zone;
+            }
 
             var hasComputes = appService.crudService.update("computes", compute);
             hasComputes.then(function (result) {

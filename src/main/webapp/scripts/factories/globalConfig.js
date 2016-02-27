@@ -91,7 +91,8 @@ function globalConfig($window) {
         getViewPageUrl: function(url) {
                 return appGlobalConfig.VIEW_URL + url;
         },
-        sessionValues:  JSON.parse($window.sessionStorage.getItem("pandaUserSession"))
+        sessionValues:  JSON.parse($window.sessionStorage.getItem("pandaUserSession")),
+        loginRemeberMeTimeout: 30 * 24 * 60 * 60 * 1000
     };
 
     return appGlobalConfig;

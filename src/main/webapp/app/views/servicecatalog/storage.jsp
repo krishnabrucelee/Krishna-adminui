@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <div ui-view>
-<div class="row" data-ng-hide="viewContent" ng-controller="storageListCtrl">
+<div class="row" data-ng-hide="viewContent" data-ng-controller="storageListCtrl">
     <div class="" >
         <div class="hpanel">
             <div class="panel-heading">
@@ -27,14 +27,14 @@
                                 <b class="pull-right">{{storageList.Count}}</b>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="dashboard-box pull-left">
+<%--                             <div class="dashboard-box pull-left">
                                 <span class="pull-right"><fmt:message
 										key="storage.disabledoffering" bundle="${msg}" /></span>
                                 <div class="clearfix"></div>
                                 <span class="pull-right m-t-xs"><img src="images/volume-icon.png"></span>
                                 <b class="pull-right">0</b>
                                 <div class="clearfix"></div>
-                            </div>
+                            </div> --%>
                         </div>
                         <div class="pull-right">
 						<panda-quick-search></panda-quick-search>
@@ -49,12 +49,11 @@
                 </div>
                 <div class="clearfix"></div>
             </div>
-			<pagination-content></pagination-content>
-            <div class="white-content">
              <div data-ng-show = "showLoader" style="margin: 1%">
     				  		<get-loader-image data-ng-show="showLoader"></get-loader-image>
       						</div>
             <div class="table-responsive" data-ng-hide="showLoader">
+            <div class="white-content">
 
                     <table cellspacing="1" cellpadding="1" class="table dataTable table-bordered table-striped">
                         <thead>
@@ -84,7 +83,7 @@
                                         <span class="fa fa-ban m-r" ></span>
                                     </a> -->
 
-                                    <a class="icon-button" title="Delete" data-ng-click="delete('sm', storage.id)" ><span class="fa fa-trash"></span></a>
+                                    <a class="icon-button" title="Delete" data-ng-click="delete('sm', storage)" ><span class="fa fa-trash"></span></a>
                                 </td>
                             </tr>
                         </tbody>
