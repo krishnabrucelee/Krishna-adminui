@@ -58,6 +58,19 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
     	    	$scope.type = "domain-quota";
     	    	$scope.getDomain($scope.resourceQuota.domain);
     	    });
+
+
+    		var hasResourceDepartmentsId = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceDepartments/domainId/"+$stateParams.id);
+    		hasResourceDepartmentsId.then(function (result) {  // this is only run after $http completes
+    			$scope.resourceDepartmentCount = result;
+            });
+
+    		var hasResourceProjectsId = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceProjects/domainId/"+$stateParams.id);
+    		hasResourceProjectsId.then(function (result) {  // this is only run after $http completes
+    			$scope.resourceProjectCount = result;
+            });
+
+
     }
 
 	$scope.getDomain = function(domain) {
@@ -236,6 +249,10 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 
 	// Get the departments by domain.
 	$scope.getDepartmentsByDomain = function() {
+
+		$scope.resource ='domain';
+
+
 		$scope.showLoader = true;
 		$scope.resourceQuota.department = "";
 		$scope.resourceQuota.project = "";
@@ -272,6 +289,17 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 		hasdomainId.then(function (result) {  // this is only run after $http completes
 			$scope.departmentList = result;
         });
+
+		var hasResourceDepartmentsId = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceDepartments/domainId/"+$scope.resourceQuota.domain.id);
+		hasResourceDepartmentsId.then(function (result) {  // this is only run after $http completes
+			$scope.resourceDepartmentCount = result;
+        });
+
+		var hasResourceProjectsId = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceProjects/domainId/"+$scope.resourceQuota.domain.id);
+		hasResourceProjectsId.then(function (result) {  // this is only run after $http completes
+			$scope.resourceProjectCount = result;
+        });
+
 	};
 
 	$scope.loadEditOption = function(list, scopeObject, object) {
@@ -284,6 +312,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 
 	// Get the projects by department.
 	$scope.getProjectsByDepartment = function() {
+		$scope.resource ='department';
 		$scope.showLoader = true;
 		$scope.resourceQuota.project= "";
 		if(angular.isUndefined($scope.resourceQuota.department) || $scope.resourceQuota.department == null) {
@@ -319,9 +348,23 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 		hasDepartmentId.then(function (result) {  // this is only run after $http completes
 			$scope.projectList = result;
         });
+
+		var hasResourceDomainId = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceDomains/departmentId/"+$scope.resourceQuota.department.domain.id);
+		hasResourceDomainId.then(function (result) {  // this is only run after $http completes
+			$scope.resourceDomainCount = result;
+        });
+
+		var hasResourceProjectsId = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceProjects/departmentId/"+$scope.resourceQuota.department.id);
+		hasResourceProjectsId.then(function (result) {  // this is only run after $http completes
+			$scope.resourceProjectCount = result;
+        });
+
+
 	};
 
 	$scope.getProjectResourceLimits = function() {
+		$scope.resource ='project';
+
 		$scope.showLoader = true;
 		if(angular.isUndefined($scope.resourceQuota.project) || $scope.resourceQuota.project == null) {
 			$scope.resourceQuota.project = {id:0};
@@ -348,6 +391,16 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 				$scope.resourceQuota[object.resourceType+"id"] = object.id;
 			});
 			$scope.showLoader = false;
+        });
+
+		var hasResourceDomainId = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceDomains/projectId/"+$scope.resourceQuota.project.domain.id);
+		hasResourceDomainId.then(function (result) {  // this is only run after $http completes
+			$scope.resourceDomainCount = result;
+        });
+
+		var hasResourceDepartmentsId = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceDepartments/projectId/"+$scope.resourceQuota.project.department.id);
+		hasResourceDepartmentsId.then(function (result) {  // this is only run after $http completes
+			$scope.resourceDepartmentCount = result;
         });
 	}
 	$scope.type = $stateParams.view;

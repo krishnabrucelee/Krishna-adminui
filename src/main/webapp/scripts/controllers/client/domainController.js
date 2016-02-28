@@ -157,9 +157,13 @@ function domainListCtrl($scope,$state, promiseAjax, $log,appService, notify, cru
 
 	// Get the departments by domain.
 	$scope.getDepartmentsByDomain = function(resourceQuota.domain) {
+		alert(resourceQuota.domain);
+		$scope.resource ='domain';
+
 		$scope.showLoader = true;
 		if(angular.isUndefined($scope.resourceQuota.domain)) {
 			$scope.resourceQuota.domain = {id:0};
+
 		}
 		var hasResource = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceDomains/domain/"+$scope.resourceQuota.domain.id);
 		hasResource.then(function (result) {
@@ -187,6 +191,10 @@ function domainListCtrl($scope,$state, promiseAjax, $log,appService, notify, cru
 		hasdomainId.then(function (result) {  // this is only run after $http completes
 			$scope.departmentList = result;
         });
+
+
+
+
 	};
 
 	$scope.loadEditOption = function(list, scopeObject, object) {
