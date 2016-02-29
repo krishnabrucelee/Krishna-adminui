@@ -11,25 +11,25 @@
                     <div class="col-md-12 col-sm-12 col-xs-12 ">
                         <div class="pull-left">
                             <div class="dashboard-box pull-left">
-                                <span class="pull-right"><fmt:message key="total.users" bundle="${msg}" /></span>
+     							<div class="instance-border-content-normal">
+                                <span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message key="total.users" bundle="${msg}" /></span>
+                                <b class="pull-left">{{paginationObject.totalItems}}</b>
                                 <div class="clearfix"></div>
-                                <span class="pull-left m-t-xs"><!-- <img src="images/user-icon.png"> --></span>
-                                <b class="pull-right">{{paginationObject.totalItems}}</b>
-                                <div class="clearfix"></div>
+                                </div>
                             </div>
                             <div class="dashboard-box pull-left">
-                                <span class="pull-right"><fmt:message key="active.users" bundle="${msg}" /></span>
+                      			<div class="instance-border-content-normal">
+                                <span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message key="active.users" bundle="${msg}" /></span>
+                                <b class="pull-left">{{(activeUsers | filter:{isActive:true}).length}}</b>
                                 <div class="clearfix"></div>
-                                <span class="pull-left m-t-xs"><!-- <img src="images/user-icon.png"> --></span>
-                                <b class="pull-right">{{(activeUsers | filter:{isActive:true}).length}}</b>
-                                <div class="clearfix"></div>
+                                </div>
                             </div>
                             <div class="dashboard-box pull-left">
-                                <span class="pull-right"><fmt:message key="inactive.users" bundle="${msg}" /></span>
+                                 <div class="instance-border-content-normal">
+                                <span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message key="inactive.users" bundle="${msg}" /></span>
+                                <b class="pull-left">{{(activeUsers | filter:{isActive:false}).length}}</b>
                                 <div class="clearfix"></div>
-                                <span class="pull-left m-t-xs"><!-- <img src="images/user-icon.png"> --></span>
-                                <b class="pull-right">{{(activeUsers | filter:{isActive:false}).length}}</b>
-                                <div class="clearfix"></div>
+                                </div>
                             </div>
                         </div>
                         <div class="pull-right">
