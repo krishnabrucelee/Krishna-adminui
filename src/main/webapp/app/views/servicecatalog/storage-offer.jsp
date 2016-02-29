@@ -226,7 +226,7 @@
 								<input type="text" name="diskwriterateiops" valid-number
 									data-ng-model="storage.diskIopsWriteRate" class="form-control">
 							</div>
-						</div>
+						</div>101003
 					</div>
 				</div>
 				<div class="col-md-12" data-ng-if="storage.qosType == 'Storage'" data-ng-hide="storage.isCustomizedIops"
@@ -355,7 +355,7 @@
 					</div>
 				</div>
 				</div>
-				<div class="row">
+				<%-- <div class="row">
 				<div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
 					<div data-ng-show="storage.qosType == 'Storage'" >
 						<div class="form-group" data-ng-if="!storage.isCustomizedIops">
@@ -394,7 +394,7 @@
 						</div>
 					</div>
 					</div>
-					</div>
+					</div> --%>
 
 				<div class="row">
 					<div class="col-md-12  col-sm-12">
