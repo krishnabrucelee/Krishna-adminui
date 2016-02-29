@@ -103,21 +103,21 @@
                                     </div>
 
                                 </div>
-                                <div data-ng-if="resource=='domain' || type == 'domain-quota'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                <div data-ng-if="resource=='domain' || type == 'domain-quota'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.department" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Volume: <b class="text-danger">
 									<span>{{resourceDepartmentCount.Volume || '-' }}</span>
 									</b></label>
                                 	<label class="col-md-6 font-normal col-sm-6 "> <fmt:message key="common.project" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Volume : <b class="text-danger">
 									<span>{{resourceProjectCount.Volume || '-' }}</span></b></label>
                                 </div>
-                                 <div data-ng-if="resource=='department'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                 <div data-ng-if="resource=='department'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.domain" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Volume: <b class="text-danger">
 									<span>{{resourceDomainCount.Volume || '-' }}</span>
 									</b></label>
                                 	<label class="col-md-6 font-normal col-sm-6 "> <fmt:message key="common.project" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Volume : <b class="text-danger">
 									<span>{{resourceProjectCount.Volume || '-' }}</span></b></label>
                                 </div>
-                                   <div data-ng-if="resource=='project'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                   <div data-ng-if="resource=='project'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.domain" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Volume: <b class="text-danger">
 									<span>{{resourceDomainCount.Volume || '-' }}</span>
 									</b></label>
@@ -141,21 +141,21 @@
                                     	<i  ng-attr-tooltip="{{ resourceAllocationForm.Instance.errorMessage || '<fmt:message key="max.user.vms.are.required" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i>
                                     </div>
                                 </div>
-                                <div data-ng-if="resource=='domain' || type == 'domain-quota'"class="col-md-8 col-sm-8 m-l-xxl ">
+                                <div data-ng-if="resource=='domain' || type == 'domain-quota'"class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.department" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Instance: <b class="text-danger">
 									<span>{{resourceDepartmentCount.Instance || '-' }}</span>
 									</b></label>
                                 	<label class="col-md-6 font-normal col-sm-6 "> <fmt:message key="common.project" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Instance : <b class="text-danger">
 									<span>{{resourceProjectCount.Instance || '-' }}</span></b></label>
                                 </div>
-                                 <div data-ng-if="resource=='department'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                 <div data-ng-if="resource=='department'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.domain" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Instance: <b class="text-danger">
 									<span>{{resourceDomainCount.Instance || '-' }}</span>
 									</b></label>
                                 	<label class="col-md-6 font-normal col-sm-6 "> <fmt:message key="common.project" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Instance : <b class="text-danger">
 									<span>{{resourceProjectCount.Instance || '-' }}</span></b></label>
                                 </div>
-                                  <div data-ng-if="resource=='project'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                  <div data-ng-if="resource=='project'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.domain" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Instance: <b class="text-danger">
 									<span>{{resourceDomainCount.Instance || '-' }}</span>
 									</b></label>
@@ -178,21 +178,21 @@
                                     	<i  ng-attr-tooltip="{{ resourceAllocationForm.Template.errorMessage || '<fmt:message key="max.templates.are.required" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i>
                                     </div>
                                 </div>
-                                <div data-ng-if="resource=='domain' || type == 'domain-quota'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                <div data-ng-if="resource=='domain' || type == 'domain-quota'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.department" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Template: <b class="text-danger">
 									<span>{{resourceDepartmentCount.Template || '-' }}</span>
 									</b></label>
                                 	<label class="col-md-6 font-normal col-sm-6 "> <fmt:message key="common.project" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Template : <b class="text-danger">
 									<span>{{resourceProjectCount.Template || '-' }}</span></b></label>
                                 </div>
-                                <div data-ng-if="resource=='department'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                <div data-ng-if="resource=='department'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.domain" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Template: <b class="text-danger">
 									<span>{{resourceDomainCount.Template || '-' }}</span>
 									</b></label>
                                 	<label class="col-md-6 font-normal col-sm-6 "> <fmt:message key="common.project" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Template : <b class="text-danger">
 									<span>{{resourceProjectCount.Template || '-' }}</span></b></label>
                                 </div>
-                                  <div data-ng-if="resource=='project'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                  <div data-ng-if="resource=='project'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.domain" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Template: <b class="text-danger">
 									<span>{{resourceDomainCount.Template || '-' }}</span>
 									</b></label>
@@ -215,21 +215,21 @@
                                     	<i  ng-attr-tooltip="{{ resourceAllocationForm.Network.errorMessage || '<fmt:message key="max.networks.are.required" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i>
                                     </div>
                                 </div>
-                                <div  data-ng-if="resource=='domain' || type == 'domain-quota'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                <div  data-ng-if="resource=='domain' || type == 'domain-quota'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.department" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Network: <b class="text-danger">
 									<span>{{resourceDepartmentCount.Network || '-' }}</span>
 									</b></label>
                                 	<label class="col-md-6 font-normal col-sm-6 "> <fmt:message key="common.project" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Network : <b class="text-danger">
 									<span>{{resourceProjectCount.Network || '-' }}</span></b></label>
                                 </div>
-                                 <div data-ng-if="resource=='department'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                 <div data-ng-if="resource=='department'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.domain" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Network: <b class="text-danger">
 									<span>{{resourceDomainCount.Network || '-' }}</span>
 									</b></label>
                                 	<label class="col-md-6 font-normal col-sm-6 "> <fmt:message key="common.project" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Network : <b class="text-danger">
 									<span>{{resourceProjectCount.Network || '-' }}</span></b></label>
                                 </div>
-                                  <div data-ng-if="resource=='project'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                  <div data-ng-if="resource=='project'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.domain" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Network: <b class="text-danger">
 									<span>{{resourceDomainCount.Network || '-' }}</span>
 									</b></label>
@@ -252,21 +252,21 @@
                                     	<i  ng-attr-tooltip="{{ resourceAllocationForm.Snapshot.errorMessage || '<fmt:message key="max.snapshots.are.required" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i>
                                     </div>
                                 </div>
-                                 <div data-ng-if="resource=='domain' || type == 'domain-quota'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                 <div data-ng-if="resource=='domain' || type == 'domain-quota'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.department" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Snapshot: <b class="text-danger">
 									<span>{{resourceDepartmentCount.Snapshot || '-' }}</span>
 									</b></label>
                                 	<label class="col-md-6 font-normal col-sm-6 "> <fmt:message key="common.project" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Snapshot : <b class="text-danger">
 									<span>{{resourceProjectCount.Snapshot || '-' }}</span></b></label>
                                 </div>
-                                <div data-ng-if="resource=='department'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                <div data-ng-if="resource=='department'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.domain" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Snapshot: <b class="text-danger">
 									<span>{{resourceDomainCount.Snapshot || '-' }}</span>
 									</b></label>
                                 	<label class="col-md-6 font-normal col-sm-6 "> <fmt:message key="common.project" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Snapshot : <b class="text-danger">
 									<span>{{resourceProjectCount.Snapshot || '-' }}</span></b></label>
                                 </div>
-                                <div data-ng-if="resource=='project'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                <div data-ng-if="resource=='project'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.domain" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Snapshot: <b class="text-danger">
 									<span>{{resourceDomainCount.Snapshot || '-' }}</span>
 									</b></label>
@@ -290,21 +290,21 @@
                                     	<i  ng-attr-tooltip="{{ resourceAllocationForm.IP.errorMessage || '<fmt:message key="max.public.ips.are.required" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i>
                                     </div>
                                 </div>
-                                    <div data-ng-if="resource=='domain' || type == 'domain-quota'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                    <div data-ng-if="resource=='domain' || type == 'domain-quota'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 " > <fmt:message key="common.department" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Public IP: <b class="text-danger">
 									<span>{{resourceDepartmentCount.IP || '-' }}</span>
 									</b></label>
                                 	<label class="col-md-6 font-normal col-sm-6 "> <fmt:message key="common.project" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Public IP : <b class="text-danger">
 									<span>{{resourceProjectCount.IP || '-' }}</span></b></label>
                                 </div>
-                                  <div data-ng-if="resource=='department'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                  <div data-ng-if="resource=='department'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.domain" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Public IP: <b class="text-danger">
 									<span>{{resourceDomainCount.IP || '-' }}</span>
 									</b></label>
                                 	<label class="col-md-6 font-normal col-sm-6 "> <fmt:message key="common.project" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Public IP : <b class="text-danger">
 									<span>{{resourceProjectCount.IP || '-' }}</span></b></label>
                                 </div>
-                                 <div data-ng-if="resource=='project'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                 <div data-ng-if="resource=='project'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.domain" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Public IP: <b class="text-danger">
 									<span>{{resourceDomainCount.IP || '-' }}</span>
 									</b></label>
@@ -328,21 +328,21 @@
                                     	<i  ng-attr-tooltip="{{ resourceAllocationForm.VPC.errorMessage || '<fmt:message key="max.vpcs.are.required" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i>
                                     </div>
                                 </div>
-                                <div data-ng-if="resource=='domain' || type == 'domain-quota'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                <div data-ng-if="resource=='domain' || type == 'domain-quota'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.department" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> VPC: <b class="text-danger">
 									<span>{{resourceDepartmentCount.VPC || '-' }}</span>
 									</b></label>
                                 	<label class="col-md-6 font-normal col-sm-6 "> <fmt:message key="common.project" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> VPC : <b class="text-danger">
 									<span>{{resourceProjectCount.VPC || '-' }}</span></b></label>
                                 </div>
-                                <div data-ng-if="resource=='department'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                <div data-ng-if="resource=='department'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.domain" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> VPC: <b class="text-danger">
 									<span>{{resourceDomainCount.VPC || '-' }}</span>
 									</b></label>
                                 	<label class="col-md-6 font-normal col-sm-6 "> <fmt:message key="common.project" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> VPC : <b class="text-danger">
 									<span>{{resourceProjectCount.VPC || '-' }}</span></b></label>
                                 </div>
-                                <div data-ng-if="resource=='project'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                <div data-ng-if="resource=='project'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.domain" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> VPC: <b class="text-danger">
 									<span>{{resourceDomainCount.VPC || '-' }}</span>
 									</b></label>
@@ -364,21 +364,21 @@
                                     <div class="error-area" data-ng-show="resourceAllocationForm.CPU.$invalid && formSubmitted" >
                                     	<i  ng-attr-tooltip="{{ resourceAllocationForm.CPU.errorMessage || '<fmt:message key="max.cpu.cores.are.required" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i></div>
                                 </div>
-                                 <div data-ng-if="resource=='domain' || type == 'domain-quota'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                 <div data-ng-if="resource=='domain' || type == 'domain-quota'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.department" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> CPU Cores: <b class="text-danger">
 									<span>{{resourceDepartmentCount.CPU || '-' }}</span>
 									</b></label>
                                 	<label class="col-md-6 font-normal col-sm-6 "> <fmt:message key="common.project" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" />  CPU Cores: <b class="text-danger">
 									<span>{{resourceProjectCount.CPU || '-' }}</span></b></label>
                                 </div>
-                                  <div data-ng-if="resource=='department'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                  <div data-ng-if="resource=='department'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.domain" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> CPU Cores: <b class="text-danger">
 									<span>{{resourceDomainCount.CPU || '-' }}</span>
 									</b></label>
                                 	<label class="col-md-6 font-normal col-sm-6 "> <fmt:message key="common.project" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> CPU Cores: <b class="text-danger">
 									<span>{{resourceProjectCount.CPU || '-' }}</span></b></label>
                                 </div>
-                                 <div data-ng-if="resource=='project'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                 <div data-ng-if="resource=='project'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.domain" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> CPU Cores: <b class="text-danger">
 									<span>{{resourceDomainCount.CPU || '-' }}</span>
 									</b></label>
@@ -401,21 +401,21 @@
                                     <div class="error-area" data-ng-show="resourceAllocationForm.Memory.$invalid && formSubmitted" >
                                     <i  ng-attr-tooltip="{{ resourceAllocationForm.Memory.errorMessage || '<fmt:message key="max.memory.is.required" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i></div>
                                 </div>
-                                  <div data-ng-if="resource=='domain' || type == 'domain-quota'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                  <div data-ng-if="resource=='domain' || type == 'domain-quota'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.department" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Memory: <b class="text-danger">
 									<span>{{resourceDepartmentCount.Memory || '-' }}</span>
 									</b></label>
                                 	<label class="col-md-6 font-normal col-sm-6 "> <fmt:message key="common.project" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Memory : <b class="text-danger">
 									<span>{{resourceProjectCount.Memory || '-' }}</span></b></label>
                                 </div>
-                                  <div data-ng-if="resource=='department'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                  <div data-ng-if="resource=='department'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.domain" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Memory: <b class="text-danger">
 									<span>{{resourceDomainCount.Memory || '-' }}</span>
 									</b></label>
                                 	<label class="col-md-6 font-normal col-sm-6 "> <fmt:message key="common.project" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Memory : <b class="text-danger">
 									<span>{{resourceProjectCount.Memory || '-' }}</span></b></label>
                                 </div>
-                                <div data-ng-if="resource=='project'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                <div data-ng-if="resource=='project'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.domain" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> Memory: <b class="text-danger">
 									<span>{{resourceDomainCount.Memory || '-' }}</span>
 									</b></label>
@@ -438,21 +438,21 @@
                                     	<i  ng-attr-tooltip="{{ resourceAllocationForm.PrimaryStorage.errorMessage || '<fmt:message key="max.primary.is.required" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i>
                                     </div>
                                 </div>
-                                 <div data-ng-if="resource=='domain' || type == 'domain-quota'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                 <div data-ng-if="resource=='domain' || type == 'domain-quota'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.department" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> PrimaryStorage: <b class="text-danger">
 									<span>{{resourceDepartmentCount.PrimaryStorage || '-' }}</span>
 									</b></label>
                                 	<label class="col-md-6 font-normal col-sm-6 "> <fmt:message key="common.project" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> PrimaryStorage : <b class="text-danger">
 									<span>{{resourceProjectCount.PrimaryStorage || '-' }}</span></b></label>
                                 </div>
-                                <div data-ng-if="resource=='department'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                <div data-ng-if="resource=='department'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.domain" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> PrimaryStorage: <b class="text-danger">
 									<span>{{resourceDomainCount.PrimaryStorage || '-' }}</span>
 									</b></label>
                                 	<label class="col-md-6 font-normal col-sm-6 "> <fmt:message key="common.project" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> PrimaryStorage : <b class="text-danger">
 									<span>{{resourceProjectCount.PrimaryStorage || '-' }}</span></b></label>
                                 </div>
-                                   <div data-ng-if="resource=='project'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                   <div data-ng-if="resource=='project'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.domain" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> PrimaryStorage: <b class="text-danger">
 									<span>{{resourceDomainCount.PrimaryStorage || '-' }}</span>
 									</b></label>
@@ -475,21 +475,21 @@
                                     <div class="error-area" data-ng-show="resourceAllocationForm.SecondaryStorage.$invalid && formSubmitted" >
                                     	<i  ng-attr-tooltip="{{ resourceAllocationForm.SecondaryStorage.errorMessage || '<fmt:message key="max.secondary.is.required" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i></div>
                                 </div>
-                                <div data-ng-if="resource=='domain'|| type == 'domain-quota'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                <div data-ng-if="resource=='domain'|| type == 'domain-quota'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.department" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> SecondaryStorage: <b class="text-danger">
 									<span>{{resourceDepartmentCount.SecondaryStorage || '-'}}</span>
 									</b></label>
                                 	<label class="col-md-6 font-normal col-sm-6 "> <fmt:message key="common.project" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> SecondaryStorage : <b class="text-danger">
 									<span>{{resourceProjectCount.SecondaryStorage || '-'}}</span></b></label>
                                 </div>
-                                <div data-ng-if="resource=='department'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                <div data-ng-if="resource=='department'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.domain" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> SecondaryStorage: <b class="text-danger">
 									<span>{{resourceDomainCount.SecondaryStorage || '-'}}</span>
 									</b></label>
                                 	<label class="col-md-6 font-normal col-sm-6 "> <fmt:message key="common.project" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" />  SecondaryStorage : <b class="text-danger">
 									<span>{{resourceProjectCount.SecondaryStorage || '-'}}</span></b></label>
                                 </div>
-                                 <div data-ng-if="resource=='project'" class="col-md-8 col-sm-8 m-l-xxl ">
+                                 <div data-ng-if="resource=='project'" class="well col-md-6 col-sm-6 pull-right ">
                                 	<label class="col-md-6 font-normal col-sm-7 "> <fmt:message key="common.domain" bundle="${msg}" /> <fmt:message key="common.available" bundle="${msg}" /> SecondaryStorage: <b class="text-danger">
 									<span>{{resourceDomainCount.SecondaryStorage || '-'}}</span>
 									</b></label>

@@ -72,17 +72,17 @@ function cloudStackCtrl($scope, $window, appService) {
     $scope.list(1);
     };
 
-function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $stateParams, promiseAjax, notify, localStorageService, modalService) {
+function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, appService) {
 
 	//$scope.adminUserList = {};
     $scope.paginationObject = {};
     $scope.configForm = {};
     $scope.domainList = {};
-    $scope.global = crudService.globalConfig;
+    $scope.global = appService.globalConfig;
 
     // Admin User List
     var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-    var hasUsers = promiseAjax.httpTokenRequest( crudService.globalConfig.HTTP_GET, crudService.globalConfig.APP_URL + "users/listbyrootadmin");
+    var hasUsers = appService.promiseAjax.httpTokenRequest( appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "users/listbyrootadmin");
     hasUsers.then(function (result) {  // this is only run after $http completes0
     	$scope.adminUserList = result;
     });
@@ -90,7 +90,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $s
 	    // Domain List
 	    $scope.list = function (pageNumber) {
 	        var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-	        var hasDomains = crudService.list("domains", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+	        var hasDomains = appService.crudService.list("domains", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
 	        hasDomains.then(function (result) {
 	        	$scope.domainList = result;
 	            $scope.stateid =$stateParams.id;
@@ -120,16 +120,16 @@ function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $s
         });
     };
 
-    localStorageService.set("billingList", null);
-    if (localStorageService.get("billingList") == null) {
-        var hasServer = promiseAjax.httpRequest("GET", "api/billing.json");
+    appService.localStorageService.set("billingList", null);
+    if (appService.localStorageService.get("billingList") == null) {
+        var hasServer = appService.promiseAjax.httpRequest("GET", "api/billing.json");
         hasServer.then(function (result) {  // this is only run after $http
 											// completes
             $scope.billingList = result;
-            localStorageService.set("billingList", result);
+            appService.localStorageService.set("billingList", result);
         });
     } else {
-        $scope.billingList = localStorageService.get("billingList");
+        $scope.billingList = appService.localStorageService.get("billingList");
     }
     if ($state.current.data.pageTitle == 'ConfigCategory' || $state.current.data.pageTitle == 'General' || $state.current.data.pageTitle == 'Chargeback'
             || $state.current.data.pageTitle == 'Cloudstack') {
@@ -140,44 +140,44 @@ function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $s
         $state.$current.parent.data.pageTitle = $stateParams.category.substring(0, 1).toUpperCase() + $stateParams.category.substring(1).toLowerCase();
     }
 
-    localStorageService.set("taxList", null);
-    if (localStorageService.get("taxList") == null) {
-        var hasServer = promiseAjax.httpRequest("GET", "api/tax.json");
+    appService.localStorageService.set("taxList", null);
+    if (appService.localStorageService.get("taxList") == null) {
+        var hasServer = appService.promiseAjax.httpRequest("GET", "api/tax.json");
         hasServer.then(function (result) {
             $scope.taxList = result;
-            localStorageService.set("taxList", result);
+            appService.localStorageService.set("taxList", result);
         });
     } else {
-        $scope.taxList = localStorageService.get("taxList");
+        $scope.taxList = appService.localStorageService.get("taxList");
     }
 
-        var hasServer = promiseAjax.httpRequest("GET", "api/paymentGateway.json");
+        var hasServer = appService.promiseAjax.httpRequest("GET", "api/paymentGateway.json");
         hasServer.then(function (result) {
             $scope.paymentGateList = result;
-            localStorageService.set("paymentGateList", result);
+            appService.localStorageService.set("paymentGateList", result);
         });
 
 
-    localStorageService.set("promotionList", null);
-    if (localStorageService.get("promotionList") == null) {
-        var hasServer = promiseAjax.httpRequest("GET", "api/promotion.json");
+    appService.localStorageService.set("promotionList", null);
+    if (appService.localStorageService.get("promotionList") == null) {
+        var hasServer = appService.promiseAjax.httpRequest("GET", "api/promotion.json");
         hasServer.then(function (result) {
             $scope.promotionList = result;
-            localStorageService.set("promotionList", result);
+            appService.localStorageService.set("promotionList", result);
         });
     } else {
-        $scope.promotionList = localStorageService.get("promotionList");
+        $scope.promotionList = appService.localStorageService.get("promotionList");
     }
 
-    localStorageService.set("discountList", null);
-    if (localStorageService.get("discountList") == null) {
-        var hasServer = promiseAjax.httpRequest("GET", "api/discount.json");
+    appService.localStorageService.set("discountList", null);
+    if (appService.localStorageService.get("discountList") == null) {
+        var hasServer = appService.promiseAjax.httpRequest("GET", "api/discount.json");
         hasServer.then(function (result) {
             $scope.discountList = result;
-            localStorageService.set("discountList", result);
+            appService.localStorageService.set("discountList", result);
         });
     } else {
-        $scope.discountList = localStorageService.get("discountList");
+        $scope.discountList = appService.localStorageService.get("discountList");
     }
 
     $scope.summernoteTextTwo = {}
@@ -304,7 +304,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $s
         $scope.formSubmitted = true;
         if (form.$valid) {
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
-            notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+            appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
         }
     };
 
@@ -313,7 +313,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $s
         if (form.$valid) {
             $scope.cancel();
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
-            notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+            appService.notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
         }
     };
 
@@ -321,7 +321,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $s
         $scope.formSubmitted = true;
         if (form.$valid) {
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
-            notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+            appService.notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
         }
     };
 
@@ -329,7 +329,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $s
         $scope.formSubmitted = true;
         if (form.$valid) {
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
-            notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+            appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
         }
     };
 
@@ -338,7 +338,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $s
         if (form.$valid) {
 
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
-            notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+            appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
 
         }
     };
@@ -347,7 +347,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $s
         $scope.formSubmitted = true;
         if (form.$valid) {
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
-            notify({message: 'Saved successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+            appService.notify({message: 'Saved successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
         }
     };
 
@@ -356,7 +356,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $s
         $scope.formSubmitted = true;
         if (form.$valid) {
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
-            notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+            appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
         }
     };
 
@@ -365,7 +365,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $s
         $scope.formSubmitted = true;
         if (form.$valid) {
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
-            notify({message: 'Saved successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+            appService.notify({message: 'Saved successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
         }
     };
 
@@ -373,7 +373,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $s
         $scope.formSubmitted = true;
         if (form.$valid) {
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
-            notify({message: 'Saved successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+            appService.notify({message: 'Saved successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
         }
     };
 
@@ -381,7 +381,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $s
         $scope.formSubmitted = true;
         if (form.$valid) {
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
-            notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+            appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
         }
     };
 
@@ -389,7 +389,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $s
         $scope.formSubmitted = true;
         if (form.$valid) {
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
-            notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+            appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
         }
     };
 
@@ -398,7 +398,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $s
         $scope.formSubmitted = true;
         if (form.$valid) {
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
-            notify({message: 'Created successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+            appService.notify({message: 'Created successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
         }
     };
 
@@ -410,7 +410,7 @@ function configurationCtrl($scope, $window, $modal, $log, $state,crudService, $s
         if (form.$valid) {
             $scope.cancel();
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
-            notify({message: 'Password changed successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+            appService.notify({message: 'Password changed successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
         }
     };
 
