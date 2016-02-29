@@ -141,7 +141,7 @@
 							</div>
 						</div>
 					</div>
-							<div class="form-group" data-ng-if="storage.qosType == 'Storage'" data-ng-hide="storage.isCustomizedIops">
+							<%-- <div class="form-group" data-ng-if="storage.qosType == 'Storage'" data-ng-hide="storage.isCustomizedIops">
 							<div class="row">
 								<label
 									class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.cost.for.iops" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)
@@ -157,8 +157,8 @@
 								</b>
 							</div>
 							</div>
-						</div>
-						<div class="form-group" data-ng-if="storage.isCustomizedIops">
+						</div> --%>
+					<%-- 	<div class="form-group" data-ng-if="storage.isCustomizedIops">
 							<div class="row">
 								<label
 									class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.cost.per.iops" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)
@@ -174,7 +174,7 @@
 								</b>
 							</div>
 							</div>
-						</div>
+						</div> --%>
 				</div>
 				<div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
 					<div class="form-group" ng-class="{'text-danger': storageForm.zone.$invalid && formSubmitted}">

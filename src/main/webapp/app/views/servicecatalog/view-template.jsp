@@ -114,7 +114,7 @@
                             <div class="row">
                                 <label class="col-md-3 col-sm-3 control-label"><fmt:message key="template.cost" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
-                                    <input required="true" type="text" name="cost" valid-number data-ng-model="template.templateCost[0].cost" class="form-control"  data-ng-class="{'error': TemplateForm.cost.$invalid && formSubmitted}">
+                                    <input required="true" type="text" name="cost" valid-price data-ng-model="template.templateCost[0].cost" class="form-control"  data-ng-class="{'error': TemplateForm.cost.$invalid && formSubmitted}">
                                     <div class="error-area" data-ng-show="TemplateForm.cost.$invalid && formSubmitted" ><i  ng-attr-tooltip="<fmt:message key="template.cost.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
                                 </div>
                             </div>
