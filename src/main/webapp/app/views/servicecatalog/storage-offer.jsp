@@ -226,7 +226,7 @@
 								<input type="text" name="diskwriterateiops" valid-number
 									data-ng-model="storage.diskIopsWriteRate" class="form-control">
 							</div>
-						</div>101003
+						</div>
 					</div>
 				</div>
 				<div class="col-md-12" data-ng-if="storage.qosType == 'Storage'" data-ng-hide="storage.isCustomizedIops"
