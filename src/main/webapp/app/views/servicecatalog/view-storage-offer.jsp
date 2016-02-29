@@ -130,7 +130,7 @@
 							<label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="common.cost.per.gb.per.month" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)
 							</label>
 							<div class="col-md-4 col-sm-4 col-xs-4">
-								<input data-ng-change= "costPerHourGB()" type="text" valid-price name="costmonth"
+								<input type="text" valid-price name="costmonth"
 									data-ng-model="storage.storagePrice[0].costGbPerMonth" class="form-control">
 							</div>
 							<div class="col-md-4 col-sm-4 col-xs-4">
@@ -141,10 +141,10 @@
 							</div>
 						</div>
 					</div>
-							<div class="form-group" data-ng-if="!storage.isCustomizedIops">
+							<div class="form-group" data-ng-if="storage.qosType == 'Storage'" data-ng-hide="storage.isCustomizedIops">
 							<div class="row">
 								<label
-									class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.cost.for.iops" bundle="${msg}" /> (<app-currency class="text-danger"></app-currency>)
+									class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.cost.for.iops" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)
 								</label>
 								<div class="col-md-4  col-sm-4 col-xs-4">
 									<input type="text" name="costperiops" valid-price
@@ -161,10 +161,10 @@
 						<div class="form-group" data-ng-if="storage.isCustomizedIops">
 							<div class="row">
 								<label
-									class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.cost.per.iops" bundle="${msg}" /> (<app-currency class="text-danger"></app-currency>)
+									class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.cost.per.iops" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)
 								</label>
 								<div class="col-md-4  col-sm-4 col-xs-4">
-									<input type="text" data-ng-keyup="costPerHourIOPS()" name="costperiops" valid-price
+									<input type="text" name="costperiops" valid-price
 										data-ng-model="storage.storagePrice[0].costIopsPerMonth" class="form-control">
 								</div>
 								<div class="col-md-4 col-sm-4 col-xs-4">
