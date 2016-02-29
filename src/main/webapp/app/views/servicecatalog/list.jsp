@@ -11,31 +11,34 @@
 <div class="row"  ng-controller="computeListCtrl">
     <div class="" >
         <div class="hpanel">
-            <div class="panel-heading">
+            <div class="panel-heading no-padding">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="pull-left">
                             <div class="dashboard-box pull-left">
-                                <span class="pull-right"><fmt:message key="compute.totalcompute" bundle="${msg}" /></span>
+                             <div class="instance-border-content-normal">
+                                <span class="pull-left"><img src="images/instance-icon.png"></span>
+                                <span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message key="compute.totalcompute" bundle="${msg}" /></span>
+                                <b class="pull-left">{{computeOffering.Count}}</b>
                                 <div class="clearfix"></div>
-                                <span class="pull-right m-t-xs"><img src="images/instance-icon.png"></span>
-                                <b class="pull-right">{{computeOffering.Count}}</b>
-                                <div class="clearfix"></div>
+                                </div>
                             </div>
                             <div class="dashboard-box pull-left">
-                                <span class="pull-right"><fmt:message key="compute.enabledcompute" bundle="${msg}" /></span>
+                            	<div class="instance-border-content-normal">
+                                 <span class="pull-left"><img src="images/instance-icon.png"></span>
+                                <span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message key="compute.enabledcompute" bundle="${msg}" /></span>
+                                <b class="pull-left">{{computeOffering.Count}}</b>
                                 <div class="clearfix"></div>
-                                <span class="pull-right m-t-xs"><img src="images/instance-icon.png"></span>
-                                <b class="pull-right">{{computeOffering.Count}}</b>
-                                <div class="clearfix"></div>
+                                </div>
                             </div>
+                            <a class="btn btn-info" ui-sref="servicecatalog.list-compute.list-compute-offer"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message key="common.add" bundle="${msg}" /></a>
+                                <a class="btn btn-info" ui-sref="servicecatalog.list-compute" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
                         </div>
                         <div class="pull-right">
 							<panda-quick-search></panda-quick-search>
                             <div class="clearfix"></div>
                             <span class="pull-right m-l-sm m-t-sm">
-                                <a class="btn btn-info" ui-sref="servicecatalog.list-compute.list-compute-offer"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message key="common.add" bundle="${msg}" /></a>
-                                <a class="btn btn-info" ui-sref="servicecatalog.list-compute" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
+
                             </span>
                         </div>
                     </div>
