@@ -229,27 +229,42 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-12" data-ng-show="storage.qosType == 'Storage'"
-					data-ng-if="!storage.isCustomizedIops">
-					<div class="form-group">
+				<div class="col-md-12" data-ng-if="storage.qosType == 'Storage'" data-ng-hide="storage.isCustomizedIops"
+					data-ng-if="!storage.isCustomizedIops" >
+					<div class="form-group"
+					ng-class="{'text-danger': storageForm.diskMinIops.$invalid && formSubmitted}">
 						<div class="row">
 							<label
 								class="col-md-6 col-sm-6 col-xs-6 control-label font-normal"><fmt:message
-									key="common.miniops" bundle="${msg}" /></label>
+									key="common.miniops" bundle="${msg}" />
+									<span class="text-danger">*</span></label>
 							<div class="col-md-6  col-sm-6 col-xs-6">
-								<input type="text" name="diskreadrateiops" valid-number
-									data-ng-model="storage.diskMinIops" class="form-control">
+								<input type="text" name="diskMinIops" valid-number data-ng-required="!storage.isCustomizedIops"
+									data-ng-model="storage.diskMinIops" class="form-control" data-ng-class="{'error': storageForm.diskMinIops.$invalid && formSubmitted}">
+								<div class="error-area"
+									data-ng-show="storageForm.diskMinIops.$invalid && formSubmitted">
+								<div class="error-area" data-ng-show="storageForm.diskMinIops.$invalid && formSubmitted" >
+								<i ng-attr-tooltip="{{ '<fmt:message key="storage.diskMinIops.required" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i>
+								</div>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="form-group">
+					<div class="form-group" ng-class="{'text-danger': storageForm.diskMaxIops.$invalid && formSubmitted}">
 						<div class="row">
 							<label
 								class="col-md-6 col-sm-6 col-xs-6 control-label font-normal"><fmt:message
-									key="common.maxiops" bundle="${msg}" /></label>
+									key="common.maxiops" bundle="${msg}" /><span
+								class="text-danger">*</span></label>
 							<div class="col-md-6  col-sm-6 col-xs-6">
-								<input type="text" name="diskwriterateiops" valid-number
-									data-ng-model="storage.diskMaxIops" class="form-control">
+								<input type="text" name="diskMaxIops" valid-number data-ng-required="!storage.isCustomizedIops"
+									data-ng-model="storage.diskMaxIops" class="form-control" data-ng-class="{'error': storageForm.diskMaxIops.$invalid && formSubmitted}">
+							<div class="error-area"
+									data-ng-show="storageForm.diskMaxIops.$invalid && formSubmitted">
+								<div class="error-area" data-ng-show="storageForm.diskMaxIops.$invalid && formSubmitted" >
+								<i ng-attr-tooltip="{{ '<fmt:message key="storage.diskMaxIops.required" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i>
+								</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -346,7 +361,7 @@
 						<div class="form-group" data-ng-if="!storage.isCustomizedIops">
 							<div class="row">
 								<label
-									class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.cost.for.iops" bundle="${msg}" /> (<app-currency class="text-danger"></app-currency>)
+									class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.cost.for.iops" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)
 								</label>
 								<div class="col-md-4  col-sm-4 col-xs-4">
 									<input type="text" name="costperiops" valid-price
@@ -364,7 +379,7 @@
 						<div class="form-group" data-ng-if="storage.isCustomizedIops">
 							<div class="row">
 								<label
-									class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.cost.per.iops" bundle="${msg}" /> (<app-currency class="text-danger"></app-currency>)
+									class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.cost.per.iops" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)
 								</label>
 								<div class="col-md-4  col-sm-4 col-xs-4">
 									<input type="text" name="costperiops" valid-price
