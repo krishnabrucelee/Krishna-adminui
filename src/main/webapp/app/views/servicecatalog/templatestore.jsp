@@ -5,38 +5,45 @@
 
 <div class="row" data-ng-hide="viewContent" data-ng-controller="templateListCtrl">
     <div class="hpanel">
-        <div class="panel-heading">
+        <div class="panel-heading no-padding">
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12 ">
                     <div class="pull-left">
                         <div class="dashboard-box pull-left">
-                            <span class="pull-right"><fmt:message key="template.totaltemplate" bundle="${msg}" /></span>
-                            <div class="clearfix"></div>
-                            <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
-                            <b class="pull-right">{{totalCount}}</b>
-                            <div class="clearfix"></div>
+	                        <div class="instance-border-content-normal">
+	                        	<span class="pull-left"><img src="images/template-icon.png"></span>
+	                            <span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message key="template.totaltemplate" bundle="${msg}" /></span>
+
+	                            <b class="pull-left">{{totalCount}}</b>
+	                            <div class="clearfix"></div>
+                            </div>
                         </div>
                         <div class="dashboard-box pull-left">
-                            <span class="pull-right"><fmt:message key="windows.template" bundle="${msg}" /></span>
-                            <div class="clearfix"></div>
-                            <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
-                            <b class="pull-right">{{windowsTemplate}}</b>
-                            <div class="clearfix"></div>
+	                        <div class="instance-border-content-normal">
+	                        	<span class="pull-left"><img src="images/template-icon.png"></span>
+	                            <span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message key="windows.template" bundle="${msg}" /></span>
+
+	                            <b class="pull-left">{{windowsTemplate}}</b>
+	                            <div class="clearfix"></div>
+                            </div>
                         </div>
                         <div class="dashboard-box pull-left">
-                            <span class="pull-right"><fmt:message key="linux.template" bundle="${msg}" /></span>
-                            <div class="clearfix"></div>
-                            <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
-                            <b class="pull-right">{{linuxTemplate}}</b>
-                            <div class="clearfix"></div>
+	                        <div class="instance-border-content-normal">
+	                        	<span class="pull-left"><img src="images/template-icon.png"></span>
+	                            <span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message key="linux.template" bundle="${msg}" /></span>
+
+	                            <b class="pull-left">{{linuxTemplate}}</b>
+	                            <div class="clearfix"></div>
+                            </div>
                         </div>
+                        <a has-permission="REGISTER_TEMPLATE" class="btn btn-info" ui-sref="servicecatalog.list-templatestore.list-view-template-create"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message key="common.add" bundle="${msg}" /></a>
+                            <a class="btn btn-info" ui-sref="servicecatalog.list-templatestore" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
                     </div>
                     <div class="pull-right">
 						<panda-quick-search></panda-quick-search>
                         <div class="clearfix"></div>
                         <span class="pull-right m-l-sm m-t-sm">
-                            <a has-permission="REGISTER_TEMPLATE" class="btn btn-info" ui-sref="servicecatalog.list-templatestore.list-view-template-create"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message key="common.add" bundle="${msg}" /></a>
-                            <a class="btn btn-info" ui-sref="servicecatalog.list-templatestore" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
+
                         </span>
                     </div>
                 </div>
