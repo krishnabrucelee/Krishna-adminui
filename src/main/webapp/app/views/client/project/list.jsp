@@ -5,32 +5,31 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <div ui-view>
 
-	<div ng-controller="projectListCtrl">
+	<div  ng-controller="projectListCtrl">
 		<div class="hpanel">
 			<div class="panel-heading">
 				<div class="row">
 					<div class="col-md-12 col-sm-12 col-xs-12 ">
 						<div class="pull-left">
 							<div class="dashboard-box pull-left">
-								<span class="pull-right"><fmt:message key="total.project" bundle="${msg}" /></span>
-								<div class="clearfix"></div>
-								<span class="pull-left m-t-xs"><!-- <img
-									src="images/project-icon.png"> --></span> <b class="pull-right">{{projectList.Count}}</b>
-								<div class="clearfix"></div>
+								<div class="instance-border-content-normal">
+								<span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message key="total.project" bundle="${msg}" /></span>
+								<b class="pull-left">{{projectList.Count}}</b>
+								<div class="clearfix"></div></div>
 							</div>
 							<div class="dashboard-box pull-left">
-								<span class="pull-right"><fmt:message key="retail.project" bundle="${msg}" /></span>
+								<div class="instance-border-content-normal">
+								<span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message key="retail.project" bundle="${msg}" /></span>
+								<b class="pull-left">0</b>
 								<div class="clearfix"></div>
-								<span class="pull-left m-t-xs"><!-- <img
-									src="images/project-icon.png"> --></span> <b class="pull-right">0</b>
-								<div class="clearfix"></div>
+								</div>
 							</div>
 							<div class="dashboard-box pull-left">
-								<span class="pull-right"><fmt:message key="trial.project" bundle="${msg}" /></span>
+								<div class="instance-border-content-normal">
+								<span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message key="trial.project" bundle="${msg}" /></span>
+								<b class="pull-left">{{projectList.Count}}</b>
 								<div class="clearfix"></div>
-								<span class="pull-left m-t-xs"><!-- <img
-									src="images/project-icon.png"> --></span> <b class="pull-right">{{projectList.Count}}</b>
-								<div class="clearfix"></div>
+								</div>
 							</div>
 						</div>
 						<div class="pull-right">
