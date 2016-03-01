@@ -142,7 +142,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 				$scope.isDisabledDepartment = false;
 				$scope.isDisabledProject = false;
 	            notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
-	            //$scope.getDepartmentsByDomain();
+	            $state.reload();
 	        }).catch(function (result) {
 	            if (!angular.isUndefined(result.data)) {
 	            	if (result.data.fieldErrors != null) {
@@ -185,6 +185,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 				$scope.isDisabledProject = false;
 				$scope.formSubmitted = false;
 	            notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
+	            $state.reload();
 	        }).catch(function (result) {
 	            if (!angular.isUndefined(result.data)) {
 	            	 if (result.data.fieldErrors != null) {
@@ -230,6 +231,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 				$scope.formSubmitted = false;
 				$scope.showLoader = false;
 	            notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
+	            $state.reload();
 	        }).catch(function (result) {
 	            if (!angular.isUndefined(result.data)) {
 	            	 if (result.data.fieldErrors != null) {
@@ -303,15 +305,12 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 	};
 
 	$scope.loadEditOption = function(list, scopeObject, object) {
-		if (object != null) {
 		angular.forEach(list, function(domainObject, domainKey) {
 			 if(domainObject.id == object.id) {
 				 scopeObject = domainObject;
 			 }
 		 });
-		} else {
-			$scope.loadEditOption();
-		}
+
 	};
 
 	// Get the projects by department.
