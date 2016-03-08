@@ -72,20 +72,76 @@
     border:none ;
     margin-top: 30px;
     color: inherit;
+
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+
+    -webkit-animation-name: slideRightRetourn;
+    animation-name: slideRightRetourn;
 }
 
 .panda-ui-admin-notify.alert-warning {
-    border-left: 6px solid @color-yellow;
+     background-color: @color-yellow;
+    border-left: 6px solid rgba(0, 0, 0, .2);
+    font-size: 17px;
 }
+
+.panda-ui-admin-notify.alert-warning .ng-binding:before{
+    content:"\f071";
+    margin-right: 10px;
+    font-size:20px;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;}
+
 .panda-ui-admin-notify.alert-success {
-    border-left: 6px solid @color-green;
+    background-color: @color-green;
+    color: @color-white;
+    border-left: 6px solid rgba(0, 0, 0, .2);
+    font-size: 17px;
 }
+
+.panda-ui-admin-notify.alert-success .ng-binding:before{
+    content:"\f058";
+    margin-right: 10px;
+    font-size:20px;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;}
 
 .panda-ui-admin-notify.alert-danger {
-    border-left: 6px solid @color-red-deep;
+    background-color: @color-red-deep;
+    color: @color-white;
+    border-left: 6px solid rgba(0, 0, 0, .2);
+    font-size: 17px;
 }
 
+.panda-ui-admin-notify.alert-danger .ng-binding:before{
+    content:"\f0e7";
+    margin-right: 10px;
+    font-size:20px;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;}
+
 .panda-ui-admin-notify.alert-info {
-    border-left: 6px solid @color-blue;
+    background-color: @color-blue;
+    color: @color-white;
+    border-left: 6px solid rgba(0, 0, 0, .2);
+    font-size: 17px;
 }
+
+.panda-ui-admin-notify.alert-info .ng-binding:before{
+    content:"\f0f3";
+    margin-right: 10px;
+    font-size:20px;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;}
 
