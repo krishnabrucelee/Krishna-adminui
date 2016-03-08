@@ -31,9 +31,21 @@
 								<div class="clearfix"></div>
 								</div>
 							</div>
+							<a class="btn btn-info" ui-sref="client.project" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg"></span></a>
 						</div>
 						<div class="pull-right">
 							<panda-quick-search></panda-quick-search>
+							<span class="pull-right m-r-sm">
+								<select
+									class="form-control input-group col-xs-5" name="domainView"
+									data-ng-model="domainView"
+									data-ng-change="selectDomainView(1)"
+									data-ng-options="domainView.name for domainView in domainListView">
+									<option value="">Select Domain</option>
+								</select>
+							</span>
+							<div class="clearfix"></div>
+							<span class="pull-right m-l-sm m-t-sm"></span>
 						</div>
 
 					</div>
@@ -59,7 +71,12 @@
 									    <!-- <th>Paid (CNY)</th> -->
 									</tr>
 								</thead>
-								<tbody>
+								<tbody data-ng-hide="projectList.length > 0">
+                                    <tr>
+                                        <td class="col-md-6 col-sm-6" colspan="6"><fmt:message key="common.no.records.found" bundle="${msg}" />!!</td>
+                                    </tr>
+                                </tbody>
+								<tbody data-ng-show="projectList.length > 0">
 									<tr
 										data-ng-repeat="project in filteredCount = (projectList| filter: quickSearch| orderBy:sort.column:sort.descending)">
 										<td><a class="text-info" title="View Project">{{ project.id}}</a></td>

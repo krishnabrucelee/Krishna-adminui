@@ -20,20 +20,32 @@
                             <div class="dashboard-box pull-left">
                       			<div class="instance-border-content-normal">
                                 <span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message key="active.users" bundle="${msg}" /></span>
-                                <b class="pull-left">{{(activeUsers | filter:{isActive:true}).length}}</b>
+                                <b class="pull-left">{{(activeUsers | filter:{isActive:true, domainId:domainView.id}:true).length}}</b>
                                 <div class="clearfix"></div>
                                 </div>
                             </div>
                             <div class="dashboard-box pull-left">
                                  <div class="instance-border-content-normal">
                                 <span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message key="inactive.users" bundle="${msg}" /></span>
-                                <b class="pull-left">{{(activeUsers | filter:{isActive:false}).length}}</b>
+                                <b class="pull-left">{{(activeUsers | filter:{isActive:false, domainId:domainView.id}:true).length}}</b>
                                 <div class="clearfix"></div>
                                 </div>
                             </div>
+                            <a class="btn btn-info" ui-sref="client.user" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg"></span></a>
                         </div>
                         <div class="pull-right">
 							<panda-quick-search></panda-quick-search>
+							<span class="pull-right m-r-sm">
+								<select
+									class="form-control input-group col-xs-5" name="domainView"
+									data-ng-model="domainView"
+									data-ng-change="selectDomainView(1)"
+									data-ng-options="domainView.name for domainView in domainListView">
+									<option value="">Select Domain</option>
+								</select>
+							</span>
+							<div class="clearfix"></div>
+							<span class="pull-right m-l-sm m-t-sm"></span>
                         </div>
                     </div>
                 </div>

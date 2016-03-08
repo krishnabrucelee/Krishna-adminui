@@ -343,10 +343,16 @@ function projectListCtrl($scope, promiseAjax,crudService,notify,appService) {
 	 $scope.paginationObject = {};
 
         $scope.list = function (pageNumber) {
-
         	$scope.showLoader = true;
             var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-            var hasProjects = appService.crudService.list("projects", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+            var hasProjects = {};
+            if ($scope.domainView == null) {
+            	hasProjects = appService.crudService.list("projects", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+            } else {
+    		    hasProjects =  promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "projects/listByDomain"
+    				+"?lang=" +appService.localStorageService.cookie.get('language')
+    				+ "&domainId="+$scope.domainView.id+"&sortBy=ASC"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+            }
             hasProjects.then(function (result) {  // this is only run after $http completes0
                 $scope.projectList = result;
                 $scope.projectList.Count = 0;
@@ -367,4 +373,15 @@ function projectListCtrl($scope, promiseAjax,crudService,notify,appService) {
               });
         };
         $scope.list(1);
+
+        // Get domain list
+        var hasdomainListView = appService.crudService.listAll("domains/list");
+        hasdomainListView.then(function (result) {
+        	$scope.domainListView = result;
+        });
+
+        // Get project list based on domain selection
+        $scope.selectDomainView = function(pageNumber) {
+        	$scope.list(1);
+        };
 };
