@@ -16,7 +16,7 @@ angular.module('panda-ui-admin').controller('projectListCtrl', projectListCtrl)
 
 function projectViewCtrl($scope, $state, $stateParams, $window, promiseAjax,
 		modalService, notify,appService, crudService) {
-	
+
 	 $scope.sort = appService.globalConfig.sort;
 	    $scope.changeSorting = appService.utilService.changeSorting;
 
@@ -343,7 +343,7 @@ function projectListCtrl($scope, promiseAjax,crudService,notify,appService) {
 	 $scope.paginationObject = {};
 
         $scope.list = function (pageNumber) {
-        	
+
         	$scope.showLoader = true;
             var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
             var hasProjects = appService.crudService.list("projects", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});

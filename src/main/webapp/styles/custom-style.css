@@ -41,6 +41,101 @@ fieldset.scheduler-border legend{border-bottom:none !important; margin-bottom:0p
 
 .dashboard-box .instance-border-content-normal.instance-border-content b{ color:#fff; text-shadow:none;}
 
+.cg-notify-message.panda-ui-admin-notify {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-name: slideRightRetourn;
+    background: #fff none repeat scroll 0 0;
+    border: medium none;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: inherit;
+    margin-top: 30px;
+    padding: 0;
+}
+.panda-ui-admin-notify.alert-warning {
+    background-color: #f4ba30;
+    border-left: 6px solid rgba(0, 0, 0, 0.2);
+    font-size: 17px;
+}
+.panda-ui-admin-notify.alert-warning .ng-binding::before {
+    content:"\f071";
+    font-family: FontAwesome;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: normal;
+    margin-right: 10px;
+    text-decoration: inherit;
+}
+.panda-ui-admin-notify.alert-success {
+    background-color: #66bb6a;
+    border-left: 6px solid rgba(0, 0, 0, 0.2);
+    color: #fff;
+    font-size: 17px;
+}
+.panda-ui-admin-notify.alert-success .ng-binding::before {
+    content:"\f058";
+    font-family: FontAwesome;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: normal;
+    margin-right: 10px;
+    text-decoration: inherit;
+}
+.panda-ui-admin-notify.alert-danger {
+    background-color: #c0392b;
+    border-left: 6px solid rgba(0, 0, 0, 0.2);
+    color: #fff;
+    font-size: 17px;
+}
+.panda-ui-admin-notify.alert-danger .ng-binding::before {
+    content:"\f0e7";
+    font-family: FontAwesome;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: normal;
+    margin-right: 10px;
+    text-decoration: inherit;
+}
+.panda-ui-admin-notify.alert-info {
+    background-color: #48a9da;
+    border-left: 6px solid rgba(0, 0, 0, 0.2);
+    color: #fff;
+    font-size: 17px;
+}
+.panda-ui-admin-notify.alert-info .ng-binding::before {
+    content:"\f0f3";
+    font-family: FontAwesome;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: normal;
+    margin-right: 10px;
+    text-decoration: inherit;
+}
+
+/*Slide Right Animation CSS*/
+@-webkit-keyframes slideRightRetourn {
+  0% {
+    -webkit-transform-origin: 0 0;
+    -webkit-transform: translateX(100%);
+  }
+
+  100% {
+    -webkit-transform-origin: 0 0;
+    -webkit-transform: translateX(0%);
+  }
+}
+@keyframes slideRightRetourn {
+  0% {
+    transform-origin: 0 0;
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform-origin: 0 0;
+    transform: translateX(0%);
+  }
+}
+
 @media (min-width: 1024px) and (max-width: 1050px){.tab-full{width:100%;}}
 
 @media (min-width: 768px) and (max-width: 1024px) {

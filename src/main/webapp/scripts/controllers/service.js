@@ -348,7 +348,7 @@ function templateEditCtrl($scope, $state, $stateParams, $log, $window, appServic
             hasTemplates.then(function (result) {
                 $scope.homerTemplate = 'app/views/notification/notify.jsp';
                 $scope.showLoader = false;
-                appService.notify({message: 'Template updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+                appService.notify({message: 'Template updated successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
                 if(template.format == "ISO") {
                 	$window.location.href = '#/templatestore/apptemplatelist';
                 } else {

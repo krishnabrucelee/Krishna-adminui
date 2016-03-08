@@ -44,7 +44,6 @@ function globalConfig($window) {
         HTTP_POST: 'POST',
         HTTP_PUT: 'PUT',
         HTTP_DELETE: 'DELETE',
-        NOTIFICATION_TEMPLATE: 'views/notification/notify.html',
         CONTENT_LIMIT: 10,
         APP_URL: "http://localhost:8080/api/",
         CONTENT_LIMIT: 10,
