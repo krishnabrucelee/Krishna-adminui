@@ -50,12 +50,12 @@
 								class="table table-bordered dataTable table-striped">
 								<thead>
 									<tr>
-										<th data-ng-click="changeSorting('id')" data-ng-class="sort.descending && sort.column =='id'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="project.id" bundle="${msg}" /></th>
-										<th data-ng-click="changeSorting('name')" data-ng-class="sort.descending && sort.column =='projectOwner.userName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="project.name" bundle="${msg}" /></th>
-										<th data-ng-click="changeSorting('domain.name')" data-ng-class="sort.descending && sort.column =='domain.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.company" bundle="${msg}" /></th>
-										<th data-ng-click="changeSorting('description')" data-ng-class="sort.descending && sort.column =='description'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.description" bundle="${msg}" /></th>
-										<th data-ng-click="changeSorting('department.userName')" data-ng-class="sort.descending && sort.column =='department.userName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.department" bundle="${msg}" /></th>
-										<th data-ng-click="changeSorting('status')" data-ng-class="sort.descending && sort.column =='status'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.status" bundle="${msg}" /></th>
+										<th data-ng-click="changeSort('id',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='id'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="project.id" bundle="${msg}" /></th>
+										<th data-ng-click="changeSort('name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='projectOwner.userName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="project.name" bundle="${msg}" /></th>
+										<th data-ng-click="changeSort('domain.name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='domain.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.company" bundle="${msg}" /></th>
+										<th data-ng-click="changeSort('description',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='description'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.description" bundle="${msg}" /></th>
+										<th data-ng-click="changeSort('department.userName',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='department.userName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.department" bundle="${msg}" /></th>
+										<th data-ng-click="changeSort('status',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='status'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.status" bundle="${msg}" /></th>
 									    <!-- <th>Paid (CNY)</th> -->
 									</tr>
 								</thead>

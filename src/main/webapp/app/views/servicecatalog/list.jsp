@@ -53,11 +53,11 @@
 					                    <table cellspacing="1" cellpadding="1" class="table dataTable table-bordered table-striped">
                         <thead>
                             <tr>
-                            	<th data-ng-click="changeSorting('name')" data-ng-class="sort.descending && sort.column =='name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.name" bundle="${msg}" /></th>
-                            	<th data-ng-click="changeSorting('numberOfCores')" data-ng-class="sort.descending && sort.column =='numberOfCores'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.vcpu" bundle="${msg}" /></th>
-                            	<th data-ng-click="changeSorting('clockSpeed')" data-ng-class="sort.descending && sort.column =='clockSpeed'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.speed" bundle="${msg}" /></th>
-                            	<th data-ng-click="changeSorting('memory')" data-ng-class="sort.descending && sort.column =='memory'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.memory" bundle="${msg}" /></th>
-                            	<th data-ng-click="changeSorting('storageType')" data-ng-class="sort.descending && sort.column =='storageType'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.type" bundle="${msg}" /></th>
+                            	<th data-ng-click="changeSort('name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.name" bundle="${msg}" /></th>
+                            	<th data-ng-click="changeSort('numberOfCores',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='numberOfCores'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.vcpu" bundle="${msg}" /></th>
+                            	<th data-ng-click="changeSort('clockSpeed',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='clockSpeed'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.speed" bundle="${msg}" /></th>
+                            	<th data-ng-click="changeSort('memory',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='memory'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.memory" bundle="${msg}" /></th>
+                            	<th data-ng-click="changeSort('storageType',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='storageType'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.type" bundle="${msg}" /></th>
                                 <th><fmt:message key="common.action" bundle="${msg}" /></th>
                             </tr>
                         </thead>

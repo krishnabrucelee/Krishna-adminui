@@ -27,7 +27,7 @@
                 <table cellspacing="1" cellpadding="1" class="table dataTable table-bordered table-striped">
                     <thead>
                         <tr>
-                               <th data-ng-click="changeSorting('name')" data-ng-class="sort.descending && sort.column =='name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.name" bundle="${msg}" /></th>
+                               <th data-ng-click="changeSort('name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.name" bundle="${msg}" /></th>
 
                                 <th><fmt:message key="common.action" bundle="${msg}" /></th>
                         </tr>

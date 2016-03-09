@@ -23,7 +23,9 @@ function globalConfig($window) {
         },
         sort : {
     		column : '',
-    		descending : false
+    		descending : false,
+		sortBy : 'id',
+		sortOrder : '+'
     	},
         networks:{
             name:''
@@ -46,7 +48,6 @@ function globalConfig($window) {
         HTTP_DELETE: 'DELETE',
         CONTENT_LIMIT: 10,
         APP_URL: "http://localhost:8080/api/",
-        CONTENT_LIMIT: 10,
         VIEW_URL : 'app/views/',
         NOTIFICATION_TEMPLATE: 'app/views/notification/notify.jsp',
         BILLABLE_ITEM: {
@@ -80,7 +81,6 @@ function globalConfig($window) {
 
         paginationHeaders: function(pageNumber, limit) {
             var headers = {};
-
             var rangeStart = (pageNumber - 1) * limit;
             var rangeEnd = (pageNumber - 1) * limit + (limit - 1);
             headers.Range = "items=" + rangeStart + "-" + rangeEnd;

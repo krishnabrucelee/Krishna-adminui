@@ -45,12 +45,12 @@ Navigation
                                     <table cellspacing="1" cellpadding="1" class="table dataTable table-bordered table-striped ">
                                         <thead>
                                         <tr>
-										<th data-ng-click="changeSorting('name')" data-ng-class="sort.descending && sort.column =='name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="company.name" bundle="${msg}" /></th>
-										<th data-ng-click="changeSorting('companyNameAbbreviation')" data-ng-class="sort.descending && sort.column =='companyNameAbbreviation'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="domain.name" bundle="${msg}" /></th>
-										<th data-ng-click="changeSorting('portalUserName')" data-ng-class="sort.descending && sort.column =='portalUserName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="portal.user.name" bundle="${msg}" /></th>
-										<th data-ng-click="changeSorting('cityHeadquarter')" data-ng-class="sort.descending && sort.column =='cityHeadquarter'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="city.headquarters" bundle="${msg}" /></th>
-										<th data-ng-click="changeSorting('email')" data-ng-class="sort.descending && sort.column =='email'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="email.id" bundle="${msg}" /></th>
-										<th data-ng-click="changeSorting('phone')" data-ng-class="sort.descending && sort.column =='phone'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="phone.number" bundle="${msg}" /></th>
+										<th data-ng-click="changeSort('name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="company.name" bundle="${msg}" /></th>
+										<th data-ng-click="changeSort('companyNameAbbreviation',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='companyNameAbbreviation'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="domain.name" bundle="${msg}" /></th>
+										<th data-ng-click="changeSort('portalUserName',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='portalUserName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="portal.user.name" bundle="${msg}" /></th>
+										<th data-ng-click="changeSort('cityHeadquarter',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='cityHeadquarter'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="city.headquarters" bundle="${msg}" /></th>
+										<th data-ng-click="changeSort('email',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='email'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="email.id" bundle="${msg}" /></th>
+										<th data-ng-click="changeSort('phone',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='phone'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="phone.number" bundle="${msg}" /></th>
                                         <th><fmt:message key="common.action" bundle="${msg}" /></th>
                                         </tr>
                                         </thead>

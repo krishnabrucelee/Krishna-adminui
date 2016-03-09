@@ -16,7 +16,7 @@ angular
         .controller('templateListCtrl', templateListCtrl)
         .controller('templateEditCtrl', templateEditCtrl)
 
-function templateListCtrl($scope, $state, $stateParams, $log, $window, appService, promiseAjax) {
+function templateListCtrl($scope, $state, $stateParams, $log, $window, appService, promiseAjax, globalConfig, localStorageService) {
 
     $scope.templateList = {};
     $scope.paginationObject = {};
@@ -31,6 +31,40 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
     $scope.linuxIsoTemplate = {};
     $scope.sort = appService.globalConfig.sort;
     $scope.changeSorting = appService.utilService.changeSorting;
+    $scope.paginationObject.sortOrder = '+';
+    $scope.paginationObject.sortBy = 'name';
+
+        $scope.changeSort = function(sortBy, pageNumber) {
+		var sort = appService.globalConfig.sort;
+		if (sort.column == sortBy) {
+			sort.descending = !sort.descending;
+		} else {
+			sort.column = sortBy;
+			sort.descending = false;
+		}
+		var sortOrder = '-';
+		if(!sort.descending){
+			sortOrder = '+';
+		}
+		$scope.paginationObject.sortOrder = sortOrder;
+		$scope.paginationObject.sortBy = sortBy;
+		$scope.showLoader = true;
+		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+                var hasTemplateList = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listall" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy +"&type=template"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+
+
+                    hasTemplateList.then(function(result) { // this is only run after $http
+			// completes0
+			$scope.templateList = result;
+			// For pagination
+			$scope.paginationObject.limit = limit;
+			$scope.paginationObject.currentPage = pageNumber;
+			$scope.paginationObject.totalItems = result.totalItems;
+			$scope.paginationObject.sortOrder = sortOrder;
+			$scope.paginationObject.sortBy = sortBy;
+			$scope.showLoader = false;
+		});
+	};
 
     $scope.summernoteOpt = {
         toolbar: [
@@ -44,11 +78,14 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
 
     //Template list
     $scope.list = function (pageNumber) {
+        appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
+        appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
     	$scope.showLoader = true;
 
     	var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-    	var hasTemplates = promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL
-        		+ "templates/listall?sortBy=ASC&type=template&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+    	//var hasTemplates = promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL
+        		//+ "templates/listall?sortBy=ASC&type=template&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+         var hasTemplates = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listall" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+appService.globalConfig.sort.sortOrder+appService.globalConfig.sort.sortBy +"&type=template"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
         hasTemplates.then(function (result) {  // this is only run after $http completes0
 
             $scope.templateList = result;
@@ -70,13 +107,52 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
     };
     $scope.list(1);
 
+   $scope.changeSorts = function(sortBy, pageNumber) {
+		var sort = appService.globalConfig.sort;
+		if (sort.column == sortBy) {
+			sort.descending = !sort.descending;
+		} else {
+			sort.column = sortBy;
+			sort.descending = false;
+		}
+		var sortOrder = '-';
+		if(!sort.descending){
+			sortOrder = '+';
+		}
+		$scope.paginationObject.sortOrder = sortOrder;
+		$scope.paginationObject.sortBy = sortBy;
+		$scope.showLoader = true;
+		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+                var hasIsoList = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listall" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy +"&type=iso"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+
+
+                    hasIsoList.then(function(result) { // this is only run after $http
+			// completes0
+			$scope.isoList = result;
+			// For pagination
+			$scope.paginationObject.limit = limit;
+			$scope.paginationObject.currentPage = pageNumber;
+			$scope.paginationObject.totalItems = result.totalItems;
+			$scope.paginationObject.sortOrder = sortOrder;
+			$scope.paginationObject.sortBy = sortBy;
+			$scope.showLoader = false;
+		});
+	};
+
+
+
     //Isolist
     $scope.isolist = function (pageNumber) {
-    	$scope.showLoader = true;
-
+    	appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
+        appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
+        $scope.showLoader = true;
     	var limit = (angular.isUndefined($scope.paginationObjectIso.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObjectIso.limit;
-        var hasIso = promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL
-        		+ "templates/listall?sortBy=ASC&type=iso&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+        //var hasIso = promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL
+        		//+ "templates/listall?sortBy=ASC&type=iso&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+     var hasIso = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listall" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+appService.globalConfig.sort.sortOrder+appService.globalConfig.sort.sortBy +"&type=iso"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+
+
+
         hasIso.then(function (result) {  // this is only run after $http completes0
 
             $scope.isoList = result;
@@ -371,7 +447,7 @@ function templateEditCtrl($scope, $state, $stateParams, $log, $window, appServic
 };
 
 
-function storageListCtrl($scope, $log, $state, $stateParams, $window, appService) {
+function storageListCtrl($scope, $log, $state, $stateParams, $window, appService, globalConfig, localStorageService) {
 
 
 
@@ -389,6 +465,40 @@ function storageListCtrl($scope, $log, $state, $stateParams, $window, appService
     $scope.paginationObject = {};
     $scope.storageForm = {};
     $scope.global = appService.globalConfig;
+    $scope.paginationObject.sortOrder = '+';
+    $scope.paginationObject.sortBy = 'name';
+
+        $scope.changeSort = function(sortBy, pageNumber) {
+		var sort = appService.globalConfig.sort;
+		if (sort.column == sortBy) {
+			sort.descending = !sort.descending;
+		} else {
+			sort.column = sortBy;
+			sort.descending = false;
+		}
+		var sortOrder = '-';
+		if(!sort.descending){
+			sortOrder = '+';
+		}
+		$scope.paginationObject.sortOrder = sortOrder;
+		$scope.paginationObject.sortBy = sortBy;
+		$scope.showLoader = true;
+		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+                var hasStorageList = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "storages" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+
+
+                    hasStorageList.then(function(result) { // this is only run after $http
+			// completes0
+			$scope.storageList = result;
+			// For pagination
+			$scope.paginationObject.limit = limit;
+			$scope.paginationObject.currentPage = pageNumber;
+			$scope.paginationObject.totalItems = result.totalItems;
+			$scope.paginationObject.sortOrder = sortOrder;
+			$scope.paginationObject.sortBy = sortBy;
+			$scope.showLoader = false;
+		});
+	};
 
     $scope.storage.zoneList = {};
     var hasZones = appService.crudService.listAll("zones/list");
@@ -423,6 +533,8 @@ function storageListCtrl($scope, $log, $state, $stateParams, $window, appService
         };
     // Storage Offer List
     $scope.list = function (pageNumber) {
+        appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
+        appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
     	$scope.showLoader = true;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasStorage = appService.crudService.list("storages", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
@@ -717,8 +829,47 @@ function networkListCtrl($scope, $modal, modalService, $log, promiseAjax,appServ
     $scope.global = crudService.globalConfig;
     $scope.sort = appService.globalConfig.sort;
     $scope.changeSorting = appService.utilService.changeSorting;
+    $scope.paginationObject.sortOrder = '+';
+    $scope.paginationObject.sortBy = 'name';
+
+        $scope.changeSort = function(sortBy, pageNumber) {
+		var sort = appService.globalConfig.sort;
+		if (sort.column == sortBy) {
+			sort.descending = !sort.descending;
+		} else {
+			sort.column = sortBy;
+			sort.descending = false;
+		}
+		var sortOrder = '-';
+		if(!sort.descending){
+			sortOrder = '+';
+		}
+		$scope.paginationObject.sortOrder = sortOrder;
+		$scope.paginationObject.sortBy = sortBy;
+		$scope.showLoader = true;
+		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+                var hasNetworkList = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "networkoffer" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy +"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+
+
+                    hasNetworkList.then(function(result) { // this is only run after $http
+			// completes0
+			$scope.networkList = result;
+			// For pagination
+			$scope.paginationObject.limit = limit;
+			$scope.paginationObject.currentPage = pageNumber;
+			$scope.paginationObject.totalItems = result.totalItems;
+			$scope.paginationObject.sortOrder = sortOrder;
+			$scope.paginationObject.sortBy = sortBy;
+			$scope.showLoader = false;
+		});
+	};
+
+
+
     // Network Offer List
     $scope.list = function (pageNumber) {
+        appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
+        appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
     	$scope.showLoader = true;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasNetworks = crudService.list("networkoffer", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
@@ -868,7 +1019,7 @@ function deleteCtrl($scope, $state, $stateParams, globalConfig, notify) {
 
 }
 
-function computeListCtrl($scope, $state, $stateParams,appService,$window) {
+function computeListCtrl($scope, $state, $stateParams, appService, $window, globalConfig, localStorageService) {
 
     $scope.computeList = {};
     $scope.paginationObject = {};
@@ -881,10 +1032,45 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
     $scope.compute = {
     		zone: {}
      };
+    $scope.paginationObject.sortOrder = '+';
+    $scope.paginationObject.sortBy = 'name';
+
+        $scope.changeSort = function(sortBy, pageNumber) {
+		var sort = appService.globalConfig.sort;
+		if (sort.column == sortBy) {
+			sort.descending = !sort.descending;
+		} else {
+			sort.column = sortBy;
+			sort.descending = false;
+		}
+		var sortOrder = '-';
+		if(!sort.descending){
+			sortOrder = '+';
+		}
+		$scope.paginationObject.sortOrder = sortOrder;
+		$scope.paginationObject.sortBy = sortBy;
+		$scope.showLoader = true;
+		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+                    var hasComputeList =  appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "computes" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+
+                    hasComputeList.then(function(result) { // this is only run after $http
+			// completes0
+			$scope.computeList = result;
+			// For pagination
+			$scope.paginationObject.limit = limit;
+			$scope.paginationObject.currentPage = pageNumber;
+			$scope.paginationObject.totalItems = result.totalItems;
+			$scope.paginationObject.sortOrder = sortOrder;
+			$scope.paginationObject.sortBy = sortBy;
+			$scope.showLoader = false;
+		});
+	};
 
 
     // Compute Offer List
     $scope.list = function (pageNumber) {
+        appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
+        appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
     	$scope.showLoader = true;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasComputes = appService.crudService.list("computes", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});

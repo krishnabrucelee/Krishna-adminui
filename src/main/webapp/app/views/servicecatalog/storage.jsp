@@ -63,10 +63,10 @@
                     <table cellspacing="1" cellpadding="1" class="table dataTable table-bordered table-striped">
                         <thead>
                             <tr>
-                               <th data-ng-click="changeSorting('name')" data-ng-class="sort.descending && sort.column =='name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.name" bundle="${msg}" /></th>
-                               <th data-ng-click="changeSorting('storageType')" data-ng-class="sort.descending && sort.column =='storageType'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.type" bundle="${msg}" /></th>
-                               <th data-ng-click="changeSorting('diskSize')" data-ng-class="sort.descending && sort.column =='diskSize'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.size" bundle="${msg}" /></th>
-                               <th data-ng-click="changeSorting('isCustomDisk')" data-ng-class="sort.descending && sort.column =='isCustomDisk'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.custom" bundle="${msg}" /></th>
+                               <th data-ng-click="changeSort('name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.name" bundle="${msg}" /></th>
+                               <th data-ng-click="changeSort('storageType',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='storageType'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.type" bundle="${msg}" /></th>
+                               <th data-ng-click="changeSort('diskSize',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='diskSize'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.size" bundle="${msg}" /></th>
+                               <th data-ng-click="changeSort('isCustomDisk',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='isCustomDisk'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.custom" bundle="${msg}" /></th>
                                <th><fmt:message key="common.action" bundle="${msg}" /></th>
                             </tr>
                         </thead>
