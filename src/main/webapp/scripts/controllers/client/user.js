@@ -12,15 +12,15 @@ function userListCtrl($scope, $state, $stateParams, modalService,appService, $lo
 	$scope.activeUsers = [];
 	$scope.sort = appService.globalConfig.sort;
 	$scope.changeSorting = appService.utilService.changeSorting;
-	    
+
     // User List
     $scope.list = function (pageNumber) {
     	$scope.showLoader = true;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-        var hasUsers = crudService.list("users", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+        var hasUsers = crudService.list("users/listall", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
         hasUsers.then(function (result) {  // this is only run after $http completes0
             $scope.accountList = result;
-            
+
             $scope.paginationObject.limit  = limit;
             $scope.paginationObject.currentPage = pageNumber;
             $scope.paginationObject.totalItems = result.totalItems;
@@ -30,11 +30,11 @@ function userListCtrl($scope, $state, $stateParams, modalService,appService, $lo
     $scope.list(1);
     $scope.active = {};
 	$scope.inActive = {};
-	
+
 	var hasUsers = crudService.listAll("users/list");
     	$scope.showLoader = true;
     hasUsers.then(function (result) {  // this is only run after $http completes0
     	$scope.activeUsers = result;
-    	
+
     });
 };
