@@ -39,6 +39,11 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
         var hasDomain = crudService.list("domains", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
         hasDomain.then(function (result) {  // this is only run after $http completes0
             $scope.domainList = result;
+            $scope.domainList.Count = 0;
+            if (result.length != 0) {
+                $scope.domainList.Count = result.totalItems;
+            }
+
             // For pagination
             $scope.paginationObject.limit  = limit;
             $scope.paginationObject.currentPage = pageNumber;

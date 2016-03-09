@@ -20,27 +20,39 @@
                             <div class="dashboard-box pull-left">
                       			<div class="instance-border-content-normal">
                                 <span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message key="active.users" bundle="${msg}" /></span>
-                                <b class="pull-left">{{(activeUsers | filter:{status:'ENABLED'}).length}}</b>
+                                <b class="pull-left">{{(activeUsers | filter:{status:'ENABLED', domainId:domainView.id}:true).length}}</b>
                                 <div class="clearfix"></div>
                                 </div>
                             </div>
                             <div class="dashboard-box pull-left">
                                  <div class="instance-border-content-normal">
                                 <span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message key="inactive.users" bundle="${msg}" /></span>
-                                <b class="pull-left">{{(activeUsers | filter:{status:'DISABLED'}).length}}</b>
+                                <b class="pull-left">{{(activeUsers | filter:{status:'DISABLED', domainId:domainView.id}:true).length}}</b>
                                 <div class="clearfix"></div>
                                 </div>
                             </div>
                              <div class="dashboard-box pull-left">
                                  <div class="instance-border-content-normal">
                                 <span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message key="removed.users" bundle="${msg}" /></span>
-                                <b class="pull-left">{{(activeUsers | filter:{status:'DELETED'}).length}}</b>
+                                <b class="pull-left">{{(activeUsers | filter:{status:'DELETED', domainId:domainView.id}).length}}</b>
                                 <div class="clearfix"></div>
                                 </div>
                             </div>
+                            <a class="btn btn-info" ui-sref="client.user" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg"></span></a>
                         </div>
                         <div class="pull-right">
 							<panda-quick-search></panda-quick-search>
+							<span class="pull-right m-r-sm">
+								<select
+									class="form-control input-group col-xs-5" name="domainView"
+									data-ng-model="domainView"
+									data-ng-change="selectDomainView(1)"
+									data-ng-options="domainView.name for domainView in domainListView">
+									<option value="">Select Domain</option>
+								</select>
+							</span>
+							<div class="clearfix"></div>
+							<span class="pull-right m-l-sm m-t-sm"></span>
                         </div>
                     </div>
                 </div>
@@ -64,13 +76,11 @@
                                         	<th data-ng-click="changeSorting('role.name')" data-ng-class="sort.descending && sort.column =='role.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.role" bundle="${msg}" /></th>
                                         	<th data-ng-click="changeSorting('email')" data-ng-class="sort.descending && sort.column =='email'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.email" bundle="${msg}" /></th>
                                         	<th data-ng-click="changeSorting('status')" data-ng-class="sort.descending && sort.column =='status'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.status" bundle="${msg}" /></th>
-
-
                                         </tr>
                                     </thead>
                                     <tbody data-ng-hide="accountList.length > 0">
                                			<tr>
-                                  			<td class="col-md-6 col-sm-6" colspan="6"><fmt:message key="common.no.records.found" bundle="${msg}" />!!</td>
+                                  			<td class="col-md-7 col-sm-7" colspan="7"><fmt:message key="common.no.records.found" bundle="${msg}" />!!</td>
                                			</tr>
                            			</tbody>
                                     <tbody data-ng-show="accountList.length > 0">

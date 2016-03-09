@@ -183,9 +183,9 @@
 							<span ng-if="state.data.pageTitle === 'Network'">
 								<a ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
-										key="common.network" bundle="${msg}" /></a> <span
+										key="common.networks" bundle="${msg}" /></a> <span
 								ng-switch-when="true"><fmt:message
-										key="common.network" bundle="${msg}" /></span>
+										key="common.networks" bundle="${msg}" /></span>
 							</span>
 							<span ng-if="state.data.pageTitle === 'Applications'"> <a
 								ng-switch-when="false"
