@@ -19,7 +19,7 @@ function userListCtrl($scope, $state, $stateParams, modalService,appService, $lo
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasUsers = {};
         if ($scope.domainView == null) {
-        	hasUsers = crudService.list("users", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+        	hasUsers = crudService.list("users/listall", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
         } else {
         	hasUsers =  promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "users/listByUserDomain"
 				+"?lang=" +appService.localStorageService.cookie.get('language')
