@@ -71,7 +71,7 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
                         		notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                         		$modalInstance.close();
                         		$scope.domain.name = "";
-                        		$scope.domain.companyNameAbb = "";
+                        		$scope.domain.companyNameAbbreviation = "";
                         		$scope.domain.portalUserName = "";
                         		$scope.domain.password = "";
                         		$scope.domain.confirmPassword = "";
