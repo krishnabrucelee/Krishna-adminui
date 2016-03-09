@@ -27,8 +27,8 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
     $scope.revokes = false;
     $scope.paginationObject = {};
     $scope.domainForm = {};
-    $scope.global = crudService.globalConfig;
     $scope.domain = {};
+    $scope.global = crudService.globalConfig;
     $scope.domainElements={
 
     };
@@ -95,8 +95,6 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
                         			});
                         		}
                                   $scope.showLoader = false;
-                                  $modalInstance.close();
-                                  $state.reload();
                         	});
                         }
                         else {  // Add tool tip message for confirmation password in add-user
@@ -142,8 +140,6 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
 	                            });
                         	}
                                 $scope.showLoader = false;
-                                $modalInstance.close();
-                                $state.reload();
                         });
                     }
                 },
