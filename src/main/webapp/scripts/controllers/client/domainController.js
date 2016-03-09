@@ -10,7 +10,7 @@ angular
 
 
 // Load list page of user
-function domainListCtrl($scope,$state, promiseAjax, $log,appService, notify, crudService, dialogService, $timeout, localStorageService) {
+function domainListCtrl($scope,$state, promiseAjax, $log,appService, notify, crudService, dialogService, $timeout, localStorageService, globalConfig) {
 
 	$scope.sort = appService.globalConfig.sort;
     $scope.changeSorting = appService.utilService.changeSorting;
@@ -31,13 +31,11 @@ function domainListCtrl($scope,$state, promiseAjax, $log,appService, notify, cru
     $scope.domain = {};
     $scope.domainElements={
 
-    };
-
-
-
+    };    
 
     // User List
     $scope.list = function (pageNumber) {
+alert('hi');
     	$scope.showLoader = true;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasDomain = crudService.list("domains", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
@@ -57,8 +55,6 @@ function domainListCtrl($scope,$state, promiseAjax, $log,appService, notify, cru
     $scope.revoke = false;
     $scope.disabled = false;
     localStorageService.set("edit", null);
-
-
 
 
     // Opened user add window
