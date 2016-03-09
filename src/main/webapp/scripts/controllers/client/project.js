@@ -361,7 +361,6 @@ function projectListCtrl($scope, promiseAjax,crudService,notify,appService, loca
 		$scope.showLoader = true;
 		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
                 var hasProjectList =  appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "projects" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
-
                     hasProjectList.then(function(result) { // this is only run after $http
 			// completes0
 			$scope.projectList = result;
@@ -380,7 +379,14 @@ function projectListCtrl($scope, promiseAjax,crudService,notify,appService, loca
                 appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
         	$scope.showLoader = true;
             var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-            var hasProjects = appService.crudService.list("projects", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+            var hasProjects = {};
+            if ($scope.domainView == null) {
+            	hasProjects = appService.crudService.list("projects", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+            } else {
+    		    hasProjects =  promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "projects/listByDomain"
+    				+"?lang=" +appService.localStorageService.cookie.get('language')
+    				+ "&domainId="+$scope.domainView.id+"&sortBy=ASC"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+            }
             hasProjects.then(function (result) {  // this is only run after $http completes0
                 $scope.projectList = result;
                 $scope.projectList.Count = 0;
@@ -401,4 +407,15 @@ function projectListCtrl($scope, promiseAjax,crudService,notify,appService, loca
               });
         };
         $scope.list(1);
+
+        // Get domain list
+        var hasdomainListView = appService.crudService.listAll("domains/list");
+        hasdomainListView.then(function (result) {
+        	$scope.domainListView = result;
+        });
+
+        // Get project list based on domain selection
+        $scope.selectDomainView = function(pageNumber) {
+        	$scope.list(1);
+        };
 };

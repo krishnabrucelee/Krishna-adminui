@@ -27,8 +27,8 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
     $scope.revokes = false;
     $scope.paginationObject = {};
     $scope.domainForm = {};
-    $scope.global = crudService.globalConfig;
     $scope.domain = {};
+    $scope.global = crudService.globalConfig;
     $scope.domainElements={
 
     };
@@ -74,6 +74,11 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
         var hasDomain = crudService.list("domains", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
         hasDomain.then(function (result) {  // this is only run after $http completes0
             $scope.domainList = result;
+            $scope.domainList.Count = 0;
+            if (result.length != 0) {
+                $scope.domainList.Count = result.totalItems;
+            }
+
             // For pagination
             $scope.paginationObject.limit  = limit;
             $scope.paginationObject.currentPage = pageNumber;
@@ -106,7 +111,7 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
                         		notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                         		$modalInstance.close();
                         		$scope.domain.name = "";
-                        		$scope.domain.companyNameAbb = "";
+                        		$scope.domain.companyNameAbbreviation = "";
                         		$scope.domain.portalUserName = "";
                         		$scope.domain.password = "";
                         		$scope.domain.confirmPassword = "";
@@ -130,8 +135,6 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
                         			});
                         		}
                                   $scope.showLoader = false;
-                                  $modalInstance.close();
-                                  $state.reload();
                         	});
                         }
                         else {  // Add tool tip message for confirmation password in add-user
@@ -177,8 +180,6 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
 	                            });
                         	}
                                 $scope.showLoader = false;
-                                $modalInstance.close();
-                                $state.reload();
                         });
                     }
                 },
