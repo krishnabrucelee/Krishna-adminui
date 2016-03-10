@@ -31,9 +31,17 @@ function userListCtrl($scope, $state, $stateParams, modalService,appService, $lo
 		$scope.paginationObject.sortBy = sortBy;
 		$scope.showLoader = true;
 		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-                    var hasUserList =  appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "users" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
 
-                    hasUserList.then(function(result) { // this is only run after $http
+            var hasUserList = {};
+            if ($scope.domainView == null) {
+            	hasUserList =  appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "users" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+            } else {
+            	hasUserList =  promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "users/listByUserDomain"
+    				+"?lang=" +appService.localStorageService.cookie.get('language')
+    				+ "&domainId="+$scope.domainView.id+"&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+            }
+
+            hasUserList.then(function(result) { // this is only run after $http
 			// completes0
 			$scope.accountList = result;
 			// For pagination
@@ -58,7 +66,7 @@ function userListCtrl($scope, $state, $stateParams, modalService,appService, $lo
         } else {
         	hasUsers =  promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "users/listByUserDomain"
 				+"?lang=" +appService.localStorageService.cookie.get('language')
-				+ "&domainId="+$scope.domainView.id+"&sortBy=ASC"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+				+ "&domainId="+$scope.domainView.id+"&sortBy="+globalConfig.sort.sortOrder+globalConfig.sort.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
         }
         hasUsers.then(function (result) {  // this is only run after $http completes0
             $scope.accountList = result;

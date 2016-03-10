@@ -484,12 +484,12 @@ function storageListCtrl($scope, $log, $state, $stateParams, $window, appService
 		$scope.paginationObject.sortBy = sortBy;
 		$scope.showLoader = true;
 		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-                var hasStorageList = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "storages" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+            var hasStorageList = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "storages" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
 
-
-                    hasStorageList.then(function(result) { // this is only run after $http
+            hasStorageList.then(function(result) { // this is only run after $http
 			// completes0
 			$scope.storageList = result;
+			$scope.storageList.Count = result.totalItems;
 			// For pagination
 			$scope.paginationObject.limit = limit;
 			$scope.paginationObject.currentPage = pageNumber;
