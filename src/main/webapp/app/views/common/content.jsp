@@ -212,7 +212,7 @@
 
 							</span>
 							</span>
-							<span ng-if="state.data.pageTitle === 'Company'"> <a
+							<span id="company_page_title" ng-if="state.data.pageTitle === 'Company'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="common.company" bundle="${msg}" /></a> <span
@@ -415,7 +415,7 @@
 	                 <span ng-if="$state.current.data.pageTitle === 'Create Compute Offer'"><fmt:message key="create.compute.offer" bundle="${msg}" /></span>
 	                 <span ng-if="$state.current.data.pageTitle === 'Edit Compute Offer'"><fmt:message key="edit.compute.offer" bundle="${msg}" /></span>
 	                 <span ng-if="$state.current.data.pageTitle === 'Edit Storage Offer'"><fmt:message key="edit.storage.offer" bundle="${msg}" /></span>
-				     <span ng-if="$state.current.data.pageTitle === 'Company'"><fmt:message key="common.company" bundle="${msg}" /></span>
+				     <span id="company_page_title" ng-if="$state.current.data.pageTitle === 'Company'"><fmt:message key="common.company" bundle="${msg}" /></span>
 				     <span ng-if="$state.current.data.pageTitle === 'Applications'"><fmt:message key="common.applications" bundle="${msg}" /></span>
 				     <span ng-if="$state.current.data.pageTitle === 'Projects'"><fmt:message key="common.projects" bundle="${msg}" /></span>
 				     <span ng-if="$state.current.data.pageTitle === 'Users'"><fmt:message key="common.users" bundle="${msg}" /></span>

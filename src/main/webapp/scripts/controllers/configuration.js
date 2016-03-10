@@ -72,13 +72,15 @@ function cloudStackCtrl($scope, $window, appService) {
     $scope.list(1);
     };
 
-function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, appService) {
+function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, appService, globalConfig) {
 
 	//$scope.adminUserList = {};
     $scope.paginationObject = {};
     $scope.configForm = {};
     $scope.domainList = {};
     $scope.global = appService.globalConfig;
+    $scope.paginationObject.sortOrder = '+';
+    $scope.paginationObject.sortBy = 'name';
 
     // Admin User List
     var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
@@ -89,10 +91,12 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
 
 	    // Domain List
 	    $scope.list = function (pageNumber) {
+                appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
+                appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
 	        var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
 	        var hasDomains = appService.crudService.list("domains", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
 	        hasDomains.then(function (result) {
-	        	$scope.domainList = result;
+	            $scope.domainList = result;
 	            $scope.stateid =$stateParams.id;
 	            $scope.type = $stateParams.quotaType;
 	            // For pagination
