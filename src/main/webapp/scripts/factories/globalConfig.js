@@ -47,7 +47,7 @@ function globalConfig($window) {
         HTTP_PUT: 'PUT',
         HTTP_DELETE: 'DELETE',
         CONTENT_LIMIT: 10,
-        APP_URL: "http://192.168.1.30:8080/api/",
+        APP_URL: "http://localhost:8080/api/",
         VIEW_URL : 'app/views/',
         NOTIFICATION_TEMPLATE: 'app/views/notification/notify.jsp',
         BILLABLE_ITEM: {
