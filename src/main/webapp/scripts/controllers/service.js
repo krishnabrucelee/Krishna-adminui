@@ -484,8 +484,14 @@ function storageListCtrl($scope, $log, $state, $stateParams, $window, appService
 		$scope.paginationObject.sortBy = sortBy;
 		$scope.showLoader = true;
 		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-            var hasStorageList = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "storages" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
-
+            var hasStorageList = {};
+            if ($scope.domainView == null) {
+            	hasStorageList =  appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "storages" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+            } else {
+            	hasStorageList =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "storages/listStorageByDomain"
+    				+"?lang=" +appService.localStorageService.cookie.get('language')
+    				+ "&domainId="+$scope.domainView.id+"&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+            }
             hasStorageList.then(function(result) { // this is only run after $http
 			// completes0
 			$scope.storageList = result;
@@ -537,10 +543,15 @@ function storageListCtrl($scope, $log, $state, $stateParams, $window, appService
         appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
     	$scope.showLoader = true;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-        var hasStorage = appService.crudService.list("storages", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+        var hasStorage = {};
+        if ($scope.domainView == null) {
+        	hasStorage = appService.crudService.list("storages", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+        } else {
+        	hasStorage =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "storages/listStorageByDomain"
+				+"?lang=" +appService.localStorageService.cookie.get('language')
+				+ "&domainId="+$scope.domainView.id+"&sortBy="+globalConfig.sort.sortOrder+globalConfig.sort.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+        }
         hasStorage.then(function (result) {  // this is only run after $http
-												// completes0
-
             $scope.storageList = result;
             $scope.storageList.Count = result.totalItems;
 
@@ -553,12 +564,12 @@ function storageListCtrl($scope, $log, $state, $stateParams, $window, appService
     };
     $scope.list(1);
 
-
+    // Get application list based on domain selection
+    $scope.selectDomainView = function(pageNumber) {
+    	$scope.list(1);
+    };
 
     // Open dialogue box to create Storage Offer
-
-
-
     $scope.costPerHourGB = function() {
 
         var regexp = /^[0-9]+([,.][0-9]+)?$/g;
@@ -1051,11 +1062,20 @@ function computeListCtrl($scope, $state, $stateParams, appService, $window, glob
 		$scope.paginationObject.sortBy = sortBy;
 		$scope.showLoader = true;
 		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-                    var hasComputeList =  appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "computes" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+            var hasComputeList = {};
+            if ($scope.domainView == null) {
+            	hasComputeList =  appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "computes" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+            } else {
+            	hasComputeList =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "computes/listComputeByDomain"
+    				+"?lang=" +appService.localStorageService.cookie.get('language')
+    				+ "&domainId="+$scope.domainView.id+"&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+            }
 
-                    hasComputeList.then(function(result) { // this is only run after $http
+            hasComputeList.then(function(result) { // this is only run after $http
 			// completes0
 			$scope.computeList = result;
+			$scope.computeOffering.Count = result.totalItems;
+
 			// For pagination
 			$scope.paginationObject.limit = limit;
 			$scope.paginationObject.currentPage = pageNumber;
@@ -1073,11 +1093,18 @@ function computeListCtrl($scope, $state, $stateParams, appService, $window, glob
         appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
     	$scope.showLoader = true;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-        var hasComputes = appService.crudService.list("computes", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
-        hasComputes.then(function (result) {  // this is only run after $http
-												// completes0
+        var hasComputes = {};
+        if ($scope.domainView == null) {
+        	hasComputes = appService.crudService.list("computes", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+        } else {
+        	hasComputes =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "computes/listComputeByDomain"
+				+"?lang=" +appService.localStorageService.cookie.get('language')
+				+ "&domainId="+$scope.domainView.id+"&sortBy="+globalConfig.sort.sortOrder+globalConfig.sort.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+        }
 
-            $scope.computeList = result;
+        hasComputes.then(function (result) {  // this is only run after $http
+
+           $scope.computeList = result;
 		   $scope.computeOffering.Count = result.totalItems;
 
             // For pagination
@@ -1088,6 +1115,11 @@ function computeListCtrl($scope, $state, $stateParams, appService, $window, glob
         });
     };
     $scope.list(1);
+
+    // Get compute list based on domain selection
+    $scope.selectDomainView = function(pageNumber) {
+    	$scope.list(1);
+    };
 
     // Open dialogue box to create Compute Offer
 
