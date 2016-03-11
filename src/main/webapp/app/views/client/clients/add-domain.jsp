@@ -9,7 +9,7 @@
 	<input type="hidden" name="passwordErrorMessage" id="passwordErrorMessage" data-ng-model="account.passwordErrorMessage" value='<fmt:message key="please.check.confirm.password" bundle="${msg}" />' />
 		<div class="inmodal">
 		<div class="modal-header">
-			<panda-modal-header page-icon="fa fa-user-plus" hide-zone="false"
+			<panda-modal-header id="add_company_page_title" page-icon="fa fa-user-plus" hide-zone="false"
 				page-title='Add Company'></panda-modal-header>
 		</div>
 		<div class="modal-body">
@@ -23,7 +23,7 @@
 									<label class="col-md-4 col-sm-4 control-label"><fmt:message key="company.name" bundle="${msg}" /><span class="text-danger">*</span>
 									</label>
 									<div class="col-md-6 col-sm-6">
-										<input required="true" type="text" name="name"
+										<input required="true" type="text" name="name" id="add_company_company_name"
 											data-ng-model="domain.name" class="form-control"
 											data-ng-class="{'error': domainForm.name.$invalid && formSubmitted}">
 										<i tooltip="Name of the company"
@@ -44,7 +44,7 @@
 									<label class="col-md-4 col-sm-4 control-label"><fmt:message key="company.name.abbreviation(domain.name)" bundle="${msg}" /><span class="text-danger">*</span>
 									</label>
 									<div class="col-md-6 col-sm-6">
-										<input required="true" type="text" name="companyNameAbbreviation"
+										<input required="true" type="text" name="companyNameAbbreviation" id = "add_company_company_name_abbrevation"
 											data-ng-model="domain.companyNameAbbreviation" class="form-control"
 											data-ng-class="{'error': domainForm.companyNameAbbreviation.$invalid && formSubmitted}">
 										<i tooltip="This is will be Domain Name"
@@ -65,7 +65,7 @@
 									<label class="col-md-4 col-sm-4 control-label"><fmt:message key="company.address" bundle="${msg}" /><span class="text-danger">*</span>
 									</label>
 									<div class="col-md-6 col-sm-6">
-										<input type="text" required="true" name="companyAddress"
+										<input type="text" required="true" name="companyAddress" id="add_company_company_address"
 											data-ng-model="domain.companyAddress" class="form-control"
 											data-ng-class="{'error': domainForm.companyAddress.$invalid && formSubmitted}">
 										<i tooltip="Company address of the company"
@@ -86,7 +86,7 @@
 									<label class="col-md-4 col-sm-4 control-label"><fmt:message key="city.headquarters" bundle="${msg}" /><span class="text-danger">*</span>
 									</label>
 									<div class="col-md-6 col-sm-6">
-										<input required="true" type="text" name="cityHeadquarter"
+										<input required="true" type="text" name="cityHeadquarter" id="add_company_city_headquarters"
 											data-ng-model="domain.cityHeadquarter" class="form-control"
 											data-ng-class="{'error': domainForm.cityHeadquarter.$invalid && formSubmitted}">
 										<i tooltip="City head quarter of the company"
@@ -108,7 +108,7 @@
 									<label class="col-md-4 col-sm-4 control-label"><fmt:message key="portal.user.name" bundle="${msg}" /><span class="text-danger">*</span>
 									</label>
 									<div class="col-md-6 col-sm-6">
-										<input type="text" required="true" name="portalUserName"
+										<input type="text" required="true" name="portalUserName" id="add_company_portal_user_name"
 											data-ng-model="domain.portalUserName" class="form-control"
 											data-ng-class="{'error': domainForm.portalUserName.$invalid && formSubmitted}">
 										<i tooltip="Name of the portal user"
@@ -127,7 +127,7 @@
 									<label class="col-md-4 col-sm-4 control-label"><fmt:message key="common.password" bundle="${msg}" /><span
 										class="text-danger">*</span></label>
 									<div class="col-md-6 col-sm-6">
-										  <input required="true" type="password" id="password" name="password"
+										  <input required="true" type="password" id="password" name="password" id="add_company_password"
 											data-ng-model="domain.password" class="form-control"
 											data-ng-class="{'error': domainForm.password.$invalid && formSubmitted}">
 										<i tooltip="Password of the portal user name"
@@ -142,7 +142,7 @@
 									<label class="col-md-4 col-sm-4 control-label"><fmt:message key="confirm.password" bundle="${msg}" /><span class="text-danger">*</span>
 									</label>
 									<div class="col-md-6 col-sm-6">
-										<input required="true" type="password" id="confirmPassword" name="confirmPassword"
+										<input required="true" type="password" id="confirmPassword" name="confirmPassword" id="add_company_confirm_password"
 											data-ng-model="account.confirmPassword" class="form-control"
 											data-ng-class="{'error': domainForm.confirmPassword.$invalid && formSubmitted}">
 										<i tooltip="Confirm Password of the company"
@@ -170,7 +170,7 @@
 										<label class="col-md-4 col-sm-4 control-label"><fmt:message key="first.name" bundle="${msg}" /><span class="text-danger">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6">
-											<input type="text" name="primaryFirstNames"
+											<input type="text" name="primaryFirstNames" id="add_company_primary_first_names"
 												data-ng-model="domain.primaryFirstName" class="form-control"
 												data-ng-class="{'error': domainForm.primaryFirstNames.$invalid && formSubmitted}" required>
 											<i tooltip="Primary first name of the company"
@@ -190,7 +190,7 @@
 										<label class="col-md-4 col-sm-4 control-label"><fmt:message key="last.name" bundle="${msg}" /><span class="text-danger">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6">
-											<input type="text"  required="true" name="lastName"
+											<input type="text"  required="true" name="lastName" id="add_company_primary_last_name"
 												data-ng-model="domain.lastName" class="form-control"
 												data-ng-class="{'error': domainForm.lastName.$invalid && formSubmitted}">
 											<i tooltip="Last name of the company"
@@ -211,7 +211,7 @@
 										<label class="col-md-4 col-sm-4 control-label"><fmt:message key="email.id" bundle="${msg}" /><span
 											class="text-danger">*</span></label>
 										<div class="col-md-6 col-sm-6">
-											<input required="true"type="email" name="email"
+											<input required="true"type="email" name="email" id="add_company_primary_email_id"
 												data-ng-model="domain.email" class="form-control"
 												data-ng-class="{'error': domainForm.email.$invalid && formSubmitted}">
 											<i tooltip="Email of the company"
@@ -232,7 +232,7 @@
 										<label class="col-md-4 col-sm-4 control-label"><fmt:message key="phone.number" bundle="${msg}" /><span
 											class="text-danger">*</span></label>
 										<div class="col-md-6 col-sm-6">
-											<input type = "text" required="true" ng-model="domain.phone" name="phone" ng-pattern="/^\d+$/" maxlength="12" class="form-control"
+											<input type = "text" required="true" id="add_company_primary_phone_number" ng-model="domain.phone" name="phone" ng-pattern="/^\d+$/" maxlength="12" class="form-control"
 												data-ng-class="{'error': domainForm.email.$invalid && formSubmitted}">
 											<span ng-show="domainForm.phone.$error.pattern">Not a valid number!</span>
 
@@ -256,7 +256,7 @@
 									<div class="row">
 										<label class="col-md-4 col-sm-4 control-label"><fmt:message key="first.name" bundle="${msg}" /></label>
 										<div class="col-md-6 col-sm-6">
-											<input type="text" name="primaryFirstName"
+											<input type="text" name="primaryFirstName" id="add_company_secondary_first_name"
 												data-ng-model="domain.secondaryContactName" class="form-control">
 											<i tooltip="Secondary first name of the company"
 												class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
@@ -268,7 +268,7 @@
 									<div class="row">
 										<label class="col-md-4 col-sm-4 control-label"><fmt:message key="last.name" bundle="${msg}" /></label>
 										<div class="col-md-6 col-sm-6">
-											<input type="text" name="SecondarylastName"
+											<input type="text" name="SecondarylastName" id="add_company_secondary_last_name"
 												data-ng-model="domain.secondaryContactLastName" class="form-control">
 											<i tooltip="Last name of the company"
 												class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
@@ -281,7 +281,7 @@
 								<label class="col-md-4 col-sm-4 control-label"><fmt:message key="email.id" bundle="${msg}" /></label>
 
 										<div class="col-md-6 col-sm-6">
-											<input type="text" name="Secondaryemail" data-ng-model="domain.secondaryContactEmail"
+											<input type="text" name="Secondaryemail" data-ng-model="domain.secondaryContactEmail" id="add_company_secondary_email_id"
 												class="form-control"> <i
 												tooltip="Email of the company"
 												class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
@@ -293,7 +293,7 @@
 									<div class="row">
 										<label class="col-md-4 col-sm-4 control-label"><fmt:message key="phone.number" bundle="${msg}" /></label>
 										<div class="col-md-6 col-sm-6">
-											<input type="text" valid-number name="Secondaryphone"
+											<input type="text" valid-number name="Secondaryphone" id="add_company_secondary_phone_number"
 												data-ng-model="domain.secondaryContactPhone" class="form-control">
 											<i tooltip="Phone of the company"
 												class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
@@ -309,8 +309,8 @@
 		<div class="modal-footer">
             <get-loader-image data-ng-show="showLoader"></get-loader-image>
 
-			<a class="btn btn-default" data-ng-hide="showLoader" data-ng-click="cancel()"><fmt:message key="common.cancel" bundle="${msg}" /></a>
-			<button class="btn btn-info" data-ng-hide="showLoader" type="submit"><fmt:message key="common.add" bundle="${msg}" />	</button>
+			<a class="btn btn-default" id="add_company_cancel_button" data-ng-hide="showLoader" data-ng-click="cancel()"><fmt:message key="common.cancel" bundle="${msg}" /></a>
+			<button class="btn btn-info" id="add_company_add_button" data-ng-hide="showLoader" type="submit"><fmt:message key="common.add" bundle="${msg}" />	</button>
 		</div>
 
 	</div>

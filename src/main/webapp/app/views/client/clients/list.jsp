@@ -28,10 +28,10 @@ Navigation
 		                                <div class="clearfix"></div>
 		                                </div>
 		                            </div>
-		                            <a class="btn btn-info" data-ng-click="addDomain('lg',domain)"><span class="pe-7s-add-user pe-lg font-bold m-r-xs"></span><fmt:message key="add.company" bundle="${msg}" /></a>
-                                    <a class="btn btn-info " ui-sref="client.client" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
+		                            <a class="btn btn-info" id="company_add_button" data-ng-click="addDomain('lg',domain)"><span class="pe-7s-add-user pe-lg font-bold m-r-xs"></span><fmt:message key="add.company" bundle="${msg}" /></a>
+                                    <a class="btn btn-info" id="company_refresh_button" ui-sref="client.client" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
 		                        </div>
-                                <div class="pull-right">
+                                <div class="pull-right" id="company_quick_search">
                                     <panda-quick-search></panda-quick-search>
                                     <div class="clearfix"></div>
                                     <span class="pull-right m-l-sm m-t-sm"></span>
@@ -41,7 +41,7 @@ Navigation
                         <div class="clearfix"></div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12 ">
+                        <div class="col-md-12 col-sm-12 col-xs-12" id="company_pagination_container">
                             <div class="white-content">
                             <div data-ng-show = "showLoader" style="margin: 1%">
     				  		<get-loader-image data-ng-show="showLoader"></get-loader-image>
@@ -69,13 +69,13 @@ Navigation
                                                 <td>{{domain.email}}</td>
                                                 <td>{{domain.phone}}</td>
                                                 <td>
-											    <a class="icon-button" title="<fmt:message key="common.edit" bundle="${msg}" />" data-ng-click="edit('lg', domain)">
+											    <a class="icon-button test_company_edit_button" id="company_edit_button_{{domain_id}}" data-unique-field="{{domain.name}}" title="<fmt:message key="common.edit" bundle="${msg}" />" data-ng-click="edit('lg', domain)">
                                                     <span class="fa fa-edit"> </span>
                                                 </a>
-												<a class="icon-button" data-ng-click="getDepartmentsByDomain(domain.id)" ui-sref="client.client.quota({id: {{ domain.id }}, view: 'client-quota'})" title="<fmt:message key="common.edit.quota" bundle="${msg}" />">
+												<a class="icon-button test_company_edit_quota_button" id="company_edit_quota_button_{{domain_id}}" data-unique-field="{{domain.name}}" data-ng-click="getDepartmentsByDomain(domain.id)" ui-sref="client.client.quota({id: {{ domain.id }}, view: 'client-quota'})" title="<fmt:message key="common.edit.quota" bundle="${msg}" />">
                                                     <span class="fa font-bold pe-7s-edit"> </span>
                                                 </a>
-                                                <a class="icon-button" title="<fmt:message key="common.delete" bundle="${msg}" />" data-ng-click="delete('sm', domain)" ><span class="fa fa-trash"></span></a>
+                                                <a class="icon-button test_company_delete_button" id="company_delete_button_{{domain_id}}" data-unique-field="{{domain.name}}" title="<fmt:message key="common.delete" bundle="${msg}" />" data-ng-click="delete('sm', domain)" ><span class="fa fa-trash"></span></a>
                                                 </td>
                                             </tr>
                                         </tbody>
