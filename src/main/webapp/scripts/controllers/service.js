@@ -220,6 +220,7 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
             template.hypervisorId = template.hypervisor.id;
             template.osCategoryId = template.osCategory.id;
             template.osTypeId = template.osType.id;
+	     template.submitCheck = false ;
             delete template.zone;
             delete template.hypervisor;
             delete template.osCategory;
@@ -415,7 +416,7 @@ function templateEditCtrl($scope, $state, $stateParams, $log, $window, appServic
             template.hypervisorId = template.hypervisor.id;
             template.osCategoryId = template.osCategory.id;
             template.osTypeId = template.osType.id;
-
+	     template.submitCheck = false ;
             delete template.zone;
             delete template.hypervisor;
             delete template.osCategory;
@@ -938,30 +939,66 @@ function networkDetailsCtrl($scope, network, $modalInstance) {
 }
 ;
 
-function miscellaneousListCtrl($scope, modalService, $log, promiseAjax, $stateParams, globalConfig, localStorageService, $window, notify) {
-    var hasServer = promiseAjax.httpRequest("GET", "api/catalog-miscellaneous.json");
-    hasServer.then(function (result) {  // this is only run after $http
-										// completes
-        $scope.miscellaneousList = result;
-        if (!angular.isUndefined($stateParams.id)) {
-            var miscellaneousId = $stateParams.id - 1;
-            $scope.miscellaneous = result[miscellaneousId];
-        }
-    });
-
+	$scope.miscellaneous = {};
+function miscellaneousListCtrl($scope, modalService, $log, promiseAjax,appService, $stateParams, globalConfig, localStorageService, $window, notify) {
+   
+		$scope.formElements = {};	
     $scope.delete = function () {
         modalService.trigger('app/views/servicecatalog/confirm-delete.jsp', 'md', 'Delete Confirmation');
     };
 
-    $scope.save = function (form) {
-        $scope.formSubmitted = true;
-        if (form.$valid) {
-            $scope.homerTemplate = 'app/views/notification/notify.jsp';
-            notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+	  $scope.templateCostList = function () {
+        $scope.showLoader = true;
+        var hastemplateList = appService.crudService.listAll("miscellaneous/list");
+        hastemplateList.then(function (result) {  // this is only run after $http completes0
+            $scope.miscellaneousList = result;
+            $scope.showLoader = false;
+        });
 
-
-        }
     };
+    $scope.templateCostList();
+
+ // Zone list from server
+    $scope.zones = {};
+    var haszoneList = appService.crudService.listAll("zones/list");
+    haszoneList.then(function (result) {
+    	$scope.formElements.zoneList = result;
+    });
+
+                  $scope.save = function (form) {
+                    $scope.formSubmitted = true;
+                    if (form.$valid) {
+                    	$scope.showLoader = true;
+                        var miscellaneous = angular.copy($scope.miscellaneous);
+                        if(!angular.isUndefined($scope.miscellaneous.domain)) {
+                        	miscellaneous.domainId = miscellaneous.zone.id;
+                        	delete miscellaneous.zone;
+                        }
+                        var hasServer = appService.crudService.add("miscellaneous", miscellaneous);
+                        hasServer.then(function (result) {  // this is only run after $http completes
+                            $scope.formSubmitted = false;
+                            $scope.showLoader = false;
+                            appService.notify({message: 'Cost added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+    			$scope.templateCostList();
+			$scope.miscellaneous = {};
+                        }).catch(function (result) {
+                        	$scope.showLoader = false;
+            		    if (!angular.isUndefined(result.data)) {
+                		if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                  	   	 var msg = result.data.globalError[0];
+                  	   	 $scope.showLoader = false;
+                	    	 appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                    	} else if (result.data.fieldErrors != null) {
+                       	$scope.showLoader = false;
+                        	angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                            	$scope.TemplateForm[key].$invalid = true;
+                            	$scope.TemplateForm[key].errorMessage = errorMessage;
+                        	});
+                		}
+                	}
+            	});
+                    	}
+                	};
 
 //    $scope.networkType = {
 //            networktypeList: {
