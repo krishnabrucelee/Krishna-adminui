@@ -44,6 +44,15 @@
                         </div>
                         <div class="pull-right">
 						<panda-quick-search></panda-quick-search>
+							<span class="pull-right m-r-sm">
+								<select
+									class="form-control input-group col-xs-5" name="domainView"
+									data-ng-model="domainView"
+									data-ng-change="selectDomainView(1)"
+									data-ng-options="domainView.name for domainView in formElements.domainList">
+									<option value="">All Domain</option>
+								</select>
+							</span>
                             <div class="clearfix"></div>
                             <span class="pull-right m-l-sm m-t-sm">
 
@@ -70,7 +79,12 @@
                                <th><fmt:message key="common.action" bundle="${msg}" /></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody data-ng-hide="storageList.length > 0">
+                               <tr>
+                                   <td class="col-md-5 col-sm-5" colspan="5"><fmt:message key="common.no.records.found" bundle="${msg}" />!!</td>
+                               </tr>
+                           </tbody>
+                           <tbody data-ng-show="storageList.length > 0">
                             <tr data-ng-repeat="storage in filteredCount = (storageList| filter: quickSearch| orderBy:sort.column:sort.descending)">
                                 <td>
                                     {{ storage.name}}

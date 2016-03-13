@@ -31,11 +31,14 @@ function domainListCtrl($scope,$state, promiseAjax, $log,appService, notify, cru
     $scope.domain = {};
     $scope.domainElements={
 
-    };    
+    };
+    $scope.paginationObject.sortOrder = '+';
+    $scope.paginationObject.sortBy = 'name';    
 
     // User List
     $scope.list = function (pageNumber) {
-alert('hi');
+        appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
+        appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
     	$scope.showLoader = true;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasDomain = crudService.list("domains", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});

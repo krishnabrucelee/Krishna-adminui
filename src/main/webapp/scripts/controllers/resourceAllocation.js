@@ -74,6 +74,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
     }
 
 	$scope.getDomain = function(domain) {
+		$scope.isResourceDefined = 'defined';
 		var hasResource = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceDomains/domain/"+ domain.id);
 		hasResource.then(function (result) {
 			$scope.showLoader = false;
@@ -253,13 +254,16 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 	$scope.getDepartmentsByDomain = function() {
 
 		$scope.resource ='domain';
+		$scope.isResourceDefined = 'defined';
 
 
 		$scope.showLoader = true;
 		$scope.resourceQuota.department = "";
 		$scope.resourceQuota.project = "";
 		if(angular.isUndefined($scope.resourceQuota.domain)) {
-			$scope.resourceQuota.domain = {id:0};
+			$state.reload();
+			$scope.showLoader = false;
+			$scope.isResourceDefined = 'undefined';
 		}
 		var hasResource = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceDomains/domain/"+$scope.resourceQuota.domain.id);
 		hasResource.then(function (result) {
@@ -316,10 +320,12 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 	// Get the projects by department.
 	$scope.getProjectsByDepartment = function() {
 		$scope.resource ='department';
+		$scope.isResourceDefined = 'defined';
 		$scope.showLoader = true;
 		$scope.resourceQuota.project= "";
 		if(angular.isUndefined($scope.resourceQuota.department) || $scope.resourceQuota.department == null) {
 			$scope.resourceQuota.department = {id:0};
+			$scope.isResourceDefined = 'undefined';
 		}
 		var hasResource = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceDepartments/department/"+$scope.resourceQuota.department.id);
 		hasResource.then(function (result) {
@@ -352,6 +358,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 			$scope.projectList = result;
         });
 
+
 		var hasResourceDomainId = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceDomains/departmentId/"+$scope.resourceQuota.department.domain.id);
 		hasResourceDomainId.then(function (result) {  // this is only run after $http completes
 			$scope.resourceDomainCount = result;
@@ -367,10 +374,13 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 
 	$scope.getProjectResourceLimits = function() {
 		$scope.resource ='project';
+		$scope.isResourceDefined = 'defined';
 
 		$scope.showLoader = true;
 		if(angular.isUndefined($scope.resourceQuota.project) || $scope.resourceQuota.project == null) {
 			$scope.resourceQuota.project = {id:0};
+			$scope.showLoader = false;
+			$scope.isResourceDefined = 'undefined';
 		}
 		var hasResource = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceProjects/project/"+$scope.resourceQuota.project.id);
 		hasResource.then(function (result) {
@@ -382,7 +392,6 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 				$scope.resourceQuota.domain = resourceQuota.domain;
 				$scope.resourceQuota.department = resourceQuota.department;
 				$scope.resourceQuota.project = resourceQuota.project;
-
 			}
 
 			angular.forEach(result, function(object, key) {

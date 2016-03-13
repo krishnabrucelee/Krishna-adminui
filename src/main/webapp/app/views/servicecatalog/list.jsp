@@ -36,6 +36,15 @@
                         </div>
                         <div class="pull-right">
 							<panda-quick-search></panda-quick-search>
+							<span class="pull-right m-r-sm">
+								<select
+									class="form-control input-group col-xs-5" name="domainView"
+									data-ng-model="domainView"
+									data-ng-change="selectDomainView(1)"
+									data-ng-options="domainView.name for domainView in domain.domaintypeList">
+									<option value="">All Domain</option>
+								</select>
+							</span>
                             <div class="clearfix"></div>
                             <span class="pull-right m-l-sm m-t-sm">
 
