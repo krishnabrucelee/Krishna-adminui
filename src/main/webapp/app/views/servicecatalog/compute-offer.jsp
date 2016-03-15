@@ -269,10 +269,10 @@
 										</label>
 										<div class="col-md-6  col-sm-6 col-xs-6">
 											<input required="true"  valid-number type="text" name="speed"
-												data-ng-model="compute.clockSpeed"  minlength= "4" maxlength ="4" class="form-control"
+												data-ng-model="compute.clockSpeed"  minlength= "4" maxlength ="4" data-ng-keyup= "validateNumbers(compute.clockSpeed)" class="form-control"
 												data-ng-class="{'error': computeForm.speed.$invalid && formSubmitted}">
 											<span style="color:red" ng-show="computeForm.speed.$error.minlength"><fmt:message key="not.a.valid.range" bundle="${msg}" /></span>
-											<span style="color:red" ng-show="computeForm.speed.$error.maxength"><fmt:message key="not.a.valid.range" bundle="${msg}" /></span>
+											<span style="color:red" ng-show="computeForm.speed.$error.maxlength"><fmt:message key="not.a.valid.range" bundle="${msg}" /></span>
 
 											<div class="error-area"
 												data-ng-show="computeForm.speed.$invalid && formSubmitted">
