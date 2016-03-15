@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<form name="TemplateForm" data-ng-submit="save(TemplateForm)" data-ng-controller="miscellaneousListCtrl" >
+<form name="TemplateForm" data-ng-submit="save(TemplateForm)" data-ng-controller="miscellaneousListCtrl"  novalidate = "">
     <div class="row">
         <div class="col-md-12 col-sm-12" >
             <div class="hpanel">
@@ -25,8 +25,8 @@
                         <div class="col-md-6 col-sm-6">
                                   <div class="form-group"ng-class="{'text-danger': TemplateForm.zone.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label "><fmt:message key="template.zone" bundle="${msg}" /><span class="text-danger">*</span></label>
-                                <div class="col-md-7  col-sm-7 col-xs-7">
+                                <label class="col-md-4 col-sm-3 control-label "><fmt:message key="template.zone" bundle="${msg}" /><span class="text-danger">*</span></label>
+                                <div class="col-md-6  col-sm-7 col-xs-7">
                                     <select required="true"  class="form-control " name="zone" data-ng-model="miscellaneous.zone" ng-options="zone.name for zone in formElements.zoneList" data-ng-class="{'error': TemplateForm.zone.$invalid && formSubmitted}" >
                                         <option value="">Select</option>
                                     </select>
@@ -38,13 +38,26 @@
                             <div class="form-group">
 
                                 <div class="row">
-                                    <label class="col-md-4 col-sm-4 control-label font-normal">Cost per GB/day (<app-currency class="text-danger"></app-currency>)</label>
+                                    <label class="col-md-4 col-sm-4 control-label font-normal">Cost per GB/month (<app-currency class="text-danger"></app-currency>)</label>
                                     <div class="col-md-6 col-sm-6  col-xs-6">
                                         <input  type="text" valid-decimal name="description" data-ng-model="miscellaneous.costperGB" class="form-control" placeholder="10.00" >
 
                                     </div>
                                 </div>
                             </div>
+                         <div class="form-group">
+
+                                <div class="row">
+                             <label class="col-md-4 col-sm-4 control-label font-normal">Cost per GB/day</label>                                    <div class="col-md-6 col-sm-6  col-xs-6">
+								<div class="col-md-6 col-sm-6">
+                                       <p class="text-danger">{{
+											miscellaneous.costperGB / 30 |
+										number:4}}</p>
+                                        </div>
+
+
+							</div>
+							</div>
                              <div class="form-group">
                                 <div class="row  ">
                                     <div class="col-md-4 col-sm-4"></div>
@@ -53,11 +66,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <label class="col-md-2 col-sm-2  no-padding m-t-sm">
-								<p class="text-danger">{{
-									miscellaneous.costperGB / 30 |
-									number:4}}/day</p>
-							</label>
+        </div>
+
                         </div>
                         <div class="col-md-6 col-sm-6" >
 
@@ -90,6 +100,5 @@
 
                 </div>
             </div>
-        </div>
     </div>
 </form>
