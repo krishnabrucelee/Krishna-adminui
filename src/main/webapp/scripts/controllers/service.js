@@ -1158,6 +1158,22 @@ function computeListCtrl($scope, $state, $stateParams, appService, $window, glob
     	$scope.list(1);
     };
 
+// Number validation 
+ $scope.validateNumbers = function(age) {
+		$scope.age = age ;                   
+                    var age = parseInt($scope.age, 4);                  
+                    if(age < 1000 ) {
+ 			submitError = true;
+                        $scope.homerTemplate = 'app/views/notification/notify.jsp';
+                        appService.notify({
+                            message: 'Please enter a valid range',
+                            classes: 'alert-danger',
+                            templateUrl: $scope.homerTemplate
+                        });
+  			$scope.age = "";
+                        return false;
+                    }
+                }
     // Open dialogue box to create Compute Offer
 
     $scope.compute = {
