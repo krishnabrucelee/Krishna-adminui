@@ -960,7 +960,7 @@ function miscellaneousListCtrl($scope, modalService, $log, promiseAjax,appServic
 
 	  $scope.templateCostList = function () {
         $scope.showLoader = true;
-        var hastemplateList = appService.crudService.listAll("miscellaneous/list");
+        var hastemplateList = appService.crudService.listAll("miscellaneous/listtemplate");
         hastemplateList.then(function (result) {  // this is only run after $http completes0
             $scope.miscellaneousList = result;
             $scope.showLoader = false;
@@ -985,12 +985,155 @@ function miscellaneousListCtrl($scope, modalService, $log, promiseAjax,appServic
                         	miscellaneous.domainId = miscellaneous.zone.id;
                         	delete miscellaneous.zone;
                         }
+			miscellaneous.costType = 'TEMPLATE';
                         var hasServer = appService.crudService.add("miscellaneous", miscellaneous);
                         hasServer.then(function (result) {  // this is only run after $http completes
                             $scope.formSubmitted = false;
                             $scope.showLoader = false;
                             appService.notify({message: 'Cost added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
     			$scope.templateCostList();
+			$scope.miscellaneous = {};
+                        }).catch(function (result) {
+                        	$scope.showLoader = false;
+            		    if (!angular.isUndefined(result.data)) {
+                		if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                  	   	 var msg = result.data.globalError[0];
+                  	   	 $scope.showLoader = false;
+                	    	 appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                    	} else if (result.data.fieldErrors != null) {
+                       	$scope.showLoader = false;
+                        	angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                            	$scope.TemplateForm[key].$invalid = true;
+                            	$scope.TemplateForm[key].errorMessage = errorMessage;
+                        	});
+                		}
+                	}
+            	});
+                    	}
+                	};
+
+  $scope.vmsnapshotCostList = function () {
+        $scope.showLoader = true;
+        var hasvmsnapshotCostList = appService.crudService.listAll("miscellaneous/listvmsnapshot");
+        hasvmsnapshotCostList.then(function (result) {  // this is only run after $http completes0
+            $scope.vmsnapshotList = result;
+            $scope.showLoader = false;
+        });
+
+    };
+    $scope.vmsnapshotCostList();
+
+	  $scope.savevmsnapshot = function (form) {
+                    $scope.formSubmitted = true;
+                    if (form.$valid) {
+                    	$scope.showLoader = true;
+                        var miscellaneous = angular.copy($scope.miscellaneous);
+                        if(!angular.isUndefined($scope.miscellaneous.domain)) {
+                        	miscellaneous.domainId = miscellaneous.zone.id;
+                        	delete miscellaneous.zone;
+                        }
+			miscellaneous.costType = 'VMSNAPSHOT';
+                        var hasServer = appService.crudService.add("miscellaneous", miscellaneous);
+                        hasServer.then(function (result) {  // this is only run after $http completes
+                            $scope.formSubmitted = false;
+                            $scope.showLoader = false;
+                            appService.notify({message: 'Cost added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+    			$scope.vmsnapshotCostList();
+			$scope.miscellaneous = {};
+                        }).catch(function (result) {
+                        	$scope.showLoader = false;
+            		    if (!angular.isUndefined(result.data)) {
+                		if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                  	   	 var msg = result.data.globalError[0];
+                  	   	 $scope.showLoader = false;
+                	    	 appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                    	} else if (result.data.fieldErrors != null) {
+                       	$scope.showLoader = false;
+                        	angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                            	$scope.TemplateForm[key].$invalid = true;
+                            	$scope.TemplateForm[key].errorMessage = errorMessage;
+                        	});
+                		}
+                	}
+            	});
+                    	}
+                	};
+
+	$scope.ipCostList = function () {
+        $scope.showLoader = true;
+        var hasipCostList = appService.crudService.listAll("miscellaneous/listbyipcost");
+        hasipCostList.then(function (result) {  // this is only run after $http completes0
+            $scope.ipList = result;
+            $scope.showLoader = false;
+        });
+
+    };
+    $scope.ipCostList();
+
+			  $scope.saveip = function (form) {
+                    $scope.formSubmitted = true;
+                    if (form.$valid) {
+                    	$scope.showLoader = true;
+                        var miscellaneous = angular.copy($scope.miscellaneous);
+                        if(!angular.isUndefined($scope.miscellaneous.domain)) {
+                        	miscellaneous.domainId = miscellaneous.zone.id;
+                        	delete miscellaneous.zone;
+                        }
+			miscellaneous.costType = 'IPADDRESS';
+                        var hasServer = appService.crudService.add("miscellaneous", miscellaneous);
+                        hasServer.then(function (result) {  // this is only run after $http completes
+                            $scope.formSubmitted = false;
+                            $scope.showLoader = false;
+                            appService.notify({message: 'Cost added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+    			$scope.ipCostList();
+			$scope.miscellaneous = {};
+                        }).catch(function (result) {
+                        	$scope.showLoader = false;
+            		    if (!angular.isUndefined(result.data)) {
+                		if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                  	   	 var msg = result.data.globalError[0];
+                  	   	 $scope.showLoader = false;
+                	    	 appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                    	} else if (result.data.fieldErrors != null) {
+                       	$scope.showLoader = false;
+                        	angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                            	$scope.TemplateForm[key].$invalid = true;
+                            	$scope.TemplateForm[key].errorMessage = errorMessage;
+                        	});
+                		}
+                	}
+            	});
+                    	}
+                	};
+
+	$scope.volumesnapList = function () {
+        $scope.showLoader = true;
+        var hasvolumesnapList = appService.crudService.listAll("miscellaneous/listvolumesnapshot");
+        hasvolumesnapList.then(function (result) {  // this is only run after $http completes0
+            $scope.volumeList = result;
+            $scope.showLoader = false;
+        });
+
+    };
+    $scope.volumesnapList();
+			
+		
+		   $scope.saveVolumeSnapshot = function (form) {
+                    $scope.formSubmitted = true;
+                    if (form.$valid) {
+                    	$scope.showLoader = true;
+                        var miscellaneous = angular.copy($scope.miscellaneous);
+                        if(!angular.isUndefined($scope.miscellaneous.domain)) {
+                        	miscellaneous.domainId = miscellaneous.zone.id;
+                        	delete miscellaneous.zone;
+                        }
+			miscellaneous.costType = 'VOLUMESNAPSHOT';
+                        var hasServer = appService.crudService.add("miscellaneous", miscellaneous);
+                        hasServer.then(function (result) {  // this is only run after $http completes
+                            $scope.formSubmitted = false;
+                            $scope.showLoader = false;
+                            appService.notify({message: 'Cost added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+    			$scope.volumesnapList();
 			$scope.miscellaneous = {};
                         }).catch(function (result) {
                         	$scope.showLoader = false;
