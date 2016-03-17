@@ -37,7 +37,7 @@ function userListCtrl($scope, $state, $stateParams, modalService,appService, $lo
             	hasUserList =  appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "users" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
             } else {
             	hasUserList =  promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "users/listByUserDomain"
-    				+"?lang=" +appService.localStorageService.cookie.get('language')
+    				+"?lang=" +appService.localStorageService.cookie.get('language')+"&flag=pandaAdminPanel"
     				+ "&domainId="+$scope.domainView.id+"&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
             }
 
@@ -65,7 +65,7 @@ function userListCtrl($scope, $state, $stateParams, modalService,appService, $lo
         	hasUsers = crudService.list("users/listall", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
         } else {
         	hasUsers =  promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "users/listByUserDomain"
-				+"?lang=" +appService.localStorageService.cookie.get('language')
+				+"?lang=" +appService.localStorageService.cookie.get('language')+"&flag=pandaAdminPanel"
 				+ "&domainId="+$scope.domainView.id+"&sortBy="+globalConfig.sort.sortOrder+globalConfig.sort.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
         }
         hasUsers.then(function (result) {  // this is only run after $http completes0
