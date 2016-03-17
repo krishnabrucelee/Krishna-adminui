@@ -35,34 +35,22 @@
                                 </div>
                             </div>
                         </div>
-                            <div class="form-group">
+                            <div class="form-group" ng-class="{'text-danger': TemplateForm.description.$invalid && formSubmitted}">
 
                                 <div class="row">
-                                    <label class="col-md-4 col-sm-4 control-label font-normal">Cost per GB/month (<app-currency class="text-danger"></app-currency>)</label>
+                                    <label class="col-md-4 col-sm-4 control-label font-normal">Cost per GB/day (<app-currency class="text-danger"></app-currency>)<span class="text-danger">*</span></label>
                                     <div class="col-md-6 col-sm-6  col-xs-6">
-                                        <input  type="text" valid-decimal name="description" data-ng-model="miscellaneous.costperGB" class="form-control" placeholder="10.00" >
+                                        <input required="true" type="text" valid-price name="description" data-ng-if =" miscellaneous.costType ='TEMPLATE'"  data-ng-model="miscellaneous.costperGB" data-ng-class="{'error': TemplateForm.description.$invalid && formSubmitted}" class="form-control" >
 
                                     </div>
                                 </div>
                             </div>
                          <div class="form-group">
-
-                                <div class="row">
-                             <label class="col-md-4 col-sm-4 control-label font-normal">Cost per GB/day</label>                                    <div class="col-md-6 col-sm-6  col-xs-6">
-								<div class="col-md-6 col-sm-6">
-                                       <p class="text-danger">{{
-											miscellaneous.costperGB / 30 |
-										number:4}}</p>
-                                        </div>
-
-
-							</div>
-							</div>
                              <div class="form-group">
                                 <div class="row  ">
                                     <div class="col-md-4 col-sm-4"></div>
                                     <div class="col-md-6 col-sm-6  col-xs-6 ">
-                                        <button class="btn btn-info pull-right" type="submit" ng-disabled="form.bandwidthForm.$invalid" >Update</button>
+                                        <button class="btn btn-info pull-right" type="submit" ng-disabled="form.TemplateForm.$invalid" >Update</button>
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +66,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Zone</th>
-                                                    <th>Cost/GB/month</th>
+                                                    <th>Cost/GB/day</th>
 
                                                 </tr>
                                             </thead>

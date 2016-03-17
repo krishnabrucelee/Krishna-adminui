@@ -75,7 +75,7 @@
                             <td>{{ template.osType.description}}</td>
                             <td>{{ template.zone.name}}</td>
                             <td>{{ template.hypervisor.name}}</td>
-                            <td><b class="text-danger">{{ template.templateCost[0].cost}}<span>/ day</span></b></td>
+                            <td><b class="text-danger"> {{ template.templateCost[0].cost || 0}}<span data-ng-if = "!template.oneTimeChargeable" >/ day</span></b></td>
                             <td>{{ template.status }}</td>
                             <td>
                                 <a class="icon-button" title="<fmt:message key="common.edit" bundle="${msg}" />" ui-sref="servicecatalog.list-templatestore.list-view-template-edit({id: {{ template.id}}})"  ><span class="fa fa-edit"></span></a>

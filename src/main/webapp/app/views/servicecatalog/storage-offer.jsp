@@ -302,14 +302,7 @@
 								<input type="text" valid-price name="costmonth"
 									data-ng-model="storage.storagePrice[0].costPerMonth" class="form-control">
 							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4">
-								<b>
-								<p class="text-danger">{{
-									storage.storagePrice[0].costPerMonth / 30 |
-									number:4}}/day </p>
-									<!-- <p class="text-danger m-t-sm">{{ storage.costPerHourGB / 30 }}/day</p> -->
-								</b>
-							</div>
+
 						</div>
 					</div>
 					<div class="form-group" data-ng-if="storage.isCustomDisk " >
@@ -320,12 +313,7 @@
 								<input  type="text" valid-price name="costmonth"
 									data-ng-model="storage.storagePrice[0].costGbPerMonth" class="form-control">
 							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4">
-								<b>	<p class="text-danger">{{
-									storage.storagePrice[0].costGbPerMonth / 30 |
-									number:4}}/day </p>
-								</b>
-							</div>
+
 						</div>
 					</div>
 					</div>
@@ -355,46 +343,6 @@
 					</div>
 				</div>
 				</div>
-				<%-- <div class="row">
-				<div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
-					<div data-ng-show="storage.qosType == 'Storage'" >
-						<div class="form-group" data-ng-if="!storage.isCustomizedIops">
-							<div class="row">
-								<label
-									class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.cost.for.iops" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)
-								</label>
-								<div class="col-md-4  col-sm-4 col-xs-4">
-									<input type="text" name="costperiops" valid-price
-										data-ng-model="storage.storagePrice[0].costPerIops" class="form-control">
-								</div>
-								<div class="col-md-4 col-sm-4 col-xs-4">
-								<b>
-									<p class="text-danger">{{ storage.storagePrice[0].costPerIops / 30 |
-									number:4 }}/day </p>
-								</b>
-							</div>
-
-							</div>
-						</div>
-						<div class="form-group" data-ng-if="storage.isCustomizedIops">
-							<div class="row">
-								<label
-									class="col-md-4 col-sm-4 col-xs-4 control-label font-normal"><fmt:message key="common.cost.per.iops" bundle="${msg}" />(<app-currency class="text-danger"></app-currency>)
-								</label>
-								<div class="col-md-4  col-sm-4 col-xs-4">
-									<input type="text" name="costperiops" valid-price
-										data-ng-model="storage.storagePrice[0].costIopsPerMonth" class="form-control">
-								</div>
-								<div class="col-md-4 col-sm-4 col-xs-4">
-								<b>
-									<p class="text-danger m-t-sm">{{ storage.storagePrice[0].costIopsPerMonth / 30 | number:4 }}/day </p>
-								</b>
-							</div>
-							</div>
-						</div>
-					</div>
-					</div>
-					</div> --%>
 
 				<div class="row">
 					<div class="col-md-12  col-sm-12">

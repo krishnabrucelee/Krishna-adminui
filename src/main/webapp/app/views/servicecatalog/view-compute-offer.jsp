@@ -258,12 +258,7 @@
 									class="help-block m-b-none"
 									ng-show="computeForm.instanceRunningCostVcpu.$invalid && formSubmitted"></span>
 							</div>
-							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
-								<p class="text-danger">{{
-									compute.computeCost[0].instanceRunningCostPerVcpu / 30|
-									number:4}}/day</p>
-							</label>
-						</div>
+							</div>
 						<div class="row" data-ng-show="!compute.customized">
 							<label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message
 									key="instance.running.cost.for.vcpu.core" bundle="${msg}" />(<app-currency
@@ -275,11 +270,6 @@
 									class="help-block m-b-none"
 									ng-show="computeForm.instanceRunningCostVcpu.$invalid && formSubmitted"></span>
 							</div>
-							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
-								<p class="text-danger">{{
-									compute.computeCost[0].instanceRunningCostVcpu / 30 |
-									number:4}}/day</p>
-							</label>
 						</div>
 					</div>
 					<div class="form-group">
@@ -295,12 +285,7 @@
 									class="help-block m-b-none"
 									ng-show="computeForm.instanceRunningCostMemory.$invalid && formSubmitted"></span>
 							</div>
-							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
-								<p class="text-danger">{{
-										compute.computeCost[0].instanceRunningCostPerMB / 30 |
-									number:4}}/day</p>
-							</label>
-						</div>
+							</div>
 						<div class="row" data-ng-show="!compute.customized">
 							<label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message
 									key="instance.running.cost.for.memory" bundle="${msg}" />(<app-currency
@@ -313,11 +298,6 @@
 									class="help-block m-b-none"
 									ng-show="computeForm.instanceRunningCostMemory.$invalid && formSubmitted"></span>
 							</div>
-							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
-								<p class="text-danger">{{
-									compute.computeCost[0].instanceRunningCostMemory / 30 |
-									number:4}}/day</p>
-							</label>
 						</div>
 					</div>
 						<div class="form-group">
@@ -333,53 +313,8 @@
 									class="help-block m-b-none"
 									ng-show="computeForm.instanceRunningCostSpeed.$invalid && formSubmitted"></span>
 							</div>
-							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
-								<p class="text-danger">
-									{{
-									compute.computeCost[0].instanceRunningCostPerMhz / 30 |
-									number:4}}/day</p>
-							</label>
 						</div>
 					</div>
-					<div class="form-group">
-						<div class="row" data-ng-show="compute.customizedIops"
-							data-ng-if="compute.qosType == 'STORAGE'">
-							<label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message
-									key="instance.running.cost.per.iops" bundle="${msg}" />(<app-currency
-									class="text-danger"></app-currency>)</label>
-							<div class="col-md-3  col-sm-3 col-xs-3">
-								<input type="text" valid-price name="instanceRunningCostIops"
-									data-ng-model="compute.computeCost[0].instanceRunningCostPerIops"
-									class="form-control"> <span
-									class="help-block m-b-none"
-									ng-show="computeForm.instanceRunningCostIops.$invalid && formSubmitted"></span>
-							</div>
-							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
-								<p class="text-danger">{{
-									compute.computeCost[0].instanceRunningCostPerIops / 30|
-									number:4}}/day</p>
-							</label>
-						</div>
-						<div class="row" data-ng-show="!compute.customizedIops"
-							data-ng-if="compute.qosType == 'STORAGE'">
-							<label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message
-									key="instance.running.cost.for.iops" bundle="${msg}" />(<app-currency
-									class="text-danger"></app-currency>)</label>
-							<div class="col-md-3  col-sm-3 col-xs-3">
-								<input type="text" valid-price name="instanceRunningCostIops"
-									data-ng-model="compute.computeCost[0].instanceRunningCostIops"
-									class="form-control"> <span
-									class="help-block m-b-none"
-									ng-show="computeForm.instanceRunningCostIops.$invalid && formSubmitted"></span>
-							</div>
-							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
-								<p class="text-danger">{{
-									compute.computeCost[0].instanceRunningCostIops / 30 |
-									number:4}}/day</p>
-							</label>
-						</div>
-					</div>
-
 				</div>
 				<div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
 
@@ -409,11 +344,6 @@
 									class="help-block m-b-none"
 									ng-show="computeForm.instanceStoppageCostVcpu.$invalid && formSubmitted"></span>
 							</div>
-							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
-								<p class="text-danger">{{
-									compute.computeCost[0].instanceStoppageCostPerVcpu / 30|
-									number:4}}/day</p>
-							</label>
 						</div>
 						<div class="row" data-ng-show="!compute.customized">
 							<label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message
@@ -426,11 +356,6 @@
 									class="help-block m-b-none"
 									ng-show="computeForm.instanceStoppageCostVcpu.$invalid && formSubmitted"></span>
 							</div>
-							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
-								<p class="text-danger">{{
-									compute.computeCost[0].instanceStoppageCostVcpu / 30 |
-									number:4}}/day</p>
-							</label>
 						</div>
 					</div>
 
@@ -447,12 +372,6 @@
 									class="help-block m-b-none"
 									ng-show="computeForm.instanceStoppageCostMemory.$invalid && formSubmitted"></span>
 							</div>
-							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
-								<p class="text-danger">
-									{{
-									compute.computeCost[0].instanceStoppageCostPerMB / 30 |
-									number:4}}/day</p>
-							</label>
 						</div>
 						<div class="row" data-ng-show="!compute.customized">
 							<label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message
@@ -466,11 +385,6 @@
 									class="help-block m-b-none"
 									ng-show="computeForm.instanceStoppageCostMemory.$invalid && formSubmitted"></span>
 							</div>
-							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
-								<p class="text-danger">{{
-									compute.computeCost[0].instanceStoppageCostMemory / 30 |
-									number:4}}/day</p>
-							</label>
 						</div>
 					</div>
 					<div class="form-group">
@@ -486,50 +400,6 @@
 									class="help-block m-b-none"
 									ng-show="computeForm.instanceStoppageCostSpeed.$invalid && formSubmitted"></span>
 							</div>
-							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
-								<p class="text-danger">
-									{{
-									compute.computeCost[0].instanceStoppageCostPerMhz / 30 |
-									number:4}}/day</p>
-							</label>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="row" data-ng-show="compute.customizedIops"
-							data-ng-if="compute.qosType == 'STORAGE'">
-							<label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message
-									key="instance.stoppage.cost.per.iops" bundle="${msg}" />(<app-currency
-									class="text-danger"></app-currency>)</label>
-							<div class="col-md-3  col-sm-3 col-xs-3">
-								<input type="text" valid-price name="instanceStoppageCostIops"
-									data-ng-model="compute.computeCost[0].instanceStoppageCostPerIops"
-									class="form-control"> <span
-									class="help-block m-b-none"
-									ng-show="computeForm.instanceStoppageCostIops.$invalid && formSubmitted"></span>
-							</div>
-							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
-								<p class="text-danger">{{
-									compute.computeCost[0].instanceStoppageCostPerIops /30 |
-									number:4}}/day</p>
-							</label>
-						</div>
-						<div class="row" data-ng-show="!compute.customizedIops"
-							data-ng-if="compute.qosType == 'STORAGE'">
-							<label class="col-md-7 col-sm-7 control-label font-normal"><fmt:message
-									key="instance.stoppage.cost.for.iops" bundle="${msg}" />(<app-currency
-									class="text-danger"></app-currency>)</label>
-							<div class="col-md-3  col-sm-3 col-xs-3">
-								<input type="text" valid-price name="instanceStoppageCostIops"
-									data-ng-model="compute.computeCost[0].instanceStoppageCostIops"
-									class="form-control"> <span
-									class="help-block m-b-none"
-									ng-show="computeForm.instanceStoppageCostIops.$invalid && formSubmitted"></span>
-							</div>
-							<label class="col-md-2 col-sm-2  no-padding m-t-sm">
-								<p class="text-danger">{{
-									compute.computeCost[0].instanceStoppageCostIops / 30 |
-									number:4}}/day</p>
-							</label>
 						</div>
 					</div>
 				</div>

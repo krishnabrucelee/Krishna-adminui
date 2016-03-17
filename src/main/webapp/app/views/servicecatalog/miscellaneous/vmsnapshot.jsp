@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<form name="vmsnapshotForm" data-ng-submit="save(vmsnapshotForm)" data-ng-controller="miscellaneousListCtrl" >
+<form name="vmsnapshotForm" data-ng-submit="savevmsnapshot(vmsnapshotForm)" data-ng-controller="miscellaneousListCtrl" novalidate = "" >
     <div class="row">
         <div class="col-md-12 col-sm-12" >
             <div class="hpanel">
@@ -24,35 +24,26 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-6">
                             <div class="form-group">
+                                 <div class="row">
+                                <label class="col-md-4 col-sm-3 control-label "><fmt:message key="template.zone" bundle="${msg}" /><span class="text-danger">*</span></label>
+                                <div class="col-md-6  col-sm-7 col-xs-7">
+                                    <select required="true"  class="form-control " name="zone" data-ng-model="miscellaneous.zone" ng-options="zone.name for zone in formElements.zoneList" data-ng-class="{'error': TemplateForm.zone.$invalid && formSubmitted}" >
+                                        <option value="">Select</option>
+                                    </select>
+                                    <i  tooltip="<fmt:message key="template.zone.tooltip" bundle="${msg}" />" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+                                    <div class="error-area" data-ng-show="TemplateForm.zone.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="template.zone.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group" ng-class="{'text-danger': TemplateForm.description.$invalid && formSubmitted}">
                                 <div class="row">
-                                    <label class="col-md-4 col-sm-4 control-label font-normal">Zone Name</label>
-                                    <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <select  class="form-control input-group" data-ng-init="miscellaneous.zone.name = zone.zoneList[0]"  name="zone" data-ng-model="miscellaneous.zone.name" ng-options="zone.name for zone in zone.zoneList" >
-                                        </select>
+                                    <label class="col-md-4 col-sm-4 control-label font-normal">Cost per GB/day (<app-currency class="text-danger"></app-currency>)<span class="text-danger">*</span></label>
+                                    <div class="col-md-6 col-sm-6  col-xs-6">
+                                        <input required="true" type="text" valid-price name="description" data-ng-if =" miscellaneous.costType ='VMSNAPSHOT'" data-ng-model="miscellaneous.costperGB" data-ng-class="{'error': TemplateForm.description.$invalid && formSubmitted}" class="form-control" >
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-
-                                <div class="row">
-                                    <label class="col-md-4 col-sm-4 control-label font-normal">Cost/GB/month(<app-currency class="text-danger"></app-currency>)</label>
-                                    <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <input  type="text" valid-decimal name="description" data-ng-model="miscellaneous.cost" class="form-control" placeholder="10.00" >
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-
-                                <div class="row">
-                                    <label class="col-md-4 col-sm-4 control-label font-normal">(Billing Cost)/GB/hour(<app-currency class="text-danger"></app-currency>)</label>
-                                    <div class="col-md-6 col-sm-6">
-                                        <b class="text-danger">
-                                            0.00000
-                                        </b>
-
-                                    </div>
-                                </div>
                             </div>
                             <div class="form-group">
                                 <div class="row ">
@@ -72,16 +63,16 @@
                                             <thead>
                                                 <tr>
                                                     <th>Zone</th>
-                                                    <th>Cost/GB/month</th>
+                                                    <th>Cost/GB/day</th>
 
                                                 </tr>
                                             </thead>
                                             <tbody >
-                                                <tr data-ng-repeat="miscellaneous in miscellaneousList| filter: miscellaneousSearch">
+                                                <tr data-ng-repeat="miscellaneous in vmsnapshotList| filter: miscellaneousSearch">
                                                     <td>
-                                                        {{miscellaneous.zone}}
+                                                         {{miscellaneous.zone.name}}
                                                     </td>
-                                                    <td><app-currency></app-currency>0.01944</td>
+                                                    <td><app-currency></app-currency>{{miscellaneous.costperGB}}</td>
 
                                             </tr>
                                             </tbody>
