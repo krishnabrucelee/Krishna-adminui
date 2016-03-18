@@ -82,7 +82,86 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+                 <div class="row">
+                <div class="col-md-4  col-sm-12 col-xs-4 clear-form" data-ng-show="storage.qosType == 'Hypervisor'">
+                    <div class="form-group" >
+                        <div class="row">
+                            <label class="col-md-6 col-sm-6 control-label font-normal" ><fmt:message key="common.diskreadratebps" bundle="${msg}" />
+                            </label>
+                            <div class="col-md-6  col-sm-6 col-xs-7">
+							   {{storage.diskBytesReadRate}}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4  col-sm-12 col-xs-4 clear-form" data-ng-show="storage.qosType == 'Hypervisor'">
+                    <div class="form-group" >
+                        <div class="row">
+                            <label class="col-md-6 col-sm-6 control-label font-normal" ><fmt:message key="common.diskwriteratebps" bundle="${msg}" />
+                            </label>
+                            <div class="col-md-6  col-sm-6 col-xs-7">
+							   {{storage.diskBytesWriteRate}}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4  col-sm-12 col-xs-4 clear-form" data-ng-show="storage.qosType == 'Hypervisor'">
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="common.diskreadrateiops" bundle="${msg}" /></label>
+                            <div class="col-md-6  col-sm-6 col-xs-7">
+							   {{storage.diskIopsReadRate}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4  col-sm-12 col-xs-4 clear-form" data-ng-show="storage.qosType == 'Hypervisor'">
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-6 col-sm-4 control-label font-normal"><fmt:message key="common.diskwriterateiops" bundle="${msg}" /></label>
+                            <div class="col-md-6 col-sm-6 col-xs-7">
+							    {{storage.diskIopsWriteRate}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-4 clear-form" data-ng-show="storage.qosType == 'Storage'">
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-6 col-sm-6 col-xs-4 control-label font-normal"><fmt:message key="common.miniops" bundle="${msg}" /></label>
+                            <div class="col-md-6  col-sm-6 col-xs-7">
+							    {{storage.diskMaxIops}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-4 clear-form" data-ng-show="storage.qosType == 'Storage'">
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-6 col-sm-6 col-xs-4 control-label font-normal"><fmt:message key="common.maxiops" bundle="${msg}" /></label>
+                            <div class="col-md-6  col-sm-6 col-xs-7">
+							    {{storage.diskMinIops}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" >
+                    <div class="form-group" >
+                        <div class="row">
+                            <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal"><fmt:message
+									key="common.size" bundle="${msg}" /></label>
+                            <div class="col-md-6 col-sm-6 col-xs-6"> <b>{{storage.diskSize || " N/A "}} </b>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                </div>
+        <%--     <div class="row">
                 <div class="col-md-4" >
                     <div class="form-group" >
                         <div class="row">
@@ -95,7 +174,7 @@
                     </div>
                 </div>
 
-            </div>
+            </div> --%>
 
 <div class="row  ">
 				<div class="col-md-12">
