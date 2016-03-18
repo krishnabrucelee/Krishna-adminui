@@ -11,8 +11,8 @@
                     <div class="col-md-6 col-sm-6 border-right">
                         <div class="form-group" ng-class="{'text-danger': TemplateForm.name.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="common.name" bundle="${msg}" /><span class="text-danger">*</span></label>
-                                <div class="col-md-7  col-sm-7 col-xs-7">
+                                <label class="col-md-4 col-sm-3 control-label"><fmt:message key="common.name" bundle="${msg}" /><span class="text-danger">*</span></label>
+                                <div class="col-md-6  col-sm-7 col-xs-7">
                                     <input required="true" type="text" name="name" data-ng-model="template.name" class="form-control" data-ng-class="{'error': TemplateForm.name.$invalid && formSubmitted}">
                                     <div class="error-area" data-ng-show="TemplateForm.name.$invalid && formSubmitted" ><i  ng-attr-tooltip="<fmt:message key="template.name.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
                                 </div>
@@ -20,8 +20,8 @@
                         </div>
                         <div class="form-group" ng-class="{'text-danger': TemplateForm.description.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="common.description" bundle="${msg}" /><span class="text-danger">*</span></label>
-                                <div class="col-md-7  col-sm-7 col-xs-7">
+                                <label class="col-md-4 col-sm-3 control-label"><fmt:message key="common.description" bundle="${msg}" /><span class="text-danger">*</span></label>
+                                <div class="col-md-6 col-sm-7 col-xs-7">
                                     <input required="true" type="text" name="description" data-ng-model="template.description" class="form-control" data-ng-class="{'error': TemplateForm.description.$invalid && formSubmitted}">
                                     <div class="error-area" data-ng-show="TemplateForm.description.$invalid && formSubmitted" ><i  ng-attr-tooltip="<fmt:message key="template.description.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
                                 </div>
@@ -29,24 +29,24 @@
                         </div>
                         <div class="form-group" >
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="common.url" bundle="${msg}" /></label>
-                                <div class="col-md-7  col-sm-7 col-xs-7">
+                                <label class="col-md-4 col-sm-3 control-label"><fmt:message key="common.url" bundle="${msg}" /></label>
+                                <div class="col-md-6  col-sm-7 col-xs-7">
                                     <input type="text" name="url" data-ng-model="template.url" class="form-control" readonly >
                                 </div>
                             </div>
                         </div>
                         <div class="form-group" >
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="template.refurl" bundle="${msg}" /></label>
-                                <div class="col-md-7  col-sm-7 col-xs-7">
+                                <label class="col-md-4 col-sm-3 control-label"><fmt:message key="template.refurl" bundle="${msg}" /></label>
+                                <div class="col-md-6  col-sm-7 col-xs-7">
                                     <input type="text" name="url" data-ng-model="template.url" class="form-control" readonly >
                                 </div>
                             </div>
                         </div>
                         <div class="form-group"ng-class="{'text-danger': TemplateForm.zone.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label control-normal"><fmt:message key="template.zone" bundle="${msg}" /><span class="text-danger">*</span></label>
-                                <div class="col-md-7  col-sm-7 col-xs-7">
+                                <label class="col-md-4 col-sm-3 control-label control-normal"><fmt:message key="template.zone" bundle="${msg}" /><span class="text-danger">*</span></label>
+                                <div class="col-md-6  col-sm-7 col-xs-7">
                                     <input required="true" type="text" name="zone" data-ng-model="template.zone.name" class="form-control" readonly data-ng-class="{'error': TemplateForm.zone.$invalid && formSubmitted}">
                                     <div class="error-area" data-ng-show="TemplateForm.zone.$invalid && formSubmitted" ><i  ng-attr-tooltip="<fmt:message key="template.zone.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
                                 </div>
@@ -54,9 +54,9 @@
                         </div>
                         <div class="form-group" ng-class="{'text-danger': TemplateForm.hypervisor.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label" ><fmt:message key="template.hypervisor" bundle="${msg}" /><span class="text-danger">*</span>
+                                <label class="col-md-4 col-sm-3 control-label" ><fmt:message key="template.hypervisor" bundle="${msg}" /><span class="text-danger">*</span>
                                 </label>
-                                <div class="col-md-7  col-sm-7 col-xs-7">
+                                <div class="col-md-6  col-sm-7 col-xs-7">
                                     <input required="true" type="text" name="hypervisor" data-ng-model="template.hypervisor.name" class="form-control" readonly data-ng-class="{'error': TemplateForm.hypervisor.$invalid && formSubmitted}">
                                     <div class="error-area" data-ng-show="TemplateForm.hypervisor.$invalid && formSubmitted" ><i  ng-attr-tooltip="<fmt:message key="template.hypervisor.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
                                 </div>
@@ -73,8 +73,8 @@
                         </div>
                         <div class="form-group" data-ng-show="template.hypervisor.id == 2">
                             <div class="row" >
-                                <label class="col-md-3 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.rootdiskcontroller" bundle="${msg}" /></label>
-                                <div class="col-md-7  col-sm-7 col-xs-7">
+                                <label class="col-md-4 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.rootdiskcontroller" bundle="${msg}" /></label>
+                                <div class="col-md-6  col-sm-7 col-xs-7">
                                     <select class="form-control input-group" name="rootDiskController" data-ng-model="template.rootDiskController" ng-options="rootDiskController for (id, rootDiskController) in formElements.rootDiskControllerList" >
                                         <option value="">No Thanks</option>
                                     </select>
@@ -83,8 +83,8 @@
                         </div>
                         <div class="form-group" data-ng-show="template.hypervisor.id == 2">
                             <div class="row" >
-                                <label class="col-md-3 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.nicadapter" bundle="${msg}" /></label>
-                                <div class="col-md-7  col-sm-7 col-xs-7">
+                                <label class="col-md-4 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.nicadapter" bundle="${msg}" /></label>
+                                <div class="col-md-6 col-sm-7 col-xs-7">
                                     <select  class="form-control input-group" name="nicType" data-ng-model="template.nicAdapter" ng-options="nicType for (id, nicType) in formElements.nicTypeList" >
                                         <option value="">No Thanks</option>
                                     </select>
@@ -93,8 +93,8 @@
                         </div>
                         <div class="form-group" data-ng-show="template.hypervisor.id == 2">
                             <div class="row" >
-                                <label class="col-md-3 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.keyboard" bundle="${msg}" /></label>
-                                <div class="col-md-7  col-sm-7 col-xs-7">
+                                <label class="col-md-4 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.keyboard" bundle="${msg}" /></label>
+                                <div class="col-md-6  col-sm-7 col-xs-7">
                                     <select  class="form-control input-group" name="keyboardType" data-ng-model="template.keyboardType" ng-options="keyboardType for (id, keyboardType) in formElements.keyboardTypeList" >
                                         <option value="">No Thanks</option>
                                     </select>
@@ -103,8 +103,8 @@
                         </div>
                         <div class="form-group"  ng-class="{'text-danger': TemplateForm.format.$invalid && formSubmitted}">
                             <div class="row" >
-                                <label class="col-md-3 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.format" bundle="${msg}" /><span class="text-danger">*</span></label>
-                                <div class="col-md-7  col-sm-7 col-xs-7">
+                                <label class="col-md-4 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.format" bundle="${msg}" /><span class="text-danger">*</span></label>
+                                <div class="col-md-6 col-sm-7 col-xs-7">
                                     <input required="true" type="text" name="format" data-ng-model="template.format" class="form-control" readonly data-ng-class="{'error': TemplateForm.format.$invalid && formSubmitted}">
                                     <div class="error-area" data-ng-show="TemplateForm.format.$invalid && formSubmitted" ><i  ng-attr-tooltip="<fmt:message key="template.format.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
                                 </div>
@@ -112,8 +112,8 @@
                         </div>
                         <div class="form-group" ng-class="{'text-danger': TemplateForm.cost.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="template.cost" bundle="${msg}" /><span class="text-danger">*</span></label>
-                                <div class="col-md-7  col-sm-7 col-xs-7">
+                                <label class="col-md-4 col-sm-3 control-label"><fmt:message key="template.cost" bundle="${msg}" /><span class="text-danger">*</span></label>
+                                <div class="col-md-6  col-sm-7 col-xs-7">
                                     <input required="true" type="text" name="cost" valid-price data-ng-model="template.templateCost[0].cost" class="form-control"  data-ng-class="{'error': TemplateForm.cost.$invalid && formSubmitted}">
                                     <div class="error-area" data-ng-show="TemplateForm.cost.$invalid && formSubmitted" ><i  ng-attr-tooltip="<fmt:message key="template.cost.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
                                 </div>
@@ -121,8 +121,8 @@
                         </div>
                         <div class="form-group" ng-class="{'text-danger': TemplateForm.mincore.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="template.minimumcore" bundle="${msg}" /><span class="text-danger">*</span></label>
-                                <div class="col-md-7  col-sm-7 col-xs-7">
+                                <label class="col-md-4 col-sm-3 control-label"><fmt:message key="template.minimumcore" bundle="${msg}" /><span class="text-danger">*</span></label>
+                                <div class="col-md-6  col-sm-7 col-xs-7">
                                     <input required="true" valid-number type="text" name="mincore" data-ng-model="template.minimumCore" class="form-control" data-ng-class="{'error': TemplateForm.mincore.$invalid && formSubmitted}">
                                     <div class="error-area" data-ng-show="TemplateForm.mincore.$invalid && formSubmitted" ><i  ng-attr-tooltip="<fmt:message key="template.minimumcore.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
                                 </div>
@@ -130,8 +130,8 @@
                         </div>
                         <div class="form-group" ng-class="{'text-danger': TemplateForm.minmemory.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="template.minimummemory" bundle="${msg}" /><span class="text-danger">*</span></label>
-                                <div class="col-md-7  col-sm-7 col-xs-7">
+                                <label class="col-md-4 col-sm-3 control-label"><fmt:message key="template.minimummemory" bundle="${msg}" /><span class="text-danger">*</span></label>
+                                <div class="col-md-6  col-sm-7 col-xs-7">
                                     <input required="true" valid-number type="text" name="minmemory" data-ng-model="template.minimumMemory" class="form-control" data-ng-class="{'error': TemplateForm.minmemory.$invalid && formSubmitted}">
                                     <div class="error-area" data-ng-show="TemplateForm.minmemory.$invalid && formSubmitted" ><i  ng-attr-tooltip="<fmt:message key="template.minimummemory.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
                                 </div>
@@ -141,8 +141,8 @@
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group" ng-class="{'text-danger': TemplateForm.osCategory.$invalid && formSubmitted}">
                             <div class="row" >
-                                <label class="col-md-3 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.oscategory" bundle="${msg}" /><span class="text-danger">*</span></label>
-                                <div class="col-md-7  col-sm-7 col-xs-7">
+                                <label class="col-md-4 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.oscategory" bundle="${msg}" /><span class="text-danger">*</span></label>
+                                <div class="col-md-6  col-sm-7 col-xs-7">
                                     <select required="true" class="form-control input-group" name="osCategory" data-ng-model="template.osCategory"  value="{{template.osCategory.name}}" ng-options="osCategory.name for osCategory in formElements.osCategoryList" data-ng-class="{'error': TemplateForm.osCategory.$invalid && formSubmitted}" >
                                         <option value="">Select</option>
                                     </select>
@@ -152,8 +152,8 @@
                         </div>
                         <div class="form-group" ng-class="{'text-danger': TemplateForm.osType.$invalid && formSubmitted}">
                             <div class="row" >
-                                <label class="col-md-3 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.ostype" bundle="${msg}" /><span class="text-danger">*</span></label>
-                                <div class="col-md-7  col-sm-7 col-xs-7">
+                                <label class="col-md-4 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.ostype" bundle="${msg}" /><span class="text-danger">*</span></label>
+                                <div class="col-md-6  col-sm-7 col-xs-7">
                                     <input required="true" type="text" name="osType" data-ng-model="template.osType.description" class="form-control" readonly data-ng-class="{'error': TemplateForm.osType.$invalid && formSubmitted}">
                                     <div class="error-area" data-ng-show="TemplateForm.osType.$invalid && formSubmitted" ><i  ng-attr-tooltip="<fmt:message key="template.ostype.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
                                 </div>
@@ -161,8 +161,8 @@
                         </div>
                         <div class="form-group" ng-class="{'text-danger': TemplateForm.osVersion.$invalid && formSubmitted}">
                             <div class="row" >
-                                <label class="col-md-3 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.osversion" bundle="${msg}" /><span class="text-danger">*</span></label>
-                                <div class="col-md-7  col-sm-7 col-xs-7">
+                                <label class="col-md-4 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.osversion" bundle="${msg}" /><span class="text-danger">*</span></label>
+                                <div class="col-md-6  col-sm-7 col-xs-7">
                                     <input required="true" type="text" name="osVersion" data-ng-model="template.osVersion" class="form-control" data-ng-class="{'error': TemplateForm.osVersion.$invalid && formSubmitted}">
                                     <div class="error-area" data-ng-show="TemplateForm.osVersion.$invalid && formSubmitted" >
                                     	<i  ng-attr-tooltip="<fmt:message key="template.osversion.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i>
