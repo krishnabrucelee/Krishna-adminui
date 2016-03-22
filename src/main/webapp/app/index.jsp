@@ -187,6 +187,7 @@
 <script src="scripts/controllers/configuration.js"></script>
 <script src="scripts/controllers/configuration/taxController.js"></script>
 <script src="scripts/controllers/configuration/billableItemController.js"></script>
+<script src="scripts/controllers/configuration/emailConfigController.js"></script>
 <script src="scripts/controllers/resourceAllocation.js"></script>
 <script src="scripts/controllers/domainController.js"></script>
 
@@ -199,6 +200,7 @@
 <script src="scripts/factories/modalService.js"></script>
 <script src="scripts/factories/dialogService.js"></script>
 <script src="scripts/factories/crudService.js"></script>
+
 
 <!-- Resource Usage Tree Structure -->
 <script src="scripts/easyTree.js"></script>
