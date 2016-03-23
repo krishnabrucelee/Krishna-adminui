@@ -72,7 +72,7 @@ function cloudStackCtrl($scope, $window, appService) {
     $scope.list(1);
     };
 
-function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, appService, globalConfig) {
+function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateParams, appService,globalConfig) {
 
 	//$scope.adminUserList = {};
     $scope.paginationObject = {};
@@ -301,7 +301,12 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
             {id: 1, name: 'Root'},
             {id: 2, name: 'Admin'},
             {id: 3, name: 'Domain'}
-        ]
+        ],
+	recipientTypeList: {
+		"0":"USER",
+                "1":"ROOT_ADMIN",
+		"2":"DOMAIN_ADMIN"
+	}
     };
 
     $scope.validateDomain = function (form) {
@@ -328,6 +333,52 @@ function configurationCtrl($scope, $window, $modal, $log, $state, $stateParams, 
             appService.notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
         }
     };
+
+$scope.eventLists = function () {
+             var hasEvent = appService.crudService.listAll("literals/list");
+             hasEvent.then(function (result) {  // this is only run after $http completes0
+                     $scope.eventList = result;
+              	});
+          	};
+$scope.eventLists();
+
+
+$scope.files = [];
+$scope.test = 0;
+
+	  $scope.validateEmailTemplate = function (form,emails,file,files) {
+                    $scope.formSubmitted = true;
+                    if (form.$valid) {
+ 			appService.uploadFile.upload($scope.file,appService.promiseAjax.httpTokenRequest,appService.globalConfig);
+ 			appService.uploadFile.upload($scope.files,appService.promiseAjax.httpTokenRequest,appService.globalConfig);
+                    	$scope.showLoader = true;
+			emails.eventName = emails.eventName.eventName;
+                        var hasServer = appService.crudService.add("emails", emails);
+                        hasServer.then(function (result) {  // this is only run after $http completes
+                            $scope.formSubmitted = false;
+                            $scope.showLoader = false;
+                            appService.notify({message: 'added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                        }).catch(function (result) {
+                        	$scope.showLoader = false;
+            		    if (!angular.isUndefined(result.data)) {
+                		if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                  	   	 var msg = result.data.globalError[0];
+                  	   	 $scope.showLoader = false;
+                	    	 appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                    	} else if (result.data.fieldErrors != null) {
+                       	$scope.showLoader = false;
+                        	angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                            	$scope.TemplateForm[key].$invalid = true;
+                            	$scope.TemplateForm[key].errorMessage = errorMessage;
+                        	});
+                		}
+                	}
+            	});
+                    	}
+
+                	};
+
+
 
     $scope.validateInvoice = function (form) {
         $scope.formSubmitted = true;

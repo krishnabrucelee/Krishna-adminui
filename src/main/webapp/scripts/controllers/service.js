@@ -950,7 +950,6 @@ function networkDetailsCtrl($scope, network, $modalInstance) {
 }
 ;
 
-	$scope.miscellaneous = {};
 function miscellaneousListCtrl($scope, modalService, $log, promiseAjax,appService, $stateParams, globalConfig, localStorageService, $window, notify) {
    
 		$scope.formElements = {};	

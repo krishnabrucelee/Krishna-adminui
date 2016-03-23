@@ -183,6 +183,14 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             }
         })
 
+         .state('configuration.home.email-template', {
+            url: "/email-template",
+            templateUrl: VIEW_URL +  "views/configuration/general/email-template.jsp",
+            data: {
+                pageTitle: 'Email Template'
+            }
+        })
+
          .state('configuration.home.login-security', {
             url: "/loginSecurity",
             templateUrl: VIEW_URL +  "views/configuration/general/login-security.jsp",
@@ -647,6 +655,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                     pageTitle: 'Tickets'
                 }
             })
+
 
 
 }

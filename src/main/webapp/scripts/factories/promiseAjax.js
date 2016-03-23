@@ -62,9 +62,34 @@ function promiseAjax($http, $window, globalConfig, notify) {
     return { httpRequest: httpRequest, httpTokenRequest: httpTokenRequest };
 }
 
+function uploadFile($http){
+	var upload = function(files,httpTokenRequest,globalConfig) {
+		 var fd = new FormData();
+           	fd.append("file",files);
+		$http.post(globalConfig.APP_URL + "/emails/uploadFile", fd, {
+			transformRequest : angular.identity,
+			headers : {
+				'Content-Type' : undefined,
+				'x-auth-token' :globalConfig.sessionValues.token
+			}
+		}).success(function(data)
+		 {
+		  console.log(data);
+		 })
+		 .error(function(data)
+		 {
+		  console.log(data);
+		 });
+		
+
+	}
+	return {upload: upload};
+};
+
 /**
  * Pass function into module
  */
 angular
     .module('panda-ui-admin')
     .factory('promiseAjax', promiseAjax)
+.factory('uploadFile', uploadFile)
