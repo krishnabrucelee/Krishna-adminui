@@ -268,6 +268,14 @@
 										bundle="${msg}" />
 							</span>
 							</span>
+							<span ng-if="state.data.pageTitle === 'Email Template'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="email.template" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="email.template"
+										bundle="${msg}" />
+							</span>
+							</span>
 							<span ng-if="state.data.pageTitle === 'Organization Details'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
@@ -446,6 +454,7 @@
 					 <span ng-if="$state.current.data.pageTitle === 'Resource Allocation'"><fmt:message key="resource.allocation" bundle="${msg}" /></span>
 					 <span ng-if="$state.current.data.pageTitle === 'Zone Description'"><fmt:message key="zone.description" bundle="${msg}" /></span>
 					 <span ng-if="$state.current.data.pageTitle === 'Import Data'"><fmt:message key="import.data" bundle="${msg}" /></span>
+					 <span ng-if="$state.current.data.pageTitle === 'Email Template'"><fmt:message key="email.template" bundle="${msg}" /></span>
 				</h2>
 				<small>{{ $state.current.data.pageDesc}}</small>
 			</div>

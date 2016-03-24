@@ -28,7 +28,7 @@
                                 <label class="col-md-3 col-sm-5 control-label">Select the event:<span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-5 col-sm-7">
-                                   <select required="true" class="form-control input-group" name="eventName" data-ng-model="config.eventName" ng-options="event.eventName for event in eventList" data-ng-class="{'error': configForm.eventName.$invalid && formSubmitted}" >
+                                   <select required="true" class="form-control input-group" name="eventName" data-ng-model="config.eventName" data-ng-change="emailEventList(config.eventName)" ng-options="event.eventName for event in eventList" data-ng-class="{'error': configForm.eventName.$invalid && formSubmitted}" >
                                     <option value=""><fmt:message key="common.select" bundle="${msg}" /></option>
                                     </select>
                                     <i  tooltip="Select the event" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
@@ -100,12 +100,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel-info col-md-3 col-sm-3">
+                    <div class="panel-info col-md-4 col-sm-4" data-ng-show ="config.eventName" >
                             <div class="panel-heading">
                                 <h3 class="panel-title"><i class="fa fa-bolt"></i>&nbsp;&nbsp;Event Details</h3>
                             </div>
                             <div class="panel-body no-padding">
+                                <ul class="list-group">
+                                    <li class="list-group-item no-padding" data-ng-repeat="event in eventsList"><code>$</code><code>{</code>{{event.eventLiterals}}<code>}</code> - {{event.description}}</li>
 
+                                </ul>
                             </div>
                 </div>
                 </div>

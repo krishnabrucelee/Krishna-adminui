@@ -78,6 +78,7 @@ function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateP
     $scope.paginationObject = {};
     $scope.configForm = {};
     $scope.domainList = {};
+    $scope.eventsList = {};
     $scope.global = appService.globalConfig;
     $scope.paginationObject.sortOrder = '+';
     $scope.paginationObject.sortBy = 'name';
@@ -207,8 +208,8 @@ function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateP
 
     $scope.formElements = {
         languageList: [
-            {id: 1, name: 'Chinese'},
-            {id: 2, name: 'English'}
+            {id: 1, name: 'English'},
+            {id: 2, name: 'Chinese'}
         ],
         departmentList: [
             {id: 1, name: 'Developing'},
@@ -334,6 +335,21 @@ function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateP
         }
     };
 
+   $scope.eventList = function () {
+             var hasEvent = crudService.listAll("literals/listall");
+             hasEvent.then(function (result) {  // this is only run after $http completes0
+                     $scope.eventList = result;
+              	});
+          	};
+
+    $scope.validateEmailTemplate = function (form) {
+        $scope.formSubmitted = true;
+        if (form.$valid) {
+            $scope.homerTemplate = 'app/views/notification/notify.jsp';
+            appService.notify({message: 'Saved successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+        }
+    };
+
 $scope.eventLists = function () {
              var hasEvent = appService.crudService.listAll("literals/list");
              hasEvent.then(function (result) {  // this is only run after $http completes0
@@ -346,6 +362,12 @@ $scope.eventLists();
 $scope.files = [];
 $scope.test = 0;
 
+ $scope.emailEventList = function (eventName) { 
+    var hasEventList = appService.crudService.listByQuery("literals/listbyevent?eventName="+eventName.eventName);
+        hasEventList.then(function (result) {
+            $scope.eventsList = result;
+        });
+    };
 
 	  $scope.validateEmailTemplate = function (form,emails,file,file1) { 
 	var arrayTest = [file, file1];
