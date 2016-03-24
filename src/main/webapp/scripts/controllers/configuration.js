@@ -346,19 +346,24 @@ $scope.eventLists();
 $scope.files = [];
 $scope.test = 0;
 
-	  $scope.validateEmailTemplate = function (form,emails,file,files) {
+
+	  $scope.validateEmailTemplate = function (form,emails,file,file1) { 
+	var arrayTest = [file, file1];
                     $scope.formSubmitted = true;
                     if (form.$valid) {
- 			appService.uploadFile.upload($scope.file,appService.promiseAjax.httpTokenRequest,appService.globalConfig);
- 			appService.uploadFile.upload($scope.files,appService.promiseAjax.httpTokenRequest,appService.globalConfig);
-                    	$scope.showLoader = true;
+     			emails.englishLanguage = "ENGLISH";
+			if(file1 != null) {
+				emails.chineseLanguage = "CHINESE";
+			}
 			emails.eventName = emails.eventName.eventName;
-                        var hasServer = appService.crudService.add("emails", emails);
-                        hasServer.then(function (result) {  // this is only run after $http completes
-                            $scope.formSubmitted = false;
-                            $scope.showLoader = false;
-                            appService.notify({message: 'added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-                        }).catch(function (result) {
+		console.log("array",emails);
+ 			appService.uploadFile.upload(arrayTest,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig);
+			//emails.chineseTemplate = "chinese";
+ 			//appService.uploadFile.upload($scope.files,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig);
+                    	$scope.showLoader = false;
+                        //var hasServer = appService.crudService.add("emails", emails);
+                       appService.notify({message: 'added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                        /**catch(function (result) {
                         	$scope.showLoader = false;
             		    if (!angular.isUndefined(result.data)) {
                 		if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
@@ -373,7 +378,7 @@ $scope.test = 0;
                         	});
                 		}
                 	}
-            	});
+            	});**/
                     	}
 
                 	};

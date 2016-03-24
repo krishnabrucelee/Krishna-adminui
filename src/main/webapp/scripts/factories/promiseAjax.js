@@ -63,9 +63,18 @@ function promiseAjax($http, $window, globalConfig, notify) {
 }
 
 function uploadFile($http){
-	var upload = function(files,httpTokenRequest,globalConfig) {
+	var upload = function(files,emails,httpTokenRequest,globalConfig) {
 		 var fd = new FormData();
-           	fd.append("file",files);
+		angular.forEach(files,function(file){
+		if(!angular.isUndefined(file)) { 
+		 fd.append('file',file);
+		}
+ 		});
+		fd.append("eventName",emails.eventName);
+		fd.append("subject",emails.subject);
+ 		fd.append('englishLanguage',emails.englishLanguage);
+ 		fd.append('chineseLanguage',emails.chineseLanguage);
+		fd.append("recipientTYpe",emails.recipientType);
 		$http.post(globalConfig.APP_URL + "/emails/uploadFile", fd, {
 			transformRequest : angular.identity,
 			headers : {

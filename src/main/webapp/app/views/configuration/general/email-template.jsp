@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<form name="configForm" data-ng-submit="validateEmailTemplate(configForm,config,file,files)" method="post" novalidate="" data-ng-controller="configurationCtrl">
+<form name="configForm" data-ng-submit="validateEmailTemplate(configForm,config,file,file1)" method="post" novalidate="" data-ng-controller="configurationCtrl">
     <div class="row">
         <div class="col-md-12 col-sm-12">
             <div class="hpanel">
@@ -49,14 +49,21 @@
 									</div>
 								</div>
 								</div>
+								 <div class="form-group" ng-class="{
+                                            'has-error'
+                                            :configForm.uploadTemplateChinese.$invalid && formSubmitted}">
   					<div class="row">
                                 <label class="col-md-3 col-sm-5 control-label">Upload the template(English):<span class="text-danger">*</span>
                                 </label>
                                                                 <div class="col-md-5 col-sm-7">
 
                         <form  name="configForm" ng-submit="">
-                        <input type="file" name="files" accept=".htm,.html" class="custom-file-input" file-model="files"/>
+                        <input type="file" name="file" accept=".htm,.html" class="custom-file-input" file-model="file"/>
+ 						<div class="error-area" data-ng-show="configForm.file.$invalid && formSubmitted">
+									<i tooltip="<fmt:message key="file.is.required" bundle="${msg}" />" class="fa fa-warning error-icon"></i>
+								</div>
  						</form>
+  						</div>
   						</div>
   						</div>
                          <div class="form-group" ng-class="{
@@ -67,11 +74,25 @@
                                 </label>
                                 <div class="col-md-5 col-sm-7">
                                 <form  name="configForm" ng-submit="">
-                        <input type="file" name="file" accept=".htm,.html" class="custom-file-input" file-model="file"/>
- 						</form>
+                        <input type="file" name="file" accept=".htm,.html" class="custom-file-input" file-model="file1"/>
+<!--                         <input type ="text" data-ng-if = "file-model == 'file1'" data-ng-model = "config.language = 'CHINESE'">
+ --> 						</form>
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group" ng-class="{'text-danger': configForm.description.$invalid && formSubmitted}">
+						<div class="row">
+							<label class="col-md-3 col-sm-5 control-label"><fmt:message key="common.subject" bundle="${msg}" /> <span class="text-danger">*</span>
+							</label>
+							<div class="col-md-5 col-sm-7">
+								<textarea rows="4" required="true" type="text" name="subject" id = "add_application_description" data-ng-model="config.subject" class="form-control" data-ng-class="{'error': configForm.subject.$invalid && formSubmitted}"></textarea>
+								<i tooltip="<fmt:message key="description.of.the.application" bundle="${msg}" />" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+								<div class="error-area" data-ng-show="configForm.subject.$invalid && formSubmitted">
+									<i tooltip="<fmt:message key="application.description.is.required" bundle="${msg}" />" class="fa fa-warning error-icon"></i>
+								</div>
+							</div>
+						</div>
+					</div>
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-3">
                                 <a class="btn btn-default" href="#/configuration/general"><fmt:message key="common.cancel" bundle="${msg}" /></a>
