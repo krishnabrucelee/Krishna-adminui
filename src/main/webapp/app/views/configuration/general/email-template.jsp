@@ -21,74 +21,68 @@
                 </div>
                 <div class="panel-body"><div class="col-md-7 col-sm-7">
 
-                        <div class="form-group" ng-class="{
-                                            'text-danger'
-                                            :configForm.eventName.$invalid && formSubmitted}">
+                        <div class="form-group" ng-class="{'text-danger':!config.eventName && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-5 control-label">Select the event:<span class="text-danger">*</span>
+                                <label class="col-md-3 col-sm-5 control-label"><fmt:message key="select.the.event" bundle="${msg}" />:<span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-5 col-sm-7">
-                                   <select required="true" class="form-control input-group" name="eventName" data-ng-model="config.eventName" data-ng-change="emailEventList(config.eventName)" ng-options="event.eventName for event in eventList" data-ng-class="{'error': configForm.eventName.$invalid && formSubmitted}" >
+                                   <select required="true" class="form-control input-group" name="eventName" data-ng-model="config.eventName" data-ng-change="emailEventList(config.eventName)" ng-options="event.eventName for event in eventList" data-ng-class="{'error': !config.eventName && formSubmitted}" >
                                     <option value=""><fmt:message key="common.select" bundle="${msg}" /></option>
                                     </select>
-                                    <i  tooltip="Select the event" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
-                                    <div class="error-area" data-ng-show="configForm.eventName.$invalid && formSubmitted" ><i  tooltip="Event is required." class="fa fa-warning error-icon"></i></div>
+                                    <i  tooltip="<fmt:message key="select.the.event" bundle="${msg}" />" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+                                    <div class="error-area" data-ng-show="!config.eventName && formSubmitted" ><i  tooltip="<fmt:message key="event.is.required" bundle="${msg}" />Event is required." class="fa fa-warning error-icon"></i></div>
                                 </div>
                             </div>
                         </div>
-                         <div class="form-group">
+                         <div class="form-group" ng-class="{'text-danger':!config.recipientType && formSubmitted}">
                         <div class="row">
-									<label
-										class="col-md-3 col-sm-5 control-label">Recipient Type</label>
+									<label class="col-md-3 col-sm-5 control-label"><fmt:message key="recipient.type" bundle="${msg}" />:<span class="text-danger">*</span></label>
 									<div class="col-md-5 col-xs-7">
 										<select class="form-control input-group" name="recipientType"
 											data-ng-model="config.recipientType"
-											ng-options="recipientType for (id,recipientType) in formElements.recipientTypeList">
+											ng-options="recipientType for (id,recipientType) in formElements.recipientTypeList" data-ng-class="{'error': !config.recipientType && formSubmitted}">
 											<option value=""><fmt:message key="common.select" bundle="${msg}" /></option>
 										</select>
+                                    <i  tooltip="<fmt:message key="select.the.user.type" bundle="${msg}" />" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+                                    <div class="error-area" data-ng-show="!config.recipientType && formSubmitted" ><i  tooltip="<fmt:message key="recipient.type.is.required" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
 									</div>
 								</div>
 								</div>
-								 <div class="form-group" ng-class="{
-                                            'has-error'
-                                            :configForm.uploadTemplateChinese.$invalid && formSubmitted}">
-  					<div class="row">
-                                <label class="col-md-3 col-sm-5 control-label">Upload the template(English):<span class="text-danger">*</span>
+						<div class="form-group" ng-class="{'text-danger':!file && formSubmitted}">
+  					    <div class="row">
+                                <label class="col-md-3 col-sm-5 control-label"><fmt:message key="upload.template.english" bundle="${msg}" />:<span class="text-danger">*</span>
                                 </label>
                                                                 <div class="col-md-5 col-sm-7">
 
                         <form  name="configForm" ng-submit="">
-                        <input type="file" name="file" accept=".htm,.html" class="custom-file-input" file-model="file"/>
- 						<div class="error-area" data-ng-show="configForm.file.$invalid && formSubmitted">
+                        <input type="file" name="file" accept=".htm,.html" class="custom-file-input" file-model="file" data-ng-class="{'error': !file && formSubmitted}"/>
+ 						<div class="error-area" data-ng-show="!file && formSubmitted">
 									<i tooltip="<fmt:message key="file.is.required" bundle="${msg}" />" class="fa fa-warning error-icon"></i>
 								</div>
  						</form>
   						</div>
   						</div>
   						</div>
-                         <div class="form-group" ng-class="{
-                                            'has-error'
-                                            :configForm.uploadTemplateChinese.$invalid && formSubmitted}">
+                         <div class="form-group">
                             <div class="row">
-                                <label class="col-md-3 col-sm-5 control-label">Upload the template(Chinese):
+                                <label class="col-md-3 col-sm-5 control-label"><fmt:message key="upload.template.chinese" bundle="${msg}" />:
                                 </label>
                                 <div class="col-md-5 col-sm-7">
                                 <form  name="configForm" ng-submit="">
                         <input type="file" name="file" accept=".htm,.html" class="custom-file-input" file-model="file1"/>
-<!--                         <input type ="text" data-ng-if = "file-model == 'file1'" data-ng-model = "config.language = 'CHINESE'">
- --> 						</form>
+  						</form>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group" ng-class="{'text-danger': configForm.description.$invalid && formSubmitted}">
+                        <div class="form-group" ng-class="{'text-danger': !config.subject && formSubmitted}">
 						<div class="row">
 							<label class="col-md-3 col-sm-5 control-label"><fmt:message key="common.subject" bundle="${msg}" /> <span class="text-danger">*</span>
 							</label>
 							<div class="col-md-5 col-sm-7">
-								<textarea rows="4" required="true" type="text" name="subject" id = "add_application_description" data-ng-model="config.subject" class="form-control" data-ng-class="{'error': configForm.subject.$invalid && formSubmitted}"></textarea>
-								<i tooltip="<fmt:message key="description.of.the.application" bundle="${msg}" />" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
-								<div class="error-area" data-ng-show="configForm.subject.$invalid && formSubmitted">
-									<i tooltip="<fmt:message key="application.description.is.required" bundle="${msg}" />" class="fa fa-warning error-icon"></i>
+								<textarea rows="4" required="true" type="text" name="subject" data-ng-model="config.subject" class="form-control" data-ng-class="{'error': !config.subject && formSubmitted}"></textarea>
+								<i tooltip="<fmt:message key="email.subject" bundle="${msg}" />" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+								<div class="error-area" data-ng-show="!config.subject && formSubmitted">
+									<i tooltip="<fmt:message key="subject.is.required" bundle="${msg}" />" class="fa fa-warning error-icon"></i>
 								</div>
 							</div>
 						</div>
@@ -96,13 +90,13 @@
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-3">
                                 <a class="btn btn-default" href="#/configuration/general"><fmt:message key="common.cancel" bundle="${msg}" /></a>
-                                <button class="btn btn-info" type="submit">Save</button>
+                                <button class="btn btn-info" type="submit"><fmt:message key="common.save" bundle="${msg}" /></button>
                             </div>
                         </div>
                     </div>
                     <div class="panel-info col-md-4 col-sm-4" data-ng-show ="config.eventName" >
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-bolt"></i>&nbsp;&nbsp;Event Details</h3>
+                                <h3 class="panel-title"><i class="fa fa-bolt"></i>&nbsp;&nbsp;<fmt:message key="event.details" bundle="${msg}" /></h3>
                             </div>
                             <div class="panel-body no-padding">
                                 <ul class="list-group">
