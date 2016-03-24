@@ -183,7 +183,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             }
         })
 
-         .state('configuration.home.email-template', {
+        .state('configuration.home.email-template', {
             url: "/email-template",
             templateUrl: VIEW_URL +  "views/configuration/general/email-template.jsp",
             data: {
