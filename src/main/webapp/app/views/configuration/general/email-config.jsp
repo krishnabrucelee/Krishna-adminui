@@ -171,8 +171,18 @@
 								</i>
 							</div>
                             </div>
-
-
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-3 col-sm-3 control-label">Select Default Language:
+                            </label>
+                            <div class="col-md-7 col-sm-7">
+                                <select required="true" class="form-control input-group" name="emailLanguage" data-ng-model="email.emailLanguage" ng-options="language for (id, language) in formElements.LanguageList" >
+                                    <option value=""><fmt:message key="common.select" bundle="${msg}" /></option>
+                                </select>
+								<i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="Choose the default language" ></i>
+                            </div>
                         </div>
                     </div>
                 </div>

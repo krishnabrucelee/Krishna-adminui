@@ -77,4 +77,11 @@ function emailConfigCtrl($scope, $window, appService, $state) {
     }
    }
 
+    $scope.formElements = {
+    		LanguageList: {
+                "0":"English",
+                "1":"Chinese"
+            }
+    };
+
 };

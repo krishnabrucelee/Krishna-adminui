@@ -12,6 +12,10 @@ function crudService($window, localStorageService, globalConfig, $stateParams, p
         return promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + moduleName +"?lang=" + localStorageService.cookie.get('language')+"&sortBy=-id");
     };
 
+    object.listByQuery = function(moduleNameWithQuery) {
+        return promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + moduleNameWithQuery);
+    };
+
     object.add = function(moduleName, object) {
         return promiseAjax.httpTokenRequest( globalConfig.HTTP_POST, globalConfig.APP_URL + moduleName, '', object);
     };
