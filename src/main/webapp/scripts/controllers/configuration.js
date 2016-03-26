@@ -359,10 +359,16 @@ $scope.test = 0;
         hasEventList.then(function (result) {
             $scope.eventsList = result;
         });
+    var hasEventTestList = appService.crudService.listByQuery("emails/listbyeventname?eventName="+eventName.eventName);
+        hasEventTestList.then(function (result) {
+            $scope.eventsTemplateList = result;
+        });
+
     };
 
+
 	  $scope.validateEmailTemplate = function (form,emails,file,file1) {
-      $scope.emails = emails;
+      
 	  var arrayTest = [file, file1];
           $scope.formSubmitted = true;
           if (emails.subject && emails.eventName && emails.recipientType && file !=null) {
@@ -371,13 +377,37 @@ $scope.test = 0;
 		          emails.chineseLanguage = "CHINESE";
 			  }
 			  emails.eventName = emails.eventName.eventName;
- 			  appService.uploadFile.upload(arrayTest,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig);
-              $scope.showLoader = false;
+ 			var hasServer = appService.uploadFile.upload(arrayTest,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig);
+			$state.reload();
+			 hasServer.then(function(result) {
               appService.notify({message: 'Added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-              $state.reload();
+                        }).catch(function (result) {
+                        	$scope.showLoader = false;
+            		    if (!angular.isUndefined(result.data)) {
+                		if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                  	   	 var msg = result.data.globalError[0];
+                  	   	 $scope.showLoader = false;
+                	    	 appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                    	} else if (result.data.fieldErrors != null) {
+                       	$scope.showLoader = false;
+                        	angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                            	$scope.TemplateForm[key].$invalid = true;
+                            	$scope.TemplateForm[key].errorMessage = errorMessage;
+                        	});
+                		}
+                	}
+            	});
           }
 
       };
+
+/**$scope.eventsList = function (email) { 
+    var hasEventTestList = appService.crudService.listByQuery("emails/listbyeventname?eventName="+email.eventName);
+        hasEventTestList.then(function (result) {
+            $scope.eventsTemplateList = result;
+	console.log("list",$scope.eventsList);
+        });
+    };**/
 
     $scope.validateInvoice = function (form) {
         $scope.formSubmitted = true;
