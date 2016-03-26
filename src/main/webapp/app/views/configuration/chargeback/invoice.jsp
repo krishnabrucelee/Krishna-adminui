@@ -40,25 +40,6 @@
                             </div>
                         </div>
 
-                        <!-- <div class="form-group" ng-class="{
-                                            'text-danger'
-                                            :configForm.date.$invalid && formSubmitted}">
-                            <div class="row">
-                                <label class="col-md-4 col-sm-5 control-label">Date of a month:
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-7">
-                                    <select required="true" class="form-control input-group" name="date" data-ng-model="config.date" data-ng-init="config.date = formElements.dateList[1]" ng-options="date.id for date in formElements.dateList  " >
-                                    </select>
-                                    <div class="error-area" data-ng-show="configForm.date.$invalid && formSubmitted" ><i  tooltip="Date of Month is required" class="fa fa-warning error-icon"></i></div>
-
-                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="Fixing billing Date for invoice generation" ></i>
-                                </div>
-
-                            </div>
-                        </div> -->
-
-
                         <div class="form-group" ng-class="{
                                             'text-danger'
                                             : configForm.overDueDays.$invalid && formSubmitted}">

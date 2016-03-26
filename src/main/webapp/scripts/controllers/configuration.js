@@ -409,7 +409,7 @@ $scope.test = 0;
 
                 	};
 
-/**$scope.eventsList = function (email) { 
+/**$scope.eventsList = function (email) {
     var hasEventTestList = appService.crudService.listByQuery("emails/listbyeventname?eventName="+email.eventName);
         hasEventTestList.then(function (result) {
             $scope.eventsTemplateList = result;
@@ -418,10 +418,10 @@ $scope.test = 0;
     };**/
 
 	 $scope.configList = function (form) {
-        var hasConfigList = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_GET, globalConfig.PING_APP_URL + "configuration?lang=en&sortBy=-id");
+        var hasConfigList = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_GET, globalConfig.PING_APP_URL + "configuration/list");
         hasConfigList.then(function (result) {  // this is only run after $http completes0
-                $scope.config = result;
-         	});
+             $scope.config.overDueDays = result[0].overDueDays;
+        });
      	};
      $scope.configList();
 
