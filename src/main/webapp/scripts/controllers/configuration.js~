@@ -79,6 +79,7 @@ function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateP
     $scope.configForm = {};
     $scope.domainList = {};
     $scope.eventsList = {};
+    $scope.emails = {};
     $scope.global = appService.globalConfig;
     $scope.paginationObject.sortOrder = '+';
     $scope.paginationObject.sortBy = 'name';
@@ -360,9 +361,9 @@ $scope.test = 0;
             $scope.eventsList = result;
         });
     };
-
+          $scope.emails = {};
 	  $scope.validateEmailTemplate = function (form,emails,file,file1) {
-      $scope.emails = emails;
+          $scope.emails = emails;
 	  var arrayTest = [file, file1];
           $scope.formSubmitted = true;
           if (emails.subject && emails.eventName && emails.recipientType && file !=null) {
@@ -373,8 +374,8 @@ $scope.test = 0;
 			  emails.eventName = emails.eventName.eventName;
  			  appService.uploadFile.upload(arrayTest,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig);
               $scope.showLoader = false;
-              appService.notify({message: 'Added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-              $state.reload();
+              appService.notify({message: 'Added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });   
+              $state.reload();          
           }
 
       };
