@@ -367,7 +367,13 @@ $scope.test = 0;
         hasEventList.then(function (result) {
             $scope.eventsList = result;
         });
+    var hasEventTestList = appService.crudService.listByQuery("emails/listbyeventname?eventName="+eventName.eventName);
+        hasEventTestList.then(function (result) {
+            $scope.eventsTemplateList = result;
+        });
+
     };
+
 
 	  $scope.validateEmailTemplate = function (form,emails,file,file1) { 
 	var arrayTest = [file, file1];
@@ -401,6 +407,14 @@ $scope.test = 0;
                     	}
 
                 	};
+
+/**$scope.eventsList = function (email) { 
+    var hasEventTestList = appService.crudService.listByQuery("emails/listbyeventname?eventName="+email.eventName);
+        hasEventTestList.then(function (result) {
+            $scope.eventsTemplateList = result;
+	console.log("list",$scope.eventsList);
+        });
+    };**/
 
 
 
