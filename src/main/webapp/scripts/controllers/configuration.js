@@ -79,6 +79,7 @@ function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateP
     $scope.configForm = {};
     $scope.domainList = {};
     $scope.eventsList = {};
+    $scope.hasConfigList = {};
     $scope.global = appService.globalConfig;
     $scope.paginationObject.sortOrder = '+';
     $scope.paginationObject.sortBy = 'name';
@@ -260,9 +261,9 @@ function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateP
             {id: 9, name: 'Project'}
         ],
         dateFormatList: [
-            {id: 1, name: 'DD/MM/YYYY'},
-            {id: 2, name: 'MM/DD/YYYY'},
-            {id: 3, name: 'YYYY/MM/DD'},
+            {id: 0, name: 'DD/MM/YYYY'},
+            {id: 1, name: 'MM/DD/YYYY'},
+            {id: 2, name: 'YYYY/MM/DD'},
             {id: 3, name: 'YYYY/DD/MM'}
         ],
         dateList: [
@@ -362,7 +363,7 @@ $scope.eventLists();
 $scope.files = [];
 $scope.test = 0;
 
- $scope.emailEventList = function (eventName) { 
+ $scope.emailEventList = function (eventName) {
     var hasEventList = appService.crudService.listByQuery("literals/listbyevent?eventName="+eventName.eventName);
         hasEventList.then(function (result) {
             $scope.eventsList = result;
@@ -375,7 +376,7 @@ $scope.test = 0;
     };
 
 
-	  $scope.validateEmailTemplate = function (form,emails,file,file1) { 
+	  $scope.validateEmailTemplate = function (form,emails,file,file1) {
 	var arrayTest = [file, file1];
                     $scope.formSubmitted = true;
                     if (emails.subject && emails.eventName && emails.recipientType && file !=null) {
@@ -416,13 +417,42 @@ $scope.test = 0;
         });
     };**/
 
-
+	 $scope.configList = function (form) {
+        var hasConfigList = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_GET, globalConfig.PING_APP_URL + "configuration?lang=en&sortBy=-id");
+        hasConfigList.then(function (result) {  // this is only run after $http completes0
+                $scope.config = result;
+         	});
+     	};
+     $scope.configList();
 
     $scope.validateInvoice = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-            $scope.homerTemplate = 'app/views/notification/notify.jsp';
-            appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+            var config = $scope.config;
+            config.dateFormatType = config.dateFormatType.id;
+            $scope.showLoader = true;
+            var hasConfig = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_POST, globalConfig.PING_APP_URL + "configuration", config);
+            hasConfig.then(function (result) {  // this is only run after $http
+                $scope.showLoader = false;
+                $scope.homerTemplate = 'app/views/notification/notify.jsp';
+                appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+                $scope.configList();
+
+            }).catch(function (result) {
+            	$scope.showLoader = false;
+                if (!angular.isUndefined(result.data)) {
+                    if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
+                        var msg = result.data.globalError[0];
+                        $scope.showLoader = false;
+                        appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
+                    } else if (result.data.fieldErrors != null) {
+                        angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                            $scope.configForm[key].$invalid = true;
+                            $scope.configForm[key].errorMessage = errorMessage;
+                        });
+                    }
+                }
+            });
         }
     };
 

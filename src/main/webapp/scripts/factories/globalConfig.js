@@ -48,6 +48,7 @@ function globalConfig($window) {
         HTTP_DELETE: 'DELETE',
         CONTENT_LIMIT: 10,
         APP_URL: "http://localhost:8080/api/",
+        PING_APP_URL: "http://localhost:8081/api/",
         VIEW_URL : 'app/views/',
         NOTIFICATION_TEMPLATE: 'app/views/notification/notify.jsp',
         BILLABLE_ITEM: {
