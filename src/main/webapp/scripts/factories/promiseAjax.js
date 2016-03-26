@@ -74,22 +74,15 @@ function uploadFile($http){
 		fd.append("subject",emails.subject);
  		fd.append('englishLanguage',emails.englishLanguage);
  		fd.append('chineseLanguage',emails.chineseLanguage);
-		fd.append("recipientTYpe",emails.recipientType);
-		$http.post(globalConfig.APP_URL + "/emails/uploadFile", fd, {
+		fd.append("recipientType",emails.recipientType);
+		return $http.post(globalConfig.APP_URL + "/emails/uploadFile", fd, {
 			transformRequest : angular.identity,
 			headers : {
 				'Content-Type' : undefined,
 				'x-auth-token' :globalConfig.sessionValues.token
 			}
-		}).success(function(data)
-		 {
-		  console.log(data);
-		 })
-		 .error(function(data)
-		 {
-		  console.log(data);
-		 });
-		
+		});
+		 	
 
 	}
 	return {upload: upload};

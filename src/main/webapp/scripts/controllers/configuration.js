@@ -367,10 +367,15 @@ $scope.test = 0;
         hasEventList.then(function (result) {
             $scope.eventsList = result;
         });
+    var hasEventTestList = appService.crudService.listByQuery("emails/listbyeventname?eventName="+eventName.eventName);
+        hasEventTestList.then(function (result) {
+            $scope.eventsTemplateList = result;
+        });
+
     };
 
+
 	  $scope.validateEmailTemplate = function (form,emails,file,file1) { 
-console.log(emails);
 	var arrayTest = [file, file1];
                     $scope.formSubmitted = true;
                     if (emails.subject && emails.eventName && emails.recipientType && file !=null) {
@@ -379,14 +384,11 @@ console.log(emails);
 				emails.chineseLanguage = "CHINESE";
 			}
 			emails.eventName = emails.eventName.eventName;
-		console.log("array",emails);
- 			appService.uploadFile.upload(arrayTest,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig);
-			//emails.chineseTemplate = "chinese";
- 			//appService.uploadFile.upload($scope.files,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig);
-                    	$scope.showLoader = false;
-                        //var hasServer = appService.crudService.add("emails", emails);
+ 			var hasServer = appService.uploadFile.upload(arrayTest,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig);
+			$state.reload();
+			 hasServer.then(function(result) {
                        appService.notify({message: 'Added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-                        /**catch(function (result) {
+                        }).catch(function (result) {
                         	$scope.showLoader = false;
             		    if (!angular.isUndefined(result.data)) {
                 		if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
@@ -401,10 +403,18 @@ console.log(emails);
                         	});
                 		}
                 	}
-            	});**/
+            	});
                     	}
 
                 	};
+
+/**$scope.eventsList = function (email) { 
+    var hasEventTestList = appService.crudService.listByQuery("emails/listbyeventname?eventName="+email.eventName);
+        hasEventTestList.then(function (result) {
+            $scope.eventsTemplateList = result;
+	console.log("list",$scope.eventsList);
+        });
+    };**/
 
 
 

@@ -69,10 +69,10 @@ Navigation
                                                 <td>{{domain.email}}</td>
                                                 <td>{{domain.phone}}</td>
                                                 <td>
-											    <a class="icon-button test_company_edit_button" id="company_edit_button_{{domain_id}}" data-unique-field="{{domain.name}}" title="<fmt:message key="common.edit" bundle="${msg}" />" data-ng-click="edit('lg', domain)">
+											    <a data-ng-hide = "global.sessionValues.domainName == '{{domain.name}}'" class="icon-button test_company_edit_button" id="company_edit_button_{{domain_id}}" data-unique-field="{{domain.name}}" title="<fmt:message key="common.edit" bundle="${msg}" />" data-ng-click="edit('lg', domain)">
                                                     <span class="fa fa-edit"> </span>
                                                 </a>
-												<a class="icon-button test_company_edit_quota_button" id="company_edit_quota_button_{{domain_id}}" data-unique-field="{{domain.name}}" data-ng-click="getDepartmentsByDomain(domain.id)" ui-sref="client.client.quota({id: {{ domain.id }}, view: 'client-quota'})" title="<fmt:message key="common.edit.quota" bundle="${msg}" />">
+												<a data-ng-hide = "global.sessionValues.domainName == '{{domain.name}}'" class="icon-button test_company_edit_quota_button" id="company_edit_quota_button_{{domain_id}}" data-unique-field="{{domain.name}}" data-ng-click="getDepartmentsByDomain(domain.id)" ui-sref="client.client.quota({id: {{ domain.id }}, view: 'client-quota'})" title="<fmt:message key="common.edit.quota" bundle="${msg}" />">
                                                     <span class="fa font-bold pe-7s-edit"> </span>
                                                 </a>
                                                 <a  data-ng-hide = "global.sessionValues.domainName == '{{domain.name}}'"class="icon-button test_company_delete_button" id="company_delete_button_{{domain_id}}" data-unique-field="{{domain.name}}" title="<fmt:message key="common.delete" bundle="${msg}" />" data-ng-click="delete('sm', domain)" ><span class="fa fa-trash"></span></a>
