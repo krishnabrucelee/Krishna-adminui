@@ -48,19 +48,19 @@
 									</div>
 								</div>
 								</div>
-						<div class="form-group" ng-class="{'text-danger':!file && formSubmitted}">
+						<div class="form-group"> <!-- ng-class="{'text-danger':file && formSubmitted}" -->
   					    <div class="row">
                                 <label class="col-md-3 col-sm-5 control-label"><fmt:message key="upload.template.english" bundle="${msg}" />:<span class="text-danger">*</span>
                                 </label>
                                                                 <div class="col-md-5 col-sm-7">
 
-                        <form  name="configForm" ng-submit="">
-                        <input type="file" name="file" accept=".htm,.html" class="custom-file-input" file-model="file" data-ng-class="{'error': !file && formSubmitted}"/>
+
+                        <input type="file" name="file" accept=".htm,.html" class="custom-file-input" file-model="file"  data-ng-class="{'error': !file && formSubmitted}"/>
  						<span><label>{{eventsTemplateList[0].englishLanguage}}</label></span>
- 						<div class="error-area" data-ng-show="!file && formSubmitted">
+ 						<%-- <div class="error-area" data-ng-show="file && formSubmitted">
 									<i tooltip="<fmt:message key="file.is.required" bundle="${msg}" />" class="fa fa-warning error-icon"></i>
-								</div>
- 						</form>
+								</div> --%>
+
   						</div>
   						</div>
   						</div>
@@ -69,10 +69,10 @@
                                 <label class="col-md-3 col-sm-5 control-label"><fmt:message key="upload.template.chinese" bundle="${msg}" />:
                                 </label>
                                 <div class="col-md-5 col-sm-7">
-                                <form  name="configForm" ng-submit="">
+
                         <input type="file" name="file" accept=".htm,.html" class="custom-file-input" file-model="file1"/>
                         <span><label>{{eventsTemplateList[0].chineseLanguage}}</label></span>
-  						</form>
+
                                 </div>
                             </div>
                         </div>
