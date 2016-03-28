@@ -220,7 +220,7 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
             template.hypervisorId = template.hypervisor.id;
             template.osCategoryId = template.osCategory.id;
             template.osTypeId = template.osType.id;
-	     template.submitCheck = false ;
+	     template.templateCreationType = false ;
             delete template.zone;
             delete template.hypervisor;
             delete template.osCategory;
@@ -416,7 +416,7 @@ function templateEditCtrl($scope, $state, $stateParams, $log, $window, appServic
             template.hypervisorId = template.hypervisor.id;
             template.osCategoryId = template.osCategory.id;
             template.osTypeId = template.osType.id;
-	     template.submitCheck = false ;
+	     template.templateCreationType = false ;
             delete template.zone;
             delete template.hypervisor;
             delete template.osCategory;
