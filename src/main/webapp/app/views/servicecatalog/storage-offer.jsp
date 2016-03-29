@@ -32,7 +32,9 @@
 								<span style="color:red" ng-show="storageForm.name.$error.minlength "><fmt:message key="your.name.should.contain.atleast.4.characters" bundle="${msg}" /></span>
        							<span style="color:red" ng-show="storageForm.name.$error.maxlength "><fmt:message key="your.name.must.be.less.than.30.characters" bundle="${msg}" /> </span>
 								<div class="error-area" data-ng-show="storageForm.name.$invalid && formSubmitted" >
-								<i ng-attr-tooltip="{{ '<fmt:message key="storage.offer.required" bundle="${msg}" />' || '<fmt:message key="storage.name.size.error" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i>
+								<i ng-attr-tooltip="{{ storageForm.name.errorMessage || '<fmt:message key="storage.offer.required" bundle="${msg}" />' }}"
+												class="fa fa-warning error-icon">
+								</i>
 								</div>
 							</div>
 						</div>
@@ -52,7 +54,7 @@
 								<div class="error-area"
 									data-ng-show="storageForm.description.$invalid && formSubmitted">
 								<div class="error-area" data-ng-show="storageForm.description.$invalid && formSubmitted" >
-								<i ng-attr-tooltip="{{ '<fmt:message key="storage.description.required" bundle="${msg}" />' || '<fmt:message key="storage.description.size.error" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i>
+                                    <i  tooltip="Description is Required" class="fa fa-warning error-icon"></i>
 								</div>
 								</div>
 							</div>

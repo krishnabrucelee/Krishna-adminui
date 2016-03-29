@@ -79,6 +79,7 @@ function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateP
     $scope.configForm = {};
     $scope.domainList = {};
     $scope.eventsList = {};
+    $scope.emails = {};
     $scope.global = appService.globalConfig;
     $scope.paginationObject.sortOrder = '+';
     $scope.paginationObject.sortBy = 'name';
@@ -342,8 +343,6 @@ function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateP
               	});
           	};
 
-    
-
 $scope.eventLists = function () {
              var hasEvent = appService.crudService.listAll("literals/list");
              hasEvent.then(function (result) {  // this is only run after $http completes0
@@ -361,43 +360,25 @@ $scope.test = 0;
         hasEventList.then(function (result) {
             $scope.eventsList = result;
         });
-    var hasEventTestList = appService.crudService.listByQuery("emails/listbyeventname?eventName="+eventName.eventName);
-        hasEventTestList.then(function (result) {
-            $scope.eventsTemplateList = result;
-		console.log($scope.eventsTemplateList);
-        });
-
     };
-
-
+          $scope.emails = {};
 	  $scope.validateEmailTemplate = function (form,emails,file,file1) {
-      
+          $scope.emails = emails;
 	  var arrayTest = [file, file1];
           $scope.formSubmitted = true;
-                    if (emails.subject && emails.eventName && emails.recipientType  !=null) {
-			if(file != null) {
+          if (emails.subject && emails.eventName && emails.recipientType && file !=null) {
      	      emails.englishLanguage = "ENGLISH";
-			}
 			  if(file1 != null) {
 		          emails.chineseLanguage = "CHINESE";
 			  }
 			  emails.eventName = emails.eventName.eventName;
- 		       appService.uploadFile.upload(arrayTest,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig);
-	                appService.notify({message: 'Added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-                        $state.reload();
+ 			  appService.uploadFile.upload(arrayTest,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig);
+              $scope.showLoader = false;
+              appService.notify({message: 'Added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });   
+              $state.reload();          
           }
 
       };
-
-/**$scope.eventsList = function (email) { 
-    var hasEventTestList = appService.crudService.listByQuery("emails/listbyeventname?eventName="+email.eventName);
-        hasEventTestList.then(function (result) {
-            $scope.eventsTemplateList = result;
-	console.log("list",$scope.eventsList);
-        });
-    };**/
-
-
 
     $scope.validateInvoice = function (form) {
         $scope.formSubmitted = true;
