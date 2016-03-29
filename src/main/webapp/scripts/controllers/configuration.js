@@ -342,6 +342,8 @@ function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateP
               	});
           	};
 
+    
+
 $scope.eventLists = function () {
              var hasEvent = appService.crudService.listAll("literals/list");
              hasEvent.then(function (result) {  // this is only run after $http completes0
@@ -362,6 +364,7 @@ $scope.test = 0;
     var hasEventTestList = appService.crudService.listByQuery("emails/listbyeventname?eventName="+eventName.eventName);
         hasEventTestList.then(function (result) {
             $scope.eventsTemplateList = result;
+		console.log($scope.eventsTemplateList);
         });
 
     };
@@ -371,32 +374,17 @@ $scope.test = 0;
       
 	  var arrayTest = [file, file1];
           $scope.formSubmitted = true;
-          if (emails.subject && emails.eventName && emails.recipientType && file !=null) {
+                    if (emails.subject && emails.eventName && emails.recipientType  !=null) {
+			if(file != null) {
      	      emails.englishLanguage = "ENGLISH";
+			}
 			  if(file1 != null) {
 		          emails.chineseLanguage = "CHINESE";
 			  }
 			  emails.eventName = emails.eventName.eventName;
- 			var hasServer = appService.uploadFile.upload(arrayTest,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig);
-			$state.reload();
-			 hasServer.then(function(result) {
-              appService.notify({message: 'Added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-                        }).catch(function (result) {
-                        	$scope.showLoader = false;
-            		    if (!angular.isUndefined(result.data)) {
-                		if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
-                  	   	 var msg = result.data.globalError[0];
-                  	   	 $scope.showLoader = false;
-                	    	 appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-                    	} else if (result.data.fieldErrors != null) {
-                       	$scope.showLoader = false;
-                        	angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
-                            	$scope.TemplateForm[key].$invalid = true;
-                            	$scope.TemplateForm[key].errorMessage = errorMessage;
-                        	});
-                		}
-                	}
-            	});
+ 		       appService.uploadFile.upload(arrayTest,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig);
+	                appService.notify({message: 'Added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                        $state.reload();
           }
 
       };
@@ -408,6 +396,8 @@ $scope.test = 0;
 	console.log("list",$scope.eventsList);
         });
     };**/
+
+
 
     $scope.validateInvoice = function (form) {
         $scope.formSubmitted = true;

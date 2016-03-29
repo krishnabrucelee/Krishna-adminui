@@ -110,8 +110,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group" ng-class="{'text-danger': TemplateForm.cost.$invalid && formSubmitted}">
-                            <div class="row">
+                        <div class="form-group" data-ng-if="!template.templateCreationType" ng-class="{'text-danger': TemplateForm.cost.$invalid && formSubmitted}">
+                            <div class="row" >
                                 <label class="col-md-4 col-sm-3 control-label"><fmt:message key="template.cost" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-6  col-sm-7 col-xs-7">
                                     <input required="true" type="text" name="cost" valid-price data-ng-model="template.templateCost[0].cost" class="form-control"  data-ng-class="{'error': TemplateForm.cost.$invalid && formSubmitted}">
@@ -193,7 +193,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="row">
+                            <div class="row" data-ng-show="!template.templateCreationType">
                                 <div class="col-md-6  col-sm-6 col-lg-6">
                                     <label> <input icheck type="checkbox" ng-model="template.featured"> <fmt:message key="template.featured" bundle="${msg}" /> </label>
                                 </div>
@@ -203,8 +203,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6">
+                            <div class="row" >
+                                <div class="col-md-6 col-sm-6" data-ng-show="!template.templateCreationType">
                                     <label> <input icheck type="checkbox" ng-model="template.oneTimeChargeable"> <fmt:message key="template.onetimechargeable" bundle="${msg}" /></label>
                                 </div>
                                 <div class="col-md-6  col-sm-6 col-lg-6">
