@@ -367,7 +367,6 @@ $scope.test = 0;
     var hasEventTestList = appService.crudService.listByQuery("emails/listbyeventname?eventName="+eventName.eventName);
         hasEventTestList.then(function (result) {
             $scope.eventsTemplateList = result;
-		console.log($scope.eventsTemplateList);
         });
 
     };
@@ -377,13 +376,14 @@ $scope.test = 0;
 
 	  var arrayTest = [file, file1];
           $scope.formSubmitted = true;
-                    if (emails.subject && emails.eventName && emails.recipientType  !=null) {
+                    if (emails.subject && emails.eventName !=null) {
 			if(file != null) {
      	      emails.englishLanguage = "ENGLISH";
 			}
 			  if(file1 != null) {
 		          emails.chineseLanguage = "CHINESE";
 			  }
+			  emails.recipientType = "USER";
 			  emails.eventName = emails.eventName.eventName;
  		       appService.uploadFile.upload(arrayTest,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig);
 	                appService.notify({message: 'Added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
@@ -391,15 +391,6 @@ $scope.test = 0;
           }
 
       };
-
-/**$scope.eventsList = function (email) {
-    var hasEventTestList = appService.crudService.listByQuery("emails/listbyeventname?eventName="+email.eventName);
-        hasEventTestList.then(function (result) {
-            $scope.eventsTemplateList = result;
-	console.log("list",$scope.eventsList);
-        });
-    };**/
-
 
 
     $scope.validateInvoice = function (form) {

@@ -35,7 +35,7 @@
                             </div>
                         </div>
 
-                        <div data-ng-if="config.eventName.eventName == 'CAPACITY' || config.eventName.eventName == 'SYSTEM ERROR'">
+                      <%--   <div data-ng-if="config.eventName.eventName == 'CAPACITY' || config.eventName.eventName == 'SYSTEM ERROR'">
                          <div class="form-group" ng-class="{'text-danger':!config.recipientType && formSubmitted}">
                         <div class="row">
 									<label class="col-md-3 col-sm-5 control-label"><fmt:message key="recipient.type" bundle="${msg}" />:<span class="text-danger">*</span></label>
@@ -50,9 +50,9 @@
 									</div>
 								</div>
 								</div>
-                             </div>
+                             </div> --%>
 
-                            <div data-ng-hide="config.eventName.eventName == 'CAPACITY' || config.eventName.eventName == 'SYSTEM ERROR'">
+                            <%-- <div data-ng-hide="config.eventName.eventName == 'CAPACITY' || config.eventName.eventName == 'SYSTEM ERROR'">
        		                <div class="form-group" ng-class="{'text-danger':!config.recipientType && formSubmitted}">
 			                <div class="row">
 									<label class="col-md-3 col-sm-5 control-label"><fmt:message key="recipient.type" bundle="${msg}" />:<span class="text-danger">*</span></label>
@@ -67,7 +67,7 @@
 									</div>
 								</div>
 		                  </div>
-		                  </div>
+		                  </div> --%>
 
 						<div class="form-group"> <!-- ng-class="{'text-danger':file && formSubmitted}" -->
   					    <div class="row">
