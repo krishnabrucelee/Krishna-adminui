@@ -34,11 +34,30 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div data-ng-if="config.eventName.eventName == 'CAPACITY' || config.eventName.eventName == 'SYSTEM ERROR'">
                          <div class="form-group" ng-class="{'text-danger':!config.recipientType && formSubmitted}">
                         <div class="row">
 									<label class="col-md-3 col-sm-5 control-label"><fmt:message key="recipient.type" bundle="${msg}" />:<span class="text-danger">*</span></label>
 									<div class="col-md-5 col-xs-7">
 										<select class="form-control input-group" name="recipientType"
+											data-ng-model="config.recipientType"
+											ng-options="recipientType for (id,recipientType) in formElements.recipientList" data-ng-class="{'error': !config.recipientType && formSubmitted}">
+											<option value=""><fmt:message key="common.select" bundle="${msg}" /></option>
+										</select>
+                                    <i  tooltip="<fmt:message key="select.the.user.type" bundle="${msg}" />" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+                                    <div class="error-area" data-ng-show="!config.recipientType && formSubmitted" ><i  tooltip="<fmt:message key="recipient.type.is.required" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
+									</div>
+								</div>
+								</div>
+                             </div>
+
+                            <div data-ng-hide="config.eventName.eventName == 'CAPACITY' || config.eventName.eventName == 'SYSTEM ERROR'">
+       		                <div class="form-group" ng-class="{'text-danger':!config.recipientType && formSubmitted}">
+			                <div class="row">
+									<label class="col-md-3 col-sm-5 control-label"><fmt:message key="recipient.type" bundle="${msg}" />:<span class="text-danger">*</span></label>
+									<div class="col-md-5 col-xs-7">
+										<select class="form-control input-group" multiple="multiple" name="recipientType"
 											data-ng-model="config.recipientType"
 											ng-options="recipientType for (id,recipientType) in formElements.recipientTypeList" data-ng-class="{'error': !config.recipientType && formSubmitted}">
 											<option value=""><fmt:message key="common.select" bundle="${msg}" /></option>
@@ -47,7 +66,9 @@
                                     <div class="error-area" data-ng-show="!config.recipientType && formSubmitted" ><i  tooltip="<fmt:message key="recipient.type.is.required" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
 									</div>
 								</div>
-								</div>
+		                  </div>
+		                  </div>
+
 						<div class="form-group"> <!-- ng-class="{'text-danger':file && formSubmitted}" -->
   					    <div class="row">
                                 <label class="col-md-3 col-sm-5 control-label"><fmt:message key="upload.template.english" bundle="${msg}" />:<span class="text-danger">*</span>
