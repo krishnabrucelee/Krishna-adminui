@@ -305,8 +305,11 @@ function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateP
         ],
 	recipientTypeList: {
 		"0":"USER",
-                "1":"ROOT_ADMIN",
+        "1":"ROOT_ADMIN",
 		"2":"DOMAIN_ADMIN"
+	},
+    recipientList: {
+        "0":"ROOT_ADMIN"
 	}
     };
 
@@ -342,7 +345,7 @@ function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateP
               	});
           	};
 
-    
+
 
 $scope.eventLists = function () {
              var hasEvent = appService.crudService.listAll("literals/list");
@@ -371,7 +374,7 @@ $scope.test = 0;
 
 
 	  $scope.validateEmailTemplate = function (form,emails,file,file1) {
-      
+
 	  var arrayTest = [file, file1];
           $scope.formSubmitted = true;
                     if (emails.subject && emails.eventName && emails.recipientType  !=null) {
@@ -389,7 +392,7 @@ $scope.test = 0;
 
       };
 
-/**$scope.eventsList = function (email) { 
+/**$scope.eventsList = function (email) {
     var hasEventTestList = appService.crudService.listByQuery("emails/listbyeventname?eventName="+email.eventName);
         hasEventTestList.then(function (result) {
             $scope.eventsTemplateList = result;
