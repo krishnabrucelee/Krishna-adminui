@@ -735,11 +735,16 @@ $scope.storage.zone= {};
         hasStorage.then(function (result) {
             $scope.storage = result;
   	     $scope.storage.zone = $scope.zoneList[0];
-	     angular.forEach($scope.zoneList, function (obj, key) {
-                if (obj.id == $scope.storage.zone.id) {
-                    $scope.storage.zone = obj;
-                }
+		var index;
+		for (index = 0; index < $scope.storage.storagePrice.length; ++index) {
+			$scope.storage.storagePrice[index].zoneId = $scope.storage.zone.id;
+		}
+	       angular.forEach($scope.storage.zoneList, function (obj, key) {
+                	if (obj.id == $scope.storage.zone.id) {
+                   	 $scope.storage.zoneId = obj;
+                	}
             });
+	 
         });
 
     };
@@ -807,6 +812,7 @@ $scope.costPerHourIOPS = function() {
         if (form.$valid) {
         	$scope.showLoader = true;
             var storage = $scope.storage;
+ storage.storagePrice[0].zoneId = storage.zone.id;
             var hasStorage = appService.crudService.update("storages", storage);
             hasStorage.then(function (result) {
 
@@ -1461,18 +1467,23 @@ function computeListCtrl($scope, $state, $stateParams, appService, $window, glob
 
     };
 
-    // Edit compute offerings
+     // Edit compute offerings
     $scope.edit = function (computeId) {
+
         var hasComputes = appService.crudService.read("computes", computeId);
         hasComputes.then(function (result) {
             $scope.compute = result;
-    		$scope.compute.zone = $scope.formElements.zoneList[0];
-	       angular.forEach($scope.formElements.zoneList, function (obj, key) {
-                if (obj.id == $scope.compute.zone.id) {
-                    $scope.compute.zone = obj;
-                }
-            });
 
+    		$scope.compute.zone = $scope.formElements.zoneList[0];
+		var index;
+		for (index = 0; index < $scope.compute.computeCost.length; ++index) {
+			$scope.compute.computeCost[index].zoneId = $scope.compute.zone.id;
+		}
+	       angular.forEach($scope.formElements.zoneList, function (obj, key) {
+                	if (obj.id == $scope.compute.zone.id) {
+                   	 $scope.compute.zoneId = obj;
+                	}
+            });
         });
     };
 
@@ -1492,11 +1503,8 @@ function computeListCtrl($scope, $state, $stateParams, appService, $window, glob
             	compute.domainId = compute.domain.id;
 		        delete compute.domain;
             }
-            if(!angular.isUndefined(compute.computeCost.zone) && $scope.compute.computeCost.zone != null) {
-            	compute.computeCost.zoneId = compute.computeCost.zone.id;
-            	delete compute.computeCost.zone;
-            }
-
+            compute.computeCost[0].zoneId = compute.zone.id;
+		delete compute.zone;
             var hasComputes = appService.crudService.update("computes", compute);
             hasComputes.then(function (result) {
 
