@@ -79,6 +79,7 @@ function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateP
     $scope.configForm = {};
     $scope.domainList = {};
     $scope.eventsList = {};
+    $scope.hasConfigList = {};
     $scope.global = appService.globalConfig;
     $scope.paginationObject.sortOrder = '+';
     $scope.paginationObject.sortBy = 'name';
@@ -260,9 +261,9 @@ function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateP
             {id: 9, name: 'Project'}
         ],
         dateFormatList: [
-            {id: 1, name: 'DD/MM/YYYY'},
-            {id: 2, name: 'MM/DD/YYYY'},
-            {id: 3, name: 'YYYY/MM/DD'},
+            {id: 0, name: 'DD/MM/YYYY'},
+            {id: 1, name: 'MM/DD/YYYY'},
+            {id: 2, name: 'YYYY/MM/DD'},
             {id: 3, name: 'YYYY/DD/MM'}
         ],
         dateList: [
@@ -392,14 +393,44 @@ $scope.test = 0;
 
       };
 
+      $scope.configList = function (form) {
+          var hasConfigList = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_GET, globalConfig.PING_APP_URL + "configuration/list");
+          hasConfigList.then(function (result) {  // this is only run after $http completes0
+               $scope.config.overDueDays = result[0].overDueDays;
+          });
+      };
+      $scope.configList();
 
-    $scope.validateInvoice = function (form) {
-        $scope.formSubmitted = true;
-        if (form.$valid) {
-            $scope.homerTemplate = 'app/views/notification/notify.jsp';
-            appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-        }
-    };
+      $scope.validateInvoice = function (form) {
+          $scope.formSubmitted = true;
+          if (form.$valid) {
+              var config = $scope.config;
+              config.dateFormatType = config.dateFormatType.id;
+              $scope.showLoader = true;
+              var hasConfig = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_POST, globalConfig.PING_APP_URL + "configuration", config);
+              hasConfig.then(function (result) {  // this is only run after $http
+                  $scope.showLoader = false;
+                  $scope.homerTemplate = 'app/views/notification/notify.jsp';
+                  appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+                  $scope.configList();
+
+              }).catch(function (result) {
+              	$scope.showLoader = false;
+                  if (!angular.isUndefined(result.data)) {
+                      if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
+                          var msg = result.data.globalError[0];
+                          $scope.showLoader = false;
+                          appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
+                      } else if (result.data.fieldErrors != null) {
+                          angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                              $scope.configForm[key].$invalid = true;
+                              $scope.configForm[key].errorMessage = errorMessage;
+                          });
+                      }
+                  }
+              });
+          }
+      };
 
     $scope.validatePaymentGateway = function (form) {
         $scope.formSubmitted = true;

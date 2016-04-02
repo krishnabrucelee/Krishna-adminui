@@ -59,14 +59,26 @@ function promiseAjax($http, $window, globalConfig, notify) {
         });
     };
 
-    return { httpRequest: httpRequest, httpTokenRequest: httpTokenRequest };
+    var httpRequestPing = function(method, url, data) {
+    	var config = {
+                "method": method,
+                "data": data,
+                "url": url,
+                "headers": {'Content-Type': 'application/json', 'Range': "items=0-9"}
+            };
+        return $http(config).then(function(result){
+            return result.data;
+        });
+    };
+
+    return { httpRequest: httpRequest, httpTokenRequest: httpTokenRequest, httpRequestPing: httpRequestPing };
 }
 
 function uploadFile($http){
 	var upload = function(files,emails,httpTokenRequest,globalConfig) {
 		 var fd = new FormData();
 		angular.forEach(files,function(file){
-		if(!angular.isUndefined(file)) { 
+		if(!angular.isUndefined(file)) {
 		 fd.append('file',file);
 		}
  		});
@@ -82,7 +94,7 @@ function uploadFile($http){
 				'x-auth-token' :globalConfig.sessionValues.token
 			}
 		});
-		 	
+
 
 	}
 	return {upload: upload};
