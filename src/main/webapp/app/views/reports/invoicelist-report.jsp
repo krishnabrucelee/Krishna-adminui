@@ -65,7 +65,7 @@
                                         <td>{{ invoice.domain.name}}</td>
                                         <td>{{ invoice.billPeriod}}</td>
                                         <td>{{ invoice.totalCost}}</td>
-                                        <td>{{ invoice.dueDate}}</td>
+                                        <td>{{ invoice.dueDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                                         <td>{{ invoice.status}}</td>
                                         <!-- <td></td> -->
                                     </tr>
