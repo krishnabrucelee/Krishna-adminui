@@ -744,7 +744,7 @@ $scope.storage.zone= {};
                    	 $scope.storage.zoneId = obj;
                 	}
             });
-	 
+
         });
 
     };
@@ -812,7 +812,9 @@ $scope.costPerHourIOPS = function() {
         if (form.$valid) {
         	$scope.showLoader = true;
             var storage = $scope.storage;
- storage.storagePrice[0].zoneId = storage.zone.id;
+            if (!angular.isUndefined(storage.storagePrice[0])) {
+            	storage.storagePrice[0].zoneId = storage.zone.id;
+            }
             var hasStorage = appService.crudService.update("storages", storage);
             hasStorage.then(function (result) {
 
@@ -1503,7 +1505,9 @@ function computeListCtrl($scope, $state, $stateParams, appService, $window, glob
             	compute.domainId = compute.domain.id;
 		        delete compute.domain;
             }
-            compute.computeCost[0].zoneId = compute.zone.id;
+            if (!angular.isUndefined(compute.computeCost[0])) {
+            	compute.computeCost[0].zoneId = compute.zone.id;
+            }
 		delete compute.zone;
             var hasComputes = appService.crudService.update("computes", compute);
             hasComputes.then(function (result) {
