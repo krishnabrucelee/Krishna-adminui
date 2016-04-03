@@ -682,36 +682,35 @@ function paymentListReport($scope, $http, $window, $modal, $log, $state, $stateP
    	   $scope.configList(1);
    };
 
-    $scope.validateInvoice = function (form) {
-        $scope.formSubmitted = true;
-        if (form.$valid) {
-            var config = $scope.config;
-            config.dateFormatType = config.dateFormatType.id;
-            $scope.showLoader = true;
-            var hasConfig = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_POST, globalConfig.PING_APP_URL + "configuration", config);
-            hasConfig.then(function (result) {  // this is only run after $http
-                $scope.showLoader = false;
-                $scope.homerTemplate = 'app/views/notification/notify.jsp';
-                appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-                $scope.configList();
-
-            }).catch(function (result) {
-            	$scope.showLoader = false;
-                if (!angular.isUndefined(result.data)) {
-                    if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
-                        var msg = result.data.globalError[0];
-                        $scope.showLoader = false;
-                        appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
-                    } else if (result.data.fieldErrors != null) {
-                        angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
-                            $scope.configForm[key].$invalid = true;
-                            $scope.configForm[key].errorMessage = errorMessage;
-                        });
-                    }
-                }
-            });
-        }
-    };
+    // Update payment status
+    $scope.PayNow = function (size, invoice) {
+   	appService.dialogService.openDialog("app/views/common/confirm-payment.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+               $scope.invoiceNumber = invoice.invoiceNumber;
+               $scope.ok = function (invoiceNumber) {
+               	$scope.showLoader = true;
+                   var hasPay = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_POST, globalConfig.PING_APP_URL + "invoice/manualPayment", invoiceNumber);
+                   hasPay.then(function (result) {
+                	   $scope.showLoader = false;
+                       $scope.homerTemplate = 'app/views/notification/notify.jsp';
+                       appService.notify({message: 'Invoice status changed as Paid', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+                       $modalInstance.close();
+                       $scope.configList(1);
+                   }).catch(function (result) {
+                       if (!angular.isUndefined(result.data)) {
+                       	   if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                         	    var msg = result.data.globalError[0];
+                         	    $scope.showLoader = false;
+                         	    appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                           }
+                       $modalInstance.close();
+                       }
+                   });
+               },
+               $scope.cancel = function () {
+                   $modalInstance.close();
+               };
+           }]);
+   };
 
     $scope.formElements = {
             invoiceStatusList: {
