@@ -173,15 +173,20 @@
                             </div>
                         </div>
                     </div>
-                     <div class="form-group">
+                     <div class="form-group" data-ng-class="{ 'text-danger' : emailConfigForm.emailLanguage.$invalid && formSubmitted}">
                         <div class="row">
                             <label class="col-md-3 col-sm-3 control-label">Select Default Language:
+                                <span class="text-danger">*</span>
                             </label>
                             <div class="col-md-7 col-sm-7">
-                                <select required="true" class="form-control input-group" name="emailLanguage" data-ng-model="email.emailLanguage" ng-options="language for (id, language) in formElements.LanguageList" >
+                                <select required="true" class="form-control input-group" name="emailLanguage" data-ng-model="email.emailLanguage" ng-options="language for (id, language) in formElements.LanguageList"
+                                data-ng-class="{ 'error' : emailConfigForm.emailLanguage.$invalid && formSubmitted}">
                                     <option value=""><fmt:message key="common.select" bundle="${msg}" /></option>
                                 </select>
 								<i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="Choose the default language" ></i>
+								<div class="error-area" data-ng-show="emailConfigForm.emailLanguage.$invalid && formSubmitted" >
+                                <i  tooltip="<fmt:message key="email.language.is.required" bundle="${msg}" />" class="fa fa-warning error-icon"></i>
+							</div>
                             </div>
                         </div>
                     </div>

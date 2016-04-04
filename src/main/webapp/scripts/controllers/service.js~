@@ -220,7 +220,7 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
             template.hypervisorId = template.hypervisor.id;
             template.osCategoryId = template.osCategory.id;
             template.osTypeId = template.osType.id;
-	     template.templateCreationType = false ;
+	     template.submitCheck = false ;
             delete template.zone;
             delete template.hypervisor;
             delete template.osCategory;
@@ -416,7 +416,7 @@ function templateEditCtrl($scope, $state, $stateParams, $log, $window, appServic
             template.hypervisorId = template.hypervisor.id;
             template.osCategoryId = template.osCategory.id;
             template.osTypeId = template.osType.id;
-	     template.templateCreationType = false ;
+	     template.submitCheck = false ;
             delete template.zone;
             delete template.hypervisor;
             delete template.osCategory;
@@ -651,11 +651,9 @@ $scope.costPerHourIOPS = function() {
                   	  $scope.showLoader = false;
                   	appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                     } else if (result.data.fieldErrors != null) {
-                    	$scope.showLoader = false;
                         angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
                             $scope.storageForm[key].$invalid = true;
                             $scope.storageForm[key].errorMessage = errorMessage;
-                            $scope.showLoader = false;
                         });
                 	}
                 }
@@ -824,7 +822,6 @@ $scope.costPerHourIOPS = function() {
                         angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
                             $scope.storageForm[key].$invalid = true;
                             $scope.storageForm[key].errorMessage = errorMessage;
-                            $scope.showLoader = false;
                         });
                 	}
                 }
@@ -954,8 +951,8 @@ function networkDetailsCtrl($scope, network, $modalInstance) {
 ;
 
 function miscellaneousListCtrl($scope, modalService, $log, promiseAjax,appService, $stateParams, globalConfig, localStorageService, $window, notify) {
-
-		$scope.formElements = {};
+   
+		$scope.formElements = {};	
     $scope.delete = function () {
         modalService.trigger('app/views/servicecatalog/confirm-delete.jsp', 'md', 'Delete Confirmation');
     };
@@ -1118,8 +1115,8 @@ function miscellaneousListCtrl($scope, modalService, $log, promiseAjax,appServic
 
     };
     $scope.volumesnapList();
-
-
+			
+		
 		   $scope.saveVolumeSnapshot = function (form) {
                     $scope.formSubmitted = true;
                     if (form.$valid) {
@@ -1360,11 +1357,11 @@ function computeListCtrl($scope, $state, $stateParams, appService, $window, glob
         }
     };
 
-// Number validation
+// Number validation 
  $scope.validateNumbers = function() {
 
-		$scope.number = parseInt($scope.compute.clockSpeed);
-
+		$scope.number = parseInt($scope.compute.clockSpeed);                   
+   
                     if($scope.number < 1000 ) {
  			submitError = true;
                         $scope.homerTemplate = 'app/views/notification/notify.jsp';

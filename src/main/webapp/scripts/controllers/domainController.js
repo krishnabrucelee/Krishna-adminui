@@ -131,6 +131,7 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
                         		$scope.domain.secondaryContactPhone = "";
 					$scope.showLoader = false;
                         	}).catch(function (result) {
+                        		$scope.showLoader = false;
                         		if(!angular.isUndefined(result) && result.data != null) {
                         			angular.forEach(result.data.fieldErrors, function(errorMessage, key) {
 					                   $scope.showLoader = false;
@@ -145,6 +146,7 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
                         	var key = 'confirmPassword';
                         	$scope.domainForm[key].$invalid = true;
                         	$scope.domainForm[key].errorMessage = document.getElementById("passwordErrorMessage").value;
+                        	$scope.showLoader = false;
                         }
                     }
                 }
