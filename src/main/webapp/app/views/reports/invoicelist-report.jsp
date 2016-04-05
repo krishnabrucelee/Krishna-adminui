@@ -67,7 +67,9 @@
                                         <td>{{ invoice.totalCost}}</td>
                                         <td>{{ invoice.dueDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                                         <td>
-                                            {{ invoice.status}}
+                                            {{ invoice.status}}<br>
+                                            <a data-ng-if="invoice.status == 'DUE'" class="m-l-sm btn btn-sm btn-default m-b-sm" data-ng-click="viewInvoice(invoice, 'Chinese')">Chinese PDF</a><br>
+                                            <a data-ng-if="invoice.status == 'DUE'" class="m-l-sm btn btn-sm btn-info" data-ng-click="viewInvoice(invoice, 'English')">English PDF</a><br>
                                             <button data-ng-if="invoice.status == 'DRAFT'" class="m-l-sm btn btn-sm btn-info" data-ng-click="generateDueInvoice(invoice)">Generate Invoice</button>
                                         </td>
                                         <!-- <td></td> -->

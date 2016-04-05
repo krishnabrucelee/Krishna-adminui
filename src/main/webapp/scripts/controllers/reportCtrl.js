@@ -431,6 +431,13 @@ function invoiceListReport($scope, $http, $window, $modal, $log, $state, $stateP
     $scope.paginationObject.sortOrder = '-';
     $scope.paginationObject.sortBy = 'dueDate';
 
+    $scope.viewInvoice = function(invoice, language) {
+        var filePath = invoice.fullPath + "/" + language + "/" + invoice.fileName + ".pdf";
+        window.open(appService.globalConfig.PING_APP_URL + "invoice/viewPdf?invoiceNumber="+ invoice.invoiceNumber +"&language="+language,
+                invoice.domain.name + "-" + invoice.invoiceNumber, "");
+    }
+
+
     $scope.generateDueInvoice = function(invoice) {
         $scope.showLoader = true;
         var hasServer = appService.promiseAjax.httpRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.PING_APP_URL + "invoice/updateDue?domainUuid=" + invoice.domainUuid);
