@@ -75,13 +75,11 @@
                                 </label>
                                                                 <div class="col-md-5 col-sm-7">
 
-
-                        <input type="file" name="file" accept=".htm,.html" class="custom-file-input" file-model="file"  data-ng-class="{'error': !file && formSubmitted}"/>
+                        <input type="file" name="file" accept=".htm,.html" class="custom-file-input" file-model="file" data-ng-class="{'error': !file && formSubmitted}"/>
  						<span><label>{{eventsTemplateList[0].englishLanguage}}</label></span>
  						<%-- <div class="error-area" data-ng-show="file && formSubmitted">
 									<i tooltip="<fmt:message key="file.is.required" bundle="${msg}" />" class="fa fa-warning error-icon"></i>
 								</div> --%>
-
   						</div>
   						</div>
   						</div>

@@ -77,11 +77,24 @@ function promiseAjax($http, $window, globalConfig, notify) {
 function uploadFile($http){
 	var upload = function(files,emails,httpTokenRequest,globalConfig) {
 		 var fd = new FormData();
-		angular.forEach(files,function(file){
+		/**angular.forEach(files,function(file){
 		if(!angular.isUndefined(file)) {
 		 fd.append('file',file);
 		}
- 		});
+		
+ 		});**/
+		var i = 0;
+		angular.forEach(files,function(file){
+            	if(!angular.isUndefined(file)) {
+                	fd.append("file",file);
+            	}
+           	 if(!angular.isUndefined(file) && i==0) {
+                	fd.append("hasEnglish",true);
+            	} else {
+                	fd.append("hasEnglish",false);
+            	}
+            	i++;
+         	});
 		fd.append("eventName",emails.eventName);
 		fd.append("subject",emails.subject);
  		fd.append('englishLanguage',emails.englishLanguage);
