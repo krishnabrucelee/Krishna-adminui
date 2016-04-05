@@ -61,7 +61,7 @@
                                 <label class="col-md-4 col-sm-5 control-label">Date Format:
                                 </label>
                                 <div class="col-md-6 col-sm-7">
-                                    <select required="true" class="form-control input-group" name="dateFormat" data-ng-model="config.dateFormatType" ng-options="dateFormatType.name for dateFormatType in formElements.dateFormatList " >
+                                    <select required="true" class="form-control input-group" name="dateFormatType" data-ng-model="config.dateFormatType" ng-options="dateFormatType for (id, dateFormatType) in formElements.dateFormatList " >
                                         <option value="">Select</option>
                                     </select>
                                     <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="This date format is applicable billing oriented external file such as pdf,csv,etc..files." ></i>
