@@ -404,6 +404,28 @@
 										bundle="${msg}" />
 							</span>
 							</span>
+							<span ng-if="state.data.pageTitle === 'Report'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="common.reports" bundle="${msg}" /></a> <span ng-switch-when="true"><fmt:message
+										key="common.reports" bundle="${msg}" /></span>
+							</span>
+							<span ng-if="state.data.pageTitle === 'Invoice List Report'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="common.invoicelistreport" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="common.invoicelistreport"
+										bundle="${msg}" />
+							</span>
+							</span>
+							<span ng-if="state.data.pageTitle === 'Payment Report'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="common.paymentreport" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="common.paymentreport"
+										bundle="${msg}" />
+							</span>
+							</span>
 						</li>
 					</ol>
 				</div>
@@ -455,6 +477,8 @@
 					 <span ng-if="$state.current.data.pageTitle === 'Zone Description'"><fmt:message key="zone.description" bundle="${msg}" /></span>
 					 <span ng-if="$state.current.data.pageTitle === 'Import Data'"><fmt:message key="import.data" bundle="${msg}" /></span>
 					 <span ng-if="$state.current.data.pageTitle === 'Email Template'"><fmt:message key="email.template" bundle="${msg}" /></span>
+					 <span ng-if="$state.current.data.pageTitle === 'Invoice List Report'"><fmt:message key="common.invoicelistreport" bundle="${msg}" /></span>
+					 <span ng-if="$state.current.data.pageTitle === 'Payment Report'"><fmt:message key="common.paymentreport" bundle="${msg}" /></span>
 				</h2>
 				<small>{{ $state.current.data.pageDesc}}</small>
 			</div>

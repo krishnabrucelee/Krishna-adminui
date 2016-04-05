@@ -10,7 +10,9 @@ angular.module('cgNotify', []).factory('notify',['$timeout','$http','$compile','
 
         var messageElements = [];
 
+
         var notify = function(args){
+        	notify.closeAll();
 
             if (typeof args !== 'object'){
                 args = {message:args};
@@ -26,6 +28,12 @@ angular.module('cgNotify', []).factory('notify',['$timeout','$http','$compile','
             scope.$message = args.message;
             scope.$classes = args.classes;
             scope.$messageTemplate = args.messageTemplate;
+            if(scope.$classes === 'alert-success'){
+            	duration = 5000;
+	    }
+	    if(scope.$classes === 'alert-danger'){
+	    	duration = 60000;
+	    }
 
             $http.get(args.templateUrl,{cache: $templateCache}).success(function(template){
 
@@ -104,7 +112,7 @@ angular.module('cgNotify', []).factory('notify',['$timeout','$http','$compile','
             });
 
             var retVal = {};
-            
+
             retVal.close = function(){
                 if (scope.$close){
                     scope.$close();

@@ -64,7 +64,7 @@ function promiseAjax($http, $window, globalConfig, notify) {
                 "method": method,
                 "data": data,
                 "url": url,
-                "headers": {'Content-Type': 'application/json'}
+                "headers": {'Content-Type': 'application/json', 'Range': "items=0-9"}
             };
         return $http(config).then(function(result){
             return result.data;
@@ -78,7 +78,7 @@ function uploadFile($http){
 	var upload = function(files,emails,httpTokenRequest,globalConfig) {
 		 var fd = new FormData();
 		angular.forEach(files,function(file){
-		if(!angular.isUndefined(file)) { 
+		if(!angular.isUndefined(file)) {
 		 fd.append('file',file);
 		}
  		});
@@ -94,7 +94,7 @@ function uploadFile($http){
 				'x-auth-token' :globalConfig.sessionValues.token
 			}
 		});
-		 	
+
 
 	}
 	return {upload: upload};

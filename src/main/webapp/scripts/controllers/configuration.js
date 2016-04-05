@@ -306,8 +306,11 @@ function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateP
         ],
 	recipientTypeList: {
 		"0":"USER",
-                "1":"ROOT_ADMIN",
+        "1":"ROOT_ADMIN",
 		"2":"DOMAIN_ADMIN"
+	},
+    recipientList: {
+        "0":"ROOT_ADMIN"
 	}
     };
 
@@ -343,7 +346,7 @@ function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateP
               	});
           	};
 
-    
+
 
 $scope.eventLists = function () {
              var hasEvent = appService.crudService.listAll("literals/list");
@@ -365,23 +368,23 @@ $scope.test = 0;
     var hasEventTestList = appService.crudService.listByQuery("emails/listbyeventname?eventName="+eventName.eventName);
         hasEventTestList.then(function (result) {
             $scope.eventsTemplateList = result;
-		console.log($scope.eventsTemplateList);
         });
 
     };
 
 
 	  $scope.validateEmailTemplate = function (form,emails,file,file1) {
-      
+
 	  var arrayTest = [file, file1];
           $scope.formSubmitted = true;
-                    if (emails.subject && emails.eventName && emails.recipientType  !=null) {
+                    if (emails.subject && emails.eventName !=null) {
 			if(file != null) {
      	      emails.englishLanguage = "ENGLISH";
 			}
 			  if(file1 != null) {
 		          emails.chineseLanguage = "CHINESE";
 			  }
+			  emails.recipientType = "USER";
 			  emails.eventName = emails.eventName.eventName;
  		       appService.uploadFile.upload(arrayTest,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig);
 	                appService.notify({message: 'Added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
@@ -390,52 +393,44 @@ $scope.test = 0;
 
       };
 
-/**$scope.eventsList = function (email) {
-    var hasEventTestList = appService.crudService.listByQuery("emails/listbyeventname?eventName="+email.eventName);
-        hasEventTestList.then(function (result) {
-            $scope.eventsTemplateList = result;
-	console.log("list",$scope.eventsList);
-        });
-    };**/
+      $scope.configList = function (form) {
+          var hasConfigList = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_GET, globalConfig.PING_APP_URL + "configuration/list");
+          hasConfigList.then(function (result) {  // this is only run after $http completes0
+               $scope.config.overDueDays = result[0].overDueDays;
+          });
+      };
+      $scope.configList();
 
-	 $scope.configList = function (form) {
-        var hasConfigList = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_GET, globalConfig.PING_APP_URL + "configuration/list");
-        hasConfigList.then(function (result) {  // this is only run after $http completes0
-             $scope.config.overDueDays = result[0].overDueDays;
-        });
-     	};
-     $scope.configList();
+      $scope.validateInvoice = function (form) {
+          $scope.formSubmitted = true;
+          if (form.$valid) {
+              var config = $scope.config;
+              config.dateFormatType = config.dateFormatType.id;
+              $scope.showLoader = true;
+              var hasConfig = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_POST, globalConfig.PING_APP_URL + "configuration", config);
+              hasConfig.then(function (result) {  // this is only run after $http
+                  $scope.showLoader = false;
+                  $scope.homerTemplate = 'app/views/notification/notify.jsp';
+                  appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+                  $scope.configList();
 
-    $scope.validateInvoice = function (form) {
-        $scope.formSubmitted = true;
-        if (form.$valid) {
-            var config = $scope.config;
-            config.dateFormatType = config.dateFormatType.id;
-            $scope.showLoader = true;
-            var hasConfig = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_POST, globalConfig.PING_APP_URL + "configuration", config);
-            hasConfig.then(function (result) {  // this is only run after $http
-                $scope.showLoader = false;
-                $scope.homerTemplate = 'app/views/notification/notify.jsp';
-                appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-                $scope.configList();
-
-            }).catch(function (result) {
-            	$scope.showLoader = false;
-                if (!angular.isUndefined(result.data)) {
-                    if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
-                        var msg = result.data.globalError[0];
-                        $scope.showLoader = false;
-                        appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
-                    } else if (result.data.fieldErrors != null) {
-                        angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
-                            $scope.configForm[key].$invalid = true;
-                            $scope.configForm[key].errorMessage = errorMessage;
-                        });
-                    }
-                }
-            });
-        }
-    };
+              }).catch(function (result) {
+              	$scope.showLoader = false;
+                  if (!angular.isUndefined(result.data)) {
+                      if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
+                          var msg = result.data.globalError[0];
+                          $scope.showLoader = false;
+                          appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
+                      } else if (result.data.fieldErrors != null) {
+                          angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                              $scope.configForm[key].$invalid = true;
+                              $scope.configForm[key].errorMessage = errorMessage;
+                          });
+                      }
+                  }
+              });
+          }
+      };
 
     $scope.validatePaymentGateway = function (form) {
         $scope.formSubmitted = true;

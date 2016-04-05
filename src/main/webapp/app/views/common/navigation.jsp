@@ -54,11 +54,12 @@
          <li ng-class="{active: $state.includes('reports')}">
              <a href="#"><span class="pe-7s-file pe-2x nav-menu-icons"></span><span class="nav-label"><fmt:message key="common.reports" bundle="${msg}" /></span><span class="fa arrow"></span> </a>
             <ul class="nav nav-second-level" ng-class="{in: $state.includes('reports')}">
-                <li ui-sref-active="active"><a ui-sref="reports.signup"><fmt:message key="common.signupreport" bundle="${msg}" /></a></li>
-                <li ui-sref-active="active"><a ui-sref="reports.billable-items"><fmt:message key="common.billableitemreport" bundle="${msg}" /></a></li>
+                <li ui-sref-active="active"><a ui-sref="reports.invoicelist-report"><fmt:message key="common.invoicelistreport" bundle="${msg}" /></a></li>
+                <%-- <li ui-sref-active="active"><a ui-sref="reports.signup"><fmt:message key="common.signupreport" bundle="${msg}" /></a></li>
+                <li ui-sref-active="active"><a ui-sref="reports.billable-items"><fmt:message key="common.billableitemreport" bundle="${msg}" /></a></li> --%>
                 <li ui-sref-active="active"><a ui-sref="reports.payment-report"><fmt:message key="common.paymentreport" bundle="${msg}" /></a></li>
-                <li ui-sref-active="active"><a ui-sref="reports.payment-due"><fmt:message key="common.paymentduereport" bundle="${msg}" /></a></li>
-                <li ui-sref-active="active"><a ui-sref="reports.client-usage"><fmt:message key="common.clientusage" bundle="${msg}" /></a></li>
+                <%-- <li ui-sref-active="active"><a ui-sref="reports.payment-due"><fmt:message key="common.paymentduereport" bundle="${msg}" /></a></li>
+                <li ui-sref-active="active"><a ui-sref="reports.client-usage"><fmt:message key="common.clientusage" bundle="${msg}" /></a></li> --%>
             </ul>
         </li>
     </ul>

@@ -600,6 +600,13 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                     pageTitle: 'Report'
                 }
             })
+            .state('reports.invoicelist-report', {
+                url: "report/invoicelistReport",
+                templateUrl: VIEW_URL +  "views/reports/invoicelist-report.jsp",
+                data: {
+                    pageTitle: 'Invoice List Report'
+                }
+            })
             .state('reports.signup', {
                 url: "report/signUp",
                 templateUrl: VIEW_URL +  "views/reports/sign-up.jsp",
