@@ -432,8 +432,10 @@ function invoiceListReport($scope, $http, $window, $modal, $log, $state, $stateP
     $scope.paginationObject.sortBy = 'dueDate';
 
     $scope.generateDueInvoice = function(invoice) {
+        $scope.showLoader = true;
         var hasServer = appService.promiseAjax.httpRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.PING_APP_URL + "invoice/updateDue?domainUuid=" + invoice.domainUuid);
         hasServer.then(function (result) {  // this is only run after $http completes
+            $scope.showLoader = false;
             $state.reload();
         });
     }
