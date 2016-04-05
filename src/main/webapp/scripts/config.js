@@ -6,7 +6,7 @@
 
 function configState($stateProvider, $urlRouterProvider, $compileProvider, localStorageServiceProvider) {
 
-	var VIEW_URL = "app/";
+    var VIEW_URL = "app/";
 
 
     // Optimize load start with remove binding information inside the DOM element
@@ -100,7 +100,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             })
 
             .state('client.client.quota', {
-            	url: "/:view/:id",
+                url: "/:view/:id",
                 templateUrl: VIEW_URL +  "views/client/clients/clientquota.jsp",
                 data: {
                     pageTitle: 'client'
@@ -670,8 +670,8 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
 angular
         .module('panda-ui-admin')
          .constant("PANDA_CONFIG", {
-			"VIEW_URL" : "app/views/",
-		})
+            "VIEW_URL" : "app/views/",
+        })
         .config(configState)
         .run(function ($rootScope, $state, editableOptions) {
             $rootScope.$state = $state;
