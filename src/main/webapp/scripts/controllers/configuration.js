@@ -260,12 +260,6 @@ function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateP
             {id: 8, name: 'Network'},
             {id: 9, name: 'Project'}
         ],
-        dateFormatList: [
-            {id: 0, name: 'DD/MM/YYYY'},
-            {id: 1, name: 'MM/DD/YYYY'},
-            {id: 2, name: 'YYYY/MM/DD'},
-            {id: 3, name: 'YYYY/DD/MM'}
-        ],
         dateList: [
             {id: 1},
             {id: 2},
@@ -304,14 +298,20 @@ function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateP
             {id: 2, name: 'Admin'},
             {id: 3, name: 'Domain'}
         ],
-	recipientTypeList: {
-		"0":"USER",
-        "1":"ROOT_ADMIN",
-		"2":"DOMAIN_ADMIN"
-	},
-    recipientList: {
-        "0":"ROOT_ADMIN"
-	}
+	    recipientTypeList: {
+		    "0":"USER",
+            "1":"ROOT_ADMIN",
+		    "2":"DOMAIN_ADMIN"
+	    },
+        recipientList: {
+            "0":"ROOT_ADMIN"
+	    },
+	    dateFormatList: {
+            "0":"DD/MM/YYYY",
+            "1":"MM/DD/YYYY",
+            "2":"YYYY/MM/DD",
+            "3":"YYYY/DD/MM"
+	    }
     };
 
     $scope.validateDomain = function (form) {
@@ -436,10 +436,21 @@ else if( !angular.isUndefined(file))
 
       };
 
+      $scope.config = {};
       $scope.configList = function (form) {
           var hasConfigList = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_GET, globalConfig.PING_APP_URL + "configuration/list");
           hasConfigList.then(function (result) {  // this is only run after $http completes0
                $scope.config.overDueDays = result[0].overDueDays;
+               if (result[0].dateFormatType === "DDMMYYYY") {
+            	   $scope.config.dateFormatType = "DD/MM/YYYY";
+               } else if (result[0].dateFormatType === "MMDDYYYY") {
+            	   $scope.config.dateFormatType = "MM/DD/YYYY";
+               } else if (result[0].dateFormatType === "YYYYMMDD") {
+            	   $scope.config.dateFormatType = "YYYY/MM/DD";
+               } else if (result[0].dateFormatType === "YYYYDDMM") {
+            	   $scope.config.dateFormatType = "YYYY/DD/MM";
+               }
+
           });
       };
       $scope.configList();
@@ -448,7 +459,15 @@ else if( !angular.isUndefined(file))
           $scope.formSubmitted = true;
           if (form.$valid) {
               var config = $scope.config;
-              config.dateFormatType = config.dateFormatType.id;
+              if (config.dateFormatType === "DD/MM/YYYY") {
+           	      config.dateFormatType = "DDMMYYYY";
+              } else if (config.dateFormatType === "MM/DD/YYYY") {
+           	      config.dateFormatType = "MMDDYYYY";
+              } else if (config.dateFormatType === "YYYY/MM/DD") {
+           	      config.dateFormatType = "YYYYMMDD";
+              } else if (config.dateFormatType === "YYYY/DD/MM") {
+           	      config.dateFormatType = "YYYYDDMM";
+              }
               $scope.showLoader = true;
               var hasConfig = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_POST, globalConfig.PING_APP_URL + "configuration", config);
               hasConfig.then(function (result) {  // this is only run after $http
