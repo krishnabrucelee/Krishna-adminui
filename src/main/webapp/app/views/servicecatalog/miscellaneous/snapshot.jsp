@@ -50,7 +50,8 @@
                                     <div class="col-md-4 col-sm-4"></div>
 
                                     <div class="col-md-6 col-sm-6   ">
-                                        <button class="btn btn-info pull-right" type="submit" ng-disabled="form.snapshotForm.$invalid" >Update</button>
+                                             <get-loader-image data-ng-if="showLoader"></get-loader-image>
+                                              <button class="btn btn-info pull-right" data-ng-if="!showLoader"  type="submit" ng-disabled="form.snapshotForm.$invalid" ><fmt:message key="common.add" bundle="${msg}" /></button>
                                     </div>
                                 </div>
                             </div>

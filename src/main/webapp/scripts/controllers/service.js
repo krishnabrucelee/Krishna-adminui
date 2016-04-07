@@ -205,6 +205,18 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
     	$scope.formElements.hypervisorList = result;
     });
 
+
+	  $scope.templateCostList = function () {
+        $scope.showLoader = true;
+        var hastemplateList = appService.crudService.listAll("miscellaneous/listtemplate");
+        hastemplateList.then(function (result) {  // this is only run after $http completes0
+            $scope.miscellaneousList = result;
+            $scope.showLoader = false;
+        });
+
+    };
+    $scope.templateCostList();
+
     // Open dialogue box to create templates
     $scope.template = {
     		templateCost: []

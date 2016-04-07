@@ -232,9 +232,10 @@
 										<label class="col-md-4 col-sm-4 control-label"><fmt:message key="phone.number" bundle="${msg}" /><span
 											class="text-danger">*</span></label>
 										<div class="col-md-6 col-sm-6">
-											<input type = "text" required="true" id="add_company_primary_phone_number" ng-model="domain.phone" name="phone" ng-pattern="/^\d+$/" maxlength="12" class="form-control"
+											<input type = "text" required="true" id="add_company_primary_phone_number" ng-model="domain.phone" name="phone" ng-pattern="/^\d+$/"  maxlength="14" class="form-control"
 												data-ng-class="{'error': domainForm.email.$invalid && formSubmitted}">
-											<span ng-show="domainForm.phone.$error.pattern">Not a valid number!</span>
+											<span class="text-danger" ng-show="domainForm.phone.$error.pattern">Numbers only allowed!</span>
+											<span class="text-danger" ng-show="domainForm.phone.$error.maxlength">Not a valid range!</span>
 
 											<i tooltip="Phone of the company"
 												class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
@@ -281,10 +282,16 @@
 								<label class="col-md-4 col-sm-4 control-label"><fmt:message key="email.id" bundle="${msg}" /></label>
 
 										<div class="col-md-6 col-sm-6">
-											<input type="text" name="Secondaryemail" data-ng-model="domain.secondaryContactEmail" id="add_company_secondary_email_id"
-												class="form-control"> <i
+											<input type="email" name="Secondaryemail" data-ng-model="domain.secondaryContactEmail" id="add_company_secondary_email_id"
+												class="form-control" data-ng-class="{'error': domainForm.Secondaryemail.$invalid && formSubmitted}"> <i
 												tooltip="Email of the company"
 												class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
+												<div class="error-area"
+												data-ng-show="domainForm.Secondaryemail.$invalid && formSubmitted">
+												<i
+													ng-attr-tooltip="{{ domainForm.Secondaryemail.errorMessage || 'Email required' }}"
+													class="fa fa-warning error-icon"></i>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -293,14 +300,20 @@
 									<div class="row">
 										<label class="col-md-4 col-sm-4 control-label"><fmt:message key="phone.number" bundle="${msg}" /></label>
 										<div class="col-md-6 col-sm-6">
-											<input type="text" valid-number name="Secondaryphone" id="add_company_secondary_phone_number"
-												data-ng-model="domain.secondaryContactPhone" class="form-control">
+											<input type = "text" id="add_company_secondary_phone_number" ng-model="domain.secondaryContactPhone" name="Secondaryphone" ng-pattern="/^\d+$/"  maxlength="14" class="form-control">
+											<span class="text-danger" ng-show="domainForm.Secondaryphone.$error.pattern">Numbers only allowed!</span>
+											<span class="text-danger" ng-show="domainForm.Secondaryphone.$error.maxlength">Not a valid range!</span>
 											<i tooltip="Phone of the company"
 												class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 										</div>
+										<div class="error-area"
+												data-ng-show="domainForm.Secondaryphone.$invalid && formSubmitted">
+												<i ng-attr-tooltip="{{ domainForm.Secondaryphone.errorMessage || 'Phone required' }}"
+													class="fa fa-warning error-icon"></i>
+											</div>
 									</div>
 								</div>
-							</fieldset>
+									</fieldset>
 						</div>
 					</div>
 				</div>
