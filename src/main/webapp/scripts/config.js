@@ -352,6 +352,14 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 pageTitle: 'Payment Settings'
             }
         })
+        
+         .state('paymentReturn', {
+            url: "/payment/return",
+            templateUrl: VIEW_URL +  "views/common/payment-success.jsp",
+            data: {
+                pageTitle: 'Payment Success'
+            }
+        })
 
         .state('configuration.home.promotional', {
             url: "/promotion",
