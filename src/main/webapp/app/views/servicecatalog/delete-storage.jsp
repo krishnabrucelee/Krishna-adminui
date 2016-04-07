@@ -5,7 +5,7 @@
 <form name="form.detachForm" data-ng-controller="deleteCtrl">
     <div class="inmodal" >
         <div class="modal-header">
-            <panda-modal-header id="delete_compute_offer_page_title" hide-zone="false" page-icon="fa fa-warning" page-title="<fmt:message key="common.delete.confirmation" bundle="${msg}" />"></panda-modal-header>
+            <panda-modal-header id="delete_storage_offer_page_title" hide-zone="false" page-icon="fa fa-warning" page-title="<fmt:message key="common.delete.confirmation" bundle="${msg}" />"></panda-modal-header>
         </div>
         <div class="modal-body">
             <div class=" row">
@@ -19,8 +19,8 @@
         </div>
         <div class="modal-footer">
         	<get-loader-image data-ng-show="showLoader"></get-loader-image>
-            <button type="button" id="delete_compute_offer_cancel_button" data-ng-hide="showLoader" class="btn btn-default " ng-click="cancel()" data-dismiss="modal"><fmt:message key="common.cancel" bundle="${msg}" /></button>
-            <button type="submit" id="delete_compute_offer_ok_button" data-ng-hide="showLoader" class="btn btn-default btn-danger2" ng-click="ok(deleteId)" data-dismiss="modal"><fmt:message key="common.ok" bundle="${msg}" /></button>
+            <button type="button" id="delete_storage_offer_cancel_button" data-ng-hide="showLoader" class="btn btn-default " ng-click="cancel()" data-dismiss="modal"><fmt:message key="common.cancel" bundle="${msg}" /></button>
+            <button type="submit" id="delete_storage_offer_ok_button" data-ng-hide="showLoader" class="btn btn-default btn-danger2" ng-click="ok(deleteId)" data-dismiss="modal"><fmt:message key="common.ok" bundle="${msg}" /></button>
         </div>
     </div>
 </form>

@@ -9,7 +9,7 @@
         {{$message}}
     </div>
 
-    <div ng-show="$messageTemplate" class="cg-notify-message-template">
+    <div ng-show="$messageTemplate" class="cg-notify-message-template test-success-notify" id="success_notify">
 
     </div>
 

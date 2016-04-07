@@ -665,7 +665,7 @@ $scope.costPerHourIOPS = function() {
 
     // Delete the Storage Offer
     $scope.delete = function (size, storage) {
-    	appService.dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+    	appService.dialogService.openDialog("app/views/servicecatalog/delete-storage.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
                 $scope.deleteId = storage.id;
                 $scope.ok = function (storageId) {
                     $scope.showLoader = true;
