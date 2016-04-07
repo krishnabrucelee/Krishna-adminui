@@ -382,16 +382,13 @@ console.log("events",$scope.eventsTemplateList[0]);
 if( angular.isUndefined(file) && angular.isUndefined($scope.eventsTemplateList[0]))
 {
 
-   appService.notify({message: 'No file selected', classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+   appService.notify({message: 'Please select a file for English Template', classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
 }
 
 
 
 
 $scope.checkfile = function(file) {
-
-console.log(file);
-
 if( (angular.isUndefined(file) || angular.isUndefined(file1)) && !angular.isUndefined($scope.eventsTemplateList[0]))
 {
             if (emails.subject && emails.eventName !=null) {
@@ -403,7 +400,6 @@ if( (angular.isUndefined(file) || angular.isUndefined(file1)) && !angular.isUnde
 			  }
 			  emails.recipientType = "USER";
 			  emails.eventName = emails.eventName.eventName;
-console.log("fileslisr",arrayTest);
  		       appService.uploadFile.upload(arrayTest,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig);
 	                appService.notify({message: 'Added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                         $state.reload();
@@ -413,7 +409,7 @@ console.log("fileslisr",arrayTest);
 else if( !angular.isUndefined(file)) 
 {
       if ((file.type != "text/html") ||  (!angular.isUndefined(file) && (file.type != "text/html"))) {
-      appService.notify({message: 'Invalid file selected, valid files are HTML files ', classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+      appService.notify({message: 'Please upload HTML files ', classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
       return false;
     }
     else {

@@ -59,7 +59,7 @@
                     <thead>
                         <tr>
                             <th data-ng-click="changeSort('name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.name" bundle="${msg}" /></th>
-                            <th data-ng-click="changeSort('osCategory.name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='osCategory.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.os" bundle="${msg}" /></th>
+                            <th data-ng-click="changeSort('templateCreationType',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='templateCreationType'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.userCreated" bundle="${msg}" /></th>
                             <th data-ng-click="changeSort('osType.description',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='osType.description'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.type" bundle="${msg}" /></th>
                             <th data-ng-click="changeSort('zone.name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='zone.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.zone" bundle="${msg}" /></th>
                             <th data-ng-click="changeSort('hypervisor.name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='hypervisor.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.hypervisor" bundle="${msg}" /></th>
@@ -71,11 +71,13 @@
                     <tbody>
                         <tr data-ng-repeat="template in filteredCount = (templateList| filter: quickSearch | orderBy:sort.column:sort.descending)">
                             <td>{{ template.name}}</td>
-                            <td>{{ template.osCategory.name}}</td>
+                            <td>{{ (template.templateCreationType) ? "Yes" : "No" }}
                             <td>{{ template.osType.description}}</td>
                             <td>{{ template.zone.name}}</td>
                             <td>{{ template.hypervisor.name}}</td>
-                            <td><b class="text-danger"> {{ template.templateCost[0].cost || 0}}<span data-ng-if = "!template.oneTimeChargeable" >/ day</span></b></td>
+                            <td data-ng-if = "template.templateCreationType == false"><b class="text-danger">{{ template.templateCost[0].cost || 0}}<span data-ng-if = "!template.oneTimeChargeable" >/ day</span></b></td>
+                             <td data-ng-if = "template.templateCreationType == true"><b class="text-danger"> {{miscellaneousList[0].costperGB|| 0}}<span>/GB/ day</span></b></td>
+
                             <td>{{ template.status }}</td>
                             <td>
                                 <a class="icon-button" title="<fmt:message key="common.edit" bundle="${msg}" />" ui-sref="servicecatalog.list-templatestore.list-view-template-edit({id: {{ template.id}}})"  ><span class="fa fa-edit"></span></a>

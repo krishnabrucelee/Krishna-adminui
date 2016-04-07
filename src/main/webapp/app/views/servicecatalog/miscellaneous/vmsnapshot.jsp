@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<form name="vmsnapshotForm" data-ng-submit="savevmsnapshot(vmsnapshotForm)" data-ng-controller="miscellaneousListCtrl" novalidate = "" >
+<form name="TemplateForm" data-ng-submit="savevmsnapshot(TemplateForm)" data-ng-controller="miscellaneousListCtrl" novalidate = "" >
     <div class="row">
         <div class="col-md-12 col-sm-12" >
             <div class="hpanel">
@@ -50,7 +50,8 @@
                                     <div class="col-md-4 col-sm-4"></div>
 
                                     <div class="col-md-6 col-sm-6 ">
-                                        <button class="btn btn-info pull-right" type="submit" ng-disabled="form.vmsnapshotForm.$invalid" >Update</button>
+                                             <get-loader-image data-ng-if="showLoader"></get-loader-image>
+                                              <button class="btn btn-info pull-right" data-ng-if="!showLoader" type="submit" ng-disabled="form.TemplateForm.$invalid" ><fmt:message key="common.add" bundle="${msg}" /></button>
                                     </div>
                                 </div>
                             </div>
