@@ -190,6 +190,7 @@
 <script src="scripts/controllers/configuration/emailConfigController.js"></script>
 <script src="scripts/controllers/configuration/organizationController.js"></script>
 <script src="scripts/controllers/configuration/paymentGatewayController.js"></script>
+<script src="scripts/controllers/configuration/paymentController.js"></script>
 <script src="scripts/controllers/resourceAllocation.js"></script>
 <script src="scripts/controllers/domainController.js"></script>
 

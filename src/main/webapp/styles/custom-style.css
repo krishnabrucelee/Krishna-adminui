@@ -96,6 +96,9 @@ fieldset.scheduler-border legend{border-bottom:none !important; margin-bottom:0p
     margin-right: 10px;
     text-decoration: inherit;
 }
+.payment-info{color: #8d8e90;}
+.payment-info span{color:#464648;}
+
 .panda-ui-admin-notify.alert-info {
     background-color: #48a9da;
     border-left: 6px solid rgba(0, 0, 0, 0.2);
