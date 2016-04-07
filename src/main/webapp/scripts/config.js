@@ -360,6 +360,22 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 pageTitle: 'Payment Success'
             }
         })
+        
+        .state('paymentNotify', {
+            url: "/payment/notify",
+            templateUrl: VIEW_URL +  "views/common/payment-notify.jsp",
+            data: {
+                pageTitle: 'Payment Notify'
+            }
+        })
+        
+        .state('paymentFailure', {
+            url: "/payment/failure",
+            templateUrl: VIEW_URL +  "views/common/payment-failure.jsp",
+            data: {
+                pageTitle: 'Payment Failure'
+            }
+        })
 
         .state('configuration.home.promotional', {
             url: "/promotion",

@@ -5,10 +5,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
         <div class="row">
             <div class="col-md-offset-4 col-md-4">
-               <div class="hpanel hgreen">
-                   <div class="panel-heading"><b class="text-success font-uppercase">Payment Successful</b></div>
+               <div class="hpanel hred">
+                   <div class="panel-heading"><b class="text-danger font-uppercase">Payment UnSuccessful</b></div>
                     <div class="panel-body">
-                        Bill payment transaction has been processed successfully for your VPS.<br>Below are your transaction details.
+                        Your transactions Could not be Processed
                         <div class="table-responsive m-t-md payment-info">
                             <table cellspacing="1" cellpadding="1" class="table table-bordered ">
                                 <tbody>

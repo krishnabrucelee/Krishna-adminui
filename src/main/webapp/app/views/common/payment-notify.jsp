@@ -5,16 +5,22 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
         <div class="row">
             <div class="col-md-offset-4 col-md-4">
-               <div class="hpanel hgreen">
-                   <div class="panel-heading"><b class="text-success font-uppercase">Payment Successful</b></div>
+               <div class="hpanel hblue">
+                   <div class="panel-heading"><b class="text-info font-uppercase">Payment Processing</b></div>
                     <div class="panel-body">
-                        Bill payment transaction has been processed successfully for your VPS.<br>Below are your transaction details.
+							Processing Please Wait ......
                         <div class="table-responsive m-t-md payment-info">
                             <table cellspacing="1" cellpadding="1" class="table table-bordered ">
                                 <tbody>
                                 <tr>
+                                    <td colspan="2">
+                                        <div class="pull-left">Order ID : <span>CKP32160990</span> </div>
+                                        <div class="pull-right">Date : <span>05-Apr-2016</span></div>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td class="bg-light">
-                                        Invoice No  : <span><b>54654654</b></span> <br>(KVM Linux VPS Slice 1 Slices)
+                                        Status  : <span><b>Processing</b></span> <br>
                                     </td>
                                     <td class="bg-light text-right">
                                         <div class="m-t-sm"><span><b>RMB.1709.00</b></span></div>
@@ -23,7 +29,7 @@
                                 <tr>
                                     <td colspan="2">
                                         <div class="pull-left">Transaction ID : <span>CKP32160990</span> </div>
-                                        <div class="pull-right">Date : <span>05-Apr-2016</span></div>
+                                        <div class="pull-right">Invoice No  : <span><b>54654654</b></span> <br>(KVM Linux VPS Slice 1 Slices) </div>
                                     </td>
                                 </tr>
                                 </tbody>
