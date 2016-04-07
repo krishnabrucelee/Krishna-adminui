@@ -374,9 +374,49 @@ $scope.test = 0;
 
 
 	  $scope.validateEmailTemplate = function (form,emails,file,file1) {
-
-	  var arrayTest = [file, file1];
+var arrayTest = [file, file1];
           $scope.formSubmitted = true;
+
+console.log("events",$scope.eventsTemplateList[0]);
+
+if( angular.isUndefined(file) && angular.isUndefined($scope.eventsTemplateList[0]))
+{
+
+   appService.notify({message: 'No file selected', classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+}
+
+
+
+
+$scope.checkfile = function(file) {
+
+console.log(file);
+
+if( (angular.isUndefined(file) || angular.isUndefined(file1)) && !angular.isUndefined($scope.eventsTemplateList[0]))
+{
+            if (emails.subject && emails.eventName !=null) {
+			if(file != null) {
+     	      emails.englishLanguage = "ENGLISH";
+			}
+			  if(file1 != null) {
+		          emails.chineseLanguage = "CHINESE";
+			  }
+			  emails.recipientType = "USER";
+			  emails.eventName = emails.eventName.eventName;
+console.log("fileslisr",arrayTest);
+ 		       appService.uploadFile.upload(arrayTest,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig);
+	                appService.notify({message: 'Added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                        $state.reload();
+          }
+}
+
+else if( !angular.isUndefined(file)) 
+{
+      if ((file.type != "text/html") ||  (!angular.isUndefined(file) && (file.type != "text/html"))) {
+      appService.notify({message: 'Invalid file selected, valid files are HTML files ', classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+      return false;
+    }
+    else {
                     if (emails.subject && emails.eventName !=null) {
 			if(file != null) {
      	      emails.englishLanguage = "ENGLISH";
@@ -390,6 +430,13 @@ $scope.test = 0;
 	                appService.notify({message: 'Added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                         $state.reload();
           }
+
+}
+}
+
+}
+ $scope.checkfile(file);
+	
 
       };
 
