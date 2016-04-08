@@ -7,6 +7,7 @@ angular
         .controller('configurationCtrl', configurationCtrl)
         .controller('importCtrl', importCtrl)
         .controller('retailManagementCtrl', retailManagementCtrl)
+        .controller('billingCtrl', billingCtrl)
 
 function cloudStackCtrl($scope, $window, appService) {
 
@@ -406,7 +407,7 @@ if( (angular.isUndefined(file) || angular.isUndefined(file1)) && !angular.isUnde
           }
 }
 
-else if( !angular.isUndefined(file)) 
+else if( !angular.isUndefined(file))
 {
       if ((file.type != "text/html") ||  (!angular.isUndefined(file) && (file.type != "text/html"))) {
       appService.notify({message: 'Please upload HTML files ', classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
@@ -432,7 +433,7 @@ else if( !angular.isUndefined(file))
 
 }
  $scope.checkfile(file);
-	
+
 
       };
 
@@ -671,5 +672,120 @@ function retailManagementCtrl($scope, globalConfig, notify) {
     };
 };
 
+function billingCtrl($scope, appService, globalConfig, localStorageService, $window, notify) {
 
+    $scope.global = globalConfig;
+    $scope.paginationObject = {};
+    $scope.billableItemDiscountList = {};
 
+    $scope.showLoader = true;
+    $scope.open = function ($event, currentDateField) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.billingSettingsObj[currentDateField] = true;
+    };
+
+    // Domain List
+    var hasDomains = appService.crudService.listAll("domains/list");
+    hasDomains.then(function (result) {  // this is only run after $http completes0
+        $scope.domainList = result;
+    });
+
+    // Billable List
+    var hasBillableList = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_GET, globalConfig.PING_APP_URL + "billableItem/list");
+    hasBillableList.then(function (result) {  // this is only run after $http completes0
+        $scope.billableList = result;
+    });
+
+    Date.prototype.ddmmyyyy= function() {
+       var yyyy = this.getFullYear().toString();
+       var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based
+       var dd  = this.getDate().toString();
+       return (dd[1]?dd:"0"+dd[0]) + "-"+ (mm[1]?mm:"0"+mm[0]) + "-" + yyyy; // padding
+      };
+
+    $scope.billingSettings = [];
+    $scope.showLoader = false;
+    $scope.billingSettingsObj = {};
+
+    $scope.getBillingSettings = function() {
+        if(angular.isUndefined($scope.billingSettingsObj.startDate)
+                || $scope.billingSettingsObj.startDate == ""
+                        || $scope.billingSettingsObj.domain == "" || $scope.billingSettingsObj.domain == null
+                        || $scope.billingSettingsObj.discountPercentage == "" || $scope.billingSettingsObj.discountPercentage == null
+                        || angular.isUndefined($scope.billingSettingsObj.billableItems) || $scope.billingSettingsObj.billableItems == null) {
+            alert("Please select all the mandatory fields")
+            return false;
+        }
+
+        $scope.showLoader = false;
+        $scope.billingSettingsObj.fromDate = $scope.billingSettingsObj.startDate.ddmmyyyy();
+        if (!angular.isUndefined($scope.billingSettingsObj.endDate)
+                && $scope.billingSettingsObj.endDate != "") {
+        	$scope.billingSettingsObj.toDate = $scope.billingSettingsObj.endDate.ddmmyyyy();
+        }
+        $scope.billingSettingsObj.domainUuid = $scope.billingSettingsObj.domain.uuid;
+        var billingSettingsTempObj = {};
+        billingSettingsTempObj = angular.copy($scope.billingSettingsObj);
+        $scope.paginationObject = {};
+        delete $scope.billingSettingsObj.startDate;
+        delete $scope.billingSettingsObj.endDate;
+
+        var billingSettingsObj = $scope.billingSettingsObj;
+        var hasConfig = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_POST, globalConfig.PING_APP_URL + "billableItemDiscount", billingSettingsObj);
+        hasConfig.then(function (result) {  // this is only run after $http
+            $scope.showLoader = false;
+            $scope.homerTemplate = 'app/views/notification/notify.jsp';
+            appService.notify({message: 'Discount added successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+            delete $scope.billingSettingsObj;
+
+            $scope.list(1, "all");
+        }).catch(function (result) {
+        	$scope.showLoader = false;
+            if (!angular.isUndefined(result.data)) {
+                if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
+                    var msg = result.data.globalError[0];
+                    $scope.showLoader = false;
+//                    $scope.billingSettingsObj= {};
+//                    $scope.billingSettingsObj.startDate = billingSettingsTempObj.startDate.ddmmyyyy();
+//                    $scope.billingSettingsObj.endDate = billingSettingsTempObj.endDate.ddmmyyyy();
+                    appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
+                }
+            }
+        });
+        }
+
+        // Discount List
+        $scope.list = function (pageNumber, domainUuid) {
+        var limit = (angular.isUndefined($scope.paginationObject.limit)) ? appService.globalConfig.CONTENT_LIMIT : $scope.paginationObject.limit;
+        hasServer = appService.promiseAjax.httpRequestPing(appService.globalConfig.HTTP_GET, appService.globalConfig.PING_APP_URL + "billableItemDiscount/listDiscountByDomain?domainUuid="+domainUuid+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+
+        hasServer.then(function (result) {  // this is only run after $http completes0
+            if (!angular.isUndefined(result._embedded)) {
+            	$scope.billableItemDiscountList = result['_embedded'].billableItemDiscountList;
+            } else {
+                $scope.billableItemDiscountList = {};
+            }
+
+            $scope.showLoader = false;
+            // For pagination
+            $scope.paginationObject.limit = limit;
+            $scope.paginationObject.currentPage = pageNumber;
+            $scope.paginationObject.totalItems = result.totalItems;
+        });
+        };
+        $scope.list(1, "all");
+
+        $scope.domainChange = function (domainObj) {
+        	$scope.list(1, domainObj.uuid);
+        }
+
+        $scope.validateDiscount = function(discountPercentage) {
+        	var discount = parseFloat(discountPercentage);
+        	if(discount > 100 || discount < -100) {
+        		alert("Discount should be between -100 and 100");
+        		$scope.billingSettingsObj.discountPercentage = 0;
+        	}
+        }
+
+};

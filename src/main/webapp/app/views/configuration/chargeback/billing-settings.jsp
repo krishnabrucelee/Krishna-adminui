@@ -3,92 +3,180 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<form name="configForm" data-ng-submit="validateInvoice(configForm)" method="post" novalidate="" data-ng-controller="configurationCtrl">
-    <div class="row">
-        <div class="col-md-12 col-sm-12">
-            <div class="hpanel">
-                <div class="panel-heading">
-                    <div class="row">
+<div class="row" ng-controller="billingCtrl">
+    <div class="hpanel">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-lg-10 col-md-10 col-sm-10 col-md-offset-1">
+                    <div class="panel-info panel ">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ $state.current.data.pageTitle}}</h3>
+                        </div>
+                        <div class="row m-t-md">
 
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <span class="pull-left">
-                                <a class="btn btn-info" href="#/configuration/chargeback"  title="Back" ><span class="fa fa-arrow-circle-left fa-lg "></span> Back</a>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group m-l-md">
+                                    <div class="row">
+                                    <label class="col-md-4 col-sm-4 control-label">Domain:
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <select
+                                        class="form-control input-group col-xs-5" name="domain"
+                                        data-ng-change="domainChange(billingSettingsObj.domain)"
+                                        data-ng-model="billingSettingsObj.domain"
+                                        data-ng-options="domainObj.name for domainObj in domainList">
+                                        <option value="">Select</option>
+                                        </select>
+                                    </div>
+                                    </div>
+                                 </div>
+                                 <div class="form-group m-l-md"
+                                    ng-class="{
+                                            'text-danger'
+                                           : !billingSettingsObj.startDate && formSubmitted}">
+                                    <div class="row">
+                                        <label class="col-md-4 col-sm-4 control-label">Valid
+                                            From: <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <div class="input-group">
+                                                <input type="text" readonly
+                                                    data-ng-class="{'error': !billingSettingsObj.startDate && formSubmitted}"
+                                                    class="form-control"
+                                                    datepicker-popup="{{global.date.format}}"
+                                                    max-date="billingSettingsObj.endDate" name="fromDate"
+                                                    data-ng-model="billingSettingsObj.startDate"
+                                                    is-open="billingSettingsObj.startDateOpened"
+                                                    datepicker-options="global.date.dateOptions"
+                                                    close-text="Close" /> <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default"
+                                                        ng-click="open($event, 'startDateOpened')"
+                                                        data-ng-class="{'error': !billingSettingsObj.startDate && formSubmitted}">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                            <div class="error-area"
+                                                data-ng-show="!billingSettingsObj.startDate && formSubmitted">
+                                                <i tooltip="From date is Required" class=""></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6  col-sm-6">
+                                <div class="form-group m-l-md">
+                                    <div class="row">
+                                    <label class="col-md-5 col-sm-5 control-label">Discount Percentage:
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input required="true" type="text" valid-price name="discountPercentage" data-ng-model="billingSettingsObj.discountPercentage" class="form-control col-md-4">
+                                        <div class="error-area" data-ng-show="billingSettingsObj.discountPercentage.$invalid" ><i  tooltip="<fmt:message key="billingSettingsObj.discountPercentage.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="form-group m-l-md"
+                                    ng-class="{
+                                            'text-danger'
+                                            : !billingSettingsObj.endDate && formSubmitted}">
+                                    <div class="row">
+                                        <label class="col-md-5 col-sm-5 control-label">Expires
+                                            On:
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <div class="input-group">
+                                                <input type="text"
+                                                    data-ng-class="{'error': !billingSettingsObj.endDate && formSubmitted}"
+                                                    readonly
+                                                    class="form-control"
+                                                    datepicker-popup="{{global.date.format}}"
+                                                    min-date="billingSettingsObj.startDate" name="endDate"
+                                                    data-ng-model="billingSettingsObj.endDate"
+                                                    is-open="billingSettingsObj.endDateOpened"
+                                                    datepicker-options="global.date.dateOptions"
+                                                    close-text="Close" /> <span class="input-group-btn">
+                                                    <button type="button"
+                                                        data-ng-class="{'error': !billingSettingsObj.endDate && formSubmitted}"
+                                                        class="btn btn-default"
+                                                        ng-click="open($event, 'endDateOpened')">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6  col-sm-6">
+                                <div class="form-group m-l-md">
+                                    <div class="row">
+                                    <label class="col-md-4 col-sm-4 control-label">Billable Item:
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <select required="true" multiple="multiple" class="form-control input-group" name="billing" data-ng-model="billingSettingsObj.billableItems" ng-options="billingObj.name for billingObj in billableList">
+						                    <option value=""><fmt:message key="common.select" bundle="${msg}" /></option>
+						                </select>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row ">
+                            <span class="col-md-4 col-sm-4"></span> <span
+                                class="col-md-7 col-sm-7 p-md">
+                                <button type="submit" data-ng-click="getBillingSettings()" class="btn btn-info">Add</button>
+                                <!-- <a class="btn btn-default" data-ng-click="reset()"> Cancel </a> -->
                             </span>
                         </div>
-
                     </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="panel-body">
-                    <div class="col-md-8 col-sm-8">
-
-                        <div class="form-group">
-                            <div class="row">
-                                <label class="col-md-4 col-sm-4 control-label">Hourly Billing Enable:
-                                </label>
-
-                                <div class="col-md-4 col-sm-5">
-                                    <input icheck  name="billing"  type="radio" data-ng-model="hourly" />
-                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="Enable Hourly Billing for VM,Disk and Snapshot" ></i>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="row">
-                                <label class="col-md-4 col-sm-4 control-label">Monthly Billing Enable:
-                                </label>
-
-                                <div class="col-md-4 col-sm-5">
-                                    <input icheck name="billing"  type="radio"  data-ng-model="monthly"/>
-                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="Enable Monthly Billing for VM,Disk and Snapshot" ></i>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="form-group" >
-                            <div class="row">
-                                <label class="col-md-4 col-sm-4 control-label">Usage Calculation Type:
-
-                                </label>
-                                <div class="col-md-4 col-sm-5">
-                                    <label class="">
-
-                                        <input icheck type="radio"  value="Actual" name="usageCalculationType" data-ng-model="actual"  > Actual
-
-
-                                    </label>
-                                    <label class="m-l-sm">
-
-                                        <input icheck type="radio" value="Hourly" name="usageCalculationType" data-ng-model="hourly" data-ng-checked="true" > Hourly
-
-
-                                    </label>
-                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="Enable Monthly Billing for VM,Disk and Snapshot" ></i>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <label class="col-md-4 col-sm-4 control-label">
-                                </label>
-                                <div class="col-md-4 col-sm-5">
-                                    <button class="btn btn-info" type="submit">Update</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
                 </div>
             </div>
-
-
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-sm-10 col-xs-10 col-md-offset-1">
+                <div class="white-content">
+                    <div data-ng-hide="showLoader" style="margin: 1%">
+                        <get-loader-image data-ng-show="showLoader"></get-loader-image>
+                    </div>
+                    <div class="table-responsive">
+                        <table cellspacing="1" cellpadding="1" class="table dataTable table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                    	<th class="col-md-2 col-sm-2">Domain</th>
+                                    	<th class="col-md-2 col-sm-2">Discount Percentage</th>
+                                    	<th class="col-md-2 col-sm-2">Valid From</th>
+                                    	<th class="col-md-2 col-sm-2">Expires On</th>
+                                    	<th class="col-md-2 col-sm-2">Billable Item</th>
+                                    </tr>
+                                </thead>
+                                <tbody data-ng-hide="billableItemDiscountList.length > 0">
+                                    <tr>
+                                        <td class="col-md-6 col-sm-6" colspan="6"><fmt:message key="common.no.records.found" bundle="${msg}" />!!</td>
+                                    </tr>
+                                </tbody>
+                                <tbody data-ng-show="billableItemDiscountList.length > 0">
+                                    <tr data-ng-repeat="discount in billableItemDiscountList">
+                                        <td>{{ discount.domain.name}}</td>
+                                        <td>{{ discount.discountPercentage}}</td>
+                                        <td>{{ discount.startDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                        <td>{{ discount.endDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                        <td><span data-ng-repeat="item in discount.billableItems">{{item.name}} {{$last ? '' : ', '}}</span></td>
+                                    </tr>
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <pagination-content></pagination-content>
+            </div>
         </div>
     </div>
-</form>
-
+</div>
