@@ -178,7 +178,7 @@
 									class="text-danger">*</span> </label>
 
 								<div class="col-md-7 col-sm-7">
-									<input required="true" type='email' valid-email name="sellerEmail"
+									<input required="true" type='text' valid-email name="sellerEmail"
 										class="form-control" data-ng-model="payment.sellerEmail"
 										data-ng-class="{'error': configForm.sellerEmail.$invalid && formSubmitted}">
 									<i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"
