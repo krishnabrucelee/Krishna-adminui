@@ -48,7 +48,7 @@
                              <label for="remeber_login">Remember login</label>
                              <p class="small">(if this is a private computer)</p>
                          </div>
-                    <button type="submit" class="btn btn-default">Login</button>
+                    <button id="login_button" type="submit" class="btn btn-default">Login</button>
                     </form>
                 </div>
             </div>

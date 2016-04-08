@@ -430,32 +430,32 @@
 					</ol>
 				</div>
 				<h2 class="font-light m-b-xs">
-					 <span ng-if="$state.current.data.pageTitle === 'Compute Offer'"><fmt:message key="compute.offer" bundle="${msg}" /></span>
-					 <span ng-if="$state.current.data.pageTitle === 'Storage Offer'">
+					 <span id="compute_offer_page_title" ng-if="$state.current.data.pageTitle === 'Compute Offer'"><fmt:message key="compute.offer" bundle="${msg}" /></span>
+					 <span id="storage_offer_page_title" ng-if="$state.current.data.pageTitle === 'Storage Offer'">
 						<a ng-switch-when="false" ng-href="{{'#' + state.url.format($stateParams)}}"><fmt:message key="view.storage" bundle="${msg}" /></a>
 					    <span ng-switch-when="true">{{ state.data.pageName }</span>
 					 </span>
-				     <span ng-if="$state.current.data.pageTitle === 'Edit Template'"><fmt:message key="edit.template" bundle="${msg}" /></span>
-				     <span ng-if="$state.current.data.pageTitle === 'Create Template'"><fmt:message key="create.template" bundle="${msg}" /></span>
-				     <span ng-if="$state.current.data.pageTitle === 'Template'"><fmt:message key="common.templates" bundle="${msg}" /></span>
-				     <span ng-if="$state.current.data.pageTitle === 'Template ISO'"><fmt:message key="template.iso" bundle="${msg}" /></span>
-				     <span ng-if="$state.current.data.pageTitle === 'Edit ISO'"><fmt:message key="edit.iso" bundle="${msg}" /></span>
-				     <span ng-if="$state.current.data.pageTitle === 'Create ISO'"><fmt:message key="create.iso" bundle="${msg}" /></span>
-	                 <span ng-if="$state.current.data.pageTitle === 'Create Storage Offer'"><fmt:message key="create.storage.offer" bundle="${msg}" /></span>
-	                 <span ng-if="$state.current.data.pageTitle === 'Create Compute Offer'"><fmt:message key="create.compute.offer" bundle="${msg}" /></span>
-	                 <span ng-if="$state.current.data.pageTitle === 'Edit Compute Offer'"><fmt:message key="edit.compute.offer" bundle="${msg}" /></span>
-	                 <span ng-if="$state.current.data.pageTitle === 'Edit Storage Offer'"><fmt:message key="edit.storage.offer" bundle="${msg}" /></span>
+				     <span id="edit_template_page_title" ng-if="$state.current.data.pageTitle === 'Edit Template'"><fmt:message key="edit.template" bundle="${msg}" /></span>
+				     <span id="create_template_page_title" ng-if="$state.current.data.pageTitle === 'Create Template'"><fmt:message key="create.template" bundle="${msg}" /></span>
+				     <span id="templates_page_title" ng-if="$state.current.data.pageTitle === 'Template'"><fmt:message key="common.templates" bundle="${msg}" /></span>
+				     <span id="template_iso_page_title" ng-if="$state.current.data.pageTitle === 'Template ISO'"><fmt:message key="template.iso" bundle="${msg}" /></span>
+				     <span id="edit_iso_page_title" ng-if="$state.current.data.pageTitle === 'Edit ISO'"><fmt:message key="edit.iso" bundle="${msg}" /></span>
+				     <span id="create_iso_page_title" ng-if="$state.current.data.pageTitle === 'Create ISO'"><fmt:message key="create.iso" bundle="${msg}" /></span>
+	                 <span id="create_storage_offer_page_title" ng-if="$state.current.data.pageTitle === 'Create Storage Offer'"><fmt:message key="create.storage.offer" bundle="${msg}" /></span>
+	                 <span id="create_compute_offer_page_title" ng-if="$state.current.data.pageTitle === 'Create Compute Offer'"><fmt:message key="create.compute.offer" bundle="${msg}" /></span>
+	                 <span id="edit_compute_offer_page_title" ng-if="$state.current.data.pageTitle === 'Edit Compute Offer'"><fmt:message key="edit.compute.offer" bundle="${msg}" /></span>
+	                 <span id="edit_storage_offer_page_title" ng-if="$state.current.data.pageTitle === 'Edit Storage Offer'"><fmt:message key="edit.storage.offer" bundle="${msg}" /></span>
 				     <span id="company_page_title" ng-if="$state.current.data.pageTitle === 'Company'"><fmt:message key="common.company" bundle="${msg}" /></span>
-				     <span ng-if="$state.current.data.pageTitle === 'Applications'"><fmt:message key="common.applications" bundle="${msg}" /></span>
-				     <span ng-if="$state.current.data.pageTitle === 'Projects'"><fmt:message key="common.projects" bundle="${msg}" /></span>
-				     <span ng-if="$state.current.data.pageTitle === 'Users'"><fmt:message key="common.users" bundle="${msg}" /></span>
-					 <span ng-if="$state.current.data.pageTitle === 'Compute'"><fmt:message key="common.compute.offerings" bundle="${msg}" /></span>
-					 <span ng-if="$state.current.data.pageTitle === 'Storage'"><fmt:message key="common.storage.offerings" bundle="${msg}" /></span>
-                     <span ng-if="$state.current.data.pageTitle === 'Network'"><fmt:message key="common.networks" bundle="${msg}" /></span>
-                     <span ng-if="$state.current.data.pageTitle === 'Miscellaneous'"><fmt:message key="common.miscellaneous" bundle="${msg}" /></span>
-                     <span ng-if="$state.current.data.pageTitle === 'Email Configuration'"><fmt:message key="email.configuration" bundle="${msg}" /></span>
-				     <span ng-if="$state.current.data.pageTitle === 'Organization Details'"><fmt:message key="organization.details" bundle="${msg}" /></span>
-				     <span ng-if="$state.current.data.pageTitle === 'Login Security'"><fmt:message key="login.security" bundle="${msg}" /></span>
+				     <span id="applications_page_title" ng-if="$state.current.data.pageTitle === 'Applications'"><fmt:message key="common.applications" bundle="${msg}" /></span>
+				     <span id="projects_page_title" ng-if="$state.current.data.pageTitle === 'Projects'"><fmt:message key="common.projects" bundle="${msg}" /></span>
+				     <span id="users_page_title" ng-if="$state.current.data.pageTitle === 'Users'"><fmt:message key="common.users" bundle="${msg}" /></span>
+					 <span id="compute_offerings_page_title" ng-if="$state.current.data.pageTitle === 'Compute'"><fmt:message key="common.compute.offerings" bundle="${msg}" /></span>
+					 <span id="storage_offerings_page_title" ng-if="$state.current.data.pageTitle === 'Storage'"><fmt:message key="common.storage.offerings" bundle="${msg}" /></span>
+                     <span id="networks_page_title" ng-if="$state.current.data.pageTitle === 'Network'"><fmt:message key="common.networks" bundle="${msg}" /></span>
+                     <span id="miscellaneous_page_title" ng-if="$state.current.data.pageTitle === 'Miscellaneous'"><fmt:message key="common.miscellaneous" bundle="${msg}" /></span>
+                     <span id="email_configuration_page_title" ng-if="$state.current.data.pageTitle === 'Email Configuration'"><fmt:message key="email.configuration" bundle="${msg}" /></span>
+				     <span id="organization_details_page_title" ng-if="$state.current.data.pageTitle === 'Organization Details'"><fmt:message key="organization.details" bundle="${msg}" /></span>
+				     <span id="login_security_page_title" ng-if="$state.current.data.pageTitle === 'Login Security'"><fmt:message key="login.security" bundle="${msg}" /></span>
 				     <span ng-if="$state.current.data.pageTitle === 'Sign up Setting'"><fmt:message key="sign.up.setting" bundle="${msg}" /></span>
 				     <span ng-if="$state.current.data.pageTitle === 'Admin User'"><fmt:message key="admin.user" bundle="${msg}" /></span>
 				     <span ng-if="$state.current.data.pageTitle === 'Add Admin User'"><fmt:message key="add.admin.user" bundle="${msg}" /></span>

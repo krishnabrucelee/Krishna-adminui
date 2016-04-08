@@ -31,13 +31,14 @@
                                 <div class="clearfix"></div>
                                 </div>
                             </div>
-                            <a class="btn btn-info" ui-sref="servicecatalog.list-compute.list-compute-offer"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message key="common.add" bundle="${msg}" /></a>
-                                <a class="btn btn-info" ui-sref="servicecatalog.list-compute" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
+                            <a class="btn btn-info" id="compute_offerings_add_button" ui-sref="servicecatalog.list-compute.list-compute-offer"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message key="common.add" bundle="${msg}" /></a>
+                            <a class="btn btn-info" id="compute_offerings_refresh_button" ui-sref="servicecatalog.list-compute" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
                         </div>
                         <div class="pull-right">
 							<panda-quick-search></panda-quick-search>
 							<span class="pull-right m-r-sm">
 								<select
+								    id="compute_offerings_domain_filter"
 									class="form-control input-group col-xs-5" name="domainView"
 									data-ng-model="domainView"
 									data-ng-change="selectDomainView(1)"
@@ -54,12 +55,14 @@
                 </div>
                 <div class="clearfix"></div>
             </div>
+                    <div class="row" id="compute_offerings_pagination_container">
+                    <div class="col-md-12 col-sm-12 col-xs-12 ">
 					<div data-ng-show="showLoader" style="margin: 1%">
 						<get-loader-image data-ng-show="showLoader"></get-loader-image>
 					</div>
 					<div data-ng-hide = "showLoader" class="table-responsive">
 					            <div class="white-content">
-					                    <table cellspacing="1" cellpadding="1" class="table dataTable table-bordered table-striped">
+					                    <table cellspacing="1" cellpadding="1" class="table dataTable table-bordered table-striped" id="compute_offerings_table">
                         <thead>
                             <tr>
                             	<th data-ng-click="changeSort('name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.name" bundle="${msg}" /></th>
@@ -89,12 +92,13 @@
 
                                 <td>
 
-                                    <a class="icon-button" title="<fmt:message key="common.edit" bundle="${msg}" /> " ui-sref="servicecatalog.list-compute.list-view-compute-offer({id: {{ compute.id}}})"   ><span class="fa fa-edit m-r"></span></a>
+                                    <a class="icon-button test-compute_offerings_edit_button" id="compute_offerings_edit_button_{{compute.id}}" data-unique-field="{{compute.name}}"
+                                     title="<fmt:message key="common.edit" bundle="${msg}" /> " ui-sref="servicecatalog.list-compute.list-view-compute-offer({id: {{ compute.id}}})"   ><span class="fa fa-edit m-r"></span></a>
                                     <a class="icon-button" title="Stop" data-ng-show="instance.state == 'Running'">
                                         <span class="fa fa-ban m-r" ></span>
                                     </a>
 
-                                    <a class="icon-button" 	title="<fmt:message key="common.delete" bundle="${msg}" /> " data-ng-click="delete('sm', compute)"  ><span class="fa fa-trash"></span></a>
+                                    <a class="icon-button test_compute_offerings_delete_button" id="compute_offerings_delete_button_{{compute.id}}" title="<fmt:message key="common.delete" bundle="${msg}" /> " data-ng-click="delete('sm', compute)"  ><span class="fa fa-trash"></span></a>
 
                                 </td>
                             </tr>
@@ -103,7 +107,9 @@
                 </div>
             </div>
             <pagination-content></pagination-content>
-        </div>
+            </div>
+            </div>
+    </div>
     </div>
 </div>
 </div>
