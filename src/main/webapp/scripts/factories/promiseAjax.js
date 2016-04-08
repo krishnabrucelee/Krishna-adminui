@@ -81,7 +81,7 @@ function uploadFile($http){
 		if(!angular.isUndefined(file)) {
 		 fd.append('file',file);
 		}
-		
+
  		});**/
 		var i = 0;
 		angular.forEach(files,function(file){
