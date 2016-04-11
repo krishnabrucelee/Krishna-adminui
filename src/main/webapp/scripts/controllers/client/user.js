@@ -103,4 +103,41 @@ function userListCtrl($scope, $state, $stateParams, modalService,appService, $lo
     $scope.selectDomainView = function(pageNumber) {
     	$scope.list(1);
     };
+
+    // Suspend the user
+    $scope.showUserListLoader = {};
+    $scope.suspendUserAccount = function(account) {
+      $scope.showUserListLoader[account.id] = true;
+
+        appService.dialogService.openDialog("app/views/common/confirm-suspension.jsp", 'sm',
+        $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+          $scope.suspensionObject = account;
+          $scope.ok = function (suspensionObject) {
+            suspensionObject.status = "SUSPENDED";
+            var hasServer = appService.crudService.update("users/suspend", suspensionObject);
+            hasServer.then(function (result) {
+              appService.notify({message: 'Account suspended  successfully ',
+              classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
+              $modalInstance.close();
+            });
+            $scope.showUserListLoader[suspensionObject.id] = false;
+          },
+          $modalInstance.close();
+          $scope.cancel = function () {
+            $modalInstance.close();
+            $scope.showUserListLoader[account.id] = false;
+          };
+      }]);
+
+      // var hasServer = appService.crudService.update("users/suspend", account);
+      // hasServer.then(function (result) {
+      //     $scope.list(1);
+      //     $scope.showUserListLoader[account.user_name] = false;
+      //     appService.notify({message: 'User suspended successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
+      //     $modalInstance.close();
+      // }).catch(function (result) {
+      //   if(!angular.isUndefined(result) && result.data != null) {
+      //     $scope.showUserListLoader[account.userName] = false;
+      // });
+    };
 };
