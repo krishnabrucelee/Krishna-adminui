@@ -25,7 +25,7 @@
 									data-ng-model="domainView"
 									data-ng-change="selectDomainView(1, domainView.name, statusView)"
 									data-ng-options="domainView.name for domainView in domainList">
-									<option value="">All Domain</option>
+									<option value=""> <fmt:message key="common.domain.filter" bundle="${msg}" /></option>
 								</select>
 							</span>
 							<div class="clearfix"></div>
