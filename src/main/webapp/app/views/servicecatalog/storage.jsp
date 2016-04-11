@@ -50,7 +50,7 @@
 									data-ng-model="domainView" id="storage_offerings_domain_filter"
 									data-ng-change="selectDomainView(1)"
 									data-ng-options="domainView.name for domainView in formElements.domainList">
-									<option value="">All Domain</option>
+									<option value=""><fmt:message key="common.all.company" bundle="${msg}" /></option>
 								</select>
 							</span>
                             <div class="clearfix"></div>

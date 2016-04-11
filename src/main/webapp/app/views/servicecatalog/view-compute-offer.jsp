@@ -216,6 +216,16 @@
                         </div>
                     </div>
                 </div>
+                  <div class="col-md-4">
+                    <div class="form-group" >
+                        <div class="row">
+                            <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal"><fmt:message
+										key="common.company" bundle="${msg}" /></label>
+                            <div class="col-md-6 col-sm-6 col-xs-6"> <b>{{compute.domain.name || " - "}} </b>
+                           </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <hr>
             <div class="row  ">

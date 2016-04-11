@@ -25,7 +25,7 @@
 									data-ng-model="domainView"
 									data-ng-change="selectDomainView(1, domainView.name, statusView)"
 									data-ng-options="domainView.name for domainView in domainList">
-									<option value="">All Domain</option>
+									<option value=""><fmt:message key="common.all.company" bundle="${msg}" /></option>
 								</select>
 							</span>
 							<div class="clearfix"></div>
@@ -46,7 +46,7 @@
                                 <thead>
                                     <tr>
                                     	<th class="col-md-1 col-sm-1" data-ng-click="changeSort('invoiceNumber',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='invoiceNumber'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.invoice.no" bundle="${msg}" /></th>
-                                    	<th class="col-md-1 col-sm-1" data-ng-click="changeSort('domain.name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='domain.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="domain.name" bundle="${msg}" /></th>
+                                    	<th class="col-md-1 col-sm-1" data-ng-click="changeSort('domain.name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='domain.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.company" bundle="${msg}" /></th>
                                     	<th class="col-md-1 col-sm-1" data-ng-click="changeSort('billPeriod',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='billPeriod'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.billing.period" bundle="${msg}" /></th>
                                     	<th class="col-md-1 col-sm-1" data-ng-click="changeSort('totalCost',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='totalCost'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.payable" bundle="${msg}" /></th>
                                     	<th class="col-md-1 col-sm-1" data-ng-click="changeSort('dueDate',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='dueDate'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.due.date" bundle="${msg}" /></th>
