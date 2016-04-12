@@ -25,11 +25,12 @@ angular
         .directive('paginationContent', paginationContent)
         .directive('paginationContentIso', paginationContentIso)
         .directive('getLoaderImage', getLoaderImage)
+        .directive('getCustomLoaderImage', getCustomLoaderImage)
         .directive('validInteger', validInteger)
         .directive('hasPermission', hasPermission)
         .directive('pandaQuickSearch', pandaQuickSearch)
         .directive('validPrice', validPrice)
-	.directive('fileModel', fileModel)
+    .directive('fileModel', fileModel)
 
 /**
  * pageTitle - Directive for set Page title - mata title
@@ -341,85 +342,85 @@ function validNumber() {
 }
 
 function validInteger() {
-	return {
-		require : '?ngModel',
-		link : function(scope, element, attrs, ngModelCtrl) {
-			if (!ngModelCtrl) {
-				return;
-			}
+    return {
+        require : '?ngModel',
+        link : function(scope, element, attrs, ngModelCtrl) {
+            if (!ngModelCtrl) {
+                return;
+            }
 
-			ngModelCtrl.$parsers.push(function(val) {
-				if (angular.isUndefined(val)) {
-					var val = '';
-				}
+            ngModelCtrl.$parsers.push(function(val) {
+                if (angular.isUndefined(val)) {
+                    var val = '';
+                }
 
-				var clean = val.replace(/[^-0-9]/g, '');
-				var negativeCheck = clean.split('-');
-				if (!angular.isUndefined(negativeCheck[1])) {
-					negativeCheck[1] = negativeCheck[1].slice(0,
-							negativeCheck[1].length);
-					clean = negativeCheck[0] + '-' + negativeCheck[1];
-					if (negativeCheck[0].length > 0) {
-						clean = negativeCheck[0];
-					}
+                var clean = val.replace(/[^-0-9]/g, '');
+                var negativeCheck = clean.split('-');
+                if (!angular.isUndefined(negativeCheck[1])) {
+                    negativeCheck[1] = negativeCheck[1].slice(0,
+                            negativeCheck[1].length);
+                    clean = negativeCheck[0] + '-' + negativeCheck[1];
+                    if (negativeCheck[0].length > 0) {
+                        clean = negativeCheck[0];
+                    }
 
-				}
+                }
 
-				if (val !== clean) {
-					ngModelCtrl.$setViewValue(clean);
-					ngModelCtrl.$render();
-				}
-				return clean;
-			});
+                if (val !== clean) {
+                    ngModelCtrl.$setViewValue(clean);
+                    ngModelCtrl.$render();
+                }
+                return clean;
+            });
 
-			element.bind('keypress', function(event) {
-				if (event.keyCode === 32) {
-					event.preventDefault();
-				}
-			});
-		}
-	};
+            element.bind('keypress', function(event) {
+                if (event.keyCode === 32) {
+                    event.preventDefault();
+                }
+            });
+        }
+    };
 }
 
 function validInteger() {
-	return {
-		require : '?ngModel',
-		link : function(scope, element, attrs, ngModelCtrl) {
-			if (!ngModelCtrl) {
-				return;
-			}
+    return {
+        require : '?ngModel',
+        link : function(scope, element, attrs, ngModelCtrl) {
+            if (!ngModelCtrl) {
+                return;
+            }
 
-			ngModelCtrl.$parsers.push(function(val) {
-				if (angular.isUndefined(val)) {
-					var val = '';
-				}
+            ngModelCtrl.$parsers.push(function(val) {
+                if (angular.isUndefined(val)) {
+                    var val = '';
+                }
 
-				var clean = val.replace(/[^-0-9]/g, '');
-				var negativeCheck = clean.split('-');
-				if (!angular.isUndefined(negativeCheck[1])) {
-					negativeCheck[1] = negativeCheck[1].slice(0,
-							negativeCheck[1].length);
-					clean = negativeCheck[0] + '-' + negativeCheck[1];
-					if (negativeCheck[0].length > 0) {
-						clean = negativeCheck[0];
-					}
+                var clean = val.replace(/[^-0-9]/g, '');
+                var negativeCheck = clean.split('-');
+                if (!angular.isUndefined(negativeCheck[1])) {
+                    negativeCheck[1] = negativeCheck[1].slice(0,
+                            negativeCheck[1].length);
+                    clean = negativeCheck[0] + '-' + negativeCheck[1];
+                    if (negativeCheck[0].length > 0) {
+                        clean = negativeCheck[0];
+                    }
 
-				}
+                }
 
-				if (val !== clean) {
-					ngModelCtrl.$setViewValue(clean);
-					ngModelCtrl.$render();
-				}
-				return clean;
-			});
+                if (val !== clean) {
+                    ngModelCtrl.$setViewValue(clean);
+                    ngModelCtrl.$render();
+                }
+                return clean;
+            });
 
-			element.bind('keypress', function(event) {
-				if (event.keyCode === 32) {
-					event.preventDefault();
-				}
-			});
-		}
-	};
+            element.bind('keypress', function(event) {
+                if (event.keyCode === 32) {
+                    event.preventDefault();
+                }
+            });
+        }
+    };
 }
 
 function validCidr() {
@@ -505,9 +506,9 @@ function pandaModalHeader() {
             scope.pageTitle = attrs["pageTitle"];
             scope.pageIcon = attrs["pageIcon"];
             if(attrs["pageCustomIcon"] != null && !angular.isUndefined(attrs["pageCustomIcon"])) {
-            	scope.pageCustomIcon = attrs["pageCustomIcon"];
+                scope.pageCustomIcon = attrs["pageCustomIcon"];
             } else {
-            	scope.pageCustomIcon = false;
+                scope.pageCustomIcon = false;
             }
             scope.hideZone = attrs["hideZone"];
         },
@@ -578,13 +579,23 @@ function paginationContentIso() {
 }
 
 function getLoaderImage() {
-	return {
-		restrict: 'E',
+    return {
+        restrict: 'E',
         link: function (scope, element, attrs) {
-
         },
         templateUrl: "app/views/common/loader-image.jsp",
-	}
+    }
+}
+
+function getCustomLoaderImage() {
+    return {
+        restrict: 'E',
+        scope: {},
+        link: function (scope, element, attrs) {
+            scope.showLoader = attrs["customLoader"];
+        },
+        templateUrl: "app/views/common/loader-image.jsp",
+    }
 }
 
 /**
@@ -595,16 +606,16 @@ function hasPermission() {
         restrict: 'A',
         link: function (scope, element, attrs) {
 
-        	var permission=false;
-        	for(var i=0;i<scope.global.sessionValues.permissionList.length;i++){
-        	    if(scope.global.sessionValues.permissionList[i].action_key === attrs["hasPermission"]){
-        	    	permission = true;
-        	    	break;
-        	    }
-        	}
-        	if(!permission) {
-    	    	element.hide();
-        	}
+            var permission=false;
+            for(var i=0;i<scope.global.sessionValues.permissionList.length;i++){
+                if(scope.global.sessionValues.permissionList[i].action_key === attrs["hasPermission"]){
+                    permission = true;
+                    break;
+                }
+            }
+            if(!permission) {
+                element.hide();
+            }
         }
     }
 }
@@ -613,63 +624,63 @@ function hasPermission() {
  * Directive for Valid Price
  */
 function validPrice() {
-	   return {
-	        require: '?ngModel',
-	        link: function(scope, element, attrs, ngModelCtrl) {
-	          if(!ngModelCtrl) {
-	            return;
-	          }
+       return {
+            require: '?ngModel',
+            link: function(scope, element, attrs, ngModelCtrl) {
+              if(!ngModelCtrl) {
+                return;
+              }
 
-	          ngModelCtrl.$parsers.push(function(val) {
-	            if (angular.isUndefined(val)) {
-	                var val = '';
-	            }
+              ngModelCtrl.$parsers.push(function(val) {
+                if (angular.isUndefined(val)) {
+                    var val = '';
+                }
 
-	            var clean = val.replace(/[^-0-9\.]/g, '');
-	            var negativeCheck = clean.split('-');
-				var decimalCheck = clean.split('.');
-	            if(!angular.isUndefined(negativeCheck[1])) {
-	                negativeCheck[1] = negativeCheck[1].slice(0, negativeCheck[1].length);
-	                clean =negativeCheck[0] + '-' + negativeCheck[1];
-	                if(negativeCheck[0].length > 0) {
-	                	clean =negativeCheck[0];
-	                }
+                var clean = val.replace(/[^-0-9\.]/g, '');
+                var negativeCheck = clean.split('-');
+                var decimalCheck = clean.split('.');
+                if(!angular.isUndefined(negativeCheck[1])) {
+                    negativeCheck[1] = negativeCheck[1].slice(0, negativeCheck[1].length);
+                    clean =negativeCheck[0] + '-' + negativeCheck[1];
+                    if(negativeCheck[0].length > 0) {
+                        clean =negativeCheck[0];
+                    }
 
-	            }
+                }
 
-	            if(!angular.isUndefined(decimalCheck[1])) {
-	                decimalCheck[1] = decimalCheck[1].slice(0,4);
-	                clean =decimalCheck[0] + '.' + decimalCheck[1];
-	            }
+                if(!angular.isUndefined(decimalCheck[1])) {
+                    decimalCheck[1] = decimalCheck[1].slice(0,4);
+                    clean =decimalCheck[0] + '.' + decimalCheck[1];
+                }
 
-	            if (val !== clean) {
-	              ngModelCtrl.$setViewValue(clean);
-	              ngModelCtrl.$render();
-	            }
-	            return clean;
-	          });
+                if (val !== clean) {
+                  ngModelCtrl.$setViewValue(clean);
+                  ngModelCtrl.$render();
+                }
+                return clean;
+              });
 
-	          element.bind('keypress', function(event) {
-	            if(event.keyCode === 32) {
-	              event.preventDefault();
-	            }
-	          });
-	        }
-	      };
+              element.bind('keypress', function(event) {
+                if(event.keyCode === 32) {
+                  event.preventDefault();
+                }
+              });
+            }
+          };
 }
 
  function fileModel($parse) {
-	return {
-		restrict : 'A',
-		link : function(scope, element, attrs) {
-			var model = $parse(attrs.fileModel);
-			var modelSetter = model.assign;
-			element.bind('change', function() {
-				scope.$apply(function() {
-			modelSetter(scope, element[0].files[0]);
-				});
-			});
-		}
-	};
+    return {
+        restrict : 'A',
+        link : function(scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+            element.bind('change', function() {
+                scope.$apply(function() {
+            modelSetter(scope, element[0].files[0]);
+                });
+            });
+        }
+    };
 };
 

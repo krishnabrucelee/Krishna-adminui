@@ -59,11 +59,9 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12 ">
-
-
-                        <div data-ng-show="showLoader" style="margin: 1%">
-						<get-loader-image data-ng-show="showLoader"></get-loader-image>
-					</div>
+	                       <div data-ng-show="showLoader" style="margin: 1%">
+                						<get-loader-image data-ng-show="showLoader"></get-loader-image>
+                					</div>
                             <div class="table-responsive" data-ng-hide="showLoader">
                             <div class="white-content">
                                 <table cellspacing="1" cellpadding="1" class="table dataTable table-bordered table-striped">
@@ -85,16 +83,24 @@
                            			</tbody>
                                     <tbody data-ng-show="accountList.length > 0">
                                         <tr data-ng-repeat="account in filteredCount = (accountList| filter: quickSearch| orderBy:sort.column:sort.descending)">
-                                        	<td>{{ account.userName}}</td>
-   											<td>{{account.department.userName}}</td>
+                                	          <td>{{ account.userName}}</td>
+		                                        <td>{{account.department.userName}}</td>
                                             <td>{{account.domain.name}}</td>
                                             <td>{{account.type}}</td>
                                             <td>{{account.role.name || '-'}} </td>
                                             <td>{{account.email || '-'}} </td>
                                             <td>
-                                             <label class="badge badge-success p-xs" data-ng-if="account.status == 'ENABLED'"> <fmt:message key="common.enabled" bundle="${msg}" /> </label>
-                                             <label class="badge badge-danger p-xs" data-ng-if="account.status == 'DISABLED'"> <fmt:message key="common.disabled" bundle="${msg}" /> </label>
-                                              <label class="badge badge-danger p-xs" data-ng-if="account.status == 'DELETED'"> <fmt:message key="common.deleted" bundle="${msg}" /> </label>
+                                              <div data-ng-show="showUserListLoader[account.id]" style="margin: 1%">
+                                                <get-custom-loader-image custom-loader="showUserListLoader[account.id]" ></get-custom-loader-image>
+                                    					</div>
+
+                                              <span data-ng-hide="showUserListLoader[account.id]">
+                                                <label class="badge badge-success p-xs" data-ng-if="account.status == 'ENABLED'"> <fmt:message key="common.enabled" bundle="${msg}" /> </label>
+                                                <label class="badge badge-danger p-xs" data-ng-if="account.status == 'DISABLED'"> <fmt:message key="common.disabled" bundle="${msg}" /> </label>
+                                                <label class="badge badge-danger p-xs" data-ng-if="account.status == 'DELETED'"> <fmt:message key="common.deleted" bundle="${msg}" /> </label>
+                                                <label class="badge badge-danger p-xs" data-ng-if="account.status == 'SUSPENDED'"> <fmt:message key="common.suspended" bundle="${msg}" /> </label>
+                                                <button class="button button-info p-xs" data-ng-if="account.status == 'ENABLED' || account.status == 'DISABLED'" data-ng-click="suspendUserAccount(account)">Suspend</button>
+                                              </span>
                                             </td>
                                         </tr>
                                     </tbody>
