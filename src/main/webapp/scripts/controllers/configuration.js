@@ -677,6 +677,11 @@ function billingCtrl($scope, appService, globalConfig, localStorageService, $win
     $scope.global = globalConfig;
     $scope.paginationObject = {};
     $scope.billableItemDiscountList = {};
+    var dateTimeStamp=new Date();
+    dateTimeStamp.setHours(0,0,0,0);
+    $scope.today= dateTimeStamp.getTime();
+    $scope.billingSettingsObj = {};
+    $scope.billableList = {};
 
     $scope.showLoader = true;
     $scope.open = function ($event, currentDateField) {
@@ -695,6 +700,8 @@ function billingCtrl($scope, appService, globalConfig, localStorageService, $win
     var hasBillableList = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_GET, globalConfig.PING_APP_URL + "billableItem/list");
     hasBillableList.then(function (result) {  // this is only run after $http completes0
         $scope.billableList = result;
+        $scope.billingSettingsObj.billableItems = [$scope.billableList[0], $scope.billableList[1],$scope.billableList[2],
+                                                   $scope.billableList[3],$scope.billableList[4]];
     });
 
     Date.prototype.ddmmyyyy= function() {
@@ -706,7 +713,7 @@ function billingCtrl($scope, appService, globalConfig, localStorageService, $win
 
     $scope.billingSettings = [];
     $scope.showLoader = false;
-    $scope.billingSettingsObj = {};
+    $scope.billingSettingsObj.startDate = $scope.today;
 
     $scope.getBillingSettings = function() {
         if(angular.isUndefined($scope.billingSettingsObj.startDate)
@@ -714,12 +721,21 @@ function billingCtrl($scope, appService, globalConfig, localStorageService, $win
                         || $scope.billingSettingsObj.domain == "" || $scope.billingSettingsObj.domain == null
                         || $scope.billingSettingsObj.discountPercentage == "" || $scope.billingSettingsObj.discountPercentage == null
                         || angular.isUndefined($scope.billingSettingsObj.billableItems) || $scope.billingSettingsObj.billableItems == null) {
-            alert("Please select all the mandatory fields")
+            alert("Please select all the mandatory fields");
+            return false;
+        }
+        if($scope.billingSettingsObj.discountPercentage > 100 || $scope.billingSettingsObj.discountPercentage < -100) {
+        	alert("Adjustment percentage must be between -100 and 100");
             return false;
         }
 
         $scope.showLoader = false;
-        $scope.billingSettingsObj.fromDate = $scope.billingSettingsObj.startDate.ddmmyyyy();
+        if (typeof $scope.billingSettingsObj.startDate.ddmmyyyy !== 'undefined' && $.isFunction($scope.billingSettingsObj.startDate.ddmmyyyy)) {
+        	$scope.billingSettingsObj.fromDate = $scope.billingSettingsObj.startDate.ddmmyyyy();
+        } else {
+        	$scope.billingSettingsObj.startDate = new Date();
+        	$scope.billingSettingsObj.fromDate = $scope.billingSettingsObj.startDate.ddmmyyyy();
+        }
         if (!angular.isUndefined($scope.billingSettingsObj.endDate)
                 && $scope.billingSettingsObj.endDate != "") {
         	$scope.billingSettingsObj.toDate = $scope.billingSettingsObj.endDate.ddmmyyyy();
@@ -728,27 +744,27 @@ function billingCtrl($scope, appService, globalConfig, localStorageService, $win
         var billingSettingsTempObj = {};
         billingSettingsTempObj = angular.copy($scope.billingSettingsObj);
         $scope.paginationObject = {};
-        delete $scope.billingSettingsObj.startDate;
-        delete $scope.billingSettingsObj.endDate;
+        //delete $scope.billingSettingsObj.startDate;
+        //delete $scope.billingSettingsObj.endDate;
 
         var billingSettingsObj = $scope.billingSettingsObj;
         var hasConfig = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_POST, globalConfig.PING_APP_URL + "billableItemDiscount", billingSettingsObj);
         hasConfig.then(function (result) {  // this is only run after $http
             $scope.showLoader = false;
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
-            appService.notify({message: 'Discount added successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-            delete $scope.billingSettingsObj;
-
+            appService.notify({message: 'Adjustment added successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+            $scope.billingSettingsObj = {};
+            $scope.billingSettingsObj.billableItems = [$scope.billableList[0], $scope.billableList[1],$scope.billableList[2],
+                                                       $scope.billableList[3],$scope.billableList[4]];
+            $scope.billingSettingsObj.startDate = $scope.today;
             $scope.list(1, "all");
         }).catch(function (result) {
+        	$scope.billingSettingsObj.startDate = $scope.today;
         	$scope.showLoader = false;
             if (!angular.isUndefined(result.data)) {
                 if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
                     var msg = result.data.globalError[0];
                     $scope.showLoader = false;
-//                    $scope.billingSettingsObj= {};
-//                    $scope.billingSettingsObj.startDate = billingSettingsTempObj.startDate.ddmmyyyy();
-//                    $scope.billingSettingsObj.endDate = billingSettingsTempObj.endDate.ddmmyyyy();
                     appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
                 }
             }
@@ -777,15 +793,41 @@ function billingCtrl($scope, appService, globalConfig, localStorageService, $win
         $scope.list(1, "all");
 
         $scope.domainChange = function (domainObj) {
-        	$scope.list(1, domainObj.uuid);
-        }
-
-        $scope.validateDiscount = function(discountPercentage) {
-        	var discount = parseFloat(discountPercentage);
-        	if(discount > 100 || discount < -100) {
-        		alert("Discount should be between -100 and 100");
-        		$scope.billingSettingsObj.discountPercentage = 0;
+        	if (domainObj == null) {
+        		$scope.list(1, "all");
+        	} else {
+        		$scope.list(1, domainObj.uuid);
         	}
         }
+
+        // Delete the template
+        $scope.delete = function (size, discount) {
+        	appService.dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+                    $scope.deleteId = discount.id;
+                    $scope.ok = function (deleteId) {
+                    	$scope.showLoader = true;
+                        hasServer = appService.promiseAjax.httpRequestPing(appService.globalConfig.HTTP_DELETE, appService.globalConfig.PING_APP_URL + "billableItemDiscount/"+deleteId);
+                        hasServer.then(function (result) {
+                            $scope.homerTemplate = 'app/views/notification/notify.jsp';
+                            $scope.showLoader = false;
+                            $modalInstance.close();
+                            appService.notify({message: 'Adjustment deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+                            $scope.list(1, "all");
+                        }).catch(function (result) {
+                            if (!angular.isUndefined(result.data)) {
+                            	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                              	    var msg = result.data.globalError[0];
+                              	    $scope.showLoader = false;
+                              	    appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                                }
+                            	$modalInstance.close();
+                            }
+                        });
+                    },
+                    $scope.cancel = function () {
+                        $modalInstance.close();
+                    };
+                }]);
+        };
 
 };

@@ -13,14 +13,16 @@
                             <h3 class="panel-title">{{ $state.current.data.pageTitle}}</h3>
                         </div>
                         <div class="row m-t-md">
-
+                            <div class="col-md-7 col-sm-7 pull-right m-b-sm">NOTE:
+                                <span class="text-danger ">Use negative number for discount (Ex: -1) and positive number for adjustment (Ex: 1) </span>
+                            </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group m-l-md">
                                     <div class="row">
-                                    <label class="col-md-4 col-sm-4 control-label">Domain:
+                                    <label class="col-md-5 col-sm-5 control-label">Domain:
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <div class="col-md-6 col-sm-6">
+                                    <div class="col-md-5 col-sm-5">
                                         <select
                                         class="form-control input-group col-xs-5" name="domain"
                                         data-ng-change="domainChange(billingSettingsObj.domain)"
@@ -36,10 +38,10 @@
                                             'text-danger'
                                            : !billingSettingsObj.startDate && formSubmitted}">
                                     <div class="row">
-                                        <label class="col-md-4 col-sm-4 control-label">Valid
+                                        <label class="col-md-5 col-sm-5 control-label">Valid
                                             From: <span class="text-danger">*</span>
                                         </label>
-                                        <div class="col-md-6 col-sm-6 ">
+                                        <div class="col-md-5 col-sm-5 ">
                                             <div class="input-group">
                                                 <input type="text" readonly
                                                     data-ng-class="{'error': !billingSettingsObj.startDate && formSubmitted}"
@@ -69,10 +71,10 @@
                             <div class="col-md-6  col-sm-6">
                                 <div class="form-group m-l-md">
                                     <div class="row">
-                                    <label class="col-md-5 col-sm-5 control-label">Discount Percentage:
+                                    <label class="col-md-6 col-sm-6 control-label">Adjustment Percentage:
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <div class="col-md-6 col-sm-6">
+                                    <div class="col-md-5 col-sm-5">
                                         <input required="true" type="text" valid-price name="discountPercentage" data-ng-model="billingSettingsObj.discountPercentage" class="form-control col-md-4">
                                         <div class="error-area" data-ng-show="billingSettingsObj.discountPercentage.$invalid" ><i  tooltip="<fmt:message key="billingSettingsObj.discountPercentage.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
                                     </div>
@@ -83,10 +85,10 @@
                                             'text-danger'
                                             : !billingSettingsObj.endDate && formSubmitted}">
                                     <div class="row">
-                                        <label class="col-md-5 col-sm-5 control-label">Expires
+                                        <label class="col-md-6 col-sm-6 control-label">Expires
                                             On:
                                         </label>
-                                        <div class="col-md-6 col-sm-6 ">
+                                        <div class="col-md-5 col-sm-5 ">
                                             <div class="input-group">
                                                 <input type="text"
                                                     data-ng-class="{'error': !billingSettingsObj.endDate && formSubmitted}"
@@ -114,10 +116,10 @@
                             <div class="col-md-6  col-sm-6">
                                 <div class="form-group m-l-md">
                                     <div class="row">
-                                    <label class="col-md-4 col-sm-4 control-label">Billable Item:
+                                    <label class="col-md-5 col-sm-5 control-label">Billable Item:
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <div class="col-md-6 col-sm-6">
+                                    <div class="col-md-5 col-sm-5">
                                         <select required="true" multiple="multiple" class="form-control input-group" name="billing" data-ng-model="billingSettingsObj.billableItems" ng-options="billingObj.name for billingObj in billableList">
 						                    <option value=""><fmt:message key="common.select" bundle="${msg}" /></option>
 						                </select>
@@ -150,10 +152,11 @@
                                 <thead>
                                     <tr>
                                     	<th class="col-md-2 col-sm-2">Domain</th>
-                                    	<th class="col-md-2 col-sm-2">Discount Percentage</th>
+                                    	<th class="col-md-2 col-sm-2">Adjustment Percentage</th>
                                     	<th class="col-md-2 col-sm-2">Valid From</th>
                                     	<th class="col-md-2 col-sm-2">Expires On</th>
                                     	<th class="col-md-2 col-sm-2">Billable Item</th>
+                                    	<th class="col-md-1 col-sm-1"><fmt:message key="common.action" bundle="${msg}" /></th>
                                     </tr>
                                 </thead>
                                 <tbody data-ng-hide="billableItemDiscountList.length > 0">
@@ -165,9 +168,11 @@
                                     <tr data-ng-repeat="discount in billableItemDiscountList">
                                         <td>{{ discount.domain.name}}</td>
                                         <td>{{ discount.discountPercentage}}</td>
-                                        <td>{{ discount.startDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-                                        <td>{{ discount.endDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                        <td>{{ discount.startDate | date:'yyyy-MM-dd'}}</td>
+                                        <td data-ng-show="today <= discount.endDate">{{ discount.endDate | date:'yyyy-MM-dd'}}</td>
+                                        <td class="text-danger" data-ng-hide="today <= discount.endDate">{{ discount.endDate | date:'yyyy-MM-dd'}}</td>
                                         <td><span data-ng-repeat="item in discount.billableItems">{{item.name}} {{$last ? '' : ', '}}</span></td>
+                                        <td><a class="icon-button" title="<fmt:message key="common.delete" bundle="${msg}" />" data-ng-click="delete('sm', discount)" ><span class="fa fa-trash"></span></a></td>
                                     </tr>
                                 </tbody>
                         </table>
