@@ -26,7 +26,7 @@
 							<label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message
 									key="common.name" bundle="${msg}" /><span class="text-danger">*</span></label>
 							<div class="col-md-8  col-sm-6 col-xs-6">
-								<input required="true" id="create_storage_offer_name" type="text" name="name" ng-minlength="4" ng-maxlength= "30"
+								<input required="true" id="create_storage_offer_name" type="text" name="name" ng-minlength="1" ng-maxlength= "30"
 									data-ng-model="storage.name" class="form-control"
 									data-ng-class="{'error': storageForm.name.$invalid && formSubmitted}">
 								<span style="color:red" ng-show="storageForm.name.$error.minlength "><fmt:message key="your.name.should.contain.atleast.4.characters" bundle="${msg}" /></span>
