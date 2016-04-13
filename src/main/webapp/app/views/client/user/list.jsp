@@ -48,7 +48,7 @@
                                     data-ng-model="domainView"
                                     data-ng-change="selectDomainView(1)"
                                     data-ng-options="domainView.name for domainView in domainListView">
-									<option value=""> <fmt:message key="common.domain.filter" bundle="${msg}" /></option>
+                                    <option value=""> <fmt:message key="common.domain.filter" bundle="${msg}" /></option>
                                 </select>
                             </span>
                             <div class="clearfix"></div>
@@ -101,6 +101,9 @@
                                                 <label class="badge badge-danger p-xs" data-ng-if="account.status == 'SUSPENDED'"> <fmt:message key="common.suspended" bundle="${msg}" /> </label>
                                                 <button class="btn btn-default suspend-btn" title="<fmt:message key="common.suspend" bundle="${msg}" />" data-ng-if="account.status == 'ENABLED' || account.status == 'DISABLED'" data-ng-click="suspendUserAccount(account)">
                                                      <span class="fa fa-ban text-center"> </span>
+                                                </button>
+                                                <button class="btn btn-default suspend-btn" title="<fmt:message key="common.enable" bundle="${msg}" />" data-ng-if="account.status == 'SUSPENDED'" data-ng-click="enableUserAccount(account)">
+                                                     <span class="fa fa-check-circle-o text-center"> </span>
                                                 </button>
                                                </span>
                                             </td>
