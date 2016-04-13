@@ -40,25 +40,14 @@
                             </div>
                             <a class="btn btn-info" ui-sref="client.user" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg"></span></a>
                         </div>
-<<<<<<< HEAD
                         <div class="pull-right dashboard-filters-area">
 							<panda-quick-search></panda-quick-search>
-							<span class="pull-right m-r-sm">
-								<select
-									class="form-control input-group col-xs-5" name="domainView"
-									data-ng-model="domainView"
-									data-ng-change="selectDomainView(1)"
-									data-ng-options="domainView.name for domainView in domainListView">
-=======
-                        <div class="pull-right">
-                            <panda-quick-search></panda-quick-search>
                             <span class="pull-right m-r-sm">
                                 <select
                                     class="form-control input-group col-xs-5" name="domainView"
                                     data-ng-model="domainView"
                                     data-ng-change="selectDomainView(1)"
                                     data-ng-options="domainView.name for domainView in domainListView">
->>>>>>> upstream/master
 									<option value=""> <fmt:message key="common.domain.filter" bundle="${msg}" /></option>
                                 </select>
                             </span>
