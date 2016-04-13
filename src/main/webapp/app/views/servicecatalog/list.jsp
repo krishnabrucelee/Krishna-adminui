@@ -4,9 +4,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-
-
-
 <div ui-view>
 <div class="row"  ng-controller="computeListCtrl">
     <div class="" >
@@ -14,7 +11,7 @@
             <div class="panel-heading no-padding">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="pull-left">
+                        <div class="pull-left dashboard-btn-area">
                             <div class="dashboard-box pull-left">
                              <div class="instance-border-content-normal">
                                 <span class="pull-left"><img src="images/instance-icon.png"></span>
@@ -34,7 +31,7 @@
                             <a class="btn btn-info" id="compute_offerings_add_button" ui-sref="servicecatalog.list-compute.list-compute-offer"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message key="common.add" bundle="${msg}" /></a>
                             <a class="btn btn-info" id="compute_offerings_refresh_button" ui-sref="servicecatalog.list-compute" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
                         </div>
-                        <div class="pull-right">
+                        <div class="pull-right dashboard-filters-area">
 							<panda-quick-search></panda-quick-search>
 							<span class="pull-right m-r-sm">
 								<select

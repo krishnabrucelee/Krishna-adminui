@@ -20,7 +20,7 @@ Navigation
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-xs-12 ">
-								<div class="pull-left">
+								<div class="pull-left dashboard-btn-area">
 		                            <div class="dashboard-box pull-left">
 		     							<div class="instance-border-content-normal">
 		                                <span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message key="total.company" bundle="${msg}" /></span>
@@ -31,10 +31,12 @@ Navigation
 		                            <a class="btn btn-info" id="company_add_button" data-ng-click="addDomain('lg',domain)"><span class="pe-7s-add-user pe-lg font-bold m-r-xs"></span><fmt:message key="add.company" bundle="${msg}" /></a>
                                     <a class="btn btn-info" id="company_refresh_button" ui-sref="client.client" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
 		                        </div>
-                                <div class="pull-right" id="company_quick_search">
+		                        <div class=" pull-right dashboard-filters-area">
+                                <div class="" id="company_quick_search">
                                     <panda-quick-search></panda-quick-search>
                                     <div class="clearfix"></div>
                                     <span class="pull-right m-l-sm m-t-sm"></span>
+                                </div>
                                 </div>
                             </div>
                         </div>

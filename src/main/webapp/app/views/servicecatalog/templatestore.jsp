@@ -8,7 +8,7 @@
         <div class="panel-heading no-padding">
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12 ">
-                    <div class="pull-left">
+                    <div class="pull-left dashboard-btn-area">
                         <div class="dashboard-box pull-left">
 	                        <div class="instance-border-content-normal">
 	                        	<span class="pull-left"><img src="images/template-icon.png"></span>
@@ -39,7 +39,7 @@
                         <a has-permission="REGISTER_TEMPLATE" class="btn btn-info" ui-sref="servicecatalog.list-templatestore.list-view-template-create"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message key="common.add" bundle="${msg}" /></a>
                             <a class="btn btn-info" ui-sref="servicecatalog.list-templatestore" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
                     </div>
-                    <div class="pull-right">
+                    <div class="pull-right dashboard-filters-area">
 						<panda-quick-search></panda-quick-search>
                         <div class="clearfix"></div>
                         <span class="pull-right m-l-sm m-t-sm">
