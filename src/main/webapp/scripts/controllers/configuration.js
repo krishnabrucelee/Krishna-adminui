@@ -8,6 +8,7 @@ angular
         .controller('importCtrl', importCtrl)
         .controller('retailManagementCtrl', retailManagementCtrl)
         .controller('billingCtrl', billingCtrl)
+        .controller('loginSecurityCtrl', loginSecurityCtrl)
 
 function cloudStackCtrl($scope, $window, appService) {
 
@@ -542,6 +543,9 @@ else if( !angular.isUndefined(file))
     $scope.validateLogin = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
+
+        	console.log(form);
+
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
             appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
         }
@@ -831,3 +835,44 @@ function billingCtrl($scope, appService, globalConfig, localStorageService, $win
         };
 
 };
+
+function loginSecurityCtrl($scope, appService, globalConfig, localStorageService, $window, notify) {
+
+	$scope.formElements = {};
+	var hasConfigs = appService.crudService.listAll("generalconfiguration/configlist");
+    hasConfigs.then(function (result) {  // this is only run after $http completes0
+        $scope.generalconfiguration = result[0];
+    });
+
+	$scope.save = function (form,generalconfiguration) {
+        $scope.formSubmitted = true;
+        if (form.$valid) {
+            $scope.showLoader = true;
+			var generalconfiguration = $scope.generalconfiguration;
+            var hasServer = appService.crudService.add("generalconfiguration", generalconfiguration);
+            hasServer.then(function (result) {  // this is only run after $http completes
+            	$scope.generalconfiguration = result;
+                $scope.formSubmitted = false;
+                $scope.showLoader = false;
+                appService.notify({message: 'Login security updated successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+            }).catch(function (result) {
+               	$scope.showLoader = false;
+           	    if (!angular.isUndefined(result.data)) {
+             		if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                 	   	 var msg = result.data.globalError[0];
+                 	   	 $scope.showLoader = false;
+               	    	 appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                   	} else if (result.data.fieldErrors != null) {
+                      	$scope.showLoader = false;
+                       	angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                           	$scope.TemplateForm[key].$invalid = true;
+                           	$scope.TemplateForm[key].errorMessage = errorMessage;
+                       	});
+               		}
+               	}
+           	});
+        }
+    };
+
+};
+
