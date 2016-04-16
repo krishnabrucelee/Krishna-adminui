@@ -9,6 +9,7 @@ angular
         .controller('retailManagementCtrl', retailManagementCtrl)
         .controller('billingCtrl', billingCtrl)
         .controller('loginSecurityCtrl', loginSecurityCtrl)
+        .controller('importCsDataCtrl', importCsDataCtrl)
 
 function cloudStackCtrl($scope, $window, appService) {
 
@@ -873,6 +874,48 @@ function loginSecurityCtrl($scope, appService, globalConfig, localStorageService
            	});
         }
     };
+};
 
+function importCsDataCtrl($scope, appService, globalConfig, localStorageService, $window, notify) {
+
+	$scope.paginationObject = {};
+	$scope.formElements = {};
+
+	// Manual sync type list from server
+    $scope.manualCloudSync = {};
+    $scope.list = function (pageNumber) {
+    var hasImportList = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL
+    		+ "manualCloudSync" +"?lang=" + localStorageService.cookie.get('language') + "&sortBy=+id"
+    		+ "&limit=" + 25, $scope.global.paginationHeaders(pageNumber, 25), {"limit" : 25});
+
+    hasImportList.then(function (result) {
+    	$scope.formElements.importList = result;
+    });
+    };
+    $scope.list(1);
+
+	$scope.openImportContainer = function (keyName, type) {
+		$scope.showLoader = true;
+        var importData = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "cloudconfiguration/importData?keyName="+keyName+"&type="+type);
+        importData.then(function (result) {
+        	$scope.list(1);
+            $scope.homerTemplate = 'app/views/notification/notify.jsp';
+            $scope.showLoader = false;
+            if (type === 'import') {
+            	$scope.msg = 'Cloud stack data imported successfully';
+            } else {
+            	$scope.msg = 'Cloud stack status checked successfully';
+            }
+            appService.notify({message: $scope.msg, classes: 'alert-success', templateUrl: $scope.homerTemplate});
+        }).catch(function (result) {
+            if (!angular.isUndefined(result.data)) {
+            	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+              	    var msg = result.data.globalError[0];
+              	    $scope.showLoader = false;
+              	    appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                }
+            }
+        });
+    };
 };
 
