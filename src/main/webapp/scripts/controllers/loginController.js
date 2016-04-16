@@ -4,55 +4,102 @@
  *
  */
 
-angular.module('panda-ui-admin', []).controller("loginCtrl", function ($scope, $http, $window, globalConfig, $remember) {
+angular.module('panda-ui-admin', ['ngCookies']).controller("loginCtrl", function ($scope, $http, $window, globalConfig, $remember, $cookies) {
 
     $scope.loginForm = function () {
-
-    	if ($scope.remember) {
-            $remember('username', $scope.username);
-            $remember('password', $scope.password);
-        }
-
+    	if (angular.isUndefined($scope.remember)) {
+    		$scope.remember = "false";
+    	}
         var headers = {
             "x-requested-with": 'BACKEND_ADMIN',
             "x-auth-username": $scope.username,
             "x-auth-password": $scope.password,
+            "x-auth-remember": $scope.remember,
+            "x-force-login" : "false",
             'Content-Type': 'application/json'
         };
 
         $http({method: 'POST', url: globalConfig.APP_URL + 'authenticate', headers: headers})
         .success(function (result) {
-            //$window.sessionStorage.token = result.token;
             $window.sessionStorage.setItem("pandaUserSession", JSON.stringify(result));
+            if (result.rememberMe == "true") {
+           		$cookies.token = result.token;
+           		$cookies.loginToken = result.loginToken;
+           		$cookies.id = result.id;
+           		$cookies.loginTime = result.loginTime;
+           		$cookies.rememberMe = result.rememberMe;
+            } else {
+            	$cookies.token = result.token;
+           		$cookies.loginToken = result.loginToken;
+           		$cookies.id = result.id;
+           		$cookies.rememberMe = result.rememberMe;
+           		$cookies.loginTime = result.loginTime;
+            }
+            if (!angular.isUndefined(result.rememberResponse)) {
+            	if(result.rememberResponse.rememberMe == "true") {
+       		        $cookies.token = result.tokenResponse.token;
+       		        $cookies.loginToken = result.rememberResponse.loginToken;
+       		        $cookies.rememberMe = result.rememberResponse.rememberMe;
+       		        $cookies.loginTime = result.rememberResponse.loginTime;
+            	} else {
+            		$cookies.token = result.tokenResponse.token;
+               		$cookies.loginToken = result.rememberResponse.loginToken;
+               		$cookies.rememberMe = result.rememberResponse.rememberMe;
+                    $cookies.loginTime = result.rememberResponse.loginTime;
+            	}
+            }
             window.location.href = "index#/dashboard";
         }).catch(function (result) {
-        	$window.sessionStorage.removeItem("pandaUserSession")
-            if (!angular.isUndefined(result.data)) {
-            	var target = document.getElementById("errorMsg");
-                target.innerHTML = result.data.message;
-                target.style.display = 'block';
-                target.style["margin-bottom"] = '10px';
+        	if (!angular.isUndefined(result.data)) {
+      	      if(result.data.message == "error.already.exists") {
+      		  $scope.forceLogin = function() {
+      		      if (confirm("Already user is logged In. Are you sure want to do Force Login?") == true) {
+      		    	var headers = {
+      		              "x-requested-with": 'BACKEND_ADMIN',
+      		              "x-auth-username": $scope.username,
+      		              "x-auth-password": $scope.password,
+      		              "x-auth-remember": $scope.remember,
+      		              "x-force-login" : "true",
+      		              'Content-Type': 'application/json'
+      		          };
+      		          $http({method: 'POST', url: globalConfig.APP_URL + 'authenticate', headers: headers})
+      		              .success(function (result) {
+      		            	$window.sessionStorage.setItem("pandaUserSession", JSON.stringify(result));
+      		              if (result.rememberMe == "true") {
+      		             		$cookies.token = result.token;
+      		             		$cookies.loginToken = result.loginToken;
+      		             		$cookies.id = result.id;
+      		             		$cookies.loginTime = result.loginTime;
+      		             		$cookies.rememberMe = result.rememberMe;
+      		              } else {
+      		              	    $cookies.token = result.token;
+      		             		$cookies.loginToken = result.loginToken;
+      		             		$cookies.id = result.id;
+      		             		$cookies.rememberMe = result.rememberMe;
+      		             		$cookies.loginTime = result.loginTime;
+      		              }
+      		              window.location.href = "index#/dashboard";
+      		          }).catch(function (result) {
+      		        	  $window.sessionStorage.removeItem("pandaUserSession")
+      		        	  if (!angular.isUndefined(result.data)) {
+      		        		var target = document.getElementById("errorMsg");
+      		                target.innerHTML = result.data.message;
+      		                target.style.display = 'block';
+      		                target.style["margin-bottom"] = '10px';
+      		        	  }
+      		          });
+      		      }
+      		  }
+      		  $scope.forceLogin();
+      		  } else {
+      			  $window.sessionStorage.removeItem("pandaUserSession")
+      			  var target = document.getElementById("errorMsg");
+                  target.innerHTML = result.data.message;
+                  target.style.display = 'block';
+                  target.style["margin-bottom"] = '10px';
+                }
             }
         });
-    }
-
-    //Set remember me option
-    $scope.rememberMe = function() {
-        if ($scope.remember) {
-            $remember('username', $scope.username);
-            $remember('password', $scope.password);
-        } else {
-            $remember('username', '');
-            $remember('password', '');
-        }
-    };
-
-    //Load cookie user name and password
-    $scope.remember = false;
-    if ($remember('username') && $remember('password') ) {
-        $scope.remember = true;
-        $scope.username = $remember('username');
-        $scope.password = $remember('password');
     }
 
 });

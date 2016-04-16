@@ -25,6 +25,7 @@
         'ui.sortable',              // AngularJS ui-sortable
         'LocalStorageModule',       // AngularJs LocalStorage
         'rzModule',                 // RZ
-        'angular-momentjs'          // AngularJS moment
+        'angular-momentjs',          // AngularJS moment
+        'ngCookies'					// Angular cookie
     ])
 })();
