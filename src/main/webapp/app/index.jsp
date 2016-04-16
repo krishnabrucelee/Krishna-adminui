@@ -109,6 +109,7 @@
 <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
 <script src="bower_components/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular/angular-cookies.js"></script>
 <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
 <script src="bower_components/angular-animate/angular-animate.min.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>

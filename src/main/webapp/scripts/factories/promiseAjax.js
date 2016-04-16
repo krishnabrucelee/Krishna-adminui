@@ -6,7 +6,7 @@
  * @author - Jamseer N
  */
 
-function promiseAjax($http, $window, globalConfig, notify) {
+function promiseAjax($http, $window, globalConfig, notify, $cookies) {
      var global = globalConfig;
      var httpTokenRequest = function (method, url, headers, data) {
 
@@ -15,18 +15,21 @@ function promiseAjax($http, $window, globalConfig, notify) {
             data.limit = global.CONTENT_LIMIT;
         };
 
-        if(globalConfig.sessionValues == null) {
-        	window.location.href = "login";
-        }
+
+    	if ((angular.isUndefined($cookies.rememberMe) || $cookies.rememberMe == "false") &&
+    			$cookies.loginToken == '0' && $cookies.loginTime == '0') {
+    			window.location.href = "login";
+    	}
 
         var config = {
             "method": method,
             "data": data,
             "url": url,
-            "headers": {'x-auth-token': globalConfig.sessionValues.token, 'x-requested-with': '', 'Content-Type': 'application/json', 'Range': "items=0-9"}
+            "headers": {'x-auth-token': $cookies.token, 'x-requested-with': '', 'Content-Type': 'application/json', 'Range': "items=0-9", 'x-auth-login-token': $cookies.loginToken, 'x-auth-remember': $cookies.rememberMe, 'x-auth-user-id': $cookies.id, 'x-auth-login-time': $cookies.loginTime}
         };
 
-        if(headers != null && !angular.isUndefined(headers)) {
+
+        if(headers != null && !angular.isUndefined(headers) && headers != '') {
             angular.forEach(headers, (function(value, key) {
                 config.headers[key] = '';
                 config.headers[key] = value;
@@ -35,6 +38,8 @@ function promiseAjax($http, $window, globalConfig, notify) {
 
         return $http(config).then(function (res) {
             var data = res.data;
+            data.loginSession = loginSession;
+
             // For Pagination
             if(res.headers('Content-Range') && typeof(res.headers('Content-Range')) != 'undefined') {
                 var contentRange = res.headers('Content-Range');
@@ -44,15 +49,12 @@ function promiseAjax($http, $window, globalConfig, notify) {
                     var itemsPerPage = contentRange.split("/")[0].split('-')[1];
                     data.itemsPerPage = global.CONTENT_LIMIT;
                 }
-
             }
             return data;
         }).catch(function (result) {
             throw result;
         });
-
     };
-
     var httpRequest = function(method, url, data) {
         return $http({method:method, url:url}).then(function(result){
             return result.data;
@@ -64,7 +66,7 @@ function promiseAjax($http, $window, globalConfig, notify) {
                 "method": method,
                 "data": data,
                 "url": url,
-                "headers": {'x-auth-token': globalConfig.sessionValues.token, 'x-requested-with': '', 'Content-Type': 'application/json', 'Range': "items=0-9"}
+                "headers": {'x-auth-token': $cookies.token, 'x-requested-with': '', 'Content-Type': 'application/json', 'Range': "items=0-9"}
             };
         return $http(config).then(function(result){
             return result.data;

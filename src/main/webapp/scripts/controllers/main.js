@@ -8,7 +8,7 @@ angular
     .module('panda-ui-admin')
     .controller('appCtrl', appCtrl);
 
-function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageService, promiseAjax) {
+function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageService, promiseAjax, $cookies) {
 
     // For iCheck purpose only
     $scope.checkOne = true;
@@ -234,8 +234,15 @@ function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageSer
      *  Logout a user.
      */
     $scope.logout = function() {
-    	$window.sessionStorage.removeItem("pandaUserSession")
-	    window.location.href = "login";
+    	$http({method:'GET', url:'http://localhost:8080/api/logout/'+$cookies.id,
+			"headers": {'x-auth-token': $cookies.token, 'x-requested-with': '', 'Content-Type': 'application/json', 'Range': "items=0-9", 'x-auth-login-token': $cookies.loginToken, 'x-auth-remember': $cookies.rememberMe, 'x-auth-user-id': $cookies.id, 'x-auth-login-time': $cookies.loginTime}})
+			.success(function(result){
+				$window.sessionStorage.removeItem("pandaUserSession")
+		    	$cookies.rememberMe = "false";
+		        $cookies.loginToken = '0';
+		        $cookies.loginTime = '0';
+			    window.location.href = "login";
+          });
     }
 
 
