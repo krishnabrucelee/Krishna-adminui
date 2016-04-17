@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
-<html ng-app="panda-ui-admin" >
+<html>
 <head>
     <!-- Redirect to login when passing the wrong URL -->
     <script>
