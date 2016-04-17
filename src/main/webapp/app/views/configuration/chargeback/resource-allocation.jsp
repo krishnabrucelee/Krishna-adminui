@@ -136,7 +136,6 @@
 		                                  <input required="true"
 		                                  type="text" valid-integer name="Volume" data-ng-model="resourceQuota.Volume"
 		                                  class="form-control"
-		                                  data-ng-blur="validateRange(resource, resourceQuota, type, 'Volume')"
 		                                  data-ng-class="{'error': (resourceAllocationForm.Volume.$invalid && formSubmitted || resourceAllocationField.Volume.$invalid)}" >
 		                                  <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="maximum.volumes.to.be.allocated" bundle="${msg}" />" ></i>
 		                                  	<div class="error-area" data-ng-show="((resourceAllocationForm.Volume.$invalid && formSubmitted) || resourceAllocationField.Volume.$invalid)" >
@@ -187,7 +186,6 @@
                             <td>
                                 <div class="col-md-8 col-sm-8">
                                     <input required="true" type="text" valid-integer is-number name="Instance"
-                                    data-ng-blur="validateRange(resource, resourceQuota, type, 'Instance')"
                                     data-ng-model="resourceQuota.Instance"  class="form-control"
                                     data-ng-class="{'error': (resourceAllocationForm.Instance.$invalid && formSubmitted || resourceAllocationField.Instance.$invalid)}">
                                     <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="maximum.user.vms.to.be.allocated" bundle="${msg}" />"></i>
@@ -240,7 +238,7 @@
                             </td>
                             <td>
                                 <div class="col-md-8 col-sm-8">
-                                    <input required="true" type="text" valid-integer name="Template" data-ng-blur="validateRange(resource, resourceQuota, type, 'Template')"
+                                    <input required="true" type="text" valid-integer name="Template"
                                     data-ng-model="resourceQuota.Template"  class="form-control"
                                     data-ng-class="{'error': (resourceAllocationForm.Template.$invalid && formSubmitted || resourceAllocationField.Template.$invalid)}">
                                     <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="maximum.templates.to.be.allocated" bundle="${msg}" />" ></i>
@@ -293,7 +291,7 @@
                             </td>
                             <td>
                                 <div class="col-md-8 col-sm-8">
-                                    <input required="true" type="text" valid-integer name="Network" data-ng-blur="validateRange(resource, resourceQuota, type, 'Network')"
+                                    <input required="true" type="text" valid-integer name="Network"
                                     data-ng-model="resourceQuota.Network"  class="form-control"
                                      data-ng-class="{'error': (resourceAllocationForm.Network.$invalid && formSubmitted  || resourceAllocationField.Network.$invalid)}">
                                     <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="maximum.networks.to.be.allocated" bundle="${msg}" />" ></i>
@@ -346,7 +344,7 @@
                           </td>
                             <td>
                                 <div class="col-md-8 col-sm-8">
-                                    <input required="true" type="text" valid-integer name="Snapshot" data-ng-blur="validateRange(resource, resourceQuota, type, 'Snapshot')"
+                                    <input required="true" type="text" valid-integer name="Snapshot"
                                     data-ng-model="resourceQuota.Snapshot"  class="form-control"
                                     data-ng-class="{'error': (resourceAllocationForm.Snapshot.$invalid && formSubmitted  || resourceAllocationField.Snapshot.$invalid)}">
                                     <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="maximum.snapshots.to.be.allocated" bundle="${msg}" />" ></i>
@@ -397,7 +395,7 @@
                             </td>
                             <td>
                                 <div class="col-md-8 col-sm-8">
-                                    <input required="true" type="text" valid-integer name="IP" data-ng-blur="validateRange(resource, resourceQuota, type, 'IP')"
+                                    <input required="true" type="text" valid-integer name="IP"
                                     data-ng-model="resourceQuota.IP"  class="form-control"
                                     data-ng-class="{'error': (resourceAllocationForm.IP.$invalid && formSubmitted  || resourceAllocationField.IP.$invalid)}">
                                     <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="maximum.public.ips.to.be.allocated" bundle="${msg}" />" ></i>
@@ -445,7 +443,7 @@
                                 </td>
                             <td>
                                 <div class="col-md-8 col-sm-8">
-                                    <input required="true" type="text" valid-integer name="VPC" data-ng-blur="validateRange(resource, resourceQuota, type, 'VPC')"
+                                    <input required="true" type="text" valid-integer name="VPC"
                                     data-ng-model="resourceQuota.VPC"  class="form-control"
                                     data-ng-class="{'error': (resourceAllocationForm.VPC.$invalid && formSubmitted  || resourceAllocationField.VPC.$invalid)}">
                                     <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="maximum.vpcs.to.be.allocated" bundle="${msg}" />"></i>
@@ -494,7 +492,7 @@
 							</td>
                             <td>
                                 <div class="col-md-8 col-sm-8">
-                                    <input required="true" type="text" valid-integer name="CPU" data-ng-blur="validateRange(resource, resourceQuota, type, 'CPU')"
+                                    <input required="true" type="text" valid-integer name="CPU"
                                     data-ng-model="resourceQuota.CPU"  class="form-control"
                                     data-ng-class="{'error': (resourceAllocationForm.CPU.$invalid && formSubmitted  || resourceAllocationField.CPU.$invalid)}">
                                     <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="maximum.cpu.cores.to.be.allocated" bundle="${msg}" />" ></i>
@@ -542,7 +540,7 @@
 							</td>
                             <td>
                                 <div class="col-md-8 col-sm-8">
-                                    <input required="true" type="text" valid-integer name="Memory" data-ng-blur="validateRange(resource, resourceQuota, type, 'Memory')"
+                                    <input required="true" type="text" valid-integer name="Memory"
                                      data-ng-model="resourceQuota.Memory"  class="form-control"
                                      data-ng-class="{'error': (resourceAllocationForm.Memory.$invalid && formSubmitted || resourceAllocationField.Memory.$invalid)}">
                                     <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="maximum.memory.to.be.allocated" bundle="${msg}" />" ></i>
@@ -590,7 +588,7 @@
 							</td>
                             <td>
                                 <div class="col-md-8 col-sm-8">
-                                    <input required="true" type="text" valid-integer name="PrimaryStorage" data-ng-blur="validateRange(resource, resourceQuota, type, 'PrimaryStorage')"
+                                    <input required="true" type="text" valid-integer name="PrimaryStorage"
                                     data-ng-model="resourceQuota.PrimaryStorage"  class="form-control"
                                     data-ng-class="{'error': (resourceAllocationForm.PrimaryStorage.$invalid && formSubmitted || resourceAllocationField.PrimaryStorage.$invalid)}">
                                     <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="maximum.primary.storage.to.be.allocated" bundle="${msg}" />" ></i>

@@ -135,6 +135,15 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					resourceObject.id = $scope.resourceQuota[$scope.resourceTypeList[i]+"id"];
 					quotaList.push(resourceObject);
 				}
+                                if(i == 5) {
+					var resourceObject = {};
+					resourceObject.domainId = $scope.resourceQuota.domain.id;
+					resourceObject.domain = $scope.resourceQuota.domain;
+					resourceObject.resourceType = $scope.resourceTypeList[i];
+					resourceObject.max = -1;
+					resourceObject.id = $scope.resourceQuota[$scope.resourceTypeList[i]+"id"];
+					quotaList.push(resourceObject);
+				}
 			}
 
 			var hasResource = promiseAjax.httpTokenRequest( globalConfig.HTTP_POST , globalConfig.APP_URL + "resourceDomains/create" , '', quotaList);
@@ -188,11 +197,11 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 		if(angular.isUndefined($scope.resourceAllocationField[key])) {
 			$scope.resourceAllocationField[key] = {};
 		}
-		if(min > value || max < value) {
-			$scope.resourceAllocationField[key].$invalid = true;
-			$scope.resourceAllocationForm[key].errorMessage= key + " Limit should be between minimum and maximum";
-		} else {
+		if (min > value && max <= value) {
 			$scope.resourceAllocationField[key].$invalid = false;
+		} else {
+			$scope.resourceAllocationField[key].$invalid = true;
+                        $scope.resourceAllocationForm[key].errorMessage= key + " Limit should be between minimum and maximum";
 		}
 	}
 
@@ -212,6 +221,17 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					resourceObject.department = $scope.resourceQuota.department;
 					resourceObject.resourceType = $scope.resourceTypeList[i];
 					resourceObject.max = $scope.resourceQuota[$scope.resourceTypeList[i]];
+					resourceObject.id = $scope.resourceQuota[$scope.resourceTypeList[i]+"id"];
+					quotaList.push(resourceObject);
+				}
+                                if(i == 5) {
+					var resourceObject = {};
+					resourceObject.domainId = $scope.resourceQuota.domain.id;
+					resourceObject.domain = $scope.resourceQuota.domain;
+					resourceObject.departmentId = $scope.resourceQuota.department.id;
+					resourceObject.department = $scope.resourceQuota.department;
+					resourceObject.resourceType = $scope.resourceTypeList[i];
+					resourceObject.max = -1;
 					resourceObject.id = $scope.resourceQuota[$scope.resourceTypeList[i]+"id"];
 					quotaList.push(resourceObject);
 				}
@@ -258,6 +278,19 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					resourceObject.project = $scope.resourceQuota.project;
 					resourceObject.resourceType = $scope.resourceTypeList[i];
 					resourceObject.max = $scope.resourceQuota[$scope.resourceTypeList[i]];
+					resourceObject.id = $scope.resourceQuota[$scope.resourceTypeList[i]+"id"];
+					quotaList.push(resourceObject);
+				}
+                                if(i == 5) {
+					var resourceObject = {};
+					resourceObject.domainId = $scope.resourceQuota.domain.id;
+					resourceObject.domain = $scope.resourceQuota.domain;
+					resourceObject.departmentId = $scope.resourceQuota.department.id;
+					resourceObject.department = $scope.resourceQuota.department;
+					resourceObject.projectId = $scope.resourceQuota.project.id;
+					resourceObject.project = $scope.resourceQuota.project;
+					resourceObject.resourceType = $scope.resourceTypeList[i];
+					resourceObject.max = -1;
 					resourceObject.id = $scope.resourceQuota[$scope.resourceTypeList[i]+"id"];
 					quotaList.push(resourceObject);
 				}
