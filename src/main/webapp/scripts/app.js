@@ -35,13 +35,23 @@
         var initInjectors = angular.injector(["ngCookies"]);
         var $http = initInjector.get("$http");
         var $cookies = initInjectors.get("$cookies");
-        return $http({method:'get', url: 'http://'+ window.location.hostname +':8080/api/'  + 'users/usersessiondetails/'+$cookies.id,
-			"headers": {'x-auth-token': $cookies.token, 'x-requested-with': '', 'Content-Type': 'application/json', 'Range': "items=0-9", 'x-auth-login-token': $cookies.loginToken, 'x-auth-remember': $cookies.rememberMe, 'x-auth-user-id': $cookies.id, 'x-auth-login-time': $cookies.loginTime}})
-			.then(function(result){
-				myApplication.constant("tokens", result.data);
-          }, function(errorResponse) {
-        	  console.log(errorResponse);
-        });
+        var $q = initInjector.get("$q");
+        console.log($cookies);
+
+        if ($cookies.id != 'undefined' && !angular.isUndefined($cookies.id)) {
+        	return $http({method:'get', url: 'http://'+ window.location.hostname +':8080/api/'  + 'users/usersessiondetails/'+$cookies.id,
+    			"headers": {'x-auth-token': $cookies.token, 'x-requested-with': '', 'Content-Type': 'application/json', 'Range': "items=0-9", 'x-auth-login-token': $cookies.loginToken, 'x-auth-remember': $cookies.rememberMe, 'x-auth-user-id': $cookies.id, 'x-auth-login-time': $cookies.loginTime}})
+    			.then(function(result){
+    				myApplication.constant("tokens", result.data);
+              }, function(errorResponse) {
+            	  console.log(errorResponse);
+            });
+        } else {
+        	var d = $q.defer();
+        	d.resolve("hi");
+        	myApplication.constant("tokens", null);
+        	return d.promise;
+        }
     }
 
     function bootstrapApplication() {
