@@ -236,9 +236,15 @@ function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageSer
     $scope.logout = function() {
     	if ($cookies.id != 'undefined' && !angular.isUndefined($cookies.id) && $cookies.id != null) {
     	$http({method:globalConfig.HTTP_GET, url:globalConfig.APP_URL + 'loginHistory/'+$cookies.id,
-			"headers": {'x-auth-token': $cookies.token, 'x-requested-with': '', 'Content-Type': 'application/json', 'Range': "items=0-9", 'x-auth-login-token': $cookies.loginToken, 'x-auth-remember': $cookies.rememberMe, 'x-auth-user-id': $cookies.id, 'x-auth-login-time': $cookies.loginTime}})
+			"headers": {'x-auth-token': $cookies.token, 'x-requested-with': '', 'Content-Type': 'application/json', 'Range': "items=0-9", 'x-auth-login-token': $cookies.loginToken, 'x-auth-remember': $cookies.rememberMe, 'x-auth-user-id': '-1', 'x-auth-login-time': $cookies.loginTime}})
 			.success(function(result){
 				$window.sessionStorage.removeItem("pandaUserSession")
+		    	$cookies.rememberMe = "false";
+		        $cookies.loginToken = '0';
+		        $cookies.loginTime = '0';
+			    window.location.href = "login";
+          }).catch(function (result) {
+        	    $window.sessionStorage.removeItem("pandaUserSession")
 		    	$cookies.rememberMe = "false";
 		        $cookies.loginToken = '0';
 		        $cookies.loginTime = '0';
