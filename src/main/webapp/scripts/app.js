@@ -36,7 +36,6 @@
         var $http = initInjector.get("$http");
         var $cookies = initInjectors.get("$cookies");
         var $q = initInjector.get("$q");
-        console.log($cookies);
 
         if ($cookies.id != 'undefined' && !angular.isUndefined($cookies.id)) {
         	return $http({method:'get', url: 'http://'+ window.location.hostname +':8080/api/'  + 'users/usersessiondetails/'+$cookies.id,

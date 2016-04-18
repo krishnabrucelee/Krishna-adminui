@@ -49,6 +49,7 @@ function globalConfig($window) {
         CONTENT_LIMIT: 10,
         APP_URL: "http://localhost:8080/api/",
         PING_APP_URL: "http://localhost:8086/api/",
+        BASE_UI_URL : "http://localhost:9090/pandaadmin/",
         VIEW_URL : 'app/views/',
         NOTIFICATION_TEMPLATE: 'app/views/notification/notify.jsp',
         BILLABLE_ITEM: {
