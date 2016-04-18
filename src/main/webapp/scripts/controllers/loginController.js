@@ -48,7 +48,7 @@ angular.module('panda-ui-admin', ['ngCookies']).controller("loginCtrl", function
                     $cookies.loginTime = result.rememberResponse.loginTime;
             	}
             }
-            window.location.href = "index#/dashboard";
+            window.location.href = globalConfig.BASE_UI_URL + "index#/dashboard";
         }).catch(function (result) {
         	if (!angular.isUndefined(result.data)) {
       	      if(result.data.message == "error.already.exists") {
@@ -78,7 +78,7 @@ angular.module('panda-ui-admin', ['ngCookies']).controller("loginCtrl", function
       		             		$cookies.rememberMe = result.rememberMe;
       		             		$cookies.loginTime = result.loginTime;
       		              }
-      		              window.location.href = "index#/dashboard";
+      		              window.location.href = globalConfig.BASE_UI_URL + "index#/dashboard";
       		          }).catch(function (result) {
       		        	  $window.sessionStorage.removeItem("pandaUserSession")
       		        	  if (!angular.isUndefined(result.data)) {
