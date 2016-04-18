@@ -22,31 +22,16 @@ angular.module('panda-ui-admin', ['ngCookies']).controller("loginCtrl", function
         $http({method: 'POST', url: globalConfig.APP_URL + 'authenticate', headers: headers})
         .success(function (result) {
             $window.sessionStorage.setItem("pandaUserSession", JSON.stringify(result));
-            if (result.rememberMe == "true") {
-           		$cookies.token = result.token;
-           		$cookies.loginToken = result.loginToken;
-           		$cookies.id = result.id;
-           		$cookies.loginTime = result.loginTime;
-           		$cookies.rememberMe = result.rememberMe;
-            } else {
-            	$cookies.token = result.token;
-           		$cookies.loginToken = result.loginToken;
-           		$cookies.id = result.id;
-           		$cookies.rememberMe = result.rememberMe;
-           		$cookies.loginTime = result.loginTime;
-            }
+        	$cookies.token = result.token;
+       		$cookies.loginToken = result.loginToken;
+       		$cookies.id = result.id;
+       		$cookies.rememberMe = result.rememberMe;
+       		$cookies.loginTime = result.loginTime;
             if (!angular.isUndefined(result.rememberResponse)) {
-            	if(result.rememberResponse.rememberMe == "true") {
-       		        $cookies.token = result.tokenResponse.token;
-       		        $cookies.loginToken = result.rememberResponse.loginToken;
-       		        $cookies.rememberMe = result.rememberResponse.rememberMe;
-       		        $cookies.loginTime = result.rememberResponse.loginTime;
-            	} else {
-            		$cookies.token = result.tokenResponse.token;
-               		$cookies.loginToken = result.rememberResponse.loginToken;
-               		$cookies.rememberMe = result.rememberResponse.rememberMe;
-                    $cookies.loginTime = result.rememberResponse.loginTime;
-            	}
+        		$cookies.token = result.tokenResponse.token;
+           		$cookies.loginToken = result.rememberResponse.loginToken;
+           		$cookies.rememberMe = result.rememberResponse.rememberMe;
+                $cookies.loginTime = result.rememberResponse.loginTime;
             }
             window.location.href = globalConfig.BASE_UI_URL + "index#/dashboard";
         }).catch(function (result) {
@@ -65,20 +50,18 @@ angular.module('panda-ui-admin', ['ngCookies']).controller("loginCtrl", function
       		          $http({method: 'POST', url: globalConfig.APP_URL + 'authenticate', headers: headers})
       		              .success(function (result) {
       		            	$window.sessionStorage.setItem("pandaUserSession", JSON.stringify(result));
-      		              if (result.rememberMe == "true") {
-      		             		$cookies.token = result.token;
-      		             		$cookies.loginToken = result.loginToken;
-      		             		$cookies.id = result.id;
-      		             		$cookies.loginTime = result.loginTime;
-      		             		$cookies.rememberMe = result.rememberMe;
-      		              } else {
-      		              	    $cookies.token = result.token;
-      		             		$cookies.loginToken = result.loginToken;
-      		             		$cookies.id = result.id;
-      		             		$cookies.rememberMe = result.rememberMe;
-      		             		$cookies.loginTime = result.loginTime;
-      		              }
-      		              window.location.href = globalConfig.BASE_UI_URL + "index#/dashboard";
+      		            	$cookies.token = result.token;
+      		         		$cookies.loginToken = result.loginToken;
+      		         		$cookies.id = result.id;
+      		         		$cookies.rememberMe = result.rememberMe;
+      		         		$cookies.loginTime = result.loginTime;
+      		                if (!angular.isUndefined(result.rememberResponse)) {
+      		          		    $cookies.token = result.tokenResponse.token;
+      		             		$cookies.loginToken = result.rememberResponse.loginToken;
+      		             		$cookies.rememberMe = result.rememberResponse.rememberMe;
+      		                    $cookies.loginTime = result.rememberResponse.loginTime;
+      		                }
+      		                window.location.href = globalConfig.BASE_UI_URL + "index#/dashboard";
       		          }).catch(function (result) {
       		        	  $window.sessionStorage.removeItem("pandaUserSession")
       		        	  if (!angular.isUndefined(result.data)) {
