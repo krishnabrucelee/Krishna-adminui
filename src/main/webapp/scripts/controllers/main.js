@@ -243,6 +243,12 @@ function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageSer
 		        $cookies.loginToken = '0';
 		        $cookies.loginTime = '0';
 			    window.location.href = "login";
+          }).catch(function (result) {
+        	    $window.sessionStorage.removeItem("pandaUserSession")
+		    	$cookies.rememberMe = "false";
+		        $cookies.loginToken = '0';
+		        $cookies.loginTime = '0';
+			    window.location.href = "login";
           });
     	} else {
     		$window.sessionStorage.removeItem("pandaUserSession")
