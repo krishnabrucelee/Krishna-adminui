@@ -77,7 +77,7 @@ function promiseAjax($http, $window, globalConfig, notify, $cookies) {
 }
 
 function uploadFile($http){
-	var upload = function(files,emails,httpTokenRequest,globalConfig) {
+	var upload = function(files,emails,httpTokenRequest,globalConfig, $cookies) {
 		 var fd = new FormData();
 		/**angular.forEach(files,function(file){
 		if(!angular.isUndefined(file)) {
@@ -102,11 +102,15 @@ function uploadFile($http){
  		fd.append('englishLanguage',emails.englishLanguage);
  		fd.append('chineseLanguage',emails.chineseLanguage);
 		fd.append("recipientType",emails.recipientType);
-		return $http.post(globalConfig.APP_URL + "/emails/uploadFile", fd, {
+		return $http.post(globalConfig.APP_URL + "emails/uploadFile", fd, {
 			transformRequest : angular.identity,
 			headers : {
 				'Content-Type' : undefined,
-				'x-auth-token' :globalConfig.sessionValues.token
+				'x-auth-token' :$cookies.token,
+				'x-auth-login-token': $cookies.loginToken,
+				'x-auth-remember': $cookies.rememberMe,
+				'x-auth-user-id': $cookies.id,
+				'x-auth-login-time': $cookies.loginTime
 			}
 		});
 
