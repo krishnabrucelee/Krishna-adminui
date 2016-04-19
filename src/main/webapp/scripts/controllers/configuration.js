@@ -403,7 +403,7 @@ if( (angular.isUndefined(file) || angular.isUndefined(file1)) && !angular.isUnde
 			  }
 			  emails.recipientType = "USER";
 			  emails.eventName = emails.eventName.eventName;
- 		       appService.uploadFile.upload(arrayTest,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig);
+ 		       appService.uploadFile.upload(arrayTest,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies);
 	                appService.notify({message: 'Added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                         $state.reload();
           }
