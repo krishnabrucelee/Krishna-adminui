@@ -6,6 +6,19 @@
 
 angular.module('panda-ui-admin', ['ngCookies']).controller("loginCtrl", function ($scope, $http, $window, globalConfig, $remember, $cookies) {
 
+	//For remember login functionality.
+    if (($cookies.rememberMe == "true" )) {
+		return $http({method:'get', url: 'http://'+ $window.location.hostname +':8080/api/'  + 'users/usersessiondetails/'+$cookies.id,
+			"headers": {'x-auth-token': $cookies.token, 'x-requested-with': '', 'Content-Type': 'application/json', 'Range': "items=0-9", 'x-auth-login-token': $cookies.loginToken, 'x-auth-remember': $cookies.rememberMe, 'x-auth-user-id': $cookies.id, 'x-auth-login-time': $cookies.loginTime}})
+			.then(function(result){
+				$window.location.href = "index#/dashboard";
+          }, function(errorResponse) {
+        	  console.log(errorResponse);
+        	  $cookies.rememberMe = "false";
+        	  $window.location.reload();
+        });
+	}
+
     $scope.loginForm = function () {
     	if (angular.isUndefined($scope.remember)) {
     		$scope.remember = "false";
