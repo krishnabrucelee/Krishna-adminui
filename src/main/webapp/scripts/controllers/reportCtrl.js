@@ -141,11 +141,23 @@ function reportCtrl($scope, globalConfig, notify, $state, $stateParams, modalSer
     
     $scope.validateClientUsage = function (form,report) {
 
-	 $scope.clientUsage.startDate = $scope.report.startDate.ddmmyyyy();
-          $scope.clientUsage.endDate = $scope.report.endDate.ddmmyyyy();
-        $scope.formSubmitted = true;
+
+	
         if ($scope.report.dateRange.value == 'period') {
 
+   if(angular.isUndefined($scope.report.startDate)|| $scope.report.startDate == ""|| (angular.isUndefined($scope.report.endDate)|| $scope.report.endDate == "")) {
+	    $scope.homerTemplate = 'app/views/notification/notify.jsp';
+            appService.notify({
+                message: 'Please Select Start and End Date ',
+                classes: 'alert-danger',
+                templateUrl: $scope.homerTemplate
+            });
+            return false;
+        }
+
+		 $scope.clientUsage.startDate = $scope.report.startDate.ddmmyyyy();
+	         $scope.clientUsage.endDate = $scope.report.endDate.ddmmyyyy();
+        	 $scope.formSubmitted = true;
             if ($scope.report.startDate && $scope.report.endDate) {
 
                 if (form.$valid) {
@@ -175,7 +187,7 @@ function reportCtrl($scope, globalConfig, notify, $state, $stateParams, modalSer
 	$scope.myframe = true;
 	$scope.reportUrl =  appService.globalConfig.PING_APP_URL + "usage/listClientUsage?fromDate="+ $scope.clientUsage.startDate +"&toDate=" + $scope.clientUsage.endDate 
 + "&status=" + $scope.reports.status;
-	document.getElementById('myframe').setAttribute('src', $scope.reportUrl + "&type=html");
+	document.getElementById('myframe').setAttribute('src', $scope.reportUrl + "&type=html"+ "&range=" + $scope.reports.dateRange);
     }
 
 
