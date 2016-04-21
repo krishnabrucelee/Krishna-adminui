@@ -13,7 +13,6 @@ angular.module('panda-ui-admin', ['ngCookies']).controller("loginCtrl", function
 			.then(function(result){
 				$window.location.href = "index#/dashboard";
           }, function(errorResponse) {
-        	  console.log(errorResponse);
         	  $cookies.rememberMe = "false";
         	  $window.location.reload();
         });
