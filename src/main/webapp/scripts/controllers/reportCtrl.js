@@ -140,38 +140,26 @@ function reportCtrl($scope, globalConfig, notify, $state, $stateParams, modalSer
 	};
     
     $scope.validateClientUsage = function (form,report) {
-
-
-	
         if ($scope.report.dateRange.value == 'period') {
 
-   if(angular.isUndefined($scope.report.startDate)|| $scope.report.startDate == ""|| (angular.isUndefined($scope.report.endDate)|| $scope.report.endDate == "")) {
-	    $scope.homerTemplate = 'app/views/notification/notify.jsp';
-            appService.notify({
-                message: 'Please Select Start and End Date ',
-                classes: 'alert-danger',
-                templateUrl: $scope.homerTemplate
-            });
-            return false;
+        	if(angular.isUndefined($scope.report.startDate)|| $scope.report.startDate == ""|| (angular.isUndefined($scope.report.endDate)|| $scope.report.endDate == "")) {
+        		$scope.homerTemplate = 'app/views/notification/notify.jsp';
+	            appService.notify({
+	                message: 'Please Select Start and End Date ',
+	                classes: 'alert-danger',
+	                templateUrl: $scope.homerTemplate
+	            });
+	            return false;
+	        }
+
+	 		var startDate = $scope.report.startDate.ddmmyyyy();
+	 		var endDate = $scope.report.endDate.ddmmyyyy();
+        }else {
+        	var startDate = "01-01-1971";
+	 		var endDate = new Date().ddmmyyyy();
         }
-
-		 $scope.clientUsage.startDate = $scope.report.startDate.ddmmyyyy();
-	         $scope.clientUsage.endDate = $scope.report.endDate.ddmmyyyy();
-        	 $scope.formSubmitted = true;
-            if ($scope.report.startDate && $scope.report.endDate) {
-
-                if (form.$valid) {
-                    $scope.reports.dateRange = $scope.report.dateRange.value;
-                    $scope.reports.status = $scope.report.status.value;
-                    $scope.reports.startDate = $scope.report.startDate;
-                    $scope.reports.endDate = $scope.report.endDate;
-                    $scope.reportGenerating();
-                    $timeout($scope.loadingContent, 3000);
-
-                }
-            }
-        }
-        else {
+ 		$scope.formSubmitted = true;
+        if (startDate && endDate) {
 
             if (form.$valid) {
                 $scope.reports.dateRange = $scope.report.dateRange.value;
@@ -183,9 +171,8 @@ function reportCtrl($scope, globalConfig, notify, $state, $stateParams, modalSer
 
             }
         }
-	
 	$scope.myframe = true;
-	$scope.reportUrl =  appService.globalConfig.PING_APP_URL + "usage/listClientUsage?fromDate="+ $scope.clientUsage.startDate +"&toDate=" + $scope.clientUsage.endDate 
+	$scope.reportUrl =  appService.globalConfig.PING_APP_URL + "usage/listClientUsage?fromDate="+ startDate +"&toDate=" + endDate 
 + "&status=" + $scope.reports.status;
 	document.getElementById('myframe').setAttribute('src', $scope.reportUrl + "&type=html"+ "&range=" + $scope.reports.dateRange);
     }
