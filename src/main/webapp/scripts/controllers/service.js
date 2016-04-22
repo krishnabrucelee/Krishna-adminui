@@ -742,10 +742,12 @@ function storageEditCtrl($scope, $state, $stateParams, $log, $window, appService
     });
 
 $scope.storage.zone= {};
+
 	$scope.edit = function (storageId) {
         var hasStorage = appService.crudService.read("storages", storageId);
         hasStorage.then(function (result) {
             $scope.storage = result;
+            $state.current.data.pageName = result.name;
   	     $scope.storage.zone = $scope.zoneList[0];
 		var index;
 		for (index = 0; index < $scope.storage.storagePrice.length; ++index) {
@@ -1487,7 +1489,7 @@ function computeListCtrl($scope, $state, $stateParams, appService, $window, glob
         var hasComputes = appService.crudService.read("computes", computeId);
         hasComputes.then(function (result) {
             $scope.compute = result;
-
+            $state.current.data.pageName = result.name;
     		$scope.compute.zone = $scope.formElements.zoneList[0];
 		var index;
 		for (index = 0; index < $scope.compute.computeCost.length; ++index) {

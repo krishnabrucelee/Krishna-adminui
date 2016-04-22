@@ -30,8 +30,7 @@
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="edit.compute.offer" bundle="${msg}" /></a> <span
-								ng-switch-when="true"><fmt:message key="edit.compute.offer"
-										bundle="${msg}" /></span>
+								ng-switch-when="true">{{ state.data.pageName }}</span>
 							</span>
 							<span ng-if="state.data.pageTitle === 'Compute'"> <a
 								ng-switch-when="false"
@@ -56,8 +55,7 @@
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
 										key="edit.storage.offer" bundle="${msg}" /></a> <span
-								ng-switch-when="true"><fmt:message key="edit.storage.offer"
-										bundle="${msg}" /></span>
+								ng-switch-when="true">{{ state.data.pageName }}</span>
 							</span>
 							<span ng-if="state.data.pageTitle === 'Storage'"> <a
 								ng-switch-when="false"
