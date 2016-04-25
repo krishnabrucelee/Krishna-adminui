@@ -153,7 +153,7 @@
                     <div data-ng-hide="showLoader" style="margin: 1%">
                         <get-loader-image data-ng-show="showLoader"></get-loader-image>
                     </div>
-                    <div data-ng-show="showLoader"
+                    <div
                         class="table-responsive">
                         <table cellspacing="1" cellpadding="1"
                             class="table table-bordered white-content">
@@ -167,15 +167,15 @@
                             </thead>
                             <tbody>
                              <tr  data-ng-repeat="usage in usageStatistics">
-                             <td>{{ $index + 1 }}</td>
+                            					 <td>{{ $index + 1 }}</td>
                               					 <td data-ng-if = "usage.name">
 
                                                     {{ usage.name}}
                                                 </td>
                                                 <td data-ng-if = "usage.usagename">
-                                                    {{ usage.usage.usageType}}
+                                                    {{ usage.usagename}}
                                                 </td>
-                                                 <td data-ng-if = "usage.usageType == '6'">
+                                                 <td data-ng-if = "!usage.usagename && !usage.name">
                                                     {{ usage.usageid}}
                                                 </td>
                                                 <td >

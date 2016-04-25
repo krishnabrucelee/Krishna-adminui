@@ -636,22 +636,11 @@ function invoiceListReport($scope, $http, $window, $modal, $log, $state, $stateP
                 domainUuid = $scope.usageStatisticsObj.domain.companyNameAbbreviation;
             }
 
-            var hasServer = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.PING_APP_URL
+            var hasServer = appService.promiseAjax.httpRequestPing(appService.globalConfig.HTTP_GET, appService.globalConfig.PING_APP_URL
                     + "usage/listUsageByType?fromDate="+ startDate +"&toDate=" + endDate + "&usageType=" + usageType + "&domainUuid=" + domainUuid);
             hasServer.then(function (result) {  // this is only run after $http completes
                 $scope.usageStatistics = result;
                 $scope.showLoader = false;
-                /**if(groupBy == "service") {
-                    usageList = $scope.getUsageListByGroup("usageid");
-                    $scope.groupItemByUsageList(usageList);
-            } else if(groupBy == "project") {
-                usageList = $scope.getUsageListByGroup("project");
-                $scope.groupItemByUsageList(usageList);
-            }
-            else if(groupBy == "department") {
-                usageList = $scope.getUsageListByGroup("account");
-                $scope.groupItemByUsageList(usageList);
-            }**/
         });
     }
 
