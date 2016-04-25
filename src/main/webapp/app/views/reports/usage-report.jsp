@@ -58,13 +58,19 @@
                                     <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-7 col-sm-7">
-                                    <select class="form-control input-group col-xs-5" name="groupBy"
+                                    <!-- <select class="form-control input-group col-xs-5" name="groupBy"
                                         data-ng-model="groupBy"
                                         data-ng-init="groupBy='project';">
                                         <option value="service">Service</option>
                                         <option value="project">Project</option>
                                         <option value="department">Department</option>
-                                    </select>
+                                    </select> -->
+                                    <select
+                                    class="form-control input-group col-xs-5" name="UsageType"
+                                    data-ng-model="usageStatisticsObj.usageType"
+                                    data-ng-options="UsageType.name for UsageType in formElements.UsageTypeList">
+                                    <option value="">Select</option>
+                                </select>
                                 </div>
                                 </div>
                                 </div>
@@ -130,7 +136,7 @@
                         <div class="row ">
                             <span class="col-md-4 col-sm-4"></span> <span
                                 class="col-md-7 col-sm-7 p-md">
-                                <button type="submit" data-ng-click="getUsageStatistics()" class="btn btn-info">Generate</button>
+                                <button type="submit" data-ng-click="getUsageReport()" class="btn btn-info">Generate</button>
                                 <!-- <a class="btn btn-default" data-ng-click="reset()"> Cancel </a> -->
                             </span>
 
@@ -147,75 +153,44 @@
                     <div data-ng-hide="showLoader" style="margin: 1%">
                         <get-loader-image data-ng-show="showLoader"></get-loader-image>
                     </div>
-                    <div data-ng-show="showLoader" data-ng-if="usageStatisticsType=='service'"
+                    <div data-ng-show="showLoader"
                         class="table-responsive">
                         <table cellspacing="1" cellpadding="1"
                             class="table table-bordered white-content">
                             <thead>
                                 <tr class="bg-primary">
                                     <th width="5%">S.no.</th>
-                                    <th width="45%">Services</th>
-                                    <th width="20%" class="text-center">Usage (Days)</th>
-                                    <th width="15%" class="text-center">Bill</th>
-                                </tr>
-                            </thead>
-                            <tbody data-ng-show="usageList.length > 0"
-                                ng-repeat="(key, value) in usageList | groupBy: 'billableType'">
-                                <tr>
-                                    <td colspan="4" class="text-primary font-bold bg-info">
-                                        {{ key }}
-                                    </td>
-                                </tr>
-                                <tr ng-repeat="usage in value">
-                                    <td>{{ $index + 1 }}</td>
-                                    <td>
-                                        <span class="m-l-lg" data-ng-if="!usage.usageName">-</span>
-                                        <span class="m-l-lg" data-ng-if="usage.usageName">{{ usage.usageName}}</span>
-                                        </td>
-                                    <td class="text-center">{{ usage.usageUnits }}</td>
-                                    <td class="text-right">{{ usage.planCost }}</td>
-                                </tr>
-                            </tbody>
-                            <tbody data-ng-show="usageList.length == '0'">
-                                <tr><td colspan="4"> No records found!! </td></tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-
-
-                    <div class="table-responsive" data-ng-if="usageStatisticsType!='service'">
-                        <table cellspacing="1" cellpadding="1"
-                            class="table table-bordered white-content">
-                            <thead>
-                                <tr class="bg-primary">
-                                    <th width="5%">S.no.</th>
                                     <th width="45%">Name</th>
-                                    <th width="20%" class="text-center">Usage (Days)</th>
-                                    <th width="15%" class="text-center">Bill</th>
+                                    <th width="20%" class="text-center">Usage (Hours)</th>
+                                    <th width="15%" class="text-center">Department</th>
                                 </tr>
                             </thead>
-                            <tbody data-ng-if="usageList.length > 0" ng-repeat="(key, value) in usageList | groupBy: 'name'">
-                                <tr>
-                                    <td colspan="4" class="text-primary font-bold bg-info">
-                                    {{ key }}
-                                    </td>
-                                </tr>
-                                <tr ng-repeat="usage in value">
-                                    <td>{{ $index + 1}} </td>
-                                    <td><span class="m-l-lg">{{ usage.billableType }}</span></td>
-                                    <td class="text-center">{{ usage.usageUnits }}</td>
-                                    <td class="text-right">{{ usage.planCost }}</td>
-                                </tr>
+                            <tbody>
+                             <tr  data-ng-repeat="usage in usageStatistics">
+                             <td>{{ $index + 1 }}</td>
+                              					 <td data-ng-if = "usage.name">
 
-                            </tbody >
-                            <tbody data-ng-show="usageList.length == '0'">
-                                <tr><td colspan="4"> No records found!! </td></tr>
-                            </tbody>
-
+                                                    {{ usage.name}}
+                                                </td>
+                                                <td data-ng-if = "usage.usagename">
+                                                    {{ usage.usage.usageType}}
+                                                </td>
+                                                 <td data-ng-if = "usage.usageType == '6'">
+                                                    {{ usage.usageid}}
+                                                </td>
+                                                <td >
+                                                    {{ usage.usage}}
+                                                </td>
+                                                <td>
+                                                    {{ usage.account}}
+                                                </td>
+                                                      </tbody>
+                                                       <tbody data-ng-show="usageStatistics.length == '0'">
+                                						<tr><td colspan="4"> No records found!! </td></tr>
+                            			</tbody>
                         </table>
-                    </div>
 
+                    </div>
                 </div>
                 <br />
                 <br />
