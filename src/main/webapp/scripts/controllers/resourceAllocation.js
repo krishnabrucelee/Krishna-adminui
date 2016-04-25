@@ -41,6 +41,8 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 	$scope.paginationObject = {};
     $scope.global = crudService.globalConfig;
 	$scope.domainList = {};
+	$scope.resourceAllocationField = {};
+	    $scope.resourceAllocationError = true;
 
     // Domain List
     var hasDomains = crudService.listAll("domains/list");
@@ -123,7 +125,6 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 	$scope.saveDomainQuota = function(form) {
 		$scope.formSubmitted = true;
 		if(form.$valid) {
-			$scope.showLoader = true;
 			var quotaList = [];
 			for(var i=0; i < $scope.resourceTypeList.length; i++) {
 				if(i != 5) {
@@ -144,8 +145,10 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					resourceObject.id = $scope.resourceQuota[$scope.resourceTypeList[i]+"id"];
 					quotaList.push(resourceObject);
 				}
+                                $scope.validateRange('domain', resourceObject.max, resourceObject.resourceType);
 			}
-
+			if ($scope.resourceAllocationError) {
+	                        $scope.showLoader = true;
 			var hasResource = promiseAjax.httpTokenRequest( globalConfig.HTTP_POST , globalConfig.APP_URL + "resourceDomains/create" , '', quotaList);
 			hasResource.then(function (result) {  // this is only run after $http completes
 				angular.forEach(result, function(obj, key) {
@@ -156,6 +159,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 				$scope.isDisabledDepartment = false;
 				$scope.isDisabledProject = false;
 	            notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
+	            $scope.resourceAllocationError = true;
 	            $state.reload();
 	        }).catch(function (result) {
 	            if (!angular.isUndefined(result.data)) {
@@ -168,49 +172,74 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 	            	}
 	            }
 	        });
+		} else {
+		    $scope.resourceAllocationError = true;
+		}
 		}
 	};
 
-	$scope.resourceAllocationField = {};
-	$scope.validateRange = function(resource, valueObj, type, key) {
+	 $scope.validateRange = function(resource, valueObj, key) {
+	        if (key !== 'Project') {
+	            var value = valueObj;
+	            var min = 0;
+	            var max = 0;
+	            switch (resource) {
+	                case "domain":
+	                    min = $scope.hasSumOfDomainMin[key];
+	                    max = value;
+	                    break;
+	                case "department":
+	                    min = $scope.hasSumOfDepartmentMin[key];
+	                    max = $scope.hasSumOfDepartmentMax[key];
+	                    break;
+	                case "project":
+	                    min = $scope.hasSumOfProjectMin[key];
+	                    max = $scope.hasSumOfProjectMax[key];
+	                    break;
 
-		var value = valueObj[key];
-		var min=0;
-		var max = 0;
-		if (!angular.isUndefined(type)) {
-			resource = "domain";
-		}
-		switch(resource) {
-		case "domain":
-			min = $scope.hasSumOfDomainMin[key];
-			max = value;
-			break;
-		case "department":
-			min = $scope.hasSumOfDepartmentMin[key];
-			max = $scope.hasSumOfDepartmentMax[key];
-			break;
-		case "project":
-			min = $scope.hasSumOfProjectMin[key];
-			max = $scope.hasSumOfProjectMax[key];
-			break;
-		}
-		if(angular.isUndefined($scope.resourceAllocationField[key])) {
-			$scope.resourceAllocationField[key] = {};
-		}
-		if (min > value && max <= value) {
-			$scope.resourceAllocationField[key].$invalid = false;
-		} else {
-			$scope.resourceAllocationField[key].$invalid = true;
-                        $scope.resourceAllocationForm[key].errorMessage= key + " Limit should be between minimum and maximum";
-		}
-	}
+	            }
+
+	            if (angular.isUndefined($scope.resourceAllocationField[key])) {
+	                $scope.resourceAllocationField[key] = {};
+	            }
+	            if (value >= min && value <= max) {
+	                $scope.resourceAllocationField[key].$invalid = false;
+	            } else {
+	                if (max == -1) {
+	                    if(max != value){
+	                        if(value >= 0) {
+	                            $scope.resourceAllocationField[key].$invalid = false;
+	                        } else {
+	                            $scope.resourceAllocationField[key].$invalid = true;
+	                            $scope.resourceAllocationError = false;
+	                            if (max == -1) {
+	                                $scope.resourceAllocationForm[key].errorMessage = key + ' limit should be ' + min + ' to unlimited';
+	                            } else {
+	                                $scope.resourceAllocationForm[key].errorMessage = key + ' limit should be between ' + min + ' and ' + max;
+	                            }
+	                        }
+	                    } else {
+	                        $scope.resourceAllocationField[key].$invalid = false;
+	                    }
+	                } else {
+	                    $scope.resourceAllocationField[key].$invalid = true;
+	                    $scope.resourceAllocationError = false;
+	                    if (max == -1) {
+	                        $scope.resourceAllocationForm[key].errorMessage = key + ' limit should be ' + min + ' to unlimited';
+	                    } else {
+	                        $scope.resourceAllocationForm[key].errorMessage = key + ' limit should be between ' + min + ' and ' + max;
+	                    }
+
+	                }
+	           }
+	        }
+	    }
 
 
 	// Save resource limit for department.
 	$scope.saveDepartmentQuota = function(form) {
 		$scope.formSubmitted = true;
 		if(form.$valid) {
-			$scope.showLoader = true;
 			var quotaList = [];
 			for(var i=0; i < $scope.resourceTypeList.length; i++) {
 				if(i != 5) {
@@ -235,7 +264,10 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					resourceObject.id = $scope.resourceQuota[$scope.resourceTypeList[i]+"id"];
 					quotaList.push(resourceObject);
 				}
+                                $scope.validateRange('department', resourceObject.max, resourceObject.resourceType);
 			}
+			if ($scope.resourceAllocationError) {
+                        $scope.showLoader = true;
 			var hasResource = promiseAjax.httpTokenRequest( globalConfig.HTTP_POST , globalConfig.APP_URL + "resourceDepartments/create" , '', quotaList);
 			hasResource.then(function (result) {  // this is only run after $http completes
 				angular.forEach(result, function(obj, key) {
@@ -245,6 +277,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 				$scope.isDisabledProject = false;
 				$scope.formSubmitted = false;
 	            notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
+	            $scope.resourceAllocationError = true;
 	            $state.reload();
 	        }).catch(function (result) {
 	            if (!angular.isUndefined(result.data)) {
@@ -257,6 +290,9 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 	            	}
 	            }
 	        });
+		} else {
+		    $scope.resourceAllocationError = true;
+		}
 		}
 	};
 
@@ -265,7 +301,6 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 	$scope.saveProjectQuota = function(form) {
 		$scope.formSubmitted = true;
 		if(form.$valid) {
-			$scope.showLoader = true;
 			var quotaList = [];
 			for(var i=0; i < $scope.resourceTypeList.length; i++) {
 				if(i != 5) {
@@ -294,8 +329,10 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					resourceObject.id = $scope.resourceQuota[$scope.resourceTypeList[i]+"id"];
 					quotaList.push(resourceObject);
 				}
+                                $scope.validateRange('project', resourceObject.max, resourceObject.resourceType);
 			}
-
+			if ($scope.resourceAllocationError) {
+	                        $scope.showLoader = true;
 			var hasResource = promiseAjax.httpTokenRequest( globalConfig.HTTP_POST , globalConfig.APP_URL + "resourceProjects/create" , '', quotaList);
 			hasResource.then(function (result) {  // this is only run after $http completes
 				angular.forEach(result, function(obj, key) {
@@ -305,6 +342,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 				$scope.showLoader = false;
 	            notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
 	            $state.reload();
+	            $scope.resourceAllocationError = true;
 	        }).catch(function (result) {
 	            if (!angular.isUndefined(result.data)) {
 	            	 if (result.data.fieldErrors != null) {
@@ -316,6 +354,9 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 	            	}
 	            }
 	        });
+		} else {
+		    $scope.resourceAllocationError = true;
+		}
 		}
 	};
 
