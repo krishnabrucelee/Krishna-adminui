@@ -24,7 +24,7 @@ function reportCtrl($scope, globalConfig, notify, $state, $stateParams, modalSer
         $scope.cancel();
     };
 
-    
+
     $scope.generatedReport = [];
     $scope.validateSignUp = function (form)
     {
@@ -178,7 +178,7 @@ $scope.clientEndDate = new Date().ddmmyyyy();
             }
         }
 	$scope.myframe = true;
-	$scope.reportUrl =  appService.globalConfig.PING_APP_URL + "usage/listClientUsage?fromDate="+ startDate +"&toDate=" + endDate 
+	$scope.reportUrl =  appService.globalConfig.PING_APP_URL + "usage/listClientUsage?fromDate="+ startDate +"&toDate=" + endDate
 + "&status=" + $scope.reports.status;
 	document.getElementById('myframe').setAttribute('src', $scope.reportUrl + "&type=html"+ "&range=" + $scope.reports.dateRange);
     }
@@ -448,7 +448,6 @@ $scope.clientEndDate = new Date().ddmmyyyy();
 };
 
 function invoiceListReport($scope, $http, $window, $modal, $log, $state, $stateParams, appService, globalConfig) {
-
     $scope.paginationObject = {};
     $scope.configForm = {};
     $scope.domainList = {};
@@ -574,6 +573,84 @@ function invoiceListReport($scope, $http, $window, $modal, $log, $state, $stateP
           $scope.configList(1);
    };
 
+ $scope.open = function ($event, currentDateField) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.usageStatisticsObj[currentDateField] = true;
+    };
+
+ $scope.monthList = appService.utilService.getMonthList();
+
+    Date.prototype.ddmmyyyy= function() {
+       var yyyy = this.getFullYear().toString();
+       var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based
+       var dd  = this.getDate().toString();
+       return (dd[1]?dd:"0"+dd[0]) + "-"+ (mm[1]?mm:"0"+mm[0]) + "-" + yyyy; // padding
+      };
+    $scope.usageStatisticsObj = {};
+ $scope.getBillableTypeByUsageType = function(usageType) {
+        var billableType = "";
+        switch(usageType) {
+        case 1:
+            billableType = "VM";
+            break;
+        case 2:
+            billableType = "Stopped VM";
+            break;
+        case 3:
+            billableType = "IP";
+            break;
+        case 6:
+            billableType = "Storage";
+            break;
+        case 7:
+        case 8:
+            billableType = "Template";
+            break;
+        case 9:
+        case 15:
+            billableType = "Snapshot";
+            break;
+
+
+        }
+        return billableType;
+    }
+
+  $scope.getUsageReport = function() {
+        if(angular.isUndefined($scope.usageStatisticsObj.startDate)
+                || $scope.usageStatisticsObj.startDate == ""
+                || (angular.isUndefined($scope.usageStatisticsObj.endDate)
+                        || $scope.usageStatisticsObj.endDate == ""
+                        || (($scope.usageStatisticsObj.domain == "" || $scope.usageStatisticsObj.domain == null)
+                        && appService.globalConfig.sessionValues.type == "ROOT_ADMIN"))) {
+            alert("Please select all the mandatory fields")
+            return false;
+        }
+
+
+        var groupBy = $scope.groupBy;
+        $scope.showLoader = false;
+        $scope.usageStatisticsType = groupBy;
+            var startDate = $scope.usageStatisticsObj.startDate.ddmmyyyy();
+            var endDate = $scope.usageStatisticsObj.endDate.ddmmyyyy();
+	    var usageType = $scope.usageStatisticsObj.usageType.id;
+            if($scope.global.sessionValues.type != 'ROOT_ADMIN') {
+                domainUuid = appService.globalConfig.sessionValues.domainAbbreviationName;
+            } else {
+                domainUuid = $scope.usageStatisticsObj.domain.companyNameAbbreviation;
+            }
+
+            var hasServer = appService.promiseAjax.httpRequestPing(appService.globalConfig.HTTP_GET, appService.globalConfig.PING_APP_URL
+                    + "usage/listUsageByType?fromDate="+ startDate +"&toDate=" + endDate + "&usageType=" + usageType + "&domainUuid=" + domainUuid);
+            hasServer.then(function (result) {  // this is only run after $http completes
+                $scope.usageStatistics = result;
+                $scope.showLoader = false;
+        });
+    }
+
+
     $scope.validateInvoice = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
@@ -611,7 +688,27 @@ function invoiceListReport($scope, $http, $window, $modal, $log, $state, $stateP
                 "2":"DUE",
                 "3":"PAID",
                 "4":"OVER_DUE"
-            }
+            },
+UsageTypeList: [{
+            id: 1,
+            name: 'VM'
+        }, {
+            id: 2,
+            name: 'Stopped VM'
+        }, {
+            id: 3,
+            name: 'IP'
+        },{
+            id: 6,
+            name: 'Storage'
+        },
+	{
+            id: 8,
+            name: 'Template'
+        },{
+            id: 15,
+            name: 'Snapshot'
+        }]
     }
 
 };
