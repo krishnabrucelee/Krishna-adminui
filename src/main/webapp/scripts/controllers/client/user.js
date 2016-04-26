@@ -106,28 +106,34 @@ function userListCtrl($scope, $state, $stateParams, modalService,appService, $lo
 
     // Suspend the user
     $scope.showUserListLoader = {};
+$scope.suspensionObject = {};
     $scope.suspendUserAccount = function(account) {
       $scope.showUserListLoader[account.id] = true;
-
+	console.log("account",account);
         appService.dialogService.openDialog("app/views/common/confirm-suspension.jsp", 'md',
         $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
-          $scope.suspensionObject = account;
-          $scope.ok = function (suspensionObject) {
-            suspensionObject.status = "SUSPENDED";
-            var hasServer = appService.crudService.update("users/suspend", suspensionObject);
+ 	  $scope.suspensionObject.status = "SUSPENDED";
+	     $scope.suspensionObject.id = account.id;
+suspensionObject = $scope.suspensionObject;
+          $scope.ok = function (suspensionObject) {          
+            var hasServer = appService.crudService.update("users/suspend",suspensionObject);
             hasServer.then(function (result) {
               appService.notify({message: 'Account suspended  successfully ',
               classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
               $modalInstance.close();
+		$scope.list(1);
             });
             $scope.showUserListLoader[suspensionObject.id] = false;
+		
           },
+	
           $modalInstance.close();
           $scope.cancel = function () {
             $modalInstance.close();
             $scope.showUserListLoader[account.id] = false;
           };
       }]);
+
     };
 
 
