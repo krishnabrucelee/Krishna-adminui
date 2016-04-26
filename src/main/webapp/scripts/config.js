@@ -653,6 +653,14 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 }
             })
 
+	    .state('reports.usage-report', {
+                url: "report/usageReport",
+                templateUrl: VIEW_URL +  "views/reports/usage-report.jsp",
+                data: {
+                    pageTitle: 'Usage Report'
+                }
+            })
+
             .state('reports.payment-due', {
                 url: "report/paymentDue",
                 templateUrl: VIEW_URL +  "views/reports/payment-due.jsp",

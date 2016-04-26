@@ -58,8 +58,9 @@
                 <%-- <li ui-sref-active="active"><a ui-sref="reports.signup"><fmt:message key="common.signupreport" bundle="${msg}" /></a></li>
                 <li ui-sref-active="active"><a ui-sref="reports.billable-items"><fmt:message key="common.billableitemreport" bundle="${msg}" /></a></li> --%>
                 <li ui-sref-active="active"><a ui-sref="reports.payment-report"><fmt:message key="common.paymentreport" bundle="${msg}" /></a></li>
-                <%-- <li ui-sref-active="active"><a ui-sref="reports.payment-due"><fmt:message key="common.paymentduereport" bundle="${msg}" /></a></li>--%>
-                <li ui-sref-active="active"><a ui-sref="reports.client-usage"><fmt:message key="common.clientusage" bundle="${msg}" /></a></li> 
+                <li ui-sref-active="active"><a ui-sref="reports.usage-report"><fmt:message key="common.usagereport" bundle="${msg}" /></a></li>
+          <%--  <li ui-sref-active="active"><a ui-sref="reports.payment-due"><fmt:message key="common.paymentduereport" bundle="${msg}" /></a></li>--%>
+                  <li ui-sref-active="active"><a ui-sref="reports.client-usage"><fmt:message key="common.clientusage" bundle="${msg}" /></a></li> 
             </ul>
         </li>
     </ul>
