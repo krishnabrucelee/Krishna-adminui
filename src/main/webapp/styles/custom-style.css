@@ -141,6 +141,20 @@ fieldset.scheduler-border legend{border-bottom:none !important; margin-bottom:0p
   }
 }
 
+.report-wrapper{float: none; margin: 0 auto; width: 1030px;}
+.client-usage-report-iframe{border:none;display: block; float: none; margin: 0 auto; width: 1058px; padding:0px;}
+.client-usage-report-iframe table{width:100% !important;}
+#__BIRT_ROOT table{width:100% !important;}
+
+#footer {
+    clear: both;
+    height: auto;
+    margin-top: 50px;
+    overflow: hidden;
+}
+
+@media (min-width: 1024px) and (max-width: 1050px){.tab-full{width:100%;}}
+
 .table > thead > tr > th{vertical-align:top;}
 
 /*Company Dashboard Styles*/

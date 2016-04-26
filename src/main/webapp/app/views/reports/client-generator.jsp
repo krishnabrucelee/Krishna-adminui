@@ -36,8 +36,7 @@
                                     <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-7 col-sm-7">
-                                    <select required="true" class="form-control input-group" data-ng-init="report.status = reportElements.statusList[1]" name="status" data-ng-model="report.status" ng-options="status.name for status in reportElements.statusList" >
-
+                                    <select required="true" class="form-control input-group" data-ng-init="report.status = clientUsage.statusList[0]" name="status" data-ng-model="report.status" ng-options="status.name for status in clientUsage.statusList" >
                                     </select>
                                     <span class="help-block m-b-none" data-ng-show="clientForm.status.$invalid && formSubmitted" >Status is required.</span>
                                 </div>
@@ -48,7 +47,7 @@
                     </div>
                     <div class="col-md-6  col-sm-6">
 
-                        <div class="form-group m-l-md" data-ng-show="report.dateRange.value == 'period'" ng-class="{
+                        <div class="form-group m-l-md" data-ng-if="report.dateRange.value == 'period'" ng-class="{
                                             'text-danger'
                                            : !report.startDate && formSubmitted}">
 
@@ -67,7 +66,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group m-l-md" data-ng-show="report.dateRange.value == 'period'" ng-class="{
+                        <div class="form-group m-l-md" data-ng-if="report.dateRange.value == 'period'" ng-class="{
                                             'text-danger'
                                             : !report.endDate && formSubmitted}">
 

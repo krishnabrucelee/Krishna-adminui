@@ -75,7 +75,7 @@ function cloudStackCtrl($scope, $window, appService) {
     $scope.list(1);
     };
 
-function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateParams, appService,globalConfig) {
+function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateParams, appService,globalConfig, $cookies) {
 
 	//$scope.adminUserList = {};
     $scope.paginationObject = {};
@@ -403,7 +403,7 @@ if( (angular.isUndefined(file) || angular.isUndefined(file1)) && !angular.isUnde
 			  }
 			  emails.recipientType = "USER";
 			  emails.eventName = emails.eventName.eventName;
- 		       appService.uploadFile.upload(arrayTest,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig);
+ 		       appService.uploadFile.upload(arrayTest,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies);
 	                appService.notify({message: 'Added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                         $state.reload();
           }
@@ -425,7 +425,7 @@ else if( !angular.isUndefined(file))
 			  }
 			  emails.recipientType = "USER";
 			  emails.eventName = emails.eventName.eventName;
- 		       appService.uploadFile.upload(arrayTest,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig);
+ 		       appService.uploadFile.upload(arrayTest,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies);
 	                appService.notify({message: 'Added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                         $state.reload();
           }
