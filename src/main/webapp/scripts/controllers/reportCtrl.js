@@ -136,12 +136,13 @@ function reportCtrl($scope, globalConfig, notify, $state, $stateParams, modalSer
       };
 
 	$scope.clientUsage = {
-		statusList: [{id: 1, name: 'ENABLED', value: 'ENABLED'}, {id: 2, name: 'DISABLED', value: 'DISABLED'}, {id: 3, root: 'Status', name: 'All', value: 'all'}]
-	};
+		statusList: [{id: 1,root: 'Status', name: 'All', value: 'ALL'}, {id: 2,name: 'ENABLED', value: 'ENABLED'}, {id: 3, name: 'DISABLED', value: 'DISABLED'}]
 
+	};
+	
+    
     $scope.validateClientUsage = function (form,report) {
         if ($scope.report.dateRange.value == 'period') {
-
         	if(angular.isUndefined($scope.report.startDate)|| $scope.report.startDate == ""|| (angular.isUndefined($scope.report.endDate)|| $scope.report.endDate == "")) {
         		$scope.homerTemplate = 'app/views/notification/notify.jsp';
 	            appService.notify({
@@ -154,9 +155,14 @@ function reportCtrl($scope, globalConfig, notify, $state, $stateParams, modalSer
 
 	 		var startDate = $scope.report.startDate.ddmmyyyy();
 	 		var endDate = $scope.report.endDate.ddmmyyyy();
+$scope.clientStartDate = $scope.report.startDate.ddmmyyyy();
+$scope.clientEndDate = $scope.report.endDate.ddmmyyyy();
+
         }else {
         	var startDate = "01-01-1971";
 	 		var endDate = new Date().ddmmyyyy();
+$scope.clientStartDate = "01-01-1971";
+$scope.clientEndDate = new Date().ddmmyyyy();
         }
  		$scope.formSubmitted = true;
         if (startDate && endDate) {
