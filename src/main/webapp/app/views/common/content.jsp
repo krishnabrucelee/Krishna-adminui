@@ -424,6 +424,14 @@
 										bundle="${msg}" />
 							</span>
 							</span>
+							<span ng-if="state.data.pageTitle === 'Client Usage Report'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="common.clientusage" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="common.clientusage"
+										bundle="${msg}" />
+							</span>
+							</span>
 						</li>
 					</ol>
 				</div>
@@ -477,6 +485,10 @@
 					 <span ng-if="$state.current.data.pageTitle === 'Email Template'"><fmt:message key="email.template" bundle="${msg}" /></span>
 					 <span ng-if="$state.current.data.pageTitle === 'Invoice List Report'"><fmt:message key="common.invoicelistreport" bundle="${msg}" /></span>
 					 <span ng-if="$state.current.data.pageTitle === 'Payment Report'"><fmt:message key="common.paymentreport" bundle="${msg}" /></span>
+					 <span ng-if="$state.current.data.pageTitle === 'Client Usage Report'"><fmt:message key="common.clientusage" bundle="${msg}" /></span>
+					 <span ng-if="$state.current.data.pageTitle === 'ConfigCategory'"><fmt:message key="configuration" bundle="${msg}" /></span>
+					 <span ng-if="$state.current.data.pageTitle === 'System Configuration'"><fmt:message key="system.configuration" bundle="${msg}" /></span>
+					 <span ng-if="$state.current.data.pageTitle === 'Currency'"><fmt:message key="currency" bundle="${msg}" /></span>
 				</h2>
 				<small>{{ $state.current.data.pageDesc}}</small>
 			</div>
