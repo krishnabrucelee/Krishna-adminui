@@ -258,6 +258,83 @@ function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageSer
     		window.location.href = "login";
     	}
     }
+    
+    
+    /**
+     *  Data for Doughnut chart
+     */
+    $scope.doughnutOptions = {
+        segmentShowStroke: true,
+        segmentStrokeColor: "#fff",
+        segmentStrokeWidth: 0,
+        percentageInnerCutout: 85, // This is 0 for Pie charts
+        animationSteps: 100,
+        animationEasing: "easeOutBounce",
+        animateRotate: false,
+        animateScale: false,
+    };
+    
+    $scope.doughnutData1 = [
+        {
+            value: 42,
+            color: "#f0ad4e",
+            highlight: "#f0ad4e",
+            label: "Used"
+   
+        },
+        {
+            value: 58,
+            color: "#ebf1f4",
+            highlight: "#ebf1f4",
+            label: "UnUsed"
+        }
+    ];
+
+    $scope.doughnutData2 = [
+	{
+            value: 73,
+            color: "#f0ad4e",
+            highlight: "#f0ad4e",
+            label: "Used"
+        },
+        {
+            value: 17,
+            color: "#ebf1f4",
+            highlight: "#ebf1f4",
+            label: "UnUsed"
+        }
+        
+    ];
+    $scope.doughnutData3 = [
+	{
+            value: 22,
+            color: "#48a9da",
+            highlight: "#48a9da",
+            label: "Used"
+        },
+        {
+            value: 78,
+            color: "#ebf1f4",
+            highlight: "#ebf1f4",
+            label: "UnUsed"
+        }
+        
+    ];
+    $scope.doughnutData4 = [
+	{
+            value: 88,
+            color: "#df6457",
+            highlight: "#df6457",
+            label: "Used"
+        },
+        {
+            value: 12,
+            color: "#ebf1f4",
+            highlight: "#ebf1f4",
+            label: "UnUsed"
+        }
+        
+    ];	
 
 
     /**
