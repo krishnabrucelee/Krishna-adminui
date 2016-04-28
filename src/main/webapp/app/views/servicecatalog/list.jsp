@@ -28,7 +28,7 @@
                                 <div class="clearfix"></div>
                                 </div>
                             </div>
-                            <a class="btn btn-info" id="compute_offerings_add_button" ui-sref="servicecatalog.list-compute.list-compute-offer"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message key="common.add" bundle="${msg}" /></a>
+                            <a class="btn btn-info font-bold" id="compute_offerings_add_button" ui-sref="servicecatalog.list-compute.list-compute-offer"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message key="common.add" bundle="${msg}" /></a>
                             <a class="btn btn-info" id="compute_offerings_refresh_button" ui-sref="servicecatalog.list-compute" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
                         </div>
                         <div class="pull-right dashboard-filters-area">
