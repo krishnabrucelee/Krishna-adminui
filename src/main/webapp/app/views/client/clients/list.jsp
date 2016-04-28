@@ -28,7 +28,7 @@ Navigation
 		                                <div class="clearfix"></div>
 		                                </div>
 		                            </div>
-		                            <a class="btn btn-info" id="company_add_button" data-ng-click="addDomain('lg',domain)"><span class="pe-7s-add-user pe-lg font-bold m-r-xs"></span><fmt:message key="add.company" bundle="${msg}" /></a>
+		                            <a class="btn btn-info font-bold" id="company_add_button" data-ng-click="addDomain('lg',domain)"><span class="pe-7s-add-user pe-lg font-bold m-r-xs"></span><fmt:message key="add.company" bundle="${msg}" /></a>
                                     <a class="btn btn-info" id="company_refresh_button" ui-sref="client.client" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
 		                        </div>
 		                        <div class=" pull-right dashboard-filters-area">

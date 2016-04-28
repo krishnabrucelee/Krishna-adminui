@@ -36,7 +36,7 @@
 	                            <div class="clearfix"></div>
                             </div>
                         </div>
-                        <a has-permission="REGISTER_TEMPLATE" class="btn btn-info" ui-sref="servicecatalog.list-templatestore.list-view-template-create"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message key="common.add" bundle="${msg}" /></a>
+                        <a has-permission="REGISTER_TEMPLATE" class="btn btn-info font-bold" ui-sref="servicecatalog.list-templatestore.list-view-template-create"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message key="common.add" bundle="${msg}" /></a>
                             <a class="btn btn-info" ui-sref="servicecatalog.list-templatestore" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
                     </div>
                     <div class="pull-right dashboard-filters-area">
