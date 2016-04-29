@@ -32,8 +32,10 @@ angular.module('panda-ui-admin', ['ngCookies', 'LocalStorageModule']).controller
             'Content-Type': 'application/json'
         };
 
+        $scope.showLoader = true;
         $http({method: 'POST', url: globalConfig.APP_URL + 'authenticate', headers: headers})
         .success(function (result) {
+        	$scope.showLoader = false;
             $window.sessionStorage.setItem("pandaUserSession", JSON.stringify(result));
             localStorageService.set('token', result.token);
             localStorageService.set('loginToken', result.loginToken);
@@ -50,6 +52,7 @@ angular.module('panda-ui-admin', ['ngCookies', 'LocalStorageModule']).controller
             }
             window.location.href = globalConfig.BASE_UI_URL + "index#/dashboard";
         }).catch(function (result) {
+        	$scope.showLoader = false;
         	if (!angular.isUndefined(result.data)) {
       	      if(result.data.message == "error.already.exists") {
       		  $scope.forceLogin = function() {
@@ -62,8 +65,10 @@ angular.module('panda-ui-admin', ['ngCookies', 'LocalStorageModule']).controller
       		              "x-force-login" : "true",
       		              'Content-Type': 'application/json'
       		          };
+      		    	  $scope.showLoader = true;
       		          $http({method: 'POST', url: globalConfig.APP_URL + 'authenticate', headers: headers})
       		              .success(function (result) {
+      		            	$scope.showLoader = false;
       		            	$window.sessionStorage.setItem("pandaUserSession", JSON.stringify(result));
       		            	localStorageService.set('token', result.token);
       		                localStorageService.set('loginToken', result.loginToken);
@@ -80,6 +85,7 @@ angular.module('panda-ui-admin', ['ngCookies', 'LocalStorageModule']).controller
       		                }
       		                window.location.href = globalConfig.BASE_UI_URL + "index#/dashboard";
       		          }).catch(function (result) {
+      		        	  $scope.showLoader = false;
       		        	  $window.sessionStorage.removeItem("pandaUserSession")
       		        	  if (!angular.isUndefined(result.data)) {
       		        		var target = document.getElementById("errorMsg");
