@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="styles/style.css">
     <!-- endbuild -->
 </head>
-<body class="blank" data-ng-controller="loginCtrl">
+<body class="blank"  data-ng-controller="loginCtrl" style="background:url(images/theme_background.jpg) no-repeat 100% 100%;">
 <div class="login-container">
     <div class="row">
         <div class="col-md-12">
@@ -48,7 +48,8 @@
                              <label for="remeber_login">Remember login</label>
                              <p class="small">(if this is a private computer)</p>
                          </div>
-                    <button type="submit" class="btn btn-default">Login</button>
+                    <get-login-loader-image data-ng-show="showLoader"></get-login-loader-image>
+                    <button data-ng-hide="showLoader" id="login_button" type="submit" class="btn btn-default">Login</button>
                     </form>
                 </div>
             </div>
@@ -64,9 +65,12 @@
 
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular/angular-cookies.js"></script>
 <script src="scripts/controllers/loginController.js"></script>
 <script src="scripts/factories/rememberMeService.js"></script>
 <script src="scripts/factories/globalConfig.js"></script>
+<script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+<script src="scripts/directives/directives.js"></script>
 <script type="text/javascript">
     function loginForm() {
         var username = document.getElementById("username").value;

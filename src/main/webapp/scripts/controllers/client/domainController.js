@@ -10,7 +10,7 @@ angular
 
 
 // Load list page of user
-function domainListCtrl($scope,$state, promiseAjax, $log,appService, notify, crudService, dialogService, $timeout, localStorageService) {
+function domainListCtrl($scope,$state, promiseAjax, $log,appService, notify, crudService, dialogService, $timeout, localStorageService, globalConfig) {
 
 	$scope.sort = appService.globalConfig.sort;
     $scope.changeSorting = appService.utilService.changeSorting;
@@ -32,12 +32,13 @@ function domainListCtrl($scope,$state, promiseAjax, $log,appService, notify, cru
     $scope.domainElements={
 
     };
-
-
-
+    $scope.paginationObject.sortOrder = '+';
+    $scope.paginationObject.sortBy = 'name';    
 
     // User List
     $scope.list = function (pageNumber) {
+        appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
+        appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
     	$scope.showLoader = true;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasDomain = crudService.list("domains", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
@@ -57,8 +58,6 @@ function domainListCtrl($scope,$state, promiseAjax, $log,appService, notify, cru
     $scope.revoke = false;
     $scope.disabled = false;
     localStorageService.set("edit", null);
-
-
 
 
     // Opened user add window
@@ -157,9 +156,13 @@ function domainListCtrl($scope,$state, promiseAjax, $log,appService, notify, cru
 
 	// Get the departments by domain.
 	$scope.getDepartmentsByDomain = function(resourceQuota.domain) {
+		alert(resourceQuota.domain);
+		$scope.resource ='domain';
+
 		$scope.showLoader = true;
 		if(angular.isUndefined($scope.resourceQuota.domain)) {
 			$scope.resourceQuota.domain = {id:0};
+
 		}
 		var hasResource = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceDomains/domain/"+$scope.resourceQuota.domain.id);
 		hasResource.then(function (result) {
@@ -187,6 +190,10 @@ function domainListCtrl($scope,$state, promiseAjax, $log,appService, notify, cru
 		hasdomainId.then(function (result) {  // this is only run after $http completes
 			$scope.departmentList = result;
         });
+
+
+
+
 	};
 
 	$scope.loadEditOption = function(list, scopeObject, object) {

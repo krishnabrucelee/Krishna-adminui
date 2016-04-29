@@ -16,7 +16,7 @@ angular
         .controller('templateListCtrl', templateListCtrl)
         .controller('templateEditCtrl', templateEditCtrl)
 
-function templateListCtrl($scope, $state, $stateParams, $log, $window, appService, promiseAjax) {
+function templateListCtrl($scope, $state, $stateParams, $log, $window, appService, promiseAjax, globalConfig, localStorageService) {
 
     $scope.templateList = {};
     $scope.paginationObject = {};
@@ -31,6 +31,40 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
     $scope.linuxIsoTemplate = {};
     $scope.sort = appService.globalConfig.sort;
     $scope.changeSorting = appService.utilService.changeSorting;
+    $scope.paginationObject.sortOrder = '+';
+    $scope.paginationObject.sortBy = 'name';
+
+        $scope.changeSort = function(sortBy, pageNumber) {
+		var sort = appService.globalConfig.sort;
+		if (sort.column == sortBy) {
+			sort.descending = !sort.descending;
+		} else {
+			sort.column = sortBy;
+			sort.descending = false;
+		}
+		var sortOrder = '-';
+		if(!sort.descending){
+			sortOrder = '+';
+		}
+		$scope.paginationObject.sortOrder = sortOrder;
+		$scope.paginationObject.sortBy = sortBy;
+		$scope.showLoader = true;
+		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+                var hasTemplateList = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listall" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy +"&type=template"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+
+
+                    hasTemplateList.then(function(result) { // this is only run after $http
+			// completes0
+			$scope.templateList = result;
+			// For pagination
+			$scope.paginationObject.limit = limit;
+			$scope.paginationObject.currentPage = pageNumber;
+			$scope.paginationObject.totalItems = result.totalItems;
+			$scope.paginationObject.sortOrder = sortOrder;
+			$scope.paginationObject.sortBy = sortBy;
+			$scope.showLoader = false;
+		});
+	};
 
     $scope.summernoteOpt = {
         toolbar: [
@@ -44,11 +78,14 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
 
     //Template list
     $scope.list = function (pageNumber) {
+        appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
+        appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
     	$scope.showLoader = true;
 
     	var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-    	var hasTemplates = promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL
-        		+ "templates/listall?sortBy=ASC&type=template&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+    	//var hasTemplates = promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL
+        		//+ "templates/listall?sortBy=ASC&type=template&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+         var hasTemplates = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listall" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+appService.globalConfig.sort.sortOrder+appService.globalConfig.sort.sortBy +"&type=template"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
         hasTemplates.then(function (result) {  // this is only run after $http completes0
 
             $scope.templateList = result;
@@ -70,13 +107,52 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
     };
     $scope.list(1);
 
+   $scope.changeSorts = function(sortBy, pageNumber) {
+		var sort = appService.globalConfig.sort;
+		if (sort.column == sortBy) {
+			sort.descending = !sort.descending;
+		} else {
+			sort.column = sortBy;
+			sort.descending = false;
+		}
+		var sortOrder = '-';
+		if(!sort.descending){
+			sortOrder = '+';
+		}
+		$scope.paginationObject.sortOrder = sortOrder;
+		$scope.paginationObject.sortBy = sortBy;
+		$scope.showLoader = true;
+		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+                var hasIsoList = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listall" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy +"&type=iso"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+
+
+                    hasIsoList.then(function(result) { // this is only run after $http
+			// completes0
+			$scope.isoList = result;
+			// For pagination
+			$scope.paginationObject.limit = limit;
+			$scope.paginationObject.currentPage = pageNumber;
+			$scope.paginationObject.totalItems = result.totalItems;
+			$scope.paginationObject.sortOrder = sortOrder;
+			$scope.paginationObject.sortBy = sortBy;
+			$scope.showLoader = false;
+		});
+	};
+
+
+
     //Isolist
     $scope.isolist = function (pageNumber) {
-    	$scope.showLoader = true;
-
+    	appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
+        appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
+        $scope.showLoader = true;
     	var limit = (angular.isUndefined($scope.paginationObjectIso.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObjectIso.limit;
-        var hasIso = promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL
-        		+ "templates/listall?sortBy=ASC&type=iso&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+        //var hasIso = promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL
+        		//+ "templates/listall?sortBy=ASC&type=iso&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+     var hasIso = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listall" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+appService.globalConfig.sort.sortOrder+appService.globalConfig.sort.sortBy +"&type=iso"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+
+
+
         hasIso.then(function (result) {  // this is only run after $http completes0
 
             $scope.isoList = result;
@@ -129,6 +205,18 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
     	$scope.formElements.hypervisorList = result;
     });
 
+
+	  $scope.templateCostList = function () {
+        $scope.showLoader = true;
+        var hastemplateList = appService.crudService.listAll("miscellaneous/listtemplate");
+        hastemplateList.then(function (result) {  // this is only run after $http completes0
+            $scope.miscellaneousList = result;
+            $scope.showLoader = false;
+        });
+
+    };
+    $scope.templateCostList();
+
     // Open dialogue box to create templates
     $scope.template = {
     		templateCost: []
@@ -144,6 +232,7 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
             template.hypervisorId = template.hypervisor.id;
             template.osCategoryId = template.osCategory.id;
             template.osTypeId = template.osType.id;
+	     template.templateCreationType = false ;
             delete template.zone;
             delete template.hypervisor;
             delete template.osCategory;
@@ -339,7 +428,7 @@ function templateEditCtrl($scope, $state, $stateParams, $log, $window, appServic
             template.hypervisorId = template.hypervisor.id;
             template.osCategoryId = template.osCategory.id;
             template.osTypeId = template.osType.id;
-
+	     template.templateCreationType = false ;
             delete template.zone;
             delete template.hypervisor;
             delete template.osCategory;
@@ -348,7 +437,7 @@ function templateEditCtrl($scope, $state, $stateParams, $log, $window, appServic
             hasTemplates.then(function (result) {
                 $scope.homerTemplate = 'app/views/notification/notify.jsp';
                 $scope.showLoader = false;
-                appService.notify({message: 'Template updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+                appService.notify({message: 'Template updated successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
                 if(template.format == "ISO") {
                 	$window.location.href = '#/templatestore/apptemplatelist';
                 } else {
@@ -371,7 +460,7 @@ function templateEditCtrl($scope, $state, $stateParams, $log, $window, appServic
 };
 
 
-function storageListCtrl($scope, $log, $state, $stateParams, $window, appService) {
+function storageListCtrl($scope, $log, $state, $stateParams, $window, appService, globalConfig, localStorageService) {
 
 
 
@@ -389,6 +478,46 @@ function storageListCtrl($scope, $log, $state, $stateParams, $window, appService
     $scope.paginationObject = {};
     $scope.storageForm = {};
     $scope.global = appService.globalConfig;
+    $scope.paginationObject.sortOrder = '+';
+    $scope.paginationObject.sortBy = 'name';
+
+        $scope.changeSort = function(sortBy, pageNumber) {
+		var sort = appService.globalConfig.sort;
+		if (sort.column == sortBy) {
+			sort.descending = !sort.descending;
+		} else {
+			sort.column = sortBy;
+			sort.descending = false;
+		}
+		var sortOrder = '-';
+		if(!sort.descending){
+			sortOrder = '+';
+		}
+		$scope.paginationObject.sortOrder = sortOrder;
+		$scope.paginationObject.sortBy = sortBy;
+		$scope.showLoader = true;
+		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+            var hasStorageList = {};
+            if ($scope.domainView == null) {
+            	hasStorageList =  appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "storages" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+            } else {
+            	hasStorageList =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "storages/listStorageByDomain"
+    				+"?lang=" +appService.localStorageService.cookie.get('language')
+    				+ "&domainId="+$scope.domainView.id+"&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+            }
+            hasStorageList.then(function(result) { // this is only run after $http
+			// completes0
+			$scope.storageList = result;
+			$scope.storageList.Count = result.totalItems;
+			// For pagination
+			$scope.paginationObject.limit = limit;
+			$scope.paginationObject.currentPage = pageNumber;
+			$scope.paginationObject.totalItems = result.totalItems;
+			$scope.paginationObject.sortOrder = sortOrder;
+			$scope.paginationObject.sortBy = sortBy;
+			$scope.showLoader = false;
+		});
+	};
 
     $scope.storage.zoneList = {};
     var hasZones = appService.crudService.listAll("zones/list");
@@ -423,12 +552,19 @@ function storageListCtrl($scope, $log, $state, $stateParams, $window, appService
         };
     // Storage Offer List
     $scope.list = function (pageNumber) {
+        appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
+        appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
     	$scope.showLoader = true;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-        var hasStorage = appService.crudService.list("storages", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+        var hasStorage = {};
+        if ($scope.domainView == null) {
+        	hasStorage = appService.crudService.list("storages", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+        } else {
+        	hasStorage =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "storages/listStorageByDomain"
+				+"?lang=" +appService.localStorageService.cookie.get('language')
+				+ "&domainId="+$scope.domainView.id+"&sortBy="+globalConfig.sort.sortOrder+globalConfig.sort.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+        }
         hasStorage.then(function (result) {  // this is only run after $http
-												// completes0
-
             $scope.storageList = result;
             $scope.storageList.Count = result.totalItems;
 
@@ -441,12 +577,12 @@ function storageListCtrl($scope, $log, $state, $stateParams, $window, appService
     };
     $scope.list(1);
 
-
+    // Get application list based on domain selection
+    $scope.selectDomainView = function(pageNumber) {
+    	$scope.list(1);
+    };
 
     // Open dialogue box to create Storage Offer
-
-
-
     $scope.costPerHourGB = function() {
 
         var regexp = /^[0-9]+([,.][0-9]+)?$/g;
@@ -521,15 +657,17 @@ $scope.costPerHourIOPS = function() {
 
             }).catch(function (result) {
 
-            	if (!angular.isUndefined(result.data)) {
+            	if (!angular.isUndefined(result.data) && result.data != null) {
                 	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
                   	    var msg = result.data.globalError[0];
                   	  $scope.showLoader = false;
                   	appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                     } else if (result.data.fieldErrors != null) {
+                    	$scope.showLoader = false;
                         angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
                             $scope.storageForm[key].$invalid = true;
                             $scope.storageForm[key].errorMessage = errorMessage;
+                            $scope.showLoader = false;
                         });
                 	}
                 }
@@ -539,7 +677,7 @@ $scope.costPerHourIOPS = function() {
 
     // Delete the Storage Offer
     $scope.delete = function (size, storage) {
-    	appService.dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+    	appService.dialogService.openDialog("app/views/servicecatalog/delete-storage.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
                 $scope.deleteId = storage.id;
                 $scope.ok = function (storageId) {
                     $scope.showLoader = true;
@@ -604,16 +742,23 @@ function storageEditCtrl($scope, $state, $stateParams, $log, $window, appService
     });
 
 $scope.storage.zone= {};
+
 	$scope.edit = function (storageId) {
         var hasStorage = appService.crudService.read("storages", storageId);
         hasStorage.then(function (result) {
             $scope.storage = result;
+            $state.current.data.pageName = result.name;
   	     $scope.storage.zone = $scope.zoneList[0];
-	     angular.forEach($scope.zoneList, function (obj, key) {
-                if (obj.id == $scope.storage.zone.id) {
-                    $scope.storage.zone = obj;
-                }
+		var index;
+		for (index = 0; index < $scope.storage.storagePrice.length; ++index) {
+			$scope.storage.storagePrice[index].zoneId = $scope.storage.zone.id;
+		}
+	       angular.forEach($scope.storage.zoneList, function (obj, key) {
+                	if (obj.id == $scope.storage.zone.id) {
+                   	 $scope.storage.zoneId = obj;
+                	}
             });
+
         });
 
     };
@@ -681,6 +826,9 @@ $scope.costPerHourIOPS = function() {
         if (form.$valid) {
         	$scope.showLoader = true;
             var storage = $scope.storage;
+            if (!angular.isUndefined(storage.storagePrice[0])) {
+            	storage.storagePrice[0].zoneId = storage.zone.id;
+            }
             var hasStorage = appService.crudService.update("storages", storage);
             hasStorage.then(function (result) {
 
@@ -698,6 +846,7 @@ $scope.costPerHourIOPS = function() {
                         angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
                             $scope.storageForm[key].$invalid = true;
                             $scope.storageForm[key].errorMessage = errorMessage;
+                            $scope.showLoader = false;
                         });
                 	}
                 }
@@ -717,8 +866,47 @@ function networkListCtrl($scope, $modal, modalService, $log, promiseAjax,appServ
     $scope.global = crudService.globalConfig;
     $scope.sort = appService.globalConfig.sort;
     $scope.changeSorting = appService.utilService.changeSorting;
+    $scope.paginationObject.sortOrder = '+';
+    $scope.paginationObject.sortBy = 'name';
+
+        $scope.changeSort = function(sortBy, pageNumber) {
+		var sort = appService.globalConfig.sort;
+		if (sort.column == sortBy) {
+			sort.descending = !sort.descending;
+		} else {
+			sort.column = sortBy;
+			sort.descending = false;
+		}
+		var sortOrder = '-';
+		if(!sort.descending){
+			sortOrder = '+';
+		}
+		$scope.paginationObject.sortOrder = sortOrder;
+		$scope.paginationObject.sortBy = sortBy;
+		$scope.showLoader = true;
+		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+                var hasNetworkList = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "networkoffer" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy +"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+
+
+                    hasNetworkList.then(function(result) { // this is only run after $http
+			// completes0
+			$scope.networkList = result;
+			// For pagination
+			$scope.paginationObject.limit = limit;
+			$scope.paginationObject.currentPage = pageNumber;
+			$scope.paginationObject.totalItems = result.totalItems;
+			$scope.paginationObject.sortOrder = sortOrder;
+			$scope.paginationObject.sortBy = sortBy;
+			$scope.showLoader = false;
+		});
+	};
+
+
+
     // Network Offer List
     $scope.list = function (pageNumber) {
+        appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
+        appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
     	$scope.showLoader = true;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasNetworks = crudService.list("networkoffer", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
@@ -787,30 +975,208 @@ function networkDetailsCtrl($scope, network, $modalInstance) {
 }
 ;
 
-function miscellaneousListCtrl($scope, modalService, $log, promiseAjax, $stateParams, globalConfig, localStorageService, $window, notify) {
-    var hasServer = promiseAjax.httpRequest("GET", "api/catalog-miscellaneous.json");
-    hasServer.then(function (result) {  // this is only run after $http
-										// completes
-        $scope.miscellaneousList = result;
-        if (!angular.isUndefined($stateParams.id)) {
-            var miscellaneousId = $stateParams.id - 1;
-            $scope.miscellaneous = result[miscellaneousId];
-        }
-    });
+function miscellaneousListCtrl($scope, modalService, $log, promiseAjax,appService, $stateParams, globalConfig, localStorageService, $window, notify) {
 
+		$scope.formElements = {};
     $scope.delete = function () {
         modalService.trigger('app/views/servicecatalog/confirm-delete.jsp', 'md', 'Delete Confirmation');
     };
 
-    $scope.save = function (form) {
-        $scope.formSubmitted = true;
-        if (form.$valid) {
-            $scope.homerTemplate = 'app/views/notification/notify.jsp';
-            notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+	  $scope.templateCostList = function () {
+        $scope.showLoader = true;
+        var hastemplateList = appService.crudService.listAll("miscellaneous/listtemplate");
+        hastemplateList.then(function (result) {  // this is only run after $http completes0
+            $scope.miscellaneousList = result;
+            $scope.showLoader = false;
+        });
 
-
-        }
     };
+    $scope.templateCostList();
+
+ // Zone list from server
+    $scope.zones = {};
+    var haszoneList = appService.crudService.listAll("zones/list");
+    haszoneList.then(function (result) {
+    	$scope.formElements.zoneList = result;
+    });
+
+                  $scope.save = function (form) {
+                    $scope.formSubmitted = true;
+                    if (form.$valid) {
+                    	$scope.showLoader = true;
+                        var miscellaneous = angular.copy($scope.miscellaneous);
+                        if(!angular.isUndefined($scope.miscellaneous.domain)) {
+                        	miscellaneous.domainId = miscellaneous.zone.id;
+                        	delete miscellaneous.zone;
+                        }
+			miscellaneous.costType = 'TEMPLATE';
+                        var hasServer = appService.crudService.add("miscellaneous", miscellaneous);
+                        hasServer.then(function (result) {  // this is only run after $http completes
+                            $scope.formSubmitted = false;
+                            $scope.showLoader = false;
+                            appService.notify({message: 'Cost added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+    			$scope.templateCostList();
+			$scope.miscellaneous = {};
+                        }).catch(function (result) {
+                        	$scope.showLoader = false;
+            		    if (!angular.isUndefined(result.data)) {
+                		if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                  	   	 var msg = result.data.globalError[0];
+                  	   	 $scope.showLoader = false;
+                	    	 appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                    	} else if (result.data.fieldErrors != null) {
+                       	$scope.showLoader = false;
+                        	angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                            	$scope.TemplateForm[key].$invalid = true;
+                            	$scope.TemplateForm[key].errorMessage = errorMessage;
+                        	});
+                		}
+                	}
+            	});
+                    	}
+                	};
+
+  $scope.vmsnapshotCostList = function () {
+        $scope.showLoader = true;
+        var hasvmsnapshotCostList = appService.crudService.listAll("miscellaneous/listvmsnapshot");
+        hasvmsnapshotCostList.then(function (result) {  // this is only run after $http completes0
+            $scope.vmsnapshotList = result;
+            $scope.showLoader = false;
+        });
+
+    };
+    $scope.vmsnapshotCostList();
+
+	  $scope.savevmsnapshot = function (form) {
+                    $scope.formSubmitted = true;
+                    if (form.$valid) {
+                    	$scope.showLoader = true;
+                        var miscellaneous = angular.copy($scope.miscellaneous);
+                        if(!angular.isUndefined($scope.miscellaneous.domain)) {
+                        	miscellaneous.domainId = miscellaneous.zone.id;
+                        	delete miscellaneous.zone;
+                        }
+			miscellaneous.costType = 'VMSNAPSHOT';
+                        var hasServer = appService.crudService.add("miscellaneous", miscellaneous);
+                        hasServer.then(function (result) {  // this is only run after $http completes
+                            $scope.formSubmitted = false;
+                            $scope.showLoader = false;
+                            appService.notify({message: 'Cost added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+    			$scope.vmsnapshotCostList();
+			$scope.miscellaneous = {};
+                        }).catch(function (result) {
+                        	$scope.showLoader = false;
+            		    if (!angular.isUndefined(result.data)) {
+                		if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                  	   	 var msg = result.data.globalError[0];
+                  	   	 $scope.showLoader = false;
+                	    	 appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                    	} else if (result.data.fieldErrors != null) {
+                       	$scope.showLoader = false;
+                        	angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                            	$scope.TemplateForm[key].$invalid = true;
+                            	$scope.TemplateForm[key].errorMessage = errorMessage;
+                        	});
+                		}
+                	}
+            	});
+                    	}
+                	};
+
+	$scope.ipCostList = function () {
+        $scope.showLoader = true;
+        var hasipCostList = appService.crudService.listAll("miscellaneous/listbyipcost");
+        hasipCostList.then(function (result) {  // this is only run after $http completes0
+            $scope.ipList = result;
+            $scope.showLoader = false;
+        });
+
+    };
+    $scope.ipCostList();
+
+			  $scope.saveip = function (form) {
+                    $scope.formSubmitted = true;
+                    if (form.$valid) {
+                    	$scope.showLoader = true;
+                        var miscellaneous = angular.copy($scope.miscellaneous);
+                        if(!angular.isUndefined($scope.miscellaneous.domain)) {
+                        	miscellaneous.domainId = miscellaneous.zone.id;
+                        	delete miscellaneous.zone;
+                        }
+			miscellaneous.costType = 'IPADDRESS';
+                        var hasServer = appService.crudService.add("miscellaneous", miscellaneous);
+                        hasServer.then(function (result) {  // this is only run after $http completes
+                            $scope.formSubmitted = false;
+                            $scope.showLoader = false;
+                            appService.notify({message: 'Cost added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+    			$scope.ipCostList();
+			$scope.miscellaneous = {};
+                        }).catch(function (result) {
+                        	$scope.showLoader = false;
+            		    if (!angular.isUndefined(result.data)) {
+                		if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                  	   	 var msg = result.data.globalError[0];
+                  	   	 $scope.showLoader = false;
+                	    	 appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                    	} else if (result.data.fieldErrors != null) {
+                       	$scope.showLoader = false;
+                        	angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                            	$scope.TemplateForm[key].$invalid = true;
+                            	$scope.TemplateForm[key].errorMessage = errorMessage;
+                        	});
+                		}
+                	}
+            	});
+                    	}
+                	};
+
+	$scope.volumesnapList = function () {
+        $scope.showLoader = true;
+        var hasvolumesnapList = appService.crudService.listAll("miscellaneous/listvolumesnapshot");
+        hasvolumesnapList.then(function (result) {  // this is only run after $http completes0
+            $scope.volumeList = result;
+            $scope.showLoader = false;
+        });
+
+    };
+    $scope.volumesnapList();
+
+
+		   $scope.saveVolumeSnapshot = function (form) {
+                    $scope.formSubmitted = true;
+                    if (form.$valid) {
+                    	$scope.showLoader = true;
+                        var miscellaneous = angular.copy($scope.miscellaneous);
+                        if(!angular.isUndefined($scope.miscellaneous.domain)) {
+                        	miscellaneous.domainId = miscellaneous.zone.id;
+                        	delete miscellaneous.zone;
+                        }
+			miscellaneous.costType = 'VOLUMESNAPSHOT';
+                        var hasServer = appService.crudService.add("miscellaneous", miscellaneous);
+                        hasServer.then(function (result) {  // this is only run after $http completes
+                            $scope.formSubmitted = false;
+                            $scope.showLoader = false;
+                            appService.notify({message: 'Cost added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+    			$scope.volumesnapList();
+			$scope.miscellaneous = {};
+                        }).catch(function (result) {
+                        	$scope.showLoader = false;
+            		    if (!angular.isUndefined(result.data)) {
+                		if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                  	   	 var msg = result.data.globalError[0];
+                  	   	 $scope.showLoader = false;
+                	    	 appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                    	} else if (result.data.fieldErrors != null) {
+                       	$scope.showLoader = false;
+                        	angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                            	$scope.TemplateForm[key].$invalid = true;
+                            	$scope.TemplateForm[key].errorMessage = errorMessage;
+                        	});
+                		}
+                	}
+            	});
+                    	}
+                	};
 
 //    $scope.networkType = {
 //            networktypeList: {
@@ -868,7 +1234,7 @@ function deleteCtrl($scope, $state, $stateParams, globalConfig, notify) {
 
 }
 
-function computeListCtrl($scope, $state, $stateParams,appService,$window) {
+function computeListCtrl($scope, $state, $stateParams, appService, $window, globalConfig, localStorageService) {
 
     $scope.computeList = {};
     $scope.paginationObject = {};
@@ -881,17 +1247,68 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
     $scope.compute = {
     		zone: {}
      };
+    $scope.paginationObject.sortOrder = '+';
+    $scope.paginationObject.sortBy = 'name';
+
+        $scope.changeSort = function(sortBy, pageNumber) {
+		var sort = appService.globalConfig.sort;
+		if (sort.column == sortBy) {
+			sort.descending = !sort.descending;
+		} else {
+			sort.column = sortBy;
+			sort.descending = false;
+		}
+		var sortOrder = '-';
+		if(!sort.descending){
+			sortOrder = '+';
+		}
+		$scope.paginationObject.sortOrder = sortOrder;
+		$scope.paginationObject.sortBy = sortBy;
+		$scope.showLoader = true;
+		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+            var hasComputeList = {};
+            if ($scope.domainView == null) {
+            	hasComputeList =  appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "computes" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+            } else {
+            	hasComputeList =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "computes/listComputeByDomain"
+    				+"?lang=" +appService.localStorageService.cookie.get('language')
+    				+ "&domainId="+$scope.domainView.id+"&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+            }
+
+            hasComputeList.then(function(result) { // this is only run after $http
+			// completes0
+			$scope.computeList = result;
+			$scope.computeOffering.Count = result.totalItems;
+
+			// For pagination
+			$scope.paginationObject.limit = limit;
+			$scope.paginationObject.currentPage = pageNumber;
+			$scope.paginationObject.totalItems = result.totalItems;
+			$scope.paginationObject.sortOrder = sortOrder;
+			$scope.paginationObject.sortBy = sortBy;
+			$scope.showLoader = false;
+		});
+	};
 
 
     // Compute Offer List
     $scope.list = function (pageNumber) {
+        appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
+        appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
     	$scope.showLoader = true;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-        var hasComputes = appService.crudService.list("computes", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
-        hasComputes.then(function (result) {  // this is only run after $http
-												// completes0
+        var hasComputes = {};
+        if ($scope.domainView == null) {
+        	hasComputes = appService.crudService.list("computes", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+        } else {
+        	hasComputes =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "computes/listComputeByDomain"
+				+"?lang=" +appService.localStorageService.cookie.get('language')
+				+ "&domainId="+$scope.domainView.id+"&sortBy="+globalConfig.sort.sortOrder+globalConfig.sort.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+        }
 
-            $scope.computeList = result;
+        hasComputes.then(function (result) {  // this is only run after $http
+
+           $scope.computeList = result;
 		   $scope.computeOffering.Count = result.totalItems;
 
             // For pagination
@@ -902,6 +1319,12 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
         });
     };
     $scope.list(1);
+
+    // Get compute list based on domain selection
+    $scope.selectDomainView = function(pageNumber) {
+    	$scope.list(1);
+    };
+
 
     // Open dialogue box to create Compute Offer
 
@@ -958,6 +1381,24 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
             });
         }
     };
+
+// Number validation
+ $scope.validateNumbers = function() {
+
+		$scope.number = parseInt($scope.compute.clockSpeed);
+
+                    if($scope.number < 1000 ) {
+ 			submitError = true;
+                        $scope.homerTemplate = 'app/views/notification/notify.jsp';
+                        appService.notify({
+                            message: 'Please enter a valid range',
+                            classes: 'alert-danger',
+                            templateUrl: $scope.homerTemplate
+                        });
+  			$scope.number = "";
+                        return false;
+                    }
+                }
 
     // Delete the Compute Offer
     $scope.delete = function (size, compute) {
@@ -1042,18 +1483,23 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
 
     };
 
-    // Edit compute offerings
+     // Edit compute offerings
     $scope.edit = function (computeId) {
+
         var hasComputes = appService.crudService.read("computes", computeId);
         hasComputes.then(function (result) {
             $scope.compute = result;
+            $state.current.data.pageName = result.name;
     		$scope.compute.zone = $scope.formElements.zoneList[0];
+		var index;
+		for (index = 0; index < $scope.compute.computeCost.length; ++index) {
+			$scope.compute.computeCost[index].zoneId = $scope.compute.zone.id;
+		}
 	       angular.forEach($scope.formElements.zoneList, function (obj, key) {
-                if (obj.id == $scope.compute.zone.id) {
-                    $scope.compute.zone = obj;
-                }
+                	if (obj.id == $scope.compute.zone.id) {
+                   	 $scope.compute.zoneId = obj;
+                	}
             });
-
         });
     };
 
@@ -1073,11 +1519,10 @@ function computeListCtrl($scope, $state, $stateParams,appService,$window) {
             	compute.domainId = compute.domain.id;
 		        delete compute.domain;
             }
-            if(!angular.isUndefined(compute.computeCost.zone) && $scope.compute.computeCost.zone != null) {
-            	compute.computeCost.zoneId = compute.computeCost.zone.id;
-            	delete compute.computeCost.zone;
+            if (!angular.isUndefined(compute.computeCost[0])) {
+            	compute.computeCost[0].zoneId = compute.zone.id;
             }
-
+		delete compute.zone;
             var hasComputes = appService.crudService.update("computes", compute);
             hasComputes.then(function (result) {
 

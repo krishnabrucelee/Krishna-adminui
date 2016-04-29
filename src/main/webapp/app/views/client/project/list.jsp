@@ -5,36 +5,47 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <div ui-view>
 
-	<div ng-controller="projectListCtrl">
+	<div  ng-controller="projectListCtrl">
 		<div class="hpanel">
 			<div class="panel-heading">
 				<div class="row">
 					<div class="col-md-12 col-sm-12 col-xs-12 ">
-						<div class="pull-left">
+						<div class="pull-left dashboard-btn-area">
 							<div class="dashboard-box pull-left">
-								<span class="pull-right"><fmt:message key="total.project" bundle="${msg}" /></span>
-								<div class="clearfix"></div>
-								<span class="pull-left m-t-xs"><!-- <img
-									src="images/project-icon.png"> --></span> <b class="pull-right">{{projectList.Count}}</b>
-								<div class="clearfix"></div>
+								<div class="instance-border-content-normal">
+								<span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message key="total.project" bundle="${msg}" /></span>
+								<b class="pull-left">{{projectList.Count}}</b>
+								<div class="clearfix"></div></div>
 							</div>
 							<div class="dashboard-box pull-left">
-								<span class="pull-right"><fmt:message key="retail.project" bundle="${msg}" /></span>
+								<div class="instance-border-content-normal">
+								<span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message key="retail.project" bundle="${msg}" /></span>
+								<b class="pull-left">0</b>
 								<div class="clearfix"></div>
-								<span class="pull-left m-t-xs"><!-- <img
-									src="images/project-icon.png"> --></span> <b class="pull-right">0</b>
-								<div class="clearfix"></div>
+								</div>
 							</div>
 							<div class="dashboard-box pull-left">
-								<span class="pull-right"><fmt:message key="trial.project" bundle="${msg}" /></span>
+								<div class="instance-border-content-normal">
+								<span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message key="trial.project" bundle="${msg}" /></span>
+								<b class="pull-left">{{projectList.Count}}</b>
 								<div class="clearfix"></div>
-								<span class="pull-left m-t-xs"><!-- <img
-									src="images/project-icon.png"> --></span> <b class="pull-right">{{projectList.Count}}</b>
-								<div class="clearfix"></div>
+								</div>
 							</div>
+							<a class="btn btn-info" ui-sref="client.project" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg"></span></a>
 						</div>
-						<div class="pull-right">
+						<div class="pull-right dashboard-filters-area">
 							<panda-quick-search></panda-quick-search>
+							<span class="pull-right m-r-sm">
+								<select
+									class="form-control input-group col-xs-5" name="domainView"
+									data-ng-model="domainView"
+									data-ng-change="selectDomainView(1)"
+									data-ng-options="domainView.name for domainView in domainListView">
+									<option value=""> <fmt:message key="common.domain.filter" bundle="${msg}" /></option>
+								</select>
+							</span>
+							<div class="clearfix"></div>
+							<span class="pull-right m-l-sm m-t-sm"></span>
 						</div>
 
 					</div>
@@ -51,16 +62,21 @@
 								class="table table-bordered dataTable table-striped">
 								<thead>
 									<tr>
-										<th data-ng-click="changeSorting('id')" data-ng-class="sort.descending && sort.column =='id'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="project.id" bundle="${msg}" /></th>
-										<th data-ng-click="changeSorting('name')" data-ng-class="sort.descending && sort.column =='projectOwner.userName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="project.name" bundle="${msg}" /></th>
-										<th data-ng-click="changeSorting('domain.name')" data-ng-class="sort.descending && sort.column =='domain.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.company" bundle="${msg}" /></th>
-										<th data-ng-click="changeSorting('description')" data-ng-class="sort.descending && sort.column =='description'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.description" bundle="${msg}" /></th>
-										<th data-ng-click="changeSorting('department.userName')" data-ng-class="sort.descending && sort.column =='department.userName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.department" bundle="${msg}" /></th>
-										<th data-ng-click="changeSorting('status')" data-ng-class="sort.descending && sort.column =='status'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.status" bundle="${msg}" /></th>
+										<th data-ng-click="changeSort('id',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='id'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="project.id" bundle="${msg}" /></th>
+										<th data-ng-click="changeSort('name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='projectOwner.userName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="project.name" bundle="${msg}" /></th>
+										<th data-ng-click="changeSort('domain.name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='domain.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.company" bundle="${msg}" /></th>
+										<th data-ng-click="changeSort('description',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='description'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.description" bundle="${msg}" /></th>
+										<th data-ng-click="changeSort('department.userName',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='department.userName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.department" bundle="${msg}" /></th>
+										<th data-ng-click="changeSort('status',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='status'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.status" bundle="${msg}" /></th>
 									    <!-- <th>Paid (CNY)</th> -->
 									</tr>
 								</thead>
-								<tbody>
+								<tbody data-ng-hide="projectList.length > 0">
+                                    <tr>
+                                        <td class="col-md-6 col-sm-6" colspan="6"><fmt:message key="common.no.records.found" bundle="${msg}" />!!</td>
+                                    </tr>
+                                </tbody>
+								<tbody data-ng-show="projectList.length > 0">
 									<tr
 										data-ng-repeat="project in filteredCount = (projectList| filter: quickSearch| orderBy:sort.column:sort.descending)">
 										<td><a class="text-info" title="View Project">{{ project.id}}</a></td>

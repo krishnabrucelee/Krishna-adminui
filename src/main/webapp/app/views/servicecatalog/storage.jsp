@@ -7,26 +7,32 @@
 <div class="row" data-ng-hide="viewContent" data-ng-controller="storageListCtrl">
     <div class="" >
         <div class="hpanel">
-            <div class="panel-heading">
+            <div class="panel-heading no-padding">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12 ">
-                        <div class="pull-left">
+                        <div class="pull-left dashboard-btn-area">
                             <div class="dashboard-box pull-left">
-                                <span class="pull-right"><fmt:message
-										key="storage.totaloffering" bundle="${msg}" /></span>
-                                <div class="clearfix"></div>
-                                <span class="pull-right m-t-xs"><img src="images/volume-icon.png"></span>
-                                <b class="pull-right">{{storageList.Count}}</b>
-                                <div class="clearfix"></div>
+                            	<div class="instance-border-content-normal">
+	                            	<span class="pull-left"><img src="images/volume-icon.png"></span>
+	                                <span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message
+											key="storage.totaloffering" bundle="${msg}" /></span>
+
+	                                <b class="pull-left">{{storageList.Count}}</b>
+	                                <div class="clearfix"></div>
+                                </div>
                             </div>
                             <div class="dashboard-box pull-left">
-                                <span class="pull-right"><fmt:message
-										key="storage.enabledoffering" bundle="${msg}" /></span>
-                                <div class="clearfix"></div>
-                                <span class="pull-right m-t-xs"><img src="images/volume-icon.png"></span>
-                                <b class="pull-right">{{storageList.Count}}</b>
-                                <div class="clearfix"></div>
+                            	<div class="instance-border-content-normal">
+	                            	<span class="pull-left"><img src="images/volume-icon.png"></span>
+	                                <span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message
+											key="storage.enabledoffering" bundle="${msg}" /></span>
+
+	                                <b class="pull-left">{{storageList.Count}}</b>
+	                                <div class="clearfix"></div>
+                                </div>
                             </div>
+                            <a class="btn btn-info font-bold" id="storage_offerings_add_button" ui-sref="servicecatalog.list-storage.list-storage-offer"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message key="common.add" bundle="${msg}" /></a>
+                            <a class="btn btn-info" id="storage_offerings_refresh_button" ui-sref="servicecatalog.list-storage" title="Refresh"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
 <%--                             <div class="dashboard-box pull-left">
                                 <span class="pull-right"><fmt:message
 										key="storage.disabledoffering" bundle="${msg}" /></span>
@@ -36,12 +42,20 @@
                                 <div class="clearfix"></div>
                             </div> --%>
                         </div>
-                        <div class="pull-right">
+                        <div class="pull-right dashboard-filters-area">
 						<panda-quick-search></panda-quick-search>
+							<span class="pull-right m-r-sm">
+								<select
+									class="form-control input-group col-xs-5" name="domainView"
+									data-ng-model="domainView" id="storage_offerings_domain_filter"
+									data-ng-change="selectDomainView(1)"
+									data-ng-options="domainView.name for domainView in formElements.domainList">
+									<option value=""> <fmt:message key="common.domain.filter" bundle="${msg}" /></option>
+								</select>
+							</span>
                             <div class="clearfix"></div>
                             <span class="pull-right m-l-sm m-t-sm">
-                                <a class="btn btn-info" ui-sref="servicecatalog.list-storage.list-storage-offer"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message key="common.add" bundle="${msg}" /></a>
-                                <a class="btn btn-info" ui-sref="servicecatalog.list-storage" title="Refresh"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
+
                             </span>
                         </div>
 
@@ -49,23 +63,30 @@
                 </div>
                 <div class="clearfix"></div>
             </div>
+            <div class="row" id="storage_offerings_pagination_container">
+                    <div class="col-md-12 col-sm-12 col-xs-12 ">
              <div data-ng-show = "showLoader" style="margin: 1%">
     				  		<get-loader-image data-ng-show="showLoader"></get-loader-image>
       						</div>
             <div class="table-responsive" data-ng-hide="showLoader">
             <div class="white-content">
 
-                    <table cellspacing="1" cellpadding="1" class="table dataTable table-bordered table-striped">
+                    <table cellspacing="1" cellpadding="1" class="table dataTable table-bordered table-striped" id="storage_offerings_table">
                         <thead>
                             <tr>
-                               <th data-ng-click="changeSorting('name')" data-ng-class="sort.descending && sort.column =='name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.name" bundle="${msg}" /></th>
-                               <th data-ng-click="changeSorting('storageType')" data-ng-class="sort.descending && sort.column =='storageType'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.type" bundle="${msg}" /></th>
-                               <th data-ng-click="changeSorting('diskSize')" data-ng-class="sort.descending && sort.column =='diskSize'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.size" bundle="${msg}" /></th>
-                               <th data-ng-click="changeSorting('isCustomDisk')" data-ng-class="sort.descending && sort.column =='isCustomDisk'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.custom" bundle="${msg}" /></th>
+                               <th data-ng-click="changeSort('name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.name" bundle="${msg}" /></th>
+                               <th data-ng-click="changeSort('storageType',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='storageType'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.type" bundle="${msg}" /></th>
+                               <th data-ng-click="changeSort('diskSize',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='diskSize'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.size" bundle="${msg}" /></th>
+                               <th data-ng-click="changeSort('isCustomDisk',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='isCustomDisk'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.custom" bundle="${msg}" /></th>
                                <th><fmt:message key="common.action" bundle="${msg}" /></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody data-ng-hide="storageList.length > 0">
+                               <tr>
+                                   <td class="col-md-5 col-sm-5" colspan="5"><fmt:message key="common.no.records.found" bundle="${msg}" />!!</td>
+                               </tr>
+                           </tbody>
+                           <tbody data-ng-show="storageList.length > 0">
                             <tr data-ng-repeat="storage in filteredCount = (storageList| filter: quickSearch| orderBy:sort.column:sort.descending)">
                                 <td>
                                     {{ storage.name}}
@@ -75,7 +96,7 @@
                                 <!--  <td>{{ storage.diskSize}}</td>-->
                                 <td>{{ storage.isCustomDisk}}</td>
                                 <td>
-                                    <a class="icon-button"  ui-sref="servicecatalog.list-storage.list-view-storage-offer({id: {{ storage.id}}})" title="Edit"  ><span class="fa fa-edit m-r"></span></a>
+                                    <a class="icon-button test_storage_offerings_edit_button" id="storage_offerings_edit_button_{{storage.id}}" data-unique-field="{{storage.name}}"  ui-sref="servicecatalog.list-storage.list-view-storage-offer({id: {{ storage.id}}})" title="Edit"  ><span class="fa fa-edit m-r"></span></a>
 <!--                                     <a class="icon-button" title="Enable" data-ng-hide="storage.state == 'Enable'">
                                         <span class="fa fa-play m-r" ></span>
                                     </a> -->
@@ -83,7 +104,7 @@
                                         <span class="fa fa-ban m-r" ></span>
                                     </a> -->
 
-                                    <a class="icon-button" title="Delete" data-ng-click="delete('sm', storage)" ><span class="fa fa-trash"></span></a>
+                                    <a class="icon-button test_storage_offerings_delete_button" id="storage_offerings_delete_button_{{storage.id}}" data-unique-field="{{storage.name}}" title="Delete" data-ng-click="delete('sm', storage)" ><span class="fa fa-trash"></span></a>
                                 </td>
                             </tr>
                         </tbody>
@@ -91,6 +112,8 @@
                 </div>
             </div>
         	<pagination-content></pagination-content>
+        </div>
+        </div>
         </div>
     </div>
 </div>

@@ -5,38 +5,45 @@
 
 <div class="row" data-ng-hide="viewContent" data-ng-controller="templateListCtrl">
     <div class="hpanel">
-        <div class="panel-heading">
+        <div class="panel-heading no-padding">
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12 ">
-                    <div class="pull-left">
+                    <div class="pull-left dashboard-btn-area">
                         <div class="dashboard-box pull-left">
-                            <span class="pull-right"><fmt:message key="template.totaltemplate" bundle="${msg}" /></span>
-                            <div class="clearfix"></div>
-                            <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
-                            <b class="pull-right">{{totalCount}}</b>
-                            <div class="clearfix"></div>
+	                        <div class="instance-border-content-normal">
+	                        	<span class="pull-left"><img src="images/template-icon.png"></span>
+	                            <span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message key="template.totaltemplate" bundle="${msg}" /></span>
+
+	                            <b class="pull-left">{{totalCount}}</b>
+	                            <div class="clearfix"></div>
+                            </div>
                         </div>
                         <div class="dashboard-box pull-left">
-                            <span class="pull-right"><fmt:message key="windows.template" bundle="${msg}" /></span>
-                            <div class="clearfix"></div>
-                            <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
-                            <b class="pull-right">{{windowsTemplate}}</b>
-                            <div class="clearfix"></div>
+	                        <div class="instance-border-content-normal">
+	                        	<span class="pull-left"><img src="images/template-icon.png"></span>
+	                            <span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message key="windows.template" bundle="${msg}" /></span>
+
+	                            <b class="pull-left">{{windowsTemplate}}</b>
+	                            <div class="clearfix"></div>
+                            </div>
                         </div>
                         <div class="dashboard-box pull-left">
-                            <span class="pull-right"><fmt:message key="linux.template" bundle="${msg}" /></span>
-                            <div class="clearfix"></div>
-                            <span class="pull-right m-t-xs"><img src="images/template-icon.png"></span>
-                            <b class="pull-right">{{linuxTemplate}}</b>
-                            <div class="clearfix"></div>
+	                        <div class="instance-border-content-normal">
+	                        	<span class="pull-left"><img src="images/template-icon.png"></span>
+	                            <span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message key="linux.template" bundle="${msg}" /></span>
+
+	                            <b class="pull-left">{{linuxTemplate}}</b>
+	                            <div class="clearfix"></div>
+                            </div>
                         </div>
+                        <a has-permission="REGISTER_TEMPLATE" class="btn btn-info font-bold" ui-sref="servicecatalog.list-templatestore.list-view-template-create"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message key="common.add" bundle="${msg}" /></a>
+                            <a class="btn btn-info" ui-sref="servicecatalog.list-templatestore" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
                     </div>
-                    <div class="pull-right">
+                    <div class="pull-right dashboard-filters-area">
 						<panda-quick-search></panda-quick-search>
                         <div class="clearfix"></div>
                         <span class="pull-right m-l-sm m-t-sm">
-                            <a has-permission="REGISTER_TEMPLATE" class="btn btn-info" ui-sref="servicecatalog.list-templatestore.list-view-template-create"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message key="common.add" bundle="${msg}" /></a>
-                            <a class="btn btn-info" ui-sref="servicecatalog.list-templatestore" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
+
                         </span>
                     </div>
                 </div>
@@ -51,24 +58,26 @@
                 <table cellspacing="1" cellpadding="1" class="table dataTable table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th data-ng-click="changeSorting('name')" data-ng-class="sort.descending && sort.column =='name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.name" bundle="${msg}" /></th>
-                            <th data-ng-click="changeSorting('osCategory.name')" data-ng-class="sort.descending && sort.column =='osCategory.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.os" bundle="${msg}" /></th>
-                            <th data-ng-click="changeSorting('osType.description')" data-ng-class="sort.descending && sort.column =='osType.description'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.type" bundle="${msg}" /></th>
-                            <th data-ng-click="changeSorting('zone.name')" data-ng-class="sort.descending && sort.column =='zone.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.zone" bundle="${msg}" /></th>
-                            <th data-ng-click="changeSorting('hypervisor.name')" data-ng-class="sort.descending && sort.column =='hypervisor.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.hypervisor" bundle="${msg}" /></th>
-                            <th data-ng-click="changeSorting('templateCost[0].cost')" data-ng-class="sort.descending && sort.column =='templateCost[0].cost'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.cost" bundle="${msg}" />(<app-currency></app-currency>)</th>
-                            <th data-ng-click="changeSorting('status')" data-ng-class="sort.descending && sort.column =='status'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.status" bundle="${msg}" /></th>
+                            <th data-ng-click="changeSort('name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.name" bundle="${msg}" /></th>
+                            <th data-ng-click="changeSort('templateCreationType',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='templateCreationType'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.userCreated" bundle="${msg}" /></th>
+                            <th data-ng-click="changeSort('osType.description',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='osType.description'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.type" bundle="${msg}" /></th>
+                            <th data-ng-click="changeSort('zone.name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='zone.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.zone" bundle="${msg}" /></th>
+                            <th data-ng-click="changeSort('hypervisor.name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='hypervisor.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.hypervisor" bundle="${msg}" /></th>
+                            <th><fmt:message key="template.cost" bundle="${msg}" />(<app-currency></app-currency>)</th>
+                            <th data-ng-click="changeSort('status',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='status'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.status" bundle="${msg}" /></th>
                             <th><fmt:message key="common.action" bundle="${msg}" /></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr data-ng-repeat="template in filteredCount = (templateList| filter: quickSearch | orderBy:sort.column:sort.descending)">
                             <td>{{ template.name}}</td>
-                            <td>{{ template.osCategory.name}}</td>
+                            <td>{{ (template.templateCreationType) ? "Yes" : "No" }}
                             <td>{{ template.osType.description}}</td>
                             <td>{{ template.zone.name}}</td>
                             <td>{{ template.hypervisor.name}}</td>
-                            <td><b class="text-danger">{{ template.templateCost[0].cost}}<span>/ day</span></b></td>
+                            <td data-ng-if = "template.templateCreationType == false"><b class="text-danger">{{ template.templateCost[0].cost || 0}}<span data-ng-if = "!template.oneTimeChargeable" >/ day</span></b></td>
+                             <td data-ng-if = "template.templateCreationType == true"><b class="text-danger"> {{miscellaneousList[0].costperGB|| 0}}<span>/GB/ day</span></b></td>
+
                             <td>{{ template.status }}</td>
                             <td>
                                 <a class="icon-button" title="<fmt:message key="common.edit" bundle="${msg}" />" ui-sref="servicecatalog.list-templatestore.list-view-template-edit({id: {{ template.id}}})"  ><span class="fa fa-edit"></span></a>

@@ -6,7 +6,7 @@
 
 function configState($stateProvider, $urlRouterProvider, $compileProvider, localStorageServiceProvider) {
 
-	var VIEW_URL = "app/";
+    var VIEW_URL = "app/";
 
 
     // Optimize load start with remove binding information inside the DOM element
@@ -100,7 +100,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             })
 
             .state('client.client.quota', {
-            	url: "/:view/:id",
+                url: "/:view/:id",
                 templateUrl: VIEW_URL +  "views/client/clients/clientquota.jsp",
                 data: {
                     pageTitle: 'client'
@@ -183,6 +183,21 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             }
         })
 
+        .state('configuration.home.email-template', {
+            url: "/email-template",
+            templateUrl: VIEW_URL +  "views/configuration/general/email-template.jsp",
+            data: {
+                pageTitle: 'Email Template'
+            }
+        })
+
+        .state('configuration.home.theme-settings', {
+            url: "/theme-settings",
+            templateUrl: VIEW_URL +  "views/configuration/general/theme-settings.jsp",
+            data: {
+                pageTitle: 'Theme Settings'
+            }
+        })
          .state('configuration.home.login-security', {
             url: "/loginSecurity",
             templateUrl: VIEW_URL +  "views/configuration/general/login-security.jsp",
@@ -342,6 +357,30 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             templateUrl: VIEW_URL +  "views/configuration/chargeback/payment-settings.jsp",
             data: {
                 pageTitle: 'Payment Settings'
+            }
+        })
+
+         .state('paymentReturn', {
+            url: "/payment/return",
+            templateUrl: VIEW_URL +  "views/common/payment-success.jsp",
+            data: {
+                pageTitle: 'Payment Success'
+            }
+        })
+
+        .state('paymentNotify', {
+            url: "/payment/notify",
+            templateUrl: VIEW_URL +  "views/common/payment-notify.jsp",
+            data: {
+                pageTitle: 'Payment Notify'
+            }
+        })
+
+        .state('paymentFailure', {
+            url: "/payment/failure",
+            templateUrl: VIEW_URL +  "views/common/payment-failure.jsp",
+            data: {
+                pageTitle: 'Payment Failure'
             }
         })
 
@@ -592,6 +631,13 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                     pageTitle: 'Report'
                 }
             })
+            .state('reports.invoicelist-report', {
+                url: "report/invoicelistReport",
+                templateUrl: VIEW_URL +  "views/reports/invoicelist-report.jsp",
+                data: {
+                    pageTitle: 'Invoice List Report'
+                }
+            })
             .state('reports.signup', {
                 url: "report/signUp",
                 templateUrl: VIEW_URL +  "views/reports/sign-up.jsp",
@@ -611,6 +657,14 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 templateUrl: VIEW_URL +  "views/reports/payment-report.jsp",
                 data: {
                     pageTitle: 'Payment Report'
+                }
+            })
+
+	    .state('reports.usage-report', {
+                url: "report/usageReport",
+                templateUrl: VIEW_URL +  "views/reports/usage-report.jsp",
+                data: {
+                    pageTitle: 'Usage Report'
                 }
             })
 
@@ -648,16 +702,25 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 }
             })
 
-
 }
 
-angular
-        .module('panda-ui-admin')
-         .constant("PANDA_CONFIG", {
-			"VIEW_URL" : "app/views/",
-		})
-        .config(configState)
-        .run(function ($rootScope, $state, editableOptions) {
+angular.module('panda-ui-admin').constant("PANDA_CONFIG", {
+           "VIEW_URL" : "app/views/",
+        }).factory('myFactory', function($http, globalConfig, $cookies, $window, tokens, localStorageService, utilService) {
+        	var loginSession = globalConfig.sessionValues;
+            if(loginSession == null || angular.isUndefined(globalConfig.sessionValues) && tokens != null) {
+            	globalConfig.sessionValues = tokens;
+            	localStorageService.set('rememberMe', tokens.rememberMe);
+            	if ((angular.isUndefined(localStorageService.get('rememberMe')) || localStorageService.get('rememberMe') == false || localStorageService.get('rememberMe') == "false")
+            			&& (angular.isUndefined($cookies.rememberMe) || $cookies.rememberMe == undefined || $cookies.rememberMe == "undefined")) {
+            		utilService.logoutApplication("COOKIE_TIME_OUT");
+            	}
+            }
+            return {
+                foo: function() { return 'bar' }
+            };
+        })
+        .run(function ($rootScope, $state, editableOptions,myFactory) {
             $rootScope.$state = $state;
             editableOptions.theme = 'bs3';
-        });
+        }).config(configState);

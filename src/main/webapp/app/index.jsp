@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
-<html ng-app="panda-ui-admin" >
+<html>
 <head>
     <!-- Redirect to login when passing the wrong URL -->
     <script>
@@ -109,6 +109,7 @@
 <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
 <script src="bower_components/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular/angular-cookies.js"></script>
 <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
 <script src="bower_components/angular-animate/angular-animate.min.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -187,8 +188,13 @@
 <script src="scripts/controllers/configuration.js"></script>
 <script src="scripts/controllers/configuration/taxController.js"></script>
 <script src="scripts/controllers/configuration/billableItemController.js"></script>
+<script src="scripts/controllers/configuration/emailConfigController.js"></script>
+<script src="scripts/controllers/configuration/organizationController.js"></script>
+<script src="scripts/controllers/configuration/paymentGatewayController.js"></script>
+<script src="scripts/controllers/configuration/paymentController.js"></script>
 <script src="scripts/controllers/resourceAllocation.js"></script>
 <script src="scripts/controllers/domainController.js"></script>
+<script src="scripts/controllers/headerController.js"></script>
 
 <script src="scripts/factories/appService.js"></script>
 <script src="scripts/factories/utilService.js"></script>
@@ -199,6 +205,7 @@
 <script src="scripts/factories/modalService.js"></script>
 <script src="scripts/factories/dialogService.js"></script>
 <script src="scripts/factories/crudService.js"></script>
+
 
 <!-- Resource Usage Tree Structure -->
 <script src="scripts/easyTree.js"></script>

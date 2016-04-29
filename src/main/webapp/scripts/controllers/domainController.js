@@ -10,7 +10,7 @@ angular
 
 
 // Load list page of user
-function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, crudService, dialogService, $timeout, localStorageService) {
+function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, crudService, dialogService, $timeout, localStorageService, globalConfig) {
 
 	$scope.sort = appService.globalConfig.sort;
     $scope.changeSorting = appService.utilService.changeSorting;
@@ -27,18 +27,62 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
     $scope.revokes = false;
     $scope.paginationObject = {};
     $scope.domainForm = {};
-    $scope.global = crudService.globalConfig;
     $scope.domain = {};
+    $scope.global = crudService.globalConfig;
     $scope.domainElements={
 
     };
+    $scope.paginationObject.sortOrder = '+';
+    $scope.paginationObject.sortBy = 'name';
+
+    $scope.changeSort = function(sortBy, pageNumber) {
+		var sort = appService.globalConfig.sort;
+		if (sort.column == sortBy) {
+			sort.descending = !sort.descending;
+		} else {
+			sort.column = sortBy;
+			sort.descending = false;
+		}
+		var sortOrder = '-';
+		if(!sort.descending){
+			sortOrder = '+';
+		}
+		$scope.paginationObject.sortOrder = sortOrder;
+		$scope.paginationObject.sortBy = sortBy;
+		$scope.showLoader = true;
+		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+                var hasDomainList =  appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "domains" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+
+                    hasDomainList.then(function(result) { // this is only run after $http
+			// completes0
+			$scope.domainList = result;
+			$scope.domainList.Count = 0;
+            if (result.length != 0) {
+                $scope.domainList.Count = result.totalItems;
+            }
+			// For pagination
+			$scope.paginationObject.limit = limit;
+			$scope.paginationObject.currentPage = pageNumber;
+			$scope.paginationObject.totalItems = result.totalItems;
+			$scope.paginationObject.sortOrder = sortOrder;
+			$scope.paginationObject.sortBy = sortBy;
+			$scope.showLoader = false;
+		});
+	};
 
     // User List
     $scope.list = function (pageNumber) {
+        appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
+        appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasDomain = crudService.list("domains", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
         hasDomain.then(function (result) {  // this is only run after $http completes0
             $scope.domainList = result;
+            $scope.domainList.Count = 0;
+            if (result.length != 0) {
+                $scope.domainList.Count = result.totalItems;
+            }
+
             // For pagination
             $scope.paginationObject.limit  = limit;
             $scope.paginationObject.currentPage = pageNumber;
@@ -71,7 +115,7 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
                         		notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                         		$modalInstance.close();
                         		$scope.domain.name = "";
-                        		$scope.domain.companyNameAbb = "";
+                        		$scope.domain.companyNameAbbreviation = "";
                         		$scope.domain.portalUserName = "";
                         		$scope.domain.password = "";
                         		$scope.domain.confirmPassword = "";
@@ -87,6 +131,7 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
                         		$scope.domain.secondaryContactPhone = "";
 					$scope.showLoader = false;
                         	}).catch(function (result) {
+                        		$scope.showLoader = false;
                         		if(!angular.isUndefined(result) && result.data != null) {
                         			angular.forEach(result.data.fieldErrors, function(errorMessage, key) {
 					                   $scope.showLoader = false;
@@ -95,14 +140,13 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
                         			});
                         		}
                                   $scope.showLoader = false;
-                                  $modalInstance.close();
-                                  $state.reload();
                         	});
                         }
                         else {  // Add tool tip message for confirmation password in add-user
                         	var key = 'confirmPassword';
                         	$scope.domainForm[key].$invalid = true;
                         	$scope.domainForm[key].errorMessage = document.getElementById("passwordErrorMessage").value;
+                        	$scope.showLoader = false;
                         }
                     }
                 }
@@ -142,8 +186,6 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
 	                            });
                         	}
                                 $scope.showLoader = false;
-                                $modalInstance.close();
-                                $state.reload();
                         });
                     }
                 },
