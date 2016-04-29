@@ -43,7 +43,7 @@
     			.then(function(result){
     				myApplication.constant("tokens", result.data);
               }, function(errorResponse) {
-            	  console.log(errorResponse);
+            	  window.location.href = "login";
             });
         } else {
         	var d = $q.defer();
