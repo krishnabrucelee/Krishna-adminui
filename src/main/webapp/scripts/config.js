@@ -191,6 +191,13 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             }
         })
 
+        .state('configuration.home.theme-settings', {
+            url: "/theme-settings",
+            templateUrl: VIEW_URL +  "views/configuration/general/theme-settings.jsp",
+            data: {
+                pageTitle: 'Theme Settings'
+            }
+        })
          .state('configuration.home.login-security', {
             url: "/loginSecurity",
             templateUrl: VIEW_URL +  "views/configuration/general/login-security.jsp",
