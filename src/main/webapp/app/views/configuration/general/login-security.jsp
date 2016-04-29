@@ -65,7 +65,20 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="form-group" ng-class="{
+                                            'text-danger'
+                                            : configForm.sessionTime.$invalid && formSubmitted}">
+                            <div class="row">
+                                <label class="col-md-4 col-sm-5 control-label">Session Timeout(Min):
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-7">
+                                    <input required="true" type="text" name="sessionTime" valid-number data-ng-class="{'error': configForm.sessionTime.$invalid && formSubmitted}" data-ng-model="generalconfiguration.sessionTime" class="form-control" >
+                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="Enter time(in min) to session timeout" ></i>
+                                    <div class="error-area" data-ng-show="configForm.sessionTime.$invalid && formSubmitted" ><i  tooltip="Unlock Time is required." class="fa fa-warning error-icon"></i></div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="row">
                                 <label class="col-md-4 col-sm-5 control-label">

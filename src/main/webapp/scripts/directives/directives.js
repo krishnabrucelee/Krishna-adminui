@@ -26,6 +26,7 @@ angular
         .directive('paginationContentIso', paginationContentIso)
         .directive('getLoaderImage', getLoaderImage)
         .directive('getCustomLoaderImage', getCustomLoaderImage)
+        .directive('getLoginLoaderImage', getLoginLoaderImage)
         .directive('validInteger', validInteger)
         .directive('hasPermission', hasPermission)
         .directive('pandaQuickSearch', pandaQuickSearch)
@@ -596,6 +597,16 @@ function getCustomLoaderImage() {
         },
         templateUrl: "app/views/common/loader-image.jsp",
     }
+}
+
+function getLoginLoaderImage() {
+	return {
+		restrict: 'E',
+        link: function (scope, element, attrs) {
+
+        },
+        templateUrl: "app/views/common/login-loader-image.jsp",
+	}
 }
 
 /**
