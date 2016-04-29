@@ -153,9 +153,15 @@ fieldset.scheduler-border legend{border-bottom:none !important; margin-bottom:0p
     overflow: hidden;
 }
 
+ul.footer-custom-links{margin:0px; padding:0px;}
+ul.footer-custom-links li{display:inline-block; list-style:none; padding:0px 5px; border-right:#ccc 1px solid; line-height:10px;}
+ul.footer-custom-links li:last-child{border-right:none;}
+.panel-border{border:#ccc 1px solid; padding:4px;}
+
 @media (min-width: 1024px) and (max-width: 1050px){.tab-full{width:100%;}}
 
 .table > thead > tr > th{vertical-align:top;}
+.theme-settings fieldset{border:none !important;}
 
 /*Company Dashboard Styles*/
 .panel-white {border-color: #cfdbe2; border-top-width: 3px; box-shadow: 0 1px 1px rgba(207, 219, 226, 0.05);}

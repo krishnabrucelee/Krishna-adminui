@@ -194,6 +194,7 @@
 <script src="scripts/controllers/configuration/paymentController.js"></script>
 <script src="scripts/controllers/resourceAllocation.js"></script>
 <script src="scripts/controllers/domainController.js"></script>
+<script src="scripts/controllers/headerController.js"></script>
 
 <script src="scripts/factories/appService.js"></script>
 <script src="scripts/factories/utilService.js"></script>

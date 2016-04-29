@@ -4,14 +4,17 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <div id="logo" class="light-version">
-    <img src="images/profile.jpg" />
+    <img src="images/theme_logo.jpg" />
 
 </div>
-<nav role="navigation">
+<nav role="navigation" data-ng-controller="headerCtrl">
     <minimaliza-menu></minimaliza-menu>
-    <div id="navbar" class="navbar-collapse collapse">
+    <div id="navbar" class="navbar-collapse collapse" >
 
-        <ul class="nav navbar-nav navbar-right round-corner">
+        <ul class="nav navbar-nav navbar-right round-corner" >
+
+			<li data-ng-repeat="theme in themeSettingsList.headers" ><a class="label-menu-corner" data-ng-if="theme.url != null" target="_blank" href="http://{{theme.url}}" >{{theme.name}}<span class="label label-warning"></span></a></li>
+
             <li data-ng-class="{active: $state.includes('support')}"><a class="label-menu-corner" ui-sref="support.tickets" ><fmt:message key="common.helpdesk" bundle="${msg}" /><span class="label label-success">2</span></a></li>
 
             <li data-ng-class="{active: $state.includes('activity')}"><a  class="label-menu-corner" ui-sref="activity" ><fmt:message key="common.activity" bundle="${msg}" /><span class="label label-warning">3</span></a></li>

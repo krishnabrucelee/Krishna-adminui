@@ -439,6 +439,244 @@ else if( !angular.isUndefined(file))
 
       };
 
+
+	$scope.themeSettingList = function () {
+		$scope.themeSettingsList = {};
+//		if (angular.isUndefined($scope.themeSettingsList.id) || $scope.themeSettingsList.id == null) {
+//			var hasThemeList = appService.crudService.listAll("themesettings/listq");
+//		} else {
+//			var hasThemeList = appService.crudService.listAll("themesettings/listAll");
+//		}
+//	    hasThemeList.then(function (result) {
+//	    	$scope.themeSettingsList = result;
+//	    	if ($scope.themeSettingsList.customisation != null  || !angular.isUndefined($scope.themeSettingsList.customisation)) {
+//	    		$scope.footerChoices = $scope.themeSettingsList.footers;
+//	    		$scope.headerChoices = $scope.themeSettingsList.headers;
+//	    	}
+//	    });
+
+		    var hasThemeList = appService.crudService.listAll("themesettings/listAll");
+		    hasThemeList.then(function (result) {
+		    	$scope.themeSettingsList = result[0];
+		    	if ($scope.themeSettingsList.customisation != null  || !angular.isUndefined($scope.themeSettingsList.customisation)) {
+		    		$scope.footerChoices = $scope.themeSettingsList.footers;
+		    		$scope.headerChoices = $scope.themeSettingsList.headers;
+		    	}
+		    });
+			 // Header footer
+	    	$scope.themeSettingsList.footers = [{id: 'choice1'}];
+	    	$scope.themeSettingsList.headers = [{id: 'choice1'}];
+		$scope.addNewThemeHeaderChoice = function() {
+			var newItemNo = $scope.themeSettingsList.headers.length+1;
+			$scope.themeSettingsList.headers.push({'id':'choice'+ " " + newItemNo});
+		};
+
+		$scope.removeThemeHeaderChoice = function() {
+			var lastItem = $scope.themeSettingsList.headers.length-1;
+			$scope.themeSettingsList.headers.splice(lastItem);
+		};
+
+		$scope.addNewThemeFooterChoice = function() {
+			var newItemNo = $scope.themeSettingsList.footers.length+1;
+			$scope.themeSettingsList.footers.push({'id':'choice'+ " " + newItemNo});
+		};
+
+		$scope.removeThemeFooterChoice = function() {
+			var lastItem = $scope.themeSettingsList.footers.length-1;
+			$scope.themeSettingsList.footers.splice(lastItem);
+		};
+
+
+		 // Header footer
+		    	$scope.footerChoices = [{id: 'choice1'}];
+		    	$scope.headerChoices = [{id: 'choice1'}];
+			$scope.addNewHeaderChoice = function() {
+				var newItemNo = $scope.headerChoices.length+1;
+				$scope.headerChoices.push({'id':'choice'+ " " + newItemNo});
+			};
+
+			$scope.removeHeaderChoice = function() {
+				var lastItem = $scope.headerChoices.length-1;
+				$scope.headerChoices.splice(lastItem);
+			};
+
+			$scope.addNewFooterChoice = function() {
+				var newItemNo = $scope.footerChoices.length+1;
+				$scope.footerChoices.push({'id':'choice'+ " " + newItemNo});
+			};
+
+			$scope.removeFooterChoice = function() {
+				var lastItem = $scope.footerChoices.length-1;
+				$scope.footerChoices.splice(lastItem);
+			};
+      // Theme Settings
+};
+$scope.themeSettingList();
+	  $scope.validateThemeSettings = function (form,themeSettingsList, headerChoices, footerChoices) {
+		  console.log("HI" + JSON.stringify(footerChoices[0].name));
+		  console.log(JSON.stringify(headerChoices[0].name));
+		  if (JSON.stringify(headerChoices[0].name)) {
+			  themeSettingsList.headers = headerChoices;
+		  }
+		  if (JSON.stringify(footerChoices[0].name)) {
+			  themeSettingsList.footers = footerChoices;
+		  }
+		  console.log("HIII" + JSON.stringify(themeSettingsList.headers));
+		  console.log("HIII" + JSON.stringify(themeSettingsList.footers));
+		  var theme = [];
+		  	$scope.formSubmitted = true;
+		  	$scope.checkfile = function(themeSettingsList) {
+		  		if((angular.isUndefined(themeSettingsList.backgroundImgFile) || angular.isUndefined(themeSettingsList.logoImgFile))) {
+
+		  			if (themeSettingsList.headers != "" || themeSettingsList.footers != "") {
+			  			//Dynamic
+		  				var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies);
+	  		 		    hasUpload.then(function (result) {
+		  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+		  		 		   $state.reload();
+		  	              }).catch(function (result) {
+		  	              	$scope.showLoader = false;
+		  	                  if (!angular.isUndefined(result.data)) {
+		  	                      if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
+		  	                          var msg = result.data.globalError[0];
+		  	                          $scope.showLoader = false;
+		  	                          appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
+		  	                      } else if (result.data.fieldErrors != null) {
+		  	                          angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+		  	                              $scope.configForm[key].$invalid = true;
+		  	                              $scope.configForm[key].errorMessage = errorMessage;
+		  	                          });
+		  	                      }
+		  	                  }
+		  	              });
+		  			} else {
+		  				//starting
+			  			var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(headerChoices),JSON.stringify(footerChoices), appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies);
+	  		 		    hasUpload.then(function (result) {
+		  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+		  		 		   $state.reload();
+		  	              }).catch(function (result) {
+		  	              	$scope.showLoader = false;
+		  	                  if (!angular.isUndefined(result.data)) {
+		  	                      if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
+		  	                          var msg = result.data.globalError[0];
+		  	                          $scope.showLoader = false;
+		  	                          appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
+		  	                      } else if (result.data.fieldErrors != null) {
+		  	                          angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+		  	                              $scope.configForm[key].$invalid = true;
+		  	                              $scope.configForm[key].errorMessage = errorMessage;
+		  	                          });
+		  	                      }
+		  	                  }
+		  	              });
+		  			}
+		  		}
+
+		  		else if( (!angular.isUndefined(themeSettingsList.backgroundImgFile) && (themeSettingsList.backgroundImgFile != null)) || (!angular.isUndefined(themeSettingsList.logoImgFile) && (themeSettingsList.logoImgFile != null))) {
+		  		      if (((themeSettingsList.backgroundImgFile.type != "image/jpeg") && (!angular.isUndefined(themeSettingsList.backgroundImgFile.type)) && (themeSettingsList.backgroundImgFile != null))
+		  		    		  || ((themeSettingsList.logoImgFile.type != "image/jpeg") && (!angular.isUndefined(themeSettingsList.logoImgFile.type) && (themeSettingsList.logoImgFile != null)))) {
+		  		      appService.notify({message: 'Please upload jpeg files ', classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+		  		      return false;
+		  		    }
+		  		    else {
+		  		    	if (((themeSettingsList.headers != "") && (!angular.isUndefined(themeSettingsList.headers)))  || ((themeSettingsList.footers != "") && (!angular.isUndefined(themeSettingsList.footers)))) {
+		  		    		console.log(themeSettingsList.headers);
+		  		    		console.log(themeSettingsList.footers)
+				  			//last
+		  		    		var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies);
+		  		 		    hasUpload.then(function (result) {
+			  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+			  		 		   $state.reload();
+			  	              }).catch(function (result) {
+			  	              	$scope.showLoader = false;
+			  	                  if (!angular.isUndefined(result.data)) {
+			  	                      if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
+			  	                          var msg = result.data.globalError[0];
+			  	                          $scope.showLoader = false;
+			  	                          appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
+			  	                      } else if (result.data.fieldErrors != null) {
+			  	                          angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+			  	                              $scope.configForm[key].$invalid = true;
+			  	                              $scope.configForm[key].errorMessage = errorMessage;
+			  	                          });
+			  	                      }
+			  	                  }
+			  	              });
+			  			} else {
+			  				//end
+				  			var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(headerChoices),JSON.stringify(footerChoices), appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies);
+		  		 		    hasUpload.then(function (result) {
+			  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+			  		 		   $state.reload();
+			  	              }).catch(function (result) {
+			  	              	$scope.showLoader = false;
+			  	                  if (!angular.isUndefined(result.data)) {
+			  	                      if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
+			  	                          var msg = result.data.globalError[0];
+			  	                          $scope.showLoader = false;
+			  	                          appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
+			  	                      } else if (result.data.fieldErrors != null) {
+			  	                          angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+			  	                              $scope.configForm[key].$invalid = true;
+			  	                              $scope.configForm[key].errorMessage = errorMessage;
+			  	                          });
+			  	                      }
+			  	                  }
+			  	              });
+			  			}
+		  		          }
+
+		  		    	} else {
+		  		    	//last
+		  		    		if (((themeSettingsList.headers != "") && (!angular.isUndefined(themeSettingsList.headers))) || ((themeSettingsList.footers != "") && (!angular.isUndefined(themeSettingsList.footers)))) {
+		  		    		var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies);
+		  		 		    hasUpload.then(function (result) {
+			  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+			  		 		   $state.reload();
+			  	              }).catch(function (result) {
+			  	              	$scope.showLoader = false;
+			  	                  if (!angular.isUndefined(result.data)) {
+			  	                      if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
+			  	                          var msg = result.data.globalError[0];
+			  	                          $scope.showLoader = false;
+			  	                          appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
+			  	                      } else if (result.data.fieldErrors != null) {
+			  	                          angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+			  	                              $scope.configForm[key].$invalid = true;
+			  	                              $scope.configForm[key].errorMessage = errorMessage;
+			  	                          });
+			  	                      }
+			  	                  }
+			  	              });
+		  		    		} else {
+		  		    		//starting
+					  			var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(headerChoices),JSON.stringify(footerChoices), appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies);
+			  		 		    hasUpload.then(function (result) {
+				  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+				  		 		   $state.reload();
+				  	              }).catch(function (result) {
+				  	              	$scope.showLoader = false;
+				  	                  if (!angular.isUndefined(result.data)) {
+				  	                      if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
+				  	                          var msg = result.data.globalError[0];
+				  	                          $scope.showLoader = false;
+				  	                          appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
+				  	                      } else if (result.data.fieldErrors != null) {
+				  	                          angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+				  	                              $scope.configForm[key].$invalid = true;
+				  	                              $scope.configForm[key].errorMessage = errorMessage;
+				  	                          });
+				  	                      }
+				  	                  }
+				  	              });
+		  		    		}
+			  			}
+		  			}
+
+		  	 $scope.checkfile(themeSettingsList);
+	  };
+
       $scope.config = {};
       $scope.configList = function (form) {
           var hasConfigList = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_GET, globalConfig.PING_APP_URL + "configuration/list");
@@ -642,6 +880,7 @@ else if( !angular.isUndefined(file))
 
         $scope.activity[currentDateField] = true;
     };
+
 };
 
 function importCtrl($scope, name, notify, $modalInstance) {
