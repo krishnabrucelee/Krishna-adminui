@@ -33,17 +33,21 @@
     function fetchData() {
         var initInjector = angular.injector(["ng"]);
         var initInjectors = angular.injector(["ngCookies"]);
+        var initInjectorss = angular.injector(["ng", "LocalStorageModule"]);
         var $http = initInjector.get("$http");
         var $cookies = initInjectors.get("$cookies");
         var $q = initInjector.get("$q");
+        var rootScope = initInjectorss.get("$rootScope");
+        var localStorageService = initInjectorss.get("localStorageService");
 
-        if ($cookies.id != 'undefined' && !angular.isUndefined($cookies.id)) {
-        	return $http({method:'get', url: 'http://'+ window.location.hostname +':8080/api/'  + 'users/usersessiondetails/'+$cookies.id,
-    			"headers": {'x-auth-token': $cookies.token, 'x-requested-with': '', 'Content-Type': 'application/json', 'Range': "items=0-9", 'x-auth-login-token': $cookies.loginToken, 'x-auth-remember': $cookies.rememberMe, 'x-auth-user-id': $cookies.id, 'x-auth-login-time': $cookies.loginTime}})
+        if (localStorageService.get('id') != 'undefined' && !angular.isUndefined(localStorageService.get('id'))
+        		&& localStorageService.get('id') != null && localStorageService.get('id') != 'null') {
+        	return $http({method:'get', url: 'http://'+ window.location.hostname +':8080/api/'  + 'users/usersessiondetails/'+localStorageService.get('id'),
+    			"headers": {'x-auth-token': localStorageService.get('token'), 'x-requested-with': '', 'Content-Type': 'application/json', 'Range': "items=0-9", 'x-auth-login-token': localStorageService.get('loginToken'), 'x-auth-remember': localStorageService.get('rememberMe'), 'x-auth-user-id': localStorageService.get('id'), 'x-auth-login-time': localStorageService.get('loginTime')}})
     			.then(function(result){
     				myApplication.constant("tokens", result.data);
               }, function(errorResponse) {
-            	  console.log(errorResponse);
+            	  window.location.href = "login";
             });
         } else {
         	var d = $q.defer();

@@ -68,6 +68,7 @@
 <script src="scripts/controllers/loginController.js"></script>
 <script src="scripts/factories/rememberMeService.js"></script>
 <script src="scripts/factories/globalConfig.js"></script>
+<script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
 <script type="text/javascript">
     function loginForm() {
         var username = document.getElementById("username").value;
