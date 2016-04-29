@@ -513,16 +513,12 @@ else if( !angular.isUndefined(file))
 };
 $scope.themeSettingList();
 	  $scope.validateThemeSettings = function (form,themeSettingsList, headerChoices, footerChoices) {
-		  console.log("HI" + JSON.stringify(footerChoices[0].name));
-		  console.log(JSON.stringify(headerChoices[0].name));
 		  if (JSON.stringify(headerChoices[0].name)) {
 			  themeSettingsList.headers = headerChoices;
 		  }
 		  if (JSON.stringify(footerChoices[0].name)) {
 			  themeSettingsList.footers = footerChoices;
 		  }
-		  console.log("HIII" + JSON.stringify(themeSettingsList.headers));
-		  console.log("HIII" + JSON.stringify(themeSettingsList.footers));
 		  var theme = [];
 		  	$scope.formSubmitted = true;
 		  	$scope.checkfile = function(themeSettingsList) {
@@ -581,8 +577,6 @@ $scope.themeSettingList();
 		  		    }
 		  		    else {
 		  		    	if (((themeSettingsList.headers != "") && (!angular.isUndefined(themeSettingsList.headers)))  || ((themeSettingsList.footers != "") && (!angular.isUndefined(themeSettingsList.footers)))) {
-		  		    		console.log(themeSettingsList.headers);
-		  		    		console.log(themeSettingsList.footers)
 				  			//last
 		  		    		var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies);
 		  		 		    hasUpload.then(function (result) {
