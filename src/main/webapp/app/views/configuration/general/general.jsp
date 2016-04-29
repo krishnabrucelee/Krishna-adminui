@@ -12,4 +12,5 @@
     <div class="col-md-3 col-sm-4 m-b-md"><button class="btn btn-info box w-100" ui-sref="configuration.home.support" type="button"><i class="fa fa-support fa-3x"></i> <h5>Support</h5></button></div>
     <div class="col-md-3 col-sm-4 m-b-md"><button class="btn btn-info box w-100" ui-sref="configuration.home.language" type="button"><i class="fa fa-language fa-3x"></i> <h5>Language</h5></button></div>
     <div class="col-md-3 col-sm-4 m-b-md"><button class="btn btn-info box w-100" ui-sref="configuration.home.email-template" type="button"><i class="fa fa-envelope-o fa-3x"></i> <h5>Email Template</h5></button></div>
+    <div class="col-md-3 col-sm-4 m-b-md"><button class="btn btn-info box w-100" ui-sref="configuration.home.theme-settings" type="button"><i class="fa fa-wrench fa-3x"></i> <h5>Theme Settings</h5></button></div>
 </div>

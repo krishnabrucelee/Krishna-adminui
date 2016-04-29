@@ -118,6 +118,41 @@ function uploadFile($http){
 	return {upload: upload};
 };
 
+
+ //Theme settings
+function uploadThemeImage($http){
+	var uploadTheme = function(backgroundImageFile, logoImageFile, headerChoices, footerChoices,httpTokenRequest,globalConfig, $cookies) {
+		 var fd = new FormData();
+		/**angular.forEach(files,function(file){
+		if(!angular.isUndefined(file)) {
+		 fd.append('file',file);
+		}
+
+ 		});**/
+        if(!angular.isUndefined(backgroundImageFile)) {
+           	fd.append("backgroundImageFile",backgroundImageFile);
+        }
+        if(!angular.isUndefined(logoImageFile)) {
+           	fd.append("logoImageFile",logoImageFile);
+        }
+		fd.append("headers",headerChoices);
+ 		fd.append('footers',footerChoices);
+		return $http.post(globalConfig.APP_URL + "themesettings/uploadFile", fd, {
+			transformRequest : angular.identity,
+			headers : {
+				'Content-Type' : undefined,
+				'x-auth-token' :$cookies.token,
+				'x-auth-login-token': $cookies.loginToken,
+				'x-auth-remember': $cookies.rememberMe,
+				'x-auth-user-id': $cookies.id,
+				'x-auth-login-time': $cookies.loginTime
+			}
+		});
+
+
+	}
+	return {uploadTheme: uploadTheme};
+};
 /**
  * Pass function into module
  */
@@ -125,3 +160,4 @@ angular
     .module('panda-ui-admin')
     .factory('promiseAjax', promiseAjax)
 .factory('uploadFile', uploadFile)
+.factory('uploadThemeImage', uploadThemeImage)
