@@ -575,6 +575,7 @@ $scope.excel = function()
                 +"?type=invoice&lang=" +appService.localStorageService.cookie.get('language')
                 + "&domainUuid="+$scope.domainView+"&status="+$scope.statusView);
       }
+ $scope.showLoader = true;
       hasConfigList.then(function (result) {  // this is only run after $http completes0
      //    if (!angular.isUndefined(result._embedded)) {
      //         $scope.invoiceList = result['_embedded'].invoiceList;
@@ -582,7 +583,7 @@ $scope.excel = function()
      //        $scope.invoiceList = {};
     //     }
 $scope.invoiceList = result;
-
+ $scope.showLoader = false;
          // For pagination
          $scope.paginationObject.limit = limit;
          $scope.paginationObject.currentPage = pageNumber;
@@ -847,6 +848,7 @@ $scope.excel = function()
                 +"?type=payment&lang=" +appService.localStorageService.cookie.get('language')
                 + "&domainUuid="+$scope.domainView+"&status="+$scope.statusView);
       }
+ $scope.showLoader = true;
       hasConfigList.then(function (result) {  // this is only run after $http completes0
         // if (!angular.isUndefined(result._embedded)) {
        //      $scope.invoiceList = result['_embedded'].invoiceList;
@@ -854,6 +856,7 @@ $scope.excel = function()
         //     $scope.invoiceList = {};
         // }
 $scope.invoiceList = result;
+ $scope.showLoader = false;
          // For pagination
          $scope.paginationObject.limit = limit;
          $scope.paginationObject.currentPage = pageNumber;
