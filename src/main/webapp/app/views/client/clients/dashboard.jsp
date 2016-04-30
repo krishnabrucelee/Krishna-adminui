@@ -46,19 +46,19 @@
 					                    <li class="list-group-item ">
 					                        <div class="row">
 		                						<div class="col-md-4 font-bold">L.Name</div>
-		                						<div class="col-md-8">{{ domain.lastName }}</div>
+		                						<div class="col-md-8">{{ domain.lastName || '-' }}</div>
 	                						</div>
 					                    </li>
 					                    <li class="list-group-item">
 					                        <div class="row">
 		                						<div class="col-md-4 font-bold">Email</div>
-		                						<div class="col-md-8">{{ domain.email }}</div>
+		                						<div class="col-md-8">{{ domain.email || '-'}}</div>
 	                						</div>
 					                    </li>
 					                    <li class="list-group-item">
 					                        <div class="row">
 		                						<div class="col-md-4 font-bold">Phone</div>
-		                						<div class="col-md-8">{{ domain.phone }}</div>
+		                						<div class="col-md-8">{{ domain.phone || '-'}}</div>
 	                						</div>
 					                    </li>
 					                </ul>
@@ -68,25 +68,25 @@
 					                    <li class="list-group-item">
 					                        <div class="row">
 		                						<div class="col-md-4 font-bold">F.Name</div>
-		                						<div class="col-md-8">{{ domain.secondaryContactName }}</div>
+		                						<div class="col-md-8">{{ domain.secondaryContactName || '-'}}</div>
 	                						</div>
 					                    </li>
 					                    <li class="list-group-item ">
 					                        <div class="row">
 		                						<div class="col-md-4 font-bold">L.Name</div>
-		                						<div class="col-md-8">{{ domain.secondaryContactLastName }}</div>
+		                						<div class="col-md-8">{{ domain.secondaryContactLastName || '-'}}</div>
 	                						</div>
 					                    </li>
 					                    <li class="list-group-item">
 					                        <div class="row">
 		                						<div class="col-md-4 font-bold">Email</div>
-		                						<div class="col-md-8">{{ domain.secondaryContactEmail }}</div>
+		                						<div class="col-md-8">{{ domain.secondaryContactEmail || '-'}}</div>
 	                						</div>
 					                    </li>
 					                    <li class="list-group-item">
 					                        <div class="row">
 		                						<div class="col-md-4 font-bold">Phone</div>
-		                						<div class="col-md-8">{{ domain.secondaryContactPhone }}</div>
+		                						<div class="col-md-8">{{ domain.secondaryContactPhone || '-'}}</div>
 	                						</div>
 					                    </li>
 					                </ul>
@@ -118,25 +118,25 @@
 			                    <li class="list-group-item">
 			                        <div class="row">
 	               						<div class="col-md-5 font-bold">Company</div>
-	               						<div class="col-md-7">{{ domain.name }}</div>
+	               						<div class="col-md-7">{{ domain.name || '-'}}</div>
 	              						</div>
 			                    </li>
 			                    <li class="list-group-item ">
 			                        <div class="row">
 	               						<div class="col-md-5 font-bold">Domain Name<span class="sub-text">(Login Name)</span></div>
-	               						<div class="col-md-7">{{ domain.companyNameAbbreviation }}</div>
+	               						<div class="col-md-7">{{ domain.companyNameAbbreviation || '-'}}</div>
 	              						</div>
 			                    </li>
 			                    <li class="list-group-item">
 			                        <div class="row">
 	               						<div class="col-md-5 font-bold">H.Q</div>
-	               						<div class="col-md-7">{{ domain.cityHeadquarter }}</div>
+	               						<div class="col-md-7">{{ domain.cityHeadquarter || '-'}}</div>
 	              						</div>
 			                    </li>
 			                    <li class="list-group-item">
 			                        <div class="row">
 	               						<div class="col-md-5 font-bold">Address</div>
-	               						<div class="col-md-7">{{ domain.companyAddress }}</div>
+	               						<div class="col-md-7">{{ domain.companyAddress || '-'}}</div>
 	              						</div>
 			                    </li>
 			                </ul>
@@ -166,17 +166,24 @@
 			                    <li class="list-group-item">
 			                        <div class="row">
 	               						<div class="col-md-5 font-bold">Member Since</div>
-	               						<div class="col-md-7">{{ domain.createdDateTime }}</div>
+	               						<div class="col-md-7">{{ domain.createdDateTime || '-'}}</div>
 	              						</div>
 			                    </li>
 			                    <li class="list-group-item ">
 			                        <div class="row">
 	               						<div class="col-md-5 font-bold">A/C Status</div>
-	               						<div class="col-md-7 font-bold text-success">{{ domain.status }}</div>
+	               						<div class="col-md-7 font-bold text-success">{{ domain.status || '-'}}</div>
 	              						</div>
 			                    </li>
 			                </ul>
-			                <a href="#" class="btn btn-info m-t-md">Suspend Account</a>
+			                <button class="btn btn-default suspend-btn" title="<fmt:message key="common.suspend" bundle="${msg}" />" data-ng-if="account.status == 'ENABLED' || account.status == 'DISABLED'" data-ng-click="suspendUserAccount(account)">
+                                                     <span class="fa fa-ban text-center"> </span>
+                                                </button>
+                                                <button class="btn btn-default suspend-btn" title="<fmt:message key="common.enable" bundle="${msg}" />" data-ng-if="account.status == 'SUSPENDED'" data-ng-click="enableUserAccount(account)">
+                                                     <span class="fa fa-check-circle-o text-center"> </span>
+                                                </button>
+					                <a data-ng-click="suspendDomain(domain)" data-ng-if="domain.status == 'ACTIVE' || domain.status == 'INACTIVE'" class="btn btn-info m-t-md">Suspend</a>
+					                <a data-ng-click="enableDomain(domain)" data-ng-if="domain.status == 'SUSPENDED'" class="btn btn-info m-t-md">Enable</a>
 		                </div>
 	                </div>
 	            </div>
@@ -194,13 +201,13 @@
 	                    </tab-heading>
 	                    <div class="panel-body">
 	                        <div class="row">
-	                        	<div class="col-md-8 col-sm-8 col-xsmd-12">
+	                        	<div class="col-md-10 col-sm-10 col-xsmd-12">
 	                        		<div class="flot-chart">
-										<canvas linechart options="usageLineOptions" data="usageLineData" height="250" width="680"  ></canvas>
+										<canvas linechart options="usageLineOptions" data="usageLineData" height="250" width="740"  ></canvas>
 					                </div>
 	                        	</div>
-	                        	<div class="col-md-4 col-sm-4 col-xsmd-12">
-	                        		<div class="table-responsive">
+	                        	<!--<div class="col-md-4 col-sm-4 col-xsmd-12">
+	                        		 <div class="table-responsive">
 						                <table cellspacing="1" cellpadding="1" class="table table-bordered table-striped">
 						                    <tr>
 						                        <td class="font-bold">Total Income</td>
@@ -238,8 +245,8 @@
 						                    </tr>
 						                    </tbody>
 						                </table>
-					                </div>
-	                        	</div>
+					                </div> 
+	                        	</div>-->
 	                        </div>
 	                    </div>
 	                </tab>
@@ -319,36 +326,112 @@
 	                    <tab-heading>
 	                        <i class="fa  fa-pie-chart"></i> Quota Limit
 	                    </tab-heading>
-	                   <div class="panel-body p-sm">
-	                        
-	                        <div class="text-center m-t-xxxl" data-ng-show="showQuotaLoader">
-	                             <img src="images/loading-bars.svg" />
-	                         </div>
-	                        <div class="row dashboard-quota-area" data-ng-hide="showQuotaLoader">
-	                            <div class="col-md-3 col-sm-4 col-xs-6 dashboard-quota" data-ng-repeat="quotaLimit in quotaLimits">
-	                                <div class="doughnutchart-value">{{ quotaLimit.percentage }}%</div>
-	                                <canvas doughnutchart options="doughnutOptions" data="quotaLimit.doughnutData" height="140" ></canvas>
-	                                {{ quotaLimit.label }} <span>Using {{quotaLimit.usedLimit}} of {{quotaLimit.max}}</span>
-	                            </div>
-	                           </div>
-	                    </div>
+		                   <div class="panel-body">
+		                        <div class="row">
+		                        	<div class="col-md-6">
+				                        <div class="text-center m-t-xxxl" data-ng-show="showQuotaLoader">
+				                             <img src="images/loading-bars.svg" />
+				                         </div>
+				                        <div class="row dashboard-quota-area" data-ng-hide="showQuotaLoader">
+				                            <div class="col-md-4 col-sm-4 col-xs-6 dashboard-quota" data-ng-repeat="quotaLimit in quotaLimits">
+		                                 		<div class="doughnut-fixed-area">
+					                                <div class="doughnutchart-value">{{ quotaLimit.percentage }}%</div>
+					                                <canvas doughnutchart options="doughnutOptions" data="quotaLimit.doughnutData" width="120" height="85"></canvas>
+					                                <div>{{ quotaLimit.label }}</div> <span>Using {{quotaLimit.usedLimit}} of {{quotaLimit.max}}</span>
+			                            		</div>
+			                            	</div>
+			                           	</div>
+		                           	</div>
+		                           	<div class="col-md-6">
+		                           	 	<div data-ng-include src="'app/views/client/clients/resource-allocation.jsp'"></div>
+		                           	 </div>
+	                           	</div>
+		                    </div>
 	                </tab>
 	                <tab>
 	                    <tab-heading>
 	                        <i class="fa fa-file-text-o"></i> Invoice
 	                    </tab-heading>
 	                    <div class="panel-body">
-	                        <strong>Invoice</strong>
-	                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	                        <table cellspacing="1" cellpadding="1" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="label-primary text-white"  data-ng-class="sort.descending && sort.column =='invoiceNumber'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.invoice.no" bundle="${msg}" /></th>
+                                        <th class="label-primary text-white text-right"  data-ng-class="sort.descending && sort.column =='domain.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.company" bundle="${msg}" /></th>
+                                        <th class="label-primary text-white text-right"  data-ng-class="sort.descending && sort.column =='billPeriod'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.billing.period" bundle="${msg}" /></th>
+                                        <th class="label-primary text-white text-right"  data-ng-class="sort.descending && sort.column =='totalCost'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.payable" bundle="${msg}" /></th>
+                                        <th class="label-primary text-white text-right"  data-ng-class="sort.descending && sort.column =='dueDate'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.due.date" bundle="${msg}" /></th>
+                                        <th class="label-primary text-white text-right"  data-ng-class="sort.descending && sort.column =='status'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.status" bundle="${msg}" /></th>
+                                        <th class="label-primary text-white text-right" ><fmt:message key="common.action" bundle="${msg}" /></th>
+                                    </tr>
+                                </thead>
+                                <tbody data-ng-hide="invoiceList.invoice.length > 0">
+                                    <tr>
+                                        <td class="col-md-6 col-sm-6" colspan="6"><fmt:message key="common.no.records.found" bundle="${msg}" />!!</td>
+                                    </tr>
+                                </tbody>
+                                <tbody data-ng-show="invoiceList.invoice.length > 0">
+                                    <tr data-ng-repeat=" invoice in filteredCount = (invoiceList.invoice | filter: quickSearch| orderBy:sort.column:sort.descending)">
+                                        <td>{{ invoice.invoiceNumber}}</td>
+                                       	<td class="text-right">{{ invoice.domain.name}}</td>
+                                        <td class="text-right">{{ invoice.billPeriod}}</td>
+                                        <td class="text-right">{{ invoice.totalCost}}</td>
+                                        <td class="text-right">{{ invoice.dueDate | date:'yyyy-MM-dd'}}</td>
+                                        <td class="text-right">
+                                            {{ invoice.status}}</td>
+                                        <td class="text-right">
+                                            <a data-ng-if="invoice.status == 'DUE'" class="m-l-sm btn btn-sm btn-default " data-ng-click="viewInvoice(invoice, 'Chinese')">Chinese </a>
+                                            <a data-ng-if="invoice.status == 'DUE'" class="m-l-sm btn btn-sm btn-info" data-ng-click="viewInvoice(invoice, 'English')">English </a>
+                                            <button data-ng-if="invoice.status == 'DRAFT'" class="m-l-sm btn btn-sm btn-info" data-ng-click="generateDueInvoice(invoice)">Generate Invoice</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
 	                    </div>
 	                </tab>
 	                <tab>
 	                    <tab-heading>
 	                        <i class="fa fa-money"></i> Payments
 	                    </tab-heading>
-	                    <div class="panel-body">
-	                        <strong>Payments</strong>
-	                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	                    <div class="panel-body">	                        
+	                        <table cellspacing="1" cellpadding="1" class="table  table-bordered ">
+                                <thead>
+                                    <tr>
+                                    	<th class="label-primary text-white"  data-ng-class="sort.descending && sort.column =='invoiceNumber'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.invoice.no" bundle="${msg}" /></th>
+                                    	<th class="label-primary text-right text-white"  data-ng-class="sort.descending && sort.column =='domain.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.company" bundle="${msg}" /></th>
+                                    	<th class="label-primary text-right text-white"  data-ng-class="sort.descending && sort.column =='billPeriod'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.billing.period" bundle="${msg}" /></th>
+                                    	<th class="label-primary text-right text-white"  data-ng-class="sort.descending && sort.column =='totalCost'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.payable" bundle="${msg}" /></th>
+                                    	<th class="label-primary text-right text-white"  data-ng-class="sort.descending && sort.column =='dueDate'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.due.date" bundle="${msg}" /></th>
+                                    	<th class="label-primary text-right text-white"  data-ng-class="sort.descending && sort.column =='paidOn'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.paid.on" bundle="${msg}" /></th>
+                                    	<th class="label-primary text-right text-white"  data-ng-class="sort.descending && sort.column =='transactionReference'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.transaction.reference" bundle="${msg}" /></th>
+                                    	<th class="label-primary text-right text-white"  data-ng-class="sort.descending && sort.column =='paymentMethod'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.payment.method" bundle="${msg}" /></th>
+                                    	<th class="label-primary text-right text-white"  data-ng-class="sort.descending && sort.column =='status'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.status" bundle="${msg}" /></th>
+                                    	<th class="label-primary text-right text-white"><fmt:message key="common.action" bundle="${msg}" /></th>
+                                    </tr>
+                                </thead>
+                                <tbody data-ng-hide="invoiceList.payment.length > 0">
+                                    <tr>
+                                        <td class="col-md-10 col-sm-10" colspan="10"><fmt:message key="common.no.records.found" bundle="${msg}" />!!</td>
+                                    </tr>
+                                </tbody>
+                                <tbody data-ng-show="invoiceList.payment.length > 0">
+                                    <tr data-ng-repeat=" invoice in filteredCount = (invoiceList.payment | filter: quickSearch| orderBy:sort.column:sort.descending)">
+                                        <td>{{ invoice.invoiceNumber}}</td>
+                                        <td class="text-right">{{ invoice.domain.name}}</td>
+                                        <td class="text-right">{{ invoice.billPeriod}}</td>
+                                        <td class="text-right">{{ invoice.totalCost}}</td>
+                                        <td class="text-right">{{ invoice.dueDate | date:'yyyy-MM-dd'}}</td>
+                                        <td class="text-right">{{ invoice.paidOn | date:'yyyy-MM-dd'}}</td>
+                                        <td class="text-right"></td>
+                                        <td class="text-right">{{ invoice.paymentMethod}}</td>
+                                        <td class="text-right">{{ invoice.status}}</td>
+                                        <td class="text-right">
+                                            <a data-ng-show="invoice.status != 'PAID'" class="btn btn-info btn-sm m-l-sm m-t-xs" title="Mark as Paid" data-ng-click="PayNow('sm', invoice)">Mark as Paid</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+	                        
 	                    </div>
 	                </tab>
 	            </tabset>

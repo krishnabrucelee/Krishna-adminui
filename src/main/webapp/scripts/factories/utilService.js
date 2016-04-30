@@ -107,7 +107,7 @@ function utilService(globalConfig, $http, $window, $cookies, localStorageService
           datasets: [
               {
                   label: "Example dataset",
-                  fillColor: "rgba(98,203,49,0.5)",
+                  fillColor: "#42A5D9",
                   strokeColor: "#42A5D9",
                   pointColor: "#42A5D9",
                   pointStrokeColor: "#fff",

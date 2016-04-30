@@ -71,7 +71,7 @@ Navigation
                                             <tr data-ng-class="{'bg-row text-white' : domain.isSelected == true }"  data-ng-repeat="domain in filteredCount = (domainList| filter: quickSearch | orderBy:sort.column:sort.descending)">
 
                                                 <td>
-                                                <a class="text-info" id="domain_dashboard_link_{{domain.id}}" ui-sref="client.client.dashboard({domainId: {{ domain.id }}, view: 'dashboard'})" title="View Dashboard">
+                                                <a class="text-info" id="domain_dashboard_link_{{domain.id}}" ui-sref="client.client.dashboard({id: {{ domain.id }}, view: 'dashboard'})" title="View Dashboard">
                                                 	{{domain.name}}
                                                	</td>
                                                 <td>{{domain.companyNameAbbreviation}}</td>

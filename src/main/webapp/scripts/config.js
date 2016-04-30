@@ -100,7 +100,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             })
 
             .state('client.client.dashboard', {
-                url: "/:view/:domainId",
+                url: "/:view/:id",
                 templateUrl: VIEW_URL +  "views/client/clients/dashboard.jsp",
                 data: {
                     pageTitle: 'Dashboard'
