@@ -9,7 +9,7 @@ angular
 
 function clientListCtrl($scope, $state, $stateParams,appService, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, dialogService, crudService) {
 
-	
+
 	 $scope.domains = {
 		        category: "domains",
 		        oneItemSelected: {},
@@ -159,7 +159,7 @@ $scope.paginationObject.sortOrder = '+';
 
 
 
- 	$scope.edit = function (quotaId) {
+ 	   $scope.edit = function (quotaId) {
          var hasQuota = crudService.read("quota", quotaId);
          hasQuota.then(function (result) {
              $scope.quota = result;
@@ -188,9 +188,135 @@ $scope.paginationObject.sortOrder = '+';
          }
      };
 
+     $scope.getDomainDetailsById = function(domainId) {
+       var hasDomain = appService.crudService.read("domains", domainId);
+       hasDomain.then(function(result) {
+          $scope.domain = result;
+          $scope.getInvoiceListByType($scope.domain, "invoice");
+          $scope.getInvoiceListByType($scope.domain, "payment");
+          $scope.getCostByMonthGraphAndDomainId(result.uuid);
+       });
+     }
+     $scope.invoiceList = {};
+     $scope.getInvoiceListByType = function(domain, type) {
+       var hasConfigList =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice/listByDomain"
+             +"?type="+ type +"&lang=" +appService.localStorageService.cookie.get('language')
+             + "&domainUuid=" + domain.companyNameAbbreviation + "&status=null");
 
+       hasConfigList.then(function(result) {
+          $scope.invoiceList[type] = result;
+       });
+     }
+
+       /**
+       * Data for Usage Line chart
+       */
+      $scope.usageLineData = appService.utilService.getSharpLineData();
+
+      /**
+       * Options for Usage Line chart
+       */
+      $scope.usageLineOptions = appService.utilService.getSharpLineOptions();
+
+
+        $scope.showCostByMonthLoader = false;
+        $scope.getCostByMonthGraphAndDomainId = function(domainUuId) {
+            $scope.showCostByMonthLoader = true;
+            var hasProjects = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "usage/usageTotal/domain/" + domainUuId);
+            hasProjects.then(function (result) {  // this is only run after $http completes
+              $scope.domainUsageCost = result;
+              $scope.showCostByMonthLoader = false;
+              var usageData = [];
+              var usageLabels = [];
+              var i=0;
+              angular.forEach($scope.domainUsageCost, function(obj, key) {
+                  i++;
+                  usageData.push(obj.cost);
+                  usageLabels.push(obj.month);
+              });
+              console.log("Usagedsata", usageData);
+              console.log("Labels", usageLabels);
+              $scope.usageLineData.labels = usageLabels.reverse();
+              $scope.usageLineData.datasets[0].data = usageData.reverse();
+
+            });
+        }
+
+     if (!angular.isUndefined($stateParams.domainId) && $stateParams.domainId != '') {
+       $scope.getDomainDetailsById($stateParams.domainId);
+       $scope.infrastructure = {};
+       $scope.showInfrastructureLoader = true;
+       var hasResult = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "dashboard/infrastructure/domain/"+$stateParams.domainId);
+       hasResult.then(function(result) {  // this is only run after;
+           $scope.infrastructure  = result;
+           $scope.showInfrastructureLoader = false;
+       });
+
+     $scope.quotaLimits = {
+       "CPU": {label: "vCPU"}, "Memory": {label: "Memory"}, "Volume": {label: "Volume"}, "Network": {label: "Network"},
+       "IP": {label: "IP"}, "PrimaryStorage": {label: "PrimaryStorage"}, "SecondaryStorage": {label: "SecondaryStorage"},
+       "Snapshot": {label: "Snapshot"}
+     };
+
+     $scope.showQuotaLoader = true;
+     var resourceArr = ["CPU", "Memory", "Volume", "Network", "IP", "PrimaryStorage", "SecondaryStorage", "Snapshot"];
+     var hasResourceDomainId = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceDomains/domain/" + $stateParams.domainId);
+     hasResourceDomainId.then(function (result) {  // this is only run after $http completes
+       $scope.showQuotaLoader = false;
+         angular.forEach(result, function(obj, key) {
+             if(resourceArr.indexOf(obj.resourceType) > -1) {
+               if(angular.isUndefined($scope.quotaLimits[obj.resourceType])) {
+                   $scope.quotaLimits[obj.resourceType] = {};
+               }
+
+               if(obj.resourceType == "Memory") {
+                 obj.usedLimit = Math.round( obj.usedLimit / 1024);
+     						if (obj.max != -1) {
+     							obj.max = Math.round(obj.max / 1024);
+                   $scope.quotaLimits[obj.resourceType].label = $scope.quotaLimits[obj.resourceType].label + " " + "(GiB)";
+     						}
+               }
+
+               if (obj.max == -1 && obj.resourceType == "PrimaryStorage" || obj.max == -1 && obj.resourceType == "SecondaryStorage") {
+ 					        obj.usedLimit = Math.round( obj.usedLimit / (1024 * 1024 * 1024));
+                   $scope.quotaLimits[obj.resourceType].label = $scope.quotaLimits[obj.resourceType].label + " " + "(GiB)";
+    				    }
+               if (obj.resourceType == "PrimaryStorage" || obj.resourceType == "SecondaryStorage") {
+                   $scope.quotaLimits[obj.resourceType].label = $scope.quotaLimits[obj.resourceType].label + " " + "(GiB)";
+    				    }
+
+               $scope.quotaLimits[obj.resourceType].max = parseInt(obj.max);
+               $scope.quotaLimits[obj.resourceType].usedLimit = parseInt(obj.usedLimit);
+               $scope.quotaLimits[obj.resourceType].percentage = parseFloat(parseInt(obj.usedLimit) / parseInt(obj.max) * 100).toFixed(2);
+               var unUsed = $scope.quotaLimits[obj.resourceType].max - $scope.quotaLimits[obj.resourceType].usedLimit;
+
+
+               var usedColor = "#48a9da";
+               if($scope.quotaLimits[obj.resourceType].percentage > 79 && $scope.quotaLimits[obj.resourceType].percentage < 90) {
+                   usedColor = "#f0ad4e";
+               } else if($scope.quotaLimits[obj.resourceType].percentage > 89){
+                   usedColor = "#df6457";
+               }
+               $scope.quotaLimits[obj.resourceType].doughnutData = [
+                   {
+                       value: parseInt(obj.usedLimit),
+                       color: usedColor,
+                       highlight: usedColor,
+                       label: "Used"
+
+                   },
+                   {
+                       value: unUsed,
+                       color: "#ebf1f4",
+                       highlight: "#ebf1f4",
+                       label: "UnUsed"
+                   }
+               ];
+             }
+         });
+     });
+
+     console.log("Quota Limits", $scope.quotaLimits);
+   }
 
  };
-
-
-

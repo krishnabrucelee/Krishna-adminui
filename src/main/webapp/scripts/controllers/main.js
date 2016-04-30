@@ -236,8 +236,8 @@ function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageSer
     $scope.logout = function() {
     	appService.utilService.logoutApplication("LOGOUT");
     }
-    
-    
+
+
     /**
      *  Data for Doughnut chart
      */
@@ -251,14 +251,14 @@ function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageSer
         animateRotate: false,
         animateScale: false,
     };
-    
+
     $scope.doughnutData1 = [
         {
             value: 42,
             color: "#f0ad4e",
             highlight: "#f0ad4e",
             label: "Used"
-   
+
         },
         {
             value: 58,
@@ -281,7 +281,7 @@ function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageSer
             highlight: "#ebf1f4",
             label: "UnUsed"
         }
-        
+
     ];
     $scope.doughnutData3 = [
 	{
@@ -296,7 +296,7 @@ function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageSer
             highlight: "#ebf1f4",
             label: "UnUsed"
         }
-        
+
     ];
     $scope.doughnutData4 = [
 	{
@@ -311,8 +311,8 @@ function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageSer
             highlight: "#ebf1f4",
             label: "UnUsed"
         }
-        
-    ];	
+
+    ];
 
 
     /**

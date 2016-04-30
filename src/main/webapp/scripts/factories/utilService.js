@@ -92,6 +92,40 @@ function utilService(globalConfig, $http, $window, $cookies, localStorageService
         ]
     }
 
+    object.getSharpLineData = function() {
+      return {
+          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          datasets: [
+              {
+                  label: "Example dataset",
+                  fillColor: "rgba(98,203,49,0.5)",
+                  strokeColor: "#42A5D9",
+                  pointColor: "#42A5D9",
+                  pointStrokeColor: "#fff",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(98,203,49,1)",
+                  data: [33, 48, 40, 19, 54, 27, 54, 90, 100, 50, 12, 10]
+              }
+          ]
+      };
+    }
+
+    object.getSharpLineOptions = function() {
+      return {
+          scaleShowGridLines : true,
+          scaleGridLineColor : "rgba(0,0,0,.05)",
+          scaleGridLineWidth : 1,
+          bezierCurve : false,
+          pointDot : true,
+          pointDotRadius : 4,
+          pointDotStrokeWidth : 1,
+          pointHitDetectionRadius : 20,
+          datasetStroke : true,
+          datasetStrokeWidth : 1,
+          datasetFill : false,
+      };
+    }
+
     return object;
 };
 
