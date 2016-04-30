@@ -71,7 +71,7 @@
     				  		<get-loader-image data-ng-show="showLoader"></get-loader-image>
       						</div>
                         <div data-ng-hide="showLoader" class="table-responsive">
-                            <table cellspacing="1" cellpadding="1" class="table  table-bordered table-striped">
+                            <table cellspacing="1" cellpadding="1" class="table  table-bordered ">
                                 <thead>
                                     <tr>
                                     	<th class="label-primary text-white"  data-ng-class="sort.descending && sort.column =='invoiceNumber'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.invoice.no" bundle="${msg}" /></th>
