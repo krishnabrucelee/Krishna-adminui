@@ -51,9 +51,18 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
 		$scope.paginationObject.sortBy = sortBy;
 		$scope.showLoader = true;
 		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-                var hasDomainList =  appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "domains" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
-
-                    hasDomainList.then(function(result) { // this is only run after $http
+        var hasDomainList = {};
+        $scope.filter = "";
+        if ($scope.quickSearchText == null) {
+        	hasDomainList = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "domains" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+        } else {
+            $scope.filter = "&searchText=" + $scope.quickSearchText;
+            hasDomainList = promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "domains/listByFilter"
+            		+ "?lang=" + appService.localStorageService.cookie.get('language') + $scope.filter + "&sortBy=" + $scope.paginationObject.sortOrder + $scope.paginationObject.sortBy + "&limit=" + limit, $scope.global.paginationHeaders(pageNumber, limit), {
+                "limit": limit
+            });
+        }
+        hasDomainList.then(function(result) { // this is only run after $http
 			// completes0
 			$scope.domainList = result;
 			$scope.domainList.Count = 0;
@@ -70,12 +79,29 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
 		});
 	};
 
+	// Get domain list based on quick search
+    $scope.quickSearchText = null;
+    $scope.searchList = function(quickSearchText) {
+        $scope.quickSearchText = quickSearchText;
+        $scope.list(1);
+    };
+
     // User List
     $scope.list = function (pageNumber) {
         appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
         appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-        var hasDomain = crudService.list("domains", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+        var hasDomain = {};
+        $scope.filter = "";
+        if ($scope.quickSearchText == null) {
+        	hasDomain = crudService.list("domains", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+        } else {
+            $scope.filter = "&searchText=" + $scope.quickSearchText;
+            hasDomain = promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "domains/listByFilter"
+            		+ "?lang=" + appService.localStorageService.cookie.get('language') + $scope.filter + "&sortBy=" + globalConfig.sort.sortOrder + globalConfig.sort.sortBy + "&limit=" + limit, $scope.global.paginationHeaders(pageNumber, limit), {
+                "limit": limit
+            });
+        }
         hasDomain.then(function (result) {  // this is only run after $http completes0
             $scope.domainList = result;
             $scope.domainList.Count = 0;
