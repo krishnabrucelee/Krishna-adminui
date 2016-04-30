@@ -38,6 +38,12 @@
 										key="resource.allocation" bundle="${msg}" /></a> <span
 								ng-switch-when="true"><fmt:message key="resource.allocation" bundle="${msg}" /></span>
 							</span>
+							<span ng-if="state.data.pageTitle === 'Dashboard'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="common.dashboard" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="common.dashboard" bundle="${msg}" /></span>
+							</span>
 							<span ng-if="state.data.pageTitle === 'Compute'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
@@ -496,6 +502,7 @@
 					 <span ng-if="$state.current.data.pageTitle === 'System Configuration'"><fmt:message key="system.configuration" bundle="${msg}" /></span>
 					 <span ng-if="$state.current.data.pageTitle === 'Currency'"><fmt:message key="currency" bundle="${msg}" /></span>
 					 <span ng-if="$state.current.data.pageTitle === 'client'"><fmt:message key="resource.allocation" bundle="${msg}" /></span>
+					 <span ng-if="$state.current.data.pageTitle === 'Dashboard'"><fmt:message key="common.dashboard" bundle="${msg}" /></span>
 				</h2>
 				<small>{{ $state.current.data.pageDesc}}</small>
 			</div>
