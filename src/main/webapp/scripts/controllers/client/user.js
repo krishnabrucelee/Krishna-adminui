@@ -61,13 +61,36 @@ function userListCtrl($scope, $state, $stateParams, modalService,appService, $lo
         $scope.showLoader = true;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasUsers = {};
-        if ($scope.domainView == null) {
-            hasUsers = crudService.list("users/listall", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+//        if ($scope.domainView == null) {
+//            hasUsers = crudService.list("users/listall", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+//        } else {
+//            hasUsers =  promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "users/listByUserDomain"
+//                +"?lang=" +appService.localStorageService.cookie.get('language')+"&flag=pandaAdminPanel"
+//                + "&domainId="+$scope.domainView.id+"&sortBy="+globalConfig.sort.sortOrder+globalConfig.sort.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+//        }
+
+        $scope.filter = "";
+        if ($scope.domainView == null && $scope.userSearch == null) {
+        	hasUsers = crudService.list("users/listall", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
         } else {
-            hasUsers =  promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "users/listByUserDomain"
-                +"?lang=" +appService.localStorageService.cookie.get('language')+"&flag=pandaAdminPanel"
-                + "&domainId="+$scope.domainView.id+"&sortBy="+globalConfig.sort.sortOrder+globalConfig.sort.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+            if ($scope.domainView != null && $scope.userSearch == null) {
+                $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=";
+            } else if ($scope.domainView == null && $scope.userSearch != null) {
+                $scope.filter = "&domainId=0" + "&searchText=" + $scope.userSearch;
+            } else {
+                $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=" + $scope.userSearch;
+            }
+            hasUsers =  promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "users/listByAdminSearch"
+                  +"?lang=" +appService.localStorageService.cookie.get('language')+"&flag=pandaAdminPanel"
+                  + $scope.filter +"&sortBy="+globalConfig.sort.sortOrder+globalConfig.sort.sortBy+"&limit="+limit,
+            		$scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+//            hasUsers = promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "users/listByDomain"
+//            		+ "?lang=" + appService.localStorageService.cookie.get('language') + "&status=" + $scope.vm.status + $scope.filter + "&sortBy="
+//            		+ globalConfig.sort.sortOrder + globalConfig.sort.sortBy + "&limit=" + limit, $scope.global.paginationHeaders(pageNumber, limit), {
+//                "limit": limit
+//            });
         }
+
         hasUsers.then(function (result) {  // this is only run after $http completes0
             $scope.accountList = result;
 
@@ -103,7 +126,12 @@ function userListCtrl($scope, $state, $stateParams, modalService,appService, $lo
     $scope.selectDomainView = function(pageNumber) {
         $scope.list(1);
     };
-
+    // Get instance list based on quick search
+    $scope.userSearch = null;
+    $scope.searchList = function(userSearch) {
+        $scope.userSearch = userSearch;
+        $scope.list(1);
+    };
     // Suspend the user
     $scope.showUserListLoader = {};
 $scope.suspensionObject = {};
@@ -114,7 +142,7 @@ $scope.suspensionObject = {};
  	  $scope.suspensionObject.status = "SUSPENDED";
 	  $scope.suspensionObject.id = account.id;
 	  suspensionObject = $scope.suspensionObject;
-          $scope.ok = function (suspensionObject) {          
+          $scope.ok = function (suspensionObject) {
             var hasServer = appService.crudService.update("users/suspend",suspensionObject);
             hasServer.then(function (result) {
               appService.notify({message: 'Account suspended  successfully ',
@@ -123,9 +151,9 @@ $scope.suspensionObject = {};
 		$scope.list(1);
             });
             $scope.showUserListLoader[suspensionObject.id] = false;
-		
+
           },
-	
+
           $modalInstance.close();
           $scope.cancel = function () {
             $modalInstance.close();

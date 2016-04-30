@@ -41,7 +41,13 @@
                             <a class="btn btn-info" ui-sref="client.user" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg"></span></a>
                         </div>
                         <div class="pull-right dashboard-filters-area">
-							<panda-quick-search></panda-quick-search>
+							<form data-ng-submit="searchList(userSearch)">
+							<div class="quick-search pull-right">
+								<div class="input-group">
+									<input data-ng-model="userSearch" type="text" class="form-control input-medium" placeholder="<fmt:message key="common.quick.search" bundle="${msg}" />" aria-describedby="quicksearch-go">
+								   	<span class="input-group-addon" id="quicksearch-go"><span class="pe-7s-search pe-lg font-bold"></span></span>
+								</div>
+							</div>
                             <span class="pull-right m-r-sm">
                                 <select
                                     class="form-control input-group col-xs-5" name="domainView"
@@ -53,6 +59,7 @@
                             </span>
                             <div class="clearfix"></div>
                             <span class="pull-right m-l-sm m-t-sm"></span>
+                            </form>
                         </div>
                     </div>
                 </div>
