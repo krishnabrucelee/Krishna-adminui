@@ -139,8 +139,8 @@ function reportCtrl($scope, globalConfig, notify, $state, $stateParams, modalSer
 		statusList: [{id: 1,root: 'Status', name: 'All', value: 'ALL'}, {id: 2,name: 'ENABLED', value: 'ENABLED'}, {id: 3, name: 'DISABLED', value: 'DISABLED'}]
 
 	};
-	
-    
+
+
     $scope.validateClientUsage = function (form,report) {
         if ($scope.report.dateRange.value == 'period') {
         	if(angular.isUndefined($scope.report.startDate)|| $scope.report.startDate == ""|| (angular.isUndefined($scope.report.endDate)|| $scope.report.endDate == "")) {
@@ -493,8 +493,7 @@ function invoiceListReport($scope, $http, $window, $modal, $log, $state, $stateP
             var hasConfigList = {};
             if (($scope.domainView == null || angular.isUndefined($scope.domainView))
                     && ($scope.statusView == null || angular.isUndefined($scope.statusView))) {
-                hasConfigList = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice?type=invoice&lang="+ appService.localStorageService.cookie.get('language')
-                        +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+                hasConfigList = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice?type=invoice&lang="+ appService.localStorageService.cookie.get('language'));
             } else {
                 if ($scope.domainView == null || angular.isUndefined($scope.domainView)) {
                       $scope.domainView = null;
@@ -502,18 +501,31 @@ function invoiceListReport($scope, $http, $window, $modal, $log, $state, $stateP
                    if ($scope.statusView == null || angular.isUndefined($scope.statusView)) {
                       $scope.statusView = null;
                    }
+$scope.pdf = function()
+{
+
+	 $scope.viewpdf =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=pdf&method=invoice";
+}
+
+$scope.excel = function()
+{
+
+	 $scope.viewexcel =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=xlsx&method=invoice";
+}
                 hasConfigList =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice/listByDomain"
                     +"?type=invoice&lang=" +appService.localStorageService.cookie.get('language')
-                    + "&domainUuid="+$scope.domainView+"&status="+$scope.statusView+"&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+                    + "&domainUuid="+$scope.domainView+"&status="+$scope.statusView);
             }
 
-            hasConfigList.then(function(result) { // this is only run after $http
-                if (!angular.isUndefined(result._embedded)) {
-                    $scope.invoiceList = result['_embedded'].invoiceList;
-                    } else {
-                        $scope.invoiceList = {};
-                    }
 
+
+            hasConfigList.then(function(result) { // this is only run after $http
+                //if (!angular.isUndefined(result._embedded)) {
+                  //  $scope.invoiceList = result['_embedded'].invoiceList;
+                  //  } else {
+                  //     $scope.invoiceList = {};
+                  //  }
+$scope.invoiceList = result;
                 // For pagination
                 $scope.paginationObject.limit = limit;
                 $scope.paginationObject.currentPage = pageNumber;
@@ -531,31 +543,45 @@ function invoiceListReport($scope, $http, $window, $modal, $log, $state, $stateP
     });
 
    $scope.global = globalConfig;
-
+ $scope.defaultView = true;
    $scope.configList = function (pageNumber) {
+ $scope.defaultView = true;
       var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
       var hasConfigList = {};
       if (($scope.domainView == null || angular.isUndefined($scope.domainView))
               && ($scope.statusView == null || angular.isUndefined($scope.statusView))) {
-          hasConfigList = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice?type=invoice&lang="+ appService.localStorageService.cookie.get('language')
-                  +"&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+          hasConfigList = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice?type=invoice&lang="+ appService.localStorageService.cookie.get('language'));
       } else {
+ $scope.defaultView = false;
           if ($scope.domainView == null || angular.isUndefined($scope.domainView)) {
                $scope.domainView = null;
             }
             if ($scope.statusView == null || angular.isUndefined($scope.statusView)) {
                $scope.statusView = null;
             }
+
+$scope.pdf = function()
+{
+
+	 $scope.viewpdf =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=pdf&method=invoice";
+}
+
+$scope.excel = function()
+{
+
+	 $scope.viewexcel =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=xlsx&method=invoice";
+}
           hasConfigList =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice/listByDomain"
                 +"?type=invoice&lang=" +appService.localStorageService.cookie.get('language')
-                + "&domainUuid="+$scope.domainView+"&status="+$scope.statusView+"&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+                + "&domainUuid="+$scope.domainView+"&status="+$scope.statusView);
       }
       hasConfigList.then(function (result) {  // this is only run after $http completes0
-         if (!angular.isUndefined(result._embedded)) {
-             $scope.invoiceList = result['_embedded'].invoiceList;
-         } else {
-             $scope.invoiceList = {};
-         }
+     //    if (!angular.isUndefined(result._embedded)) {
+     //         $scope.invoiceList = result['_embedded'].invoiceList;
+     //    } else {
+     //        $scope.invoiceList = {};
+    //     }
+$scope.invoiceList = result;
 
          // For pagination
          $scope.paginationObject.limit = limit;
@@ -744,8 +770,7 @@ function paymentListReport($scope, $http, $window, $modal, $log, $state, $stateP
             var hasConfigList = {};
             if (($scope.domainView == null || angular.isUndefined($scope.domainView))
                     && ($scope.statusView == null || angular.isUndefined($scope.statusView))) {
-                hasConfigList = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice?type=payment&lang="+ appService.localStorageService.cookie.get('language')
-                        +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+                hasConfigList = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice?type=payment&lang="+ appService.localStorageService.cookie.get('language'));
             } else {
                 if ($scope.domainView == null || angular.isUndefined($scope.domainView)) {
                       $scope.domainView = null;
@@ -753,17 +778,27 @@ function paymentListReport($scope, $http, $window, $modal, $log, $state, $stateP
                    if ($scope.statusView == null || angular.isUndefined($scope.statusView)) {
                       $scope.statusView = null;
                    }
+$scope.pdf = function()
+{
+	 $scope.viewpdf =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=pdf&method=payment";
+}
+
+$scope.excel = function()
+{
+	 $scope.viewexcel =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=xlsx&method=payment";
+}
                 hasConfigList =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice/listByDomain"
                     +"?type=payment&lang=" +appService.localStorageService.cookie.get('language')
-                    + "&domainUuid="+$scope.domainView+"&status="+$scope.statusView+"&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+                    + "&domainUuid="+$scope.domainView+"&status="+$scope.statusView);
             }
 
             hasConfigList.then(function(result) { // this is only run after $http
-                if (!angular.isUndefined(result._embedded)) {
-                    $scope.invoiceList = result['_embedded'].invoiceList;
-                    } else {
-                        $scope.invoiceList = {};
-                    }
+              //  if (!angular.isUndefined(result._embedded)) {
+              //      $scope.invoiceList = result['_embedded'].invoiceList;
+              //      } else {
+              //          $scope.invoiceList = {};
+              //      }
+		$scope.invoiceList = result;
 
                 // For pagination
                 $scope.paginationObject.limit = limit;
@@ -782,32 +817,43 @@ function paymentListReport($scope, $http, $window, $modal, $log, $state, $stateP
     });
 
    $scope.global = globalConfig;
-
+ $scope.defaultView = true;
    $scope.configList = function (pageNumber) {
+ $scope.defaultView = true;
       var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
       var hasConfigList = {};
       if (($scope.domainView == null || angular.isUndefined($scope.domainView))
               && ($scope.statusView == null || angular.isUndefined($scope.statusView))) {
-          hasConfigList = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice?type=payment&lang="+ appService.localStorageService.cookie.get('language')
-                  +"&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+          hasConfigList = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice?type=payment&lang="+ appService.localStorageService.cookie.get('language'));
       } else {
+ $scope.defaultView = false;
           if ($scope.domainView == null || angular.isUndefined($scope.domainView)) {
                $scope.domainView = null;
             }
             if ($scope.statusView == null || angular.isUndefined($scope.statusView)) {
                $scope.statusView = null;
             }
+
+$scope.pdf = function()
+{
+	 $scope.viewpdf =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=pdf&method=payment";
+}
+
+$scope.excel = function()
+{
+	 $scope.viewexcel =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=xlsx&method=payment";
+}
           hasConfigList =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice/listByDomain"
                 +"?type=payment&lang=" +appService.localStorageService.cookie.get('language')
-                + "&domainUuid="+$scope.domainView+"&status="+$scope.statusView+"&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+                + "&domainUuid="+$scope.domainView+"&status="+$scope.statusView);
       }
       hasConfigList.then(function (result) {  // this is only run after $http completes0
-         if (!angular.isUndefined(result._embedded)) {
-             $scope.invoiceList = result['_embedded'].invoiceList;
-         } else {
-             $scope.invoiceList = {};
-         }
-
+        // if (!angular.isUndefined(result._embedded)) {
+       //      $scope.invoiceList = result['_embedded'].invoiceList;
+        // } else {
+        //     $scope.invoiceList = {};
+        // }
+$scope.invoiceList = result;
          // For pagination
          $scope.paginationObject.limit = limit;
          $scope.paginationObject.currentPage = pageNumber;
