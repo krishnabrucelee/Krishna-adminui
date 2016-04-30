@@ -1,4 +1,4 @@
-function appService(crudService, localStorageService, globalConfig, promiseAjax, notify, utilService, dialogService, modalService, sweetAlert, uploadFile) {
+function appService(crudService, localStorageService, globalConfig, promiseAjax, notify, utilService, dialogService, modalService, sweetAlert, uploadFile, uploadThemeImage) {
 
 	var object = {};
 
@@ -16,6 +16,9 @@ function appService(crudService, localStorageService, globalConfig, promiseAjax,
 
     // Application ajax calls goes here
     object.uploadFile = uploadFile
+
+    // Application ajax calls goes here
+    object.uploadThemeImage = uploadThemeImage
 
     // Application notification
     object.notify = notify
