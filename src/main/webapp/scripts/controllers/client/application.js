@@ -37,15 +37,21 @@ function applicationListCtrl($scope, notify, promiseAjax, dialogService,appServi
 		$scope.showLoader = true;
 		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
 
-            var hasApplicationsLists = {};
-            if ($scope.domainView == null) {
-            	hasApplicationsLists =  appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "applications" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
-            } else {
-            	hasApplicationsLists =  promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "applications/listByDomain"
-    				+"?lang=" +appService.localStorageService.cookie.get('language')
-    				+ "&domainId="+$scope.domainView.id+"&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
-            }
-
+            var hasApplicationsLists = {};           
+            if ($scope.domainView == null && $scope.applicationSearch == null) {
+            	hasApplicationsLists = appService.crudService.list("applications", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+            }  else {
+                $scope.filter = "";
+            	if ($scope.domainView != null && $scope.applicationSearch == null) {
+                	$scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=";
+            	} else if ($scope.domainView == null && $scope.applicationSearch != null) {
+                	$scope.filter = "&domainId=0" + "&searchText=" + $scope.applicationSearch;
+            	} else {
+                	$scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=" + $scope.applicationSearch;
+            	}
+            hasApplicationsLists =  promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "applications/listByFilter"
+				+"?lang=" +appService.localStorageService.cookie.get('language')+ $scope.filter+"&sortBy="+globalConfig.sort.sortOrder+globalConfig.sort.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+        }
             hasApplicationsLists.then(function(result) { // this is only run after $http
 			// completes0
 			$scope.applicationList = result;
@@ -70,12 +76,19 @@ function applicationListCtrl($scope, notify, promiseAjax, dialogService,appServi
     	$scope.showLoader = true;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasApplications = {};
-        if ($scope.domainView == null) {
-        	hasApplications = appService.crudService.list("applications", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+        $scope.filter = "";
+        if ($scope.domainView == null && $scope.applicationSearch == null) {
+            hasApplications = appService.crudService.list("applications", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
         } else {
-        	hasApplications =  promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "applications/listByDomain"
-				+"?lang=" +appService.localStorageService.cookie.get('language')
-				+ "&domainId="+$scope.domainView.id+"&sortBy="+globalConfig.sort.sortOrder+globalConfig.sort.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+            if ($scope.domainView != null && $scope.applicationSearch == null) {
+                $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=";
+            } else if ($scope.domainView == null && $scope.applicationSearch != null) {
+                $scope.filter = "&domainId=0" + "&searchText=" + $scope.applicationSearch;
+            } else {
+                $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=" + $scope.applicationSearch;
+            }
+            hasApplications =  promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "applications/listByFilter"
+				+"?lang=" +appService.localStorageService.cookie.get('language')+ $scope.filter+"&sortBy="+globalConfig.sort.sortOrder+globalConfig.sort.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
         }
         hasApplications.then(function (result) {  // this is only run after $http completes0
             $scope.applicationList = result;
@@ -109,5 +122,12 @@ function applicationListCtrl($scope, notify, promiseAjax, dialogService,appServi
     $scope.selectDomainView = function(pageNumber) {
     	$scope.list(1);
     };
-};
 
+    // Get instance list based on quick search
+    $scope.applicationSearch = null;
+    $scope.searchList = function(applicationSearch) {
+        $scope.applicationSearch = applicationSearch;
+        $scope.list(1);
+    };
+
+};
