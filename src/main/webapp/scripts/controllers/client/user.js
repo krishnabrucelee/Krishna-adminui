@@ -114,7 +114,7 @@ $scope.suspensionObject = {};
  	  $scope.suspensionObject.status = "SUSPENDED";
 	  $scope.suspensionObject.id = account.id;
 	  suspensionObject = $scope.suspensionObject;
-          $scope.ok = function (suspensionObject) {          
+          $scope.ok = function (suspensionObject) {
             var hasServer = appService.crudService.update("users/suspend",suspensionObject);
             hasServer.then(function (result) {
               appService.notify({message: 'Account suspended  successfully ',
@@ -123,9 +123,9 @@ $scope.suspensionObject = {};
 		$scope.list(1);
             });
             $scope.showUserListLoader[suspensionObject.id] = false;
-		
+
           },
-	
+
           $modalInstance.close();
           $scope.cancel = function () {
             $modalInstance.close();
@@ -144,7 +144,7 @@ $scope.suspensionObject = {};
             $scope.suspensionObject = account;
             $scope.ok = function (suspensionObject) {
               suspensionObject.status = "ENABLED";
-              var hasServer = appService.crudService.update("users/enable", suspensionObject);
+              var hasServer = appService.crudService.update("users", suspensionObject);
               hasServer.then(function (result) {
                 appService.notify({message: 'Account enabled  successfully ',
                 classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});

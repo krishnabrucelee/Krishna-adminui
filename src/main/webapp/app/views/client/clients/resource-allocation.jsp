@@ -7,85 +7,9 @@
 
     <div class="row">
         <div class="col-md-12 col-sm-12">
-            <div class="hpanel">
-                <div class="panel-heading">
-                    <div class="row">
-
-                        <div class="col-md-1 col-sm-1 col-xs-1" data-ng-if="type != 'domain-quota'"  data-ng-hide="stateid">
-                            <span class="pull-left">
-                                <a class="btn btn-info" href="#/configuration/chargeback"  title="<fmt:message key="common.back" bundle="${msg}" />" ><span class="fa fa-arrow-circle-left fa-lg "></span> <fmt:message key="common.back" bundle="${msg}" /></a>
-                            </span>
-
-                        </div>
-                        <div class="col-md-1 col-sm-1 col-xs-1" data-ng-if="type == 'domain-quota'" data-ng-hide="stateid">
-                            <span class="pull-left">
-                                <a class="btn btn-info" href="#/client/company"  title="<fmt:message key="common.back" bundle="${msg}" />" ><span class="fa fa-arrow-circle-left fa-lg "></span> <fmt:message key="common.back" bundle="${msg}" /></a>
-                            </span>
-
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="panel-body">
-
-                    <div class="col-md-12 col-sm-12 m-b-md border-bottom">
-
-                    <label class="col-md-4 col-sm-12 control-label" data-ng-if="type == 'domain-quota'">
-                    	<fmt:message key="common.domain" bundle="${msg}" />: {{domainName}} </label>
-
-
-                        <div class="col-md-4 col-sm-4" data-ng-if="type == 'client-quota' || !type">
-                            <div class="form-group" ng-class="{
-                                            'text-danger'
-                                            : resourceAllocationForm.domain.$invalid && formSubmitted}">
-                                <div class="row">
-                                    <label class="col-md-4 col-sm-12 control-label"><fmt:message key="common.domain" bundle="${msg}" />:
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-md-8 col-sm-12" >
-                                        <select required="true" data-ng-change="getDepartmentsByDomain()"  class="form-control input-group" name="domain"
-                                        data-ng-model="resourceQuota.domain" ng-options="domain.name for domain in domainList"
-                                        data-ng-class="{'error': resourceAllocationForm.domain.$invalid && formSubmitted}" >
-                                            <option value="">Select</option>
-                                        </select>
-
-                                        <div class="error-area" data-ng-show="resourceAllocationForm.domain.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="domain.is.required" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
-
-                                    </div>
-                                      <label data-ng-if="type"> {{resourceQuota.domain.name}} </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-4" data-ng-if="type == 'department-quota'|| !type">
-                            <div class="form-group">
-                                <div class="row">
-                                    <label class="col-md-4 col-sm-12 control-label"><fmt:message key="common.department" bundle="${msg}" />:
-                                    </label>
-                                    <div class="col-md-8 col-sm-12">
-                                        <select  class="form-control input-group" data-ng-disabled="isDisabledDepartment"  name="department" data-ng-change="getProjectsByDepartment()" data-ng-model="resourceQuota.department" ng-options="department.userName for department in departmentList" >
-                                            <option value="">Select</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-4" data-ng-if="type == 'project-quota'|| !type">
-                            <div class="form-group">
-                                <div class="row">
-                                    <label class="col-md-4 col-sm-12 control-label"><fmt:message key="common.project" bundle="${msg}" />:
-                                    </label>
-                                    <div class="col-md-8 col-sm-12">
-                                        <select  class="form-control input-group" data-ng-disabled="isDisabledProject" name="project" data-ng-change="getProjectResourceLimits()" data-ng-model="resourceQuota.project" ng-options="project.name for project in projectList" >
-                                            <option value="">Select</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <div class="panel-body">
 					<div class="row" data-ng-if="(resource=='domain'|| type == 'domain-quota' || resource=='department' || resource=='project') && isResourceDefined == 'defined' ">
-						<div class="col-md-8 col-sm-8">
+						<div class="col-md-12 col-sm-12">
 							<div data-ng-if="showLoader" style="margin: 20%">
 								<get-loader-image data-ng-if="showLoader"></get-loader-image>
 							</div>
@@ -96,10 +20,10 @@
                                 	<label> Quota Type</label></th>
                                 	<th  class="text-center">Company Limit</th>
 			                        <th class="text-center">
-			                        	<label> Minimum</label>
+			                        	<label> Min</label>
 			                        </th>
 			                        <th class="text-center">
-			                        	<label> Maximum</label>
+			                        	<label> Max</label>
 			                        </th>
 			                    </tr>
 			           <tr data-ng-if="resource=='department'">
@@ -107,10 +31,10 @@
                                 	<label> Quota Type</label></th>
                                 	<th  class="text-center">Department Limit</th>
 			                        <th  class="text-center">
-			                        	<label> Minimum</label>
+			                        	<label> Min</label>
 			                        </th>
 			                        <th  class="text-center">
-			                        	<label> Maximum</label>
+			                        	<label> Max</label>
 			                        </th>
 			                    </tr>
 			          			<tr data-ng-if="resource=='project'">
@@ -118,10 +42,10 @@
                                 	<label> Quota Type</label></th>
                                 	<th  class="text-center">Project Limit</th>
 			                        <th  class="text-center">
-			                        	<label> Minimum</label>
+			                        	<label> Min</label>
 			                        </th>
 			                        <th  class="text-center">
-			                        	<label> Maximum</label>
+			                        	<label> Max</label>
 			                        </th>
 			                    </tr>
 			                    </thead>
@@ -681,20 +605,9 @@
 			        		<td colspan="4">
 								<div class="form-group m-t-sm" data-ng-if="(resource=='domain'|| type == 'domain-quota' || resource=='department' || resource=='project') && isResourceDefined == 'defined'">
 		                            <div class="row">
-		<%--                             <label class="col-sm-1 col-md-1 control-label"><fmt:message key="note" bundle="${msg}" /> :</label>
-		                            <div class="col-sm-4 col-md-3">
-		                                <div class="well ">
-		                              <fmt:message key="common.quota.note.display" bundle="${msg}" />
-		                                </div>
-		                            </div> --%>
-
 		                                <get-loader-image data-ng-show="showLoader"></get-loader-image>
-		                                <div class="col-md-4 col-sm-5" data-ng-hide="showLoader">
-		                                    <a class="btn btn-default btn-outline" data-ng-if="type != 'domain-quota'"  href="#/configuration/chargeback"><fmt:message key="common.cancel" bundle="${msg}" /></a>
-		                                    <a class="btn btn-default btn-outline" data-ng-if="type == 'domain-quota'"  href="#/client/company"><fmt:message key="common.cancel" bundle="${msg}" /></a>
-		                                   <button class="btn btn-info" has-permission="DOMAIN_QUOTA" data-ng-hide="showLoader" type="submit"><fmt:message key="common.update" bundle="${msg}" /></button>
-			                                <button data-ng-if="type == 'department-quota'" class="btn btn-info" has-permission="DEPARTMENT_QUOTA_EDIT" data-ng-hide="showLoader" type="submit"><fmt:message key="common.update" bundle="${msg}" /></button>
-		                        			<button data-ng-if="type == 'project-quota'" class="btn btn-info" has-permission="PROJECT_QUOTA_EDIT" data-ng-hide="showLoader" type="submit"><fmt:message key="common.update" bundle="${msg}" /></button>
+		                                <div class="text-center" data-ng-hide="showLoader">
+											<button class="btn btn-info" has-permission="DOMAIN_QUOTA" data-ng-hide="showLoader" type="submit"><fmt:message key="common.update" bundle="${msg}" /></button>
 		                                </div>
 
 		                        </div>
@@ -704,25 +617,14 @@
 			        </tbody>
 			                </table>
 						</div>
-						<div class="col-md-4 col-sm-4">
-							<div class="alert alert-info">
-								<label class="control-label"><fmt:message key="note" bundle="${msg}" /> :</label>
-								<ul class="list-group">
-									<li class="list-group-item">-1 indicates, Unlimited limit.</li>
-									<li class="list-group-item"> 0 indicates, No quota available.</li>
-									<li class="list-group-item">Department limit should not exceed company limit. </li>
-									<li class="list-group-item">Project limit should not exceed department limit. </li>
-								</ul>
-							</div>
-						</div>
+					
 					</div>
 
-                            </div>
+                    </div>
 
                 </div>
             </div>
 
 
-        </div>
     </div>
     </form>

@@ -236,8 +236,8 @@ function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageSer
     $scope.logout = function() {
     	appService.utilService.logoutApplication("LOGOUT");
     }
-    
-    
+
+
     /**
      *  Data for Doughnut chart
      */
@@ -250,15 +250,75 @@ function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageSer
         animationEasing: "easeOutBounce",
         animateRotate: false,
         animateScale: false,
+
+        customTooltips: function customTooltips(tooltip){
+            // Tooltip Element
+            var tooltipEl = $('#chartjs-customtooltip');
+            // Make the element if not available
+            if (!tooltipEl[0]) {
+                $('body').append('<div id="chartjs-customtooltip"></div>');
+                tooltipEl = $('#chartjs-customtooltip');
+            }
+            // Hide if no tooltip
+            if (!tooltip) {
+                tooltipEl.css({
+                    opacity: 0
+                });
+                return;
+            }
+            // Set caret Position
+            tooltipEl.removeClass('above below no-transform');
+            if (tooltip.yAlign) {
+                tooltipEl.addClass(tooltip.yAlign);
+            } else {
+                tooltipEl.addClass('no-transform');
+            }
+            // Set Text
+            if (tooltip.text) {
+                tooltipEl.html(tooltip.text);
+            } else {
+                var innerHtml = '<div class="title">' + tooltip.title + '</div>';
+                for (var i = 0; i < tooltip.labels.length; i++) {
+                    innerHtml += [
+                        '<div class="section">',
+                        '   <span class="key" style="background-color:' + tooltip.legendColors[i].fill + '"></span>',
+                        '   <span class="value">' + tooltip.labels[i] + '</span>',
+                        '</div>'
+                    ].join('');
+                }
+                tooltipEl.html(innerHtml);
+            }
+            // Find Y Location on page
+            var top = 0;
+            if (tooltip.yAlign) {
+                if (tooltip.yAlign == 'above') {
+                    top = tooltip.y - tooltip.caretHeight - tooltip.caretPadding;
+                } else {
+                    top = tooltip.y + tooltip.caretHeight + tooltip.caretPadding;
+                }
+            }
+            var offset = $(tooltip.chart.canvas).offset();
+
+            // Display, position, and set styles for font
+            tooltipEl.css({
+                opacity: 1,
+                width: tooltip.width ? (tooltip.width + 'px') : 'auto',
+                left: offset.left + tooltip.x + 'px',
+                top: offset.top + top + 'px',
+                fontFamily: tooltip.fontFamily,
+                fontSize: tooltip.fontSize,
+                fontStyle: tooltip.fontStyle,
+            });
+        }
     };
-    
+
     $scope.doughnutData1 = [
         {
             value: 42,
             color: "#f0ad4e",
             highlight: "#f0ad4e",
             label: "Used"
-   
+
         },
         {
             value: 58,
@@ -281,7 +341,7 @@ function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageSer
             highlight: "#ebf1f4",
             label: "UnUsed"
         }
-        
+
     ];
     $scope.doughnutData3 = [
 	{
@@ -296,7 +356,7 @@ function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageSer
             highlight: "#ebf1f4",
             label: "UnUsed"
         }
-        
+
     ];
     $scope.doughnutData4 = [
 	{
@@ -311,8 +371,8 @@ function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageSer
             highlight: "#ebf1f4",
             label: "UnUsed"
         }
-        
-    ];	
+
+    ];
 
 
     /**

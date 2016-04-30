@@ -9,7 +9,7 @@ angular
 
 function clientListCtrl($scope, $state, $stateParams,appService, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, dialogService, crudService) {
 
-	
+
 	 $scope.domains = {
 		        category: "domains",
 		        oneItemSelected: {},
@@ -159,7 +159,7 @@ $scope.paginationObject.sortOrder = '+';
 
 
 
- 	$scope.edit = function (quotaId) {
+ 	   $scope.edit = function (quotaId) {
          var hasQuota = crudService.read("quota", quotaId);
          hasQuota.then(function (result) {
              $scope.quota = result;
@@ -168,7 +168,7 @@ $scope.paginationObject.sortOrder = '+';
      };
 
 
-     if (!angular.isUndefined($stateParams.id) && $stateParams.id != '') {
+     if (!angular.isUndefined($stateParams.id) && $stateParams.id != '' && $stateParams.view != 'dashboard') {
          $scope.edit($stateParams.id)
      }
 
@@ -188,9 +188,220 @@ $scope.paginationObject.sortOrder = '+';
          }
      };
 
+     $scope.getDomainDetailsById = function(domainId) {
+       var hasDomain = appService.crudService.read("domains", domainId);
+       hasDomain.then(function(result) {
+          $scope.domain = result;
+          $scope.getInvoiceListByType($scope.domain, "invoice");
+          $scope.getInvoiceListByType($scope.domain, "payment");
+          $scope.getCostByMonthGraphAndDomainId(result.uuid);
+       });
+     }
+     $scope.invoiceList = {};
+     $scope.getInvoiceListByType = function(domain, type) {
+       var hasConfigList =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice/listByDomain"
+             +"?type="+ type +"&lang=" +appService.localStorageService.cookie.get('language')
+             + "&domainUuid=" + domain.companyNameAbbreviation + "&status=null");
 
+       hasConfigList.then(function(result) {
+          $scope.invoiceList[type] = result;
+       });
+     }
+
+      // Update payment status
+      $scope.PayNow = function (size, invoice) {
+         appService.dialogService.openDialog("app/views/common/confirm-payment.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+                 $scope.invoiceNumber = invoice.invoiceNumber;
+                 $scope.ok = function (invoiceNumber) {
+                     $scope.showLoader = true;
+                     var hasPay = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_POST, globalConfig.PING_APP_URL + "invoice/manualPayment", invoiceNumber);
+                     hasPay.then(function (result) {
+                         $scope.showLoader = false;
+                         $scope.homerTemplate = 'app/views/notification/notify.jsp';
+                         appService.notify({message: 'Invoice status changed as Paid', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+                         $modalInstance.close();
+                         $scope.getInvoiceListByType($scope.domain, "payment");
+                     }).catch(function (result) {
+                         if (!angular.isUndefined(result.data)) {
+                                if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                                   var msg = result.data.globalError[0];
+                                   $scope.showLoader = false;
+                                   appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                             }
+                         $modalInstance.close();
+                         }
+                     });
+                 },
+                 $scope.cancel = function () {
+                     $modalInstance.close();
+                 };
+             }]);
+     };
+
+     $scope.viewInvoice = function(invoice, language) {
+         var filePath = invoice.fullPath + "/" + language + "/" + invoice.fileName + ".pdf";
+         window.open(appService.globalConfig.PING_APP_URL + "invoice/viewPdf?invoiceNumber="+ invoice.invoiceNumber +"&language="+language,
+                 invoice.domain.name + "-" + invoice.invoiceNumber, "");
+     }
+
+       /**
+       * Data for Usage Line chart
+       */
+      $scope.usageLineData = appService.utilService.getSharpLineData();
+
+      /**
+       * Options for Usage Line chart
+       */
+      $scope.usageLineOptions = appService.utilService.getSharpLineOptions();
+
+
+        $scope.showCostByMonthLoader = false;
+        $scope.getCostByMonthGraphAndDomainId = function(domainUuId) {
+            $scope.showCostByMonthLoader = true;
+            var hasProjects = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "usage/usageTotal/domain/" + domainUuId);
+            hasProjects.then(function (result) {  // this is only run after $http completes
+              $scope.domainUsageCost = result;
+              $scope.showCostByMonthLoader = false;
+              var usageData = [];
+              var usageLabels = [];
+              var i=0;
+              angular.forEach($scope.domainUsageCost, function(obj, key) {
+                  i++;
+                  usageData.push(obj.cost);
+                  usageLabels.push(obj.month);
+              });
+              $scope.usageLineData.labels = usageLabels.reverse();
+              $scope.usageLineData.datasets[0].data = usageData.reverse();
+
+            });
+        }
+
+     if (!angular.isUndefined($stateParams.id) && $stateParams.id != '' && $stateParams.view == 'dashboard') {
+       $scope.getDomainDetailsById($stateParams.id);
+       $scope.infrastructure = {};
+       $scope.showInfrastructureLoader = true;
+       var hasResult = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "dashboard/infrastructure/domain/"+$stateParams.id);
+       hasResult.then(function(result) {  // this is only run after;
+           $scope.infrastructure  = result;
+           $scope.showInfrastructureLoader = false;
+       });
+
+       // Suspend the user
+       $scope.showUserListLoader = {};
+       $scope.suspensionObject = {};
+       $scope.suspendDomain = function(domain) {
+         $scope.showUserListLoader[domain.id] = true;
+           appService.dialogService.openDialog("app/views/common/confirm-suspension.jsp", 'md',
+           $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+       $scope.suspensionObject.status = "SUSPENDED";
+       $scope.suspensionObject.id = domain.id;
+       suspensionObject = $scope.suspensionObject;
+             $scope.ok = function (suspensionObject) {
+               var hasServer = appService.crudService.update("domains/suspend",suspensionObject);
+               hasServer.then(function (result) {
+                 appService.notify({message: 'Company suspended  successfully ',
+                 classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
+                 $modalInstance.close();
+                 $scope.list(1);
+               });
+               $scope.showUserListLoader[suspensionObject.id] = false;
+
+             },
+
+             $modalInstance.close();
+             $scope.cancel = function () {
+               $modalInstance.close();
+               $scope.showUserListLoader[account.id] = false;
+             };
+         }]);
+
+       };
+
+       $scope.enableDomain = function(domain) {
+           $scope.showUserListLoader[domain.id] = true;
+
+             appService.dialogService.openDialog("app/views/common/confirm-activation.jsp", 'md',
+             $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+               $scope.suspensionObject = domain;
+               $scope.ok = function (suspensionObject) {
+                 suspensionObject.status = "ACTIVE";
+                 var hasServer = appService.crudService.update("domains", suspensionObject);
+                 hasServer.then(function (result) {
+                   appService.notify({message: 'Company enabled  successfully ',
+                   classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE});
+                   $modalInstance.close();
+                 });
+                 $scope.showUserListLoader[suspensionObject.id] = false;
+               },
+               $modalInstance.close();
+               $scope.cancel = function () {
+                 $modalInstance.close();
+                 $scope.showUserListLoader[domain.id] = false;
+               };
+           }]);
+         };
+
+     $scope.quotaLimits = {
+       "CPU": {label: "vCPU"}, "Memory": {label: "Memory"}, "Volume": {label: "Volume"}, "Network": {label: "Network"},
+       "IP": {label: "IP"}, "PrimaryStorage": {label: "PrimaryStorage"}, "SecondaryStorage": {label: "SecondaryStorage"},
+       "Snapshot": {label: "Snapshot"}
+     };
+
+     $scope.showQuotaLoader = true;
+     var resourceArr = ["CPU", "Memory", "Volume", "Network", "IP", "PrimaryStorage", "SecondaryStorage", "Snapshot"];
+     var hasResourceDomainId = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceDomains/domain/" + $stateParams.id);
+     hasResourceDomainId.then(function (result) {  // this is only run after $http completes
+       $scope.showQuotaLoader = false;
+         angular.forEach(result, function(obj, key) {
+             if(resourceArr.indexOf(obj.resourceType) > -1) {
+               if(angular.isUndefined($scope.quotaLimits[obj.resourceType])) {
+                   $scope.quotaLimits[obj.resourceType] = {};
+               }
+
+               if(obj.resourceType == "Memory") {
+                 obj.usedLimit = Math.round( obj.usedLimit / 1024);
+     						if (obj.max != -1) {
+     							obj.max = Math.round(obj.max / 1024);
+                   $scope.quotaLimits[obj.resourceType].label = $scope.quotaLimits[obj.resourceType].label + " " + "(GiB)";
+     						}
+               }
+
+               if (obj.max == -1 && obj.resourceType == "PrimaryStorage" || obj.max == -1 && obj.resourceType == "SecondaryStorage") {
+ 					        obj.usedLimit = Math.round( obj.usedLimit / (1024 * 1024 * 1024));
+                   $scope.quotaLimits[obj.resourceType].label = $scope.quotaLimits[obj.resourceType].label + " " + "(GiB)";
+    				    }
+
+               $scope.quotaLimits[obj.resourceType].max = parseInt(obj.max);
+               $scope.quotaLimits[obj.resourceType].usedLimit = parseInt(obj.usedLimit);
+               $scope.quotaLimits[obj.resourceType].percentage = parseFloat(parseInt(obj.usedLimit) / parseInt(obj.max) * 100).toFixed(2);
+               var unUsed = $scope.quotaLimits[obj.resourceType].max - $scope.quotaLimits[obj.resourceType].usedLimit;
+
+
+               var usedColor = "#48a9da";
+               if($scope.quotaLimits[obj.resourceType].percentage > 79 && $scope.quotaLimits[obj.resourceType].percentage < 90) {
+                   usedColor = "#f0ad4e";
+               } else if($scope.quotaLimits[obj.resourceType].percentage > 89){
+                   usedColor = "#df6457";
+               }
+               $scope.quotaLimits[obj.resourceType].doughnutData = [
+                   {
+                       value: parseInt(obj.usedLimit),
+                       color: usedColor,
+                       highlight: usedColor,
+                       label: "Used"
+
+                   },
+                   {
+                       value: unUsed,
+                       color: "#ebf1f4",
+                       highlight: "#ebf1f4",
+                       label: "UnUsed"
+                   }
+               ];
+             }
+         });
+     });
+
+   }
 
  };
-
-
-
