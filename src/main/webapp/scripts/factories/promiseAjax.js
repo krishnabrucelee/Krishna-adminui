@@ -76,7 +76,7 @@ function promiseAjax($http, $window, globalConfig, notify, $cookies, localStorag
 }
 
 function uploadFile($http){
-	var upload = function(files,emails,httpTokenRequest,globalConfig, $cookies) {
+	var upload = function(files,emails,httpTokenRequest,globalConfig, $cookies, localStorageService) {
 		 var fd = new FormData();
 		/**angular.forEach(files,function(file){
 		if(!angular.isUndefined(file)) {
@@ -105,11 +105,11 @@ function uploadFile($http){
 			transformRequest : angular.identity,
 			headers : {
 				'Content-Type' : undefined,
-				'x-auth-token' :$cookies.token,
-				'x-auth-login-token': $cookies.loginToken,
-				'x-auth-remember': $cookies.rememberMe,
-				'x-auth-user-id': $cookies.id,
-				'x-auth-login-time': $cookies.loginTime
+				'x-auth-token': localStorageService.get('token'),
+				'x-auth-login-token': localStorageService.get('loginToken'),
+				'x-auth-remember': localStorageService.get('rememberMe'),
+				'x-auth-user-id': localStorageService.get('id'),
+				'x-auth-login-time': localStorageService.get('loginTime')
 			}
 		});
 
@@ -121,7 +121,7 @@ function uploadFile($http){
 
  //Theme settings
 function uploadThemeImage($http){
-	var uploadTheme = function(backgroundImageFile, logoImageFile, headerChoices, footerChoices,httpTokenRequest,globalConfig, $cookies) {
+	var uploadTheme = function(backgroundImageFile, logoImageFile, headerChoices, footerChoices,httpTokenRequest,globalConfig, $cookies, localStorageService) {
 		 var fd = new FormData();
 		/**angular.forEach(files,function(file){
 		if(!angular.isUndefined(file)) {
@@ -141,11 +141,11 @@ function uploadThemeImage($http){
 			transformRequest : angular.identity,
 			headers : {
 				'Content-Type' : undefined,
-				'x-auth-token' :$cookies.token,
-				'x-auth-login-token': $cookies.loginToken,
-				'x-auth-remember': $cookies.rememberMe,
-				'x-auth-user-id': $cookies.id,
-				'x-auth-login-time': $cookies.loginTime
+				'x-auth-token': localStorageService.get('token'),
+				'x-auth-login-token': localStorageService.get('loginToken'),
+				'x-auth-remember': localStorageService.get('rememberMe'),
+				'x-auth-user-id': localStorageService.get('id'),
+				'x-auth-login-time': localStorageService.get('loginTime')
 			}
 		});
 
