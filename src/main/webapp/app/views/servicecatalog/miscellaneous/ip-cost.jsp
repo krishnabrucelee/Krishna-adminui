@@ -73,8 +73,7 @@
                                                     <td>
                                                         {{miscellaneous.zone.name}}
                                                     </td>
-                                                    <td><h5 class="text-danger">
-                                                    <app-currency></app-currency>{{miscellaneous.costperGB}}</td>
+                                                    <td><h5 class="text-danger"><app-currency></app-currency>{{miscellaneous.costperGB}}</td>
                                             </tr>
                                             </tbody>
                                         </table>

@@ -139,8 +139,8 @@ function reportCtrl($scope, globalConfig, notify, $state, $stateParams, modalSer
 		statusList: [{id: 1,root: 'Status', name: 'All', value: 'ALL'}, {id: 2,name: 'ENABLED', value: 'ENABLED'}, {id: 3, name: 'DISABLED', value: 'DISABLED'}]
 
 	};
-	
-    
+
+
     $scope.validateClientUsage = function (form,report) {
         if ($scope.report.dateRange.value == 'period') {
         	if(angular.isUndefined($scope.report.startDate)|| $scope.report.startDate == ""|| (angular.isUndefined($scope.report.endDate)|| $scope.report.endDate == "")) {
@@ -543,14 +543,16 @@ $scope.invoiceList = result;
     });
 
    $scope.global = globalConfig;
-
+ $scope.defaultView = true;
    $scope.configList = function (pageNumber) {
+ $scope.defaultView = true;
       var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
       var hasConfigList = {};
       if (($scope.domainView == null || angular.isUndefined($scope.domainView))
               && ($scope.statusView == null || angular.isUndefined($scope.statusView))) {
           hasConfigList = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice?type=invoice&lang="+ appService.localStorageService.cookie.get('language'));
       } else {
+ $scope.defaultView = false;
           if ($scope.domainView == null || angular.isUndefined($scope.domainView)) {
                $scope.domainView = null;
             }
@@ -815,14 +817,16 @@ $scope.excel = function()
     });
 
    $scope.global = globalConfig;
-
+ $scope.defaultView = true;
    $scope.configList = function (pageNumber) {
+ $scope.defaultView = true;
       var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
       var hasConfigList = {};
       if (($scope.domainView == null || angular.isUndefined($scope.domainView))
               && ($scope.statusView == null || angular.isUndefined($scope.statusView))) {
           hasConfigList = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice?type=payment&lang="+ appService.localStorageService.cookie.get('language'));
       } else {
+ $scope.defaultView = false;
           if ($scope.domainView == null || angular.isUndefined($scope.domainView)) {
                $scope.domainView = null;
             }

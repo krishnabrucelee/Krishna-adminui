@@ -63,7 +63,7 @@
                             <th data-ng-click="changeSort('osType.description',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='osType.description'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.type" bundle="${msg}" /></th>
                             <th data-ng-click="changeSort('zone.name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='zone.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.zone" bundle="${msg}" /></th>
                             <th data-ng-click="changeSort('hypervisor.name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='hypervisor.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.hypervisor" bundle="${msg}" /></th>
-                            <th><fmt:message key="template.cost" bundle="${msg}" />(<app-currency class = "text-danger"></app-currency>)</th>
+                            <th><fmt:message key="template.cost" bundle="${msg}" /> (<app-currency class = "text-danger"></app-currency>)</th>
                             <th data-ng-click="changeSort('status',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='status'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.status" bundle="${msg}" /></th>
                             <th><fmt:message key="common.action" bundle="${msg}" /></th>
                         </tr>

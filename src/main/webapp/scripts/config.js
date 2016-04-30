@@ -206,6 +206,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 pageTitle: 'Theme Settings'
             }
         })
+
          .state('configuration.home.login-security', {
             url: "/loginSecurity",
             templateUrl: VIEW_URL +  "views/configuration/general/login-security.jsp",
