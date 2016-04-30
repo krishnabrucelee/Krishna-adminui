@@ -202,6 +202,9 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 	            if (angular.isUndefined($scope.resourceAllocationField[key])) {
 	                $scope.resourceAllocationField[key] = {};
 	            }
+                    if (angular.isUndefined($scope.resourceAllocationForm[key])) {
+	                $scope.resourceAllocationForm[key] = {};
+	            }
 	            if (value >= min && value <= max) {
 	                $scope.resourceAllocationField[key].$invalid = false;
 	            } else {
