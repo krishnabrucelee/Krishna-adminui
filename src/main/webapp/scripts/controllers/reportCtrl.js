@@ -140,6 +140,12 @@ function reportCtrl($scope, globalConfig, notify, $state, $stateParams, modalSer
 
 	};
 
+$scope.validateDateRange=function(report)
+{
+$scope.report.startDate = "";
+$scope.report.endDate = "";
+}
+
 
     $scope.validateClientUsage = function (form,report) {
         if ($scope.report.dateRange.value == 'period') {
@@ -163,6 +169,7 @@ $scope.clientEndDate = $scope.report.endDate.ddmmyyyy();
 	 		var endDate = new Date().ddmmyyyy();
 $scope.clientStartDate = "01-01-1971";
 $scope.clientEndDate = new Date().ddmmyyyy();
+
         }
  		$scope.formSubmitted = true;
         if (startDate && endDate) {

@@ -21,7 +21,7 @@
                                     <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-7 col-sm-7">
-                                    <select required="true" class="form-control input-group" data-ng-init="report.dateRange = reportElements.dateList[1]" name="dateRange" data-ng-model="report.dateRange" ng-options="dateRange.name for dateRange in reportElements.dateList" >
+                                    <select required="true" class="form-control input-group" data-ng-change="validateDateRange(report.dateRange)" data-ng-init="report.dateRange = reportElements.dateList[1]" name="dateRange" data-ng-model="report.dateRange" ng-options="dateRange.name for dateRange in reportElements.dateList" >
 
                                     </select>
                                     <span class="help-block m-b-none" data-ng-show="clientForm.dateRange.$invalid && formSubmitted" >Date range is required.</span>
