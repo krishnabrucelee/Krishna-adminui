@@ -56,18 +56,20 @@
                                 <thead>
                                     <tr>
                                     	<th class="col-md-2 col-sm-3" data-ng-click="changeSort('type',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='type'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.type" bundle="${msg}" /></th>
+                                 		<th class="col-md-2 col-sm-3"  data-ng-click="changeSort('domain.name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='domain.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.domain" bundle="${msg}" /></th>
                                     	<th class="col-md-4 col-sm-5" data-ng-click="changeSort('description',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='description'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.description" bundle="${msg}" /></th>
-                                    	<th class="col-md-1 col-sm-2" data-ng-click="changeSort('status',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='status'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.status" bundle="${msg}" /></th>
+                                    	<th class="col-md-2 col-sm-3" data-ng-click="changeSort('status',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='status'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.status" bundle="${msg}" /></th>
                                     </tr>
                                 </thead>
                                 <tbody data-ng-hide="applicationList.length > 0">
                                     <tr>
-                                        <td class="col-md-6 col-sm-6" colspan="6"><fmt:message key="common.no.records.found" bundle="${msg}" />!!</td>
+                                        <td class="col-md-5 col-sm-5" colspan="4"><fmt:message key="common.no.records.found" bundle="${msg}" />!!</td>
                                     </tr>
                                 </tbody>
                                 <tbody data-ng-show="applicationList.length > 0">
                                     <tr data-ng-repeat=" application in filteredCount = (applicationList| filter: quickSearch| orderBy:sort.column:sort.descending)">
                                         <td>{{ application.type}}</td>
+                                        <td>{{ application.domain.name }}</td>
                                         <td>{{ application.description}}</td>
                                         <td>
                                         	<label class="badge badge-success p-xs" data-ng-if="application.status == 'ENABLED'"> {{ application.status}} </label>
