@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <div class="row" data-ng-controller="clientListCtrl">
 	<div class="col-md-12">
-	
+
 	<div class="row">
     	<div class="col-md-12">
 	        <div class="panel panel-white no-border-radious">
@@ -245,7 +245,7 @@
 						                    </tr>
 						                    </tbody>
 						                </table>
-					                </div> 
+					                </div>
 	                        	</div>-->
 	                        </div>
 	                    </div>
@@ -259,63 +259,72 @@
 	            				<div class="col-md-2 col-sm-3 col-xs-6">
 	            					<div class="quick-view-details running-vm">
 	            						<div class="quick-view-icon pull-right"></div>
-	            						<div class="quick-view-count pull-right">{{ infrastructure.runningVmCount }}</div>
+	            						<div class="clearfix"></div>
+	            						<div class="quick-view-count text-right">{{ infrastructure.runningVmCount }}</div>
 	            					</div>
 	            					<div class="quick-view-title text-center">Running VM</div>
 	            				</div>
 	            				<div class="col-md-2 col-sm-3 col-xs-6">
 	            					<div class="quick-view-details stopped-vm">
 	            						<div class="quick-view-icon pull-right"></div>
-	            						<div class="quick-view-count pull-right">{{ infrastructure.stoppedVmCount }}</div>
+	            						<div class="clearfix"></div>
+	            						<div class="quick-view-count text-right">{{ infrastructure.stoppedVmCount }}</div>
 	            					</div>
 	            					<div class="quick-view-title text-center">Stopped VM</div>
 	            				</div>
 	            				<div class="col-md-2 col-sm-3 col-xs-6">
 	            					<div class="quick-view-details total-vm">
 	            						<div class="quick-view-icon pull-right"></div>
-	            						<div class="quick-view-count pull-right">{{ infrastructure.totalCount }}</div>
+	            						<div class="clearfix"></div>
+	            						<div class="quick-view-count text-right">{{ infrastructure.totalCount }}</div>
 	            					</div>
 	            					<div class="quick-view-title text-center">Total VM</div>
 	            				</div>
 	            				<div class="col-md-2 col-sm-3 col-xs-6">
 	            					<div class="quick-view-details vcpu">
 	            						<div class="quick-view-icon pull-right"></div>
-	            						<div class="quick-view-count pull-right">{{ infrastructure.vcpu }}</div>
+	            						<div class="clearfix"></div>
+	            						<div class="quick-view-count text-right">{{ infrastructure.vcpu }}</div>
 	            					</div>
 	            					<div class="quick-view-title text-center">vCpu</div>
 	            				</div>
 	            				<div class="col-md-2 col-sm-3 col-xs-6">
 	            					<div class="quick-view-details vcpu">
 	            						<div class="quick-view-icon pull-right"></div>
-	            						<div class="quick-view-count pull-right">{{ infrastructure.ram }}<small>(GB)</small></div>
+	            						<div class="clearfix"></div>
+	            						<div class="quick-view-count text-right">{{ infrastructure.ram }} <small>(GB)</small></div>
 	            					</div>
 	            					<div class="quick-view-title text-center">RAM</div>
 	            				</div>
 	            				<div class="col-md-2 col-sm-3 col-xs-6">
 	            					<div class="quick-view-details vcpu">
 	            						<div class="quick-view-icon pull-right"></div>
-	            						<div class="quick-view-count pull-right">{{ infrastructure.storage }}<small>(GB)</small></div>
+	            						<div class="clearfix"></div>
+	            						<div class="quick-view-count text-right">{{ infrastructure.storage }} <small>(GB)</small></div>
 	            					</div>
 	            					<div class="quick-view-title text-center">Storage Allocation</div>
 	            				</div>
 	            				<div class="col-md-2 col-sm-3 col-xs-6">
 	            					<div class="quick-view-details networks">
 	            						<div class="quick-view-icon pull-right"></div>
-	            						<div class="quick-view-count pull-right">{{ infrastructure.publicIp }}</div>
+	            						<div class="clearfix"></div>
+	            						<div class="quick-view-count text-right">{{ infrastructure.publicIp }}</div>
 	            					</div>
 	            					<div class="quick-view-title text-center">Public IP</div>
 	            				</div>
 	            				<div class="col-md-2 col-sm-3 col-xs-6">
 	            					<div class="quick-view-details networks">
 	            						<div class="quick-view-icon pull-right"></div>
-	            						<div class="quick-view-count pull-right">{{ infrastructure.networks }}</div>
+	            						<div class="clearfix"></div>
+	            						<div class="quick-view-count text-right">{{ infrastructure.networks }}</div>
 	            					</div>
 	            					<div class="quick-view-title text-center">Networks</div>
 	            				</div>
 	            				<div class="col-md-2 col-sm-3 col-xs-6">
 	            					<div class="quick-view-details private-template">
 	            						<div class="quick-view-icon pull-right"></div>
-	            						<div class="quick-view-count pull-right">{{ infrastructure.template }}</div>
+	            						<div class="clearfix"></div>
+	            						<div class="quick-view-count text-right">{{ infrastructure.template }}</div>
 	            					</div>
 	            					<div class="quick-view-title text-center">Private Template</div>
 	            				</div>
@@ -393,7 +402,7 @@
 	                    <tab-heading>
 	                        <i class="fa fa-money"></i> Payments
 	                    </tab-heading>
-	                    <div class="panel-body">	                        
+	                    <div class="panel-body">
 	                        <table cellspacing="1" cellpadding="1" class="table  table-bordered ">
                                 <thead>
                                     <tr>
@@ -431,7 +440,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-	                        
+
 	                    </div>
 	                </tab>
 	            </tabset>
