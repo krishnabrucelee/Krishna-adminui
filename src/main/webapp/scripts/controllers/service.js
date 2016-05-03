@@ -1267,12 +1267,25 @@ function computeListCtrl($scope, $state, $stateParams, appService, $window, glob
 		$scope.showLoader = true;
 		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
             var hasComputeList = {};
-            if ($scope.domainView == null) {
+          /**  if ($scope.domainView == null) {
             	hasComputeList =  appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "computes" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
             } else {
             	hasComputeList =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "computes/listComputeByDomain"
     				+"?lang=" +appService.localStorageService.cookie.get('language')
     				+ "&domainId="+$scope.domainView.id+"&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+            }**/
+  if ($scope.domainView == null && $scope.vmSearch == null) {
+            	hasComputeList = appService.crudService.list("computes", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+            } 
+		else {
+if ($scope.domainView != null && $scope.vmSearch == null) {
+                $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=";
+            }  else if ($scope.domainView == null && $scope.vmSearch != null) {
+                $scope.filter = "&domainId=0" + "&searchText=" + $scope.vmSearch;
+            } else  {
+                $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=" + $scope.vmSearch;
+            }
+    		    hasComputeList =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "computes/listComputeByDomain"+"?lang=" +appService.localStorageService.cookie.get('language')+ $scope.filter +"&sortBy="+globalConfig.sort.sortOrder+globalConfig.sort.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
             }
 
             hasComputeList.then(function(result) { // this is only run after $http
@@ -1291,6 +1304,13 @@ function computeListCtrl($scope, $state, $stateParams, appService, $window, glob
 	};
 
 
+ $scope.vmSearch = null;
+    $scope.searchList = function(vmSearch) {
+        $scope.vmSearch = vmSearch;
+
+        $scope.list(1);
+    };
+
     // Compute Offer List
     $scope.list = function (pageNumber) {
         appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
@@ -1298,13 +1318,26 @@ function computeListCtrl($scope, $state, $stateParams, appService, $window, glob
     	$scope.showLoader = true;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasComputes = {};
-        if ($scope.domainView == null) {
+   if ($scope.domainView == null && $scope.vmSearch == null) {
+            	hasComputes = appService.crudService.list("computes", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+            } 
+		else {
+if ($scope.domainView != null && $scope.vmSearch == null) {
+                $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=";
+            }  else if ($scope.domainView == null && $scope.vmSearch != null) {
+                $scope.filter = "&domainId=0" + "&searchText=" + $scope.vmSearch;
+            } else  {
+                $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=" + $scope.vmSearch;
+            }
+    		    hasComputes =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "computes/listComputeByDomain"+"?lang=" +appService.localStorageService.cookie.get('language')+ $scope.filter +"&sortBy="+globalConfig.sort.sortOrder+globalConfig.sort.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+            }
+       /** if ($scope.domainView == null) {
         	hasComputes = appService.crudService.list("computes", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
         } else {
         	hasComputes =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "computes/listComputeByDomain"
 				+"?lang=" +appService.localStorageService.cookie.get('language')
 				+ "&domainId="+$scope.domainView.id+"&sortBy="+globalConfig.sort.sortOrder+globalConfig.sort.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
-        }
+        }**/
 
         hasComputes.then(function (result) {  // this is only run after $http
 
@@ -1319,6 +1352,13 @@ function computeListCtrl($scope, $state, $stateParams, appService, $window, glob
         });
     };
     $scope.list(1);
+
+ // Get domain list
+        var hasdomainListView = appService.crudService.listAll("domains/list");
+        hasdomainListView.then(function (result) {
+        	$scope.domainListView = result;
+        });
+
 
     // Get compute list based on domain selection
     $scope.selectDomainView = function(pageNumber) {
