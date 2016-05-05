@@ -12,8 +12,6 @@ function headerCtrl($scope, $http, $window, $modal, $log, $state, $stateParams, 
 		    var hasThemeList = appService.crudService.listAll("themesettings/listAll");
 		    hasThemeList.then(function (result) {
 		    	$scope.themeSettingsList = result[0];
-		    	console.log("Hi", $scope.themeSettingsList);
-
 //		    	if (!angular.isUndefined($scope.themeSettingsList.id)) {
 //		            var hasCustomList= appService.crudService.listByQuery("themesettings/listbythemeid?id="+$scope.themeSettingsList.id);
 //			        hasCustomList.then(function (result) {

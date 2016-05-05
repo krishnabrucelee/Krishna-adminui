@@ -515,6 +515,11 @@ else if( !angular.isUndefined(file))
 };
 $scope.themeSettingList();
 	  $scope.validateThemeSettings = function (form,themeSettingsList, headerChoices, footerChoices) {
+
+		  if ((themeSettingsList.backgroundImgFile.size >= 1048576) || (themeSettingsList.logoImgFile.size >= 1048576)) {
+			  $state.reload();
+			  return appService.notify({message: "Image size should not be larger than 1 Mb", classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
+		  }
 		  if (JSON.stringify(headerChoices[0].name)) {
 			  themeSettingsList.headers = headerChoices;
 		  }
@@ -531,10 +536,11 @@ $scope.themeSettingList();
 		  				var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies,localStorageService);
 	  		 		    hasUpload.then(function (result) {
 		  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-		  		 		   $state.reload();
+		  		 		   $window.location.reload();
 		  	              }).catch(function (result) {
 		  	              	$scope.showLoader = false;
 		  	                  if (!angular.isUndefined(result.data)) {
+		  	                	$state.reload();
 		  	                      if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
 		  	                          var msg = result.data.globalError[0];
 		  	                          $scope.showLoader = false;
@@ -552,10 +558,11 @@ $scope.themeSettingList();
 			  			var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(headerChoices),JSON.stringify(footerChoices), appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
 	  		 		    hasUpload.then(function (result) {
 		  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-		  		 		   $state.reload();
+		  		 		   $window.location.reload();
 		  	              }).catch(function (result) {
 		  	              	$scope.showLoader = false;
 		  	                  if (!angular.isUndefined(result.data)) {
+		  	                	$state.reload();
 		  	                      if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
 		  	                          var msg = result.data.globalError[0];
 		  	                          $scope.showLoader = false;
@@ -583,10 +590,11 @@ $scope.themeSettingList();
 		  		    		var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
 		  		 		    hasUpload.then(function (result) {
 			  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-			  		 		   $state.reload();
+			  		 		   $window.location.reload();
 			  	              }).catch(function (result) {
 			  	              	$scope.showLoader = false;
 			  	                  if (!angular.isUndefined(result.data)) {
+			  	                	$state.reload();
 			  	                      if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
 			  	                          var msg = result.data.globalError[0];
 			  	                          $scope.showLoader = false;
@@ -604,10 +612,12 @@ $scope.themeSettingList();
 				  			var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(headerChoices),JSON.stringify(footerChoices), appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
 		  		 		    hasUpload.then(function (result) {
 			  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-			  		 		   $state.reload();
+			  		 		   $window.location.reload();
+			  		 		   console.log("dsf");
 			  	              }).catch(function (result) {
 			  	              	$scope.showLoader = false;
 			  	                  if (!angular.isUndefined(result.data)) {
+			  	                	$state.reload();
 			  	                      if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
 			  	                          var msg = result.data.globalError[0];
 			  	                          $scope.showLoader = false;
@@ -629,10 +639,11 @@ $scope.themeSettingList();
 		  		    		var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
 		  		 		    hasUpload.then(function (result) {
 			  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-			  		 		   $state.reload();
+			  		 		   $window.location.reload();
 			  	              }).catch(function (result) {
 			  	              	$scope.showLoader = false;
 			  	                  if (!angular.isUndefined(result.data)) {
+			  	                	$state.reload();
 			  	                      if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
 			  	                          var msg = result.data.globalError[0];
 			  	                          $scope.showLoader = false;
@@ -650,10 +661,11 @@ $scope.themeSettingList();
 					  			var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(headerChoices),JSON.stringify(footerChoices), appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
 			  		 		    hasUpload.then(function (result) {
 				  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-				  		 		   $state.reload();
+				  		 		   $window.location.reload();
 				  	              }).catch(function (result) {
 				  	              	$scope.showLoader = false;
 				  	                  if (!angular.isUndefined(result.data)) {
+				  	                	$state.reload();
 				  	                      if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
 				  	                          var msg = result.data.globalError[0];
 				  	                          $scope.showLoader = false;

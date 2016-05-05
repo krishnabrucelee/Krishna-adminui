@@ -27,7 +27,7 @@
                                 </label>
                                 <div class="col-md-10 col-sm-4">
                                 <div class="pull-left panel-border">
-                                	<img src="images/theme_background.jpg" alt="" height="100" width="150">
+                                	<img src="http://localhost:8080/resources/theme_background.jpg" alt="" height="100" width="150">
                                 </div>
 								<div class="pull-left m-l-md">
                                 <input type="file" name="background" accept=".jpg, .jpeg" class="custom-file-input" file-model="themeSettingsList.backgroundImgFile"/>
@@ -42,7 +42,7 @@
                                 </label>
                                 <div class="col-md-10 col-sm-4">
                                 <div class="pull-left panel-border">
-                                	<img src="images/theme_logo.jpg" alt="" height="100" width="150">
+                                	<img src="http://localhost:8080/resources/theme_logo.jpg" alt="" height="100" width="150" />
                                 </div>
                                 <div class="pull-left m-l-md">
                                     <input type="file" name="logo" accept=".jpg, .jpeg" class="custom-file-input" file-model="themeSettingsList.logoImgFile" />

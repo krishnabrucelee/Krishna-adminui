@@ -4,8 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <div id="logo" class="light-version">
-    <img src="images/theme_logo.jpg" />
-
+    <img src="http://localhost:8080/resources/theme_logo.jpg" />
 </div>
 <nav role="navigation" data-ng-controller="headerCtrl">
     <minimaliza-menu></minimaliza-menu>

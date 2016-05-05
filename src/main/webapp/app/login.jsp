@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="styles/style.css">
     <!-- endbuild -->
 </head>
-<body class="blank"  data-ng-controller="loginCtrl" style="background:url(images/theme_background.jpg); background-repeat: no-repeat; background-size: 100% 100%;">
+<body class="blank"  data-ng-controller="loginCtrl" style="background:url({{backgroundImage}}); background-repeat: no-repeat; background-size: 100% 100%;">
 <div class="login-container">
     <div class="row">
         <div class="col-md-12">
