@@ -45,7 +45,7 @@
 		                        <td width="24%" class="text-right"></td>
 		                    </tr>
 
-                        <tr data-ng-repeat="import in formElements.importList">
+                        <tr data-ng-repeat="import in formElements.importList" data-ng-class="import.acsCount == import.pandaCount? 'text-normal' : 'text-danger'">
                              <td>
                                  {{import.name}}
                              </td>
