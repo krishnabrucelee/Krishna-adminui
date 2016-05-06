@@ -516,10 +516,6 @@ else if( !angular.isUndefined(file))
 
 $scope.showImage = function() {
 	$scope.backgroundImage =  'http://'+ $window.location.hostname +':8080/'  + 'resources/' + 'theme_background.jpg';
-}
-$scope.showImage();
-
-$scope.showImage = function() {
 	$scope.logoImage =  'http://'+ $window.location.hostname +':8080/'  + 'resources/' + 'theme_logo.jpg';
 }
 $scope.showImage();
