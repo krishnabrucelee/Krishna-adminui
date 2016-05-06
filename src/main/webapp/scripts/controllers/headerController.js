@@ -7,6 +7,11 @@ angular
 
 function headerCtrl($scope, $http, $window, $modal, $log, $state, $stateParams, appService,globalConfig, $cookies) {
 
+	  $scope.showImage = function() {
+	    	$scope.logoImage =  'http://'+ $window.location.hostname +':8080/'  + 'resources/' + 'theme_logo.jpg';
+	}
+	$scope.showImage();
+
 	$scope.themeSettingList = function () {
 		$scope.themeSettingsList = {};
 		    var hasThemeList = appService.crudService.listAll("themesettings/listAll");

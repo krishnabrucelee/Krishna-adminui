@@ -513,6 +513,17 @@ else if( !angular.isUndefined(file))
 			};
       // Theme Settings
 };
+
+$scope.showImage = function() {
+	$scope.backgroundImage =  'http://'+ $window.location.hostname +':8080/'  + 'resources/' + 'theme_background.jpg';
+}
+$scope.showImage();
+
+$scope.showImage = function() {
+	$scope.logoImage =  'http://'+ $window.location.hostname +':8080/'  + 'resources/' + 'theme_logo.jpg';
+}
+$scope.showImage();
+
 $scope.themeSettingList();
 	  $scope.validateThemeSettings = function (form,themeSettingsList, headerChoices, footerChoices) {
 
@@ -613,8 +624,7 @@ $scope.themeSettingList();
 		  		 		    hasUpload.then(function (result) {
 			  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
 			  		 		   $window.location.reload();
-			  		 		   console.log("dsf");
-			  	              }).catch(function (result) {
+//			  	              }).catch(function (result) {
 			  	              	$scope.showLoader = false;
 			  	                  if (!angular.isUndefined(result.data)) {
 			  	                	$state.reload();
