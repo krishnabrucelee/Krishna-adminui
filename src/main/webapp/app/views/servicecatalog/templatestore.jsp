@@ -39,13 +39,19 @@
                         <a has-permission="REGISTER_TEMPLATE" class="btn btn-info font-bold" ui-sref="servicecatalog.list-templatestore.list-view-template-create"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message key="common.add" bundle="${msg}" /></a>
                             <a class="btn btn-info" ui-sref="servicecatalog.list-templatestore" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
                     </div>
-                    <div class="pull-right dashboard-filters-area">
-						<panda-quick-search></panda-quick-search>
-                        <div class="clearfix"></div>
-                        <span class="pull-right m-l-sm m-t-sm">
-
-                        </span>
-                    </div>
+                    <div class="pull-right dashboard-filters-area" id="instances_quick_search">
+						<form data-ng-submit="searchList(vmSearch)">
+							<div class="quick-search pull-right">
+								<div class="input-group">
+									<input data-ng-model="vmSearch" type="text" class="form-control input-medium" placeholder="<fmt:message key="common.quick.search" bundle="${msg}" />" aria-describedby="quicksearch-go">
+								   	<span class="input-group-addon" id="quicksearch-go"><span class="pe-7s-search pe-lg font-bold"></span></span>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<span class="pull-right m-l-sm m-t-sm">
+							</span>
+						</form>
+						</div>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -69,8 +75,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr data-ng-repeat="template in filteredCount = (templateList| filter: quickSearch | orderBy:sort.column:sort.descending)">
-                            <td>{{ template.name}}</td>
+<!--                         <tr data-ng-repeat="template in filteredCount = (templateList| filter: quickSearch | orderBy:sort.column:sort.descending)">
+ -->
+                         <tr data-ng-repeat="template in templateList">
+
+ 							  <td>{{ template.name}}</td>
                             <td>{{ (template.templateCreationType) ? "Yes" : "No" }}
                             <td>{{ template.osType.description}}</td>
                             <td>{{ template.zone.name}}</td>

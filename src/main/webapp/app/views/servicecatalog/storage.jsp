@@ -42,22 +42,28 @@
                                 <div class="clearfix"></div>
                             </div> --%>
                         </div>
-                        <div class="pull-right dashboard-filters-area">
-						<panda-quick-search></panda-quick-search>
-							<span class="pull-right m-r-sm">
+                        <div class="pull-right dashboard-filters-area" id="instances_quick_search">
+						<form data-ng-submit="searchList(vmSearch)">
+							<div class="quick-search pull-right">
+								<div class="input-group">
+									<input data-ng-model="vmSearch" type="text" class="form-control input-medium" placeholder="<fmt:message key="common.quick.search" bundle="${msg}" />" aria-describedby="quicksearch-go">
+								   	<span class="input-group-addon" id="quicksearch-go"><span class="pe-7s-search pe-lg font-bold"></span></span>
+								</div>
+							</div>
+							<span class="pull-right m-r-sm" >
 								<select
 									class="form-control input-group col-xs-5" name="domainView"
-									data-ng-model="domainView" id="storage_offerings_domain_filter"
+									data-ng-model="domainView"
 									data-ng-change="selectDomainView(1)"
 									data-ng-options="domainView.name for domainView in formElements.domainList">
 									<option value=""> <fmt:message key="common.domain.filter" bundle="${msg}" /></option>
 								</select>
 							</span>
-                            <div class="clearfix"></div>
-                            <span class="pull-right m-l-sm m-t-sm">
-
-                            </span>
-                        </div>
+							<div class="clearfix"></div>
+							<span class="pull-right m-l-sm m-t-sm">
+							</span>
+						</form>
+						</div>
 
                     </div>
                 </div>

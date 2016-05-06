@@ -82,7 +82,7 @@ function userListCtrl($scope, $state, $stateParams, modalService,appService, $lo
             }
             hasUsers =  promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "users/listByAdminSearch"
                   +"?lang=" +appService.localStorageService.cookie.get('language')+"&flag=pandaAdminPanel"
-                  + $scope.filter +"&sortBy="+globalConfig.sort.sortOrder+globalConfig.sort.sortBy+"&limit="+limit,
+                  +  encodeURI($scope.filter) +"&sortBy="+globalConfig.sort.sortOrder+globalConfig.sort.sortBy+"&limit="+limit,
             		$scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
 //            hasUsers = promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "users/listByDomain"
 //            		+ "?lang=" + appService.localStorageService.cookie.get('language') + "&status=" + $scope.vm.status + $scope.filter + "&sortBy="

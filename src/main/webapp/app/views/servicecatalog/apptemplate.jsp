@@ -40,12 +40,18 @@
                             <a class="btn btn-info" ui-sref="servicecatalog.list-apptemplate" title="Refresh"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
                     </div>
                     <div class="pull-right dashboard-filters-area">
-						<panda-quick-search></panda-quick-search>
-                        <div class="clearfix"></div>
-                        <span class="pull-right m-l-sm m-t-sm">
-
-                        </span>
-                    </div>
+						<form data-ng-submit="searchListing(quickSearch)">
+							<div class="quick-search pull-right">
+								<div class="input-group">
+									<input data-ng-model="quickSearch" type="text" class="form-control input-medium" placeholder="<fmt:message key="common.quick.search" bundle="${msg}" />" aria-describedby="quicksearch-go">
+								   	<span class="input-group-addon" id="quicksearch-go"><span class="pe-7s-search pe-lg font-bold"></span></span>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<span class="pull-right m-l-sm m-t-sm">
+							</span>
+						</form>
+						</div>
                 </div>
             </div>
         </div>
@@ -68,8 +74,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr data-ng-repeat="template in filteredCount = (isoList| filter: quickSearch | orderBy:sort.column:sort.descending)">
-                            <td>{{ template.name}}</td>
+<!--                         <tr data-ng-repeat="template in filteredCount = (isoList| filter: quickSearch | orderBy:sort.column:sort.descending)">
+ -->
+
+                       <tr data-ng-repeat="template in filteredCount = isoList | orderBy:sort.column:sort.descending">
+
+ 							<td>{{ template.name}}</td>
                             <td>{{ template.osCategory.name}}</td>
                             <td>{{ template.osType.description}}</td>
                             <td>{{ template.zone.name}}</td>
