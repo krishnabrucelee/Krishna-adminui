@@ -44,6 +44,15 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 	$scope.resourceAllocationField = {};
 	    $scope.resourceAllocationError = true;
 
+       Math.round = (function() {
+    	  var originalRound = Math.round;
+    	  return function(number, precision) {
+    	    precision = Math.abs(parseInt(precision)) || 0;
+    	    var multiplier = Math.pow(10, precision);
+    	    return (originalRound(number * multiplier) / multiplier);
+    	  };
+    	})();
+
     // Domain List
     var hasDomains = crudService.listAll("domains/list");
     hasDomains.then(function (result) {
@@ -102,7 +111,11 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					$scope.isDisabledProject = false;
 					$scope.loadEditOption($scope.domainList, $scope.resourceQuota.domain, object.domain);
 				}
-				$scope.resourceQuota[object.resourceType] = object.max;
+                                if (object.resourceType == "Memory" && object.max != -1) {
+                    			$scope.resourceQuota[object.resourceType] = (object.max)/1024; 
+               			 } else {
+                    			$scope.resourceQuota[object.resourceType] = object.max;
+                		}				
 				$scope.resourceQuota[object.resourceType+"id"] = object.id;
 			});
         })
@@ -132,7 +145,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					resourceObject.domainId = $scope.resourceQuota.domain.id;
 					resourceObject.domain = $scope.resourceQuota.domain;
 					resourceObject.resourceType = $scope.resourceTypeList[i];
-					resourceObject.max = $scope.resourceQuota[$scope.resourceTypeList[i]];
+                                        resourceObject.max = $scope.resourceQuota[$scope.resourceTypeList[i]];
 					resourceObject.id = $scope.resourceQuota[$scope.resourceTypeList[i]+"id"];
 					quotaList.push(resourceObject);
 				}
@@ -146,6 +159,13 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					quotaList.push(resourceObject);
 				}
                                 $scope.validateRange('domain', resourceObject.max, resourceObject.resourceType);
+                                if ( resourceObject.resourceType == "Memory" && resourceObject.max != -1) {
+				     resourceObject.max = $scope.resourceQuota[$scope.resourceTypeList[i]] * 1024;
+		                 } else {
+		            	     resourceObject.max = $scope.resourceQuota[$scope.resourceTypeList[i]];
+                                     $scope.validateRange('domain', resourceObject.max, resourceObject.resourceType);
+				 } 
+                                 quotaList.push(resourceObject);
 			}
 			if ($scope.resourceAllocationError) {
 	                        $scope.showLoader = true;
@@ -256,7 +276,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					resourceObject.id = $scope.resourceQuota[$scope.resourceTypeList[i]+"id"];
 					quotaList.push(resourceObject);
 				}
-                                if(i == 5) {
+                    if(i == 5) {
 					var resourceObject = {};
 					resourceObject.domainId = $scope.resourceQuota.domain.id;
 					resourceObject.domain = $scope.resourceQuota.domain;
@@ -268,6 +288,13 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					quotaList.push(resourceObject);
 				}
                                 $scope.validateRange('department', resourceObject.max, resourceObject.resourceType);
+                                if ( resourceObject.resourceType == "Memory" && resourceObject.max != -1 ) {
+				     resourceObject.max = $scope.resourceQuota[$scope.resourceTypeList[i]] * 1024;
+		                 } else {
+		            	     resourceObject.max = $scope.resourceQuota[$scope.resourceTypeList[i]];
+                                     $scope.validateRange('department', resourceObject.max, resourceObject.resourceType); 
+				 } 
+                                 quotaList.push(resourceObject); 
 			}
 			if ($scope.resourceAllocationError) {
                         $scope.showLoader = true;
@@ -333,6 +360,13 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					quotaList.push(resourceObject);
 				}
                                 $scope.validateRange('project', resourceObject.max, resourceObject.resourceType);
+				if ( resourceObject.resourceType == "Memory" && resourceObject.max != -1) {
+				     resourceObject.max = $scope.resourceQuota[$scope.resourceTypeList[i]] * 1024;
+		                } else {
+		            	     resourceObject.max = $scope.resourceQuota[$scope.resourceTypeList[i]];
+                                     $scope.validateRange('project', resourceObject.max, resourceObject.resourceType);
+				} 
+                                quotaList.push(resourceObject); 
 			}
 			if ($scope.resourceAllocationError) {
 	                        $scope.showLoader = true;
@@ -405,8 +439,12 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					$scope.isDisabledDepartment = false;
 					$scope.isDisabledProject = false;
 					$scope.loadEditOption($scope.domainList, $scope.resourceQuota.domain, object.domain);
-				}
-				$scope.resourceQuota[object.resourceType] = object.max;
+				}				
+				if (object.resourceType == "Memory" && object.max != -1) {
+                    			$scope.resourceQuota[object.resourceType] = (object.max)/1024; 
+               			 } else {
+                    			$scope.resourceQuota[object.resourceType] = object.max;
+                		}
 				$scope.resourceQuota[object.resourceType+"id"] = object.id;
 			});
         })
@@ -475,7 +513,11 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					$scope.isDisabledProject = false;
 					$scope.loadEditOption($scope.departmentList, $scope.resourceQuota.department, object.department);
 				}
-				$scope.resourceQuota[object.resourceType] = object.max;
+                                if (object.resourceType == "Memory" && object.max != -1) {
+                    			$scope.resourceQuota[object.resourceType] = (object.max)/1024; 
+                		} else {
+                   			 $scope.resourceQuota[object.resourceType] = object.max;
+                		}
 				$scope.resourceQuota[object.resourceType+"id"] = object.id;
 			});
         });
@@ -535,7 +577,11 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 				if(i == 1) {
 					$scope.loadEditOption($scope.projectList, $scope.resourceQuota.project, object.project);
 				}
-				$scope.resourceQuota[object.resourceType] = object.max;
+				if (object.resourceType == "Memory" && object.max != -1) {
+                    			$scope.resourceQuota[object.resourceType] = (object.max)/1024; 
+                		} else {
+                   			 $scope.resourceQuota[object.resourceType] = object.max;
+                		}
 				$scope.resourceQuota[object.resourceType+"id"] = object.id;
 			});
 			$scope.showLoader = false;
