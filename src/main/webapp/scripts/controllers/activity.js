@@ -11,129 +11,96 @@ angular
         .controller('activityCtrl', activityCtrl)
         .controller('activityDescriptionCtrl', activityDescriptionCtrl)
 
-function archiveCtrl($scope, globalConfig, notify, $state, $stateParams) {
-    $scope.global = globalConfig;
-    $scope.activity = {};
-    $scope.archive = function () {
-        $scope.homerTemplate = 'views/notification/notify.jsp';
-        notify({message: 'Archived successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-        $scope.cancel();
-    };
-
-
-    $scope.save = function (form)
-    {
-//        if($scope.activity.type == null && $scope.activity.startDate == null && $scope.activity.endDate == null) {
-//            alert("Please enter any Field ");
-//        } else {
-        $scope.formSubmitted = true;
-
-        if (form.$valid) {
-            $scope.homerTemplate = 'views/notification/notify.jsp';
-            notify({message: 'Archived successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-            $scope.cancel();
-        }
-    }
-
-
-    $scope.open = function ($event, currentDateField) {
-        $event.preventDefault();
-        $event.stopPropagation();
-
-        $scope.activity[currentDateField] = true;
-    };
-
-
-}
-
-
-function deleteCtrl($scope, $state, $stateParams, globalConfig, notify) {
-    $scope.global = globalConfig;
-    $scope.activity = {};
-    $scope.delete = function () {
-        $scope.homerTemplate = 'views/notification/notify.jsp';
-        notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-        $scope.cancel();
-    };
-
-    $scope.remove = function (form)
-    {
-        $scope.formSubmitted = true;
-
-        if (form.$valid) {
-            $scope.homerTemplate = 'views/notification/notify.jsp';
-            notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-            $scope.cancel();
-        }
-    }
-
-
-    $scope.open = function ($event, currentDateField) {
-        $event.preventDefault();
-        $event.stopPropagation();
-
-        $scope.activity[currentDateField] = true;
-    };
-
-
-}
-
-
-function activityViewCtrl($scope, $state, $stateParams, promiseAjax, localStorageService, modalService) {
-    var hasServer = promiseAjax.httpRequest("GET", "api/activity-" + pageTitle + ".json");
-    hasServer.then(function (result) {  // this is only run after $http completes
-        $scope.activityList = result;
-        angular.forEach($scope.activityList, function (item, key) {
-            if (item.id == activityId) {
-                $scope.activity = item;
-                modalService.trigger('views/activity/activity-description.jsp', 'md', "#" + $scope.activity.id);
-            }
-        });
-
-    });
-
-}
-;
-
-
-
-function activityCtrl($scope, $modal, promiseAjax, localStorageService, modalService) {
-
+function activityCtrl($scope, appService, $modal, promiseAjax, localStorageService, modalService) {
+    $scope.global = appService.globalConfig;
+    $scope.owner = {};
     $scope.activity = {
         category: "events",
         oneItemSelected: {},
         selectedAll: {}
     };
-    $scope.getActivityByCategory = function (category) {
-        $scope.activity = {
-            category: category,
-            oneItemSelected: {},
-            selectedAll: {}
-        };
-        $scope.activity.category = category;
-        $scope.pageTitle = category.substring(0, 1).toUpperCase() + category.substring(1).toLowerCase();
-        var hasServer = promiseAjax.httpRequest("GET", "api/activity-" + category + ".json");
-        hasServer.then(function (result) {  // this is only run after $http completes
-            $scope.activityList = result;
+    $scope.paginationObject = {};
+    $scope.sort = appService.globalConfig.sort;
+    $scope.changeSorting = appService.utilService.changeSorting;
+    $scope.paginationObject.sortOrder = '-';
+    $scope.paginationObject.sortBy = 'eventDateTime';
 
-        });
+    appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
+    appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
+    var hasUsers = appService.crudService.read("users", $scope.global.sessionValues.id);
+    hasUsers.then(function (result) {
+        $scope.owner = result;
+    });
+    $scope.getActivityByCategory = function (category, pageNumber) {
+        $scope.activity.category = category;
+        $scope.showLoader = true;
+        $scope.pageTitle = category.substring(0, 1).toUpperCase() + category.substring(1).toLowerCase();
+        var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+        if(category == 'events') {
+            var hasactionServer = appService.promiseAjax.httpTokenRequest( $scope.global.HTTP_GET, $scope.global.APP_URL + "events/events/rootadmin" +"?&sortBy=+id&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+        	hasactionServer.then(function (result) {  // this is only run after $http completes
+                $scope.activityList = result;
+
+                // For pagination
+                $scope.paginationObject.limit = limit;
+                $scope.paginationObject.currentPage = pageNumber;
+                $scope.paginationObject.totalItems = result.totalItems;
+                $scope.global.sessionValues.eventTotal = result.totalItems;
+                $scope.showLoader = false;
+            });
+        } else {
+            var hasactionServer = appService.promiseAjax.httpTokenRequest( $scope.global.HTTP_GET, $scope.global.APP_URL + "events/list/event" +"?lang=" + localStorageService.cookie.get('language') + "&type=ALERT&sortBy=+id&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+            hasactionServer.then(function (result) {  // this is only run after $http completes
+                $scope.activityList = result;
+                // For pagination
+                $scope.paginationObject.limit = limit;
+                $scope.paginationObject.currentPage = pageNumber;
+                $scope.paginationObject.totalItems = result.totalItems;
+                $scope.showLoader = false;
+            });
+        }
     }
-    $scope.getActivityByCategory($scope.activity.category);
+    $scope.getActivityByCategory($scope.activity.category, 1);
+    $scope.list = function(pageNumber) {
+        $scope.showLoader = true;
+        var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+        if($scope.activity.category == "events"){
+            var hasactionServer = appService.promiseAjax.httpTokenRequest( $scope.global.HTTP_GET, $scope.global.APP_URL + "events/events/rootadmin" +"?&sortBy=+id&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+            hasactionServer.then(function (result) {  // this is only run after $http completes
+            $scope.activityList = result;
+            // For pagination
+            $scope.paginationObject.limit = limit;
+            $scope.paginationObject.currentPage = pageNumber;
+            $scope.paginationObject.totalItems = result.totalItems;
+            $scope.showLoader = false;
+            });
+        } else {
+            var hasactionServer = appService.promiseAjax.httpTokenRequest( $scope.global.HTTP_GET, $scope.global.APP_URL + "events/list/event" +"?lang=" + localStorageService.cookie.get('language') + "&type=ALERT&sortBy=+id&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+            hasactionServer.then(function (result) {  // this is only run after $http completes
+                $scope.activityList = result;
+                // For pagination
+                $scope.paginationObject.limit = limit;
+                $scope.paginationObject.currentPage = pageNumber;
+                $scope.paginationObject.totalItems = result.totalItems;
+                $scope.showLoader = false;
+            });
+        }
+    }
 
     $scope.archiveGlobal = function () {
-        modalService.trigger('views/activity/archive.jsp', 'md', 'Archive ' + $scope.pageTitle);
+        modalService.trigger('app/views/activity/archive.jsp', 'md', 'Archive ' + $scope.pageTitle);
     };
 
     $scope.deleteGlobal = function () {
-        modalService.trigger('views/activity/delete.jsp', 'md', 'Delete ' + $scope.pageTitle);
+        modalService.trigger('app/views/activity/delete.jsp', 'md', 'Delete ' + $scope.pageTitle);
     };
 
     $scope.delete = function () {
-        modalService.trigger('views/activity/confirm-delete.jsp', 'md', 'Delete Confirmation');
+        modalService.trigger('app/views/activity/confirm-delete.jsp', 'md', 'Delete Confirmation');
     };
 
     $scope.archive = function () {
-        modalService.trigger('views/activity/confirm-archive.jsp', 'md', 'Archive Confirmation');
+        modalService.trigger('app/views/activity/confirm-archive.jsp', 'md', 'Archive Confirmation');
     };
 
 
@@ -146,7 +113,6 @@ function activityCtrl($scope, $modal, promiseAjax, localStorageService, modalSer
         } else {
             $scope.activity.selectedAll[$scope.activity.category] = false;
         }
-
 
         angular.forEach($scope.activityList, function (item, key) {
             item['isSelected'] = $scope.activity.selectedAll[$scope.activity.category];
@@ -168,16 +134,14 @@ function activityCtrl($scope, $modal, promiseAjax, localStorageService, modalSer
             }
         });
     }
-
-
     $scope.showDescription = function (activity) {
         $scope.currentActivity = activity;
         activity.pageTitle = $scope.pageTitle;
         activity.category = $scope.activity.category;
-
+        activity.owner = $scope.owner;
         var modalInstance = $modal.open({
             animation: $scope.animationsEnabled,
-            templateUrl: 'views/activity/activity-description.jsp',
+            templateUrl: 'app/views/activity/activity-description.jsp',
             controller: 'activityDescriptionCtrl',
             size: 'md',
             backdrop: 'static',
@@ -185,7 +149,10 @@ function activityCtrl($scope, $modal, promiseAjax, localStorageService, modalSer
             resolve: {
                 activity: function () {
                     return angular.copy(activity);
-                }
+                },
+                owner:function () {
+                    return angular.copy( $scope.owner);
+                },
             }
         });
 
@@ -195,6 +162,11 @@ function activityCtrl($scope, $modal, promiseAjax, localStorageService, modalSer
         }, function () {
         });
     };
+
+
+    $scope.$on("EVENTS", function() {
+        $scope.getActivityByCategory("events", 1);
+    });
 };
 
 
@@ -203,4 +175,81 @@ function activityDescriptionCtrl($scope, activity, $modalInstance, notify) {
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
+};
+
+function archiveCtrl($scope, globalConfig, notify, $state, $stateParams) {
+    $scope.global = globalConfig;
+    $scope.activity = {};
+    $scope.archive = function () {
+        $scope.homerTemplate = 'app/views/notification/notify.jsp';
+        notify({message: 'Archived successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+        $scope.cancel();
+    };
+
+
+    $scope.save = function (form)
+    {
+        $scope.formSubmitted = true;
+
+        if (form.$valid) {
+            $scope.homerTemplate = 'app/views/notification/notify.jsp';
+            notify({message: 'Archived successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+            $scope.cancel();
+        }
+    }
+
+
+    $scope.open = function ($event, currentDateField) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.activity[currentDateField] = true;
+    };
+
+};
+
+
+function deleteCtrl($scope, $state, $stateParams, globalConfig, notify) {
+    $scope.global = globalConfig;
+    $scope.activity = {};
+    $scope.delete = function () {
+        $scope.homerTemplate = 'app/views/notification/notify.jsp';
+        notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+        $scope.cancel();
+    };
+
+    $scope.remove = function (form)
+    {
+        $scope.formSubmitted = true;
+
+        if (form.$valid) {
+            $scope.homerTemplate = 'app/views/notification/notify.jsp';
+            notify({message: 'Deleted successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+            $scope.cancel();
+        }
+    }
+
+
+    $scope.open = function ($event, currentDateField) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.activity[currentDateField] = true;
+    };
+};
+
+
+function activityViewCtrl($scope, $state, $stateParams, promiseAjax, localStorageService, modalService) {
+    var hasServer = promiseAjax.httpRequest("GET", "api/activity-" + pageTitle + ".json");
+    hasServer.then(function (result) {  // this is only run after $http completes
+        $scope.activityList = result;
+        angular.forEach($scope.activityList, function (item, key) {
+            if (item.id == activityId) {
+                $scope.activity = item;
+                modalService.trigger('app/views/activity/activity-description.jsp', 'md', "#" + $scope.activity.id);
+            }
+        });
+
+    });
+
 };

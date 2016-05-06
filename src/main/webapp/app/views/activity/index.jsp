@@ -1,10 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-        pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<ng-include id="header" src="global.getViewPageUrl('common/header.jsp')"></ng-include>
-<ng-include id="menu" src="global.getViewPageUrl('common/navigation.jsp')"></ng-include>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<!-- This is content container for nested view in UI-Router-->
+<!-- You can put here any constant element in app content for example: Page title or breadcrum -->
+
+<!-- Header -->
+<div id="header" ng-include="'app/views/common/header.jsp'"></div>
+
+<!-- Navigation -->
+<aside id="menu" ng-include="'app/views/common/navigation.jsp'"></aside>
 
 <!-- Main Wrapper -->
 <div id="wrapper">
@@ -15,7 +21,7 @@
                     <ol class="hbreadcrumb breadcrumb">
                         <li><a ui-sref="dashboard">Home</a></li>
                         <li ng-repeat="state in $state.$current.path" ng-switch="$last || !!state.abstract" ng-class="{active: $last}">
-                            <a ng-switch-when="false" href="#{{state.url.format($stateParams)}}">{{state.data.pageTitle}}</a>
+                            <a ng-switch-when="false" href="{{state.url.format($stateParams)}}">{{state.data.pageTitle}}</a>
                             <span ng-switch-when="true">{{state.data.pageTitle}}</span>
                         </li>
                     </ol>
@@ -33,18 +39,21 @@
                 <div class="hpanel">
                     <div class="row m-l-sm m-r-sm panel-body" ng-controller="activityCtrl">
                         <ul class="nav nav-tabs" >
-                            <li data-ng-class="{'active' : activity.category == 'events'}"><a href="javascript:void(0)"  data-ng-click="getActivityByCategory('events')" data-toggle="tab">  <i class="fa fa-calendar"></i> Events</a></li>
-                            <li data-ng-class="{'active' : activity.category == 'alerts'}"><a  data-ng-click="getActivityByCategory('alerts')" data-toggle="tab"> <i class="fa fa-warning"></i> Alerts</a></li>
-                            <li data-ng-class="{'active' : activity.category == 'notifications'}"><a  data-ng-click="getActivityByCategory('notifications')" data-toggle="tab"> <i class="fa fa-bell"></i> Notifications</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane"  data-ng-class="{'active' : activity.category == 'events'}" id="events">
+                            <li data-ng-class="{'active' : activity.category == 'events'}"><a   data-ng-click="getActivityByCategory('events', 1)" data-toggle="tab">  <i class="fa fa-calendar"></i> Events</a></li>
+                            <li data-ng-class="{'active' : activity.category == 'alerts'}"><a   data-ng-click="getActivityByCategory('alerts', 1)" data-toggle="tab"> <i class="fa fa-warning"></i> Alerts</a></li>
+                            <li data-ng-class="{'active' : activity.category == 'notifications'}"><a data-ng-click="getActivityByCategory('notifications', 1)" data-toggle="tab"> <i class="fa fa-bell"></i> Notifications</a></li>
+               			</ul>
+                      <div class="tab-content">
+                      <div data-ng-show="showLoader" style="margin: 1%">
+							<get-loader-image data-ng-show="showLoader"></get-loader-image>
+						</div>
+                            <div data-ng-hide="showLoader" class="tab-pane"  data-ng-class="{'active' : activity.category == 'events'}" id="events">
                                 <div data-ng-include src="'app/views/activity/events.jsp'"></div>
                             </div>
-                            <div class="tab-pane"  data-ng-class="{'active' : activity.category == 'alerts'}" id="alerts">
+                            <div data-ng-hide="showLoader" class="tab-pane"  data-ng-class="{'active' : activity.category == 'alerts'}" id="alerts">
                                 <div data-ng-include src="'app/views/activity/alerts.jsp'"></div>
                             </div>
-                            <div class="tab-pane"  data-ng-class="{'active' : activity.category == 'notifications'}" id="notifications">
+                            <div data-ng-hide="showLoader" class="tab-pane"  data-ng-class="{'active' : activity.category == 'notifications'}" id="notifications">
                                 <div data-ng-include src="'app/views/activity/notifications.jsp'"></div>
                             </div>
                         </div>
@@ -53,5 +62,5 @@
             </div>
         </div>
     </div>
-<div id="footer" ng-include="'app/views/common/footer.jsp'"></div>
+
 </div>
