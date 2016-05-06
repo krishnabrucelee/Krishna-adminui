@@ -158,8 +158,7 @@
                                             'text-danger'
                                             : configForm.phoneNo.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">Phone Number:
-                                    <span class="text-danger">*</span>
+                                <label class="col-md-3 col-sm-3 control-label">Phone Number:<span class="text-danger">*</span>
                                 </label>
 
                                 <div class="col-md-7 col-sm-7">
@@ -218,6 +217,7 @@
 										data-ng-show="configForm.backgroundImageURL.$invalid && formSubmitted">
 										<i tooltip="not.valid.url" class="fa fa-warning error-icon"></i>
 									</div>
+									<i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="organization.background.url" bundle="${msg}" />" ></i>
 								</div>
                             </div>
                         </div>
@@ -226,8 +226,7 @@
                                             'text-danger'
                                             : configForm.signaturName.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">Signature Name:
-                                    <span class="text-danger">*</span>
+                                <label class="col-md-3 col-sm-3 control-label">Signature Name:<span class="text-danger">*</span>
                                 </label>
 
                                 <div class="col-md-7 col-sm-7" >
@@ -257,7 +256,12 @@
                         </div>
 
                     </div>
-                    <button class="btn btn-info pull-right" type="submit">Update</button>
+                    <span class="pull-right">
+                    <a class="btn btn-default btn-outline" id="cancel_button" data-ng-hide="showLoader" ui-sref="configuration.home({category:'general'})"><fmt:message key="common.cancel" bundle="${msg}" /></a>
+                    <button data-ng-if="organization.id == null" class="btn btn-info" data-ng-hide="showLoader" type="submit"><fmt:message key="common.add" bundle="${msg}" /></button>
+                <button data-ng-if="organization.id != null" class="btn btn-info" data-ng-hide="showLoader" type="submit"><fmt:message key="common.update" bundle="${msg}" /></button>
+				</span>
+
                 </div>
             </div>
         </div>
