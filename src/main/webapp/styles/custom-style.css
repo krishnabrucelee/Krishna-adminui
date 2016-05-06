@@ -156,6 +156,9 @@ fieldset.scheduler-border legend{border-bottom:none !important; margin-bottom:0p
 ul.footer-custom-links{margin:0px; padding:0px;}
 ul.footer-custom-links li{display:inline-block; list-style:none; padding:0px 5px; border-right:#ccc 1px solid; line-height:10px;}
 ul.footer-custom-links li:last-child{border-right:none;}
+ul.footer-custom-links li a{color:#6a6c6f; text-decoration:none;}
+ul.footer-custom-links li a:hover{color:#000; text-decoration:none;}
+
 .panel-border{border:#ccc 1px solid; padding:4px;}
 
 @media (min-width: 1024px) and (max-width: 1050px){.tab-full{width:100%;}}
