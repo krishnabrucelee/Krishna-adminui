@@ -88,7 +88,7 @@ function applicationListCtrl($scope, notify, promiseAjax, dialogService,appServi
                 $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=" + $scope.applicationSearch;
             }
             hasApplications =  promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "applications/listByFilter"
-				+"?lang=" +appService.localStorageService.cookie.get('language')+ $scope.filter+"&sortBy="+appService.globalConfig.sort.sortOrder+appService.globalConfig.sort.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+				+"?lang=" +appService.localStorageService.cookie.get('language')+  encodeURI($scope.filter)+"&sortBy="+appService.globalConfig.sort.sortOrder+appService.globalConfig.sort.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
         }
         hasApplications.then(function (result) {  // this is only run after $http completes0
             $scope.applicationList = result;

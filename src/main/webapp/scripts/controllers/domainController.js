@@ -98,7 +98,7 @@ function domainListCtrl($scope,$state, promiseAjax,appService, $log, notify, cru
         } else {
             $scope.filter = "&searchText=" + $scope.quickSearchText;
             hasDomain = promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "domains/listByFilter"
-            		+ "?lang=" + appService.localStorageService.cookie.get('language') + $scope.filter + "&sortBy=" + globalConfig.sort.sortOrder + globalConfig.sort.sortBy + "&limit=" + limit, $scope.global.paginationHeaders(pageNumber, limit), {
+            		+ "?lang=" + appService.localStorageService.cookie.get('language') +  encodeURI($scope.filter) + "&sortBy=" + globalConfig.sort.sortOrder + globalConfig.sort.sortBy + "&limit=" + limit, $scope.global.paginationHeaders(pageNumber, limit), {
                 "limit": limit
             });
         }
