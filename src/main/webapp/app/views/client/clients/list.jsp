@@ -67,7 +67,12 @@ Navigation
                                         <th><fmt:message key="common.action" bundle="${msg}" /></th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody data-ng-hide="domainList.length > 0">
+                              		 <tr>
+                                   <td class="col-md-6 col-sm-6" colspan="7"><fmt:message key="common.no.records.found" bundle="${msg}" />!!</td>
+                              			 </tr>
+                           			</tbody>
+                                        <tbody data-ng-show="domainList.length > 0">
                                             <tr data-ng-class="{'bg-row text-white' : domain.isSelected == true }"  data-ng-repeat="domain in filteredCount = (domainList| filter: quickSearch | orderBy:sort.column:sort.descending)">
 
                                                 <td>

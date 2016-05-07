@@ -110,9 +110,15 @@ if ($scope.vmSearch == null) {
         hasTemplates.then(function (result) {  // this is only run after $http completes0
 
             $scope.templateList = result;
-		console.log("templateList", result);
             // Get the count of the listings
-       		var hasTemplateCount =  appService.crudService.listAll("templates/templateCounts");
+	if ($scope.domainView == null && $scope.vmSearch == null) {
+       		hasTemplateCount =  appService.crudService.listAll("templates/templateCounts");
+	}
+ 	else {
+            	hasTemplateCount = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL +
+            			"templates/templateCountsSearchText?lang="+
+            			appService.localStorageService.cookie.get('language')+ $scope.filter +"&sortBy="+globalConfig.sort.sortOrder+globalConfig.sort.sortBy);
+            }
        		hasTemplateCount.then(function(result) {
        			$scope.windowsTemplate = result.windowsCount;
        			$scope.linuxTemplate = result.linuxCount;
@@ -145,11 +151,11 @@ if ($scope.vmSearch == null) {
 		$scope.paginationObject.sortBy = sortBy;
 		$scope.showLoader = true;
 		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-if ($scope.quickSearch == null) {
+if ($scope.templatequickSearch == null) {
      var hasIsoList = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listalltemplateforadmin" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+appService.globalConfig.sort.sortOrder+appService.globalConfig.sort.sortBy +"&type=iso"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
 }
-	if ($scope.quickSearch != null) {
-	$scope.filter = "&searchText=" + $scope.quickSearch;
+	if ($scope.templatequickSearch != null) {
+	$scope.filter = "&searchText=" + $scope.templatequickSearch;
   	var hasIsoList = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listall" +"?lang=" + localStorageService.cookie.get('language')+ $scope.filter +"&sortBy="+appService.globalConfig.sort.sortOrder+appService.globalConfig.sort.sortBy +"&type=iso"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
 	}
 
@@ -168,9 +174,9 @@ if ($scope.quickSearch == null) {
 		});
 	};
 
-$scope.quickSearch = null;
-    $scope.searchListing = function(quickSearch) {
-        $scope.quickSearch = quickSearch;
+$scope.templatequickSearch = null;
+    $scope.searchListing = function(templatequickSearch) {
+        $scope.templatequickSearch = templatequickSearch;
         $scope.isolist(1);
     };
 
@@ -180,21 +186,28 @@ $scope.quickSearch = null;
         appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
         $scope.showLoader = true;
     	var limit = (angular.isUndefined($scope.paginationObjectIso.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObjectIso.limit;
-if ($scope.quickSearch == null) {
+if ($scope.templatequickSearch == null) {
      var hasIso = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listalltemplateforadmin" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+appService.globalConfig.sort.sortOrder+appService.globalConfig.sort.sortBy +"&type=iso"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
 }
-	if ($scope.quickSearch != null) {
-	$scope.filter = "&searchText=" + $scope.quickSearch;
+	if ($scope.templatequickSearch != null) {
+	$scope.filter = "&searchText=" + $scope.templatequickSearch;
   	var hasIso = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listall" +"?lang=" + localStorageService.cookie.get('language')+ $scope.filter +"&sortBy="+appService.globalConfig.sort.sortOrder+appService.globalConfig.sort.sortBy +"&type=iso"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
 	}
 
 
         hasIso.then(function (result) {  // this is only run after $http completes0
-		console.log("result", result);
             $scope.isoList = result;
 
             // Get the count of the listings
-       		var hasIsoTemplateCount =  appService.crudService.listAll("templates/templateCounts");
+       		//var hasIsoTemplateCount =  appService.crudService.listAll("templates/templateCounts");
+if ($scope.domainView == null && $scope.templatequickSearch == null) {
+       		hasIsoTemplateCount =  appService.crudService.listAll("templates/templateCounts");
+	}
+ 	else {
+            	hasIsoTemplateCount = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL +
+            			"templates/templateCountsSearchText?lang="+
+            			appService.localStorageService.cookie.get('language')+ $scope.filter +"&sortBy="+globalConfig.sort.sortOrder+globalConfig.sort.sortBy);
+            }
        		hasIsoTemplateCount.then(function(result) {
        			$scope.windowsIsoTemplate = result.windowsIsoCount;
        			$scope.linuxIsoTemplate = result.linuxIsoCount;
@@ -534,13 +547,7 @@ function storageListCtrl($scope, $log, $state, $stateParams, $window, appService
 		$scope.showLoader = true;
 		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
             var hasStorageList = {};
-           /** if ($scope.domainView == null) {
-            	hasStorageList =  appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "storages" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
-            } else {
-            	hasStorageList =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "storages/listStorageByDomain"
-    				+"?lang=" +appService.localStorageService.cookie.get('language')
-    				+ "&domainId="+$scope.domainView.id+"&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
-            }**/
+           
 if ($scope.domainView == null && $scope.vmSearch == null) {
             	hasStorageList = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "storages" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
             } 

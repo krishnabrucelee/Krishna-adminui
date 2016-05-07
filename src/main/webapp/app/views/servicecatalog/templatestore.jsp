@@ -74,10 +74,15 @@
                             <th><fmt:message key="common.action" bundle="${msg}" /></th>
                         </tr>
                     </thead>
-                    <tbody>
-<!--                         <tr data-ng-repeat="template in filteredCount = (templateList| filter: quickSearch | orderBy:sort.column:sort.descending)">
+                     <tbody data-ng-hide="templateList.length > 0">
+                              		 <tr>
+                                   <td class="col-md-6 col-sm-6" colspan="10"><fmt:message key="common.no.records.found" bundle="${msg}" />!!</td>
+                              			 </tr>
+                           			</tbody>
+                    <tbody data-ng-show="templateList.length > 0">
+<!--                      <tr data-ng-repeat="template in filteredCount = (templateList| filter: quickSearch | orderBy:sort.column:sort.descending)">
  -->
-                         <tr data-ng-repeat="template in templateList">
+                       <tr data-ng-repeat="template in templateList">
 
  							  <td>{{ template.name}}</td>
                             <td>{{ (template.templateCreationType) ? "Yes" : "No" }}
