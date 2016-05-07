@@ -16,7 +16,7 @@
 
             <li data-ng-class="{active: $state.includes('support')}"><a class="label-menu-corner" ui-sref="support.tickets" ><fmt:message key="common.helpdesk" bundle="${msg}" /><span class="label label-success">2</span></a></li>
 
-            <li data-ng-class="{active: $state.includes('activity')}"><a  class="label-menu-corner" ui-sref="javascript:void(0)" ><fmt:message key="common.activity" bundle="${msg}" /><span class="label label-warning">3</span></a></li>
+            <li data-ng-class="{active: $state.includes('activity')}"><a  class="label-menu-corner" ui-sref="activity" ><fmt:message key="common.activity" bundle="${msg}" /><span class="label label-warning">{{global.sessionValues.eventTotal }}</span></a></li>
 
             <li class="dropdown" dropdown>
 
