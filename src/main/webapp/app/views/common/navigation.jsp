@@ -26,8 +26,8 @@
         <li ng-class="{active: $state.includes('cloud')}">
             <a href="#" id="cloud_navigation_button"><span class="pe-7s-cloud pe-2x nav-menu-icons"></span> <span class="nav-label"><fmt:message key="common.cloud" bundle="${msg}" /></span><span class="fa arrow"></span> </a>
             <ul class="nav nav-second-level" ng-class="{in: $state.includes('cloud')}">
-                <li ui-sref-active="active"><a ui-sref="cloud.infra-structure" id="infrastructure_navigation_button"><fmt:message key="common.infrastructure" bundle="${msg}" /></a></li>
-                <li ui-sref-active="active"><a ui-sref="cloud.resource" id="resource_usage_navigation_button"><fmt:message key="common.resourceusage" bundle="${msg}" /></a></li>
+<%--                 <li ui-sref-active="active"><a ui-sref="cloud.infra-structure" id="infrastructure_navigation_button"><fmt:message key="common.infrastructure" bundle="${msg}" /></a></li>
+ --%>                <li ui-sref-active="active"><a ui-sref="cloud.resource" id="resource_usage_navigation_button"><fmt:message key="common.resourceusage" bundle="${msg}" /></a></li>
                 <li ui-sref-active="active"><a ui-sref="cloud.vpc" id="vpc_navigation_button"><fmt:message key="common.vpc" bundle="${msg}" /></a></li>
             </ul>
         </li>
@@ -60,7 +60,7 @@
                 <li ui-sref-active="active"><a ui-sref="reports.payment-report"><fmt:message key="common.paymentreport" bundle="${msg}" /></a></li>
                 <li ui-sref-active="active"><a ui-sref="reports.usage-report"><fmt:message key="common.usagereport" bundle="${msg}" /></a></li>
           <%--  <li ui-sref-active="active"><a ui-sref="reports.payment-due"><fmt:message key="common.paymentduereport" bundle="${msg}" /></a></li>--%>
-                  <li ui-sref-active="active"><a ui-sref="reports.client-usage"><fmt:message key="common.clientusage" bundle="${msg}" /></a></li> 
+                  <li ui-sref-active="active"><a ui-sref="reports.client-usage"><fmt:message key="common.clientusage" bundle="${msg}" /></a></li>
             </ul>
         </li>
     </ul>
