@@ -100,7 +100,7 @@
                                 <td>{{ storage.storageType}} </td>
                                 <td><span data-ng-if="storage.diskSize <= 0">0</span><span data-ng-if="storage.diskSize > 0">{{ storage.diskSize}}</span></td>
                                 <!--  <td>{{ storage.diskSize}}</td>-->
-                                <td>{{ storage.isCustomDisk}}</td>
+                                <td>{{ (storage.isCustomDisk) ? "Yes" : "No"}}</td>
                                 <td>
                                     <a class="icon-button test_storage_offerings_edit_button" id="storage_offerings_edit_button_{{storage.id}}" data-unique-field="{{storage.name}}"  ui-sref="servicecatalog.list-storage.list-view-storage-offer({id: {{ storage.id}}})" title="Edit"  ><span class="fa fa-edit m-r"></span></a>
 <!--                                     <a class="icon-button" title="Enable" data-ng-hide="storage.state == 'Enable'">
