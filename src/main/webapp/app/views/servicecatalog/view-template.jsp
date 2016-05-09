@@ -188,7 +188,7 @@
                                     <label> <input icheck type="checkbox" ng-model="template.extractable"> <fmt:message key="template.extractable" bundle="${msg}" /> </label>
                                 </div>
                                 <div class="col-md-6  col-sm-6 col-lg-6  col-sm-6 col-lg-6">
-                                    <label> <input ng-disabled="!checked" icheck type="checkbox" ng-model="template.passwordEnabled"> <fmt:message key="template.password.enabled" bundle="${msg}" /></label>
+                                    <label data-ng-if ="template.passwordEnabled"> <input  icheck type="checkbox" ng-model="template.passwordEnabled"> <fmt:message key="template.password.enabled" bundle="${msg}" /></label>
                                 </div>
                             </div>
                         </div>
