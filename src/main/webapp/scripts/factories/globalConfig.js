@@ -82,6 +82,7 @@ function globalConfig($window) {
             },
             minDate : new Date(),
         },
+        Math : window.Math,
 
         HTTP_GET : 'GET',
         HTTP_POST : 'POST',

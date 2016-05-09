@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-        pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <div class="hpanel" >
     <div class="panel-heading">
 
@@ -17,7 +16,7 @@
                 <div class="pull-right">
                     <panda-quick-search></panda-quick-search>
                     <div class="clearfix"></div>
-
+<!--
                     <span class="pull-right m-l-sm m-t-sm">
                         <span data-ng-hide="activity.oneItemSelected.notifications">
                             <a class="btn btn-info" data-ng-click="archiveGlobal()"><span class="fa fa-file-archive-o"></span> Archive Notifications</a>
@@ -28,7 +27,7 @@
                             <a class="btn btn-info" data-ng-click="delete()"><span class="fa fa-trash"></span> Delete Notifications</a>
                         </span>
                         <a class="btn btn-info" title="Refresh" ><span class="fa fa-refresh fa-lg "></span></a>
-                    </span>
+                    </span> -->
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -53,9 +52,14 @@
                 <th>Action</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody data-ng-hide="activityListt.length > 0">
+                                    <tr>
+                                        <td colspan="10"><fmt:message key="common.no.records.found" bundle="${msg}" />!!</td>
+                                    </tr>
+                </tbody>
+                <tbody data-ng-show="activityListt.length > 0">
 
-                    <tr data-ng-repeat="notification in activityList| filter: quickSearch">
+                    <tr data-ng-repeat="notification in activityListt| filter: quickSearch">
                         <td class="">
                             <div class="checkbox checkbox-single checkbox-info">
                                 <input type="checkbox" data-ng-model="notification.isSelected" data-ng-click="checkOne(notification)">

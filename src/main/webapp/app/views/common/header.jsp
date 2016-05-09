@@ -3,9 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<div id="logo" class="light-version">
-    <img src="images/theme_logo.jpg" />
-
+<div id="logo" class="light-version" data-ng-controller="headerCtrl" >
+    <img src={{logoImage}} />
 </div>
 <nav role="navigation" data-ng-controller="headerCtrl">
     <minimaliza-menu></minimaliza-menu>
@@ -17,7 +16,7 @@
 
             <li data-ng-class="{active: $state.includes('support')}"><a class="label-menu-corner" ui-sref="support.tickets" ><fmt:message key="common.helpdesk" bundle="${msg}" /><span class="label label-success">2</span></a></li>
 
-            <li data-ng-class="{active: $state.includes('activity')}"><a  class="label-menu-corner" ui-sref="activity" ><fmt:message key="common.activity" bundle="${msg}" /><span class="label label-warning">3</span></a></li>
+            <li data-ng-class="{active: $state.includes('activity')}"><a  class="label-menu-corner" ui-sref="activity" ><fmt:message key="common.activity" bundle="${msg}" /><span class="label label-warning">{{global.sessionValues.eventTotal }}</span></a></li>
 
             <li class="dropdown" dropdown>
 
