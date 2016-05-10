@@ -191,7 +191,7 @@ if ($scope.templatequickSearch == null) {
 }
 	if ($scope.templatequickSearch != null) {
 	$scope.filter = "&searchText=" + $scope.templatequickSearch;
-  	var hasIso = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listall" +"?lang=" + localStorageService.cookie.get('language')+ $scope.filter +"&sortBy="+appService.globalConfig.sort.sortOrder+appService.globalConfig.sort.sortBy +"&type=iso"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+  	var hasIso = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listall" +"?lang=" + localStorageService.cookie.get('language')+ encodeURI($scope.filter) +"&sortBy="+appService.globalConfig.sort.sortOrder+appService.globalConfig.sort.sortBy +"&type=iso"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
 	}
 
 
@@ -206,7 +206,7 @@ if ($scope.domainView == null && $scope.templatequickSearch == null) {
  	else {
             	hasIsoTemplateCount = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL +
             			"templates/templateCountsSearchText?lang="+
-            			appService.localStorageService.cookie.get('language')+ $scope.filter +"&sortBy="+globalConfig.sort.sortOrder+globalConfig.sort.sortBy);
+            			appService.localStorageService.cookie.get('language')+ encodeURI($scope.filter) +"&sortBy="+globalConfig.sort.sortOrder+globalConfig.sort.sortBy);
             }
        		hasIsoTemplateCount.then(function(result) {
        			$scope.windowsIsoTemplate = result.windowsIsoCount;
