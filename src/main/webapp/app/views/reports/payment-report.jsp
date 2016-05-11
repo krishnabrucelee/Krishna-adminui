@@ -99,7 +99,7 @@
                                         <td class="text-right">{{ invoice.totalCost}}</td>
                                         <td class="text-right">{{ invoice.dueDate | date:'yyyy-MM-dd'}}</td>
                                         <td class="text-right">{{ invoice.paidOn | date:'yyyy-MM-dd'}}</td>
-                                        <td class="text-right"></td>
+                                        <td class="text-right">{{invoice.transactionReference}}</td>
                                         <td class="text-right">{{ invoice.paymentMethod}}</td>
                                         <td class="text-right">{{ invoice.status}}</td>
                                         <td class="text-right">
