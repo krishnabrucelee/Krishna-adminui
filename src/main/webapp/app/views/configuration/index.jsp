@@ -11,8 +11,8 @@
 
             <ul class="nav nav-tabs" >
                 <li data-ng-class="{'active' : configElements.category == 'general'}"><a href="#/configuration/general">  <i class="fa fa-calendar"></i> General</a></li>
-                <li data-ng-class="{'active' : configElements.category == 'chargeback'}"><a href="#/configuration/chargeback"  > <i class="fa fa-warning"></i> Chargeback</a></li>
-                <li data-ng-class="{'active' : configElements.category == 'cloudstack'}"><a href="#/configuration/cloudstack"><i class="fa fa-money"></i> Cloud Stack</a></li>
+                <li data-ng-class="{'active' : configElements.category == 'chargeback'}"><a href="#/configuration/chargeback"  > <i class="fa fa-credit-card"></i> Chargeback</a></li>
+                <li data-ng-class="{'active' : configElements.category == 'cloudstack'}"><a href="#/configuration/cloudstack"><i class="fa fa-cloud"></i> Cloud Stack</a></li>
             </ul>
 
             <div class="tab-content">
