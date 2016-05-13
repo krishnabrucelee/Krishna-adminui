@@ -187,26 +187,28 @@
                                 <div class="col-md-6  col-sm-6 col-lg-6  col-sm-6 col-lg-6">
                                     <label> <input icheck type="checkbox" ng-model="template.extractable"> <fmt:message key="template.extractable" bundle="${msg}" /> </label>
                                 </div>
-                                <div class="col-md-6  col-sm-6 col-lg-6  col-sm-6 col-lg-6">
+                                <%-- <div class="col-md-6  col-sm-6 col-lg-6  col-sm-6 col-lg-6">
                                     <label data-ng-if ="template.passwordEnabled"> <input  icheck type="checkbox" ng-model="template.passwordEnabled"> <fmt:message key="template.password.enabled" bundle="${msg}" /></label>
+                                </div> --%>
+                                 <div class="col-md-6  col-sm-6 col-lg-6">
+                                    <label> <input icheck type="checkbox" ng-model="template.featured"> <fmt:message key="template.featured" bundle="${msg}" /> </label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row" data-ng-show="!template.templateCreationType">
-                                <div class="col-md-6  col-sm-6 col-lg-6">
-                                    <label> <input icheck type="checkbox" ng-model="template.featured"> <fmt:message key="template.featured" bundle="${msg}" /> </label>
-                                </div>
+
                                 <div class="col-md-6  col-sm-6 col-lg-6">
                                     <label> <input icheck type="checkbox" ng-model="template.routing"> <fmt:message key="template.routing" bundle="${msg}" /> </label>
+                                </div>
+                                <div class="col-md-6 col-sm-6" data-ng-show="!template.templateCreationType">
+                                    <label> <input icheck type="checkbox" ng-model="template.oneTimeChargeable"> <fmt:message key="template.onetimechargeable" bundle="${msg}" /></label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row" >
-                                <div class="col-md-6 col-sm-6" data-ng-show="!template.templateCreationType">
-                                    <label> <input icheck type="checkbox" ng-model="template.oneTimeChargeable"> <fmt:message key="template.onetimechargeable" bundle="${msg}" /></label>
-                                </div>
+
                                 <div class="col-md-6  col-sm-6 col-lg-6">
                                     <label> <input icheck type="checkbox" ng-model="template.share"> <fmt:message key="template.share" bundle="${msg}" /> </label>
                                 </div>
