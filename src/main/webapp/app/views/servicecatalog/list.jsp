@@ -29,7 +29,7 @@
                                 </div>
                             </div>
                             <a class="btn btn-info font-bold" id="compute_offerings_add_button" ui-sref="servicecatalog.list-compute.list-compute-offer"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message key="common.add" bundle="${msg}" /></a>
-                            <a class="btn btn-info" id="compute_offerings_refresh_button" ui-sref="servicecatalog.list-compute" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
+                            <a class="btn btn-info" id="compute_offerings_refresh_button" data-ng-click="list(1)" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
                         </div>
                         <%-- <div class="pull-right dashboard-filters-area">
 							<panda-quick-search></panda-quick-search>
@@ -52,7 +52,7 @@
 						<form data-ng-submit="searchList(vmSearch)">
 							<div class="quick-search pull-right">
 								<div class="input-group">
-									<input data-ng-model="vmSearch" type="text" class="form-control input-medium" placeholder="<fmt:message key="common.quick.search" bundle="${msg}" />" aria-describedby="quicksearch-go">
+									<input data-ng-model="vmSearch" id="compute_offer_list_search" type="text" class="form-control input-medium" placeholder="<fmt:message key="common.quick.search" bundle="${msg}" />" aria-describedby="quicksearch-go">
 								   	<span class="input-group-addon" id="quicksearch-go"><span class="pe-7s-search pe-lg font-bold"></span></span>
 								</div>
 							</div>

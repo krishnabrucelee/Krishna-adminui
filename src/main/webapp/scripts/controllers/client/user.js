@@ -33,12 +33,19 @@ function userListCtrl($scope, $state, $stateParams, modalService,appService, $lo
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
 
             var hasUserList = {};
-            if ($scope.domainView == null) {
+            if ($scope.domainView == null && $scope.userSearch == null) {
                 hasUserList =  appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "users" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
             } else {
-                hasUserList =  promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "users/listByUserDomain"
+            	if ($scope.domainView != null && $scope.userSearch == null) {
+                    $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=";
+                } else if ($scope.domainView == null && $scope.userSearch != null) {
+                    $scope.filter = "&domainId=0" + "&searchText=" + $scope.userSearch;
+                } else {
+                    $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=" + $scope.userSearch;
+                }
+                hasUserList =  promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "users/listByAdminSearch"
                     +"?lang=" +appService.localStorageService.cookie.get('language')+"&flag=pandaAdminPanel"
-                    + "&domainId="+$scope.domainView.id+"&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+                    + encodeURI($scope.filter) + "&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
             }
 
             hasUserList.then(function(result) { // this is only run after $http
@@ -61,13 +68,6 @@ function userListCtrl($scope, $state, $stateParams, modalService,appService, $lo
         $scope.showLoader = true;
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasUsers = {};
-//        if ($scope.domainView == null) {
-//            hasUsers = crudService.list("users/listall", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
-//        } else {
-//            hasUsers =  promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "users/listByUserDomain"
-//                +"?lang=" +appService.localStorageService.cookie.get('language')+"&flag=pandaAdminPanel"
-//                + "&domainId="+$scope.domainView.id+"&sortBy="+globalConfig.sort.sortOrder+globalConfig.sort.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
-//        }
 
         $scope.filter = "";
         if ($scope.domainView == null && $scope.userSearch == null) {
@@ -84,15 +84,22 @@ function userListCtrl($scope, $state, $stateParams, modalService,appService, $lo
                   +"?lang=" +appService.localStorageService.cookie.get('language')+"&flag=pandaAdminPanel"
                   +  encodeURI($scope.filter) +"&sortBy="+globalConfig.sort.sortOrder+globalConfig.sort.sortBy+"&limit="+limit,
             		$scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
-//            hasUsers = promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "users/listByDomain"
-//            		+ "?lang=" + appService.localStorageService.cookie.get('language') + "&status=" + $scope.vm.status + $scope.filter + "&sortBy="
-//            		+ globalConfig.sort.sortOrder + globalConfig.sort.sortBy + "&limit=" + limit, $scope.global.paginationHeaders(pageNumber, limit), {
-//                "limit": limit
-//            });
         }
 
         hasUsers.then(function (result) {  // this is only run after $http completes0
             $scope.accountList = result;
+
+            // Get the count of the listings
+            var hasUserCount = {};
+            if ($scope.domainView == null && $scope.userSearch == null) {
+            	hasUserCount = appService.crudService.listAll("users/list");
+            } else {
+            	hasUserCount = appService.promiseAjax.httpTokenRequest(appService.crudService.globalConfig.HTTP_GET,
+       				 appService.crudService.globalConfig.APP_URL + "users"  +"/listBySearchText?"+encodeURI($scope.filter)+"&flag=pandaAdminPanel");
+            }
+            hasUserCount.then(function(result) {
+       			$scope.activeUsers = result;
+    		});
 
             $scope.paginationObject.limit  = limit;
             $scope.paginationObject.currentPage = pageNumber;
@@ -110,11 +117,11 @@ function userListCtrl($scope, $state, $stateParams, modalService,appService, $lo
     $scope.active = {};
     $scope.inActive = {};
 
-    var hasUsers = crudService.listAll("users/list");
-        $scope.showLoader = true;
+    /*var hasUsers = crudService.listAll("users/list");
+    $scope.showLoader = true;
     hasUsers.then(function (result) {  // this is only run after $http completes0
         $scope.activeUsers = result;
-    });
+    });*/
 
     // Get domain list
     var hasdomainListView = appService.crudService.listAll("domains/list");
