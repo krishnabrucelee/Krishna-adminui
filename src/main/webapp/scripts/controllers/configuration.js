@@ -1004,7 +1004,7 @@ function billingCtrl($scope, appService, globalConfig, localStorageService, $win
         $scope.paginationObject = {};
         //delete $scope.billingSettingsObj.startDate;
         //delete $scope.billingSettingsObj.endDate;
-
+        $scope.billingSettingsObj.domain.status = "ENABLED";
         var billingSettingsObj = $scope.billingSettingsObj;
         var hasConfig = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_POST, globalConfig.PING_APP_URL + "billableItemDiscount", billingSettingsObj);
         hasConfig.then(function (result) {  // this is only run after $http
