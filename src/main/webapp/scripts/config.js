@@ -183,7 +183,15 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             }
         })
 
-      .state('configuration.home.email', {
+        .state('configuration.home.usage', {
+            url: "/importUsage",
+            templateUrl: VIEW_URL +  "views/configuration/cloudStack/import-usage.jsp",
+            data: {
+                pageTitle: 'Manual Usage'
+            }
+        })
+
+        .state('configuration.home.email', {
             url: "/email",
             templateUrl: VIEW_URL +  "views/configuration/general/email-config.jsp",
             data: {
