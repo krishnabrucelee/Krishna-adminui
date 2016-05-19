@@ -10,6 +10,7 @@ angular
         .controller('billingCtrl', billingCtrl)
         .controller('loginSecurityCtrl', loginSecurityCtrl)
         .controller('importCsDataCtrl', importCsDataCtrl)
+        .controller('usageCsDataCtrl', usageCsDataCtrl)
 
 function cloudStackCtrl($scope, $window, appService) {
 
@@ -1159,6 +1160,59 @@ function importCsDataCtrl($scope, appService, globalConfig, localStorageService,
             } else {
             	$scope.msg = 'Cloud stack status checked successfully';
             }
+            appService.notify({message: $scope.msg, classes: 'alert-success', templateUrl: $scope.homerTemplate});
+        }).catch(function (result) {
+            if (!angular.isUndefined(result.data)) {
+            	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+              	    var msg = result.data.globalError[0];
+              	    $scope.showLoader = false;
+              	    appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                }
+            }
+        });
+    };
+};
+
+function usageCsDataCtrl($scope, appService, globalConfig, localStorageService, $window, notify) {
+
+	$scope.paginationObject = {};
+	$scope.formElements = {};
+
+	// Manual sync type list from server
+    $scope.list = function (pageNumber) {
+    	$scope.showLoader = true;
+    	var limit = (angular.isUndefined($scope.paginationObject.limit)) ? appService.globalConfig.CONTENT_LIMIT : $scope.paginationObject.limit;
+        var hasDomainList = appService.promiseAjax.httpRequestPing(appService.globalConfig.HTTP_GET, appService.globalConfig.PING_APP_URL
+        		+ "domain/listDomain?limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+        hasDomainList.then(function (result) {
+    	    if (!angular.isUndefined(result._embedded)) {
+            	$scope.formElements.domainList = result['_embedded'].domainList;
+            } else {
+                $scope.formElements.domainList = {};
+            }
+
+            $scope.showLoader = false;
+            // For pagination
+            $scope.paginationObject.limit = limit;
+            $scope.paginationObject.currentPage = pageNumber;
+            $scope.paginationObject.totalItems = result.totalItems;
+        });
+    };
+    $scope.list(1);
+
+	$scope.updateDomainUsage = function (domain, type) {
+		$scope.showLoader = true;
+		var hasUsageData = {};
+		if (type == 'import') {
+			hasUsageData = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_POST, globalConfig.PING_APP_URL + "domain/updateDomainUsage", domain);
+		} else {
+			hasUsageData = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_GET, globalConfig.PING_APP_URL + "domain/updateAllDomainUsage");
+		}
+        hasUsageData.then(function (result) {
+        	$scope.list(1);
+            $scope.homerTemplate = 'app/views/notification/notify.jsp';
+            $scope.showLoader = false;
+            $scope.msg = 'Domain usage updated successfully';
             appService.notify({message: $scope.msg, classes: 'alert-success', templateUrl: $scope.homerTemplate});
         }).catch(function (result) {
             if (!angular.isUndefined(result.data)) {

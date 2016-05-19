@@ -145,6 +145,14 @@
 										bundle="${msg}" />
 							</span>
 							</span>
+							<span ng-if="state.data.pageTitle === 'Manual Usage'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="import.usage" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="import.usage"
+										bundle="${msg}" />
+							</span>
+							</span>
 							<span ng-if="state.data.pageTitle === 'Zone Description'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
@@ -494,6 +502,7 @@
 					 <span ng-if="$state.current.data.pageTitle === 'Resource Allocation'"><fmt:message key="resource.allocation" bundle="${msg}" /></span>
 					 <span ng-if="$state.current.data.pageTitle === 'Zone Description'"><fmt:message key="zone.description" bundle="${msg}" /></span>
 					 <span ng-if="$state.current.data.pageTitle === 'Import Data'"><fmt:message key="import.data" bundle="${msg}" /></span>
+					 <span ng-if="$state.current.data.pageTitle === 'Manual Usage'"><fmt:message key="import.usage" bundle="${msg}" /></span>
 					 <span ng-if="$state.current.data.pageTitle === 'Email Template'"><fmt:message key="email.template" bundle="${msg}" /></span>
 					 <span ng-if="$state.current.data.pageTitle === 'Invoice List Report'"><fmt:message key="common.invoicelistreport" bundle="${msg}" /></span>
 					 <span ng-if="$state.current.data.pageTitle === 'Payment Report'"><fmt:message key="common.paymentreport" bundle="${msg}" /></span>
