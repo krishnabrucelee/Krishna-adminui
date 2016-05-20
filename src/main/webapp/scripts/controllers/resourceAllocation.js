@@ -117,7 +117,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					$scope.loadEditOption($scope.domainList, $scope.resourceQuota.domain, object.domain);
 				}
                                 if (object.resourceType == "Memory" && object.max != -1) {
-                    			$scope.resourceQuota[object.resourceType] = (object.max)/1024; 
+                    			$scope.resourceQuota[object.resourceType] = Math.round(((object.max)/1024),1); 
                			 } else {
                     			$scope.resourceQuota[object.resourceType] = object.max;
                 		}				
@@ -451,7 +451,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					$scope.loadEditOption($scope.domainList, $scope.resourceQuota.domain, object.domain);
 				}				
 				if (object.resourceType == "Memory" && object.max != -1) {
-                    			$scope.resourceQuota[object.resourceType] = (object.max)/1024; 
+                    			$scope.resourceQuota[object.resourceType] = Math.round(((object.max)/1024),1); 
                			 } else {
                     			$scope.resourceQuota[object.resourceType] = object.max;
                 		}
@@ -534,7 +534,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					$scope.loadEditOption($scope.departmentList, $scope.resourceQuota.department, object.department);
 				}
                                 if (object.resourceType == "Memory" && object.max != -1) {
-                    			$scope.resourceQuota[object.resourceType] = (object.max)/1024; 
+                    			$scope.resourceQuota[object.resourceType] = Math.round(((object.max)/1024),1); 
                 		} else {
                    			 $scope.resourceQuota[object.resourceType] = object.max;
                 		}
@@ -608,7 +608,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					$scope.loadEditOption($scope.projectList, $scope.resourceQuota.project, object.project);
 				}
 				if (object.resourceType == "Memory" && object.max != -1) {
-                    			$scope.resourceQuota[object.resourceType] = (object.max)/1024; 
+                    			$scope.resourceQuota[object.resourceType] = Math.round(((object.max)/1024),1); 
                 		} else {
                    			 $scope.resourceQuota[object.resourceType] = object.max;
                 		}
