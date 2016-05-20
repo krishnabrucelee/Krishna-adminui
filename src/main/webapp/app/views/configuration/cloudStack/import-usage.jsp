@@ -47,7 +47,7 @@
                              <td>
                                  {{domain.name}}
                              </td>
-                             <td>{{domain.usageExecutedDate | date:'yyyy-MM-dd'}}</td>
+                             <td>{{domain.usageExecutedDate || " - " | date:'yyyy-MM-dd'}}</td>
                              <td>
                                  <span>
                                      <a class="btn btn-info" data-ng-click="updateDomainUsage(domain, 'import')"><i class="fa fa-download"></i> <fmt:message key="manual.execute" bundle="${msg}" /></a>
