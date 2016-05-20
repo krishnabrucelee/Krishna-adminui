@@ -9,14 +9,14 @@ angular
 
 function clientListCtrl($scope, $state, $stateParams,appService, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, dialogService, crudService) {
 
-
 	 $scope.domains = {
 		        category: "domains",
 		        oneItemSelected: {},
 		        selectedAll: {},
 		        totalcount: 0
 		    };
-
+		    $scope.status={};
+ 			$scope.status.basic = true;
 		    $scope.default_option = true
 		    $scope.domainList = {};
 		    $scope.revokes = false;

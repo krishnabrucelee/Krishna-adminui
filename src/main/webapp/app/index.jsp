@@ -187,6 +187,7 @@
 <script src="scripts/controllers/reportCtrl.js"></script>
 <script src="scripts/controllers/configuration.js"></script>
 <script src="scripts/controllers/configuration/taxController.js"></script>
+    <script src="scripts/controllers/profileController.js"></script>
 <script src="scripts/controllers/configuration/billableItemController.js"></script>
 <script src="scripts/controllers/configuration/emailConfigController.js"></script>
 <script src="scripts/controllers/configuration/organizationController.js"></script>
