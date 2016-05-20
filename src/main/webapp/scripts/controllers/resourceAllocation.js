@@ -509,7 +509,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 		hasSumOfDepartmentMax.then(function (result) {  // this is only run after $http completes
 			$scope.hasSumOfDepartmentMax = result;
                         angular.forEach(result, function(object, key) {
-		            if (key == "Memory") {
+		            if (key == "Memory" && object != -1) {
                                 $scope.hasSumOfDepartmentMax.Memory = object/1024;
 		            }
                         });
@@ -586,7 +586,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 		hasSumOfProjectMax.then(function (result) {  // this is only run after $http completes
 			$scope.hasSumOfProjectMax = result;
                         angular.forEach(result, function(object, key) {
-		            if (key == "Memory") {
+		            if (key == "Memory" && object != -1) {
                                 $scope.hasSumOfProjectMax.Memory = object/1024;
 		            }
                         });
