@@ -90,6 +90,11 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 		var hasSumOfDomainMin = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceDomains/domainmin/"+$scope.resourceQuota.domain.id);
 		hasSumOfDomainMin.then(function (result) {  // this is only run after $http completes
 			$scope.hasSumOfDomainMin = result;
+                        angular.forEach(result, function(object, key) {
+		            if (key == "Memory") {
+                                $scope.hasSumOfDomainMin.Memory = object/1024;
+		            }
+                        });
         });
 		hasResource.then(function (result) {
 			$scope.showLoader = false;
@@ -419,6 +424,11 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 		var hasSumOfDomainMin = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceDomains/domainmin/"+$scope.resourceQuota.domain.id);
 		hasSumOfDomainMin.then(function (result) {  // this is only run after $http completes
 			$scope.hasSumOfDomainMin = result;
+                        angular.forEach(result, function(object, key) {
+		            if (key == "Memory") {
+                                $scope.hasSumOfDomainMin.Memory = object/1024;
+		            }
+                        });
         });
 		hasResource.then(function (result) {
 			$scope.showLoader = false;
@@ -489,10 +499,20 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 		var hasSumOfDepartmentMin = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceDepartments/departmentmin/"+$scope.resourceQuota.department.id);
 		hasSumOfDepartmentMin.then(function (result) {  // this is only run after $http completes
 			$scope.hasSumOfDepartmentMin = result;
+                        angular.forEach(result, function(object, key) {
+		            if (key == "Memory") {
+                                $scope.hasSumOfDepartmentMin.Memory = object/1024;
+		            }
+                        });
         });
 		var hasSumOfDepartmentMax = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceDepartments/departmentmax/"+$scope.resourceQuota.department.id);
 		hasSumOfDepartmentMax.then(function (result) {  // this is only run after $http completes
 			$scope.hasSumOfDepartmentMax = result;
+                        angular.forEach(result, function(object, key) {
+		            if (key == "Memory" && object != -1) {
+                                $scope.hasSumOfDepartmentMax.Memory = object/1024;
+		            }
+                        });
         });
 		hasResource.then(function (result) {
 			$scope.showLoader = false;
@@ -556,10 +576,20 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 		var hasSumOfProjectMin = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceProjects/projectmin/"+$scope.resourceQuota.project.id);
 		hasSumOfProjectMin.then(function (result) {  // this is only run after $http completes
 			$scope.hasSumOfProjectMin = result;
+                        angular.forEach(result, function(object, key) {
+		            if (key == "Memory") {
+                                $scope.hasSumOfProjectMin.Memory = object/1024;
+		            }
+                        });
         });
 		var hasSumOfProjectMax = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceProjects/projectmax/"+$scope.resourceQuota.project.id);
 		hasSumOfProjectMax.then(function (result) {  // this is only run after $http completes
 			$scope.hasSumOfProjectMax = result;
+                        angular.forEach(result, function(object, key) {
+		            if (key == "Memory" && object != -1) {
+                                $scope.hasSumOfProjectMax.Memory = object/1024;
+		            }
+                        });
         });
 		hasResource.then(function (result) {
 			$scope.showLoader = false;
