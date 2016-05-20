@@ -32,10 +32,14 @@
 			                </div>
 		                </div>
 	                </div>
-	                <div class="row">
+	                <div class="row" >
 		                <div class="col-md-12 m-t-md company-panel-content">
-			                <accordion close-others="oneAtATime" class="company-dashboard-accordion">
-			                    <accordion-group heading="Primary Contact" is-open="true">
+
+			                <accordion close-others="oneAtATime" class="company-dashboard-accordion" >
+			                    <accordion-group  is-open="status.basic">
+			                    <accordion-heading >
+                            <fmt:message key="primary.contact" bundle="${msg}" /><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.basic, 'glyphicon-chevron-right': !status.basic}"></i>
+                        </accordion-heading>
 			                        <ul class="list-group no-border">
 					                    <li class="list-group-item">
 					                        <div class="row">
@@ -63,7 +67,12 @@
 					                    </li>
 					                </ul>
 			                    </accordion-group>
-			                    <accordion-group heading="Secondary Contact">
+
+
+			                    <accordion-group is-open="status.secondary" >
+			                    <accordion-heading  >
+                            <fmt:message key="secondary.contact" bundle="${msg}" /><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.secondary, 'glyphicon-chevron-right': !status.secondary}"></i>
+                        </accordion-heading>
 			                        <ul class="list-group no-border">
 					                    <li class="list-group-item">
 					                        <div class="row">

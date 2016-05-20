@@ -115,7 +115,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel-info col-md-4 col-sm-4" data-ng-show ="config.eventName" >
+                    <div class="panel-info col-md-5 col-sm-5" data-ng-show ="config.eventName" >
                             <div class="panel-heading">
                                 <h3 class="panel-title"><i class="fa fa-bolt"></i>&nbsp;&nbsp;<fmt:message key="event.details" bundle="${msg}" /></h3>
                             </div>

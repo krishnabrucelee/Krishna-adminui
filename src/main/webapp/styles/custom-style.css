@@ -209,9 +209,6 @@ ul.footer-custom-links li a:hover{color:#000; text-decoration:none;}
 
 .company-panel-content a.accordion-toggle span{font-size:13px; font-weight:bold; color:#4c6986;}
 
-.company-dashboard-accordion .panel-heading h4{background: url("../images/expand.png") no-repeat center left !important; }
-.company-dashboard-accordion .panel-heading h4 a{margin-left:20px;}
-
 @media (min-width: 1024px) and (max-width: 1050px){.tab-full{width:100%;}}
 
 @media (min-width: 600px) and (max-width: 767px) {

@@ -33,6 +33,14 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 }
             })
 
+            .state('profile', {
+                url : "/profile",
+                templateUrl : VIEW_URL + "views/profile.jsp",
+                data : {
+                    pageTitle : 'Profile Settings',
+                }
+            })
+
             // Common views
             .state('common', {
                 abstract: true,
