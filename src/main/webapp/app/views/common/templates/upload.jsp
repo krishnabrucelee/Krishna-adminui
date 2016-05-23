@@ -3,13 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:set var="language" value="${not empty language ? language : pageContext.request.getAttribute('language')}" scope="session" />
+<fmt:setBundle basename="i18n/messages_${language}" var="msg" scope="session" />
+
 <form name="uploadTemplateForm" data-ng-submit="save(uploadTemplateForm)" method="post" novalidate="" >
 <div class="inmodal" >
         <div class="modal-header">
-            <panda-modal-header page-icon="pe-7s-upload" page-title="Upload Template"></panda-modal-header>                
+            <panda-modal-header page-icon="pe-7s-upload" page-title="Upload Template"></panda-modal-header>
         </div>
         <div class="modal-body">
-            <div class="row"  > 
+            <div class="row"  >
                 <div class="col-md-9 col-sm-9 col-xs-9">
                     <div class="form-group" ng-class="{'has-error': uploadTemplateForm.name.$invalid && formSubmitted}">
                         <div class="row">
@@ -59,14 +62,14 @@
                             <div class="col-md-6 col-sm-6">
                                 <select required="true" class="form-control input-group" name="hypervisor" data-ng-model="template.hypervisor" ng-options="hypervisor.name for hypervisor in formElements.hypervisorList" >
                                     <option value="">Select</option>
-                                </select>  
+                                </select>
                                 <span class="help-block m-b-none" ng-show="uploadTemplateForm.hypervisor.$invalid && formSubmitted" >Hypervisor is required.</span>
                                 <i tooltip="Choose the hypervisor" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
                             </div>
-                            
+
                         </div>
                     </div>
-                    
+
                     <div class="form-group" data-ng-show="template.hypervisor.id == 3">
                         <div class="row">
                             <div class="col-md-6">
@@ -79,78 +82,78 @@
 
 
                     <div class="form-group" data-ng-show="template.hypervisor.id == 4">
-                        <div class="row" > 
+                        <div class="row" >
                             <label class="col-md-3 col-sm-3 col-xs-3 control-label" >Root disk controller</label>
                             <div class="col-md-9 col-sm-9 col-xs-9">
                                 <select class="form-control input-group" name="rootDiskController" data-ng-model="template.rootDiskController" ng-options="rootDiskController.name for rootDiskController in template.hypervisor.rootDiskControllerList" >
                                     <option value="">No Thanks</option>
-                                </select>  
+                                </select>
                                 <i tooltip="Choose the Root disk controller"  class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
-                                
+
                             </div>
                         </div>
                     </div>
-                    
-                    
+
+
                     <div class="form-group" data-ng-show="template.hypervisor.id == 4">
-                        <div class="row" > 
+                        <div class="row" >
                             <label class="col-md-3 col-sm-3 col-xs-3 control-label" >NIC adapter type</label>
                             <div class="col-md-9 col-sm-9 col-xs-9">
                                 <select  class="form-control input-group" name="nicType" data-ng-model="template.nicType" ng-options="nicType.name for nicType in template.hypervisor.nicTypeList" >
                                     <option value="">No Thanks</option>
-                                </select> 
+                                </select>
                                 <i tooltip="Choose the Nic adapter type list"   class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
                             </div>
-                            
+
                         </div>
                     </div>
-                    
-                    
+
+
                     <div class="form-group" data-ng-show="template.hypervisor.id == 4">
-                        <div class="row" > 
+                        <div class="row" >
                             <label class="col-md-3 col-sm-3 col-xs-3 control-label" >Keyboard type</label>
                             <div class="col-md-9 col-sm-9 col-xs-9">
                                 <select  class="form-control input-group" name="format" data-ng-model="template.keyboardType" ng-options="keyboardType.name for keyboardType in template.hypervisor.keyboardTypeList" >
                                     <option value="">No Thanks</option>
-                                </select> 
+                                </select>
                                 <i tooltip="Choose the Keyboard type"   class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
                             </div>
-                            
+
                         </div>
                     </div>
-                    
-                   
+
+
                     <div class="form-group"  ng-class="{
                                             'has-error'
                                             : uploadTemplateForm.format.$invalid && formSubmitted}">
-                        <div class="row" > 
+                        <div class="row" >
                             <label class="col-md-3 col-sm-3 col-xs-3 control-label" >Format<span class="text-danger">*</span></label>
                             <div class="col-md-9 col-sm-9 col-xs-9">
                                 <select required="true" class="form-control input-group" name="format" data-ng-model="template.format" ng-options="format.name for format in template.hypervisor.formatList" >
                                     <option value="">Select</option>
-                                    
+
                                 </select>
                                 <span class="help-block m-b-none" ng-show="uploadTemplateForm.format.$invalid && formSubmitted" >Format is required.</span>
                                 <i tooltip="Choose the Format"   class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
 
                 <div class="col-md-9 col-sm-9 col-xs-9">
-                    
-                    
+
+
 
                     <div class="form-group" ng-class="{
                                             'has-error'
                                             : uploadTemplateForm.osType.$invalid && formSubmitted}">
-                        <div class="row" > 
+                        <div class="row" >
                             <label class="col-md-3 col-sm-3 col-xs-3 control-label" >OS Type<span class="text-danger">*</span></label>
                             <div class="col-md-9 col-sm-9 col-xs-9">
                                 <select required="true" class="form-control input-group" name="osType" data-ng-model="template.osType" ng-options="osType.name for osType in formElements.osTypeList" >
                                     <option value="">Select</option>
-                                </select>  
+                                </select>
                                 <span class="help-block m-b-none" ng-show="uploadTemplateForm.osType.$invalid && formSubmitted" >OS Type is required.</span>
                                 <i tooltip="Choose the type"  class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
                             </div>
@@ -162,7 +165,7 @@
                                 <label> <input icheck type="checkbox" ng-model="template.extractable"> Extractable </label>
                             </div>
                             <div class="col-md-6 col-lg-6">
-                                <label> <input icheck type="checkbox" ng-model="template.passwordEnabled"> Password Enabled </label>                   
+                                <label> <input icheck type="checkbox" ng-model="template.passwordEnabled"> Password Enabled </label>
                             </div>
                         </div>
                     </div>
@@ -198,7 +201,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="form-group" ng-class="{'has-error': uploadTemplateForm.rate.$invalid && formSubmitted}">
                         <div class="row">
                             <label class="col-md-3 col-sm-3 control-label">Rate Per GB<span class="text-danger">*</span></label>
@@ -214,7 +217,7 @@
                 </div>
             </div>
         </div>
-    
+
         <div class="modal-footer">
             <div class="row">
                 <div class="col-md-12  col-sm-12">

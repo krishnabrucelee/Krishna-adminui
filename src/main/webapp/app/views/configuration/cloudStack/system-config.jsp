@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<c:set var="language" value="${not empty language ? language : pageContext.request.getAttribute('language')}" scope="session" />
+<fmt:setBundle basename="i18n/messages_${language}" var="msg" scope="session" />
+
 <form name="configForm" data-ng-controller="cloudStackCtrl"
 	method="post" novalidate="" data-ng-submit="save(configForm)">
 
@@ -35,7 +38,7 @@
 									<input required="true" type="url" name="URL"
 										class="form-control" data-ng-model="config.apiURL"
 										data-ng-class="{'error': configForm.URL.$invalid && formSubmitted}">
-										
+
 									<div class="error-area"
 										data-ng-show="configForm.URL.$invalid && formSubmitted">
 										<i tooltip="URL  is Required" class="fa fa-warning error-icon"></i>
