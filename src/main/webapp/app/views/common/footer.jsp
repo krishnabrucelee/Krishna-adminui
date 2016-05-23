@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:set var="language" value="${not empty language ? language : pageContext.request.getAttribute('language')}" scope="session" />
+<fmt:setBundle basename="i18n/messages_${language}" var="msg" scope="session" />
 
 <%--  <footer class="footer" data-ng-controller="headerCtrl">
  <span class="pull-left"><fmt:message key="common.copyright" bundle="${msg}" /> © <fmt:message key="common.footer" bundle="${msg}" />.</span>

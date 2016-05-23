@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:set var="language" value="${not empty language ? language : pageContext.request.getAttribute('language')}" scope="session" />
+<fmt:setBundle basename="i18n/messages_${language}" var="msg" scope="session" />
+
 <div ui-view  data-ng-controller="reportCtrl" >
     <div data-ng-include src="'views/reports/common-generator.html'"></div>
     <div class="col-md-12 col-sm-12 col-xs-12 m-b-sm"><a href="#" class="btn btn-info  pull-right m-l-xs"><span class="fa fa-file-pdf-o "></span> PDF</a><a href="#" class="btn btn-info pull-right m-r-xs"><span class=" fa fa-file-excel-o "></span> CSV</a></div>

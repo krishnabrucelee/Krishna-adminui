@@ -3,6 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:set var="language" value="${not empty language ? language : pageContext.request.getAttribute('language')}" scope="session" />
+<fmt:setBundle basename="i18n/messages_${language}" var="msg" scope="session" />
+
+
 <md-dialog aria-label="Volume Snapshot">
   <form>
   <md-toolbar style="background-color: #71B1D1 !important;">
@@ -24,10 +28,10 @@
     </div>
 
 
-   
+
   </md-dialog-content>
   <div class="md-actions m-t-md" layout="row">
-   
+
     <md-button class="btn-primary" ng-click="answer('not useful')">
      Yes
     </md-button>
