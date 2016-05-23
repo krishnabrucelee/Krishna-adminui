@@ -1166,7 +1166,12 @@ function importCsDataCtrl($scope, appService, globalConfig, localStorageService,
             	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
               	    var msg = result.data.globalError[0];
               	    $scope.showLoader = false;
-              	    appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+              	  if (type === 'checkall') {
+                  	$scope.msg = 'Data dependency accoured so please use individual check option';
+                  } else {
+                  	$scope.msg = 'Data dependency accoured so please import from top level hierarchy';
+                  }
+              	    appService.notify({message: $scope.msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                 }
             }
         });
