@@ -93,8 +93,8 @@
                                        </tbody>
                                     <tbody data-ng-show="accountList.length > 0">
                                         <tr data-ng-repeat="account in filteredCount = accountList">
-                                              <td>{{ account.userName}}</td>
-                                                <td>{{account.department.userName}}</td>
+                                            <td>{{ account.userName}}</td>
+                                            <td>{{account.department.userName}}</td>
                                             <td>{{account.domain.name}}</td>
                                             <td>{{account.type}}</td>
                                             <td>{{account.role.name || '-'}} </td>
