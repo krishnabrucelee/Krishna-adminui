@@ -34,13 +34,13 @@
                                 <div class="clearfix"></div>
                                 </div>
                             </div>
-                             <div class="dashboard-box pull-left">
+                             <%-- <div class="dashboard-box pull-left">
                                  <div class="instance-border-content-normal">
                                 <span class="pull-left m-t-xs m-l-xs m-r-xs"><fmt:message key="removed.users" bundle="${msg}" /></span>
                                 <b class="pull-left">{{(activeUsers | filter:{status:'DELETED', domainId:domainView.id}).length}}</b>
                                 <div class="clearfix"></div>
                                 </div>
-                            </div>
+                            </div> --%>
                             <a class="btn btn-info" data-ng-click="list(1)" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg"></span></a>
                         </div>
                         <div class="pull-right dashboard-filters-area">
