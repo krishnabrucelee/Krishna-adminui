@@ -27,9 +27,10 @@
 
     <!-- build:css({.tmp,app}) styles/style.css -->
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/custom-style.css">
     <!-- endbuild -->
 </head>
-<body class="blank"  data-ng-controller="loginCtrl" data-ng-style="{'background':(backgroundImage ? 'url('+backgroundImage+')' : '')}" style="background-repeat: no-repeat; background-size: 100% 100%;">
+<body class="blank login-bg" data-ng-controller="loginCtrl" data-ng-style="{'background':(backgroundImage ? 'url('+backgroundImage+')' : '') }">
 <div class="login-container">
     <div class="row">
         <div class="col-md-12">
@@ -88,5 +89,8 @@
             target.style["margin-bottom"] = '10px';
         }
     }
+</script>
+<script type="text/javascript">
+    var ADMIN_CONTEXT_PATH = "<%=request.getContextPath()%>";
 </script>
 </html>
