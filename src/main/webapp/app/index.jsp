@@ -10,6 +10,9 @@
 <html>
 <head>
     <!-- Redirect to login when passing the wrong URL -->
+    <script type="text/javascript">
+	    var ADMIN_CONTEXT_PATH = "<%=request.getContextPath()%>";
+	</script>
     <script>
         var pageUrl = window.location.href;
         if(pageUrl.indexOf("index#/login") > -1 || pageUrl.endsWith("index#/")) {
