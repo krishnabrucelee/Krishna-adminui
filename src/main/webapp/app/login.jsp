@@ -28,6 +28,7 @@
     <!-- build:css({.tmp,app}) styles/style.css -->
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/custom-style.css">
+    <link rel="stylesheet" href="styles/login-loader.css">
     <!-- endbuild -->
 </head>
 <body class="blank login-bg" data-ng-controller="loginCtrl" data-ng-style="{'background':(backgroundImage ? 'url('+backgroundImage+')' : '') }">
