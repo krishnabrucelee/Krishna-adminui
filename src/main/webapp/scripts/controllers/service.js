@@ -50,7 +50,7 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
 		$scope.paginationObject.sortBy = sortBy;
 		$scope.showLoader = true;
 		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-             
+
 if ($scope.vmSearch == null) {
          var hasTemplateList = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listalltemplateforadmin" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy +"&type=template"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
 }
@@ -94,7 +94,7 @@ if ($scope.vmSearch == null) {
 
     //Template list
     $scope.list = function (pageNumber) {
-  
+
         appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
         appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
     	$scope.showLoader = true;
@@ -103,7 +103,7 @@ if ($scope.vmSearch == null) {
 	if ($scope.vmSearch == null) {
          var hasTemplates = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listalltemplateforadmin" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+appService.globalConfig.sort.sortOrder+appService.globalConfig.sort.sortBy +"&type=template"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
 }
-	if ($scope.vmSearch != null) {	
+	if ($scope.vmSearch != null) {
 	$scope.filter = "&searchText=" + $scope.vmSearch;
   	var hasTemplates = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listall" +"?lang=" + localStorageService.cookie.get('language')+  encodeURI($scope.filter) +"&sortBy="+appService.globalConfig.sort.sortOrder+appService.globalConfig.sort.sortBy +"&type=template"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
 	}
@@ -123,7 +123,6 @@ if ($scope.vmSearch == null) {
        			$scope.windowsTemplate = result.windowsCount;
        			$scope.linuxTemplate = result.linuxCount;
        			$scope.totalCount = result.totalCount;
-			console.log(result.totalCount);
     		});
 
             // For pagination
@@ -417,6 +416,8 @@ function templateEditCtrl($scope, $state, $stateParams, $log, $window, appServic
 
 	$scope.templateForm = {};
 
+
+
 	$scope.formElements = {
 	        rootDiskControllerList: {
 	          "0":"SCSI",
@@ -445,6 +446,23 @@ function templateEditCtrl($scope, $state, $stateParams, $log, $window, appServic
         });
     };
 
+       // OS Type list from server
+    $scope.categoryChange = function() {
+        $scope.ostypes = {};
+        var hasosTypeList = appService.crudService.filterList("ostypes/list", $scope.template.osCategory.name);
+        hasosTypeList.then(function (result) {
+    	    $scope.formElements.osTypeList = result;
+    	    angular.forEach( $scope.formElements.osTypeList, function(obj, key) {
+	    		if(obj.id == $scope.template.osType.id) {
+	    			$scope.template.osType = obj;
+	    		}
+	    	});
+        });
+
+    };
+
+
+
     if (!angular.isUndefined($stateParams.id) && $stateParams.id != '') {
         $scope.edit($stateParams.id)
     }
@@ -458,6 +476,7 @@ function templateEditCtrl($scope, $state, $stateParams, $log, $window, appServic
 	    	angular.forEach($scope.formElements.osCategoryList, function(obj, key) {
 	    		if(obj.id == $scope.template.osCategory.id) {
 	    			$scope.template.osCategory = obj;
+	    			$scope.categoryChange();
 	    		}
 	    	});
 	    });
@@ -547,10 +566,10 @@ function storageListCtrl($scope, $log, $state, $stateParams, $window, appService
 		$scope.showLoader = true;
 		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
             var hasStorageList = {};
-           
+
 if ($scope.domainView == null && $scope.vmSearch == null) {
             	hasStorageList = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "storages" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
-            } 
+            }
 		else {
 	if ($scope.domainView != null && $scope.vmSearch == null) {
                 $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=";
@@ -622,7 +641,7 @@ $scope.vmSearch = null;
         var hasStorage = {};
  	if ($scope.domainView == null && $scope.vmSearch == null) {
             	hasStorage = appService.crudService.list("storages", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
-            } 
+            }
 		else {
 	if ($scope.domainView != null && $scope.vmSearch == null) {
                 $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=";
@@ -1338,7 +1357,7 @@ function computeListCtrl($scope, $state, $stateParams, appService, $window, glob
             var hasComputeList = {};
   if ($scope.domainView == null && $scope.vmSearch == null) {
             	hasComputeList = appService.crudService.list("computes", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
-            } 
+            }
 		else {
 if ($scope.domainView != null && $scope.vmSearch == null) {
                 $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=";
@@ -1382,7 +1401,7 @@ if ($scope.domainView != null && $scope.vmSearch == null) {
         var hasComputes = {};
    if ($scope.domainView == null && $scope.vmSearch == null) {
             	hasComputes = appService.crudService.list("computes", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
-            } 
+            }
 		else {
 if ($scope.domainView != null && $scope.vmSearch == null) {
                 $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=";
