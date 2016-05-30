@@ -89,4 +89,7 @@
         }
     }
 </script>
+<script type="text/javascript">
+    var ADMIN_CONTEXT_PATH = "<%=request.getContextPath()%>";
+</script>
 </html>
