@@ -112,7 +112,9 @@
                             <div class="row" >
                                 <label class="col-md-3 col-sm-3 col-xs-3 control-label" ><fmt:message key="template.ostype" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-7  col-sm-7 col-xs-7">
-                                    <input required="true" type="text" name="osType" data-ng-model="template.osType.description" class="form-control" readonly data-ng-class="{'error': TemplateForm.osType.$invalid && formSubmitted}">
+                                    <select required="true" class="form-control input-group" name="osType" data-ng-model="template.osType" ng-options="osType.description for osType in formElements.osTypeList" data-ng-class="{'error': TemplateForm.osType.$invalid && formSubmitted}" >
+                                        <option value="">Select</option>
+                                    </select>
                                     <div class="error-area" data-ng-show="TemplateForm.osType.$invalid && formSubmitted" ><i  ng-attr-tooltip="<fmt:message key="template.ostype.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
                                 </div>
                             </div>
