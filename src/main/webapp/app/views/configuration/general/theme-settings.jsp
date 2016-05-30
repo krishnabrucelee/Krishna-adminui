@@ -34,7 +34,7 @@
                                 </div>
 								<div class="pull-left m-l-md">
                                 <input type="file" name="background" accept=".jpg, .jpeg" class="custom-file-input" file-model="themeSettingsList.backgroundImgFile"/>
-                               <span><label>Size must be larger than (1300x650)</label></span>
+                               <span><label>Resolution must be larger than (700x400)<br>File Size must be smaller than 1 Mb</label></span>
                                 </div>
                                 </div>
                             </div>
@@ -49,7 +49,9 @@
                                 </div>
                                 <div class="pull-left m-l-md">
                                     <input type="file" name="logo" accept=".jpg, .jpeg" class="custom-file-input" file-model="themeSettingsList.logoImgFile" />
-                                <span><label>Size must be lesser than (180x55)</label></span>
+                                <span>
+                                	<label>Resolution must be lesser than (180x55) <br>File Size must be smaller than 1 Mb</label>
+                                </span>
                                 </div>
                                 </div>
 
@@ -68,7 +70,7 @@
 									<div class="col-md-5"><input type="hidden"  data-ng-init="headerChoice.headerType = 'HEADER'" data-ng-model="headerChoice.headerType" name="" value="HEADER" class="form-control"></div>
 									</div>
 									</fieldset>
-									<button type="button" class="addfields btn btn-info m-t-sm" data-ng-click="addNewHeaderChoice()" >Add headers</button>
+									<button type="button" class="addfields btn btn-info m-t-sm" data-ng-click="addNewHeaderChoice()" ><fmt:message key="add.header" bundle="${msg}" /></button>
 								</div>
 								 <div class="col-md-5 col-sm-7" data-ng-if="themeSettingsList.headers != '' || themeSettingsList.headers != null">
 									<fieldset data-ng-repeat="headerChoice in themeSettingsList.headers" class="bg-light p-xs m-b-xs">
@@ -79,7 +81,7 @@
 									<div class="col-md-5"><input type="hidden" data-ng-init="headerChoice.headerType = 'HEADER'" data-ng-model="headerChoice.headerType" name="" value="HEADER" class="form-control"></div>
 									</div>
 									</fieldset>
-									<button type="button" data-ng-if=" themeSettingsList.headers != '' && themeSettingsList.headers != null" class="addfields btn btn-info m-t-sm" data-ng-click="addNewThemeHeaderChoice()" >Add headers</button>
+									<button type="button" data-ng-if=" themeSettingsList.headers != '' && themeSettingsList.headers != null" class="addfields btn btn-info m-t-sm" data-ng-click="addNewThemeHeaderChoice()" ><fmt:message key="add.header" bundle="${msg}" /></button>
 								</div>
                             </div>
                         </div>
@@ -96,7 +98,7 @@
 									<div class="col-md-5"><input type="hidden" data-ng-init= "footerChoice.footerType = 'FOOTER'" data-ng-model="footerChoice.footerType" name="" value="FOOTER" class="form-control"></div>
 									</div>
 									</fieldset>
-									<button type="button" class="addfields btn btn-info m-t-sm" data-ng-click="addNewFooterChoice()">Add footers</button>
+									<button type="button" class="addfields btn btn-info m-t-sm" data-ng-click="addNewFooterChoice()"><fmt:message key="add.footer" bundle="${msg}" /></button>
 								</div>
 								<div class="col-md-5 col-sm-7" data-ng-if="themeSettingsList.footers != '' || themeSettingsList.footers != null">
 								 <fieldset data-ng-repeat="footerChoice in themeSettingsList.footers" class="bg-light p-xs m-b-xs">
@@ -107,13 +109,13 @@
 									<div class="col-md-5"><input type="hidden" data-ng-init= "footerChoice.footerType = 'FOOTER'" data-ng-model="footerChoice.footerType" name="" value="FOOTER" class="form-control"></div>
 									</div>
 									</fieldset>
-									<button type="button" data-ng-if="themeSettingsList.footers != '' && themeSettingsList.footers != null" class="addfields btn btn-info m-t-sm" data-ng-click="addNewThemeFooterChoice()">Add footers</button>
+									<button type="button" data-ng-if="themeSettingsList.footers != '' && themeSettingsList.footers != null" class="addfields btn btn-info m-t-sm" data-ng-click="addNewThemeFooterChoice()"><fmt:message key="add.footer" bundle="${msg}" /></button>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row" >
-                                <label class="col-md-2 col-sm-3 control-label "> Welcome content:</label>
+                                <label class="col-md-2 col-sm-3 control-label "><fmt:message key="theme.welcome.content" bundle="${msg}" />:</label>
                                 <div class="col-md-5 col-sm-7">
                                     <summernote class=""  name="summernoteTextThree" required="true" height="150"  data-ng-model="themeSettingsList.welcomeContent"  config="summernoteOption"></summernote>
                                     <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon " tooltip="<fmt:message key="theme.welcome.tooltip" bundle="${msg}" />" ></i>
@@ -122,7 +124,7 @@
                         </div>
                         <div class="form-group">
                             <div class="row" >
-                                <label class="col-md-2 col-sm-3 control-label "> Footer content:</label>
+                                <label class="col-md-2 col-sm-3 control-label "><fmt:message key="theme.footer.content" bundle="${msg}" />:</label>
                                 <div class="col-md-5 col-sm-7">
                                     <summernote  class=""  name="summernoteTextThree" required="true" height="150"  data-ng-model="themeSettingsList.footerContent"  config="summernoteOption"></summernote>
                                     <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon " tooltip="<fmt:message key="theme.footer.tooltip" bundle="${msg}" />" ></i>
