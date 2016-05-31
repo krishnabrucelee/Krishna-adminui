@@ -45,7 +45,7 @@
                         <div class="row" >
                             <label class="col-md-6 col-sm-6 col-xs-4 control-label font-normal" ><fmt:message key="compute.storagetype" bundle="${msg}" /></label>
                             <div class="col-md-6  col-sm-6 col-xs-7">
-                            	{{compute.storageType || " N/A "}}
+                            	{{compute.storageType || " - "}}
                             </div>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                         <div class="row">
                             <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="compute.hosttag" bundle="${msg}" /></label>
                             <div class="col-md-6  col-sm-6 col-xs-7">
-                                  {{compute.hostTags || " N/A "}}
+                                  {{compute.hostTags || " - "}}
                             </div>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                         <div class="row">
                             <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="compute.storagetag" bundle="${msg}" /></label>
                             <div class="col-md-6  col-sm-6 col-xs-7">
-                                 {{compute.storageTags || " N/A "}}
+                                 {{compute.storageTags || " - "}}
                             </div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                         <div class="row">
                             <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="common.memory" bundle="${msg}" /><span class="text-danger">*</span></label>
                             <div class="col-md-6  col-sm-6 col-xs-7">
-                                 {{compute.memory }}
+                                 {{compute.memory || " - "}}
                             </div>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                         <div class="row">
                             <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="compute.vcpu.core" bundle="${msg}" /><span class="text-danger">*</span></label>
                             <div class="col-md-6  col-sm-6 col-xs-7">
-                                 {{compute.numberOfCores}}
+                                 {{compute.numberOfCores || " - "}}
                             </div>
                         </div>
                     </div>
@@ -96,7 +96,7 @@
                         <div class="row">
                             <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="common.speed" bundle="${msg}" /><span class="text-danger">*</span></label>
                             <div class="col-md-6  col-sm-6 col-xs-7">
-                                 {{compute.clockSpeed}}
+                                 {{compute.clockSpeed || " - "}}
                             </div>
                         </div>
                     </div>
@@ -106,7 +106,7 @@
                         <div class="row">
                             <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="common.networkrate" bundle="${msg}" /></label>
                             <div class="col-md-6  col-sm-6 col-xs-7">
-							    {{compute.networkRate || " N/A "}}
+							    {{compute.networkRate || " - "}}
                             </div>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                         <div class="row" >
                             <label class="col-md-6 col-sm-6 col-xs-4 control-label font-normal" ><fmt:message key="compute.diskio" bundle="${msg}" /></label>
                             <div class="col-md-6  col-sm-6 col-xs-7">
-							    {{compute.diskIo}}
+							    {{compute.diskIo || " - "}}
                             </div>
 
                         </div>
@@ -128,7 +128,7 @@
                             <label class="col-md-6 col-sm-6 control-label font-normal" ><fmt:message key="common.diskreadratebps" bundle="${msg}" />
                             </label>
                             <div class="col-md-6  col-sm-6 col-xs-7">
-							   {{compute.diskBytesReadRate}}
+							   {{compute.diskBytesReadRate || " - "}}
                             </div>
 
                         </div>
@@ -141,7 +141,7 @@
                             <label class="col-md-6 col-sm-6 control-label font-normal" ><fmt:message key="common.diskwriteratebps" bundle="${msg}" />
                             </label>
                             <div class="col-md-6  col-sm-6 col-xs-7">
-							   {{compute.diskBytesWriteRate}}
+							   {{compute.diskBytesWriteRate || " - "}}
                             </div>
                         </div>
                     </div>
@@ -152,7 +152,7 @@
                         <div class="row">
                             <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="common.diskreadrateiops" bundle="${msg}" /></label>
                             <div class="col-md-6  col-sm-6 col-xs-7">
-							   {{compute.diskIopsReadRate}}
+							   {{compute.diskIopsReadRate || " - "}}
                             </div>
                         </div>
                     </div>
@@ -163,7 +163,7 @@
                         <div class="row">
                             <label class="col-md-6 col-sm-4 control-label font-normal"><fmt:message key="common.diskwriterateiops" bundle="${msg}" /></label>
                             <div class="col-md-6 col-sm-6 col-xs-7">
-							    {{compute.diskIopsWriteRate}}
+							    {{compute.diskIopsWriteRate || " - "}}
                             </div>
                         </div>
                     </div>
@@ -173,7 +173,7 @@
                         <div class="row">
                             <label class="col-md-6 col-sm-6 col-xs-4 control-label font-normal"><fmt:message key="common.miniops" bundle="${msg}" /></label>
                             <div class="col-md-6  col-sm-6 col-xs-7">
-							    {{compute.minIops}}
+							    {{compute.minIops || " - "}}
                             </div>
                         </div>
                     </div>
@@ -183,7 +183,7 @@
                         <div class="row">
                             <label class="col-md-6 col-sm-6 col-xs-4 control-label font-normal"><fmt:message key="common.maxiops" bundle="${msg}" /></label>
                             <div class="col-md-6  col-sm-6 col-xs-7">
-							    {{compute.maxIops}}
+							    {{compute.maxIops || " - "}}
                             </div>
                         </div>
                     </div>
@@ -193,7 +193,7 @@
                         <div class="row">
                             <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="compute.cpucap" bundle="${msg}" /></label>
                             <div class="col-md-6 col-sm-6">
-                                    {{compute.cpuCapacity || "N/A"}}
+                                    {{compute.cpuCapacity || "-"}}
                             </div>
                         </div>
                     </div>
@@ -203,7 +203,7 @@
                         <div class="row">
                             <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="compute.offerha" bundle="${msg}" /></label>
                             <div class="col-md-6 col-sm-6">
-                            {{compute.isHighAvailabilityEnabled}}
+                            {{compute.isHighAvailabilityEnabled || " - "}}
                             </div>
                         </div>
                     </div>
@@ -213,7 +213,7 @@
                         <div class="row">
                             <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="compute.public" bundle="${msg}" /></label>
                             <div class="col-md-6 col-sm-6">
-                            <b>{{compute.isPublic}}</b>
+                            <b>{{compute.isPublic || " - "}}</b>
 
                             </div>
                         </div>

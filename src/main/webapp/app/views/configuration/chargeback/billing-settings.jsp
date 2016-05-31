@@ -135,7 +135,7 @@
                         <div class="row ">
                             <span class="col-md-4 col-sm-4"></span> <span
                                 class="col-md-7 col-sm-7 p-md">
-                                <button type="submit" data-ng-click="getBillingSettings()" class="btn btn-info">Add</button>
+                                <button type="submit" data-ng-click="getBillingSettings()" class="btn btn-info"><fmt:message key="common.add" bundle="${msg}" /></button>
                                 <!-- <a class="btn btn-default" data-ng-click="reset()"> Cancel </a> -->
                             </span>
                         </div>

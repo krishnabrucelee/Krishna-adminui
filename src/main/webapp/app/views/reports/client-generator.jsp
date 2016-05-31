@@ -11,7 +11,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="panel-info panel ">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Generate {{ $state.current.data.pageTitle}}</h3>
+                    <h3 class="panel-title"><fmt:message key="common.generate" bundle="${msg}" /> {{ $state.current.data.pageTitle}}</h3>
                 </div>
 
                 <div class="row m-t-md">
@@ -20,7 +20,7 @@
                                             'text-danger'
                                             : clientForm.dateRange.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label"> Date Range:
+                                <label class="col-md-3 col-sm-3 control-label"> <fmt:message key="date.range" bundle="${msg}" />:
                                     <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-7 col-sm-7">
@@ -35,7 +35,7 @@
                                             'text-danger'
                                             : clientForm.status.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label"> Status:
+                                <label class="col-md-3 col-sm-3 control-label"> <fmt:message key="common.state" bundle="${msg}" />:
                                     <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-7 col-sm-7">
@@ -55,7 +55,7 @@
                                            : !report.startDate && formSubmitted}">
 
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label"> From Date:
+                                <label class="col-md-3 col-sm-3 control-label"> <fmt:message key="from.date" bundle="${msg}" />:
                                     <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-7 col-sm-7 ">
@@ -74,7 +74,7 @@
                                             : !report.endDate && formSubmitted}">
 
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label"> To Date:
+                                <label class="col-md-3 col-sm-3 control-label"> <fmt:message key="to.date" bundle="${msg}" />:
                                     <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-7 col-sm-7 ">
@@ -93,8 +93,8 @@
                 <div class="row ">
                     <span class="col-md-4 col-sm-4"></span>
                     <span class="col-md-7 col-sm-7 p-md">
-                        <button type="submit" class="btn btn-info"> Generate </button>
-                        <a class="btn btn-default" data-ng-click="reset()" > Cancel </a>
+                        <button type="submit" class="btn btn-info"> <fmt:message key="common.generate" bundle="${msg}" /> </button>
+                        <a class="btn btn-default" data-ng-click="reset()" > <fmt:message key="common.cancel" bundle="${msg}" /> </a>
                     </span>
 
                 </div>

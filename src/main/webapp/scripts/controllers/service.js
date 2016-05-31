@@ -123,7 +123,6 @@ if ($scope.vmSearch == null) {
        			$scope.windowsTemplate = result.windowsCount;
        			$scope.linuxTemplate = result.linuxCount;
        			$scope.totalCount = result.totalCount;
-			console.log(result.totalCount);
     		});
 
             // For pagination
@@ -417,6 +416,8 @@ function templateEditCtrl($scope, $state, $stateParams, $log, $window, appServic
 
 	$scope.templateForm = {};
 
+
+
 	$scope.formElements = {
 	        rootDiskControllerList: {
 	          "0":"SCSI",
@@ -445,6 +446,23 @@ function templateEditCtrl($scope, $state, $stateParams, $log, $window, appServic
         });
     };
 
+       // OS Type list from server
+    $scope.categoryChange = function() {
+        $scope.ostypes = {};
+        var hasosTypeList = appService.crudService.filterList("ostypes/list", $scope.template.osCategory.name);
+        hasosTypeList.then(function (result) {
+    	    $scope.formElements.osTypeList = result;
+    	    angular.forEach( $scope.formElements.osTypeList, function(obj, key) {
+	    		if(obj.id == $scope.template.osType.id) {
+	    			$scope.template.osType = obj;
+	    		}
+	    	});
+        });
+
+    };
+
+
+
     if (!angular.isUndefined($stateParams.id) && $stateParams.id != '') {
         $scope.edit($stateParams.id)
     }
@@ -458,6 +476,7 @@ function templateEditCtrl($scope, $state, $stateParams, $log, $window, appServic
 	    	angular.forEach($scope.formElements.osCategoryList, function(obj, key) {
 	    		if(obj.id == $scope.template.osCategory.id) {
 	    			$scope.template.osCategory = obj;
+	    			$scope.categoryChange();
 	    		}
 	    	});
 	    });

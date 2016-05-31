@@ -41,7 +41,7 @@
                              <div class="form-group">
                                 <div class="form-group" ng-class="{'text-danger': snapshotForm.description.$invalid && formSubmitted}">
                                 <div class="row">
-                                    <label class="col-md-4 col-sm-4 control-label font-normal">Cost per GB/day (<app-currency class="text-danger"></app-currency>)<span class="text-danger">*</span></label>
+                                    <label class="col-md-4 col-sm-4 control-label font-normal"><fmt:message key="cost.per.gb.per.day" bundle="${msg}" /> (<app-currency class="text-danger"></app-currency>)<span class="text-danger">*</span></label>
                                     <div class="col-md-6 col-sm-6  col-xs-6">
                                         <input required="true" type="text" valid-price name="description" data-ng-if =" miscellaneous.costType ='VOLUMESNAPSHOT'" data-ng-model="miscellaneous.costperGB" data-ng-class="{'error': snapshotForm.description.$invalid && formSubmitted}" class="form-control" >
                                     </div>
@@ -66,7 +66,7 @@
                                     <table cellspacing="1" cellpadding="1" class="table table-bordered  table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Zone</th>
+                                                <th><fmt:message key="template.zone" bundle="${msg}" /></th>
                                                 <th>Cost/GB/day</th>
 
                                             </tr>
