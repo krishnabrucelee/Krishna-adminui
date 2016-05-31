@@ -184,6 +184,26 @@
 					    </div>
 	               </div>
                 </div>
+
+                <div class="row">
+              <div class="col-md-6  col-sm-6 col-xs-4 col-lg-6 " >
+						<div class="form-group">
+						<div class="row">
+							<label
+								class="col-md-4 col-sm-4 col-xs-6 control-label font-normal"><fmt:message
+									key="storage.provisioningType" bundle="${msg}" /></label>
+							<div class="col-md-8  col-sm-6 col-xs-6">
+								<select class="form-control input-group" name="provisioningType" id="create_storage_offer_provisioning_type"
+									data-ng-model="storage.provisioningType"
+									ng-options="provisioningTypeList for  (id, provisioningTypeList)  in provisioningTypes.provisioningTypeList">
+									<option value="">Select</option>
+								</select>
+							</div>
+						</div>
+					</div>
+	                </div>
+
+                </div>
                 </div>
                  <div class="col-md-6  col-sm-6 col-xs-4 col-lg-4 " data-ng-show="storage.qosType">
  								<fieldset class="scheduler-border"  >

@@ -731,6 +731,32 @@ $scope.costPerHourIOPS = function() {
             	storage.zoneId = storage.zone.id;
             	delete storage.zone;
             }
+            if (!angular.isUndefined($scope.storage.qosType) && storage.qosType != null) {
+            	if (storage.qosType == "Hypervisor") {
+            		delete storage.diskMaxIops;
+            		delete storage.diskMinIops;
+            	}
+            	if (storage.qosType == "Storage") {
+            		delete storage.diskBytesReadRate;
+            		delete storage.diskBytesWriteRate;
+            		delete storage.diskIopsReadRate;
+            		delete storage.diskIopsWriteRate;
+            		if (storage.isCustomizedIops == true) {
+                		delete storage.diskMaxIops;
+                		delete storage.diskMinIops;
+                	} else {
+                		storage.isCustomizedIops = false;
+                	}
+            	}
+            }
+            if (!angular.isUndefined($scope.storage.isCustomDisk) && storage.isCustomDisk != null) {
+            	if (storage.isCustomDisk == true) {
+            		delete storage.diskSize;
+            	}
+            }
+            if (storage.isPublic == true) {
+            	delete storage.domainId;
+            }
 //            storage.storagePrice = [];
 //            storage.storagePrice[0] = $scope.storage.storagePrice;
             var hasStorage = appService.crudService.add("storages", storage);
@@ -808,6 +834,13 @@ $scope.costPerHourIOPS = function() {
         }
     };
 
+    $scope.provisioningTypes = {
+            provisioningTypeList: {
+                      "0": "thin",
+                      "1": "sparse",
+                      "2": "fat"
+            }
+        };
 
 }
 
