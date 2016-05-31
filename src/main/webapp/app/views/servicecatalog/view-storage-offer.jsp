@@ -96,7 +96,7 @@
                             <label class="col-md-6 col-sm-6 control-label font-normal" ><fmt:message key="common.diskreadratebps" bundle="${msg}" />
                             </label>
                             <div class="col-md-6  col-sm-6 col-xs-7">
-							   {{storage.diskBytesReadRate}}
+							   <label>{{storage.diskBytesReadRate || " - "}}</label>
                             </div>
 
                         </div>
@@ -109,7 +109,7 @@
                             <label class="col-md-6 col-sm-6 control-label font-normal" ><fmt:message key="common.diskwriteratebps" bundle="${msg}" />
                             </label>
                             <div class="col-md-6  col-sm-6 col-xs-7">
-							   {{storage.diskBytesWriteRate}}
+							   <label>{{storage.diskBytesWriteRate || " - "}}</label>
                             </div>
                         </div>
                     </div>
@@ -120,7 +120,7 @@
                         <div class="row">
                             <label class="col-md-6 col-sm-6 control-label font-normal"><fmt:message key="common.diskreadrateiops" bundle="${msg}" /></label>
                             <div class="col-md-6  col-sm-6 col-xs-7">
-							   {{storage.diskIopsReadRate}}
+							   <label>{{storage.diskIopsReadRate || " - "}}</label>
                             </div>
                         </div>
                     </div>
@@ -131,7 +131,7 @@
                         <div class="row">
                             <label class="col-md-6 col-sm-4 control-label font-normal"><fmt:message key="common.diskwriterateiops" bundle="${msg}" /></label>
                             <div class="col-md-6 col-sm-6 col-xs-7">
-							    {{storage.diskIopsWriteRate}}
+							    <label>{{storage.diskIopsWriteRate || " - "}}</label>
                             </div>
                         </div>
                     </div>
@@ -141,7 +141,7 @@
                         <div class="row">
                             <label class="col-md-6 col-sm-6 col-xs-4 control-label font-normal"><fmt:message key="common.miniops" bundle="${msg}" /></label>
                             <div class="col-md-6  col-sm-6 col-xs-7">
-							    {{storage.diskMaxIops}}
+							    <label>{{storage.diskMaxIops || " - "}}</label>
                             </div>
                         </div>
                     </div>
@@ -151,7 +151,17 @@
                         <div class="row">
                             <label class="col-md-6 col-sm-6 col-xs-4 control-label font-normal"><fmt:message key="common.maxiops" bundle="${msg}" /></label>
                             <div class="col-md-6  col-sm-6 col-xs-7">
-							    {{storage.diskMinIops}}
+							    <label>{{storage.diskMinIops || " - "}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-4 clear-form" data-ng-show="storage.isCustomizedIops">
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-6 col-sm-6 col-xs-4 control-label font-normal"><fmt:message key="common.customiops" bundle="${msg}" /></label>
+                            <div class="col-md-6  col-sm-6 col-xs-7">
+							    <label>{{storage.isCustomizedIops || " - "}}</label>
                             </div>
                         </div>
                     </div>
@@ -162,6 +172,17 @@
                             <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal"><fmt:message
 									key="common.size" bundle="${msg}" /></label>
                             <div class="col-md-6 col-sm-6 col-xs-6"> <b>{{storage.diskSize || " N/A "}} </b>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                                <div class="col-md-4" >
+                    <div class="form-group" >
+                        <div class="row">
+                            <label class="col-md-6 col-sm-6 col-xs-6 control-label font-normal"><fmt:message
+									key="storage.provisioningType" bundle="${msg}" /></label>
+                            <div class="col-md-6 col-sm-6 col-xs-6"> <b>{{storage.provisioningType || " N/A "}} </b>
                             </div>
                         </div>
 

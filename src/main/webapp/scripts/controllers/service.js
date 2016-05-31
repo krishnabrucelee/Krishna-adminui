@@ -50,7 +50,7 @@ function templateListCtrl($scope, $state, $stateParams, $log, $window, appServic
 		$scope.paginationObject.sortBy = sortBy;
 		$scope.showLoader = true;
 		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-             
+
 if ($scope.vmSearch == null) {
          var hasTemplateList = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listalltemplateforadmin" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy +"&type=template"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
 }
@@ -94,7 +94,7 @@ if ($scope.vmSearch == null) {
 
     //Template list
     $scope.list = function (pageNumber) {
-  
+
         appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
         appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
     	$scope.showLoader = true;
@@ -103,7 +103,7 @@ if ($scope.vmSearch == null) {
 	if ($scope.vmSearch == null) {
          var hasTemplates = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listalltemplateforadmin" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+appService.globalConfig.sort.sortOrder+appService.globalConfig.sort.sortBy +"&type=template"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
 }
-	if ($scope.vmSearch != null) {	
+	if ($scope.vmSearch != null) {
 	$scope.filter = "&searchText=" + $scope.vmSearch;
   	var hasTemplates = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listall" +"?lang=" + localStorageService.cookie.get('language')+  encodeURI($scope.filter) +"&sortBy="+appService.globalConfig.sort.sortOrder+appService.globalConfig.sort.sortBy +"&type=template"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
 	}
@@ -547,10 +547,10 @@ function storageListCtrl($scope, $log, $state, $stateParams, $window, appService
 		$scope.showLoader = true;
 		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
             var hasStorageList = {};
-           
+
 if ($scope.domainView == null && $scope.vmSearch == null) {
             	hasStorageList = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "storages" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
-            } 
+            }
 		else {
 	if ($scope.domainView != null && $scope.vmSearch == null) {
                 $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=";
@@ -622,7 +622,7 @@ $scope.vmSearch = null;
         var hasStorage = {};
  	if ($scope.domainView == null && $scope.vmSearch == null) {
             	hasStorage = appService.crudService.list("storages", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
-            } 
+            }
 		else {
 	if ($scope.domainView != null && $scope.vmSearch == null) {
                 $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=";
@@ -712,6 +712,32 @@ $scope.costPerHourIOPS = function() {
             	storage.zoneId = storage.zone.id;
             	delete storage.zone;
             }
+            if (!angular.isUndefined($scope.storage.qosType) && storage.qosType != null) {
+            	if (storage.qosType == "Hypervisor") {
+            		delete storage.diskMaxIops;
+            		delete storage.diskMinIops;
+            	}
+            	if (storage.qosType == "Storage") {
+            		delete storage.diskBytesReadRate;
+            		delete storage.diskBytesWriteRate;
+            		delete storage.diskIopsReadRate;
+            		delete storage.diskIopsWriteRate;
+            		if (storage.isCustomizedIops == true) {
+                		delete storage.diskMaxIops;
+                		delete storage.diskMinIops;
+                	} else {
+                		storage.isCustomizedIops = false;
+                	}
+            	}
+            }
+            if (!angular.isUndefined($scope.storage.isCustomDisk) && storage.isCustomDisk != null) {
+            	if (storage.isCustomDisk == true) {
+            		delete storage.diskSize;
+            	}
+            }
+            if (storage.isPublic == true) {
+            	delete storage.domainId;
+            }
 //            storage.storagePrice = [];
 //            storage.storagePrice[0] = $scope.storage.storagePrice;
             var hasStorage = appService.crudService.add("storages", storage);
@@ -789,6 +815,13 @@ $scope.costPerHourIOPS = function() {
         }
     };
 
+    $scope.provisioningTypes = {
+            provisioningTypeList: {
+                      "0": "thin",
+                      "1": "sparse",
+                      "2": "fat"
+            }
+        };
 
 }
 
@@ -1338,7 +1371,7 @@ function computeListCtrl($scope, $state, $stateParams, appService, $window, glob
             var hasComputeList = {};
   if ($scope.domainView == null && $scope.vmSearch == null) {
             	hasComputeList = appService.crudService.list("computes", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
-            } 
+            }
 		else {
 if ($scope.domainView != null && $scope.vmSearch == null) {
                 $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=";
@@ -1382,7 +1415,7 @@ if ($scope.domainView != null && $scope.vmSearch == null) {
         var hasComputes = {};
    if ($scope.domainView == null && $scope.vmSearch == null) {
             	hasComputes = appService.crudService.list("computes", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
-            } 
+            }
 		else {
 if ($scope.domainView != null && $scope.vmSearch == null) {
                 $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=";
