@@ -384,7 +384,7 @@
 									<div class="row">
 										<div class="col-md-6  col-sm-6 col-xs-6">
 											<label class="font-normal"> <input icheck
-												type="checkbox" id="create_compute_offering_customized_iops" ng-model="compute.customizedIops"> <fmt:message
+												type="checkbox" data-ng-change="customCheck(compute)" id="create_compute_offering_customized_iops" ng-model="compute.customizedIops"> <fmt:message
 													key="common.customiops" bundle="${msg}" />
 											</label>
 										</div>
