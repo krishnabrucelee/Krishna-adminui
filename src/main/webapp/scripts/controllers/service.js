@@ -1445,9 +1445,23 @@ if ($scope.domainView != null && $scope.vmSearch == null) {
     		computeCost: []
     };
 
+      $scope.customCheck = function(value) {
+      if(value.customizedIops == true)
+      {
+      $scope.compute.customizedIops = true;
+            $scope.compute.maxIops = null;
+            $scope.compute.minIops = null;
+      }
+      else
+      {
+       $scope.compute.customizedIops = false;
+      }
+    };
+
     $scope.save = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
+
         	$scope.showLoader = true;
             var compute = angular.copy($scope.compute);
             if(!angular.isUndefined(compute.domain)) {
@@ -1459,7 +1473,9 @@ if ($scope.domainView != null && $scope.vmSearch == null) {
             	delete compute.computeCost.zone;
             }
             compute.customized = (compute.customized == null) ? false : true;
-            compute.customizedIops = (compute.customizedIops == null) ? false : true;
+            if($scope.compute.customizedIops == null) {
+                 compute.customizedIops = false;
+            }
             compute.isHighAvailabilityEnabled = (compute.isHighAvailabilityEnabled == null) ? false : true;
             var hasComputes = appService.crudService.add("computes", compute);
             hasComputes.then(function (result) {  // this is only run after
