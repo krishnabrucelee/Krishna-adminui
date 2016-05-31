@@ -13,9 +13,9 @@
         <div class="row m-l-sm m-r-sm panel-body" ng-controller="configurationCtrl">
 
             <ul class="nav nav-tabs" >
-                <li data-ng-class="{'active' : configElements.category == 'general'}"><a href="#/configuration/general">  <i class="fa fa-calendar"></i> General</a></li>
-                <li data-ng-class="{'active' : configElements.category == 'chargeback'}"><a href="#/configuration/chargeback"  > <i class="fa fa-credit-card"></i> Chargeback</a></li>
-                <li data-ng-class="{'active' : configElements.category == 'cloudstack'}"><a href="#/configuration/cloudstack"><i class="fa fa-cloud"></i> Cloud Stack</a></li>
+                <li data-ng-class="{'active' : configElements.category == 'general'}"><a href="#/configuration/general">  <i class="fa fa-calendar"></i> <fmt:message key="General" bundle="${msg}" /></a></li>
+                <li data-ng-class="{'active' : configElements.category == 'chargeback'}"><a href="#/configuration/chargeback"  > <i class="fa fa-credit-card"></i> <fmt:message key="Chargeback" bundle="${msg}" /></a></li>
+                <li data-ng-class="{'active' : configElements.category == 'cloudstack'}"><a href="#/configuration/cloudstack"><i class="fa fa-cloud"></i> <fmt:message key="cloud.stack" bundle="${msg}" /></a></li>
             </ul>
 
             <div class="tab-content">

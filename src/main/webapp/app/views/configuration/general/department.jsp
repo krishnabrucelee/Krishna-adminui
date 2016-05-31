@@ -38,8 +38,8 @@
                                 <label class="col-md-4 col-sm-5 control-label">
                                 </label>
                                 <div class="col-md-6 col-sm-7">
-                                    <button type="button" class="btn btn-default" ng-click="cancel()" data-dismiss="modal">Cancel</button>
-                                    <button class="btn btn-info  m-l-xs" type="submit">Save</button>
+                                    <button type="button" class="btn btn-default" ng-click="cancel()" data-dismiss="modal"><fmt:message key="common.cancel" bundle="${msg}" /></button>
+                                    <button class="btn btn-info  m-l-xs" type="submit"><fmt:message key="common.save" bundle="${msg}" /></button>
                                 </div>
                             </div>
                         </div>
