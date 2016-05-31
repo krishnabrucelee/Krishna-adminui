@@ -15,7 +15,7 @@
 
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <span class="pull-left">
-                                <a class="btn btn-info" href="#/configuration/general"  title="Back" ><span class="fa fa-arrow-circle-left fa-lg "></span> Back</a>
+                                <a class="btn btn-info" href="#/configuration/general"  title="Back" ><span class="fa fa-arrow-circle-left fa-lg "></span> <fmt:message key="common.back" bundle="${msg}" /></a>
                             </span>
                         </div>
 
@@ -50,7 +50,7 @@
                                  <label class="col-md-4 col-sm-5 control-label">
                                  </label>
                        <div class="col-md-6 col-sm-7">
-                        <button class="btn btn-info" type="submit">Update</button>
+                        <button class="btn btn-info" type="submit"><fmt:message key="common.update" bundle="${msg}" /></button>
                     </div>
                             </div>
                     </div>

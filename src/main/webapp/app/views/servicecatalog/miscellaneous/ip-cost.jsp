@@ -66,7 +66,7 @@
                                         <table cellspacing="1" cellpadding="1" class="table table-bordered  table-striped ">
                                             <thead>
                                                 <tr>
-                                                    <th>Zone</th>
+                                                    <th><fmt:message key="template.zone" bundle="${msg}" /></th>
                                                     <th>Cost/IP/day</th>
 
                                                 </tr>

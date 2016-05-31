@@ -14,7 +14,7 @@
 
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <span class="pull-left">
-                            <a class="btn btn-info" href="#/configuration/general"  title="Back" ><span class="fa fa-arrow-circle-left fa-lg "></span> Back</a>
+                            <a class="btn btn-info" href="#/configuration/general"  title="Back" ><span class="fa fa-arrow-circle-left fa-lg "></span> <fmt:message key="common.back" bundle="${msg}" /></a>
                         </span>
                     </div>
 

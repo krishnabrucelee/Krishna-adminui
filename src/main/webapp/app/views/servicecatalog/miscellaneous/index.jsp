@@ -10,10 +10,10 @@
     <div class="row m-l-sm m-r-sm panel-body">
 
         <ul class="nav nav-tabs" data-ng-init="miscellaneousCategory = 'template'">
-            <li class="active"><a href="javascript:void(0)" data-ng-click="miscellaneousCategory = 'template'" data-toggle="tab"> <i class="fa fa-dashboard"></i> Template</a></li>
-            <li class=""><a data-ng-click="miscellaneousCategory = 'snapshot'" data-toggle="tab"> <i class="fa fa-camera-retro"></i> Volume BackUp</a></li>
-            <li class=""><a  data-ng-click="miscellaneousCategory = 'ipcost'" data-toggle="tab"> <i class="custom-icon custom-icon-ip"></i> IPAddress</a></li>
-            <li class=""><a data-ng-click="miscellaneousCategory = 'vmsnapshot'" data-toggle="tab"> <i class="fa fa-camera-retro"></i> VM Snapshot</a></li>
+            <li class="active"><a href="javascript:void(0)" data-ng-click="miscellaneousCategory = 'template'" data-toggle="tab"> <i class="fa fa-dashboard"></i> <fmt:message key="template" bundle="${msg}" /></a></li>
+            <li class=""><a data-ng-click="miscellaneousCategory = 'snapshot'" data-toggle="tab"> <i class="fa fa-camera-retro"></i> <fmt:message key="volume.backup" bundle="${msg}" /></a></li>
+            <li class=""><a  data-ng-click="miscellaneousCategory = 'ipcost'" data-toggle="tab"> <i class="custom-icon custom-icon-ip"></i> <fmt:message key="common.ipaddress" bundle="${msg}" /></a></li>
+            <li class=""><a data-ng-click="miscellaneousCategory = 'vmsnapshot'" data-toggle="tab"> <i class="fa fa-camera-retro"></i> <fmt:message key="vm.snapshot" bundle="${msg}" /></a></li>
 
         </ul>
 
