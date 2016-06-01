@@ -15,7 +15,7 @@
 
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <span class="pull-left">
-                                <a class="btn btn-info" href="#/configuration/general"  title="Back" ><span class="fa fa-arrow-circle-left fa-lg "></span> <fmt:message key="common.back" bundle="${msg}" /></a>
+                                <a class="btn btn-info" href="#/configuration/general"  title="<fmt:message key="common.back" bundle="${msg}" />" ><span class="fa fa-arrow-circle-left fa-lg "></span> <fmt:message key="common.back" bundle="${msg}" /></a>
                             </span>
                         </div>
 
@@ -34,7 +34,7 @@
                                 </div>
 								<div class="pull-left m-l-md">
                                 <input type="file" name="background" accept=".jpg, .jpeg" class="custom-file-input" file-model="themeSettingsList.backgroundImgFile"/>
-                               <span><label>Resolution must be larger than (700x400)<br>File Size must be smaller than 1 Mb</label></span>
+                               <span><label><fmt:message key="resolution.size" bundle="${msg}" /><br><fmt:message key="file.size" bundle="${msg}" /></label></span>
                                 </div>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                                 <div class="pull-left m-l-md">
                                     <input type="file" name="logo" accept=".jpg, .jpeg" class="custom-file-input" file-model="themeSettingsList.logoImgFile" />
                                 <span>
-                                	<label>Resolution must be lesser than (180x55) <br>File Size must be smaller than 1 Mb</label>
+                                	<label><fmt:message key="resolution.size" bundle="${msg}" />) <br><fmt:message key="file.size" bundle="${msg}" /></label>
                                 </span>
                                 </div>
                                 </div>

@@ -25,7 +25,7 @@
                 <div class="col-md-6 col-sm-6">
              <div class="form-group">
                         <div class="row">
-                            <label class="col-md-3 col-sm-3 control-label">Currency:
+                            <label class="col-md-3 col-sm-3 control-label"><fmt:message key="currency" bundle="${msg}" />:
                              </label>
 
                             <div class="col-md-7 col-sm-7">

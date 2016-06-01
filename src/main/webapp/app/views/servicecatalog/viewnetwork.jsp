@@ -9,7 +9,8 @@
 <form name="form.detachForm" ng-controller="networkListCtrl">
     <div class="inmodal" >
         <div class="modal-header">
-            <panda-modal-header hide-zone="false" page-custom-icon="images/network-icon-2.png" page-title="View Network Offer"></panda-modal-header>
+            <panda-modal-header hide-zone="false" page-custom-icon="images/network-icon-2.png" page-title="<fmt:message
+									key="view.network.offer" bundle="${msg}" />"></panda-modal-header>
 
         </div>
 
@@ -30,7 +31,8 @@
             </div>
         </div>
         <div class="modal-footer">
-                    <button type="button" class="btn btn-info " ng-click="cancel()" data-dismiss="modal">Ok</button>
+                    <button type="button" class="btn btn-info " ng-click="cancel()" data-dismiss="modal"><fmt:message
+									key="common.ok" bundle="${msg}" /></button>
                 </div>
     </div>
 

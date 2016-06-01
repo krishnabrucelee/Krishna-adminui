@@ -225,7 +225,8 @@
 						<div class="col-md-6  col-sm-12 col-xs-4"
 							data-ng-if="!compute.customized">
 							<fieldset class="scheduler-border">
-								<legend class="scheduler-border">Compute Resource</legend>
+								<legend class="scheduler-border"><fmt:message
+											key="compute.resource" bundle="${msg}" /></legend>
 								<div class="form-group"
 									ng-class="{'text-danger': computeForm.memory.$invalid && formSubmitted}">
 									<div class="row">
@@ -294,7 +295,8 @@
 							data-ng-if="compute.qosType">
 
 							<fieldset class="scheduler-border">
-								<legend class="scheduler-border">Disk Performance</legend>
+								<legend class="scheduler-border"><fmt:message
+												key="disk.performance" bundle="${msg}" /></legend>
 								<div class="form-group"
 									data-ng-show="compute.qosType == 'HYPERVISOR'">
 									<div class="row">

@@ -13,7 +13,7 @@
 <!-- Main Wrapper -->
 <div id="wrapper">
 <div class="content">
-<div class="row text-center"><h2>Welcome to Panda Admin Panel</h2></div>
+<div class="row text-center"><h2><fmt:message key="welcome.admin.panel" bundle="${msg}" /></h2></div>
 </div>
 <div class="row"><div id="footer" class="m-t-md" ng-include="'app/views/common/footer.jsp'"></div></div>
 </div>

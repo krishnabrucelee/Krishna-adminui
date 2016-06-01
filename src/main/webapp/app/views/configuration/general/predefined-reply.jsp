@@ -17,13 +17,13 @@
                                             'text-danger'
                                             :configForm.department.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-4 col-sm-5 control-label">Department:
+                                <label class="col-md-4 col-sm-5 control-label"><fmt:message key="common.department" bundle="${msg}" />:
                                     <span class="text-danger">*</span>
                                 </label>
 
                                 <div class="col-md-6 col-sm-7">
                                     <select required="true" class="form-control input-group" name="department" data-ng-class="{'error': configForm.department.$invalid && formSubmitted}" data-ng-model="config.department" ng-options="department.name for department in formElements.departmentList" >
-                                        <option value="">Select</option>
+                                        <option value=""><fmt:message key="common.select" bundle="${msg}" /></option>
                                     </select>
                                     <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="Select the department" ></i>
                                     <div class="error-area" data-ng-show="configForm.department.$invalid && formSubmitted" ><i  tooltip="Department is required." class="fa fa-warning error-icon"></i></div>
@@ -35,7 +35,7 @@
                                             'text-danger'
                                             : configForm.subject.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-4 col-sm-5 control-label">Subject:
+                                <label class="col-md-4 col-sm-5 control-label"><fmt:message key="common.subject" bundle="${msg}" />:
                                     <span class="text-danger">*</span>
                                 </label>
 
@@ -52,7 +52,7 @@
                                             'text-danger'
                                             : configForm.summernoteTextTwo.$invalid && formSubmitted}">
                             <div class="row" >
-                                <label class="col-md-4 col-sm-5 control-label ">Content:
+                                <label class="col-md-4 col-sm-5 control-label "><fmt:message key="content" bundle="${msg}" />:
                                     <span class="text-danger">*</span>
                                 </label>
 

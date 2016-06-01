@@ -48,7 +48,7 @@
                                         <select required="true" data-ng-change="getDepartmentsByDomain()"  class="form-control input-group" name="domain"
                                         data-ng-model="resourceQuota.domain" ng-options="domain.name for domain in domainList"
                                         data-ng-class="{'error': resourceAllocationForm.domain.$invalid && formSubmitted}" >
-                                            <option value="">Select</option>
+                                            <option value=""><fmt:message key="common.select" bundle="${msg}" /></option>
                                         </select>
 
                                         <div class="error-area" data-ng-show="resourceAllocationForm.domain.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="domain.is.required" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
@@ -65,7 +65,7 @@
                                     </label>
                                     <div class="col-md-8 col-sm-12">
                                         <select  class="form-control input-group" data-ng-disabled="isDisabledDepartment"  name="department" data-ng-change="getProjectsByDepartment()" data-ng-model="resourceQuota.department" ng-options="department.userName for department in departmentList" >
-                                            <option value="">Select</option>
+                                            <option value=""><fmt:message key="common.select" bundle="${msg}" /></option>
                                         </select>
                                     </div>
                                 </div>
@@ -78,7 +78,7 @@
                                     </label>
                                     <div class="col-md-8 col-sm-12">
                                         <select  class="form-control input-group" data-ng-disabled="isDisabledProject" name="project" data-ng-change="getProjectResourceLimits()" data-ng-model="resourceQuota.project" ng-options="project.name for project in projectList" >
-                                            <option value="">Select</option>
+                                            <option value=""><fmt:message key="common.select" bundle="${msg}" /></option>
                                         </select>
                                     </div>
                                 </div>
@@ -95,35 +95,35 @@
 			                    <thead class="bg-info">
 			           		<tr data-ng-if="resource=='domain'|| type == 'domain-quota'">
 			                    <th  class="text-center">
-                                	<label> Quota Type</label></th>
-                                	<th  class="text-center">Company Limit</th>
+                                	<label><fmt:message key="quota.type" bundle="${msg}" /> </label></th>
+                                	<th  class="text-center"><fmt:message key="company.limit" bundle="${msg}" /></th>
 			                        <th class="text-center">
-			                        	<label> Minimum</label>
+			                        	<label> <fmt:message key="min" bundle="${msg}" /></label>
 			                        </th>
 			                        <th class="text-center">
-			                        	<label> Maximum</label>
+			                        	<label> <fmt:message key="max" bundle="${msg}" /></label>
 			                        </th>
 			                    </tr>
 			           <tr data-ng-if="resource=='department'">
 			                    <th  class="text-center">
-                                	<label> Quota Type</label></th>
-                                	<th  class="text-center">Department Limit</th>
+                                	<label><fmt:message key="quota.type" bundle="${msg}" /> </label></th>
+                                	<th  class="text-center"><fmt:message key="department.limit" bundle="${msg}" /></th>
 			                        <th  class="text-center">
-			                        	<label> Minimum</label>
+			                        	<label> <fmt:message key="min" bundle="${msg}" /></label>
 			                        </th>
 			                        <th  class="text-center">
-			                        	<label> Maximum</label>
+			                        	<label> <fmt:message key="max" bundle="${msg}" /></label>
 			                        </th>
 			                    </tr>
 			          			<tr data-ng-if="resource=='project'">
 			                    <th  class="text-center">
-                                	<label> Quota Type</label></th>
-                                	<th  class="text-center">Project Limit</th>
+                                	<label> <fmt:message key="quota.type" bundle="${msg}" /> </label></th>
+                                	<th  class="text-center"><fmt:message key="project.limit" bundle="${msg}" /></th>
 			                        <th  class="text-center">
-			                        	<label> Minimum</label>
+			                        	<label> <fmt:message key="min" bundle="${msg}" /></label>
 			                        </th>
 			                        <th  class="text-center">
-			                        	<label> Maximum</label>
+			                        	<label> <fmt:message key="max" bundle="${msg}" /></label>
 			                        </th>
 			                    </tr>
 			                    </thead>
@@ -733,10 +733,10 @@
 							<div class="alert alert-info">
 								<label class="control-label"><fmt:message key="note" bundle="${msg}" /> :</label>
 								<ul class="list-group">
-									<li class="list-group-item">-1 indicates, Unlimited limit.</li>
-									<li class="list-group-item"> 0 indicates, No quota available.</li>
-									<li class="list-group-item">Department limit should not exceed company limit. </li>
-									<li class="list-group-item">Project limit should not exceed department limit. </li>
+									<li class="list-group-item"><fmt:message key="common.unlimited" bundle="${msg}" /></li>
+									<li class="list-group-item"><fmt:message key="common.no.quota" bundle="${msg}" /></li>
+									<li class="list-group-item"><fmt:message key="common.department.limit" bundle="${msg}" /></li>
+									<li class="list-group-item"><fmt:message key="common.project.limit" bundle="${msg}" /></li>
 								</ul>
 							</div>
 						</div>

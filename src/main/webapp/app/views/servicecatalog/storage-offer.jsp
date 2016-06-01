@@ -108,7 +108,8 @@
 								<select class="form-control input-group" name="qosType" id="create_storage_offer_qos_type"
 									data-ng-model="storage.qosType"
 									ng-options="qosType for  (id, qosType)  in formElements.qosList">
-									<option value="">Select</option>
+									<option value=""><fmt:message
+									key="common.select" bundle="${msg}" /></option>
 								</select>
 							</div>
 						</div>
@@ -207,7 +208,8 @@
                 </div>
                  <div class="col-md-6  col-sm-6 col-xs-4 col-lg-4 " data-ng-show="storage.qosType">
  								<fieldset class="scheduler-border"  >
-                                <legend class="scheduler-border">Disk Performance</legend>
+                                <legend class="scheduler-border"><fmt:message
+									key="disk.performance" bundle="${msg}" /></legend>
 				<div class="" data-ng-show="storage.qosType == 'Hypervisor'">
 					<div class="form-group">
 						<div class="row">
@@ -354,7 +356,8 @@
 									data-ng-model="storage.storagePrice[0].zone"
 									ng-options=" zone.name for zone in zoneList"
 									data-ng-class="{'error': storageForm.zone.$invalid && formSubmitted}">
-									<option value="" class="">Select</option>
+									<option value="" class=""><fmt:message
+									key="common.select" bundle="${msg}" />t</option>
 								</select>
 								<div class="error-area"
 									data-ng-show="storageForm.zone.$invalid && formSubmitted">

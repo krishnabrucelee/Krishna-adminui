@@ -15,7 +15,7 @@
 
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <span class="pull-left">
-                            <a class="btn btn-info" href="#/configuration/cloudstack" title="Back" ><span class="fa fa-arrow-circle-left fa-lg "></span> Back</a>
+                            <a class="btn btn-info" href="#/configuration/cloudstack" title="<fmt:message key="common.back" bundle="${msg}" />" ><span class="fa fa-arrow-circle-left fa-lg "></span><fmt:message key="common.back" bundle="${msg}" /> </a>
                         </span>
                     </div>
 
@@ -23,7 +23,7 @@
                 <div class="clearfix"></div>
             </div>
             <div class="panel-body">
-          <label>Zone:</label>
+          <label><fmt:message key="template.zone" bundle="${msg}" />:</label>
             <li data-ng-repeat="zone in zoneList">{{zone.name}}</li>
            </div>
         </div>

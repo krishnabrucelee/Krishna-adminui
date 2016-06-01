@@ -15,7 +15,7 @@
 
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <span class="pull-left">
-                                <a class="btn btn-info" href="#/configuration/chargeback"  title="Back" ><span class="fa fa-arrow-circle-left fa-lg "></span> <fmt:message key="common.back" bundle="${msg}" /></a>
+                                <a class="btn btn-info" href="#/configuration/chargeback"  title="<fmt:message key="common.back" bundle="${msg}" />" ><span class="fa fa-arrow-circle-left fa-lg "></span> <fmt:message key="common.back" bundle="${msg}" /></a>
                             </span>
                         </div>
 
@@ -61,11 +61,11 @@
 
                         <div class="form-group" >
                             <div class="row">
-                                <label class="col-md-4 col-sm-5 control-label">Date Format:
+                                <label class="col-md-4 col-sm-5 control-label"><fmt:message key="date.format" bundle="${msg}" />
                                 </label>
                                 <div class="col-md-6 col-sm-7">
                                     <select required="true" class="form-control input-group" name="dateFormatType" data-ng-model="config.dateFormatType" ng-options="dateFormatType for (id, dateFormatType) in formElements.dateFormatList " >
-                                        <option value="">Select</option>
+                                        <option value=""><fmt:message key="common.select" bundle="${msg}" /></option>
                                     </select>
                                     <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="This date format is applicable billing oriented external file such as pdf,csv,etc..files." ></i>
                                 </div>

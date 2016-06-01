@@ -16,13 +16,13 @@
                             <h3 class="panel-title">{{ $state.current.data.pageTitle}}</h3>
                         </div>
                         <div class="row m-t-md">
-                            <div class="col-md-7 col-sm-7 pull-right m-b-sm">NOTE:
-                                <span class="text-danger ">Use negative number for discount (Ex: -1) and positive number for adjustment (Ex: 1) </span>
+                            <div class="col-md-7 col-sm-7 pull-right m-b-sm"><fmt:message key="note" bundle="${msg}" />:
+                                <span class="text-danger "><fmt:message key="negative.number" bundle="${msg}" /></span>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group m-l-md">
                                     <div class="row">
-                                    <label class="col-md-5 col-sm-5 control-label">Domain:
+                                    <label class="col-md-5 col-sm-5 control-label"><fmt:message key="domain.name" bundle="${msg}" />:
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-md-5 col-sm-5">
@@ -31,7 +31,7 @@
                                         data-ng-change="domainChange(billingSettingsObj.domain)"
                                         data-ng-model="billingSettingsObj.domain"
                                         data-ng-options="domainObj.name for domainObj in domainList">
-                                        <option value="">Select</option>
+                                        <option value=""><fmt:message key="common.select" bundle="${msg}" /></option>
                                         </select>
                                     </div>
                                     </div>
@@ -41,8 +41,7 @@
                                             'text-danger'
                                            : !billingSettingsObj.startDate && formSubmitted}">
                                     <div class="row">
-                                        <label class="col-md-5 col-sm-5 control-label">Valid
-                                            From: <span class="text-danger">*</span>
+                                        <label class="col-md-5 col-sm-5 control-label"><fmt:message key="valid.from" bundle="${msg}" /> <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-md-5 col-sm-5 ">
                                             <div class="input-group">
@@ -74,7 +73,7 @@
                             <div class="col-md-6  col-sm-6">
                                 <div class="form-group m-l-md">
                                     <div class="row">
-                                    <label class="col-md-6 col-sm-6 control-label">Adjustment Percentage:
+                                    <label class="col-md-6 col-sm-6 control-label"><fmt:message key="adjust.percent" bundle="${msg}" />:
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-md-5 col-sm-5">
@@ -88,8 +87,8 @@
                                             'text-danger'
                                             : !billingSettingsObj.endDate && formSubmitted}">
                                     <div class="row">
-                                        <label class="col-md-6 col-sm-6 control-label">Expires
-                                            On:
+                                        <label class="col-md-6 col-sm-6 control-label"><fmt:message key="expire" bundle="${msg}" />
+                                           :
                                         </label>
                                         <div class="col-md-5 col-sm-5 ">
                                             <div class="input-group">
@@ -119,7 +118,7 @@
                             <div class="col-md-6  col-sm-6">
                                 <div class="form-group m-l-md">
                                     <div class="row">
-                                    <label class="col-md-5 col-sm-5 control-label">Billable Item:
+                                    <label class="col-md-5 col-sm-5 control-label"><fmt:message key="billable.items" bundle="${msg}" />:
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-md-5 col-sm-5">

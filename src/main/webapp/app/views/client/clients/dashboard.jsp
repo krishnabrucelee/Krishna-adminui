@@ -13,7 +13,7 @@
     	<div class="col-md-12">
 	        <div class="panel panel-white no-border-radious">
 	            <div class="panel-body no-padding">
-	                <div class="p-sm company-title-bg pull-left">Company</div>
+	                <div class="p-sm company-title-bg pull-left"><fmt:message key="common.domain" bundle="${msg}" /></div>
 	                <div class="pull-left m-r-sm p-sm text-info font-bold">{{ domain.name }}</div>
 	            </div>
 	        </div>
@@ -30,7 +30,7 @@
 			                		<div class="company-panel-icon label-danger text-center"><i class="fa fa-phone"></i></div>
 			                	</div>
 			                	<div class="pull-left company-panel-title font-bold m-l-sm">
-			                		Contact <span>Contact Person Details</span>
+			                		<fmt:message key="contact" bundle="${msg}" /> <span><fmt:message key="contact.person" bundle="${msg}" /></span>
 			                	</div>
 			                </div>
 		                </div>
@@ -46,25 +46,25 @@
 			                        <ul class="list-group no-border">
 					                    <li class="list-group-item">
 					                        <div class="row">
-		                						<div class="col-md-4 font-bold">F.Name</div>
+		                						<div class="col-md-4 font-bold"><fmt:message key="f.name" bundle="${msg}" /></div>
 		                						<div class="col-md-8">{{ domain.primaryFirstName }}</div>
 	                						</div>
 					                    </li>
 					                    <li class="list-group-item ">
 					                        <div class="row">
-		                						<div class="col-md-4 font-bold">L.Name</div>
+		                						<div class="col-md-4 font-bold"><fmt:message key="l.name" bundle="${msg}" /></div>
 		                						<div class="col-md-8">{{ domain.lastName || '-' }}</div>
 	                						</div>
 					                    </li>
 					                    <li class="list-group-item">
 					                        <div class="row">
-		                						<div class="col-md-4 font-bold">Email</div>
+		                						<div class="col-md-4 font-bold"><fmt:message key="common.email" bundle="${msg}" /></div>
 		                						<div class="col-md-8">{{ domain.email || '-'}}</div>
 	                						</div>
 					                    </li>
 					                    <li class="list-group-item">
 					                        <div class="row">
-		                						<div class="col-md-4 font-bold">Phone</div>
+		                						<div class="col-md-4 font-bold"><fmt:message key="phone" bundle="${msg}" /></div>
 		                						<div class="col-md-8">{{ domain.phone || '-'}}</div>
 	                						</div>
 					                    </li>
@@ -79,25 +79,25 @@
 			                        <ul class="list-group no-border">
 					                    <li class="list-group-item">
 					                        <div class="row">
-		                						<div class="col-md-4 font-bold">F.Name</div>
+		                						<div class="col-md-4 font-bold"><fmt:message key="f.name" bundle="${msg}" /></div>
 		                						<div class="col-md-8">{{ domain.secondaryContactName || '-'}}</div>
 	                						</div>
 					                    </li>
 					                    <li class="list-group-item ">
 					                        <div class="row">
-		                						<div class="col-md-4 font-bold">L.Name</div>
+		                						<div class="col-md-4 font-bold"><fmt:message key="l.name" bundle="${msg}" /></div>
 		                						<div class="col-md-8">{{ domain.secondaryContactLastName || '-'}}</div>
 	                						</div>
 					                    </li>
 					                    <li class="list-group-item">
 					                        <div class="row">
-		                						<div class="col-md-4 font-bold">Email</div>
+		                						<div class="col-md-4 font-bold"><fmt:message key="common.email" bundle="${msg}" /></div>
 		                						<div class="col-md-8">{{ domain.secondaryContactEmail || '-'}}</div>
 	                						</div>
 					                    </li>
 					                    <li class="list-group-item">
 					                        <div class="row">
-		                						<div class="col-md-4 font-bold">Phone</div>
+		                						<div class="col-md-4 font-bold"><fmt:message key="phone" bundle="${msg}" /></div>
 		                						<div class="col-md-8">{{ domain.secondaryContactPhone || '-'}}</div>
 	                						</div>
 					                    </li>
@@ -119,7 +119,7 @@
 			                		<div class="company-panel-icon label-info text-center"><i class="fa fa-building"></i></div>
 			                	</div>
 			                	<div class="pull-left company-panel-title font-bold m-l-sm">
-			                		Company <span>Company Location Details</span>
+			                		<fmt:message key="common.domain" bundle="${msg}" /> <span><fmt:message key="company.location.details" bundle="${msg}" /></span>
 			                	</div>
 			                </div>
 		                </div>
@@ -129,25 +129,25 @@
 			                <ul class="list-group no-border">
 			                    <li class="list-group-item">
 			                        <div class="row">
-	               						<div class="col-md-5 font-bold">Company</div>
+	               						<div class="col-md-5 font-bold"><fmt:message key="common.domain" bundle="${msg}" /></div>
 	               						<div class="col-md-7">{{ domain.name || '-'}}</div>
 	              						</div>
 			                    </li>
 			                    <li class="list-group-item ">
 			                        <div class="row">
-	               						<div class="col-md-5 font-bold">Domain Name<span class="sub-text">(Login Name)</span></div>
+	               						<div class="col-md-5 font-bold"><fmt:message key="domain.name" bundle="${msg}" /><span class="sub-text">(Login Name)</span></div>
 	               						<div class="col-md-7">{{ domain.companyNameAbbreviation || '-'}}</div>
 	              						</div>
 			                    </li>
 			                    <li class="list-group-item">
 			                        <div class="row">
-	               						<div class="col-md-5 font-bold">H.Q</div>
+	               						<div class="col-md-5 font-bold"><fmt:message key="city.headquarters" bundle="${msg}" /></div>
 	               						<div class="col-md-7">{{ domain.cityHeadquarter || '-'}}</div>
 	              						</div>
 			                    </li>
 			                    <li class="list-group-item">
 			                        <div class="row">
-	               						<div class="col-md-5 font-bold">Address</div>
+	               						<div class="col-md-5 font-bold"><fmt:message key="address" bundle="${msg}" /></div>
 	               						<div class="col-md-7">{{ domain.companyAddress || '-'}}</div>
 	              						</div>
 			                    </li>
@@ -167,7 +167,7 @@
 			                		<div class="company-panel-icon label-warning text-center"><i class="fa fa-user"></i></div>
 			                	</div>
 			                	<div class="pull-left company-panel-title font-bold m-l-sm">
-			                		Account <span>Account History Details</span>
+			                		<fmt:message key="account" bundle="${msg}" /> <span><fmt:message key="account.history" bundle="${msg}" /></span>
 			                	</div>
 			                </div>
 		                </div>
@@ -177,13 +177,13 @@
 		                	<ul class="list-group no-border">
 			                    <li class="list-group-item">
 			                        <div class="row">
-	               						<div class="col-md-5 font-bold">Member Since</div>
+	               						<div class="col-md-5 font-bold"><fmt:message key="member.since" bundle="${msg}" /></div>
 	               						<div class="col-md-7">{{ domain.createdDateTime || '-'}}</div>
 	              						</div>
 			                    </li>
 			                    <li class="list-group-item ">
 			                        <div class="row">
-	               						<div class="col-md-5 font-bold">A/C Status</div>
+	               						<div class="col-md-5 font-bold"><fmt:message key="ac.status" bundle="${msg}" /></div>
 	               						<div class="col-md-7 font-bold text-success">{{ domain.status || '-'}}</div>
 	              						</div>
 			                    </li>
@@ -194,7 +194,7 @@
                                                 <button class="btn btn-default suspend-btn" title="<fmt:message key="common.enable" bundle="${msg}" />" data-ng-if="account.status == 'SUSPENDED'" data-ng-click="enableUserAccount(account)">
                                                      <span class="fa fa-check-circle-o text-center"> </span>
                                                 </button>
-					                <a data-ng-click="suspendDomain(domain)" data-ng-if="domain.status == 'ACTIVE' || domain.status == 'INACTIVE'" class="btn btn-info m-t-md">Suspend</a>
+					                <a data-ng-click="suspendDomain(domain)" data-ng-if="domain.status == 'ACTIVE' || domain.status == 'INACTIVE'" class="btn btn-info m-t-md"><fmt:message key="common.suspend" bundle="${msg}" /></a>
 					                <a data-ng-click="enableDomain(domain)" data-ng-if="domain.status == 'SUSPENDED'" class="btn btn-info m-t-md">Enable</a>
 		                </div>
 	                </div>
@@ -209,7 +209,7 @@
 				<tabset>
 	                <tab>
 	                    <tab-heading>
-	                        <i class="fa fa-line-chart"></i> Billing Summary
+	                        <i class="fa fa-line-chart"></i><fmt:message key="billing.summary" bundle="${msg}" />
 	                    </tab-heading>
 	                    <div class="panel-body">
 	                        <div class="row">
@@ -264,7 +264,7 @@
 	                </tab>
 	                <tab>
 	                    <tab-heading>
-	                        <i class="fa fa-area-chart"></i> Resource Usage
+	                        <i class="fa fa-area-chart"></i><fmt:message key="resource.usage" bundle="${msg}" />
 	                    </tab-heading>
 	                    <div class="panel-body">
 	                        <div class="row">
@@ -274,7 +274,7 @@
 	            						<div class="clearfix"></div>
 	            						<div class="quick-view-count text-right">{{ infrastructure.runningVmCount }}</div>
 	            					</div>
-	            					<div class="quick-view-title text-center">Running VM</div>
+	            					<div class="quick-view-title text-center"><fmt:message key="running.vm" bundle="${msg}" /></div>
 	            				</div>
 	            				<div class="col-md-2 col-sm-3 col-xs-6">
 	            					<div class="quick-view-details stopped-vm">
@@ -282,7 +282,7 @@
 	            						<div class="clearfix"></div>
 	            						<div class="quick-view-count text-right">{{ infrastructure.stoppedVmCount }}</div>
 	            					</div>
-	            					<div class="quick-view-title text-center">Stopped VM</div>
+	            					<div class="quick-view-title text-center"><fmt:message key="stopped.vm" bundle="${msg}" /></div>
 	            				</div>
 	            				<div class="col-md-2 col-sm-3 col-xs-6">
 	            					<div class="quick-view-details total-vm">
@@ -290,7 +290,7 @@
 	            						<div class="clearfix"></div>
 	            						<div class="quick-view-count text-right">{{ infrastructure.totalCount }}</div>
 	            					</div>
-	            					<div class="quick-view-title text-center">Total VM</div>
+	            					<div class="quick-view-title text-center"><fmt:message key="total.vm" bundle="${msg}" /></div>
 	            				</div>
 	            				<div class="col-md-2 col-sm-3 col-xs-6">
 	            					<div class="quick-view-details vcpu">
@@ -298,7 +298,7 @@
 	            						<div class="clearfix"></div>
 	            						<div class="quick-view-count text-right">{{ infrastructure.vcpu }}</div>
 	            					</div>
-	            					<div class="quick-view-title text-center">vCpu</div>
+	            					<div class="quick-view-title text-center"><fmt:message key="common.vcpu" bundle="${msg}" /></div>
 	            				</div>
 	            				<div class="col-md-2 col-sm-3 col-xs-6">
 	            					<div class="quick-view-details vcpu">
@@ -306,7 +306,7 @@
 	            						<div class="clearfix"></div>
 	            						<div class="quick-view-count text-right">{{ infrastructure.ram }} <small>(GB)</small></div>
 	            					</div>
-	            					<div class="quick-view-title text-center">RAM</div>
+	            					<div class="quick-view-title text-center"><fmt:message key="ram" bundle="${msg}" /></div>
 	            				</div>
 	            				<div class="col-md-2 col-sm-3 col-xs-6">
 	            					<div class="quick-view-details vcpu">
@@ -314,7 +314,7 @@
 	            						<div class="clearfix"></div>
 	            						<div class="quick-view-count text-right">{{ infrastructure.storage }} <small>(GB)</small></div>
 	            					</div>
-	            					<div class="quick-view-title text-center">Storage Allocation</div>
+	            					<div class="quick-view-title text-center"><fmt:message key="storage.allocation" bundle="${msg}" /></div>
 	            				</div>
 	            				<div class="col-md-2 col-sm-3 col-xs-6">
 	            					<div class="quick-view-details networks">
@@ -322,7 +322,7 @@
 	            						<div class="clearfix"></div>
 	            						<div class="quick-view-count text-right">{{ infrastructure.publicIp }}</div>
 	            					</div>
-	            					<div class="quick-view-title text-center">Public IP</div>
+	            					<div class="quick-view-title text-center"><fmt:message key="public.ip" bundle="${msg}" /></div>
 	            				</div>
 	            				<div class="col-md-2 col-sm-3 col-xs-6">
 	            					<div class="quick-view-details networks">
@@ -330,7 +330,7 @@
 	            						<div class="clearfix"></div>
 	            						<div class="quick-view-count text-right">{{ infrastructure.networks }}</div>
 	            					</div>
-	            					<div class="quick-view-title text-center">Networks</div>
+	            					<div class="quick-view-title text-center"><fmt:message key="common.networks" bundle="${msg}" /></div>
 	            				</div>
 	            				<div class="col-md-2 col-sm-3 col-xs-6">
 	            					<div class="quick-view-details private-template">
@@ -338,14 +338,14 @@
 	            						<div class="clearfix"></div>
 	            						<div class="quick-view-count text-right">{{ infrastructure.template }}</div>
 	            					</div>
-	            					<div class="quick-view-title text-center">Private Template</div>
+	            					<div class="quick-view-title text-center"><fmt:message key="private.template" bundle="${msg}" /></div>
 	            				</div>
 	           				</div>
 	                    </div>
 	                </tab>
 	                <tab>
 	                    <tab-heading>
-	                        <i class="fa  fa-pie-chart"></i> Quota Limit
+	                        <i class="fa  fa-pie-chart"></i> <fmt:message key="common.quota.limit" bundle="${msg}" />
 	                    </tab-heading>
 		                   <div class="panel-body">
 		                        <div class="row">
@@ -371,7 +371,7 @@
 	                </tab>
 	                <tab>
 	                    <tab-heading>
-	                        <i class="fa fa-file-text-o"></i> Invoice
+	                        <i class="fa fa-file-text-o"></i> <fmt:message key="invoice" bundle="${msg}" />
 	                    </tab-heading>
 	                    <div class="panel-body">
 	                        <table cellspacing="1" cellpadding="1" class="table table-bordered">
@@ -412,7 +412,7 @@
 	                </tab>
 	                <tab>
 	                    <tab-heading>
-	                        <i class="fa fa-money"></i> Payments
+	                        <i class="fa fa-money"></i>  <fmt:message key="payments" bundle="${msg}" />
 	                    </tab-heading>
 	                    <div class="panel-body">
 	                        <table cellspacing="1" cellpadding="1" class="table  table-bordered ">

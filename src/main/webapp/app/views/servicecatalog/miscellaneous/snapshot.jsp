@@ -15,7 +15,7 @@
                         <div class="col-md-12 col-sm-12 col-xs-12 ">
                             <div class="quick-search pull-right">
                                 <div class="input-group">
-                                    <input data-ng-model="miscellaneousSearch" type="text" class="form-control input-medium" placeholder="Quick Search" aria-describedby="quicksearch-go">
+                                    <input data-ng-model="miscellaneousSearch" type="text" class="form-control input-medium" placeholder="<fmt:message key="common.quick.search" bundle="${msg}" />" aria-describedby="quicksearch-go">
                                     <span class="input-group-addon" id="quicksearch-go"><span class="pe-7s-search pe-lg font-bold"></span></span>
                                 </div>
                             </div>
@@ -31,7 +31,8 @@
                                 <label class="col-md-4 col-sm-3 control-label "><fmt:message key="template.zone" bundle="${msg}" /><span class="text-danger">*</span></label>
                                 <div class="col-md-6  col-sm-7 col-xs-7">
                                     <select required="true"  class="form-control " name="zone" data-ng-model="miscellaneous.zone" ng-options="zone.name for zone in formElements.zoneList" data-ng-class="{'error': snapshotForm.zone.$invalid && formSubmitted}" >
-                                        <option value="">Select</option>
+                                        <option value=""><fmt:message
+									key="common.select" bundle="${msg}" /></option>
                                     </select>
                                     <i  tooltip="<fmt:message key="template.zone.tooltip" bundle="${msg}" />" class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
                                     <div class="error-area" data-ng-show="snapshotForm.zone.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="template.zone.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
