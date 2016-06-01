@@ -28,13 +28,13 @@
                                             'text-danger'
                                             :configForm.maxLogin.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-4 col-sm-5 control-label">Max Login Failure per IP:
+                                <label class="col-md-4 col-sm-5 control-label"><fmt:message key="max.login.failure" bundle="${msg}" />:
                                     <span class="text-danger">*</span>
                                 </label>
 
                                 <div class="col-md-6 col-sm-7">
                                     <input required="true" type="text" name="maxLogin" valid-number data-ng-class="{'error': configForm.maxLogin.$invalid && formSubmitted}" data-ng-model="generalconfiguration.maxLogin" class="form-control" >
-                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="Enter the no of max failure attempt for an ip " ></i>
+                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="max.attempt" bundle="${msg}" />"></i>
                                     <div class="error-area" data-ng-show="configForm.maxLogin.$invalid && formSubmitted" ><i  tooltip="Max Login Failure pre IP is required" class="fa fa-warning error-icon"></i></div>
                                 </div>
 
@@ -44,12 +44,12 @@
                                             'text-danger'
                                             : configForm.unlockTime.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-4 col-sm-5 control-label">Unlock Time(Min):
+                                <label class="col-md-4 col-sm-5 control-label"><fmt:message key="unlock.time" bundle="${msg}" />:
                                     <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-7">
                                     <input required="true" type="text" name="unlockTime" valid-number data-ng-class="{'error': configForm.unlockTime.$invalid && formSubmitted}" data-ng-model="generalconfiguration.unlockTime" class="form-control" >
-                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="Enter time(in min) to unlock account" ></i>
+                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="unlock.time" bundle="${msg}" />" ></i>
                                     <div class="error-area" data-ng-show="configForm.unlockTime.$invalid && formSubmitted" ><i  tooltip="Unlock Time is required." class="fa fa-warning error-icon"></i></div>
                                 </div>
                             </div>
@@ -58,12 +58,12 @@
                                             'text-danger'
                                             : configForm.rememberMeExpiredDays.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-4 col-sm-5 control-label">Remember Me Expired Days:
+                                <label class="col-md-4 col-sm-5 control-label"><fmt:message key="remember.me.expiry" bundle="${msg}" />:
                                     <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-7">
                                     <input required="true" type="text" name="rememberMeExpiredDays" valid-number data-ng-class="{'error': configForm.rememberMeExpiredDays.$invalid && formSubmitted}" data-ng-model="generalconfiguration.rememberMeExpiredDays" class="form-control" >
-                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip=" Enter remember me expired days" ></i>
+                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip=" <fmt:message key="remember.me.expiry" bundle="${msg}" />" ></i>
                                     <div class="error-area" data-ng-show="configForm.rememberMeExpiredDays.$invalid && formSubmitted" ><i  tooltip="Remember me expired days is required." class="fa fa-warning error-icon"></i></div>
                                 </div>
                             </div>
@@ -72,12 +72,12 @@
                                             'text-danger'
                                             : configForm.sessionTime.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-4 col-sm-5 control-label">Session Timeout(Min):
+                                <label class="col-md-4 col-sm-5 control-label"><fmt:message key="session.timeout" bundle="${msg}" />:
                                     <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-7">
                                     <input required="true" type="text" name="sessionTime" valid-number data-ng-class="{'error': configForm.sessionTime.$invalid && formSubmitted}" data-ng-model="generalconfiguration.sessionTime" class="form-control" >
-                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="Enter time(in min) to session timeout" ></i>
+                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="time.session.minute" bundle="${msg}" />" ></i>
                                     <div class="error-area" data-ng-show="configForm.sessionTime.$invalid && formSubmitted" ><i  tooltip="Unlock Time is required." class="fa fa-warning error-icon"></i></div>
                                 </div>
                             </div>

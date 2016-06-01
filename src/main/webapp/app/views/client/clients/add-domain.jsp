@@ -28,7 +28,7 @@
 										<input required="true" type="text" name="name" id="add_company_company_name"
 											data-ng-model="domain.name" class="form-control"
 											data-ng-class="{'error': domainForm.name.$invalid && formSubmitted}">
-										<i tooltip="Name of the company"
+										<i tooltip="<fmt:message key="name.reference" bundle="${msg}" />"
 											class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 										<div class="error-area"
 											data-ng-show="domainForm.name.$invalid && formSubmitted">
@@ -49,7 +49,7 @@
 										<input required="true" type="text" name="companyNameAbbreviation" id = "add_company_company_name_abbrevation"
 											data-ng-model="domain.companyNameAbbreviation" class="form-control"
 											data-ng-class="{'error': domainForm.companyNameAbbreviation.$invalid && formSubmitted}">
-										<i tooltip="This is will be Domain Name"
+										<i tooltip="<fmt:message key="this.company.name" bundle="${msg}" />"
 											class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 										<div class="error-area"
 											data-ng-show="domainForm.companyNameAbbreviation.$invalid && formSubmitted">
@@ -70,7 +70,7 @@
 										<input type="text" required="true" name="companyAddress" id="add_company_company_address"
 											data-ng-model="domain.companyAddress" class="form-control"
 											data-ng-class="{'error': domainForm.companyAddress.$invalid && formSubmitted}">
-										<i tooltip="Company address of the company"
+										<i tooltip="<fmt:message key="company.address" bundle="${msg}" />"
 											class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 										<div class="error-area"
 											data-ng-show="domainForm.companyAddress.$invalid && formSubmitted">
@@ -91,7 +91,7 @@
 										<input required="true" type="text" name="cityHeadquarter" id="add_company_city_headquarters"
 											data-ng-model="domain.cityHeadquarter" class="form-control"
 											data-ng-class="{'error': domainForm.cityHeadquarter.$invalid && formSubmitted}">
-										<i tooltip="City head quarter of the company"
+										<i tooltip="<fmt:message key="city.headquarters" bundle="${msg}" />"
 											class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 										<div class="error-area"
 											data-ng-show="domainForm.cityHeadquarter.$invalid && formSubmitted">
@@ -113,7 +113,7 @@
 										<input type="text" required="true" name="portalUserName" id="add_company_portal_user_name"
 											data-ng-model="domain.portalUserName" class="form-control"
 											data-ng-class="{'error': domainForm.portalUserName.$invalid && formSubmitted}">
-										<i tooltip="Name of the portal user"
+										<i tooltip="<fmt:message key="portal.user.name" bundle="${msg}" />"
 											class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 										<div class="error-area"
 											data-ng-show="domainForm.portalUserName.$invalid && formSubmitted">
@@ -132,7 +132,7 @@
 										  <input required="true" type="password" id="password" name="password" id="add_company_password"
 											data-ng-model="domain.password" class="form-control"
 											data-ng-class="{'error': domainForm.password.$invalid && formSubmitted}">
-										<i tooltip="Password of the portal user name"
+										<i tooltip="<fmt:message key="password.portal.user" bundle="${msg}" />"
 											class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 									<div class="error-area" data-ng-show="domainForm.password.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="password.is.required" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
 									</div>
@@ -147,7 +147,7 @@
 										<input required="true" type="password" id="confirmPassword" name="confirmPassword" id="add_company_confirm_password"
 											data-ng-model="account.confirmPassword" class="form-control"
 											data-ng-class="{'error': domainForm.confirmPassword.$invalid && formSubmitted}">
-										<i tooltip="Confirm Password of the company"
+										<i tooltip="<fmt:message key="confirm.password.company" bundle="${msg}" />"
 											class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 									     <div class="error-area" data-ng-show="domainForm.confirmPassword.$invalid && formSubmitted" >
                                     <i ng-attr-tooltip="{{ domainForm.confirmPassword.errorMessage || '<fmt:message key="confirm.password.is.required" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i>
@@ -175,7 +175,7 @@
 											<input type="text" name="primaryFirstNames" id="add_company_primary_first_names"
 												data-ng-model="domain.primaryFirstName" class="form-control"
 												data-ng-class="{'error': domainForm.primaryFirstNames.$invalid && formSubmitted}" required>
-											<i tooltip="Primary first name of the company"
+											<i tooltip="<fmt:message key="first.name" bundle="${msg}" />"
 												class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 											<div class="error-area"
 												data-ng-show="domainForm.primaryFirstNames.$invalid && formSubmitted">
@@ -195,7 +195,7 @@
 											<input type="text"  required="true" name="lastName" id="add_company_primary_last_name"
 												data-ng-model="domain.lastName" class="form-control"
 												data-ng-class="{'error': domainForm.lastName.$invalid && formSubmitted}">
-											<i tooltip="Last name of the company"
+											<i tooltip="<fmt:message key="last.name" bundle="${msg}" />"
 												class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 											<div class="error-area"
 												data-ng-show="domainForm.lastName.$invalid && formSubmitted">
@@ -216,7 +216,7 @@
 											<input required="true"type="email" name="email" id="add_company_primary_email_id"
 												data-ng-model="domain.email" class="form-control"
 												data-ng-class="{'error': domainForm.email.$invalid && formSubmitted}">
-											<i tooltip="Email of the company"
+											<i tooltip="<fmt:message key="email.id" bundle="${msg}" />"
 												class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 											<div class="error-area"
 												data-ng-show="domainForm.email.$invalid && formSubmitted">
@@ -239,7 +239,7 @@
 											<span class="text-danger" ng-show="domainForm.phone.$error.pattern">Numbers only allowed!</span>
 											<span class="text-danger" ng-show="domainForm.phone.$error.maxlength">Not a valid range!</span>
 
-											<i tooltip="Phone of the company"
+											<i tooltip="<fmt:message key="phone.number" bundle="${msg}" />"
 												class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 											<div class="error-area"
 												data-ng-show="domainForm.phone.$invalid && formSubmitted">
@@ -261,7 +261,7 @@
 										<div class="col-md-6 col-sm-6">
 											<input type="text" name="primaryFirstName" id="add_company_secondary_first_name"
 												data-ng-model="domain.secondaryContactName" class="form-control">
-											<i tooltip="Secondary first name of the company"
+											<i tooltip="<fmt:message key="secondary.contact" bundle="${msg}" />"
 												class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 										</div>
 									</div>
@@ -273,7 +273,7 @@
 										<div class="col-md-6 col-sm-6">
 											<input type="text" name="SecondarylastName" id="add_company_secondary_last_name"
 												data-ng-model="domain.secondaryContactLastName" class="form-control">
-											<i tooltip="Last name of the company"
+											<i tooltip="<fmt:message key="last.name" bundle="${msg}" />"
 												class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 										</div>
 									</div>
@@ -286,7 +286,7 @@
 										<div class="col-md-6 col-sm-6">
 											<input type="email" name="Secondaryemail" data-ng-model="domain.secondaryContactEmail" id="add_company_secondary_email_id"
 												class="form-control" data-ng-class="{'error': domainForm.Secondaryemail.$invalid && formSubmitted}"> <i
-												tooltip="Email of the company"
+												tooltip="<fmt:message key="email.id" bundle="${msg}" />"
 												class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 												<div class="error-area"
 												data-ng-show="domainForm.Secondaryemail.$invalid && formSubmitted">
@@ -305,7 +305,7 @@
 											<input type = "text" id="add_company_secondary_phone_number" ng-model="domain.secondaryContactPhone" name="Secondaryphone" ng-pattern="/^\d+$/"  maxlength="14" class="form-control">
 											<span class="text-danger" ng-show="domainForm.Secondaryphone.$error.pattern">Numbers only allowed!</span>
 											<span class="text-danger" ng-show="domainForm.Secondaryphone.$error.maxlength">Not a valid range!</span>
-											<i tooltip="Phone of the company"
+											<i tooltip="<fmt:message key="phone.number" bundle="${msg}" />"
 												class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"></i>
 										</div>
 										<div class="error-area"

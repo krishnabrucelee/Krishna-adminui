@@ -50,7 +50,7 @@
                                 {{ network.name}}
                             </td>
                             <td>
-                                <a class="icon-button" data-ng-click="showDescription(network)" title="Edit"  ><span class="fa fa-eye"></span></a>
+                                <a class="icon-button" data-ng-click="showDescription(network)" title="<fmt:message key="common.edit" bundle="${msg}" />"  ><span class="fa fa-eye"></span></a>
                             </td>
                         </tr>
                     </tbody>

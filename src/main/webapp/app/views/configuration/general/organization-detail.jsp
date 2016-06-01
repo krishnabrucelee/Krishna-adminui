@@ -16,7 +16,7 @@
 
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <span class="pull-left">
-                                <a class="btn btn-info" href="#/configuration/general"  title="Back" ><span class="fa fa-arrow-circle-left fa-lg "></span> <fmt:message key="common.back" bundle="${msg}" /></a>
+                                <a class="btn btn-info" href="#/configuration/general"  title="<fmt:message key="common.back" bundle="${msg}" />" ><span class="fa fa-arrow-circle-left fa-lg "></span> <fmt:message key="common.back" bundle="${msg}" /></a>
                             </span>
                         </div>
 
@@ -30,7 +30,7 @@
                                             'text-danger'
                                             : configForm.name.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">Name:
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="common.name" bundle="${msg}" />:
                                     <span class="text-danger">*</span>
                                 </label>
 
@@ -47,7 +47,7 @@
                                             'text-danger'
                                             : configForm.email.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">Email:
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="common.email" bundle="${msg}" />:
                                     <span class="text-danger">*</span>
                                 </label>
 
@@ -63,7 +63,7 @@
                                             'text-danger'
                                             : configForm.address.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">Address:
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="address" bundle="${msg}" />:
                                     <span class="text-danger">*</span>
                                 </label>
 
@@ -77,7 +77,7 @@
 
                         <div class="form-group">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">Address Extension:
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="address.extension" bundle="${msg}" />:
 
                                 </label>
 
@@ -92,8 +92,7 @@
                                             'text-danger'
                                             : configForm.city.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">City:
-                                    <span class="text-danger">*</span>
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="city" bundle="${msg}" /><span class="text-danger">*</span>
                                 </label>
 
                                 <div class="col-md-7 col-sm-7">
@@ -108,7 +107,7 @@
                                             'text-danger'
                                             : configForm.country.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">Country:
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="country" bundle="${msg}" />:
                                     <span class="text-danger">*</span>
                                 </label>
                                  <div class="col-md-7 col-sm-7">
@@ -124,7 +123,7 @@
                                             'text-danger'
                                             : configForm.state.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">State:
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="state" bundle="${msg}" />:
                                     <span class="text-danger">*</span>
                                 </label>
 
@@ -140,7 +139,7 @@
                                             'text-danger'
                                             : configForm.zipCode.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">Zip Code:
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="zip.code" bundle="${msg}" />:
                                     <span class="text-danger">*</span>
                                 </label>
 
@@ -160,7 +159,7 @@
                                             'text-danger'
                                             : configForm.phoneNo.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">Phone Number:<span class="text-danger">*</span>
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="phone.number" bundle="${msg}" />:<span class="text-danger">*</span>
                                 </label>
 
                                 <div class="col-md-7 col-sm-7">
@@ -175,7 +174,7 @@
                                             'text-danger'
                                             : configForm.faxNumber.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">Fax:
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="fax" bundle="${msg}" />:
                                     <span class="text-danger">*</span>
                                 </label>
 
@@ -189,7 +188,7 @@
 
                         <div class="form-group">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">Logo URL:
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="logo.url" bundle="${msg}" />:
                                 </label>
                                 <div class="col-md-7 col-sm-7">
 									<input type="url" name="logo"
@@ -208,7 +207,7 @@
 
                         <div class="form-group">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">Background image URL:
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="background.image.url" bundle="${msg}" />:
                                 </label>
                                  <div class="col-md-7 col-sm-7">
 									<input type="url" name="backgroundImageURL"
@@ -228,7 +227,7 @@
                                             'text-danger'
                                             : configForm.signaturName.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-3 col-sm-3 control-label">Signature Name:<span class="text-danger">*</span>
+                                <label class="col-md-3 col-sm-3 control-label"><fmt:message key="sign.name" bundle="${msg}" />:<span class="text-danger">*</span>
                                 </label>
 
                                 <div class="col-md-7 col-sm-7" >
@@ -245,7 +244,7 @@
                                             'text-danger'
                                             : configForm.summernoteTextTwo.$invalid && formSubmitted}">
                             <div class="row" >
-                                <label class="col-md-3 col-sm-3 control-label ">Terms and Conditions:
+                                <label class="col-md-3 col-sm-3 control-label "><fmt:message key="terms.conditions" bundle="${msg}" />:
                                     <span class="text-danger">*</span>
                                 </label>
 

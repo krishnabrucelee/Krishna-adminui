@@ -19,35 +19,35 @@
 			                    <thead class="bg-info">
 			           		<tr data-ng-if="resource=='domain'|| type == 'domain-quota'">
 			                    <th  class="text-center">
-                                	<label> Quota Type</label></th>
-                                	<th  class="text-center">Company Limit</th>
+                                	<label><fmt:message key="quota.type" bundle="${msg}" /> </label></th>
+                                	<th  class="text-center"><fmt:message key="company.limit" bundle="${msg}" /> </th>
 			                        <th class="text-center">
-			                        	<label> Min</label>
+			                        	<label> <fmt:message key="min" bundle="${msg}" /></label>
 			                        </th>
 			                        <th class="text-center">
-			                        	<label> Max</label>
+			                        	<label> <fmt:message key="max" bundle="${msg}" /></label>
 			                        </th>
 			                    </tr>
-			           <tr data-ng-if="resource=='department'">
+			         			  <tr data-ng-if="resource=='department'">
 			                    <th  class="text-center">
-                                	<label> Quota Type</label></th>
-                                	<th  class="text-center">Department Limit</th>
+                                	<label><fmt:message key="quota.type" bundle="${msg}" /></label></th>
+                                	<th  class="text-center"><fmt:message key="department.limit" bundle="${msg}" /></th>
 			                        <th  class="text-center">
-			                        	<label> Min</label>
+			                        	<label> <fmt:message key="min" bundle="${msg}" /></label>
 			                        </th>
 			                        <th  class="text-center">
-			                        	<label> Max</label>
+			                        	<label> <fmt:message key="max" bundle="${msg}" /></label>
 			                        </th>
 			                    </tr>
 			          			<tr data-ng-if="resource=='project'">
 			                    <th  class="text-center">
-                                	<label> Quota Type</label></th>
-                                	<th  class="text-center">Project Limit</th>
+                                	<label> <fmt:message key="quota.type" bundle="${msg}" /></label></th>
+                                	<th  class="text-center"><fmt:message key="project.limit" bundle="${msg}" /></th>
 			                        <th  class="text-center">
-			                        	<label> Min</label>
+			                        	<label>  <fmt:message key="min" bundle="${msg}" /></label>
 			                        </th>
 			                        <th  class="text-center">
-			                        	<label> Max</label>
+			                        	<label> <fmt:message key="max" bundle="${msg}" /></label>
 			                        </th>
 			                    </tr>
 			                    </thead>

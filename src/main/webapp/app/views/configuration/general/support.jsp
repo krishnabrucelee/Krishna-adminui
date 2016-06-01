@@ -24,8 +24,8 @@
 
             <div class="panel-body">
                 <ul class="nav nav-tabs" data-ng-init="templateCategory = 'department'">
-        <li class="active"><a  data-ng-click="templateCategory = 'department'" data-toggle="tab"> DEPARTMENT</a></li>
-        <li class=""><a  data-ng-click="templateCategory = 'predefined'" data-toggle="tab"> PRE DEFINED REPLY</a></li>
+        <li class="active"><a  data-ng-click="templateCategory = 'department'" data-toggle="tab"><fmt:message key="common.department" bundle="${msg}" /> </a></li>
+        <li class=""><a  data-ng-click="templateCategory = 'predefined'" data-toggle="tab"> <fmt:message key="predefined.reply" bundle="${msg}" /></a></li>
 
     </ul>
 

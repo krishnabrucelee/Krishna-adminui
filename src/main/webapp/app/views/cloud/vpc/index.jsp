@@ -32,12 +32,12 @@
                         <table cellspacing="1" cellpadding="1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th>User</th>
-                                    <th>Zone</th>
-                                    <th>CIDR</th>
-                                    <th>State</th>
+                                    <th><fmt:message key="common.name" bundle="${msg}" /></th>
+                                    <th><fmt:message key="common.description" bundle="${msg}" /></th>
+                                    <th><fmt:message key="common.user" bundle="${msg}" /></th>
+                                    <th><fmt:message key="iso.zone" bundle="${msg}" /></th>
+                                    <th><fmt:message key="cidr" bundle="${msg}" /></th>
+                                    <th><fmt:message key="common.status" bundle="${msg}" /></th>
                                 </tr>
                             </thead>
                             <tbody>

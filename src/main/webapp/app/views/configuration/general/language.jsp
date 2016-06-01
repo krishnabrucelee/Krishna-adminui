@@ -28,7 +28,7 @@
                                             'has-error'
                                             :configForm.language.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-4 col-sm-5 control-label">Select Default Language:
+                                <label class="col-md-4 col-sm-5 control-label"><fmt:message key="select.default" bundle="${msg}" />:
 
                                 </label>
 

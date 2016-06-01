@@ -27,12 +27,12 @@
 
                         <div class="form-group">
                         <div class="row">
-                            <label class="col-md-4 col-sm-4 control-label">Credit Card Processing Enable:
+                            <label class="col-md-4 col-sm-4 control-label"><fmt:message key="credit.card.process" bundle="${msg}" />:
                             </label>
 
                             <div class="col-md-2 col-sm-3">
                                 <input icheck  name="creditCard"  type="checkbox" data-ng-model="payment.creditCard" />
-                                <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="Credit Card Processing Enable for panel" ></i>
+                                <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="credit.card.process" bundle="${msg}" />" ></i>
 
                             </div>
 
@@ -41,12 +41,12 @@
 
                         <div class="form-group" data-ng-show="payment.creditCard ">
                         <div class="row">
-                            <label class="col-md-4 col-sm-4 control-label">Enable Card Verification On Sign Up:
+                            <label class="col-md-4 col-sm-4 control-label"><fmt:message key="enable.card.verify" bundle="${msg}" />:
                             </label>
 
                             <div class="col-md-2 col-sm-3">
                                 <input icheck name="cardVerification"  type="checkbox" data-ng-checked="true" data-ng-model="payment.cardVerification"/>
-                                <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="Credit Card Processing Enable On Signup" ></i>
+                                <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="enable.card.verify" bundle="${msg}" />" ></i>
 
                             </div>
 

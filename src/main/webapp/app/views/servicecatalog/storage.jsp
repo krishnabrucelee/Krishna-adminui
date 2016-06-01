@@ -35,7 +35,8 @@
                                 </div>
                             </div>
                             <a class="btn btn-info font-bold" id="storage_offerings_add_button" ui-sref="servicecatalog.list-storage.list-storage-offer"><span class="pe-7s-plus pe-lg font-bold m-r-xs"></span><fmt:message key="common.add" bundle="${msg}" /></a>
-                            <a class="btn btn-info" id="storage_offerings_refresh_button" data-ng-click="list(1)" title="Refresh"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
+                            <a class="btn btn-info" id="storage_offerings_refresh_button" data-ng-click="list(1)" title="<fmt:message
+									key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg "></span></a>
 <%--                             <div class="dashboard-box pull-left">
                                 <span class="pull-right"><fmt:message
 										key="storage.disabledoffering" bundle="${msg}" /></span>
@@ -105,7 +106,8 @@
                                 <!--  <td>{{ storage.diskSize}}</td>-->
                                 <td>{{ (storage.isCustomDisk) ? "Yes" : "No"}}</td>
                                 <td>
-                                    <a class="icon-button test_storage_offerings_edit_button" id="storage_offerings_edit_button_{{storage.id}}" data-unique-field="{{storage.name}}"  ui-sref="servicecatalog.list-storage.list-view-storage-offer({id: {{ storage.id}}})" title="Edit"  ><span class="fa fa-edit m-r"></span></a>
+                                    <a class="icon-button test_storage_offerings_edit_button" id="storage_offerings_edit_button_{{storage.id}}" data-unique-field="{{storage.name}}"  ui-sref="servicecatalog.list-storage.list-view-storage-offer({id: {{ storage.id}}})" title="<fmt:message
+									key="common.edit" bundle="${msg}" />"  ><span class="fa fa-edit m-r"></span></a>
 <!--                                     <a class="icon-button" title="Enable" data-ng-hide="storage.state == 'Enable'">
                                         <span class="fa fa-play m-r" ></span>
                                     </a> -->
@@ -113,7 +115,8 @@
                                         <span class="fa fa-ban m-r" ></span>
                                     </a> -->
 
-                                    <a class="icon-button test_storage_offerings_delete_button" id="storage_offerings_delete_button_{{storage.id}}" data-unique-field="{{storage.name}}" title="Delete" data-ng-click="delete('sm', storage)" ><span class="fa fa-trash"></span></a>
+                                    <a class="icon-button test_storage_offerings_delete_button" id="storage_offerings_delete_button_{{storage.id}}" data-unique-field="{{storage.name}}" title="<fmt:message
+									key="common.delete" bundle="${msg}" />" data-ng-click="delete('sm', storage)" ><span class="fa fa-trash"></span></a>
                                 </td>
                             </tr>
                         </tbody>

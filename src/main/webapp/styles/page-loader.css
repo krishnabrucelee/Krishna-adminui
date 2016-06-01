@@ -167,9 +167,7 @@
   margin-left:40%;
   margin-top:-70px;
 }
-.loader-img-wrapper{
-	height:64px; clear:both; overflow:hidden; position:relative;
-}
+.loader-img-wrapper{height:64px; clear:both; position:relative;}
 
 .modal-dialog .uil-ripple-css {
   margin-left:30%;
