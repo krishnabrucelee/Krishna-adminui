@@ -14,12 +14,12 @@ angular.module('panda-ui-admin', ['ngCookies', 'LocalStorageModule', 'ngSanitize
 
 
   $scope.showImage = function() {
-    	$scope.backgroundImage =  'http://'+ $window.location.hostname +':8080/'  + 'resources/' + 'theme_background.jpg';
+    	$scope.backgroundImage =  REQUEST_PROTOCOL +  $window.location.hostname +':8080/'  + 'resources/' + 'theme_background.jpg';
 }
 $scope.showImage();
 
 $scope.themeSettingList = function () {
-	return $http({method:'get', url: 'http://'+ $window.location.hostname +':8080/' +'home/' +'list'})
+	return $http({method:'get', url: REQUEST_PROTOCOL  + $window.location.hostname +':8080/' +'home/' +'list'})
 	.then(function(result){
 		$scope.themeSettings = result;
 		 $scope.welcomeContent = result.data.welcomeContent;
@@ -30,7 +30,7 @@ $scope.themeSettingList();
 
 	//For remember login functionality.
 	if ((localStorageService.get('rememberMe') == "true" || localStorageService.get('rememberMe') == true)) {
-		return $http({method:'get', url: 'http://'+ $window.location.hostname +':8080/api/'  + 'users/usersessiondetails/'+localStorageService.get('id'),
+		return $http({method:'get', url: REQUEST_PROTOCOL  + $window.location.hostname +':8080/api/'  + 'users/usersessiondetails/'+localStorageService.get('id'),
 			"headers": {'x-auth-token': localStorageService.get('token'), 'x-requested-with': '', 'Content-Type': 'application/json', 'Range': "items=0-9", 'x-auth-login-token': localStorageService.get('loginToken'), 'x-auth-remember': localStorageService.get('rememberMe'), 'x-auth-user-id': localStorageService.get('id'), 'x-auth-login-time': localStorageService.get('loginTime')}})
 			.then(function(result){
 				$window.location.href = "index#/dashboard";

@@ -10,17 +10,16 @@
 <html>
 <head>
     <!-- Redirect to login when passing the wrong URL -->
-    <script type="text/javascript">
-	    var ADMIN_CONTEXT_PATH = "<%=request.getContextPath()%>";
-	</script>
+
     <script>
         var pageUrl = window.location.href;
         if(pageUrl.indexOf("index#/login") > -1 || pageUrl.endsWith("index#/")) {
             var contextPath = '<%= request.getContextPath() %>';
+
             var baseUrl = window.location.protocol + "//" + window.location.host + contextPath + '/login';
             window.location = baseUrl;
         }
-    </script>
+       </script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -99,6 +98,9 @@
 <!-- appCtrl controller with serveral data used in theme on diferent view -->
 <!-- landing-scrollspy is directive for scrollspy used in landing page -->
 <body ng-controller="appCtrl" class="{{$state.current.data.specialClass}}"  landing-scrollspy tour backdrop="true">
+<input type="hidden" value="${REQUEST_PROTOCOL}" id="request_protocol" />
+                         <input type="hidden" value="${REQUEST_PORT}" id="request_port" />
+                         <input type="hidden" value="${REQUEST_ADMIN_FOLDER}" id="request_admin_folder" />
 <!-- Simple splash screen-->
 <div class="splash loading-screen"> <div class="splash-title"><h1>Panda - Admin Console</h1><p>Cloud Management Portal</p><img src="images/loading-bars.svg" width="64" height="64" /> </div> </div>
 <!--[if lt IE 7]>
@@ -112,7 +114,22 @@
     <div ui-view autoscroll="true"></div>
 
 <!-- build:js(.) scripts/vendor.js -->
+<script type="text/javascript">
+	    var ADMIN_CONTEXT_PATH = "<%=request.getContextPath()%>";
+	    var REQUEST_PROTOCOL = document.getElementById("request_protocol").value;
+        if(REQUEST_PROTOCOL == "" || typeof(REQUEST_PROTOCOL) == "undefined" || REQUEST_PROTOCOL == null) {
+        	REQUEST_PROTOCOL = "http";
+        }
+        var REQUEST_PORT = document.getElementById("request_port").value;
+        if(REQUEST_PORT != "" && typeof(REQUEST_PORT) != "undefined" && REQUEST_PORT != null) {
+        	REQUEST_PORT = ":" + REQUEST_PORT;
+        }
+        var REQUEST_ADMIN_FOLDER = document.getElementById("request_admin_folder").value;
+        if(REQUEST_ADMIN_FOLDER == "" || typeof(REQUEST_ADMIN_FOLDER) == "undefined" || REQUEST_ADMIN_FOLDER == null) {
+        	REQUEST_ADMIN_FOLDER = "/admin/";
+        }
 
+	</script>
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
 <script src="bower_components/slimScroll/jquery.slimscroll.min.js"></script>
@@ -210,6 +227,7 @@
 <script src="scripts/factories/loginService.js"></script>
 <script src="scripts/factories/interceptor.js"></script>
 <script src="scripts/factories/promiseAjax.js"></script>
+<script src="scripts/constants/appConstants.js"></script>
 <script src="scripts/factories/globalConfig.js"></script>
 <script src="scripts/factories/modalService.js"></script>
 <script src="scripts/factories/dialogService.js"></script>

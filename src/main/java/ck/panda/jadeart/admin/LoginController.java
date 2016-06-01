@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "LoginController", urlPatterns = { "/login" })
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -31,6 +31,14 @@ public class LoginController extends HttpServlet {
 		// TODO Auto-generated method stub
 		RequestDispatcher rd = request
                 .getRequestDispatcher("app/login.jsp");
+		String value = System.getenv("REQUEST_PROTOCOL");
+		request.setAttribute("REQUEST_PROTOCOL", value);
+
+		String port = System.getenv("REQUEST_PORT");
+		request.setAttribute("REQUEST_PORT", port);
+
+		String folder = System.getenv("REQUEST_ADMIN_FOLDER");
+		request.setAttribute("REQUEST_ADMIN_FOLDER", folder);
         rd.forward(request, response);
 	}
 

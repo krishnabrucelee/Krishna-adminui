@@ -89,9 +89,9 @@ function globalConfig($window) {
         HTTP_PUT : 'PUT',
         HTTP_DELETE : 'DELETE',
         CONTENT_LIMIT : 10,
-        APP_URL : "http://" + window.location.hostname + ":8080/api/",
-        PING_APP_URL : "http://" + window.location.hostname + ":8086/api/",
-        BASE_UI_URL : "http://"+ window.location.hostname +":9090"+ADMIN_CONTEXT_PATH+"/",
+        APP_URL : REQUEST_PROTOCOL  + window.location.hostname + ":8080/api/",
+        PING_APP_URL : REQUEST_PROTOCOL  + window.location.hostname + ":8086/api/",
+        BASE_UI_URL : REQUEST_PROTOCOL + window.location.hostname + REQUEST_PORT + REQUEST_ADMIN_FOLDER,
         VIEW_URL : 'app/views/',
         NOTIFICATION_TEMPLATE : 'app/views/notification/notify.jsp',
         BILLABLE_ITEM : {
