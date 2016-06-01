@@ -29,7 +29,7 @@
                             <a class="btn btn-info" data-ng-click="archive()"><span class="fa fa-file-archive-o"></span> Archive Events</a>
                             <a class="btn btn-info" data-ng-click="delete()"><span class="fa fa-trash"></span> Delete Events</a>
                         </span> -->
-                        <a class="btn btn-info" data-ng-click="getActivityByCategory('events',1)" title="Refresh" ><span class="fa fa-refresh fa-lg "></span></a>
+                        <a class="btn btn-info" data-ng-click="getActivityByCategory('events',1)" title="<fmt:message key="common.refresh" bundle="${msg}" />" ><span class="fa fa-refresh fa-lg "></span></a>
                     </span>
                 </div>
             </div>
@@ -50,12 +50,12 @@
                     <input type="checkbox" data-ng-model="activity.selectedAll.events" data-ng-click="checkAll();"><label></label>
                 </div>
                 </th>
-                <th>Description</th>
-                <th>Status</th>
-                <th>Type</th>
-                <th>Domain</th>
-                <th>Account</th>
-                <th>Date</th><!--
+                <th><fmt:message key="common.description" bundle="${msg}" /></th>
+                <th><fmt:message key="common.state" bundle="${msg}" /></th>
+                <th><fmt:message key="common.type" bundle="${msg}" /></th>
+                <th><fmt:message key="common.domain" bundle="${msg}" /></th>
+                <th><fmt:message key="common.accounts" bundle="${msg}" /></th>
+                <th><fmt:message key="event.date" bundle="${msg}" /></th><!--
                 <th>Action</th> -->
                 </tr>
                 </thead>
