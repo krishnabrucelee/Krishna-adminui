@@ -49,10 +49,10 @@
                     <label></label>
                 </div>
                 </th>
-                <th>Description</th>
-                <th>Type</th>
-                <th>Date</th>
-                <th>Action</th>
+                        <th><fmt:message key="common.description" bundle="${msg}" /></th>
+                        <th><fmt:message key="common.type" bundle="${msg}" /></th>
+                        <th><fmt:message key="event.date" bundle="${msg}" /></th>
+                        <th><fmt:message key="common.active" bundle="${msg}" /></th>
                 </tr>
                 </thead>
                 <tbody data-ng-hide="activityListt.length > 0">

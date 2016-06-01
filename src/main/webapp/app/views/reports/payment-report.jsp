@@ -96,7 +96,7 @@ table tbody.auto-serial tr td:first-child:before
                             <table cellspacing="1" cellpadding="1" class="table  table-bordered ">
                                 <thead>
                                     <tr>
-                                    	<th class="label-primary text-white">S.No</th>
+                                    	<th class="label-primary text-white"><fmt:message key="serial.no" bundle="${msg}" /></th>
                                     	<th class="label-primary text-white"  data-ng-class="sort.descending && sort.column =='invoiceNumber'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.invoice.no" bundle="${msg}" />.</th>
                                     	<th class="label-primary text-right text-white"  data-ng-class="sort.descending && sort.column =='domain.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.company" bundle="${msg}" /></th>
                                     	<th class="label-primary text-right text-white"  data-ng-class="sort.descending && sort.column =='billPeriod'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.billing.period" bundle="${msg}" /></th>
@@ -127,7 +127,7 @@ table tbody.auto-serial tr td:first-child:before
                                         <td class="text-right">{{ invoice.paymentMethod}}</td>
                                         <td class="text-right">{{ invoice.status}}</td>
                                         <td class="text-right">
-                                            <a data-ng-show="invoice.status != 'PAID'" class="btn btn-info btn-sm m-l-sm m-t-xs" title="Mark as Paid" data-ng-click="PayNow('sm', invoice)">Mark as Paid</a>
+                                            <a data-ng-show="invoice.status != 'PAID'" class="btn btn-info btn-sm m-l-sm m-t-xs" title="Mark as Paid" data-ng-click="PayNow('sm', invoice)"><fmt:message key="payment.mark.as.paid" bundle="${msg}" /></a>
                                         </td>
                                     </tr>
                                 </tbody>

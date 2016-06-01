@@ -27,15 +27,15 @@
 
                                <span class="pull-right m-l-sm m-t-sm">
                                     <span data-ng-hide="oneItemSelected">
-                                    <a class="btn btn-info" data-ng-click="openDeleteContainer('sm')"><span class="fa fa-trash"></span> Delete Ticket</a>
+                                    <a class="btn btn-info" data-ng-click="openDeleteContainer('sm')"><span class="fa fa-trash"></span> <fmt:message key="delete.ticket" bundle="${msg}" /></a>
                                    </span>
 
                                     <span data-ng-show="oneItemSelected">
-                                    <a class="btn btn-info" data-ng-click="openDeleteTicketContainer('sm')"><span class="fa fa-trash"></span> Delete Ticket</a>
+                                    <a class="btn btn-info" data-ng-click="openDeleteTicketContainer('sm')"><span class="fa fa-trash"></span> <fmt:message key="delete.ticket" bundle="${msg}" /></a>
                                     </span>
-                                    <a class="btn btn-info"  ng-click="openAddTicketContainer()"><span class="pe pe-7s-plus font-bold fa-lg  m-r-sm"></span>Add Ticket</a>
+                                    <a class="btn btn-info"  ng-click="openAddTicketContainer()"><span class="pe pe-7s-plus font-bold fa-lg  m-r-sm"></span><fmt:message key="add.ticket" bundle="${msg}" /></a>
 
-                                    <a class="btn btn-info" ui-sref="support.tickets" title="Refresh"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg"></span></a>
+                                    <a class="btn btn-info" ui-sref="support.tickets" title="<fmt:message key="common.refresh" bundle="${msg}" />"  ui-sref-opts="{reload: true}"><span class="fa fa-refresh fa-lg"></span></a>
                                     </span>
                             </div>
                         </div>
@@ -52,10 +52,10 @@
                                 <input type="checkbox" data-ng-model="selectedAll.support" data-ng-click="checkAll();">                                <label></label>
                             </div>
                             </th>
-                            <th class="col-md-1 col-sm-1">Id</th>
-                            <th class="col-md-2 col-sm-2">Department</th>
-                            <th >Subject</th>
-                            <th class="col-md-2 col-sm-2">Priority</th>
+                            <th class="col-md-1 col-sm-1"><fmt:message key="common.id" bundle="${msg}" /></th>
+                            <th class="col-md-2 col-sm-2"><fmt:message key="common.department" bundle="${msg}" /></th>
+                            <th ><fmt:message key="common.subject" bundle="${msg}" /></th>
+                            <th class="col-md-2 col-sm-2"><fmt:message key="common.priority" bundle="${msg}" /></th>
 
                             </tr>
                             </thead>

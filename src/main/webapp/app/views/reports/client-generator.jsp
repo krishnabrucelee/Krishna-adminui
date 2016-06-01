@@ -11,7 +11,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="panel-info panel ">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><fmt:message key="common.generate" bundle="${msg}" /> {{ $state.current.data.pageTitle}}</h3>
+                    <h3 class="panel-title"><fmt:message key="generate.client.usage.report" bundle="${msg}" /></h3>
                 </div>
 
                 <div class="row m-t-md">

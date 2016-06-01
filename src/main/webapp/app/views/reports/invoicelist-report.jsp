@@ -92,7 +92,7 @@ table tbody.auto-serial tr td:first-child:before
                             <table cellspacing="1" cellpadding="1" class="table table-bordered">
                                 <thead>
                                     <tr>
-                                      	<th class="label-primary text-white">S.No</th>
+                                      	<th class="label-primary text-white"><fmt:message key="serial.no" bundle="${msg}" /></th>
                                         <th class="label-primary text-white"  data-ng-class="sort.descending && sort.column =='invoiceNumber'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.invoice.no" bundle="${msg}" />.</th>
                                         <th class="label-primary text-white text-right"  data-ng-class="sort.descending && sort.column =='domain.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.company" bundle="${msg}" /></th>
                                         <th class="label-primary text-white text-right"  data-ng-class="sort.descending && sort.column =='billPeriod'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.billing.period" bundle="${msg}" /></th>
@@ -118,9 +118,9 @@ table tbody.auto-serial tr td:first-child:before
                                         <td class="text-right">
                                             {{ invoice.status}}</td>
                                         <td class="text-right">
-                                            <a data-ng-if="invoice.status == 'DUE'" class="m-l-sm btn btn-sm btn-default " data-ng-click="viewInvoice(invoice, 'Chinese')">Chinese </a>
-                                            <a data-ng-if="invoice.status == 'DUE'" class="m-l-sm btn btn-sm btn-info" data-ng-click="viewInvoice(invoice, 'English')">English </a>
-                                            <button data-ng-if="invoice.status == 'DRAFT'" class="m-l-sm btn btn-sm btn-info" data-ng-click="generateDueInvoice(invoice)">Generate Invoice</button>
+                                            <a data-ng-if="invoice.status == 'DUE'" class="m-l-sm btn btn-sm btn-default " data-ng-click="viewInvoice(invoice, 'Chinese')"><fmt:message key="common.chinese" bundle="${msg}" /></a>
+                                            <a data-ng-if="invoice.status == 'DUE'" class="m-l-sm btn btn-sm btn-info" data-ng-click="viewInvoice(invoice, 'English')"><fmt:message key="common.english" bundle="${msg}" /></a>
+                                            <button data-ng-if="invoice.status == 'DRAFT'" class="m-l-sm btn btn-sm btn-info" data-ng-click="generateDueInvoice(invoice)"><fmt:message key="invoice.generate.invoice" bundle="${msg}" /></button>
                                         </td>
                                         <!-- <td></td> -->
                                     </tr>
