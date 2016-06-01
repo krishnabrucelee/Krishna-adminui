@@ -61,6 +61,15 @@ public class IndexController extends HttpServlet {
         messages = ResourceBundle.getBundle("i18n/messages", currentLocale);
         request.setAttribute("messages", messages);
         request.setAttribute("lang", languageString);
+        String value = System.getenv("REQUEST_PROTOCOL");
+		request.setAttribute("REQUEST_PROTOCOL", value);
+
+		String port = System.getenv("REQUEST_PORT");
+		request.setAttribute("REQUEST_PORT", port);
+
+		String folder = System.getenv("REQUEST_ADMIN_FOLDER");
+		request.setAttribute("REQUEST_ADMIN_FOLDER", folder);
+
         RequestDispatcher rd = request
                 .getRequestDispatcher("app/index.jsp");
         rd.forward(request, response);
