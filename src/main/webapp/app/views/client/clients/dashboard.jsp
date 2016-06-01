@@ -194,7 +194,7 @@
                                                 <button class="btn btn-default suspend-btn" title="<fmt:message key="common.enable" bundle="${msg}" />" data-ng-if="account.status == 'SUSPENDED'" data-ng-click="enableUserAccount(account)">
                                                      <span class="fa fa-check-circle-o text-center"> </span>
                                                 </button>
-					                <a data-ng-click="suspendDomain(domain)" data-ng-if="domain.status == 'ACTIVE' || domain.status == 'INACTIVE'" class="btn btn-info m-t-md">Suspend</a>
+					                <a data-ng-click="suspendDomain(domain)" data-ng-if="domain.status == 'ACTIVE' || domain.status == 'INACTIVE'" class="btn btn-info m-t-md"><fmt:message key="common.suspend" bundle="${msg}" /></a>
 					                <a data-ng-click="enableDomain(domain)" data-ng-if="domain.status == 'SUSPENDED'" class="btn btn-info m-t-md">Enable</a>
 		                </div>
 	                </div>
