@@ -8,7 +8,7 @@
 
 <div class="inmodal" >
     <div class="modal-header">
-        <panda-modal-header page-title="{{activity.pageTitle}} Description" hide-zone="true"></panda-modal-header>
+        <panda-modal-header page-title="<fmt:message key="activity.events" bundle="${msg}" /> <fmt:message key="common.description" bundle="${msg}" />" hide-zone="true"></panda-modal-header>
 
     </div>
     <div class="modal-body">
@@ -21,7 +21,7 @@
     </div>
     <div class="modal-footer">
 
-        <a class="btn btn-info"  data-ng-click="cancel()">Close</a>
+        <a class="btn btn-info"  data-ng-click="cancel()"><fmt:message key="common.cancel" bundle="${msg}" /></a>
 
     </div>
 </div>
