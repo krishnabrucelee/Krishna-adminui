@@ -24,19 +24,20 @@
                 </div>
                 <div class="panel-body"><div class="col-md-7 col-sm-7">
 
-                        <div class="form-group" ng-class="{
-                                            'has-error'
-                                            :configForm.defaultLanguage.$invalid && formSubmitted}">
+                        <div class="form-group" data-ng-class="{ 'text-danger' : configForm.defaultLanguage.$invalid && formSubmitted}">
                             <div class="row">
                                 <label class="col-md-4 col-sm-5 control-label"><fmt:message key="select.default" bundle="${msg}" />:</label>
                                 <div class="col-md-6 col-sm-7">
                                     <select required="true" class="form-control input-group" name="defaultLanguage" data-ng-model="generalconfiguration.defaultLanguage" ng-options="language for (id, language) in formElements.LanguageList"
 	                                data-ng-class="{ 'error' : configForm.defaultLanguage.$invalid && formSubmitted}">
+	                                <option value=""><fmt:message key="common.select" bundle="${msg}" /></option>
 	                                </select>
-                                    <span class="help-block m-b-none" ng-show="configForm.defaultLanguage.$invalid && formSubmitted" >Language is required.</span>
-                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="select.default" bundle="${msg}" />" ></i>
+	                                <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="select.default" bundle="${msg}" /> "></i>
+									<div class="error-area" data-ng-show="configForm.defaultLanguage.$invalid && formSubmitted" >
+	                                <i  tooltip="<fmt:message key="select.default" bundle="${msg}" />" class="fa fa-warning error-icon"></i>
                                 </div>
                             </div>
+                        </div>
                         </div>
                         <div class="form-group">
                             <div class="row">
@@ -47,7 +48,7 @@
                     </div>
                             </div>
                     </div>
-                    </div>
+
                 </div>
             </div>
         </div>
