@@ -6,7 +6,7 @@
 <c:set var="language" value="${not empty language ? language : pageContext.request.getAttribute('language')}" scope="session" />
 <fmt:setBundle basename="i18n/messages_${language}" var="msg" scope="session" />
 
-<form name="configForm" data-ng-submit="validateLanguage(configForm)" method="post" novalidate="" data-ng-controller="configurationCtrl">
+<form name="configForm" data-ng-submit="save(configForm, generalconfiguration)" method="post" novalidate="" data-ng-controller="languageCtrl">
     <div class="row">
         <div class="col-md-12 col-sm-12">
             <div class="hpanel">
@@ -26,23 +26,16 @@
 
                         <div class="form-group" ng-class="{
                                             'has-error'
-                                            :configForm.language.$invalid && formSubmitted}">
+                                            :configForm.defaultLanguage.$invalid && formSubmitted}">
                             <div class="row">
-                                <label class="col-md-4 col-sm-5 control-label"><fmt:message key="select.default" bundle="${msg}" />:
-
-                                </label>
-
+                                <label class="col-md-4 col-sm-5 control-label"><fmt:message key="select.default" bundle="${msg}" />:</label>
                                 <div class="col-md-6 col-sm-7">
-                                    <select required="true" class="form-control input-group" name="language" data-ng-model="config.language" data-ng-init="config.language = formElements.languageList[1]" ng-options="language.name for language in formElements.languageList" >
-
-                                    </select>
-                                    <span class="help-block m-b-none" ng-show="configForm.language.$invalid && formSubmitted" >Language is required.</span>
-                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="Select default language for panel" ></i>
-
-
-
+                                    <select required="true" class="form-control input-group" name="defaultLanguage" data-ng-model="generalconfiguration.defaultLanguage" ng-options="language for (id, language) in formElements.LanguageList"
+	                                data-ng-class="{ 'error' : configForm.defaultLanguage.$invalid && formSubmitted}">
+	                                </select>
+                                    <span class="help-block m-b-none" ng-show="configForm.defaultLanguage.$invalid && formSubmitted" >Language is required.</span>
+                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="select.default" bundle="${msg}" />" ></i>
                                 </div>
-
                             </div>
                         </div>
                         <div class="form-group">
@@ -57,8 +50,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 </form>

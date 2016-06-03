@@ -735,6 +735,8 @@ angular.module('panda-ui-admin').constant("PANDA_CONFIG", {
         	var loginSession = globalConfig.sessionValues;
             if(loginSession == null || angular.isUndefined(globalConfig.sessionValues) && tokens != null) {
             	globalConfig.sessionValues = tokens;
+            	globalConfig.sessionValues.token = localStorageService.get('token');
+                globalConfig.sessionValues.loginToken = localStorageService.get('loginToken');
             	localStorageService.set('rememberMe', tokens.rememberMe);
             	if ((angular.isUndefined(localStorageService.get('rememberMe')) || localStorageService.get('rememberMe') == false || localStorageService.get('rememberMe') == "false")
             			&& (angular.isUndefined($cookies.rememberMe) || $cookies.rememberMe == undefined || $cookies.rememberMe == "undefined")) {
