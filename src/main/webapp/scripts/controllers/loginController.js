@@ -40,6 +40,10 @@ $scope.themeSettingList = function () {
 		$scope.themeSettings = result;
 		 $scope.welcomeContent = result.data.welcomeContent;
 		 $scope.footerContent = result.data.footerContent;
+		 $scope.splashTitle= result.data.splashTitle;
+
+		 $cookies.splashTitle = result.data.splashTitle;
+
 	});
 };
 $scope.themeSettingList();

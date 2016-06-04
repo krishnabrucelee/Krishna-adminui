@@ -51,7 +51,7 @@ function projectViewCtrl($scope, $state, $stateParams, $window, promiseAjax,
 	};
 
 	$scope.cancelProject = function() {
-		$scope.cancellingProject = true;
+		$scope.showLoader = true;
 		setTimeout(function() {
 			$scope.cancel();
 			$scope.homerTemplate = 'views/notification/notify.html';
@@ -70,7 +70,7 @@ function projectViewCtrl($scope, $state, $stateParams, $window, promiseAjax,
 	};
 
 	$scope.suspendProject = function() {
-		$scope.suspendingProject = true;
+		$scope.showLoader = true;
 		setTimeout(function() {
 			$scope.cancel();
 			$scope.homerTemplate = 'views/notification/notify.html';
@@ -424,7 +424,7 @@ function projectListCtrl($scope, promiseAjax,crudService,notify,appService, loca
             var hasProjects = {};
             if ($scope.domainView == null && $scope.vmSearch == null) {
             	hasProjects = appService.crudService.list("projects", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
-            } 
+            }
 		else {
 if ($scope.domainView != null && $scope.vmSearch == null) {
                 $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=";
@@ -457,5 +457,5 @@ if ($scope.domainView != null && $scope.vmSearch == null) {
         };
         $scope.list(1);
 
-    
+
 };
