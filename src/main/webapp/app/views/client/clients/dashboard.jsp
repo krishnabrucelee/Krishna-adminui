@@ -135,7 +135,7 @@
 			                    </li>
 			                    <li class="list-group-item ">
 			                        <div class="row">
-	               						<div class="col-md-5 font-bold"><fmt:message key="domain.name" bundle="${msg}" /><span class="sub-text">(Login Name)</span></div>
+	               						<div class="col-md-5 font-bold"><fmt:message key="domain.name" bundle="${msg}" /><span class="sub-text">(<fmt:message key="login.name" bundle="${msg}" />)</span></div>
 	               						<div class="col-md-7">{{ domain.companyNameAbbreviation || '-'}}</div>
 	              						</div>
 			                    </li>

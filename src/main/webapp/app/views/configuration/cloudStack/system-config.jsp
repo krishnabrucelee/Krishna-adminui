@@ -41,10 +41,10 @@
 
 									<div class="error-area"
 										data-ng-show="configForm.URL.$invalid && formSubmitted">
-										<i tooltip="URL  is Required" class="fa fa-warning error-icon"></i>
+										<i tooltip="<fmt:message key="iso.url.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i>
 									</div>
 									<i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"
-										tooltip="The URL of the cloudStack server you wish to integrate with"></i>
+										tooltip="<fmt:message key="url.cloudstack" bundle="${msg}" />"></i>
 								</div>
 							</div>
 						</div>
@@ -59,10 +59,10 @@
 										class="form-control" data-ng-model="config.apiKey"
 										data-ng-class="{'error': configForm.rootAPI.$invalid && formSubmitted}">
 									<i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"
-										tooltip="The api key of the admin user from cloud stack "></i>
+										tooltip="<fmt:message key="api.key.cloudstack" bundle="${msg}" />"></i>
 									<div class="error-area"
 										data-ng-show="configForm.rootAPI.$invalid && formSubmitted">
-										<i tooltip="rootAPI  is Required"
+										<i tooltip="<fmt:message key="root.api" bundle="${msg}" />"
 											class="fa fa-warning error-icon"></i>
 									</div>
 								</div>
@@ -80,10 +80,10 @@
 										class="form-control" data-ng-model="config.secretKey"
 										data-ng-class="{'error': configForm.secretKey.$invalid && formSubmitted}">
 									<i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"
-										tooltip="The secret key of the admin user from cloud stack "></i>
+										tooltip="<fmt:message key="secret.key.cloudstack" bundle="${msg}" />"></i>
 									<div class="error-area"
 										data-ng-show="configForm.secretKey.$invalid && formSubmitted">
-										<i tooltip="secretKey  is Required"
+										<i tooltip="<fmt:message key="secret.key.required" bundle="${msg}" />"
 											class="fa fa-warning error-icon"></i>
 									</div>
 								</div>
