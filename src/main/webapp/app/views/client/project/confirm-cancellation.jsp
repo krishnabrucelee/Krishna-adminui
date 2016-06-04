@@ -14,7 +14,7 @@
         </div>
 
         <div class="modal-body">
-            <div class=" row" data-ng-hide="cancellingProject">
+            <div class=" row" data-ng-hide="showLoader">
                 <div class="form-group has-error col-md-3 col-sm-3  col-xs-3">
 
                     <span class="fa fa-3x fa-warning text-warning"></span>
@@ -27,8 +27,8 @@
             </div>
 
 
-            <div class="text-center" data-ng-show="cancellingProject">
-                <img src="images/loading-bars.svg" />
+            <div class="text-center" data-ng-show="showLoader">
+<get-login-loader-image data-ng-show="showLoader"></get-login-loader-image>
             </div>
 
 

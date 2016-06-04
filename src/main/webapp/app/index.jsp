@@ -94,6 +94,21 @@
 
 </head>
 
+<script type="text/javascript">
+
+var re = new RegExp("splashTitle" + "=([^;]+)");
+var value = re.exec(document.cookie);
+console.log("111",unescape(value[1]));
+//return (value != null) ? unescape(value[1]) : null;
+
+
+//		var splashText = document.cookie.split('splashTitle=');
+		//var splashTitle = splashText[1].split(';');
+
+		document.getElementById("demo").innerHTML = unescape(value[1]);
+		//alert(splashTitle[0]);
+	</script>
+
 <!-- Body -->
 <!-- appCtrl controller with serveral data used in theme on diferent view -->
 <!-- landing-scrollspy is directive for scrollspy used in landing page -->
@@ -102,7 +117,7 @@
                          <input type="hidden" value="${REQUEST_PORT}" id="request_port" />
                          <input type="hidden" value="${REQUEST_ADMIN_FOLDER}" id="request_admin_folder" />
 <!-- Simple splash screen-->
-<div class="splash loading-screen"> <div class="splash-title"><h1>Panda - Admin Console</h1><p>Cloud Management Portal</p><img src="images/loading-bars.svg" width="64" height="64" /> </div> </div>
+<div class="splash loading-screen"> <div class="splash-title"><%=request.getParameter("demo")%><h1>Panda - Admin Console</h1><p>Cloud Management Portal</p><get-login-loader-image data-ng-show="showLoader"></get-login-loader-image></div> </div>
 <!--[if lt IE 7]>
 <p class="alert alert-danger">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
@@ -114,6 +129,9 @@
     <div ui-view autoscroll="true"></div>
 
 <!-- build:js(.) scripts/vendor.js -->
+
+
+
 <script type="text/javascript">
 	    var ADMIN_CONTEXT_PATH = "<%=request.getContextPath()%>";
 	    var REQUEST_PROTOCOL = document.getElementById("request_protocol").value;

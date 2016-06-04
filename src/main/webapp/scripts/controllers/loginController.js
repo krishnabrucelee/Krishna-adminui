@@ -10,7 +10,7 @@ angular.module('panda-ui-admin', ['ngCookies', 'LocalStorageModule', 'ngSanitize
 	            return $sce.trustAsHtml(text);
 	        };
 	    }])
-	    .controller("loginCtrl", function ($scope, $http, $window, globalConfig, $remember, $cookies, localStorageService ) {
+	    .controller("loginCtrl", function ($scope, $http, $window, globalConfig, $remember, $cookies,$cookieStore, localStorageService ) {
 
 
   $scope.showImage = function() {
@@ -24,6 +24,10 @@ $scope.themeSettingList = function () {
 		$scope.themeSettings = result;
 		 $scope.welcomeContent = result.data.welcomeContent;
 		 $scope.footerContent = result.data.footerContent;
+		 $scope.splashTitle= result.data.splashTitle;
+
+		 $cookies.splashTitle = result.data.splashTitle;
+
 	});
 };
 $scope.themeSettingList();

@@ -347,11 +347,11 @@ $scope.paginationObject.sortOrder = '+';
        "Snapshot": {label: "Snapshot"}
      };
 
-     $scope.showQuotaLoader = true;
+     $scope.showLoader = true;
      var resourceArr = ["CPU", "Memory", "Volume", "Network", "IP", "PrimaryStorage", "SecondaryStorage", "Snapshot"];
      var hasResourceDomainId = promiseAjax.httpTokenRequest( globalConfig.HTTP_GET , globalConfig.APP_URL + "resourceDomains/domain/" + $stateParams.id);
      hasResourceDomainId.then(function (result) {  // this is only run after $http completes
-       $scope.showQuotaLoader = false;
+       $scope.showLoader = false;
          angular.forEach(result, function(obj, key) {
              if(resourceArr.indexOf(obj.resourceType) > -1) {
                if(angular.isUndefined($scope.quotaLimits[obj.resourceType])) {
