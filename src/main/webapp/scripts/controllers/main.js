@@ -28,6 +28,20 @@ function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageSer
         return localStorageService.cookie.get('language');
     }();
 
+    $scope.themeSettingList = function () {
+	return $http({method:'get', url: REQUEST_PROTOCOL  + $window.location.hostname +':8080/home/list'})
+	.then(function(result){
+		$scope.themeSettings = result;
+		 $scope.welcomeContent = result.data.welcomeContent;
+		 $scope.footerContent = result.data.footerContent;
+		 $scope.splashTitle= result.data.splashTitle;
+
+		 $cookies.splashTitle = result.data.splashTitle;
+
+	});
+};
+$scope.themeSettingList();
+
 
     /**
      * Sparkline bar chart data and options used in under Profile image on left navigation panel
