@@ -10,7 +10,7 @@ angular.module('panda-ui-admin', ['ngCookies', 'LocalStorageModule', 'ngSanitize
 	            return $sce.trustAsHtml(text);
 	        };
 	    }])
-	    .controller("loginCtrl", function ($scope, $http, $window, globalConfig, $remember, $cookies,$cookieStore, localStorageService ) {
+	    .controller("loginCtrl", function ($scope, $http, $window, globalConfig, $remember, $cookies, localStorageService) {
 
 
   $scope.showImage = function() {
@@ -18,8 +18,24 @@ angular.module('panda-ui-admin', ['ngCookies', 'LocalStorageModule', 'ngSanitize
 }
 $scope.showImage();
 
+$scope.languageSettingList = function () {
+	return $http({method:'get', url: REQUEST_PROTOCOL  + $window.location.hostname +':8080/home/generalConfiguration'})
+	.then(function(result){
+		$scope.generalconfiguration = result;
+        if ($scope.generalconfiguration.data.defaultLanguage == 'Chinese') {
+        	localStorageService.cookie.set('language', 'zh');
+        } else {
+        	localStorageService.cookie.set('language', 'en');
+        }
+        window.location.href = globalConfig.BASE_UI_URL;
+	});
+};
+if(localStorageService.cookie.get('language') == null) {
+    $scope.languageSettingList();
+}
+
 $scope.themeSettingList = function () {
-	return $http({method:'get', url: REQUEST_PROTOCOL  + $window.location.hostname +':8080/' +'home/' +'list'})
+	return $http({method:'get', url: REQUEST_PROTOCOL  + $window.location.hostname +':8080/home/list'})
 	.then(function(result){
 		$scope.themeSettings = result;
 		 $scope.welcomeContent = result.data.welcomeContent;

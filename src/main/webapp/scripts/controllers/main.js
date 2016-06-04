@@ -15,7 +15,15 @@ function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageSer
 
     $scope.appLanguage = function() {
         if(localStorageService.cookie.get('language') == null) {
-                localStorageService.cookie.set('language', 'en');
+        	var hasConfigs = appService.crudService.listAll("generalconfiguration/configlist");
+            hasConfigs.then(function (result) {
+                $scope.generalconfiguration = result[0];
+                if ($scope.generalconfiguration.defaultLanguage == 'Chinese') {
+                	localStorageService.cookie.set('language', 'zh');
+                } else {
+                	localStorageService.cookie.set('language', 'en');
+                }
+            });
         }
         return localStorageService.cookie.get('language');
     }();
