@@ -262,7 +262,6 @@ var re = new RegExp("splashTitle" + "=([^;]+)");
 //var re = new RegExp("splashTitle" + "!#$%&'()*+-./:<=>?@[]^_`{|}~");
 var value = re.exec(document.cookie);
 var text = unescape(value[1]);
-console.log("------------------------",text);
 		//var splashTitle = splashText[1].split(';');
 		document.getElementById("p1").innerHTML = text;
 		//document.write(unescape(value[1]));
