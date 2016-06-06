@@ -16,7 +16,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12  ">
                         <div class="quick-search pull-right">
                             <div class="input-group">
-                                <input data-ng-model="ipSearch" type="text" class="form-control input-medium" placeholder="Quick Search" aria-describedby="quicksearch-go">
+                                <input data-ng-model="ipSearch" type="text" class="form-control input-medium" placeholder="<fmt:message key="common.quick.search" bundle="${msg}" />" aria-describedby="quicksearch-go">
                                 <span class="input-group-addon" id="quicksearch-go"><span class="pe-7s-search pe-lg font-bold"></span></span>
                             </div>
                         </div>
@@ -31,10 +31,10 @@
                     <table cellspacing="1" cellpadding="1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th>IPs</th>
-                        <th>Zone</th>
-                        <th>User</th>
-                        <th>State</th>
+                        <th><fmt:message key="common.ips" bundle="${msg}" /></th>
+                        <th><fmt:message key="common.zone" bundle="${msg}" /></th>
+                        <th><fmt:message key="common.user" bundle="${msg}" /></th>
+                        <th><fmt:message key="common.state" bundle="${msg}" /></th>
                     </tr>
                     </thead>
                     <tbody>

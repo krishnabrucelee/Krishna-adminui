@@ -98,7 +98,7 @@
 <!-- Body -->
 <!-- appCtrl controller with serveral data used in theme on diferent view -->
 <!-- landing-scrollspy is directive for scrollspy used in landing page -->
-<body ng-controller="appCtrl" class="{{$state.current.data.specialClass}}"  landing-scrollspy tour backdrop="true">
+<body data-ng-controller="appCtrl" class="{{$state.current.data.specialClass}}"  landing-scrollspy tour backdrop="true">
 <input type="hidden" value="${REQUEST_PROTOCOL}" id="request_protocol" />
                          <input type="hidden" value="${REQUEST_PORT}" id="request_port" />
                          <input type="hidden" value="${REQUEST_ADMIN_FOLDER}" id="request_admin_folder" />
@@ -149,6 +149,7 @@
 <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
 <script src="bower_components/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/sanitize/angular-sanitize.min.js"></script>
 <script src="bower_components/angular/angular-cookies.js"></script>
 <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
 <script src="bower_components/angular-animate/angular-animate.min.js"></script>
