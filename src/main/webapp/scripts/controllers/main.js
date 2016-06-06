@@ -5,14 +5,18 @@
  */
 
 angular
-    .module('panda-ui-admin')
-    .controller('appCtrl', appCtrl);
+        .module('panda-ui-admin').filter('to_trusted', ['$sce', function($sce){
+	        return function(text) {
+	            return $sce.trustAsHtml(text);
+	        };
+	    }]).controller('appCtrl', appCtrl);
 
 function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageService, promiseAjax, $cookies, appService) {
 
+    $scope.splashTitle = localStorageService.get('splashTitle');
     // For iCheck purpose only
-    $scope.checkOne = true;
-
+    $scope.checkOne = true;    
+   
     $scope.appLanguage = function() {
         if(localStorageService.cookie.get('language') == null) {
         	var hasConfigs = appService.crudService.listAll("generalconfiguration/configlist");
@@ -41,7 +45,6 @@ function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageSer
 	});
 };
 $scope.themeSettingList();
-
 
     /**
      * Sparkline bar chart data and options used in under Profile image on left navigation panel

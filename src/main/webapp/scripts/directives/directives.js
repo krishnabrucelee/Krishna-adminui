@@ -32,7 +32,8 @@ angular
         .directive('pandaQuickSearch', pandaQuickSearch)
         .directive('validPrice', validPrice)
     	.directive('validCharacters', validCharacters)
-    .directive('fileModel', fileModel)
+        .directive('fileModel', fileModel)
+        .directive('splash', splash)
 
 /**
  * pageTitle - Directive for set Page title - mata title
@@ -102,6 +103,17 @@ function minimalizaMenu($rootScope) {
 }
 ;
 
+/**
+ * minimalizaSidebar - Directive for minimalize sidebar
+ */
+function splash() {
+    return {
+        restrict: 'EA',
+        controller: function ($scope, localStorageService) {
+           $scope.splashTitle = localStorageService.get('splashTitle');
+        }
+    };
+};
 
 /**
  * sparkline - Directive for Sparkline chart
