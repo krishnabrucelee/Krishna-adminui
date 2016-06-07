@@ -494,6 +494,14 @@ $scope.themeSettingList();
                 }
             ]
         },
-    ]
+    ];
+
+    $scope.updatePagination = function (limit) {
+  	  var hasResult = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET,
+    			appService.globalConfig.APP_URL + "users" +"/paginationLimit/"+limit);
+        hasResult.then(function(result) {
+      	  globalConfig.CONTENT_LIMIT = limit;
+        });
+    };
 
 }
