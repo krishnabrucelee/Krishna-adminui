@@ -16,7 +16,7 @@
 			content="Place your page title and breadcrumb. Select small or large header or give the user choice to change the size."
 			placement="bottom">
 			<div class="panel-body">
-				<div id="hbreadcrumb" class="pull-right">
+				<div id="hbreadcrumb" class="pull-left">
 					<ol class="hbreadcrumb breadcrumb">
 						<li><a ui-sref="dashboard"><fmt:message key="common.home"
 									bundle="${msg}" /></a></li>
@@ -458,7 +458,7 @@
 						</li>
 					</ol>
 				</div>
-				<h2 class="font-light m-b-xs">
+				<%-- <h2 class="font-light m-b-xs">
 					 <span id="compute_offer_page_title" ng-if="$state.current.data.pageTitle === 'Compute Offer'"><fmt:message key="compute.offer" bundle="${msg}" /></span>
 					 <span id="storage_offer_page_title" ng-if="$state.current.data.pageTitle === 'Storage Offer'">
 						<a ng-switch-when="false" ng-href="{{'#' + state.url.format($stateParams)}}"><fmt:message key="view.storage" bundle="${msg}" /></a>
@@ -516,7 +516,7 @@
 					 <span ng-if="$state.current.data.pageTitle === 'client'"><fmt:message key="resource.allocation" bundle="${msg}" /></span>
 					 <span ng-if="$state.current.data.pageTitle === 'Dashboard'"><fmt:message key="common.dashboard" bundle="${msg}" /></span>
 				</h2>
-				<small>{{ $state.current.data.pageDesc}}</small>
+				<small>{{ $state.current.data.pageDesc}}</small> --%>
 			</div>
 		</div>
 	</div>
