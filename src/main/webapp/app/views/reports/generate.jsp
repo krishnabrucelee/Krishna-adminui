@@ -13,7 +13,8 @@
 
             <div class="text-center" data-ng-init="ok()">
                 <span>Generating wait..</span><br/>
-                <span><img src="images/loading-bars.svg" /> </span>
+                <span><get-login-loader-image data-ng-show="showLoader"></get-login-loader-image>
+ </span>
             </div>
 
         </div>

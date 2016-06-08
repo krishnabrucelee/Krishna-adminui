@@ -350,10 +350,9 @@
 		                   <div class="panel-body">
 		                        <div class="row">
 		                        	<div class="col-md-6">
-				                        <div class="text-center m-t-xxxl" data-ng-show="showQuotaLoader">
-				                             <img src="images/loading-bars.svg" />
-				                         </div>
-				                        <div class="row dashboard-quota-area" data-ng-hide="showQuotaLoader">
+				                                            <get-login-loader-image data-ng-show="showLoader"></get-login-loader-image>
+
+				                        <div class="row dashboard-quota-area" data-ng-hide="showLoader">
 				                            <div class="col-md-4 col-sm-4 col-xs-6 dashboard-quota" data-ng-repeat="quotaLimit in quotaLimits">
 		                                 		<div class="doughnut-fixed-area">
 					                                <div class="doughnutchart-value">{{ quotaLimit.percentage }}%</div>

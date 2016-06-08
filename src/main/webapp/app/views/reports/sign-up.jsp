@@ -18,9 +18,8 @@
 
             </div>
         </div>
-        <div class="text-center m-t-xxxl" data-ng-show="showLoader">
-            <img src="images/loading-bars.svg" />
-        </div>
+                           <get-login-loader-image data-ng-show="showLoader"></get-login-loader-image>
+
 
     </div>
     <div class="col-md-12 col-sm-12 col-xs-12">

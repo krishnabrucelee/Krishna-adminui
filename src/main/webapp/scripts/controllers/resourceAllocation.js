@@ -117,10 +117,10 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					$scope.loadEditOption($scope.domainList, $scope.resourceQuota.domain, object.domain);
 				}
                                 if (object.resourceType == "Memory" && object.max != -1) {
-                    			$scope.resourceQuota[object.resourceType] = Math.round(((object.max)/1024),1); 
+                    			$scope.resourceQuota[object.resourceType] = Math.round(((object.max)/1024),1);
                			 } else {
                     			$scope.resourceQuota[object.resourceType] = object.max;
-                		}				
+                		}
 				$scope.resourceQuota[object.resourceType+"id"] = object.id;
 			});
         })
@@ -169,7 +169,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 		                 } else {
 		            	     resourceObject.max = $scope.resourceQuota[$scope.resourceTypeList[i]];
                                      $scope.validateRange('domain', resourceObject.max, resourceObject.resourceType);
-				 } 
+				 }
                                  quotaList.push(resourceObject);
 			}
 			if ($scope.resourceAllocationError) {
@@ -297,9 +297,9 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 				     resourceObject.max = $scope.resourceQuota[$scope.resourceTypeList[i]] * 1024;
 		                 } else {
 		            	     resourceObject.max = $scope.resourceQuota[$scope.resourceTypeList[i]];
-                                     $scope.validateRange('department', resourceObject.max, resourceObject.resourceType); 
-				 } 
-                                 quotaList.push(resourceObject); 
+                                     $scope.validateRange('department', resourceObject.max, resourceObject.resourceType);
+				 }
+                                 quotaList.push(resourceObject);
 			}
 			if ($scope.resourceAllocationError) {
                         $scope.showLoader = true;
@@ -370,8 +370,8 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 		                } else {
 		            	     resourceObject.max = $scope.resourceQuota[$scope.resourceTypeList[i]];
                                      $scope.validateRange('project', resourceObject.max, resourceObject.resourceType);
-				} 
-                                quotaList.push(resourceObject); 
+				}
+                                quotaList.push(resourceObject);
 			}
 			if ($scope.resourceAllocationError) {
 	                        $scope.showLoader = true;
@@ -449,9 +449,9 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					$scope.isDisabledDepartment = false;
 					$scope.isDisabledProject = false;
 					$scope.loadEditOption($scope.domainList, $scope.resourceQuota.domain, object.domain);
-				}				
+				}
 				if (object.resourceType == "Memory" && object.max != -1) {
-                    			$scope.resourceQuota[object.resourceType] = Math.round(((object.max)/1024),1); 
+                    			$scope.resourceQuota[object.resourceType] = Math.round(((object.max)/1024),1);
                			 } else {
                     			$scope.resourceQuota[object.resourceType] = object.max;
                 		}
@@ -534,7 +534,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					$scope.loadEditOption($scope.departmentList, $scope.resourceQuota.department, object.department);
 				}
                                 if (object.resourceType == "Memory" && object.max != -1) {
-                    			$scope.resourceQuota[object.resourceType] = Math.round(((object.max)/1024),1); 
+                    			$scope.resourceQuota[object.resourceType] = Math.round(((object.max)/1024),1);
                 		} else {
                    			 $scope.resourceQuota[object.resourceType] = object.max;
                 		}
@@ -563,6 +563,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 	};
 
 	$scope.getProjectResourceLimits = function() {
+		$scope.resourceQuota.department.type = "";
 		$scope.resource ='project';
 		$scope.isResourceDefined = 'defined';
 
@@ -608,7 +609,7 @@ function resourceAllocationCtrl($scope, crudService, globalConfig, notify, $stat
 					$scope.loadEditOption($scope.projectList, $scope.resourceQuota.project, object.project);
 				}
 				if (object.resourceType == "Memory" && object.max != -1) {
-                    			$scope.resourceQuota[object.resourceType] = Math.round(((object.max)/1024),1); 
+                    			$scope.resourceQuota[object.resourceType] = Math.round(((object.max)/1024),1);
                 		} else {
                    			 $scope.resourceQuota[object.resourceType] = object.max;
                 		}

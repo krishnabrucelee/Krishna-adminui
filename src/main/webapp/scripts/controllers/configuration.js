@@ -11,6 +11,7 @@ angular
         .controller('loginSecurityCtrl', loginSecurityCtrl)
         .controller('importCsDataCtrl', importCsDataCtrl)
         .controller('usageCsDataCtrl', usageCsDataCtrl)
+        .controller('languageCtrl', languageCtrl)
 
 function cloudStackCtrl($scope, $window, appService) {
 
@@ -552,7 +553,7 @@ $scope.themeSettingList();
 
 		  			if (themeSettingsList.headers != "" || themeSettingsList.footers != "") {
 			  			//Dynamic
-		  				var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), themeSettingsList.welcomeContent, themeSettingsList.footerContent, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies,localStorageService);
+		  				var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), themeSettingsList.welcomeContent,themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies,localStorageService);
 	  		 		    hasUpload.then(function (result) {
 		  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
 		  		 		   $window.location.reload();
@@ -574,7 +575,7 @@ $scope.themeSettingList();
 		  	              });
 		  			} else {
 		  				//starting
-			  			var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(headerChoices),JSON.stringify(footerChoices), themeSettingsList.welcomeContent, themeSettingsList.footerContent, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
+			  			var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(headerChoices),JSON.stringify(footerChoices), themeSettingsList.welcomeContent, themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
 	  		 		    hasUpload.then(function (result) {
 		  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
 		  		 		   $window.location.reload();
@@ -606,7 +607,7 @@ $scope.themeSettingList();
 		  		    else {
 		  		    	if (((themeSettingsList.headers != "") && (!angular.isUndefined(themeSettingsList.headers)))  || ((themeSettingsList.footers != "") && (!angular.isUndefined(themeSettingsList.footers)))) {
 				  			//last
-		  		    		var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), themeSettingsList.welcomeContent, themeSettingsList.footerContent, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
+		  		    		var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), themeSettingsList.welcomeContent,themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
 		  		 		    hasUpload.then(function (result) {
 			  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
 			  		 		   $window.location.reload();
@@ -628,7 +629,7 @@ $scope.themeSettingList();
 			  	              });
 			  			} else {
 			  				//end
-				  			var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(headerChoices),JSON.stringify(footerChoices), themeSettingsList.welcomeContent, themeSettingsList.footerContent, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
+				  			var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(headerChoices),JSON.stringify(footerChoices), themeSettingsList.welcomeContent, themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
 		  		 		    hasUpload.then(function (result) {
 			  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
 			  		 		   $window.location.reload();
@@ -654,7 +655,7 @@ $scope.themeSettingList();
 		  		    	} else {
 		  		    	//last
 		  		    		if (((themeSettingsList.headers != "") && (!angular.isUndefined(themeSettingsList.headers))) || ((themeSettingsList.footers != "") && (!angular.isUndefined(themeSettingsList.footers)))) {
-		  		    		var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), themeSettingsList.welcomeContent, themeSettingsList.footerContent, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
+		  		    		var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), themeSettingsList.welcomeContent, themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
 		  		 		    hasUpload.then(function (result) {
 			  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
 			  		 		   $window.location.reload();
@@ -676,7 +677,7 @@ $scope.themeSettingList();
 			  	              });
 		  		    		} else {
 		  		    		//starting
-					  			var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(headerChoices),JSON.stringify(footerChoices), themeSettingsList.welcomeContent, themeSettingsList.footerContent, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
+					  			var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(headerChoices),JSON.stringify(footerChoices), themeSettingsList.welcomeContent, themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
 			  		 		    hasUpload.then(function (result) {
 				  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
 				  		 		   $window.location.reload();
@@ -1239,5 +1240,57 @@ function usageCsDataCtrl($scope, appService, globalConfig, localStorageService, 
                 }
             }
         });
+    };
+};
+
+function languageCtrl($scope, appService, globalConfig, localStorageService, $window, notify, $timeout) {
+
+	$scope.formElements = {};
+	var hasConfigs = appService.crudService.listAll("generalconfiguration/configlist");
+    hasConfigs.then(function (result) {  // this is only run after $http completes0
+        $scope.generalconfiguration = result[0];
+    });
+
+	$scope.save = function (form, generalconfiguration) {
+        $scope.formSubmitted = true;
+        if (form.$valid) {
+            $scope.showLoader = true;
+			var generalconfiguration = $scope.generalconfiguration;
+            var hasServer = appService.crudService.add("generalconfiguration", generalconfiguration);
+            hasServer.then(function (result) {  // this is only run after $http completes
+            	$scope.generalconfiguration = result;
+            	if ($scope.generalconfiguration.defaultLanguage == 'Chinese') {
+                	localStorageService.cookie.set('language', 'zh');
+                } else {
+                	localStorageService.cookie.set('language', 'en');
+                }
+                $scope.formSubmitted = false;
+                $scope.showLoader = false;
+                appService.notify({message: 'Default language updated successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                $window.location.reload();
+            }).catch(function (result) {
+               	$scope.showLoader = false;
+           	    if (!angular.isUndefined(result.data)) {
+             		if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                 	   	 var msg = result.data.globalError[0];
+                 	   	 $scope.showLoader = false;
+               	    	 appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                   	} else if (result.data.fieldErrors != null) {
+                      	$scope.showLoader = false;
+                       	angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                           	$scope.TemplateForm[key].$invalid = true;
+                           	$scope.TemplateForm[key].errorMessage = errorMessage;
+                       	});
+               		}
+               	}
+           	});
+        }
+    };
+
+    $scope.formElements = {
+    		LanguageList: {
+                "0":"English",
+                "1":"Chinese"
+            }
     };
 };

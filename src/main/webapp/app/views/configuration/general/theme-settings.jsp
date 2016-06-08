@@ -34,7 +34,7 @@
                                 </div>
 								<div class="pull-left m-l-md">
                                 <input type="file" name="background" accept=".jpg, .jpeg" class="custom-file-input" file-model="themeSettingsList.backgroundImgFile"/>
-                               <span><label><fmt:message key="resolution.size" bundle="${msg}" /><br><fmt:message key="file.size" bundle="${msg}" /></label></span>
+                               <span><label><fmt:message key="image.resolution.size" bundle="${msg}" /><br><fmt:message key="file.size" bundle="${msg}" /></label></span>
                                 </div>
                                 </div>
                             </div>
@@ -115,9 +115,36 @@
                         </div>
                         <div class="form-group">
                             <div class="row" >
-                                <label class="col-md-2 col-sm-3 control-label "><fmt:message key="theme.welcome.content" bundle="${msg}" />:</label>
+                                <label class="col-md-2 col-sm-3 control-label "><fmt:message key="theme.welcome.content.admin" bundle="${msg}" />:</label>
                                 <div class="col-md-5 col-sm-7">
                                     <summernote class=""  name="summernoteTextThree" required="true" height="150"  data-ng-model="themeSettingsList.welcomeContent"  config="summernoteOption"></summernote>
+                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon " tooltip="<fmt:message key="theme.welcome.tooltip" bundle="${msg}" />" ></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row" >
+                                <label class="col-md-2 col-sm-3 control-label "><fmt:message key="theme.welcome.content.user" bundle="${msg}" />:</label>
+                                <div class="col-md-5 col-sm-7">
+                                    <summernote class=""  name="summernoteTextThree" required="true" height="150"  data-ng-model="themeSettingsList.welcomeContentUser"  config="summernoteOption"></summernote>
+                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon " tooltip="<fmt:message key="theme.welcome.tooltip" bundle="${msg}" />" ></i>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <div class="row" >
+                                <label class="col-md-2 col-sm-3 control-label "><fmt:message key="splash.title.admin.panel" bundle="${msg}" />:</label>
+                                <div class="col-md-5 col-sm-7">
+                                    <summernote class=""  name="summernoteTextThree"  height="150"  data-ng-model="themeSettingsList.splashTitle"  config="summernoteOption"></summernote>
+                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon " tooltip="<fmt:message key="theme.welcome.tooltip" bundle="${msg}" />" ></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row" >
+                                <label class="col-md-2 col-sm-3 control-label "><fmt:message key="splash.title.user.panel" bundle="${msg}" />:</label>
+                                <div class="col-md-5 col-sm-7">
+                                    <summernote class=""  name="summernoteTextThree"  height="150"  data-ng-model="themeSettingsList.splashTitleUser"  config="summernoteOption"></summernote>
                                     <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon " tooltip="<fmt:message key="theme.welcome.tooltip" bundle="${msg}" />" ></i>
                                 </div>
                             </div>
@@ -137,12 +164,9 @@
                                 <button class="btn btn-info" type="submit"><fmt:message key="common.save" bundle="${msg}" /></button>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 </form>
