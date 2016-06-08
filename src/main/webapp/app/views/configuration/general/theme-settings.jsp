@@ -34,7 +34,7 @@
                                 </div>
 								<div class="pull-left m-l-md">
                                 <input type="file" name="background" accept=".jpg, .jpeg" class="custom-file-input" file-model="themeSettingsList.backgroundImgFile"/>
-                               <span><label><fmt:message key="resolution.size" bundle="${msg}" /><br><fmt:message key="file.size" bundle="${msg}" /></label></span>
+                               <span><label><fmt:message key="image.resolution.size" bundle="${msg}" /><br><fmt:message key="file.size" bundle="${msg}" /></label></span>
                                 </div>
                                 </div>
                             </div>

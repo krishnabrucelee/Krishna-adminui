@@ -170,7 +170,8 @@
 								<select required = "true" id="create_storage_offer_domain" class="form-control input-group" name="domain"
 									data-ng-model="storage.domain"
 									ng-options="domain.name for domain in formElements.domainList" data-ng-class="{'error': storageForm.domain.$invalid && formSubmitted}">
-									<option value="">Select</option>
+									<option value=""><fmt:message
+									key="common.select" bundle="${msg}" /></option>
 								</select>
 								<div class="error-area"
 									data-ng-show="storageForm.domain.$invalid && formSubmitted">
@@ -195,9 +196,9 @@
 									key="storage.provisioningType" bundle="${msg}" /></label>
 							<div class="col-md-8  col-sm-6 col-xs-6">
 								<select class="form-control input-group" name="provisioningType" id="create_storage_offer_provisioning_type"
+									data-ng-init="storage.provisioningType = provisioningTypes.provisioningTypeList[0]"
 									data-ng-model="storage.provisioningType"
 									ng-options="provisioningTypeList for  (id, provisioningTypeList)  in provisioningTypes.provisioningTypeList">
-									<option value="">Select</option>
 								</select>
 							</div>
 						</div>
@@ -357,7 +358,7 @@
 									ng-options=" zone.name for zone in zoneList"
 									data-ng-class="{'error': storageForm.zone.$invalid && formSubmitted}">
 									<option value="" class=""><fmt:message
-									key="common.select" bundle="${msg}" />t</option>
+									key="common.select" bundle="${msg}" /></option>
 								</select>
 								<div class="error-area"
 									data-ng-show="storageForm.zone.$invalid && formSubmitted">

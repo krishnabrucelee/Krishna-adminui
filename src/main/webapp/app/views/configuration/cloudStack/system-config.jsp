@@ -33,18 +33,17 @@
 								<label class="col-md-3 col-sm-3 control-label"><fmt:message
 										key="url" bundle="${msg}" />: <span class="text-danger">*</span>
 								</label>
-
-								<div class="col-md-7 col-sm-7">
+								<div class="col-md-7 col-sm-7" >
 									<input required="true" type="url" name="URL"
-										class="form-control" data-ng-model="config.apiURL"
+										class="form-control" data-ng-model="config.apiURL" data-ng-readonly = "config.id"
 										data-ng-class="{'error': configForm.URL.$invalid && formSubmitted}">
 
 									<div class="error-area"
 										data-ng-show="configForm.URL.$invalid && formSubmitted">
-										<i tooltip="URL  is Required" class="fa fa-warning error-icon"></i>
+										<i tooltip="<fmt:message key="iso.url.error" bundle="${msg}" />" class="fa fa-warning error-icon"></i>
 									</div>
 									<i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"
-										tooltip="The URL of the cloudStack server you wish to integrate with"></i>
+										tooltip="<fmt:message key="url.cloudstack" bundle="${msg}" />"></i>
 								</div>
 							</div>
 						</div>
@@ -56,13 +55,13 @@
 									class="text-danger">*</span> </label>
 								<div class="col-md-7 col-sm-7">
 									<input required="true" type="text" name="rootAPI"
-										class="form-control" data-ng-model="config.apiKey"
+										class="form-control" data-ng-model="config.apiKey" data-ng-readonly = "config.id"
 										data-ng-class="{'error': configForm.rootAPI.$invalid && formSubmitted}">
 									<i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"
-										tooltip="The api key of the admin user from cloud stack "></i>
+										tooltip="<fmt:message key="api.key.cloudstack" bundle="${msg}" />"></i>
 									<div class="error-area"
 										data-ng-show="configForm.rootAPI.$invalid && formSubmitted">
-										<i tooltip="rootAPI  is Required"
+										<i tooltip="<fmt:message key="root.api" bundle="${msg}" />"
 											class="fa fa-warning error-icon"></i>
 									</div>
 								</div>
@@ -77,13 +76,13 @@
 
 								<div class="col-md-7 col-sm-7">
 									<input required="true" type="text" name="secretKey"
-										class="form-control" data-ng-model="config.secretKey"
+										class="form-control" data-ng-model="config.secretKey" data-ng-readonly = "config.id"
 										data-ng-class="{'error': configForm.secretKey.$invalid && formSubmitted}">
 									<i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon"
-										tooltip="The secret key of the admin user from cloud stack "></i>
+										tooltip="<fmt:message key="secret.key.cloudstack" bundle="${msg}" />"></i>
 									<div class="error-area"
 										data-ng-show="configForm.secretKey.$invalid && formSubmitted">
-										<i tooltip="secretKey  is Required"
+										<i tooltip="<fmt:message key="secret.key.required" bundle="${msg}" />"
 											class="fa fa-warning error-icon"></i>
 									</div>
 								</div>
@@ -93,7 +92,7 @@
 							<div class="row">
 								<span class="pull-right">
 								<get-loader-image data-ng-show="showLoader"></get-loader-image>
-									<button class="btn btn-info" type="submit"  data-ng-hide="showLoader"
+									<button ng-disabled = "config.id" class="btn btn-info" type="submit"  data-ng-hide="showLoader"
 										ng-disabled="form.configForm.$invalid">
 
 										<fmt:message key="common.save" bundle="${msg}" />
