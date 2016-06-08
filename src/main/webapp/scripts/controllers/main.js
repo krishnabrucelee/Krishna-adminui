@@ -504,9 +504,6 @@ $scope.themeSettingList();
       	  var currentSession = JSON.parse($window.sessionStorage.getItem("pandaUserSession"));
   	      currentSession.paginationLimit = limit;
           $window.sessionStorage.setItem("pandaUserSession", JSON.stringify(currentSession));
-
-          console.log("=============="+JSON.parse($window.sessionStorage.getItem("pandaUserSession")).paginationLimit);
-
         });
     };
 
