@@ -159,6 +159,15 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <div class="row" >
+                                <label class="col-md-2 col-sm-3 control-label "><fmt:message key="splash.title" bundle="${msg}" />:</label>
+                                <div class="col-md-5 col-sm-7">
+                                    <summernote  class=""  name="splashTitle" required="true" height="150"  data-ng-model="themeSettingsList.splashTitle"  config="summernoteOption"></summernote>
+                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon " tooltip="<fmt:message key="splash.title.tooltip" bundle="${msg}" />" ></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-3">
                                 <a class="btn btn-default" href="#/configuration/general"><fmt:message key="common.cancel" bundle="${msg}" /></a>
                                 <button class="btn btn-info" type="submit"><fmt:message key="common.save" bundle="${msg}" /></button>

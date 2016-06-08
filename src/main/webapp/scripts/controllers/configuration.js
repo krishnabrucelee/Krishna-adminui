@@ -85,6 +85,7 @@ function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateP
     $scope.domainList = {};
     $scope.eventsList = {};
     $scope.hasConfigList = {};
+    $scope.themeSettingsList = {};
     $scope.global = appService.globalConfig;
     $scope.paginationObject.sortOrder = '+';
     $scope.paginationObject.sortBy = 'name';

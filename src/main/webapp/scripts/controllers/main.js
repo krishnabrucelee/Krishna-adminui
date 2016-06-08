@@ -5,11 +5,15 @@
  */
 
 angular
-    .module('panda-ui-admin')
-    .controller('appCtrl', appCtrl);
+        .module('panda-ui-admin').filter('to_trusted', ['$sce', function($sce){
+	        return function(text) {
+	            return $sce.trustAsHtml(text);
+	        };
+	    }]).controller('appCtrl', appCtrl);
 
 function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageService, promiseAjax, $cookies, appService) {
 
+    $scope.splashTitle = localStorageService.get('splashTitle');
     // For iCheck purpose only
     $scope.checkOne = true;
 
@@ -28,6 +32,19 @@ function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageSer
         return localStorageService.cookie.get('language');
     }();
 
+    $scope.themeSettingList = function () {
+	return $http({method:'get', url: REQUEST_PROTOCOL  + $window.location.hostname +':8080/home/list'})
+	.then(function(result){
+		$scope.themeSettings = result;
+		 $scope.welcomeContent = result.data.welcomeContent;
+		 $scope.footerContent = result.data.footerContent;
+		 $scope.splashTitle= result.data.splashTitle;
+
+		 $cookies.splashTitle = result.data.splashTitle;
+
+	});
+};
+$scope.themeSettingList();
 
     /**
      * Sparkline bar chart data and options used in under Profile image on left navigation panel
@@ -477,6 +494,17 @@ function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageSer
                 }
             ]
         },
-    ]
+    ];
+
+    $scope.updatePagination = function (limit) {
+  	  var hasResult = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET,
+    			appService.globalConfig.APP_URL + "users" +"/paginationLimit/"+limit);
+        hasResult.then(function(result) {
+      	  globalConfig.CONTENT_LIMIT = limit;
+      	  var currentSession = JSON.parse($window.sessionStorage.getItem("pandaUserSession"));
+  	      currentSession.paginationLimit = limit;
+          $window.sessionStorage.setItem("pandaUserSession", JSON.stringify(currentSession));
+        });
+    };
 
 }

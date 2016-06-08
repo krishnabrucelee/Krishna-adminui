@@ -40,6 +40,10 @@
         var rootScope = initInjectorss.get("$rootScope");
         var localStorageService = initInjectorss.get("localStorageService");
 
+        var splashTitle = localStorageService.get('splashTitle');
+
+        myApplication.value('splashTitle', localStorageService.get('splashTitle'));
+
         if (localStorageService.get('id') != 'undefined' && !angular.isUndefined(localStorageService.get('id'))
         		&& localStorageService.get('id') != null && localStorageService.get('id') != 'null') {
         	return $http({method:'get', url: REQUEST_PROTOCOL + window.location.hostname +':8080/api/'  + 'users/usersessiondetails/'+localStorageService.get('id'),
@@ -56,6 +60,7 @@
         	return d.promise;
         }
     }
+
 
     function bootstrapApplication() {
         angular.element(document).ready(function() {
