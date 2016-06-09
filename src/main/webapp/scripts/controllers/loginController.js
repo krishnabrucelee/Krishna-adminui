@@ -38,6 +38,7 @@ $scope.themeSettingList = function () {
 	return $http({method:'get', url: REQUEST_PROTOCOL  + $window.location.hostname +':8080/home/list'})
 	.then(function(result){
 		$scope.themeSettings = result;
+		localStorageService.cookie.set('themeSettings', $scope.themeSettings);
 		 $scope.welcomeContent = result.data.welcomeContent;
 		 $scope.footerContent = result.data.footerContent;
 		 $scope.splashTitle= result.data.splashTitle;
