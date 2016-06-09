@@ -110,7 +110,7 @@
 <div class="splash loading-screen"> <div class="splash-title">
 <h1><p id="p1"></p></h1>
 <div class="loader-img-wrapper">
-	<div class='uil-ripple-css' style='transform:scale(0.32);'><div></div><div></div></div>
+    <div class='uil-ripple-css' style='transform:scale(0.32);'><div></div><div></div></div>
 </div></div>
 </div>
 
@@ -119,7 +119,7 @@
 <p class="alert alert-danger">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 
-	<fmt:setBundle basename="i18n/messages_${lang}" var="msg" />
+    <fmt:setBundle basename="i18n/messages_${lang}" var="msg" />
     <c:set var="msg" scope="session" value="${msg}"/>
 
     <!-- Page view wrapper -->
@@ -130,21 +130,21 @@
 
 
 <script type="text/javascript">
-	    var ADMIN_CONTEXT_PATH = "<%=request.getContextPath()%>";
-	    var REQUEST_PROTOCOL = document.getElementById("request_protocol").value;
+        var ADMIN_CONTEXT_PATH = "<%=request.getContextPath()%>";
+        var REQUEST_PROTOCOL = document.getElementById("request_protocol").value;
         if(REQUEST_PROTOCOL == "" || typeof(REQUEST_PROTOCOL) == "undefined" || REQUEST_PROTOCOL == null) {
-        	REQUEST_PROTOCOL = "http";
+            REQUEST_PROTOCOL = "http";
         }
         var REQUEST_PORT = document.getElementById("request_port").value;
         if(REQUEST_PORT != "" && typeof(REQUEST_PORT) != "undefined" && REQUEST_PORT != null) {
-        	REQUEST_PORT = ":" + REQUEST_PORT;
+            REQUEST_PORT = ":" + REQUEST_PORT;
         }
         var REQUEST_ADMIN_FOLDER = document.getElementById("request_admin_folder").value;
         if(REQUEST_ADMIN_FOLDER == "" || typeof(REQUEST_ADMIN_FOLDER) == "undefined" || REQUEST_ADMIN_FOLDER == null) {
-        	REQUEST_ADMIN_FOLDER = "/admin/";
+            REQUEST_ADMIN_FOLDER = "/admin/";
         }
 
-	</script>
+    </script>
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
 <script src="bower_components/slimScroll/jquery.slimscroll.min.js"></script>
@@ -230,6 +230,7 @@
 <script src="scripts/controllers/configuration/taxController.js"></script>
     <script src="scripts/controllers/profileController.js"></script>
 <script src="scripts/controllers/configuration/billableItemController.js"></script>
+<script src="scripts/controllers/configuration/eventConfigController.js"></script>
 <script src="scripts/controllers/configuration/emailConfigController.js"></script>
 <script src="scripts/controllers/configuration/organizationController.js"></script>
 <script src="scripts/controllers/configuration/paymentGatewayController.js"></script>
@@ -263,8 +264,8 @@ var re = new RegExp("splashTitle" + "=([^;]+)");
 //var re = new RegExp("splashTitle" + "!#$%&'()*+-./:<=>?@[]^_`{|}~");
 var value = re.exec(document.cookie);
 var text = unescape(value[1]);
-		//var splashTitle = splashText[1].split(';');
-		document.getElementById("p1").innerHTML = text;
-		//document.write(unescape(value[1]));
+        //var splashTitle = splashText[1].split(';');
+        document.getElementById("p1").innerHTML = text;
+        //document.write(unescape(value[1]));
 
-	</script>
+    </script>
