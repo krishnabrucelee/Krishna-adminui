@@ -455,6 +455,14 @@
 										bundle="${msg}" />
 							</span>
 							</span>
+							<span ng-if="state.data.pageTitle === 'Events Settings'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="event.configuration" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="event.configuration"
+										bundle="${msg}" />
+							</span>
+							</span>
 						</li>
 					</ol>
 				</div>

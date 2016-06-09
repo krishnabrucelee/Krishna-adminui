@@ -15,7 +15,7 @@
 
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <span class="pull-left">
-                                <a class="btn btn-info" href="#/configuration/general"  title="Back" ><span class="fa fa-arrow-circle-left fa-lg "></span> <fmt:message key="common.back" bundle="${msg}" /></a>
+                                <a class="btn btn-info" href="#/configuration/general"  title="<fmt:message key="common.back" bundle="${msg}" />" ><span class="fa fa-arrow-circle-left fa-lg "></span> <fmt:message key="common.back" bundle="${msg}" /></a>
                             </span>
                         </div>
 
@@ -35,7 +35,7 @@
                                 <div class="col-md-6 col-sm-7">
                                     <input required="true" valid-integer type="text" name="noOfMessages" valid-number data-ng-class="{'error': eventConfigForm.noOfMessages.$invalid && formSubmitted}" data-ng-model="eventConfig.noOfMessages" class="form-control" >
                                     <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="enter.the.maximum.active.messages" bundle="${msg}" />"></i>
-                                    <div class="error-area" data-ng-show="eventConfigForm.noOfMessages.$invalid && formSubmitted" ><i  tooltip="Active messages should be a valid integer" class="fa fa-warning error-icon"></i></div>
+                                    <div class="error-area" data-ng-show="eventConfigForm.noOfMessages.$invalid && formSubmitted" ><i  tooltip="active.messages.should.be.a.valid.integer" class="fa fa-warning error-icon"></i></div>
                                 </div>
 
                             </div>
@@ -50,7 +50,7 @@
                                 <div class="col-md-6 col-sm-7">
                                     <input required="true" valid-integer type="text" name="archivalDays" valid-number data-ng-class="{'error': eventConfigForm.archivalDays.$invalid && formSubmitted}" data-ng-model="eventConfig.archivalDays" class="form-control" >
                                     <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="enter.the.archival.days" bundle="${msg}" />" ></i>
-                                    <div class="error-area" data-ng-show="eventConfigForm.archivalDays.$invalid && formSubmitted" ><i  tooltip="Archival days should be a valid integer" class="fa fa-warning error-icon"></i></div>
+                                    <div class="error-area" data-ng-show="eventConfigForm.archivalDays.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="archival.days.should.be.a.valid.integer" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                                 <div class="col-md-6 col-sm-7">
                                     <input required="true" valid-integer type="text" name="expiryDays" valid-number data-ng-class="{'error': eventConfigForm.expiryDays.$invalid && formSubmitted}" data-ng-model="eventConfig.expiryDays" class="form-control" >
                                     <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip=" <fmt:message key="enter.the.expiry.days" bundle="${msg}" />" ></i>
-                                    <div class="error-area" data-ng-show="eventConfigForm.expiryDays.$invalid && formSubmitted" ><i  tooltip="Expiry days should be a valid integer" class="fa fa-warning error-icon"></i></div>
+                                    <div class="error-area" data-ng-show="eventConfigForm.expiryDays.$invalid && formSubmitted" ><i  tooltip="<fmt:message key="expiry.days.should.be.a.valid.integer" bundle="${msg}" />" class="fa fa-warning error-icon"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                                 <label class="col-md-4 col-sm-5 control-label">
                                 </label>
                                 <div class="col-md-6 col-sm-7">
-                                <a href="#/configuration/general" class="btn btn-default">Cancel</a>
+                                <a href="#/configuration/general" class="btn btn-default"><fmt:message key="common.cancel" bundle="${msg}" /></a>
                                     <button class="btn btn-info " type="submit"><fmt:message key="common.save" bundle="${msg}" /></button>
                                 </div>
                             </div>
