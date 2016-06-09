@@ -88,7 +88,7 @@ function globalConfig($window) {
         HTTP_POST : 'POST',
         HTTP_PUT : 'PUT',
         HTTP_DELETE : 'DELETE',
-        CONTENT_LIMIT : 10,
+        CONTENT_LIMIT : $window.sessionStorage.getItem("pandaUserSession") == null ? 10 : JSON.parse($window.sessionStorage.getItem("pandaUserSession")).paginationLimit,
         APP_URL : REQUEST_PROTOCOL  + window.location.hostname + ":8080/api/",
         PING_APP_URL : REQUEST_PROTOCOL  + window.location.hostname + ":8086/api/",
         BASE_UI_URL : REQUEST_PROTOCOL + window.location.hostname + REQUEST_PORT + REQUEST_ADMIN_FOLDER,

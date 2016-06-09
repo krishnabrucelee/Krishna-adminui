@@ -743,6 +743,7 @@ angular.module('panda-ui-admin').constant("PANDA_CONFIG", {
             var loginSession = globalConfig.sessionValues;
             if(loginSession == null || angular.isUndefined(globalConfig.sessionValues) && tokens != null) {
                 globalConfig.sessionValues = tokens;
+            	globalConfig.CONTENT_LIMIT = tokens.paginationLimit;
                 globalConfig.sessionValues.token = localStorageService.get('token');
                 globalConfig.sessionValues.loginToken = localStorageService.get('loginToken');
                 localStorageService.set('rememberMe', tokens.rememberMe);

@@ -13,7 +13,7 @@
 	    <div class="col-sm-6 shown-page" data-ng-hide="paginationObjectIso.totalItems > (((paginationObjectIso.currentPage - 1) * (paginationObjectIso.limit * 1)) + (paginationObjectIso.limit * 1))"><div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing {{ ((paginationObjectIso.currentPage - 1) * paginationObjectIso.limit) + 1}} to {{ paginationObjectIso.totalItems}} of {{ paginationObjectIso.totalItems}} entries</div></div>
 	    <div class="col-sm-6 shown-entry">
 	        <div class="dataTables_length" id="example1_length"><label>Show
-	                <select data-ng-model="paginationObjectIso.limit" data-ng-change="isolist(1)" aria-controls="example1" class="form-control input-sm">
+	                <select data-ng-model="paginationObjectIso.limit" data-ng-change="isolist(1); updatePagination(paginationObjectIso.limit)" aria-controls="example1" class="form-control input-sm">
 	                    <option value="10">10</option>
 	                    <option value="25">25</option>
 	                    <option value="50">50</option>

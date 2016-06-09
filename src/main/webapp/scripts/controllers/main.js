@@ -15,8 +15,8 @@ function appCtrl($http, $scope, $timeout, $window, globalConfig, localStorageSer
 
     $scope.splashTitle = localStorageService.get('splashTitle');
     // For iCheck purpose only
-    $scope.checkOne = true;    
-   
+    $scope.checkOne = true;
+
     $scope.appLanguage = function() {
         if(localStorageService.cookie.get('language') == null) {
         	var hasConfigs = appService.crudService.listAll("generalconfiguration/configlist");
@@ -494,6 +494,17 @@ $scope.themeSettingList();
                 }
             ]
         },
-    ]
+    ];
+
+    $scope.updatePagination = function (limit) {
+  	  var hasResult = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET,
+    			appService.globalConfig.APP_URL + "users" +"/paginationLimit/"+limit);
+        hasResult.then(function(result) {
+      	  globalConfig.CONTENT_LIMIT = limit;
+      	  var currentSession = JSON.parse($window.sessionStorage.getItem("pandaUserSession"));
+  	      currentSession.paginationLimit = limit;
+          $window.sessionStorage.setItem("pandaUserSession", JSON.stringify(currentSession));
+        });
+    };
 
 }
