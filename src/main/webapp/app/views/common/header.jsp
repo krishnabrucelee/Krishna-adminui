@@ -23,12 +23,10 @@
             <li data-ng-class="{active: $state.includes('activity')}" data-ng-if="global.sessionValues.eventTotal!=0"><a  class="label-menu-corner" ui-sref="activity" ><fmt:message key="common.activity" bundle="${msg}" /><span class="label label-warning">{{global.sessionValues.eventTotal }}</span></a></li>
 
             <li class="dropdown" dropdown>
-
                 <a class="dropdown-toggle icon-content" id="user_name" href="#" dropdown-toggle>
                     <i class="pe-7s-user"></i>
                     <span class="caret"></span>
                 </a>
-
                 <ul class="dropdown-menu hdropdown flipInX">
 					<li >
 						<div class="pull-left eng-lang">
