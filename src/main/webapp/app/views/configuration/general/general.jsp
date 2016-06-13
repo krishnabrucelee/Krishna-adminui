@@ -16,4 +16,5 @@
     <div class="col-md-3 col-sm-4 m-b-md"><button class="btn btn-info box w-100" ui-sref="configuration.home.language" type="button"><i class="fa fa-language fa-3x"></i> <h5><fmt:message key="common.language" bundle="${msg}" /></h5></button></div>
     <div class="col-md-3 col-sm-4 m-b-md"><button class="btn btn-info box w-100" ui-sref="configuration.home.email-template" type="button"><i class="fa fa-envelope-o fa-3x"></i> <h5><fmt:message key="email.template" bundle="${msg}" /></h5></button></div>
     <div class="col-md-3 col-sm-4 m-b-md"><button class="btn btn-info box w-100" ui-sref="configuration.home.theme-settings" type="button"><i class="fa fa-cogs fa-3x"></i> <h5><fmt:message key="theme.settings" bundle="${msg}" /></h5></button></div>
+    <div class="col-md-3 col-sm-4 m-b-md"><button class="btn btn-info box w-100" ui-sref="configuration.home.events" type="button"><i class="fa fa-bell fa-3x"></i> <h5><fmt:message key="event.configuration" bundle="${msg}" /></h5></button></div>
 </div>

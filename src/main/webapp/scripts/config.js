@@ -223,6 +223,14 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
             }
         })
 
+        .state('configuration.home.events', {
+            url: "/events",
+            templateUrl: VIEW_URL +  "views/configuration/general/event-config.jsp",
+            data: {
+                pageTitle: 'Events Settings'
+            }
+        })
+
          .state('configuration.home.login-security', {
             url: "/loginSecurity",
             templateUrl: VIEW_URL +  "views/configuration/general/login-security.jsp",
@@ -685,7 +693,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                 }
             })
 
-	    .state('reports.usage-report', {
+        .state('reports.usage-report', {
                 url: "report/usageReport",
                 templateUrl: VIEW_URL +  "views/reports/usage-report.jsp",
                 data: {
@@ -732,17 +740,17 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
 angular.module('panda-ui-admin').constant("PANDA_CONFIG", {
            "VIEW_URL" : "app/views/",
         }).factory('myFactory', function($http, globalConfig, AppConstants, $cookies, $window, tokens, localStorageService, utilService) {
-        	var loginSession = globalConfig.sessionValues;
+            var loginSession = globalConfig.sessionValues;
             if(loginSession == null || angular.isUndefined(globalConfig.sessionValues) && tokens != null) {
-            	globalConfig.sessionValues = tokens;
+                globalConfig.sessionValues = tokens;
             	globalConfig.CONTENT_LIMIT = tokens.paginationLimit;
-            	globalConfig.sessionValues.token = localStorageService.get('token');
+                globalConfig.sessionValues.token = localStorageService.get('token');
                 globalConfig.sessionValues.loginToken = localStorageService.get('loginToken');
-            	localStorageService.set('rememberMe', tokens.rememberMe);
-            	if ((angular.isUndefined(localStorageService.get('rememberMe')) || localStorageService.get('rememberMe') == false || localStorageService.get('rememberMe') == "false")
-            			&& (angular.isUndefined($cookies.rememberMe) || $cookies.rememberMe == undefined || $cookies.rememberMe == "undefined")) {
-            		utilService.logoutApplication("COOKIE_TIME_OUT");
-            	}
+                localStorageService.set('rememberMe', tokens.rememberMe);
+                if ((angular.isUndefined(localStorageService.get('rememberMe')) || localStorageService.get('rememberMe') == false || localStorageService.get('rememberMe') == "false")
+                        && (angular.isUndefined($cookies.rememberMe) || $cookies.rememberMe == undefined || $cookies.rememberMe == "undefined")) {
+                    utilService.logoutApplication("COOKIE_TIME_OUT");
+                }
             }
             return {
                 foo: function() { return 'bar' }
