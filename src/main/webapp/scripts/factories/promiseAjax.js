@@ -15,10 +15,10 @@ function promiseAjax($http, $window, globalConfig, notify, $cookies, localStorag
             data.limit = global.CONTENT_LIMIT;
         };
 
-    	if ((angular.isUndefined(localStorageService.get('rememberMe')) || localStorageService.get('rememberMe') == false) &&
-    			localStorageService.get('loginToken') == 0 && localStorageService.get('loginTime') == 0) {
+        if ((angular.isUndefined(localStorageService.get('rememberMe')) || localStorageService.get('rememberMe') == false) &&
+                localStorageService.get('loginToken') == 0 && localStorageService.get('loginTime') == 0) {
             appService.utilService.logoutApplication("SESSION_EXPIRED");
-    	}
+        }
 
         var config = {
             "method": method,
@@ -61,7 +61,7 @@ function promiseAjax($http, $window, globalConfig, notify, $cookies, localStorag
     };
 
     var httpRequestPing = function(method, url, data) {
-    	var config = {
+        var config = {
                 "method": method,
                 "data": data,
                 "url": url,
@@ -76,88 +76,91 @@ function promiseAjax($http, $window, globalConfig, notify, $cookies, localStorag
 }
 
 function uploadFile($http){
-	var upload = function(files,emails,httpTokenRequest,globalConfig, $cookies, localStorageService) {
-		 var fd = new FormData();
-		/**angular.forEach(files,function(file){
-		if(!angular.isUndefined(file)) {
-		 fd.append('file',file);
-		}
+    var upload = function(files,emails,httpTokenRequest,globalConfig, $cookies, localStorageService) {
+         var fd = new FormData();
+        /**angular.forEach(files,function(file){
+        if(!angular.isUndefined(file)) {
+         fd.append('file',file);
+        }
 
- 		});**/
-		var i = 0;
-		angular.forEach(files,function(file){
-            	if(!angular.isUndefined(file)) {
-                	fd.append("file",file);
-            	}
-           	 if(!angular.isUndefined(file) && i==0) {
-                	fd.append("hasEnglish",true);
-            	} else {
-                	fd.append("hasEnglish",false);
-            	}
-            	i++;
-         	});
-		fd.append("eventName",emails.eventName);
-		fd.append("subject",emails.subject);
- 		fd.append('englishLanguage',emails.englishLanguage);
- 		fd.append('chineseLanguage',emails.chineseLanguage);
-		fd.append("recipientType",emails.recipientType);
-		return $http.post(globalConfig.APP_URL + "emails/uploadFile", fd, {
-			transformRequest : angular.identity,
-			headers : {
-				'Content-Type' : undefined,
-				'x-auth-token': localStorageService.get('token'),
-				'x-auth-login-token': localStorageService.get('loginToken'),
-				'x-auth-remember': localStorageService.get('rememberMe'),
-				'x-auth-user-id': localStorageService.get('id'),
-				'x-auth-login-time': localStorageService.get('loginTime')
-			}
-		});
+         });**/
+        var i = 0;
+        angular.forEach(files,function(file){
+                if(!angular.isUndefined(file)) {
+                    fd.append("file",file);
+                }
+                if(!angular.isUndefined(file) && i==0) {
+                    fd.append("hasEnglish",true);
+                } else {
+                    fd.append("hasEnglish",false);
+                }
+                i++;
+             });
+        fd.append("eventName",emails.eventName);
+        fd.append("subject",emails.subject);
+         fd.append('englishLanguage',emails.englishLanguage);
+         fd.append('chineseLanguage',emails.chineseLanguage);
+        fd.append("recipientType",emails.recipientType);
+        return $http.post(globalConfig.APP_URL + "emails/uploadFile", fd, {
+            transformRequest : angular.identity,
+            headers : {
+                'Content-Type' : undefined,
+                'x-auth-token': localStorageService.get('token'),
+                'x-auth-login-token': localStorageService.get('loginToken'),
+                'x-auth-remember': localStorageService.get('rememberMe'),
+                'x-auth-user-id': localStorageService.get('id'),
+                'x-auth-login-time': localStorageService.get('loginTime')
+            }
+        });
 
 
-	}
-	return {upload: upload};
+    }
+    return {upload: upload};
 };
 
 
  //Theme settings
 function uploadThemeImage($http){
-	var uploadTheme = function(backgroundImageFile, logoImageFile, headerChoices, footerChoices, welcomeContent,welcomeContentUser,splashTitle,splashTitleUser, footerContent, httpTokenRequest,globalConfig, $cookies, localStorageService) {
-		 var fd = new FormData();
-		/**angular.forEach(files,function(file){
-		if(!angular.isUndefined(file)) {
-		 fd.append('file',file);
-		}
+    var uploadTheme = function(backgroundImageFile, logoImageFile, headerChoices, footerChoices,
+            welcomeContent,welcomeContentUser,splashTitle,splashTitleUser, footerContent, headerTitle,
+            httpTokenRequest,globalConfig, $cookies, localStorageService) {
+         var fd = new FormData();
+        /**angular.forEach(files,function(file){
+        if(!angular.isUndefined(file)) {
+         fd.append('file',file);
+        }
 
- 		});**/
+         });**/
         if(!angular.isUndefined(backgroundImageFile)) {
-           	fd.append("backgroundImageFile",backgroundImageFile);
+               fd.append("backgroundImageFile",backgroundImageFile);
         }
         if(!angular.isUndefined(logoImageFile)) {
-           	fd.append("logoImageFile",logoImageFile);
+               fd.append("logoImageFile",logoImageFile);
         }
-		fd.append("headers",headerChoices);
- 		fd.append('footers',footerChoices);
-		fd.append("welcomeContent",welcomeContent);
-		fd.append("welcomeContentUser",welcomeContentUser);
-		fd.append("splashTitle",splashTitle);
-		fd.append("splashTitleUser",splashTitleUser);
- 		fd.append('footerContent',footerContent);
+        fd.append("headers",headerChoices);
+        fd.append('footers',footerChoices);
+        fd.append("welcomeContent",welcomeContent);
+        fd.append("welcomeContentUser",welcomeContentUser);
+        fd.append("splashTitle",splashTitle);
+        fd.append("splashTitleUser",splashTitleUser);
+         fd.append('footerContent',footerContent);
+         fd.append('headerTitle',headerTitle);
                 fd.append('splashTitle',splashTitle);
-		return $http.post(globalConfig.APP_URL + "themesettings/uploadFile", fd, {
-			transformRequest : angular.identity,
-			headers : {
-				'Content-Type' : undefined,
-				'x-auth-token': localStorageService.get('token'),
-				'x-auth-login-token': localStorageService.get('loginToken'),
-				'x-auth-remember': localStorageService.get('rememberMe'),
-				'x-auth-user-id': localStorageService.get('id'),
-				'x-auth-login-time': localStorageService.get('loginTime')
-			}
-		});
+        return $http.post(globalConfig.APP_URL + "themesettings/uploadFile", fd, {
+            transformRequest : angular.identity,
+            headers : {
+                'Content-Type' : undefined,
+                'x-auth-token': localStorageService.get('token'),
+                'x-auth-login-token': localStorageService.get('loginToken'),
+                'x-auth-remember': localStorageService.get('rememberMe'),
+                'x-auth-user-id': localStorageService.get('id'),
+                'x-auth-login-time': localStorageService.get('loginTime')
+            }
+        });
 
 
-	}
-	return {uploadTheme: uploadTheme};
+    }
+    return {uploadTheme: uploadTheme};
 };
 /**
  * Pass function into module
