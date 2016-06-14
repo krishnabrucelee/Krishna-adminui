@@ -353,6 +353,9 @@ $scope.paginationObject.sortOrder = '+';
      hasResourceDomainId.then(function (result) {  // this is only run after $http completes
        $scope.showLoader = false;
          angular.forEach(result, function(obj, key) {
+          	if(obj.usedLimit == null || obj.usedLimit == "null" || isNaN(obj.usedLimit)) {
+        		  obj.usedLimit = 0;
+        	  }
              if(resourceArr.indexOf(obj.resourceType) > -1) {
                if(angular.isUndefined($scope.quotaLimits[obj.resourceType])) {
                    $scope.quotaLimits[obj.resourceType] = {};

@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Page title set in pageTitle directive -->
-    <title page-title></title>
+    <title id="pandaAppPageTitle" page-title></title>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
    <link rel="shortcut icon" type="image/x-ico" href="favicon.ico" />
 
@@ -100,17 +100,17 @@
     var ADMIN_CONTEXT_PATH = "<%=request.getContextPath()%>";
     var REQUEST_PROTOCOL = document.getElementById("request_protocol").value;
     if(REQUEST_PROTOCOL == "" || typeof(REQUEST_PROTOCOL) == "undefined" || REQUEST_PROTOCOL == null) {
-    	REQUEST_PROTOCOL = "http";
+        REQUEST_PROTOCOL = "http";
     }
 
     var REQUEST_PORT = document.getElementById("request_port").value;
     if(REQUEST_PORT != "" && typeof(REQUEST_PORT) != "undefined" && REQUEST_PORT != null) {
-    	REQUEST_PORT = ":" + REQUEST_PORT;
+        REQUEST_PORT = ":" + REQUEST_PORT;
     }
 
     var REQUEST_ADMIN_FOLDER = document.getElementById("request_admin_folder").value;
     if(REQUEST_ADMIN_FOLDER == "" || typeof(REQUEST_ADMIN_FOLDER) == "undefined" || REQUEST_ADMIN_FOLDER == null) {
-    	REQUEST_ADMIN_FOLDER = "/admin/";
+        REQUEST_ADMIN_FOLDER = "/admin/";
     }
     var WEBSOCKET_DEBUG = document.getElementById("websocket_debug").value;
 	if(WEBSOCKET_DEBUG == "" || typeof(WEBSOCKET_DEBUG) == "undefined" || WEBSOCKET_DEBUG == null) {

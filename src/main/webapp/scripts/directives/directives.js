@@ -31,26 +31,40 @@ angular
         .directive('hasPermission', hasPermission)
         .directive('pandaQuickSearch', pandaQuickSearch)
         .directive('validPrice', validPrice)
-    	.directive('validCharacters', validCharacters)
+        .directive('validCharacters', validCharacters)
         .directive('fileModel', fileModel)
         .directive('splash', splash)
 
 /**
  * pageTitle - Directive for set Page title - mata title
  */
-function pageTitle($rootScope, $timeout) {
+function pageTitle($rootScope, $timeout, localStorageService) {
     return {
         link: function (scope, element) {
+
             var listener = function (event, toState, toParams, fromState, fromParams) {
+                var themeSettings = localStorageService.get('themeSettings');
                 // Default title
-                var title = 'Panda';
+                if(themeSettings == null || typeof(themeSettings) == "undefined") {
+                    headerTitle = "Panda";
+                } else {
+                    headerTitle = themeSettings.data.headerTitle;
+                }
+
+                if(themeSettings.data.headerTitle == null) {
+                    themeSettings.data.headerTitle = "Panda";
+                }
+
+                var title = headerTitle;
+
                 // Create your own title pattern
                 if (toState.data && toState.data.pageTitle)
-                    title = 'Panda | ' + toState.data.pageTitle;
+                    title = headerTitle + ' | ' + toState.data.pageTitle;
                 $timeout(function () {
-                    element.text(title);
+                    //element.text(title);
                 });
             };
+
             $rootScope.$on('$stateChangeStart', listener);
         }
     }
@@ -613,13 +627,13 @@ function getCustomLoaderImage() {
 }
 
 function getLoginLoaderImage() {
-	return {
-		restrict: 'E',
+    return {
+        restrict: 'E',
         link: function (scope, element, attrs) {
 
         },
         templateUrl: "app/views/common/login-loader-image.jsp",
-	}
+    }
 }
 
 /**
