@@ -39,12 +39,12 @@ function cloudStackCtrl($scope, $window, appService) {
                 $scope.showLoader = false;
                 appService.notify({message: 'System configured successfully. Please login again to continue.', classes: 'alert-success', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
                     setTimeout(function() {
-            	    $window.sessionStorage.removeItem("pandaUserSession");
-        		    window.location.href = "login";
-        	    }, 4000);
+                    $window.sessionStorage.removeItem("pandaUserSession");
+                    window.location.href = "login";
+                }, 4000);
 
             }).catch(function (result) {
-            	$scope.showLoader = false;
+                $scope.showLoader = false;
                 if (!angular.isUndefined(result.data)) {
                     if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
                         var msg = result.data.globalError[0];
@@ -79,7 +79,7 @@ function cloudStackCtrl($scope, $window, appService) {
 
 function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateParams, appService,globalConfig, $cookies, localStorageService) {
 
-	//$scope.adminUserList = {};
+    //$scope.adminUserList = {};
     $scope.paginationObject = {};
     $scope.configForm = {};
     $scope.domainList = {};
@@ -94,26 +94,26 @@ function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateP
     var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
     var hasUsers = appService.promiseAjax.httpTokenRequest( appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "users/listbyrootadmin");
     hasUsers.then(function (result) {  // this is only run after $http completes0
-    	$scope.adminUserList = result;
+        $scope.adminUserList = result;
     });
 
-	    // Domain List
-	    $scope.list = function (pageNumber) {
+        // Domain List
+        $scope.list = function (pageNumber) {
                 appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
                 appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
-	        var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-	        var hasDomains = appService.crudService.list("domains", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
-	        hasDomains.then(function (result) {
-	            $scope.domainList = result;
-	            $scope.stateid =$stateParams.id;
-	            $scope.type = $stateParams.quotaType;
-	            // For pagination
-	            $scope.paginationObject.limit = limit;
-	            $scope.paginationObject.currentPage = pageNumber;
-	            $scope.paginationObject.totalItems = result.totalItems;
-	        });
-	    };
-	    $scope.list(1);
+            var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+            var hasDomains = appService.crudService.list("domains", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+            hasDomains.then(function (result) {
+                $scope.domainList = result;
+                $scope.stateid =$stateParams.id;
+                $scope.type = $stateParams.quotaType;
+                // For pagination
+                $scope.paginationObject.limit = limit;
+                $scope.paginationObject.currentPage = pageNumber;
+                $scope.paginationObject.totalItems = result.totalItems;
+            });
+        };
+        $scope.list(1);
 
     $scope.global = globalConfig;
     $scope.activity = {};
@@ -136,7 +136,7 @@ function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateP
     if (appService.localStorageService.get("billingList") == null) {
         var hasServer = appService.promiseAjax.httpRequest("GET", "api/billing.json");
         hasServer.then(function (result) {  // this is only run after $http
-											// completes
+                                            // completes
             $scope.billingList = result;
             appService.localStorageService.set("billingList", result);
         });
@@ -316,20 +316,20 @@ function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateP
             {id: 2, name: 'Admin'},
             {id: 3, name: 'Domain'}
         ],
-	    recipientTypeList: {
-		    "0":"USER",
+        recipientTypeList: {
+            "0":"USER",
             "1":"ROOT_ADMIN",
-		    "2":"DOMAIN_ADMIN"
-	    },
+            "2":"DOMAIN_ADMIN"
+        },
         recipientList: {
             "0":"ROOT_ADMIN"
-	    },
-	    dateFormatList: {
+        },
+        dateFormatList: {
             "0":"DD/MM/YYYY",
             "1":"MM/DD/YYYY",
             "2":"YYYY/MM/DD",
             "3":"YYYY/DD/MM"
-	    }
+        }
     };
 
     $scope.validateDomain = function (form) {
@@ -361,8 +361,8 @@ function configurationCtrl($scope, $http, $window, $modal, $log, $state, $stateP
              var hasEvent = crudService.listAll("literals/listall");
              hasEvent.then(function (result) {  // this is only run after $http completes0
                      $scope.eventList = result;
-              	});
-          	};
+                  });
+              };
 
 
 
@@ -370,8 +370,8 @@ $scope.eventLists = function () {
              var hasEvent = appService.crudService.listAll("literals/list");
              hasEvent.then(function (result) {  // this is only run after $http completes0
                      $scope.eventList = result;
-              	});
-          	};
+                  });
+              };
 $scope.eventLists();
 
 
@@ -391,7 +391,7 @@ $scope.test = 0;
     };
 
 
-	  $scope.validateEmailTemplate = function (form,emails,file,file1) {
+      $scope.validateEmailTemplate = function (form,emails,file,file1) {
 var arrayTest = [file, file1];
           $scope.formSubmitted = true;
 
@@ -410,16 +410,16 @@ $scope.checkfile = function(file) {
 if( (angular.isUndefined(file) || angular.isUndefined(file1)) && !angular.isUndefined($scope.eventsTemplateList[0]))
 {
             if (emails.subject && emails.eventName !=null) {
-			if(file != null) {
-     	      emails.englishLanguage = "ENGLISH";
-			}
-			  if(file1 != null) {
-		          emails.chineseLanguage = "CHINESE";
-			  }
-			  emails.recipientType = "USER";
-			  emails.eventName = emails.eventName.eventName;
- 		       appService.uploadFile.upload(arrayTest,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
-	                appService.notify({message: 'Added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+            if(file != null) {
+               emails.englishLanguage = "ENGLISH";
+            }
+              if(file1 != null) {
+                  emails.chineseLanguage = "CHINESE";
+              }
+              emails.recipientType = "USER";
+              emails.eventName = emails.eventName.eventName;
+                appService.uploadFile.upload(arrayTest,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
+                    appService.notify({message: 'Added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                         $state.reload();
           }
 }
@@ -432,16 +432,16 @@ else if( !angular.isUndefined(file))
     }
     else {
                     if (emails.subject && emails.eventName !=null) {
-			if(file != null) {
-     	      emails.englishLanguage = "ENGLISH";
-			}
-			  if(file1 != null) {
-		          emails.chineseLanguage = "CHINESE";
-			  }
-			  emails.recipientType = "USER";
-			  emails.eventName = emails.eventName.eventName;
- 		       appService.uploadFile.upload(arrayTest,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
-	                appService.notify({message: 'Added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+            if(file != null) {
+               emails.englishLanguage = "ENGLISH";
+            }
+              if(file1 != null) {
+                  emails.chineseLanguage = "CHINESE";
+              }
+              emails.recipientType = "USER";
+              emails.eventName = emails.eventName.eventName;
+                appService.uploadFile.upload(arrayTest,emails,appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
+                    appService.notify({message: 'Added successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                         $state.reload();
           }
 
@@ -455,8 +455,8 @@ else if( !angular.isUndefined(file))
       };
 
 
-	$scope.themeSettingList = function () {
-		$scope.themeSettingsList = {};
+    $scope.themeSettingList = function () {
+        $scope.themeSettingsList = {};
 //		if (angular.isUndefined($scope.themeSettingsList.id) || $scope.themeSettingsList.id == null) {
 //			var hasThemeList = appService.crudService.listAll("themesettings/listq");
 //		} else {
@@ -470,240 +470,246 @@ else if( !angular.isUndefined(file))
 //	    	}
 //	    });
 
-		    var hasThemeList = appService.crudService.listAll("themesettings/listAll");
-		    hasThemeList.then(function (result) {
-		    	$scope.themeSettingsList = result[0];
-		    	if (!angular.isUndefined($scope.themeSettingsList) && $scope.themeSettingsList != null) {
-		    		if ($scope.themeSettingsList.customisation != null  || !angular.isUndefined($scope.themeSettingsList.customisation)) {
-			    		$scope.footerChoices = $scope.themeSettingsList.footers;
-			    		$scope.headerChoices = $scope.themeSettingsList.headers;
-			    	}
-		    	}
-		    });
-			 // Header footer
-	    	$scope.themeSettingsList.footers = [{id: 'choice1'}];
-	    	$scope.themeSettingsList.headers = [{id: 'choice1'}];
-		$scope.addNewThemeHeaderChoice = function() {
-			var newItemNo = $scope.themeSettingsList.headers.length+1;
-			$scope.themeSettingsList.headers.push({'id':'choice'+ " " + newItemNo});
-		};
+            var hasThemeList = appService.crudService.listAll("themesettings/listAll");
+            hasThemeList.then(function (result) {
+                $scope.themeSettingsList = result[0];
+                if (!angular.isUndefined($scope.themeSettingsList) && $scope.themeSettingsList != null) {
+                    if ($scope.themeSettingsList.customisation != null  || !angular.isUndefined($scope.themeSettingsList.customisation)) {
+                        $scope.footerChoices = $scope.themeSettingsList.footers;
+                        $scope.headerChoices = $scope.themeSettingsList.headers;
+                    }
+                    if ($scope.themeSettingsList.headerTitle != null) {
+                        document.getElementById("pandaAppPageTitle").innerHTML = $scope.themeSettingsList.headerTitle;                    }
+                }
+            });
+             // Header footer
+            $scope.themeSettingsList.footers = [{id: 'choice1'}];
+            $scope.themeSettingsList.headers = [{id: 'choice1'}];
+        $scope.addNewThemeHeaderChoice = function() {
+            var newItemNo = $scope.themeSettingsList.headers.length+1;
+            $scope.themeSettingsList.headers.push({'id':'choice'+ " " + newItemNo});
+        };
 
-		$scope.removeThemeHeaderChoice = function() {
-			var lastItem = $scope.themeSettingsList.headers.length-1;
-			$scope.themeSettingsList.headers.splice(lastItem);
-		};
+        $scope.removeThemeHeaderChoice = function() {
+            var lastItem = $scope.themeSettingsList.headers.length-1;
+            $scope.themeSettingsList.headers.splice(lastItem);
+        };
 
-		$scope.addNewThemeFooterChoice = function() {
-			var newItemNo = $scope.themeSettingsList.footers.length+1;
-			$scope.themeSettingsList.footers.push({'id':'choice'+ " " + newItemNo});
-		};
+        $scope.addNewThemeFooterChoice = function() {
+            var newItemNo = $scope.themeSettingsList.footers.length+1;
+            $scope.themeSettingsList.footers.push({'id':'choice'+ " " + newItemNo});
+        };
 
-		$scope.removeThemeFooterChoice = function() {
-			var lastItem = $scope.themeSettingsList.footers.length-1;
-			$scope.themeSettingsList.footers.splice(lastItem);
-		};
+        $scope.removeThemeFooterChoice = function() {
+            var lastItem = $scope.themeSettingsList.footers.length-1;
+            $scope.themeSettingsList.footers.splice(lastItem);
+        };
 
 
-		 // Header footer
-		    	$scope.footerChoices = [{id: 'choice1'}];
-		    	$scope.headerChoices = [{id: 'choice1'}];
-			$scope.addNewHeaderChoice = function() {
-				var newItemNo = $scope.headerChoices.length+1;
-				$scope.headerChoices.push({'id':'choice'+ " " + newItemNo});
-			};
+         // Header footer
+                $scope.footerChoices = [{id: 'choice1'}];
+                $scope.headerChoices = [{id: 'choice1'}];
+            $scope.addNewHeaderChoice = function() {
+                var newItemNo = $scope.headerChoices.length+1;
+                $scope.headerChoices.push({'id':'choice'+ " " + newItemNo});
+            };
 
-			$scope.removeHeaderChoice = function() {
-				var lastItem = $scope.headerChoices.length-1;
-				$scope.headerChoices.splice(lastItem);
-			};
+            $scope.removeHeaderChoice = function() {
+                var lastItem = $scope.headerChoices.length-1;
+                $scope.headerChoices.splice(lastItem);
+            };
 
-			$scope.addNewFooterChoice = function() {
-				var newItemNo = $scope.footerChoices.length+1;
-				$scope.footerChoices.push({'id':'choice'+ " " + newItemNo});
-			};
+            $scope.addNewFooterChoice = function() {
+                var newItemNo = $scope.footerChoices.length+1;
+                $scope.footerChoices.push({'id':'choice'+ " " + newItemNo});
+            };
 
-			$scope.removeFooterChoice = function() {
-				var lastItem = $scope.footerChoices.length-1;
-				$scope.footerChoices.splice(lastItem);
-			};
+            $scope.removeFooterChoice = function() {
+                var lastItem = $scope.footerChoices.length-1;
+                $scope.footerChoices.splice(lastItem);
+            };
       // Theme Settings
 };
 
 $scope.showImage = function() {
-	$scope.backgroundImage =  'http://'+ $window.location.hostname +':8080/'  + 'resources/' + 'theme_background.jpg';
-	$scope.logoImage =  'http://'+ $window.location.hostname +':8080/'  + 'resources/' + 'theme_logo.jpg';
+    $scope.backgroundImage =  'http://'+ $window.location.hostname +':8080/'  + 'resources/' + 'theme_background.jpg';
+    $scope.logoImage =  'http://'+ $window.location.hostname +':8080/'  + 'resources/' + 'theme_logo.jpg';
 }
 $scope.showImage();
 
 $scope.themeSettingList();
-	  $scope.validateThemeSettings = function (form,themeSettingsList, headerChoices, footerChoices) {
-		  if ((themeSettingsList.backgroundImgFile.size >= 1048576) || (themeSettingsList.logoImgFile.size >= 1048576)) {
-			  $state.reload();
-			  return appService.notify({message: "File size should not be larger than 1 Mb", classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
-		  }
-		  if (JSON.stringify(headerChoices[0].name)) {
-			  themeSettingsList.headers = headerChoices;
-		  }
-		  if (JSON.stringify(footerChoices[0].name)) {
-			  themeSettingsList.footers = footerChoices;
-		  }
-		  var theme = [];
-		  	$scope.formSubmitted = true;
-		  	$scope.checkfile = function(themeSettingsList) {
-		  		if((angular.isUndefined(themeSettingsList.backgroundImgFile) || angular.isUndefined(themeSettingsList.logoImgFile))) {
+      $scope.validateThemeSettings = function (form,themeSettingsList, headerChoices, footerChoices) {
+          if ((themeSettingsList.backgroundImgFile.size >= 1048576) || (themeSettingsList.logoImgFile.size >= 1048576)) {
+              $state.reload();
+              return appService.notify({message: "File size should not be larger than 1 Mb", classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
+          }
+          if (JSON.stringify(headerChoices[0].name)) {
+              themeSettingsList.headers = headerChoices;
+          }
+          if (JSON.stringify(footerChoices[0].name)) {
+              themeSettingsList.footers = footerChoices;
+          }
 
-		  			if (themeSettingsList.headers != "" || themeSettingsList.footers != "") {
-			  			//Dynamic
-		  				var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), themeSettingsList.welcomeContent,themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies,localStorageService);
-	  		 		    hasUpload.then(function (result) {
-		  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-		  		 		   $window.location.reload();
-		  	              }).catch(function (result) {
-		  	              	$scope.showLoader = false;
-		  	                  if (!angular.isUndefined(result.data)) {
-		  	                	$state.reload();
-		  	                      if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
-		  	                          var msg = result.data.globalError[0];
-		  	                          $scope.showLoader = false;
-		  	                          appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
-		  	                      } else if (result.data.fieldErrors != null) {
-		  	                          angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
-		  	                              $scope.configForm[key].$invalid = true;
-		  	                              $scope.configForm[key].errorMessage = errorMessage;
-		  	                          });
-		  	                      }
-		  	                  }
-		  	              });
-		  			} else {
-		  				//starting
-			  			var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(headerChoices),JSON.stringify(footerChoices), themeSettingsList.welcomeContent, themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
-	  		 		    hasUpload.then(function (result) {
-		  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-		  		 		   $window.location.reload();
-		  	              }).catch(function (result) {
-		  	              	$scope.showLoader = false;
-		  	                  if (!angular.isUndefined(result.data)) {
-		  	                	$state.reload();
-		  	                      if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
-		  	                          var msg = result.data.globalError[0];
-		  	                          $scope.showLoader = false;
-		  	                          appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
-		  	                      } else if (result.data.fieldErrors != null) {
-		  	                          angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
-		  	                              $scope.configForm[key].$invalid = true;
-		  	                              $scope.configForm[key].errorMessage = errorMessage;
-		  	                          });
-		  	                      }
-		  	                  }
-		  	              });
-		  			}
-		  		}
+          if(themeSettingsList.headerTitle == null || angular.isUndefined(themeSettingsList.headerTitle)) {
+              themeSettingsList.headerTitle = "";
+          }
+          var theme = [];
+              $scope.formSubmitted = true;
+              $scope.checkfile = function(themeSettingsList) {
+                  if((angular.isUndefined(themeSettingsList.backgroundImgFile) || angular.isUndefined(themeSettingsList.logoImgFile))) {
 
-		  		else if( (!angular.isUndefined(themeSettingsList.backgroundImgFile) && (themeSettingsList.backgroundImgFile != null)) || (!angular.isUndefined(themeSettingsList.logoImgFile) && (themeSettingsList.logoImgFile != null))) {
-		  		      if (((themeSettingsList.backgroundImgFile.type != "image/jpeg") && (!angular.isUndefined(themeSettingsList.backgroundImgFile.type)) && (themeSettingsList.backgroundImgFile != null))
-		  		    		  || ((themeSettingsList.logoImgFile.type != "image/jpeg") && (!angular.isUndefined(themeSettingsList.logoImgFile.type) && (themeSettingsList.logoImgFile != null)))) {
-		  		      appService.notify({message: 'Please upload jpeg files ', classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-		  		      return false;
-		  		    }
-		  		    else {
-		  		    	if (((themeSettingsList.headers != "") && (!angular.isUndefined(themeSettingsList.headers)))  || ((themeSettingsList.footers != "") && (!angular.isUndefined(themeSettingsList.footers)))) {
-				  			//last
-		  		    		var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), themeSettingsList.welcomeContent,themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
-		  		 		    hasUpload.then(function (result) {
-			  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-			  		 		   $window.location.reload();
-			  	              }).catch(function (result) {
-			  	              	$scope.showLoader = false;
-			  	                  if (!angular.isUndefined(result.data)) {
-			  	                	$state.reload();
-			  	                      if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
-			  	                          var msg = result.data.globalError[0];
-			  	                          $scope.showLoader = false;
-			  	                          appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
-			  	                      } else if (result.data.fieldErrors != null) {
-			  	                          angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
-			  	                              $scope.configForm[key].$invalid = true;
-			  	                              $scope.configForm[key].errorMessage = errorMessage;
-			  	                          });
-			  	                      }
-			  	                  }
-			  	              });
-			  			} else {
-			  				//end
-				  			var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(headerChoices),JSON.stringify(footerChoices), themeSettingsList.welcomeContent, themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
-		  		 		    hasUpload.then(function (result) {
-			  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-			  		 		   $window.location.reload();
+                      if (themeSettingsList.headers != "" || themeSettingsList.footers != "") {
+                          //Dynamic
+                          var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), themeSettingsList.welcomeContent,themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, themeSettingsList.headerTitle, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies,localStorageService);
+                           hasUpload.then(function (result) {
+                                 appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                              $window.location.reload();
+                            }).catch(function (result) {
+                                $scope.showLoader = false;
+                                if (!angular.isUndefined(result.data)) {
+                                  $state.reload();
+                                    if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
+                                        var msg = result.data.globalError[0];
+                                        $scope.showLoader = false;
+                                        appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
+                                    } else if (result.data.fieldErrors != null) {
+                                        angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                                            $scope.configForm[key].$invalid = true;
+                                            $scope.configForm[key].errorMessage = errorMessage;
+                                        });
+                                    }
+                                }
+                            });
+                      } else {
+                          //starting
+                          var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(headerChoices),JSON.stringify(footerChoices), themeSettingsList.welcomeContent, themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, themeSettingsList.headerTitle, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
+                           hasUpload.then(function (result) {
+                                 appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                              $window.location.reload();
+                            }).catch(function (result) {
+                                $scope.showLoader = false;
+                                if (!angular.isUndefined(result.data)) {
+                                  $state.reload();
+                                    if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
+                                        var msg = result.data.globalError[0];
+                                        $scope.showLoader = false;
+                                        appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
+                                    } else if (result.data.fieldErrors != null) {
+                                        angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                                            $scope.configForm[key].$invalid = true;
+                                            $scope.configForm[key].errorMessage = errorMessage;
+                                        });
+                                    }
+                                }
+                            });
+                      }
+                  }
+
+                  else if( (!angular.isUndefined(themeSettingsList.backgroundImgFile) && (themeSettingsList.backgroundImgFile != null)) || (!angular.isUndefined(themeSettingsList.logoImgFile) && (themeSettingsList.logoImgFile != null))) {
+                        if (((themeSettingsList.backgroundImgFile.type != "image/jpeg") && (!angular.isUndefined(themeSettingsList.backgroundImgFile.type)) && (themeSettingsList.backgroundImgFile != null))
+                                || ((themeSettingsList.logoImgFile.type != "image/jpeg") && (!angular.isUndefined(themeSettingsList.logoImgFile.type) && (themeSettingsList.logoImgFile != null)))) {
+                        appService.notify({message: 'Please upload jpeg files ', classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                        return false;
+                      }
+                      else {
+                          if (((themeSettingsList.headers != "") && (!angular.isUndefined(themeSettingsList.headers)))  || ((themeSettingsList.footers != "") && (!angular.isUndefined(themeSettingsList.footers)))) {
+                              //last
+                              var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), themeSettingsList.welcomeContent,themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, themeSettingsList.headerTitle, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
+                               hasUpload.then(function (result) {
+                                     appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                                  $window.location.reload();
+                                }).catch(function (result) {
+                                    $scope.showLoader = false;
+                                    if (!angular.isUndefined(result.data)) {
+                                      $state.reload();
+                                        if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
+                                            var msg = result.data.globalError[0];
+                                            $scope.showLoader = false;
+                                            appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
+                                        } else if (result.data.fieldErrors != null) {
+                                            angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                                                $scope.configForm[key].$invalid = true;
+                                                $scope.configForm[key].errorMessage = errorMessage;
+                                            });
+                                        }
+                                    }
+                                });
+                          } else {
+                              //end
+                              var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(headerChoices),JSON.stringify(footerChoices), themeSettingsList.welcomeContent, themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, themeSettingsList.headerTitle, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
+                               hasUpload.then(function (result) {
+                                     appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                                  $window.location.reload();
 //			  	              }).catch(function (result) {
-			  	              	$scope.showLoader = false;
-			  	                  if (!angular.isUndefined(result.data)) {
-			  	                	$state.reload();
-			  	                      if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
-			  	                          var msg = result.data.globalError[0];
-			  	                          $scope.showLoader = false;
-			  	                          appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
-			  	                      } else if (result.data.fieldErrors != null) {
-			  	                          angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
-			  	                              $scope.configForm[key].$invalid = true;
-			  	                              $scope.configForm[key].errorMessage = errorMessage;
-			  	                          });
-			  	                      }
-			  	                  }
-			  	              });
-			  			}
-		  		          }
+                                    $scope.showLoader = false;
+                                    if (!angular.isUndefined(result.data)) {
+                                      $state.reload();
+                                        if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
+                                            var msg = result.data.globalError[0];
+                                            $scope.showLoader = false;
+                                            appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
+                                        } else if (result.data.fieldErrors != null) {
+                                            angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                                                $scope.configForm[key].$invalid = true;
+                                                $scope.configForm[key].errorMessage = errorMessage;
+                                            });
+                                        }
+                                    }
+                                });
+                          }
+                            }
 
-		  		    	} else {
-		  		    	//last
-		  		    		if (((themeSettingsList.headers != "") && (!angular.isUndefined(themeSettingsList.headers))) || ((themeSettingsList.footers != "") && (!angular.isUndefined(themeSettingsList.footers)))) {
-		  		    		var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), themeSettingsList.welcomeContent, themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
-		  		 		    hasUpload.then(function (result) {
-			  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-			  		 		   $window.location.reload();
-			  	              }).catch(function (result) {
-			  	              	$scope.showLoader = false;
-			  	                  if (!angular.isUndefined(result.data)) {
-			  	                	$state.reload();
-			  	                      if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
-			  	                          var msg = result.data.globalError[0];
-			  	                          $scope.showLoader = false;
-			  	                          appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
-			  	                      } else if (result.data.fieldErrors != null) {
-			  	                          angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
-			  	                              $scope.configForm[key].$invalid = true;
-			  	                              $scope.configForm[key].errorMessage = errorMessage;
-			  	                          });
-			  	                      }
-			  	                  }
-			  	              });
-		  		    		} else {
-		  		    		//starting
-					  			var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(headerChoices),JSON.stringify(footerChoices), themeSettingsList.welcomeContent, themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
-			  		 		    hasUpload.then(function (result) {
-				  		 		      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-				  		 		   $window.location.reload();
-				  	              }).catch(function (result) {
-				  	              	$scope.showLoader = false;
-				  	                  if (!angular.isUndefined(result.data)) {
-				  	                	$state.reload();
-				  	                      if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
-				  	                          var msg = result.data.globalError[0];
-				  	                          $scope.showLoader = false;
-				  	                          appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
-				  	                      } else if (result.data.fieldErrors != null) {
-				  	                          angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
-				  	                              $scope.configForm[key].$invalid = true;
-				  	                              $scope.configForm[key].errorMessage = errorMessage;
-				  	                          });
-				  	                      }
-				  	                  }
-				  	              });
-		  		    		}
-			  			}
-		  			}
+                          } else {
+                          //last
+                              if (((themeSettingsList.headers != "") && (!angular.isUndefined(themeSettingsList.headers))) || ((themeSettingsList.footers != "") && (!angular.isUndefined(themeSettingsList.footers)))) {
+                              var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), themeSettingsList.welcomeContent, themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, themeSettingsList.headerTitle, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
+                               hasUpload.then(function (result) {
+                                     appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                                  $window.location.reload();
+                                }).catch(function (result) {
+                                    $scope.showLoader = false;
+                                    if (!angular.isUndefined(result.data)) {
+                                      $state.reload();
+                                        if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
+                                            var msg = result.data.globalError[0];
+                                            $scope.showLoader = false;
+                                            appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
+                                        } else if (result.data.fieldErrors != null) {
+                                            angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                                                $scope.configForm[key].$invalid = true;
+                                                $scope.configForm[key].errorMessage = errorMessage;
+                                            });
+                                        }
+                                    }
+                                });
+                              } else {
+                              //starting
+                                  var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(headerChoices),JSON.stringify(footerChoices), themeSettingsList.welcomeContent, themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, themeSettingsList.headerTitle,  appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
+                                   hasUpload.then(function (result) {
+                                         appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                                      $window.location.reload();
+                                    }).catch(function (result) {
+                                        $scope.showLoader = false;
+                                        if (!angular.isUndefined(result.data)) {
+                                          $state.reload();
+                                            if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
+                                                var msg = result.data.globalError[0];
+                                                $scope.showLoader = false;
+                                                appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
+                                            } else if (result.data.fieldErrors != null) {
+                                                angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                                                    $scope.configForm[key].$invalid = true;
+                                                    $scope.configForm[key].errorMessage = errorMessage;
+                                                });
+                                            }
+                                        }
+                                    });
+                              }
+                          }
+                      }
 
-		  	 $scope.checkfile(themeSettingsList);
-	  };
+               $scope.checkfile(themeSettingsList);
+      };
 
       $scope.config = {};
       $scope.configList = function (form) {
@@ -711,13 +717,13 @@ $scope.themeSettingList();
           hasConfigList.then(function (result) {  // this is only run after $http completes0
                $scope.config.overDueDays = result[0].overDueDays;
                if (result[0].dateFormatType === "DDMMYYYY") {
-            	   $scope.config.dateFormatType = "DD/MM/YYYY";
+                   $scope.config.dateFormatType = "DD/MM/YYYY";
                } else if (result[0].dateFormatType === "MMDDYYYY") {
-            	   $scope.config.dateFormatType = "MM/DD/YYYY";
+                   $scope.config.dateFormatType = "MM/DD/YYYY";
                } else if (result[0].dateFormatType === "YYYYMMDD") {
-            	   $scope.config.dateFormatType = "YYYY/MM/DD";
+                   $scope.config.dateFormatType = "YYYY/MM/DD";
                } else if (result[0].dateFormatType === "YYYYDDMM") {
-            	   $scope.config.dateFormatType = "YYYY/DD/MM";
+                   $scope.config.dateFormatType = "YYYY/DD/MM";
                }
 
           });
@@ -729,13 +735,13 @@ $scope.themeSettingList();
           if (form.$valid) {
               var config = $scope.config;
               if (config.dateFormatType === "DD/MM/YYYY") {
-           	      config.dateFormatType = "DDMMYYYY";
+                     config.dateFormatType = "DDMMYYYY";
               } else if (config.dateFormatType === "MM/DD/YYYY") {
-           	      config.dateFormatType = "MMDDYYYY";
+                     config.dateFormatType = "MMDDYYYY";
               } else if (config.dateFormatType === "YYYY/MM/DD") {
-           	      config.dateFormatType = "YYYYMMDD";
+                     config.dateFormatType = "YYYYMMDD";
               } else if (config.dateFormatType === "YYYY/DD/MM") {
-           	      config.dateFormatType = "YYYYDDMM";
+                     config.dateFormatType = "YYYYDDMM";
               }
               $scope.showLoader = true;
               var hasConfig = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_POST, globalConfig.PING_APP_URL + "configuration", config);
@@ -746,7 +752,7 @@ $scope.themeSettingList();
                   $scope.configList();
 
               }).catch(function (result) {
-              	$scope.showLoader = false;
+                  $scope.showLoader = false;
                   if (!angular.isUndefined(result.data)) {
                       if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
                           var msg = result.data.globalError[0];
@@ -811,7 +817,7 @@ $scope.themeSettingList();
         $scope.formSubmitted = true;
         if (form.$valid) {
 
-        	console.log(form);
+            console.log(form);
 
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
             appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
@@ -913,7 +919,7 @@ $scope.themeSettingList();
 
 function importCtrl($scope, name, notify, $modalInstance) {
 
-	var VIEW_URL = "app/";
+    var VIEW_URL = "app/";
     $scope.name = name;
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
@@ -930,7 +936,7 @@ function importCtrl($scope, name, notify, $modalInstance) {
 
 function retailManagementCtrl($scope, globalConfig, notify) {
 
-	var VIEW_URL = "app/";
+    var VIEW_URL = "app/";
     $scope.global = globalConfig;
     $scope.validateRetailManagementLimit = function (form) {
         $scope.formSubmitted = true;
@@ -997,20 +1003,20 @@ function billingCtrl($scope, appService, globalConfig, localStorageService, $win
             return false;
         }
         if($scope.billingSettingsObj.discountPercentage > 100 || $scope.billingSettingsObj.discountPercentage < -100) {
-        	alert("Adjustment percentage must be between -100 and 100");
+            alert("Adjustment percentage must be between -100 and 100");
             return false;
         }
 
         $scope.showLoader = false;
         if (typeof $scope.billingSettingsObj.startDate.ddmmyyyy !== 'undefined' && $.isFunction($scope.billingSettingsObj.startDate.ddmmyyyy)) {
-        	$scope.billingSettingsObj.fromDate = $scope.billingSettingsObj.startDate.ddmmyyyy();
+            $scope.billingSettingsObj.fromDate = $scope.billingSettingsObj.startDate.ddmmyyyy();
         } else {
-        	$scope.billingSettingsObj.startDate = new Date();
-        	$scope.billingSettingsObj.fromDate = $scope.billingSettingsObj.startDate.ddmmyyyy();
+            $scope.billingSettingsObj.startDate = new Date();
+            $scope.billingSettingsObj.fromDate = $scope.billingSettingsObj.startDate.ddmmyyyy();
         }
         if (!angular.isUndefined($scope.billingSettingsObj.endDate)
                 && $scope.billingSettingsObj.endDate != "") {
-        	$scope.billingSettingsObj.toDate = $scope.billingSettingsObj.endDate.ddmmyyyy();
+            $scope.billingSettingsObj.toDate = $scope.billingSettingsObj.endDate.ddmmyyyy();
         }
         $scope.billingSettingsObj.domainUuid = $scope.billingSettingsObj.domain.uuid;
         var billingSettingsTempObj = {};
@@ -1031,8 +1037,8 @@ function billingCtrl($scope, appService, globalConfig, localStorageService, $win
             $scope.billingSettingsObj.startDate = $scope.today;
             $scope.list(1, "all");
         }).catch(function (result) {
-        	$scope.billingSettingsObj.startDate = $scope.today;
-        	$scope.showLoader = false;
+            $scope.billingSettingsObj.startDate = $scope.today;
+            $scope.showLoader = false;
             if (!angular.isUndefined(result.data)) {
                 if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
                     var msg = result.data.globalError[0];
@@ -1050,7 +1056,7 @@ function billingCtrl($scope, appService, globalConfig, localStorageService, $win
 
         hasServer.then(function (result) {  // this is only run after $http completes0
             if (!angular.isUndefined(result._embedded)) {
-            	$scope.billableItemDiscountList = result['_embedded'].billableItemDiscountList;
+                $scope.billableItemDiscountList = result['_embedded'].billableItemDiscountList;
             } else {
                 $scope.billableItemDiscountList = {};
             }
@@ -1065,19 +1071,19 @@ function billingCtrl($scope, appService, globalConfig, localStorageService, $win
         $scope.list(1, "all");
 
         $scope.domainChange = function (domainObj) {
-        	if (domainObj == null) {
-        		$scope.list(1, "all");
-        	} else {
-        		$scope.list(1, domainObj.uuid);
-        	}
+            if (domainObj == null) {
+                $scope.list(1, "all");
+            } else {
+                $scope.list(1, domainObj.uuid);
+            }
         }
 
         // Delete the template
         $scope.delete = function (size, discount) {
-        	appService.dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+            appService.dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
                     $scope.deleteId = discount.id;
                     $scope.ok = function (deleteId) {
-                    	$scope.showLoader = true;
+                        $scope.showLoader = true;
                         hasServer = appService.promiseAjax.httpRequestPing(appService.globalConfig.HTTP_DELETE, appService.globalConfig.PING_APP_URL + "billableItemDiscount/"+deleteId);
                         hasServer.then(function (result) {
                             $scope.homerTemplate = 'app/views/notification/notify.jsp';
@@ -1087,12 +1093,12 @@ function billingCtrl($scope, appService, globalConfig, localStorageService, $win
                             $scope.list(1, "all");
                         }).catch(function (result) {
                             if (!angular.isUndefined(result.data)) {
-                            	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
-                              	    var msg = result.data.globalError[0];
-                              	    $scope.showLoader = false;
-                              	    appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                                if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                                      var msg = result.data.globalError[0];
+                                      $scope.showLoader = false;
+                                      appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                                 }
-                            	$modalInstance.close();
+                                $modalInstance.close();
                             }
                         });
                     },
@@ -1106,85 +1112,85 @@ function billingCtrl($scope, appService, globalConfig, localStorageService, $win
 
 function loginSecurityCtrl($scope, appService, globalConfig, localStorageService, $window, notify) {
 
-	$scope.formElements = {};
-	var hasConfigs = appService.crudService.listAll("generalconfiguration/configlist");
+    $scope.formElements = {};
+    var hasConfigs = appService.crudService.listAll("generalconfiguration/configlist");
     hasConfigs.then(function (result) {  // this is only run after $http completes0
         $scope.generalconfiguration = result[0];
     });
 
-	$scope.save = function (form,generalconfiguration) {
+    $scope.save = function (form,generalconfiguration) {
         $scope.formSubmitted = true;
         if (form.$valid) {
             $scope.showLoader = true;
-			var generalconfiguration = $scope.generalconfiguration;
+            var generalconfiguration = $scope.generalconfiguration;
             var hasServer = appService.crudService.add("generalconfiguration", generalconfiguration);
             hasServer.then(function (result) {  // this is only run after $http completes
-            	$scope.generalconfiguration = result;
+                $scope.generalconfiguration = result;
                 $scope.formSubmitted = false;
                 $scope.showLoader = false;
                 appService.notify({message: 'Login security updated successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
             }).catch(function (result) {
-               	$scope.showLoader = false;
-           	    if (!angular.isUndefined(result.data)) {
-             		if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
-                 	   	 var msg = result.data.globalError[0];
-                 	   	 $scope.showLoader = false;
-               	    	 appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-                   	} else if (result.data.fieldErrors != null) {
-                      	$scope.showLoader = false;
-                       	angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
-                           	$scope.TemplateForm[key].$invalid = true;
-                           	$scope.TemplateForm[key].errorMessage = errorMessage;
-                       	});
-               		}
-               	}
-           	});
+                   $scope.showLoader = false;
+                   if (!angular.isUndefined(result.data)) {
+                     if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                             var msg = result.data.globalError[0];
+                             $scope.showLoader = false;
+                            appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                       } else if (result.data.fieldErrors != null) {
+                          $scope.showLoader = false;
+                           angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                               $scope.TemplateForm[key].$invalid = true;
+                               $scope.TemplateForm[key].errorMessage = errorMessage;
+                           });
+                       }
+                   }
+               });
         }
     };
 };
 
 function importCsDataCtrl($scope, appService, globalConfig, localStorageService, $window, notify) {
 
-	$scope.paginationObject = {};
-	$scope.formElements = {};
+    $scope.paginationObject = {};
+    $scope.formElements = {};
 
-	// Manual sync type list from server
+    // Manual sync type list from server
     $scope.manualCloudSync = {};
     $scope.list = function (pageNumber) {
     var hasImportList = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL
-    		+ "manualCloudSync" +"?lang=" + localStorageService.cookie.get('language') + "&sortBy=+id"
-    		+ "&limit=" + 25, $scope.global.paginationHeaders(pageNumber, 25), {"limit" : 25});
+            + "manualCloudSync" +"?lang=" + localStorageService.cookie.get('language') + "&sortBy=+id"
+            + "&limit=" + 25, $scope.global.paginationHeaders(pageNumber, 25), {"limit" : 25});
 
     hasImportList.then(function (result) {
-    	$scope.formElements.importList = result;
+        $scope.formElements.importList = result;
     });
     };
     $scope.list(1);
 
-	$scope.openImportContainer = function (keyName, type) {
-		$scope.showLoader = true;
+    $scope.openImportContainer = function (keyName, type) {
+        $scope.showLoader = true;
         var importData = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "cloudconfiguration/importData?keyName="+keyName+"&type="+type);
         importData.then(function (result) {
-        	$scope.list(1);
+            $scope.list(1);
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
             $scope.showLoader = false;
             if (type === 'import') {
-            	$scope.msg = 'Cloud stack data imported successfully';
+                $scope.msg = 'Cloud stack data imported successfully';
             } else {
-            	$scope.msg = 'Cloud stack status checked successfully';
+                $scope.msg = 'Cloud stack status checked successfully';
             }
             appService.notify({message: $scope.msg, classes: 'alert-success', templateUrl: $scope.homerTemplate});
         }).catch(function (result) {
             if (!angular.isUndefined(result.data)) {
-            	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
-              	    var msg = result.data.globalError[0];
-              	    $scope.showLoader = false;
-              	  if (type === 'checkall') {
-                  	$scope.msg = 'Data dependency accoured so please use individual check option';
+                if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                      var msg = result.data.globalError[0];
+                      $scope.showLoader = false;
+                    if (type === 'checkall') {
+                      $scope.msg = 'Data dependency accoured so please use individual check option';
                   } else {
-                  	$scope.msg = 'Data dependency accoured so please import from top level hierarchy';
+                      $scope.msg = 'Data dependency accoured so please import from top level hierarchy';
                   }
-              	    appService.notify({message: $scope.msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                      appService.notify({message: $scope.msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                 }
             }
         });
@@ -1193,18 +1199,18 @@ function importCsDataCtrl($scope, appService, globalConfig, localStorageService,
 
 function usageCsDataCtrl($scope, appService, globalConfig, localStorageService, $window, notify) {
 
-	$scope.paginationObject = {};
-	$scope.formElements = {};
+    $scope.paginationObject = {};
+    $scope.formElements = {};
 
-	// Manual sync type list from server
+    // Manual sync type list from server
     $scope.list = function (pageNumber) {
-    	$scope.showLoader = true;
-    	var limit = (angular.isUndefined($scope.paginationObject.limit)) ? appService.globalConfig.CONTENT_LIMIT : $scope.paginationObject.limit;
+        $scope.showLoader = true;
+        var limit = (angular.isUndefined($scope.paginationObject.limit)) ? appService.globalConfig.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasDomainList = appService.promiseAjax.httpRequestPing(appService.globalConfig.HTTP_GET, appService.globalConfig.PING_APP_URL
-        		+ "domain/listDomain?limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+                + "domain/listDomain?limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
         hasDomainList.then(function (result) {
-    	    if (!angular.isUndefined(result._embedded)) {
-            	$scope.formElements.domainList = result['_embedded'].domainList;
+            if (!angular.isUndefined(result._embedded)) {
+                $scope.formElements.domainList = result['_embedded'].domainList;
             } else {
                 $scope.formElements.domainList = {};
             }
@@ -1218,26 +1224,26 @@ function usageCsDataCtrl($scope, appService, globalConfig, localStorageService, 
     };
     $scope.list(1);
 
-	$scope.updateDomainUsage = function (domain, type) {
-		$scope.showLoader = true;
-		var hasUsageData = {};
-		if (type == 'import') {
-			hasUsageData = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_POST, globalConfig.PING_APP_URL + "domain/updateDomainUsage", domain);
-		} else {
-			hasUsageData = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_GET, globalConfig.PING_APP_URL + "domain/updateAllDomainUsage");
-		}
+    $scope.updateDomainUsage = function (domain, type) {
+        $scope.showLoader = true;
+        var hasUsageData = {};
+        if (type == 'import') {
+            hasUsageData = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_POST, globalConfig.PING_APP_URL + "domain/updateDomainUsage", domain);
+        } else {
+            hasUsageData = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_GET, globalConfig.PING_APP_URL + "domain/updateAllDomainUsage");
+        }
         hasUsageData.then(function (result) {
-        	$scope.list(1);
+            $scope.list(1);
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
             $scope.showLoader = false;
             $scope.msg = 'Domain usage updated successfully';
             appService.notify({message: $scope.msg, classes: 'alert-success', templateUrl: $scope.homerTemplate});
         }).catch(function (result) {
             if (!angular.isUndefined(result.data)) {
-            	if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
-              	    var msg = result.data.globalError[0];
-              	    $scope.showLoader = false;
-              	    appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                      var msg = result.data.globalError[0];
+                      $scope.showLoader = false;
+                      appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                 }
             }
         });
@@ -1246,50 +1252,50 @@ function usageCsDataCtrl($scope, appService, globalConfig, localStorageService, 
 
 function languageCtrl($scope, appService, globalConfig, localStorageService, $window, notify, $timeout) {
 
-	$scope.formElements = {};
-	var hasConfigs = appService.crudService.listAll("generalconfiguration/configlist");
+    $scope.formElements = {};
+    var hasConfigs = appService.crudService.listAll("generalconfiguration/configlist");
     hasConfigs.then(function (result) {  // this is only run after $http completes0
         $scope.generalconfiguration = result[0];
     });
 
-	$scope.save = function (form, generalconfiguration) {
+    $scope.save = function (form, generalconfiguration) {
         $scope.formSubmitted = true;
         if (form.$valid) {
             $scope.showLoader = true;
-			var generalconfiguration = $scope.generalconfiguration;
+            var generalconfiguration = $scope.generalconfiguration;
             var hasServer = appService.crudService.add("generalconfiguration", generalconfiguration);
             hasServer.then(function (result) {  // this is only run after $http completes
-            	$scope.generalconfiguration = result;
-            	if ($scope.generalconfiguration.defaultLanguage == 'Chinese') {
-                	localStorageService.cookie.set('language', 'zh');
+                $scope.generalconfiguration = result;
+                if ($scope.generalconfiguration.defaultLanguage == 'Chinese') {
+                    localStorageService.cookie.set('language', 'zh');
                 } else {
-                	localStorageService.cookie.set('language', 'en');
+                    localStorageService.cookie.set('language', 'en');
                 }
                 $scope.formSubmitted = false;
                 $scope.showLoader = false;
                 appService.notify({message: 'Default language updated successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                 $window.location.reload();
             }).catch(function (result) {
-               	$scope.showLoader = false;
-           	    if (!angular.isUndefined(result.data)) {
-             		if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
-                 	   	 var msg = result.data.globalError[0];
-                 	   	 $scope.showLoader = false;
-               	    	 appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-                   	} else if (result.data.fieldErrors != null) {
-                      	$scope.showLoader = false;
-                       	angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
-                           	$scope.TemplateForm[key].$invalid = true;
-                           	$scope.TemplateForm[key].errorMessage = errorMessage;
-                       	});
-               		}
-               	}
-           	});
+                   $scope.showLoader = false;
+                   if (!angular.isUndefined(result.data)) {
+                     if (result.data.globalError[0] != '' && !angular.isUndefined(result.data.globalError[0])) {
+                             var msg = result.data.globalError[0];
+                             $scope.showLoader = false;
+                            appService.notify({message: msg, classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                       } else if (result.data.fieldErrors != null) {
+                          $scope.showLoader = false;
+                           angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+                               $scope.TemplateForm[key].$invalid = true;
+                               $scope.TemplateForm[key].errorMessage = errorMessage;
+                           });
+                       }
+                   }
+               });
         }
     };
 
     $scope.formElements = {
-    		LanguageList: {
+            LanguageList: {
                 "0":"English",
                 "1":"Chinese"
             }
