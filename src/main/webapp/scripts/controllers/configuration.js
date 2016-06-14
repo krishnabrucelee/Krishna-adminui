@@ -479,7 +479,7 @@ else if( !angular.isUndefined(file))
                         $scope.headerChoices = $scope.themeSettingsList.headers;
                     }
                     if ($scope.themeSettingsList.headerTitle != null) {
-                        document.getElementById("pandaAppPageTitle").innerHTML = $scope.themeSettings.data.headerTitle;                    }
+                        document.getElementById("pandaAppPageTitle").innerHTML = $scope.themeSettingsList.headerTitle;                    }
                 }
             });
              // Header footer

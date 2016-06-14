@@ -50,13 +50,18 @@ function pageTitle($rootScope, $timeout, localStorageService) {
                 } else {
                     headerTitle = themeSettings.data.headerTitle;
                 }
+
+                if(themeSettings.data.headerTitle == null) {
+                    themeSettings.data.headerTitle = "Panda";
+                }
+
                 var title = headerTitle;
 
                 // Create your own title pattern
                 if (toState.data && toState.data.pageTitle)
                     title = headerTitle + ' | ' + toState.data.pageTitle;
                 $timeout(function () {
-                    element.text(title);
+                    //element.text(title);
                 });
             };
 
