@@ -56,6 +56,7 @@
                          <input type="hidden" value="${REQUEST_PROTOCOL}" id="request_protocol" />
                          <input type="hidden" value="${REQUEST_PORT}" id="request_port" />
                          <input type="hidden" value="${REQUEST_ADMIN_FOLDER}" id="request_admin_folder" />
+                         <input type="hidden" value="${WEBSOCKET}" id="websocket_debug" />
                     <get-login-loader-image data-ng-show="showLoader"></get-login-loader-image>
                     <button data-ng-hide="showLoader" id="login_button" type="submit" class="btn btn-default"><fmt:message key="common.login" bundle="${msg}" /></button>
                     </form>
@@ -111,5 +112,9 @@
     if(REQUEST_ADMIN_FOLDER == "" || typeof(REQUEST_ADMIN_FOLDER) == "undefined" || REQUEST_ADMIN_FOLDER == null) {
     	REQUEST_ADMIN_FOLDER = "/admin/";
     }
+    var WEBSOCKET_DEBUG = document.getElementById("websocket_debug").value;
+	if(WEBSOCKET_DEBUG == "" || typeof(WEBSOCKET_DEBUG) == "undefined" || WEBSOCKET_DEBUG == null) {
+		WEBSOCKET_DEBUG = false;
+	}
 </script>
 </html>
