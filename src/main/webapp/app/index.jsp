@@ -25,7 +25,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Page title set in pageTitle directive -->
-    <title page-title></title>
+    <title id="pandaAppPageTitle" page-title></title>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link rel="shortcut icon" type="image/x-ico" href="favicon.ico" />
 
@@ -102,6 +102,7 @@
 <input type="hidden" value="${REQUEST_PROTOCOL}" id="request_protocol" />
                          <input type="hidden" value="${REQUEST_PORT}" id="request_port" />
                          <input type="hidden" value="${REQUEST_ADMIN_FOLDER}" id="request_admin_folder" />
+                         <input type="hidden" value="${WEBSOCKET}" id="websocket_debug" />
 
 
 
@@ -143,6 +144,10 @@
         if(REQUEST_ADMIN_FOLDER == "" || typeof(REQUEST_ADMIN_FOLDER) == "undefined" || REQUEST_ADMIN_FOLDER == null) {
             REQUEST_ADMIN_FOLDER = "/admin/";
         }
+        var WEBSOCKET_DEBUG = document.getElementById("websocket_debug").value;
+    	if(WEBSOCKET_DEBUG == "" || typeof(WEBSOCKET_DEBUG) == "undefined" || WEBSOCKET_DEBUG == null) {
+    		WEBSOCKET_DEBUG = false;
+    	}
 
     </script>
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -192,6 +197,8 @@
 <script src="bower_components/angular-ui-sortable/sortable.min.js"></script>
 <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
 <script src="bower_components/angularjs-slider/rzslider.js"></script>
+<script src="bower_components/sockjs/sockjs.min.js"></script>
+<script src="bower_components/stomp/lib/stomp.min.js"></script>
 
 <!-- endbuild -->
 
@@ -249,6 +256,8 @@
 <script src="scripts/factories/modalService.js"></script>
 <script src="scripts/factories/dialogService.js"></script>
 <script src="scripts/factories/crudService.js"></script>
+<script src="scripts/factories/webSocket.js"></script>
+<script src="scripts/factories/webSocketService.js"></script>
 
 
 <!-- Resource Usage Tree Structure -->
