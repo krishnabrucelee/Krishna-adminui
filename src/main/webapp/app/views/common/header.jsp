@@ -39,10 +39,6 @@
 						</div>
 						<div class="clearfix"></div>
 					</li>
-<<<<<<< HEAD
-
-=======
->>>>>>> 0f5c68c099c4331d9a0026b131f4eaabf284e9b6
                     <li><a ui-sref="profile" id="profile">
                         <fmt:message key="common.profile" bundle="${msg}" />
                     </a></li>

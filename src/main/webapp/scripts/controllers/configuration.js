@@ -537,6 +537,7 @@ $scope.showImage();
 
 $scope.themeSettingList();
 	  $scope.validateThemeSettings = function (form,themeSettingsList, headerChoices, footerChoices) {
+		  console.log(themeSettingsList);
 		  if ((themeSettingsList.backgroundImgFile.size >= 1048576) || (themeSettingsList.logoImgFile.size >= 1048576)) {
 			  $state.reload();
 			  return appService.notify({message: "File size should not be larger than 1 Mb", classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});

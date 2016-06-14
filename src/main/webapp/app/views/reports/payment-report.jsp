@@ -50,11 +50,19 @@ table tbody.auto-serial tr td:first-child:before
 
 					<div class="pull-right" data-ng-if="defaultView">
 
-					  <a
-										href="{{ global.PING_APP_URL }}invoice/paymentReport?type=pdf"
+					<a data-ng-if="defaultLanguage=='en'"
+										href="{{ global.PING_APP_URL }}invoice/paymentReport?type=pdf&lang=ENGLISH"
 										class="btn btn-default  pull-right m-l-xs"><span
 										class="fa fa-file-pdf-o text-danger"></span> PDF</a>
-							<a			href="{{ global.PING_APP_URL }}invoice/paymentReport?type=xlsx"
+					<a data-ng-if="defaultLanguage=='en'"	href="{{ global.PING_APP_URL }}invoice/paymentReport?type=xlsx&lang=ENGLISH"
+										class="btn btn-default  pull-right m-l-xs"><span
+										class=" fa fa-file-excel-o text-success"></span> XLSX</a>
+										
+					<a data-ng-if="defaultLanguage=='zh'"
+										href="{{ global.PING_APP_URL }}invoice/paymentReport?type=pdf&lang=CHINESE"
+										class="btn btn-default  pull-right m-l-xs"><span
+										class="fa fa-file-pdf-o text-danger"></span> PDF</a>
+					<a	 data-ng-if="defaultLanguage=='zh'"		href="{{ global.PING_APP_URL }}invoice/paymentReport?type=xlsx&lang=CHINESE"
 										class="btn btn-default  pull-right m-l-xs"><span
 										class=" fa fa-file-excel-o text-success"></span> XLSX</a>
 										<div class="clearfix"></div>

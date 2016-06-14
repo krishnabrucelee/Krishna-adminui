@@ -13,6 +13,7 @@ angular
 
 
 function reportCtrl($scope, globalConfig, notify, $state, $stateParams, modalService, $timeout, promiseAjax,appService) {
+	$scope.defaultLanguage = appService.localStorageService.cookie.get('language');
     $scope.global = globalConfig;
     $scope.generatedList = [];
     $scope.formSubmitteds = false;
@@ -185,8 +186,15 @@ $scope.clientEndDate = new Date().ddmmyyyy();
             }
         }
 	$scope.myframe = true;
+	
+	if(appService.localStorageService.cookie.get('language') == "en"){
 	$scope.reportUrl =  appService.globalConfig.PING_APP_URL + "usage/listClientUsage?fromDate="+ startDate +"&toDate=" + endDate
-+ "&status=" + $scope.reports.status;
++ "&status=" + $scope.reports.status+"&lang=ENGLISH";
+	} else {	
+	$scope.reportUrl =  appService.globalConfig.PING_APP_URL + "usage/listClientUsage?fromDate="+ startDate +"&toDate=" + endDate
+	+ "&status=" + $scope.reports.status+"&lang=CHINESE";
+	}
+	
 	document.getElementById('myframe').setAttribute('src', $scope.reportUrl + "&type=html"+ "&range=" + $scope.reports.dateRange);
     }
 
@@ -455,6 +463,7 @@ $scope.clientEndDate = new Date().ddmmyyyy();
 };
 
 function invoiceListReport($scope, $http, $window, $modal, $log, $state, $stateParams, appService, globalConfig) {
+	$scope.defaultLanguage = appService.localStorageService.cookie.get('language');
     $scope.paginationObject = {};
     $scope.configForm = {};
     $scope.domainList = {};
@@ -510,7 +519,6 @@ function invoiceListReport($scope, $http, $window, $modal, $log, $state, $stateP
                    }
 $scope.pdf = function()
 {
-
 	 $scope.viewpdf =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=pdf&method=invoice";
 }
 
@@ -569,14 +577,26 @@ $scope.invoiceList = result;
 
 $scope.pdf = function()
 {
-
-	 $scope.viewpdf =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=pdf&method=invoice";
+	if(appService.localStorageService.cookie.get('language') == "en"){
+	 $scope.viewpdf =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=pdf&method=invoice&lang=ENGLISH";
 }
+else
+	{
+	 $scope.viewpdf =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=pdf&method=invoice&lang=CHINESE";
+
+	}
+}
+
 
 $scope.excel = function()
 {
-
-	 $scope.viewexcel =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=xlsx&method=invoice";
+	if(appService.localStorageService.cookie.get('language') == "en"){
+		 $scope.viewexcel =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=xlsx&method=invoice&lang=ENGLISH";
+	}
+	else
+		{
+		 $scope.viewexcel =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=xlsx&method=invoice&lang=CHINESE";
+		}
 }
           hasConfigList =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice/listByDomain"
                 +"?type=invoice&lang=" +appService.localStorageService.cookie.get('language')
@@ -748,7 +768,7 @@ UsageTypeList: [{
 };
 
 function paymentListReport($scope, $http, $window, $modal, $log, $state, $stateParams, appService, globalConfig) {
-
+	$scope.defaultLanguage = appService.localStorageService.cookie.get('language');
     $scope.paginationObject = {};
     $scope.configForm = {};
     $scope.domainList = {};
@@ -842,15 +862,30 @@ $scope.excel = function()
                $scope.statusView = null;
             }
 
-$scope.pdf = function()
-{
-	 $scope.viewpdf =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=pdf&method=payment";
-}
+            $scope.pdf = function()
+            {
+            	if(appService.localStorageService.cookie.get('language') == "en"){
+            	 $scope.viewpdf =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=pdf&method=payment&lang=ENGLISH";
+            }
+            else
+            	{
+            	 $scope.viewpdf =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=pdf&method=payment&lang=CHINESE";
+            	}
+            }
+            
+            
+            $scope.excel = function()
+            {
+            	if(appService.localStorageService.cookie.get('language') == "en"){
+            	 $scope.viewexcel =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=xlsx&method=payment&lang=ENGLISH";
 
-$scope.excel = function()
-{
-	 $scope.viewexcel =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=xlsx&method=payment";
-}
+            }
+            else
+            	{
+           	 $scope.viewexcel =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=xlsx&method=payment&lang=CHINESE";
+            	}
+            }
+
           hasConfigList =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice/listByDomain"
                 +"?type=payment&lang=" +appService.localStorageService.cookie.get('language')
                 + "&domainUuid="+$scope.domainView+"&status="+$scope.statusView);
