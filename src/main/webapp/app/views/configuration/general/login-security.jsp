@@ -82,7 +82,19 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{
+                                            'text-danger'
+                                            : configForm.sessionTime.$invalid && formSubmitted}">
+                            <div class="row">
+                                <label class="col-md-4 col-sm-5 control-label"> <fmt:message key="generalconfiguration.enableCaptcha" bundle="${msg}" />:
+                                
+                                </label>
+                                <div class="col-md-6 col-sm-7">
+										<input icheck type="checkbox" ng-model="generalconfiguration.enableCaptcha">                                    
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="form-group">
                             <div class="row">
                                 <label class="col-md-4 col-sm-5 control-label">
                                 </label>
