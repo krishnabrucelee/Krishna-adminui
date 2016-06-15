@@ -14,18 +14,30 @@ angular
 function appCtrl($http, $scope, $timeout, $rootScope, $modal, $window, globalConfig, localStorageService, promiseAjax, $cookies, appService) {
 
 	$scope.global = appService.globalConfig;
+	$scope.owner = {};
     $scope.paginationObject = {};
     $scope.sort = appService.globalConfig.sort;
     $scope.paginationObject.sortOrder = '-';
     $scope.paginationObject.sortBy = 'eventDateTime';
+    $scope.activity = {
+        category: "events",
+        oneItemSelected: {},
+        selectedAll: {}
+    };
+
+    appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
+    appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
+    var hasUsers = appService.crudService.read("users", $scope.global.sessionValues.id);
+    hasUsers.then(function (result) {
+        $scope.owner = result;
+    });
 
     $scope.splashTitle = localStorageService.get('splashTitle');
     // For iCheck purpose only
     $scope.checkOne = true;
 
-
     $scope.getActivity = function (pageNumber) {
-    	appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
+        appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
         appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
         var limit = 10;
             var hasactionServer = appService.promiseAjax.httpTokenRequest($scope.global.HTTP_GET, $scope.global.APP_URL + "events/list/read-event" +"?lang=" + localStorageService.cookie.get('language') + "&sortBy="+appService.globalConfig.sort.sortOrder+appService.globalConfig.sort.sortBy+"&limit=10", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
@@ -65,7 +77,7 @@ function appCtrl($http, $scope, $timeout, $rootScope, $modal, $window, globalCon
     	var hasServer = appService.promiseAjax.httpTokenRequest( $scope.global.HTTP_PUT , $scope.global.APP_URL + "events/event-update"  +"/"+$scope.activityList.id);
         $scope.currentActivity = $scope.activityList;
         $scope.activityList.pageTitle = $scope.pageTitle;
-        $scope.activityList.category = $scope.currentActivity.category;
+        $scope.activityList.category = $scope.activity.category;
         $scope.activityList.owner = $scope.owner;
         var modalInstance = $modal.open({
             animation: $scope.animationsEnabled,
