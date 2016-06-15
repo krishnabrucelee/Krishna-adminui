@@ -19,8 +19,8 @@
 
             <li data-ng-class="{active: $state.includes('support')}"><a class="label-menu-corner" ui-sref="support.tickets" ><fmt:message key="common.helpdesk" bundle="${msg}" /><span class="label label-success"></span></a></li>
 
-            <li data-ng-class="{active: $state.includes('activity')}" data-ng-if="global.sessionValues.eventTotal==0"><a  class="label-menu-corner" ui-sref="activity" ><fmt:message key="common.activity" bundle="${msg}" /><span class="label label-warning"></span></a></li>
-            <li data-ng-class="{active: $state.includes('activity')}" data-ng-if="global.sessionValues.eventTotal!=0"><a  class="label-menu-corner" ui-sref="activity" ><fmt:message key="common.activity" bundle="${msg}" /><span class="label label-warning">{{global.sessionValues.eventTotal }}</span></a></li>
+            <li data-ng-class="{active: $state.includes('activity')}" data-ng-if="global.event==0"><a  class="label-menu-corner" ui-sref="activity" ><fmt:message key="common.activity" bundle="${msg}" /><span class="label label-warning"></span></a></li>
+            <li data-ng-class="{active: $state.includes('activity')}" data-ng-if="global.event!=0"><a  class="label-menu-corner" ui-sref="activity" ><fmt:message key="common.activity" bundle="${msg}" /><span class="label label-warning">{{global.event }}</span></a></li>
 
             <li class="dropdown" dropdown>
                 <a class="dropdown-toggle icon-content" id="user_name" href="#" dropdown-toggle>

@@ -14,30 +14,49 @@ angular
 function appCtrl($http, $scope, $timeout, $rootScope, $modal, $window, globalConfig, localStorageService, promiseAjax, $cookies, appService) {
 
 	$scope.global = appService.globalConfig;
+	$scope.owner = {};
     $scope.paginationObject = {};
     $scope.sort = appService.globalConfig.sort;
     $scope.paginationObject.sortOrder = '-';
     $scope.paginationObject.sortBy = 'eventDateTime';
+    $scope.activity = {
+        category: "events",
+        oneItemSelected: {},
+        selectedAll: {}
+    };
+
+    appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
+    appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
+    var hasUsers = appService.crudService.read("users", $scope.global.sessionValues.id);
+    hasUsers.then(function (result) {
+        $scope.owner = result;
+    });
 
     $scope.splashTitle = localStorageService.get('splashTitle');
     // For iCheck purpose only
     $scope.checkOne = true;
 
-
     $scope.getActivity = function (pageNumber) {
-    	appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
+        appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
         appService.globalConfig.sort.sortBy = $scope.paginationObject.sortBy;
         var limit = 10;
             var hasactionServer = appService.promiseAjax.httpTokenRequest($scope.global.HTTP_GET, $scope.global.APP_URL + "events/list/read-event" +"?lang=" + localStorageService.cookie.get('language') + "&sortBy="+appService.globalConfig.sort.sortOrder+appService.globalConfig.sort.sortBy+"&limit=10", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
             hasactionServer.then(function (result) {  // this is only run after $http completes
-                $scope.activityList = result[0];
-                var msg = result[0].message;
-                appService.notify({message: msg, classes: 'alert-info',templateUrl: $scope.global.NOTIFICATIONS_TEMPLATE });
-                // For pagination
-                $scope.paginationObject.limit = limit;
-                $scope.paginationObject.currentPage = pageNumber;
-                $scope.paginationObject.totalItems = result.totalItems;
-                $scope.global.sessionValues.eventTotal = result.totalItems;
+            	 if(result.length>0){
+                 	$scope.activityList = result[0];
+                     var msg = result[0].message;
+                if (msg.length > 50) {
+                    msg =  msg.slice(0, 50) + '...';
+                }
+                     appService.notify({message: msg, classes: 'alert-info',templateUrl: $scope.global.NOTIFICATIONS_TEMPLATE });
+                     // For pagination
+                     $scope.paginationObject.limit = limit;
+                     $scope.paginationObject.currentPage = pageNumber;
+                     $scope.paginationObject.totalItems = result.totalItems;
+                     $scope.global.event = result.totalItems;
+                     }else{
+                     	$scope.global.event = 0;
+                     }
             });
         };
         $scope.getActivity(1);
@@ -62,7 +81,7 @@ function appCtrl($http, $scope, $timeout, $rootScope, $modal, $window, globalCon
     	var hasServer = appService.promiseAjax.httpTokenRequest( $scope.global.HTTP_PUT , $scope.global.APP_URL + "events/event-update"  +"/"+$scope.activityList.id);
         $scope.currentActivity = $scope.activityList;
         $scope.activityList.pageTitle = $scope.pageTitle;
-        $scope.activityList.category = $scope.currentActivity.category;
+        $scope.activityList.category = $scope.activity.category;
         $scope.activityList.owner = $scope.owner;
         var modalInstance = $modal.open({
             animation: $scope.animationsEnabled,
