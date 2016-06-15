@@ -38,11 +38,11 @@ angular
 /**
  * pageTitle - Directive for set Page title - mata title
  */
-function pageTitle($rootScope, $timeout, localStorageService) {
+function pageTitle($rootScope, $timeout) {
     return {
         link: function (scope, element) {
 
-            var listener = function (event, toState, toParams, fromState, fromParams) {
+           /* var listener = function (event, toState, toParams, fromState, fromParams) {
                 var themeSettings = localStorageService.get('themeSettings');
                 // Default title
                 if(themeSettings == null || typeof(themeSettings) == "undefined") {
@@ -63,7 +63,7 @@ function pageTitle($rootScope, $timeout, localStorageService) {
                 $timeout(function () {
                     //element.text(title);
                 });
-            };
+            };*/
 
             $rootScope.$on('$stateChangeStart', listener);
         }
