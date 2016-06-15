@@ -66,7 +66,7 @@ function pageTitle($rootScope, $timeout, localStorageService) {
 //            };
 //
 //            $rootScope.$on('$stateChangeStart', listener);
-        }
+
     }
 }
 ;
