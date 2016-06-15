@@ -25,13 +25,6 @@ function webSocket($rootScope, $timeout, webSockets, globalConfig, notify) {
     };
        var eventSubscribe = function() {
         webSockets.subscribe("/topic/action.event/" + globalConfig.sessionValues.id, function(message) {
-            if (JSON.parse(message.body).resourceUuid !== null) {
-                notify({
-                    message : JSON.parse(message.body).message,
-                    classes : 'alert-success',
-                    templateUrl : globalConfig.NOTIFICATION_TEMPLATE
-                });
-            }
         });
         webSockets.subscribe("/topic/async.event/VM/" + globalConfig.sessionValues.id, function(message) {
             $rootScope.$broadcast(JSON.parse(message.body).event, JSON.parse(message.body));
