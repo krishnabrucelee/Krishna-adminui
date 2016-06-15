@@ -340,7 +340,8 @@ function globalConfig($window) {
             return appGlobalConfig.VIEW_URL + url;
         },
         sessionValues : JSON.parse($window.sessionStorage.getItem("pandaUserSession")),
-        loginRemeberMeTimeout : 30 * 24 * 60 * 60 * 1000
+        loginRemeberMeTimeout : 30 * 24 * 60 * 60 * 1000,
+        event :0
     };
 
     return appGlobalConfig;
