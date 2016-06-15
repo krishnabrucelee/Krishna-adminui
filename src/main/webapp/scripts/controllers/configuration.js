@@ -395,16 +395,11 @@ $scope.test = 0;
 var arrayTest = [file, file1];
           $scope.formSubmitted = true;
 
-console.log("events",$scope.eventsTemplateList[0]);
-
 if( angular.isUndefined(file) && angular.isUndefined($scope.eventsTemplateList[0]))
 {
 
    appService.notify({message: 'Please select a file for English Template', classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
 }
-
-
-
 
 $scope.checkfile = function(file) {
 if( (angular.isUndefined(file) || angular.isUndefined(file1)) && !angular.isUndefined($scope.eventsTemplateList[0]))
@@ -816,9 +811,6 @@ $scope.themeSettingList();
     $scope.validateLogin = function (form) {
         $scope.formSubmitted = true;
         if (form.$valid) {
-
-            console.log(form);
-
             $scope.homerTemplate = 'app/views/notification/notify.jsp';
             appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
         }
