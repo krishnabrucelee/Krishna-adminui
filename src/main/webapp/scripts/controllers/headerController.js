@@ -18,7 +18,6 @@ function headerCtrl($scope, $http, $window, $modal, $log, $state, $stateParams, 
             document.getElementById("pandaAppPageTitle").innerHTML = $scope.themeSettingsList.data.headerTitle;
         }
         //$state.data.pageTitle = "testttt";
-        console.log("State", $state);
     };
     $scope.themeSettingList();
 };

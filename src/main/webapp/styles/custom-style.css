@@ -166,6 +166,8 @@ ul.footer-custom-links li a:hover{color:#000; text-decoration:none;}
 .event-notify-message{left: auto !important;}
 
 .cg-notify-close .fa{font-size: 14px;}
+.cg-notify-message {font-size: 15px !important;}
+
 
 
 @media (min-width: 1024px) and (max-width: 1050px){.tab-full{width:100%;}}
