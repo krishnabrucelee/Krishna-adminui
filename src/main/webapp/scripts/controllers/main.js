@@ -32,6 +32,9 @@ function appCtrl($http, $scope, $timeout, $rootScope, $modal, $window, globalCon
             hasactionServer.then(function (result) {  // this is only run after $http completes
                 $scope.activityList = result[0];
                 var msg = result[0].message;
+                if (msg.length > 50) {
+                    msg =  msg.slice(0, 50) + '...';
+                }
                 appService.notify({message: msg, classes: 'alert-info',templateUrl: $scope.global.NOTIFICATIONS_TEMPLATE });
                 // For pagination
                 $scope.paginationObject.limit = limit;
