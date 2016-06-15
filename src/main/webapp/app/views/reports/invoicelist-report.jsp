@@ -60,13 +60,9 @@ table tbody.auto-serial tr td:first-child:before
 										class="btn btn-default  pull-right m-l-xs"><span
 										class=" fa fa-file-excel-o text-success"></span> XLSX</a>
 												<div class="clearfix"></div>
-
-
-
 								<!-- <iframe width="400" height="700" id="myReportframe" name="myReportframe"
 									class="embed-responsive-item col-md-12 client-usage-report-iframe"></iframe> -->
 							</div>
-
                             <span class="pull-right m-r-sm">
                                 <select class="form-control input-group col-xs-5" name="statusView"
                                     data-ng-model="statusView"
@@ -131,7 +127,6 @@ table tbody.auto-serial tr td:first-child:before
                                             <a data-ng-if="invoice.status == 'DUE'" class="m-l-sm btn btn-sm btn-info" data-ng-click="viewInvoice(invoice, 'English')"><fmt:message key="common.english" bundle="${msg}" /></a>
                                             <button data-ng-if="invoice.status == 'DRAFT'" class="m-l-sm btn btn-sm btn-info" data-ng-click="generateDueInvoice(invoice)"><fmt:message key="invoice.generate.invoice" bundle="${msg}" /></button>
                                         </td>
-                                        <!-- <td></td> -->
                                     </tr>
                                 </tbody>
                             </table>

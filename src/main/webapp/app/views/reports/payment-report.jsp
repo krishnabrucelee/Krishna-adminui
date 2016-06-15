@@ -33,23 +33,17 @@ table tbody.auto-serial tr td:first-child:before
                     <div class="col-md-12 col-sm-12 col-xs-12 ">
                         <div class="pull-right">
                         <div class="pull-right"  data-ng-if="!defaultView">
-
 										<a	href="{{viewpdf}}" class="btn btn-default  pull-right m-l-xs" data-ng-click="pdf()"><span
 										class="fa fa-file-pdf-o text-danger"></span> PDF</a>
 
 										<a	href="{{viewexcel}}" class="btn btn-default  pull-right m-l-xs" data-ng-click="excel()"><span
 										class=" fa fa-file-excel-o text-success"></span> XLSX</a>
-
-
 										<div class="clearfix"></div>
-
-
 						<!-- <iframe width="400" height="700" id="myframe" name="myframe"
 							class="embed-responsive-item col-md-12 client-usage-report-iframe"></iframe> -->
 					</div>
 
 					<div class="pull-right" data-ng-if="defaultView">
-
 					<a data-ng-if="defaultLanguage=='en'"
 										href="{{ global.PING_APP_URL }}invoice/paymentReport?type=pdf&lang=ENGLISH"
 										class="btn btn-default  pull-right m-l-xs"><span
@@ -57,7 +51,6 @@ table tbody.auto-serial tr td:first-child:before
 					<a data-ng-if="defaultLanguage=='en'"	href="{{ global.PING_APP_URL }}invoice/paymentReport?type=xlsx&lang=ENGLISH"
 										class="btn btn-default  pull-right m-l-xs"><span
 										class=" fa fa-file-excel-o text-success"></span> XLSX</a>
-										
 					<a data-ng-if="defaultLanguage=='zh'"
 										href="{{ global.PING_APP_URL }}invoice/paymentReport?type=pdf&lang=CHINESE"
 										class="btn btn-default  pull-right m-l-xs"><span
@@ -66,7 +59,6 @@ table tbody.auto-serial tr td:first-child:before
 										class="btn btn-default  pull-right m-l-xs"><span
 										class=" fa fa-file-excel-o text-success"></span> XLSX</a>
 										<div class="clearfix"></div>
-
 						<!-- <iframe width="400" height="700" id="myReportframe" name="myReportframe"
 							class="embed-responsive-item col-md-12 client-usage-report-iframe"></iframe> -->
 					</div>

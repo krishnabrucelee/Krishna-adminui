@@ -32,11 +32,9 @@
 								href="{{global.PING_APP_URL }}usage/listClientUsage/report?fromDate={{clientStartDate}}&toDate={{clientEndDate}}&status={{reports.status}}&type=xlsx&range={{reports.dateRange}}&lang=CHINESE"
 								class="btn btn-default pull-right m-r-xs"><span
 								class=" fa fa-file-excel-o text-success"></span> XLSX</a>
-
                 </div>
-       	</div>
-                            <get-login-loader-image data-ng-show="showLoader"></get-login-loader-image>
-
+       		</div>
+                <get-login-loader-image data-ng-show="showLoader"></get-login-loader-image>
     </div>
 	<div data-ng-hide="showLoader">
 			<div class="report-wrapper">
@@ -44,6 +42,5 @@
 						<iframe width="400" height="700" id="myframe" name="myframe" class="embed-responsive-item col-md-12 client-usage-report-iframe"></iframe>
 					</div>
 			</div>
-
 	</div>
 </div>

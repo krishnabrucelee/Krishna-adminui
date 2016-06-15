@@ -25,7 +25,6 @@ function reportCtrl($scope, globalConfig, notify, $state, $stateParams, modalSer
         $scope.cancel();
     };
 
-
     $scope.generatedReport = [];
     $scope.validateSignUp = function (form)
     {
@@ -58,16 +57,13 @@ function reportCtrl($scope, globalConfig, notify, $state, $stateParams, modalSer
 
             }
         }
-
     }
 
     $scope.validatePayment = function (form)
     {
         $scope.formSubmitted = true;
         if ($scope.report.dateRange.value == 'period') {
-
             if ($scope.report.startDate && $scope.report.endDate) {
-
                 if (form.$valid) {
                     $scope.reports.dateRange = $scope.report.dateRange.value;
                     $scope.reports.projectType = $scope.report.project.value;
@@ -75,12 +71,10 @@ function reportCtrl($scope, globalConfig, notify, $state, $stateParams, modalSer
                     $scope.reports.endDate = $scope.report.endDate;
                     $scope.reportGenerating();
                     $timeout($scope.loadingContent, 3000);
-
                 }
             }
         }
         else {
-
             if (form.$valid) {
                 $scope.reports.dateRange = $scope.report.dateRange.value;
                 $scope.reports.projectType = $scope.report.projectType.value;
@@ -88,46 +82,36 @@ function reportCtrl($scope, globalConfig, notify, $state, $stateParams, modalSer
                 $scope.reports.endDate = $scope.report.endDate;
                 $scope.reportGenerating();
                 $timeout($scope.loadingContent, 3000);
-
             }
         }
-
     }
-
 
     $scope.validateDue = function (form)
     {
         $scope.formSubmitted = true;
         if ($scope.report.dateRange.value == 'period') {
-
             if ($scope.report.startDate && $scope.report.endDate) {
-
                 if (form.$valid) {
                     $scope.reports.dateRange = $scope.report.dateRange.value;
                     $scope.reports.startDate = $scope.report.startDate;
                     $scope.reports.endDate = $scope.report.endDate;
                     $scope.reportGenerating();
                     $timeout($scope.loadingContent, 3000);
-
                 }
             }
         }
-
         else {
-
             if (form.$valid) {
                 $scope.reports.dateRange = $scope.report.dateRange.value;
                 $scope.reports.startDate = $scope.report.startDate;
                 $scope.reports.endDate = $scope.report.endDate;
                 $scope.reportGenerating();
                 $timeout($scope.loadingContent, 3000);
-
             }
         }
-
     }
 
-	 $scope.monthList = appService.utilService.getMonthList();
+	$scope.monthList = appService.utilService.getMonthList();
 
     Date.prototype.ddmmyyyy= function() {
        var yyyy = this.getFullYear().toString();
@@ -135,19 +119,15 @@ function reportCtrl($scope, globalConfig, notify, $state, $stateParams, modalSer
        var dd  = this.getDate().toString();
        return (dd[1]?dd:"0"+dd[0]) + "-"+ (mm[1]?mm:"0"+mm[0]) + "-" + yyyy; // padding
       };
-
 	$scope.clientUsage = {
 		statusList: [{id: 1,root: 'Status', name: 'All', value: 'ALL'}, {id: 2,name: 'ENABLED', value: 'ENABLED'}, {id: 3, name: 'DISABLED', value: 'DISABLED'}]
-
 	};
 
-$scope.validateDateRange=function(report)
-{
-$scope.report.startDate = "";
-$scope.report.endDate = "";
-}
-
-
+	$scope.validateDateRange=function(report)
+	{
+	$scope.report.startDate = "";
+	$scope.report.endDate = "";
+	}
     $scope.validateClientUsage = function (form,report) {
         if ($scope.report.dateRange.value == 'period') {
         	if(angular.isUndefined($scope.report.startDate)|| $scope.report.startDate == ""|| (angular.isUndefined($scope.report.endDate)|| $scope.report.endDate == "")) {
@@ -159,22 +139,18 @@ $scope.report.endDate = "";
 	            });
 	            return false;
 	        }
-
-	 		var startDate = $scope.report.startDate.ddmmyyyy();
-	 		var endDate = $scope.report.endDate.ddmmyyyy();
-$scope.clientStartDate = $scope.report.startDate.ddmmyyyy();
-$scope.clientEndDate = $scope.report.endDate.ddmmyyyy();
-
+	var startDate = $scope.report.startDate.ddmmyyyy();
+	var endDate = $scope.report.endDate.ddmmyyyy();
+	$scope.clientStartDate = $scope.report.startDate.ddmmyyyy();
+	$scope.clientEndDate = $scope.report.endDate.ddmmyyyy();
         }else {
         	var startDate = "01-01-1971";
 	 		var endDate = new Date().ddmmyyyy();
-$scope.clientStartDate = "01-01-1971";
-$scope.clientEndDate = new Date().ddmmyyyy();
-
+	 		$scope.clientStartDate = "01-01-1971";
+	 		$scope.clientEndDate = new Date().ddmmyyyy();
         }
  		$scope.formSubmitted = true;
         if (startDate && endDate) {
-
             if (form.$valid) {
                 $scope.reports.dateRange = $scope.report.dateRange.value;
                 $scope.reports.status = $scope.report.status.value;
@@ -182,29 +158,25 @@ $scope.clientEndDate = new Date().ddmmyyyy();
                 $scope.reports.endDate = $scope.report.endDate;
                 $scope.reportGenerating();
                 $timeout($scope.loadingContent, 3000);
-
             }
         }
 	$scope.myframe = true;
-	
+
 	if(appService.localStorageService.cookie.get('language') == "en"){
 	$scope.reportUrl =  appService.globalConfig.PING_APP_URL + "usage/listClientUsage?fromDate="+ startDate +"&toDate=" + endDate
 + "&status=" + $scope.reports.status+"&lang=ENGLISH";
-	} else {	
+	} else {
 	$scope.reportUrl =  appService.globalConfig.PING_APP_URL + "usage/listClientUsage?fromDate="+ startDate +"&toDate=" + endDate
 	+ "&status=" + $scope.reports.status+"&lang=CHINESE";
 	}
-	
+
 	document.getElementById('myframe').setAttribute('src', $scope.reportUrl + "&type=html"+ "&range=" + $scope.reports.dateRange);
     }
-
-
     $scope.validateBillable = function (form) {
         $scope.formSubmitted = true;
         if ($scope.report.dateRange.value == 'period' && $scope.report.billable.value != 'selective') {
 
             if ($scope.report.startDate && $scope.report.endDate) {
-
                 if (form.$valid) {
                     $scope.reports.dateRange = $scope.report.dateRange.value;
                     $scope.reports.projectType = $scope.report.project.value;
@@ -215,11 +187,9 @@ $scope.clientEndDate = new Date().ddmmyyyy();
                     $scope.reports.endDate = $scope.report.endDate;
                     $scope.reportGenerating();
                     $timeout($scope.loadingContent, 3000);
-
                 }
             }
         }
-
         else if ($scope.report.dateRange.value == 'period' && $scope.report.billable.value == 'selective') {
 
             if ($scope.report.startDate && $scope.report.endDate && $scope.report.selective) {
@@ -234,15 +204,11 @@ $scope.clientEndDate = new Date().ddmmyyyy();
                     $scope.reports.endDate = $scope.report.endDate;
                     $scope.reportGenerating();
                     $timeout($scope.loadingContent, 3000);
-
                 }
             }
         }
-
         else if ($scope.report.billable.value == 'selective') {
-
             if ($scope.report.selective) {
-
                 if (form.$valid) {
                     $scope.reports.dateRange = $scope.report.dateRange.value;
                     $scope.reports.projectType = $scope.report.project.value;
@@ -253,12 +219,10 @@ $scope.clientEndDate = new Date().ddmmyyyy();
                     $scope.reports.endDate = $scope.report.endDate;
                     $scope.reportGenerating();
                     $timeout($scope.loadingContent, 3000);
-
                 }
             }
         }
         else {
-
             if (form.$valid) {
                 $scope.reports.dateRange = $scope.report.dateRange.value;
                 $scope.reports.projectType = $scope.report.project.value;
@@ -269,18 +233,13 @@ $scope.clientEndDate = new Date().ddmmyyyy();
                 $scope.reports.endDate = $scope.report.endDate;
                 $scope.reportGenerating();
                 $timeout($scope.loadingContent, 3000);
-
             }
         }
     }
-
-
     $scope.validateBillableChart = function (form) {
         $scope.formSubmitted = true;
         if ($scope.report.dateRange.value == 'period' && $scope.report.billable.value != 'selective') {
-
             if ($scope.report.startDate && $scope.report.endDate) {
-
                 if (form.$valid) {
                     $scope.reports.dateRange = $scope.report.dateRange.value;
                     $scope.reports.projectType = $scope.report.project.value;
@@ -291,13 +250,10 @@ $scope.clientEndDate = new Date().ddmmyyyy();
                     $scope.reports.endDate = $scope.report.endDate;
                     $scope.reportGenerating();
                     $timeout($scope.loadingContent, 3000);
-
                 }
             }
         }
-
         else if ($scope.report.dateRange.value == 'period' && $scope.report.billable.value == 'selective') {
-
             if ($scope.report.startDate && $scope.report.endDate && $scope.report.selective) {
 
                 if (form.$valid) {
@@ -310,15 +266,11 @@ $scope.clientEndDate = new Date().ddmmyyyy();
                     $scope.reports.endDate = $scope.report.endDate;
                     $scope.reportGenerating();
                     $timeout($scope.loadingContent, 3000);
-
                 }
             }
         }
-
         else if ($scope.report.billable.value == 'selective') {
-
             if ($scope.report.selective) {
-
                 if (form.$valid) {
                     $scope.reports.dateRange = $scope.report.dateRange.value;
                     $scope.reports.projectType = $scope.report.project.value;
@@ -329,7 +281,6 @@ $scope.clientEndDate = new Date().ddmmyyyy();
                     $scope.reports.endDate = $scope.report.endDate;
                     $scope.reportGenerating();
                     $timeout($scope.loadingContent, 3000);
-
                 }
             }
         }
@@ -349,13 +300,9 @@ $scope.clientEndDate = new Date().ddmmyyyy();
             }
         }
     }
-
-
-
     $scope.reset = function () {
         $state.reload();
     }
-
     $scope.loadingContent = function () {
         var hasServer = promiseAjax.httpRequest("GET", "api/reports/report.json");
         hasServer.then(function (result) {  // this is only run after $http completes
@@ -479,8 +426,6 @@ function invoiceListReport($scope, $http, $window, $modal, $log, $state, $stateP
         window.open(appService.globalConfig.PING_APP_URL + "invoice/viewPdf?invoiceNumber="+ invoice.invoiceNumber +"&language="+language,
                 invoice.domain.name + "-" + invoice.invoiceNumber, "");
     }
-
-
     $scope.generateDueInvoice = function(invoice) {
         $scope.showLoader = true;
         var hasServer = appService.promiseAjax.httpRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.PING_APP_URL + "invoice/updateDue?domainUuid=" + invoice.domainUuid);
@@ -517,22 +462,20 @@ function invoiceListReport($scope, $http, $window, $modal, $log, $state, $stateP
                    if ($scope.statusView == null || angular.isUndefined($scope.statusView)) {
                       $scope.statusView = null;
                    }
-$scope.pdf = function()
-{
-	 $scope.viewpdf =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=pdf&method=invoice";
-}
+		$scope.pdf = function()
+		{
+			 $scope.viewpdf =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=pdf&method=invoice";
+		}
 
-$scope.excel = function()
-{
+		$scope.excel = function()
+		{
 
-	 $scope.viewexcel =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=xlsx&method=invoice";
-}
+			 $scope.viewexcel =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=xlsx&method=invoice";
+		}
                 hasConfigList =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice/listByDomain"
                     +"?type=invoice&lang=" +appService.localStorageService.cookie.get('language')
                     + "&domainUuid="+$scope.domainView+"&status="+$scope.statusView);
             }
-
-
 
             hasConfigList.then(function(result) { // this is only run after $http
                 //if (!angular.isUndefined(result._embedded)) {
@@ -540,7 +483,7 @@ $scope.excel = function()
                   //  } else {
                   //     $scope.invoiceList = {};
                   //  }
-$scope.invoiceList = result;
+            	$scope.invoiceList = result;
                 // For pagination
                 $scope.paginationObject.limit = limit;
                 $scope.paginationObject.currentPage = pageNumber;
@@ -558,214 +501,209 @@ $scope.invoiceList = result;
     });
 
    $scope.global = globalConfig;
- $scope.defaultView = true;
-   $scope.configList = function (pageNumber) {
- $scope.defaultView = true;
-      var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-      var hasConfigList = {};
-      if (($scope.domainView == null || angular.isUndefined($scope.domainView))
-              && ($scope.statusView == null || angular.isUndefined($scope.statusView))) {
-          hasConfigList = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice?type=invoice&lang="+ appService.localStorageService.cookie.get('language'));
-      } else {
- $scope.defaultView = false;
-          if ($scope.domainView == null || angular.isUndefined($scope.domainView)) {
-               $scope.domainView = null;
-            }
-            if ($scope.statusView == null || angular.isUndefined($scope.statusView)) {
-               $scope.statusView = null;
-            }
+	 $scope.defaultView = true;
+	   $scope.configList = function (pageNumber) {
+	 $scope.defaultView = true;
+	      var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+	      var hasConfigList = {};
+	      if (($scope.domainView == null || angular.isUndefined($scope.domainView))
+	              && ($scope.statusView == null || angular.isUndefined($scope.statusView))) {
+	          hasConfigList = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice?type=invoice&lang="+ appService.localStorageService.cookie.get('language'));
+	      } else {
+	 $scope.defaultView = false;
+	          if ($scope.domainView == null || angular.isUndefined($scope.domainView)) {
+	               $scope.domainView = null;
+	            }
+	            if ($scope.statusView == null || angular.isUndefined($scope.statusView)) {
+	               $scope.statusView = null;
+	            }
 
-$scope.pdf = function()
-{
-	if(appService.localStorageService.cookie.get('language') == "en"){
-	 $scope.viewpdf =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=pdf&method=invoice&lang=ENGLISH";
-}
-else
+	$scope.pdf = function()
 	{
-	 $scope.viewpdf =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=pdf&method=invoice&lang=CHINESE";
-
+		if(appService.localStorageService.cookie.get('language') == "en"){
+		 $scope.viewpdf =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=pdf&method=invoice&lang=ENGLISH";
 	}
-}
-
-
-$scope.excel = function()
-{
-	if(appService.localStorageService.cookie.get('language') == "en"){
-		 $scope.viewexcel =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=xlsx&method=invoice&lang=ENGLISH";
+	else {
+		 $scope.viewpdf =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=pdf&method=invoice&lang=CHINESE";
 	}
-	else
-		{
-		 $scope.viewexcel =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=xlsx&method=invoice&lang=CHINESE";
+	}
+
+	$scope.excel = function()
+	{
+		if(appService.localStorageService.cookie.get('language') == "en"){
+			 $scope.viewexcel =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=xlsx&method=invoice&lang=ENGLISH";
+		} else{
+			 $scope.viewexcel =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=xlsx&method=invoice&lang=CHINESE";
 		}
-}
+	}
           hasConfigList =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice/listByDomain"
                 +"?type=invoice&lang=" +appService.localStorageService.cookie.get('language')
                 + "&domainUuid="+$scope.domainView+"&status="+$scope.statusView);
       }
- $scope.showLoader = true;
-      hasConfigList.then(function (result) {  // this is only run after $http completes0
-     //    if (!angular.isUndefined(result._embedded)) {
-     //         $scope.invoiceList = result['_embedded'].invoiceList;
-     //    } else {
-     //        $scope.invoiceList = {};
-    //     }
-$scope.invoiceList = result;
- $scope.showLoader = false;
-         // For pagination
-         $scope.paginationObject.limit = limit;
-         $scope.paginationObject.currentPage = pageNumber;
-         $scope.paginationObject.totalItems = $scope.invoiceList.totalItems;
-         $scope.showLoader = false;
-      });
-       };
-   $scope.configList(1);
+	 $scope.showLoader = true;
+	      hasConfigList.then(function (result) {  // this is only run after $http completes0
+	     //    if (!angular.isUndefined(result._embedded)) {
+	     //         $scope.invoiceList = result['_embedded'].invoiceList;
+	     //    } else {
+	     //        $scope.invoiceList = {};
+	    //     }
+	$scope.invoiceList = result;
+	 $scope.showLoader = false;
+	         // For pagination
+	         $scope.paginationObject.limit = limit;
+	         $scope.paginationObject.currentPage = pageNumber;
+	         $scope.paginationObject.totalItems = $scope.invoiceList.totalItems;
+	         $scope.showLoader = false;
+	      });
+	       };
+	   $scope.configList(1);
 
-   // Get application list based on domain selection
-   $scope.selectDomainView = function(pageNumber, domainName, statusView) {
-       $scope.domainView = domainName;
-       $scope.statusView = statusView;
-          $scope.configList(1);
-   };
+	   // Get application list based on domain selection
+	   $scope.selectDomainView = function(pageNumber, domainName, statusView) {
+	       $scope.domainView = domainName;
+	       $scope.statusView = statusView;
+	          $scope.configList(1);
+	   };
 
- $scope.open = function ($event, currentDateField) {
-        $event.preventDefault();
-        $event.stopPropagation();
+	 $scope.open = function ($event, currentDateField) {
+	        $event.preventDefault();
+	        $event.stopPropagation();
 
-        $scope.usageStatisticsObj[currentDateField] = true;
-    };
+	        $scope.usageStatisticsObj[currentDateField] = true;
+	    };
 
- $scope.monthList = appService.utilService.getMonthList();
+	 $scope.monthList = appService.utilService.getMonthList();
 
-    Date.prototype.ddmmyyyy= function() {
-       var yyyy = this.getFullYear().toString();
-       var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based
-       var dd  = this.getDate().toString();
-       return (dd[1]?dd:"0"+dd[0]) + "-"+ (mm[1]?mm:"0"+mm[0]) + "-" + yyyy; // padding
-      };
-    $scope.usageStatisticsObj = {};
- $scope.getBillableTypeByUsageType = function(usageType) {
-        var billableType = "";
-        switch(usageType) {
-        case 1:
-            billableType = "VM";
-            break;
-        case 2:
-            billableType = "Stopped VM";
-            break;
-        case 3:
-            billableType = "IP";
-            break;
-        case 6:
-            billableType = "Storage";
-            break;
-        case 7:
-        case 8:
-            billableType = "Template";
-            break;
-        case 9:
-        case 15:
-            billableType = "Snapshot";
-            break;
-
-
-        }
-        return billableType;
-    }
-
-  $scope.getUsageReport = function() {
-        if(angular.isUndefined($scope.usageStatisticsObj.startDate)
-                || $scope.usageStatisticsObj.startDate == ""
-                || (angular.isUndefined($scope.usageStatisticsObj.endDate)
-                        || $scope.usageStatisticsObj.endDate == ""
-                        || (($scope.usageStatisticsObj.domain == "" || $scope.usageStatisticsObj.domain == null)
-                        && appService.globalConfig.sessionValues.type == "ROOT_ADMIN"))) {
-            alert("Please select all the mandatory fields")
-            return false;
-        }
+	    Date.prototype.ddmmyyyy= function() {
+	       var yyyy = this.getFullYear().toString();
+	       var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based
+	       var dd  = this.getDate().toString();
+	       return (dd[1]?dd:"0"+dd[0]) + "-"+ (mm[1]?mm:"0"+mm[0]) + "-" + yyyy; // padding
+	      };
+	    $scope.usageStatisticsObj = {};
+	 $scope.getBillableTypeByUsageType = function(usageType) {
+	        var billableType = "";
+	        switch(usageType) {
+	        case 1:
+	            billableType = "VM";
+	            break;
+	        case 2:
+	            billableType = "Stopped VM";
+	            break;
+	        case 3:
+	            billableType = "IP";
+	            break;
+	        case 6:
+	            billableType = "Storage";
+	            break;
+	        case 7:
+	        case 8:
+	            billableType = "Template";
+	            break;
+	        case 9:
+	        case 15:
+	            billableType = "Snapshot";
+	            break;
 
 
-        var groupBy = $scope.groupBy;
-        $scope.showLoader = false;
-        $scope.usageStatisticsType = groupBy;
-            var startDate = $scope.usageStatisticsObj.startDate.ddmmyyyy();
-            var endDate = $scope.usageStatisticsObj.endDate.ddmmyyyy();
-	    var usageType = $scope.usageStatisticsObj.usageType.id;
-            if($scope.global.sessionValues.type != 'ROOT_ADMIN') {
-                domainUuid = appService.globalConfig.sessionValues.domainAbbreviationName;
-            } else {
-                domainUuid = $scope.usageStatisticsObj.domain.companyNameAbbreviation;
-            }
+	        }
+	        return billableType;
+	    }
 
-            var hasServer = appService.promiseAjax.httpRequestPing(appService.globalConfig.HTTP_GET, appService.globalConfig.PING_APP_URL
-                    + "usage/listUsageByType?fromDate="+ startDate +"&toDate=" + endDate + "&usageType=" + usageType + "&domainUuid=" + domainUuid);
-            hasServer.then(function (result) {  // this is only run after $http completes
-                $scope.usageStatistics = result;
-                $scope.showLoader = false;
-        });
-    }
+	  $scope.getUsageReport = function() {
+	        if(angular.isUndefined($scope.usageStatisticsObj.startDate)
+	                || $scope.usageStatisticsObj.startDate == ""
+	                || (angular.isUndefined($scope.usageStatisticsObj.endDate)
+	                        || $scope.usageStatisticsObj.endDate == ""
+	                        || (($scope.usageStatisticsObj.domain == "" || $scope.usageStatisticsObj.domain == null)
+	                        && appService.globalConfig.sessionValues.type == "ROOT_ADMIN"))) {
+	            alert("Please select all the mandatory fields")
+	            return false;
+	        }
 
 
-    $scope.validateInvoice = function (form) {
-        $scope.formSubmitted = true;
-        if (form.$valid) {
-            var config = $scope.config;
-            config.dateFormatType = config.dateFormatType.id;
-            $scope.showLoader = true;
-            var hasConfig = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_POST, globalConfig.PING_APP_URL + "configuration", config);
-            hasConfig.then(function (result) {  // this is only run after $http
-                $scope.showLoader = false;
-                $scope.homerTemplate = 'app/views/notification/notify.jsp';
-                appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
-                $scope.configList();
+	        var groupBy = $scope.groupBy;
+	        $scope.showLoader = false;
+	        $scope.usageStatisticsType = groupBy;
+	            var startDate = $scope.usageStatisticsObj.startDate.ddmmyyyy();
+	            var endDate = $scope.usageStatisticsObj.endDate.ddmmyyyy();
+		    var usageType = $scope.usageStatisticsObj.usageType.id;
+	            if($scope.global.sessionValues.type != 'ROOT_ADMIN') {
+	                domainUuid = appService.globalConfig.sessionValues.domainAbbreviationName;
+	            } else {
+	                domainUuid = $scope.usageStatisticsObj.domain.companyNameAbbreviation;
+	            }
 
-            }).catch(function (result) {
-                $scope.showLoader = false;
-                if (!angular.isUndefined(result.data)) {
-                    if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
-                        var msg = result.data.globalError[0];
-                        $scope.showLoader = false;
-                        appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
-                    } else if (result.data.fieldErrors != null) {
-                        angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
-                            $scope.configForm[key].$invalid = true;
-                            $scope.configForm[key].errorMessage = errorMessage;
-                        });
-                    }
-                }
-            });
-        }
-    };
+	            var hasServer = appService.promiseAjax.httpRequestPing(appService.globalConfig.HTTP_GET, appService.globalConfig.PING_APP_URL
+	                    + "usage/listUsageByType?fromDate="+ startDate +"&toDate=" + endDate + "&usageType=" + usageType + "&domainUuid=" + domainUuid);
+	            hasServer.then(function (result) {  // this is only run after $http completes
+	                $scope.usageStatistics = result;
+	                $scope.showLoader = false;
+	        });
+	    }
 
-    $scope.formElements = {
-            invoiceStatusList: {
-                "0":"DRAFT",
-                "2":"DUE",
-                "3":"PAID",
-                "4":"OVER_DUE"
-            },
-UsageTypeList: [{
-            id: 1,
-            name: 'VM'
-        }, {
-            id: 2,
-            name: 'Stopped VM'
-        }, {
-            id: 3,
-            name: 'IP'
-        },{
-            id: 6,
-            name: 'Storage'
-        },
-	{
-            id: 8,
-            name: 'Template'
-        },{
-            id: 15,
-            name: 'Snapshot'
-        }]
-    }
 
-};
+	    $scope.validateInvoice = function (form) {
+	        $scope.formSubmitted = true;
+	        if (form.$valid) {
+	            var config = $scope.config;
+	            config.dateFormatType = config.dateFormatType.id;
+	            $scope.showLoader = true;
+	            var hasConfig = appService.promiseAjax.httpRequestPing(globalConfig.HTTP_POST, globalConfig.PING_APP_URL + "configuration", config);
+	            hasConfig.then(function (result) {  // this is only run after $http
+	                $scope.showLoader = false;
+	                $scope.homerTemplate = 'app/views/notification/notify.jsp';
+	                appService.notify({message: 'Updated successfully', classes: 'alert-success', templateUrl: $scope.homerTemplate});
+	                $scope.configList();
+
+	            }).catch(function (result) {
+	                $scope.showLoader = false;
+	                if (!angular.isUndefined(result.data)) {
+	                    if (result.data.globalError != '' && !angular.isUndefined(result.data.globalError)) {
+	                        var msg = result.data.globalError[0];
+	                        $scope.showLoader = false;
+	                        appService.notify({message: msg, classes: 'alert-danger', templateUrl: appService.globalConfig.NOTIFICATION_TEMPLATE});
+	                    } else if (result.data.fieldErrors != null) {
+	                        angular.forEach(result.data.fieldErrors, function (errorMessage, key) {
+	                            $scope.configForm[key].$invalid = true;
+	                            $scope.configForm[key].errorMessage = errorMessage;
+	                        });
+	                    }
+	                }
+	            });
+	        }
+	    };
+
+	    $scope.formElements = {
+	            invoiceStatusList: {
+	                "0":"DRAFT",
+	                "2":"DUE",
+	                "3":"PAID",
+	                "4":"OVER_DUE"
+	            },
+	UsageTypeList: [{
+	            id: 1,
+	            name: 'VM'
+	        }, {
+	            id: 2,
+	            name: 'Stopped VM'
+	        }, {
+	            id: 3,
+	            name: 'IP'
+	        },{
+	            id: 6,
+	            name: 'Storage'
+	        },
+		{
+	            id: 8,
+	            name: 'Template'
+	        },{
+	            id: 15,
+	            name: 'Snapshot'
+	        }]
+	    }
+
+	};
 
 function paymentListReport($scope, $http, $window, $modal, $log, $state, $stateParams, appService, globalConfig) {
 	$scope.defaultLanguage = appService.localStorageService.cookie.get('language');
@@ -806,16 +744,16 @@ function paymentListReport($scope, $http, $window, $modal, $log, $state, $stateP
                    if ($scope.statusView == null || angular.isUndefined($scope.statusView)) {
                       $scope.statusView = null;
                    }
-$scope.pdf = function()
-{
-	 $scope.viewpdf =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=pdf&method=payment";
-}
+		$scope.pdf = function()
+		{
+			 $scope.viewpdf =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=pdf&method=payment";
+		}
 
-$scope.excel = function()
-{
-	 $scope.viewexcel =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=xlsx&method=payment";
-}
-                hasConfigList =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice/listByDomain"
+		$scope.excel = function()
+		{
+			 $scope.viewexcel =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=xlsx&method=payment";
+		}
+		                hasConfigList =  appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice/listByDomain"
                     +"?type=payment&lang=" +appService.localStorageService.cookie.get('language')
                     + "&domainUuid="+$scope.domainView+"&status="+$scope.statusView);
             }
@@ -827,7 +765,6 @@ $scope.excel = function()
               //          $scope.invoiceList = {};
               //      }
 		$scope.invoiceList = result;
-
                 // For pagination
                 $scope.paginationObject.limit = limit;
                 $scope.paginationObject.currentPage = pageNumber;
@@ -844,44 +781,38 @@ $scope.excel = function()
         $scope.domainList = result;
     });
 
-   $scope.global = globalConfig;
- $scope.defaultView = true;
-   $scope.configList = function (pageNumber) {
- $scope.defaultView = true;
-      var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
-      var hasConfigList = {};
-      if (($scope.domainView == null || angular.isUndefined($scope.domainView))
-              && ($scope.statusView == null || angular.isUndefined($scope.statusView))) {
-          hasConfigList = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice?type=payment&lang="+ appService.localStorageService.cookie.get('language'));
-      } else {
- $scope.defaultView = false;
+	 $scope.global = globalConfig;
+	 $scope.defaultView = true;
+	 $scope.configList = function (pageNumber) {
+	 $scope.defaultView = true;
+	      var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+	      var hasConfigList = {};
+	      if (($scope.domainView == null || angular.isUndefined($scope.domainView))
+	              && ($scope.statusView == null || angular.isUndefined($scope.statusView))) {
+	          hasConfigList = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "usage/invoice?type=payment&lang="+ appService.localStorageService.cookie.get('language'));
+	      } else {
+	 $scope.defaultView = false;
           if ($scope.domainView == null || angular.isUndefined($scope.domainView)) {
                $scope.domainView = null;
             }
             if ($scope.statusView == null || angular.isUndefined($scope.statusView)) {
                $scope.statusView = null;
             }
-
             $scope.pdf = function()
             {
             	if(appService.localStorageService.cookie.get('language') == "en"){
             	 $scope.viewpdf =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=pdf&method=payment&lang=ENGLISH";
             }
-            else
-            	{
+            else {
             	 $scope.viewpdf =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=pdf&method=payment&lang=CHINESE";
             	}
             }
-            
-            
+
             $scope.excel = function()
             {
             	if(appService.localStorageService.cookie.get('language') == "en"){
             	 $scope.viewexcel =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=xlsx&method=payment&lang=ENGLISH";
-
-            }
-            else
-            	{
+            } else {
            	 $scope.viewexcel =appService.globalConfig.PING_APP_URL +"invoice/statistics/report?domainUuid="+$scope.domainView+"&status="+ $scope.statusView+"&type=xlsx&method=payment&lang=CHINESE";
             	}
             }
@@ -890,30 +821,30 @@ $scope.excel = function()
                 +"?type=payment&lang=" +appService.localStorageService.cookie.get('language')
                 + "&domainUuid="+$scope.domainView+"&status="+$scope.statusView);
       }
- $scope.showLoader = true;
-      hasConfigList.then(function (result) {  // this is only run after $http completes0
-        // if (!angular.isUndefined(result._embedded)) {
-       //      $scope.invoiceList = result['_embedded'].invoiceList;
-        // } else {
-        //     $scope.invoiceList = {};
-        // }
-$scope.invoiceList = result;
- $scope.showLoader = false;
-         // For pagination
-         $scope.paginationObject.limit = limit;
-         $scope.paginationObject.currentPage = pageNumber;
-         $scope.paginationObject.totalItems = $scope.invoiceList.totalItems;
-         $scope.showLoader = false;
-      });
-       };
-   $scope.configList(1);
+	 $scope.showLoader = true;
+	      hasConfigList.then(function (result) {  // this is only run after $http completes0
+	        // if (!angular.isUndefined(result._embedded)) {
+	       //      $scope.invoiceList = result['_embedded'].invoiceList;
+	        // } else {
+	        //     $scope.invoiceList = {};
+	        // }
+	$scope.invoiceList = result;
+	$scope.showLoader = false;
+	         // For pagination
+	         $scope.paginationObject.limit = limit;
+	         $scope.paginationObject.currentPage = pageNumber;
+	         $scope.paginationObject.totalItems = $scope.invoiceList.totalItems;
+	         $scope.showLoader = false;
+	      });
+	       };
+	   $scope.configList(1);
 
-   // Get application list based on domain selection
-   $scope.selectDomainView = function(pageNumber, domainName, statusView) {
-       $scope.domainView = domainName;
-       $scope.statusView = statusView;
-          $scope.configList(1);
-   };
+	   // Get application list based on domain selection
+	   $scope.selectDomainView = function(pageNumber, domainName, statusView) {
+	       $scope.domainView = domainName;
+	       $scope.statusView = statusView;
+	          $scope.configList(1);
+	   };
 
     // Update payment status
     $scope.PayNow = function (size, invoice) {
