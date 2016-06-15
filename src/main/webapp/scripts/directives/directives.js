@@ -38,7 +38,7 @@ angular
 /**
  * pageTitle - Directive for set Page title - mata title
  */
-function pageTitle($rootScope, $timeout, localStorageService) {
+function pageTitle($rootScope, $timeout) {
     return {
 //        link: function (scope, element) {
 //
