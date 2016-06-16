@@ -9,69 +9,69 @@ angular
 
 function clientListCtrl($scope, $state, $stateParams,appService, modalService, $log, promiseAjax, globalConfig, localStorageService, $window, sweetAlert, notify, dialogService, crudService) {
 
-	 $scope.domains = {
-		        category: "domains",
-		        oneItemSelected: {},
-		        selectedAll: {},
-		        totalcount: 0
-		    };
-		    $scope.status={};
- 			$scope.status.basic = true;
-		    $scope.default_option = true
-		    $scope.domainList = {};
-		    $scope.revokes = false;
-		    $scope.paginationObject = {};
-		    $scope.domainForm = {};
-		    $scope.global = crudService.globalConfig;
-		    $scope.domain = {};
-		    $scope.sort = appService.globalConfig.sort;
-		    $scope.changeSorting = appService.utilService.changeSorting;
-		    $scope.domainElements={
+     $scope.domains = {
+                category: "domains",
+                oneItemSelected: {},
+                selectedAll: {},
+                totalcount: 0
+            };
+            $scope.status={};
+             $scope.status.basic = true;
+            $scope.default_option = true
+            $scope.domainList = {};
+            $scope.revokes = false;
+            $scope.paginationObject = {};
+            $scope.domainForm = {};
+            $scope.global = crudService.globalConfig;
+            $scope.domain = {};
+            $scope.sort = appService.globalConfig.sort;
+            $scope.changeSorting = appService.utilService.changeSorting;
+            $scope.domainElements={
 
-		    };
+            };
     $scope.paginationObject = {};
     $scope.global = crudService.globalConfig;
-	$scope.domainList = {};
+    $scope.domainList = {};
 $scope.paginationObject.sortOrder = '+';
     $scope.paginationObject.sortBy = 'name';
 
     $scope.changeSort = function(sortBy, pageNumber) {
-		var sort = appService.globalConfig.sort;
-		if (sort.column == sortBy) {
-			sort.descending = !sort.descending;
-		} else {
-			sort.column = sortBy;
-			sort.descending = false;
-		}
-		var sortOrder = '-';
-		if(!sort.descending){
-			sortOrder = '+';
-		}
-		$scope.paginationObject.sortOrder = sortOrder;
-		$scope.paginationObject.sortBy = sortBy;
-		$scope.showLoader = true;
-		var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
+        var sort = appService.globalConfig.sort;
+        if (sort.column == sortBy) {
+            sort.descending = !sort.descending;
+        } else {
+            sort.column = sortBy;
+            sort.descending = false;
+        }
+        var sortOrder = '-';
+        if(!sort.descending){
+            sortOrder = '+';
+        }
+        $scope.paginationObject.sortOrder = sortOrder;
+        $scope.paginationObject.sortBy = sortBy;
+        $scope.showLoader = true;
+        var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
                     var hasDomainList =  appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "domains" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
 
                     hasDomainList.then(function(result) { // this is only run after $http
-			// completes0
-			$scope.domainList = result;
-			// For pagination
-			$scope.paginationObject.limit = limit;
-			$scope.paginationObject.currentPage = pageNumber;
-			$scope.paginationObject.totalItems = result.totalItems;
-			$scope.paginationObject.sortOrder = sortOrder;
-			$scope.paginationObject.sortBy = sortBy;
-			$scope.showLoader = false;
-		});
-	};
+            // completes0
+            $scope.domainList = result;
+            // For pagination
+            $scope.paginationObject.limit = limit;
+            $scope.paginationObject.currentPage = pageNumber;
+            $scope.paginationObject.totalItems = result.totalItems;
+            $scope.paginationObject.sortOrder = sortOrder;
+            $scope.paginationObject.sortBy = sortBy;
+            $scope.showLoader = false;
+        });
+    };
 
     // Compute Offer List
     $scope.list = function (pageNumber) {
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
         var hasDomains = crudService.list("domains", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
         hasDomains.then(function (result) {  // this is only run after $http
-												// completes0
+                                                // completes0
 
             $scope.domainList = result;
 
@@ -99,38 +99,38 @@ $scope.paginationObject.sortOrder = '+';
     // Opened user add window
     $scope.addDomain = function (size,domain) {
         dialogService.openDialog("app/views/domain/add-domain.jsp", size, $scope, ['$scope', '$modalInstance', '$rootScope', function ($scope, $modalInstance, $rootScope) {
-        	$scope.save = function (form) {
+            $scope.save = function (form) {
                 $scope.formSubmitted = true;
                 if (form.$valid) {
 
                     $scope.formSubmitted = true;
                     if (form.$valid) {
                         var user = angular.copy($scope.user);
-                        	var hasServer = crudService.add("domains", domain);
-                        	hasServer.then(function (result) {  // this is only run after $http completes
-                        		$scope.list(1);
-                        		notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
-                        		$modalInstance.close();
-                        		$scope.domain.name = "";
-                        		$scope.domain.companyNameAbbreviation = "";
-                        		$scope.domain.portalUserName = "";
-                        		$scope.domain.password = "";
-                        		$scope.domain.confirmPassword = "";
-                        		$scope.domain.cityHeadquarter = "";
-                        		$scope.domain.companyAddress = "";
-                        		$scope.domain.primaryFirstName = "";
-                        		$scope.domain.lastName = "";
-                        		$scope.domain.email = "";
-                        		$scope.domain.phone = "";
-                        		$scope.domain.secondaryContact = "";
-                        	}).catch(function (result) {
-                        		if(!angular.isUndefined(result) && result.data != null) {
-                        			angular.forEach(result.data.fieldErrors, function(errorMessage, key) {
-                                	   $scope.domainForm[key].$invalid = true;
-                                	   $scope.domainForm[key].errorMessage = errorMessage;
-                        			});
-                        		}
-                        	});
+                            var hasServer = crudService.add("domains", domain);
+                            hasServer.then(function (result) {  // this is only run after $http completes
+                                $scope.list(1);
+                                notify({message: 'Added successfully', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                                $modalInstance.close();
+                                $scope.domain.name = "";
+                                $scope.domain.companyNameAbbreviation = "";
+                                $scope.domain.portalUserName = "";
+                                $scope.domain.password = "";
+                                $scope.domain.confirmPassword = "";
+                                $scope.domain.cityHeadquarter = "";
+                                $scope.domain.companyAddress = "";
+                                $scope.domain.primaryFirstName = "";
+                                $scope.domain.lastName = "";
+                                $scope.domain.email = "";
+                                $scope.domain.phone = "";
+                                $scope.domain.secondaryContact = "";
+                            }).catch(function (result) {
+                                if(!angular.isUndefined(result) && result.data != null) {
+                                    angular.forEach(result.data.fieldErrors, function(errorMessage, key) {
+                                       $scope.domainForm[key].$invalid = true;
+                                       $scope.domainForm[key].errorMessage = errorMessage;
+                                    });
+                                }
+                            });
                     }
                 }
             },
@@ -153,13 +153,13 @@ $scope.paginationObject.sortOrder = '+';
 
      $scope.quota = {
 
-             	};
+                 };
      $scope.paginationObject = {};
      $scope.global = crudService.globalConfig;
 
 
 
- 	   $scope.edit = function (quotaId) {
+        $scope.edit = function (quotaId) {
          var hasQuota = crudService.read("quota", quotaId);
          hasQuota.then(function (result) {
              $scope.quota = result;
@@ -360,16 +360,16 @@ $scope.paginationObject.sortOrder = '+';
 
                if(obj.resourceType == "Memory") {
                  obj.usedLimit = Math.round( obj.usedLimit / 1024);
-     						if (obj.max != -1) {
-     							obj.max = Math.round(obj.max / 1024);
-                   $scope.quotaLimits[obj.resourceType].label = $scope.quotaLimits[obj.resourceType].label + " " + "(GiB)";
-     						}
+                     if (obj.max != -1) {
+                                 obj.max = Math.round(obj.max / 1024);
+                                 $scope.quotaLimits[obj.resourceType].label = $scope.quotaLimits[obj.resourceType].label + " " + "(GiB)";
+                     }
                }
 
                if (obj.max == -1 && obj.resourceType == "PrimaryStorage" || obj.max == -1 && obj.resourceType == "SecondaryStorage") {
- 					        obj.usedLimit = Math.round( obj.usedLimit / (1024 * 1024 * 1024));
+                            // obj.usedLimit = Math.round( obj.usedLimit / (1024 * 1024 * 1024));
                    $scope.quotaLimits[obj.resourceType].label = $scope.quotaLimits[obj.resourceType].label + " " + "(GiB)";
-    				    }
+                }
 
                $scope.quotaLimits[obj.resourceType].max = parseInt(obj.max);
                $scope.quotaLimits[obj.resourceType].usedLimit = parseInt(obj.usedLimit);
