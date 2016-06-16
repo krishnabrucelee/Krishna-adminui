@@ -161,6 +161,15 @@ ul.footer-custom-links li a:hover{color:#000; text-decoration:none;}
 
 .panel-border{border:#ccc 1px solid; padding:4px;}
 
+.event-notify-message {margin-left:0px !important; right:37px; z-index:0 !important; margin-top:60px !important; position:absolute;}
+.event-notify-message{max-width:1000px !important; min-width:auto !important;}
+.event-notify-message{left: auto !important;}
+
+.cg-notify-close .fa{font-size: 14px;}
+.cg-notify-message {font-size: 15px !important;}
+
+
+
 @media (min-width: 1024px) and (max-width: 1050px){.tab-full{width:100%;}}
 
 .table > thead > tr > th{vertical-align:top;}

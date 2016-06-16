@@ -70,6 +70,9 @@ public class IndexController extends HttpServlet {
 		String folder = System.getenv("REQUEST_ADMIN_FOLDER");
 		request.setAttribute("REQUEST_ADMIN_FOLDER", folder);
 
+		Boolean debug = Boolean.valueOf(System.getenv("WEBSOCKET_CLIENT_DEBUG"));
+		request.setAttribute("WEBSOCKET", debug);
+
         RequestDispatcher rd = request
                 .getRequestDispatcher("app/index.jsp");
         rd.forward(request, response);

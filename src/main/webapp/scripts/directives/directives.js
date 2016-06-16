@@ -38,35 +38,35 @@ angular
 /**
  * pageTitle - Directive for set Page title - mata title
  */
-function pageTitle($rootScope, $timeout, localStorageService) {
+function pageTitle($rootScope, $timeout) {
     return {
-        link: function (scope, element) {
+//        link: function (scope, element) {
+//
+//            var listener = function (event, toState, toParams, fromState, fromParams) {
+//                var themeSettings = localStorageService.get('themeSettings');
+//                // Default title
+//                if(themeSettings == null || typeof(themeSettings) == "undefined") {
+//                    headerTitle = "Panda";
+//                } else {
+//                    headerTitle = themeSettings.data.headerTitle;
+//                }
+//
+//                if(themeSettings.data.headerTitle == null) {
+//                    themeSettings.data.headerTitle = "Panda";
+//                }
+//
+//                var title = headerTitle;
+//
+//                // Create your own title pattern
+//                if (toState.data && toState.data.pageTitle)
+//                    title = headerTitle + ' | ' + toState.data.pageTitle;
+//                $timeout(function () {
+//                    //element.text(title);
+//                });
+//            };
+//
+//            $rootScope.$on('$stateChangeStart', listener);
 
-            var listener = function (event, toState, toParams, fromState, fromParams) {
-                var themeSettings = localStorageService.get('themeSettings');
-                // Default title
-                if(themeSettings == null || typeof(themeSettings) == "undefined") {
-                    headerTitle = "Panda";
-                } else {
-                    headerTitle = themeSettings.data.headerTitle;
-                }
-
-                if(themeSettings.data.headerTitle == null) {
-                    themeSettings.data.headerTitle = "Panda";
-                }
-
-                var title = headerTitle;
-
-                // Create your own title pattern
-                if (toState.data && toState.data.pageTitle)
-                    title = headerTitle + ' | ' + toState.data.pageTitle;
-                $timeout(function () {
-                    //element.text(title);
-                });
-            };
-
-            $rootScope.$on('$stateChangeStart', listener);
-        }
     }
 }
 ;

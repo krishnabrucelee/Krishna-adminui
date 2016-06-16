@@ -143,9 +143,8 @@ function uploadThemeImage($http){
         fd.append("welcomeContentUser",welcomeContentUser);
         fd.append("splashTitle",splashTitle);
         fd.append("splashTitleUser",splashTitleUser);
-         fd.append('footerContent',footerContent);
-         fd.append('headerTitle',headerTitle);
-                fd.append('splashTitle',splashTitle);
+        fd.append('footerContent',footerContent);
+        fd.append('headerTitle',headerTitle);
         return $http.post(globalConfig.APP_URL + "themesettings/uploadFile", fd, {
             transformRequest : angular.identity,
             headers : {
