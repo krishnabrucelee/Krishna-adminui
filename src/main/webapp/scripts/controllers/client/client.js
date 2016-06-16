@@ -353,9 +353,9 @@ $scope.paginationObject.sortOrder = '+';
      hasResourceDomainId.then(function (result) {  // this is only run after $http completes
        $scope.showLoader = false;
          angular.forEach(result, function(obj, key) {
-          	if(obj.usedLimit == null || obj.usedLimit == "null" || isNaN(obj.usedLimit)) {
-        		  obj.usedLimit = 0;
-        	  }
+              if(obj.usedLimit == null || obj.usedLimit == "null" || isNaN(obj.usedLimit)) {
+                  obj.usedLimit = 0;
+              }
              if(resourceArr.indexOf(obj.resourceType) > -1) {
                if(angular.isUndefined($scope.quotaLimits[obj.resourceType])) {
                    $scope.quotaLimits[obj.resourceType] = {};
@@ -377,6 +377,11 @@ $scope.paginationObject.sortOrder = '+';
                $scope.quotaLimits[obj.resourceType].max = parseInt(obj.max);
                $scope.quotaLimits[obj.resourceType].usedLimit = parseInt(obj.usedLimit);
                $scope.quotaLimits[obj.resourceType].percentage = parseFloat(parseInt(obj.usedLimit) / parseInt(obj.max) * 100).toFixed(2);
+
+               if(isNaN($scope.quotaLimits[obj.resourceType].percentage)) {
+                   $scope.quotaLimits[obj.resourceType].percentage = 0;
+               }
+
                var unUsed = $scope.quotaLimits[obj.resourceType].max - $scope.quotaLimits[obj.resourceType].usedLimit;
 
 
