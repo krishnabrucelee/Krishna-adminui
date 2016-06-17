@@ -33,6 +33,7 @@ angular
         .directive('validPrice', validPrice)
         .directive('validCharacters', validCharacters)
         .directive('fileModel', fileModel)
+        .directive('favIconUrl', favIconUrl)
         .directive('splash', splash)
 
 /**
@@ -759,4 +760,14 @@ function validCharacters() {
         }
     };
 };
+
+function favIconUrl($window) {
+    var url = 'http://'+ $window.location.hostname +':8080/'  + 'resources/' + 'favicon.ico';
+    return {
+        restrict :"A",
+        link: function(scope, el, attr) {
+           el.attr("href",url)
+        }
+    }
+}
 

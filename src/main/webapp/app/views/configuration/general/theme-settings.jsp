@@ -57,6 +57,20 @@
 
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <label class="col-md-2 col-sm-3 control-label"><fmt:message key="upload.fav.icon" bundle="${msg}" />:
+                                </label>
+                                <div class="col-md-10 col-sm-4">
+                                <div class="pull-left panel-border">
+                                    <img src={{favIconImage}} alt="" >
+                                </div>
+                                <div class="pull-left m-l-md">
+                                <input type="file" name="favIcon" accept=".ico" class="custom-file-input" file-model="themeSettingsList.favIconFile"/>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <div class="row" >
