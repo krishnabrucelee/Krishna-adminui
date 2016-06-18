@@ -12,6 +12,7 @@ angular.module('cgNotify', []).factory('notify',['$timeout','$http','$compile','
 
 
         var notify = function(args){
+
         	notify.closeAll();
 
             if (typeof args !== 'object'){
@@ -30,10 +31,10 @@ angular.module('cgNotify', []).factory('notify',['$timeout','$http','$compile','
             scope.$messageTemplate = args.messageTemplate;
             if(scope.$classes === 'alert-success'){
             	duration = 5000;
-	    }
-	    if(scope.$classes === 'alert-danger'){
-	    	duration = 60000;
-	    }
+	        }
+	        if (scope.$classes === 'alert-danger'){
+	    	    duration = 60000;
+	        }
 
             $http.get(args.templateUrl,{cache: $templateCache}).success(function(template){
 
