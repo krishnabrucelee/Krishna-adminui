@@ -121,7 +121,7 @@ function uploadFile($http){
 
  //Theme settings
 function uploadThemeImage($http){
-    var uploadTheme = function(backgroundImageFile, logoImageFile, headerChoices, footerChoices,
+    var uploadTheme = function(backgroundImageFile, logoImageFile, favIconFile, headerChoices, footerChoices,
             welcomeContent,welcomeContentUser,splashTitle,splashTitleUser, footerContent, headerTitle,
             httpTokenRequest,globalConfig, $cookies, localStorageService) {
          var fd = new FormData();
@@ -131,12 +131,17 @@ function uploadThemeImage($http){
         }
 
          });**/
+         console.log("fd",favIconFile);
+
         if(!angular.isUndefined(backgroundImageFile)) {
                fd.append("backgroundImageFile",backgroundImageFile);
         }
         if(!angular.isUndefined(logoImageFile)) {
                fd.append("logoImageFile",logoImageFile);
         }
+        if(!angular.isUndefined(favIconFile)) {
+            fd.append("favIconFile",favIconFile);
+     }
         fd.append("headers",headerChoices);
         fd.append('footers',footerChoices);
         fd.append("welcomeContent",welcomeContent);

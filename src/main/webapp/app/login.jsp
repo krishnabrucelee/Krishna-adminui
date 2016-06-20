@@ -15,7 +15,7 @@
     <!-- Page title set in pageTitle directive -->
     <title id="pandaAppPageTitle" page-title></title>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-   <link rel="shortcut icon" type="image/x-ico" href="favicon.ico" />
+	<link rel="shortcut icon" type="image/x-icon"  href=""  data-fav-icon-url="" />
 
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->

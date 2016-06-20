@@ -529,6 +529,7 @@ else if( !angular.isUndefined(file))
 $scope.showImage = function() {
     $scope.backgroundImage =  'http://'+ $window.location.hostname +':8080/'  + 'resources/' + 'theme_background.jpg';
     $scope.logoImage =  'http://'+ $window.location.hostname +':8080/'  + 'resources/' + 'theme_logo.jpg';
+    $scope.favIconImage = 'http://'+ $window.location.hostname +':8080/'  + 'resources/' + 'favicon.ico';
 }
 $scope.showImage();
 
@@ -551,11 +552,11 @@ $scope.themeSettingList();
           var theme = [];
               $scope.formSubmitted = true;
               $scope.checkfile = function(themeSettingsList) {
-                  if((angular.isUndefined(themeSettingsList.backgroundImgFile) || angular.isUndefined(themeSettingsList.logoImgFile))) {
+                  if((angular.isUndefined(themeSettingsList.backgroundImgFile) || angular.isUndefined(themeSettingsList.logoImgFile) || (angular.isUndefined(themeSettingsList.favIconFile)))) {
 
                       if (themeSettingsList.headers != "" || themeSettingsList.footers != "") {
                           //Dynamic
-                          var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), themeSettingsList.welcomeContent,themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, themeSettingsList.headerTitle, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies,localStorageService);
+                          var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, themeSettingsList.favIconFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), themeSettingsList.welcomeContent,themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, themeSettingsList.headerTitle, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies,localStorageService);
                            hasUpload.then(function (result) {
                                  appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                               $window.location.reload();
@@ -577,7 +578,8 @@ $scope.themeSettingList();
                             });
                       } else {
                           //starting
-                          var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(headerChoices),JSON.stringify(footerChoices), themeSettingsList.welcomeContent, themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, themeSettingsList.headerTitle, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
+                          console.log("2",themeSettingsList);
+                          var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile,themeSettingsList.favIconFile, themeSettingsList.logoImgFile, JSON.stringify(headerChoices),JSON.stringify(footerChoices), themeSettingsList.welcomeContent, themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, themeSettingsList.headerTitle, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
                            hasUpload.then(function (result) {
                                  appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                               $window.location.reload();
@@ -600,16 +602,21 @@ $scope.themeSettingList();
                       }
                   }
 
-                  else if( (!angular.isUndefined(themeSettingsList.backgroundImgFile) && (themeSettingsList.backgroundImgFile != null)) || (!angular.isUndefined(themeSettingsList.logoImgFile) && (themeSettingsList.logoImgFile != null))) {
+                  else if( (!angular.isUndefined(themeSettingsList.backgroundImgFile) && (themeSettingsList.backgroundImgFile != null)) || (!angular.isUndefined(themeSettingsList.logoImgFile) && (themeSettingsList.logoImgFile != null)) || (!angular.isUndefined(themeSettingsList.favIconFile) &(themeSettingsList.favIconFile != null))) {
                         if (((themeSettingsList.backgroundImgFile.type != "image/jpeg") && (!angular.isUndefined(themeSettingsList.backgroundImgFile.type)) && (themeSettingsList.backgroundImgFile != null))
                                 || ((themeSettingsList.logoImgFile.type != "image/jpeg") && (!angular.isUndefined(themeSettingsList.logoImgFile.type) && (themeSettingsList.logoImgFile != null)))) {
                         appService.notify({message: 'Please upload jpeg files ', classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                         return false;
                       }
+                        if((themeSettingsList.favIconFile.type != "image/vnd.microsoft.icon") && (!angular.isUndefined(themeSettingsList.favIconFile.type)) && (themeSettingsList.favIconFile != null)) {
+                	  appService.notify({message: 'Please upload fav icon files ', classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
+                      return false;
+                  		}
                       else {
                           if (((themeSettingsList.headers != "") && (!angular.isUndefined(themeSettingsList.headers)))  || ((themeSettingsList.footers != "") && (!angular.isUndefined(themeSettingsList.footers)))) {
                               //last
-                              var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), themeSettingsList.welcomeContent,themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, themeSettingsList.headerTitle, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
+                        	  console.log("1",themeSettingsList);
+                              var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.favIconFile, themeSettingsList.logoImgFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), themeSettingsList.welcomeContent,themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, themeSettingsList.headerTitle, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
                                hasUpload.then(function (result) {
                                      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                                   $window.location.reload();
@@ -631,7 +638,9 @@ $scope.themeSettingList();
                                 });
                           } else {
                               //end
-                              var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(headerChoices),JSON.stringify(footerChoices), themeSettingsList.welcomeContent, themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, themeSettingsList.headerTitle, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
+                              console.log("3",themeSettingsList.favIconFile);
+
+                              var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile,themeSettingsList.logoImgFile, themeSettingsList.favIconFile, JSON.stringify(headerChoices),JSON.stringify(footerChoices), themeSettingsList.welcomeContent, themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, themeSettingsList.headerTitle, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
                                hasUpload.then(function (result) {
                                      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                                   $window.location.reload();
@@ -657,7 +666,7 @@ $scope.themeSettingList();
                           } else {
                           //last
                               if (((themeSettingsList.headers != "") && (!angular.isUndefined(themeSettingsList.headers))) || ((themeSettingsList.footers != "") && (!angular.isUndefined(themeSettingsList.footers)))) {
-                              var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), themeSettingsList.welcomeContent, themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, themeSettingsList.headerTitle, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
+                              var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.favIconFile, themeSettingsList.logoImgFile, JSON.stringify(themeSettingsList.headers),JSON.stringify(themeSettingsList.footers), themeSettingsList.welcomeContent, themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, themeSettingsList.headerTitle, appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
                                hasUpload.then(function (result) {
                                      appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                                   $window.location.reload();
@@ -679,7 +688,9 @@ $scope.themeSettingList();
                                 });
                               } else {
                               //starting
-                                  var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile, themeSettingsList.logoImgFile, JSON.stringify(headerChoices),JSON.stringify(footerChoices), themeSettingsList.welcomeContent, themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, themeSettingsList.headerTitle,  appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
+                                  console.log("4",themeSettingsList);
+
+                                  var hasUpload = appService.uploadThemeImage.uploadTheme(themeSettingsList.backgroundImgFile,themeSettingsList.favIconFile, themeSettingsList.logoImgFile, JSON.stringify(headerChoices),JSON.stringify(footerChoices), themeSettingsList.welcomeContent, themeSettingsList.welcomeContentUser,themeSettingsList.splashTitle,themeSettingsList.splashTitleUser, themeSettingsList.footerContent, themeSettingsList.headerTitle,  appService.promiseAjax.httpTokenRequest,appService.globalConfig, $cookies, localStorageService);
                                    hasUpload.then(function (result) {
                                          appService.notify({message: 'Add successfully ', classes: 'alert-success', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                                       $window.location.reload();
