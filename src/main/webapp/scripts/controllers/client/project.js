@@ -369,10 +369,11 @@ function projectListCtrl($scope, promiseAjax,crudService,notify,appService, loca
     				+"?lang=" +appService.localStorageService.cookie.get('language')
     				+ "&domainId="+$scope.domainView.id+"&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
             }**/
- if ($scope.domainView == null && $scope.vmSearch == null) {
-            	hasProjectList = appService.crudService.list("projects", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+            if ($scope.domainView == null && $scope.vmSearch == null) {
+            	hasProjectList = promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, globalConfig.APP_URL + "projects/listView" +"?lang=" + appService.localStorageService.cookie.get('language')
+            			+"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
             } else {
-		if ($scope.domainView != null && $scope.vmSearch == null) {
+		    if ($scope.domainView != null && $scope.vmSearch == null) {
                 $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=";
             }  if ($scope.domainView == null && $scope.vmSearch != null) {
                 $scope.filter = "&domainId=0" + "&searchText=" + $scope.vmSearch;
@@ -423,7 +424,7 @@ function projectListCtrl($scope, promiseAjax,crudService,notify,appService, loca
             var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
             var hasProjects = {};
             if ($scope.domainView == null && $scope.vmSearch == null) {
-            	hasProjects = appService.crudService.list("projects", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
+            	hasProjects = appService.crudService.list("projects/listView", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
             }
 		else {
 if ($scope.domainView != null && $scope.vmSearch == null) {

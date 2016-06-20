@@ -73,10 +73,10 @@
 								<thead>
 									<tr>
 										<th data-ng-click="changeSort('id',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='id'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="project.id" bundle="${msg}" /></th>
-										<th data-ng-click="changeSort('name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='projectOwner.userName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="project.name" bundle="${msg}" /></th>
-										<th data-ng-click="changeSort('domain.name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='domain.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.company" bundle="${msg}" /></th>
+										<th data-ng-click="changeSort('name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='projectOwnerUserName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="project.name" bundle="${msg}" /></th>
+										<th data-ng-click="changeSort('domainName',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='domainName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.company" bundle="${msg}" /></th>
 										<th data-ng-click="changeSort('description',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='description'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.description" bundle="${msg}" /></th>
-										<th data-ng-click="changeSort('department.userName',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='department.userName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.department" bundle="${msg}" /></th>
+										<th data-ng-click="changeSort('departmentUserName',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='departmentUserName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.department" bundle="${msg}" /></th>
 										<th data-ng-click="changeSort('status',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='status'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.status" bundle="${msg}" /></th>
 									    <!-- <th>Paid (CNY)</th> -->
 									</tr>
@@ -91,9 +91,9 @@
 										data-ng-repeat="project in filteredCount = (projectList| filter: quickSearch| orderBy:sort.column:sort.descending)">
 										<td><a class="text-info" title="<fmt:message key="view.project" bundle="${msg}" />">{{ project.id}}</a></td>
 										<td>{{ project.name}}</td>
-										<td>{{ project.domain.name}}</td>
+										<td>{{ project.domainName}}</td>
 										<td>{{ project.description}}</td>
-										<td>{{ project.department.userName}}</td>
+										<td>{{ project.departmentUserName}}</td>
 										<!-- <td>{{ project.totalPaid}}</td> -->
 										<td><label class="icon-button btn btn-success  btn-sm"
 											title="{{ project.status}}">{{
