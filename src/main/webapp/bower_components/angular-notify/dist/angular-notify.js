@@ -29,10 +29,13 @@ angular.module('cgNotify', []).factory('notify',['$timeout','$http','$compile','
             scope.$message = args.message;
             scope.$classes = args.classes;
             scope.$messageTemplate = args.messageTemplate;
-            if(scope.$classes === 'alert-success'){
+            if (scope.$classes === 'alert-success') {
             	duration = 5000;
 	        }
-	        if (scope.$classes === 'alert-danger'){
+	        if (scope.$classes === 'alert-danger') {
+	    	    duration = 60000;
+	        }
+	        if (scope.$classes === 'alert-info') {
 	    	    duration = 60000;
 	        }
 
