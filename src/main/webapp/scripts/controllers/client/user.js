@@ -34,7 +34,7 @@ function userListCtrl($scope, $state, $stateParams, modalService,appService, $lo
 
             var hasUserList = {};
             if ($scope.domainView == null && $scope.userSearch == null) {
-                hasUserList =  appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "users" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+                hasUserList =  appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "users/listView" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
             } else {
             	if ($scope.domainView != null && $scope.userSearch == null) {
                     $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=";
@@ -142,7 +142,9 @@ function userListCtrl($scope, $state, $stateParams, modalService,appService, $lo
     // Suspend the user
     $scope.showUserListLoader = {};
 $scope.suspensionObject = {};
-    $scope.suspendUserAccount = function(account) {
+    $scope.suspendUserAccount = function(accountId) {
+      var hasUsersRead = appService.crudService.read("users", accountId);
+      hasUsersRead.then(function (account) {
       $scope.showUserListLoader[account.id] = true;
         appService.dialogService.openDialog("app/views/common/confirm-suspension.jsp", 'md',
         $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
@@ -167,11 +169,13 @@ $scope.suspensionObject = {};
             $scope.showUserListLoader[account.id] = false;
           };
       }]);
-
+    });
     };
 
 
-    $scope.enableUserAccount = function(account) {
+    $scope.enableUserAccount = function(accountId) {
+    	var hasUsersRead = appService.crudService.read("users", accountId);
+    	hasUsersRead.then(function (account) {
         $scope.showUserListLoader[account.id] = true;
 
           appService.dialogService.openDialog("app/views/common/confirm-activation.jsp", 'md',
@@ -193,5 +197,6 @@ $scope.suspensionObject = {};
               $scope.showUserListLoader[account.id] = false;
             };
         }]);
+      });
       };
 };

@@ -78,10 +78,10 @@
                                     <thead>
                                         <tr>
                                             <th data-ng-click="changeSort('userName',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='userName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="user.name" bundle="${msg}" /></th>
-                                             <th  data-ng-click="changeSort('department.userName',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='department.userName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.department" bundle="${msg}" /></th>
-                                             <th  data-ng-click="changeSort('domain.name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='domain.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.domain" bundle="${msg}" /></th>
+                                            <th data-ng-click="changeSort('departmentUserName',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='departmentUserName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.department" bundle="${msg}" /></th>
+                                            <th data-ng-click="changeSort('domainName',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='domainName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.domain" bundle="${msg}" /></th>
                                             <th data-ng-click="changeSort('type',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='type'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="user.type" bundle="${msg}" /></th>
-                                            <th data-ng-click="changeSort('role.name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='role.name'? 'sorting_desc' : 'sorting_asc' "><fmt:message key="common.role" bundle="${msg}" /></th>
+                                            <th data-ng-click="changeSort('roleName',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='roleName'? 'sorting_desc' : 'sorting_asc' "><fmt:message key="common.role" bundle="${msg}" /></th>
                                             <th data-ng-click="changeSort('email',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='email'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.email" bundle="${msg}" /></th>
                                             <th data-ng-click="changeSort('status',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='status'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.status" bundle="${msg}" /></th>
                                         </tr>
@@ -93,11 +93,11 @@
                                        </tbody>
                                     <tbody data-ng-show="accountList.length > 0">
                                         <tr data-ng-repeat="account in filteredCount = accountList">
-                                            <td>{{ account.userName}}</td>
-                                            <td>{{account.department.userName}}</td>
-                                            <td>{{account.domain.name}}</td>
+                                            <td>{{account.userName}}</td>
+                                            <td>{{account.departmentUserName}}</td>
+                                            <td>{{account.domainName}}</td>
                                             <td>{{account.type}}</td>
-                                            <td>{{account.role.name || '-'}} </td>
+                                            <td>{{account.roleName || '-'}} </td>
                                             <td>{{account.email || '-'}} </td>
                                             <td>
                                               <div data-ng-show="showUserListLoader[account.id]" style="margin: 1%">
@@ -109,10 +109,10 @@
                                                 <label class="badge badge-danger p-xs" data-ng-if="account.status == 'DISABLED'"> <fmt:message key="common.disabled" bundle="${msg}" /> </label>
                                                 <label class="badge badge-danger p-xs" data-ng-if="account.status == 'DELETED'"> <fmt:message key="common.deleted" bundle="${msg}" /> </label>
                                                 <label class="badge badge-danger p-xs" data-ng-if="account.status == 'SUSPENDED'"> <fmt:message key="common.suspended" bundle="${msg}" /> </label>
-                                                <button class="btn btn-default suspend-btn" title="<fmt:message key="common.suspend" bundle="${msg}" />" data-ng-if="account.status == 'ENABLED' || account.status == 'DISABLED'" data-ng-click="suspendUserAccount(account)">
+                                                <button class="btn btn-default suspend-btn" title="<fmt:message key="common.suspend" bundle="${msg}" />" data-ng-if="account.status == 'ENABLED' || account.status == 'DISABLED'" data-ng-click="suspendUserAccount(account.id)">
                                                      <span class="fa fa-ban text-center"> </span>
                                                 </button>
-                                                <button class="btn btn-default suspend-btn" title="<fmt:message key="common.enable" bundle="${msg}" />" data-ng-if="account.status == 'SUSPENDED'" data-ng-click="enableUserAccount(account)">
+                                                <button class="btn btn-default suspend-btn" title="<fmt:message key="common.enable" bundle="${msg}" />" data-ng-if="account.status == 'SUSPENDED'" data-ng-click="enableUserAccount(account.id)">
                                                      <span class="fa fa-check-circle-o text-center"> </span>
                                                 </button>
                                                </span>
