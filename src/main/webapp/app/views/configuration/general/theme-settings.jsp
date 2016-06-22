@@ -67,6 +67,8 @@
                                 </div>
                                 <div class="pull-left m-l-md">
                                 <input type="file" name="favIcon" accept=".ico" class="custom-file-input" file-model="themeSettingsList.favIconFile"/>
+                                <span><label><fmt:message key="favicon.file.size" bundle="${msg}" /></label></span>
+
                                 </div>
                                 </div>
                             </div>
