@@ -48,7 +48,7 @@
 								<select
 									class="form-control input-group col-xs-5" name="domainView"
 									data-ng-model="domainView"
-									data-ng-change="selectDomainView(1)"
+									data-ng-change="selectDomainView(domainView)"
 									data-ng-options="domainView.name for domainView in domainListView">
 									<option value=""> <fmt:message key="common.domain.filter" bundle="${msg}" /></option>
 								</select>

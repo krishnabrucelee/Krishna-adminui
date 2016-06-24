@@ -33,15 +33,15 @@ function userListCtrl($scope, $state, $stateParams, modalService,appService, $lo
         var limit = (angular.isUndefined($scope.paginationObject.limit)) ? $scope.global.CONTENT_LIMIT : $scope.paginationObject.limit;
 
             var hasUserList = {};
-            if ($scope.domainView == null && $scope.userSearch == null) {
+            if ($scope.filterView == null && $scope.userSearch == null) {
                 hasUserList =  appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "users/listView" +"?lang=" + localStorageService.cookie.get('language') +"&sortBy="+sortOrder+sortBy+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
             } else {
-            	if ($scope.domainView != null && $scope.userSearch == null) {
-                    $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=";
-                } else if ($scope.domainView == null && $scope.userSearch != null) {
-                    $scope.filter = "&domainId=0" + "&searchText=" + $scope.userSearch;
+            	if ($scope.filterView != null && $scope.userSearch == null) {
+                    $scope.filter = "&domainId=" + $scope.filterView.id + "&searchText=" + "&filterParameter=" + $scope.filterParamater;
+                } else if ($scope.filterView == null && $scope.userSearch != null) {
+                    $scope.filter = "&domainId=0" + "&searchText=" + $scope.userSearch + "&filterParameter=" + $scope.filterParamater;
                 } else {
-                    $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=" + $scope.userSearch;
+                    $scope.filter = "&domainId=" + $scope.filterView.id + "&searchText=" + $scope.userSearch + "&filterParameter=" + $scope.filterParamater;
                 }
                 hasUserList =  promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "users/listByAdminSearch"
                     +"?lang=" +appService.localStorageService.cookie.get('language')+"&flag=pandaAdminPanel"
@@ -70,15 +70,15 @@ function userListCtrl($scope, $state, $stateParams, modalService,appService, $lo
         var hasUsers = {};
 
         $scope.filter = "";
-        if ($scope.domainView == null && $scope.userSearch == null) {
+        if ($scope.filterView == null && $scope.userSearch == null) {
         	hasUsers = crudService.list("users/listall", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
         } else {
-            if ($scope.domainView != null && $scope.userSearch == null) {
-                $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=";
-            } else if ($scope.domainView == null && $scope.userSearch != null) {
-                $scope.filter = "&domainId=0" + "&searchText=" + $scope.userSearch;
+            if ($scope.filterView != null && $scope.userSearch == null) {
+                $scope.filter = "&domainId=" + $scope.filterView.id + "&searchText=" + "&filterParameter=" + $scope.filterParamater;
+            } else if ($scope.filterView == null && $scope.userSearch != null) {
+                $scope.filter = "&domainId=0" + "&searchText=" + $scope.userSearch + "&filterParameter=" + $scope.filterParamater;
             } else {
-                $scope.filter = "&domainId=" + $scope.domainView.id + "&searchText=" + $scope.userSearch;
+                $scope.filter = "&domainId=" + $scope.filterView.id + "&searchText=" + $scope.userSearch + "&filterParameter=" + $scope.filterParamater;
             }
             hasUsers =  promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "users/listByAdminSearch"
                   +"?lang=" +appService.localStorageService.cookie.get('language')+"&flag=pandaAdminPanel"
@@ -91,7 +91,7 @@ function userListCtrl($scope, $state, $stateParams, modalService,appService, $lo
 
             // Get the count of the listings
             var hasUserCount = {};
-            if ($scope.domainView == null && $scope.userSearch == null) {
+            if ($scope.filterView == null && $scope.userSearch == null) {
             	hasUserCount = appService.crudService.listAll("users/list");
             } else {
             	hasUserCount = appService.promiseAjax.httpTokenRequest(appService.crudService.globalConfig.HTTP_GET,
@@ -129,14 +129,24 @@ function userListCtrl($scope, $state, $stateParams, modalService,appService, $lo
         $scope.domainListView = result;
     });
 
-    // Get user list based on domain selection
-    $scope.selectDomainView = function(pageNumber) {
-        $scope.list(1);
+    // Get volume list based on domain selection
+    $scope.selectDomainView = function(domainfilter) {
+    	$scope.filterView = domainfilter;
+    	$scope.filterParamater = 'domain';
+    	$scope.list(1);
     };
+
     // Get instance list based on quick search
     $scope.userSearch = null;
     $scope.searchList = function(userSearch) {
-        $scope.userSearch = userSearch;
+    	if ($scope.global.sessionValues.type == 'ROOT_ADMIN') {
+    		$scope.filterParamater = 'domain';
+    	}
+    	if (userSearch != "") {
+            $scope.userSearch = userSearch;
+    	} else {
+    		$scope.userSearch = null;
+    	}
         $scope.list(1);
     };
     // Suspend the user
