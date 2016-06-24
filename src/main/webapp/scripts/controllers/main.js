@@ -25,10 +25,12 @@ function appCtrl($http, $scope, $timeout, $rootScope, $modal, $window, globalCon
         selectedAll: {}
     };
 
-    var hasUsers = appService.crudService.read("users", $scope.global.sessionValues.id);
-    hasUsers.then(function (result) {
-        $scope.owner = result;
-    });
+    if (!angular.isUndefined($scope.global.sessionValues.id)) {
+	    var hasUsers = appService.crudService.read("users", $scope.global.sessionValues.id);
+	    hasUsers.then(function (result) {
+	        $scope.owner = result;
+	    });
+    }
 
     $scope.splashTitle = localStorageService.get('splashTitle');
     // For iCheck purpose only

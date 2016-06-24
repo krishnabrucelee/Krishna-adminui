@@ -313,7 +313,9 @@ if ($scope.domainView == null && $scope.templatequickSearch == null) {
     };
 
     // Delete the template
-    $scope.delete = function (size, template) {
+    $scope.delete = function (size, templateId) {
+    	var hasTemplateRead = appService.crudService.read("templates", templateId);
+    	hasTemplateRead.then(function (template) {
     	appService.dialogService.openDialog("app/views/servicecatalog/confirm-delete.jsp", size, $scope, ['$scope', '$modalInstance', function ($scope, $modalInstance) {
                 $scope.deleteId = template.id;
                 $scope.ok = function (deleteId) {
@@ -344,6 +346,7 @@ if ($scope.domainView == null && $scope.templatequickSearch == null) {
                     $modalInstance.close();
                 };
             }]);
+    	});
     };
 
     $scope.update = function (form) {
