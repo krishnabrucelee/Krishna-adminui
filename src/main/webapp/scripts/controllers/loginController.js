@@ -99,7 +99,7 @@ $scope.themeSettingList();
                 localStorageService.set('rememberMe', result.rememberResponse.rememberMe);
                 $cookies.rememberMe = result.rememberResponse.rememberMe;
             }
-            //window.location.href = globalConfig.BASE_UI_URL + "index#/dashboard";
+            window.location.href = globalConfig.BASE_UI_URL + "index#/dashboard";
         }).catch(function (result) {
             $scope.showLoader = false;
             if (!angular.isUndefined(result.data) && result.data != null) {
