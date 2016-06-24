@@ -68,9 +68,9 @@
                     <thead>
                         <tr>
                             <th data-ng-click="changeSorts('name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.name" bundle="${msg}" /></th>
-                            <th data-ng-click="changeSorts('osCategory.name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='osCategory.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.os" bundle="${msg}" /></th>
-                            <th data-ng-click="changeSorts('osType.description',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='osType.description'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.type" bundle="${msg}" /></th>
-                            <th data-ng-click="changeSorts('zone.name',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='zone.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.zone" bundle="${msg}" /></th>
+                            <th data-ng-click="changeSorts('osCategoryName',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='osCategory.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.os" bundle="${msg}" /></th>
+                            <th data-ng-click="changeSorts('osTypeDescription',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='osType.description'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.type" bundle="${msg}" /></th>
+                            <th data-ng-click="changeSorts('zoneName',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='zone.name'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="template.zone" bundle="${msg}" /></th>
                             <th><fmt:message key="template.cost" bundle="${msg}" />(<app-currency></app-currency>)</th>
                             <th data-ng-click="changeSorts('status',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='status'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="common.status" bundle="${msg}" /></th>
                             <th><fmt:message key="common.action" bundle="${msg}" /></th>
@@ -88,14 +88,14 @@
                        <tr data-ng-repeat="template in isoList">
 
  							<td>{{ template.name}}</td>
-                            <td>{{ template.osCategory.name}}</td>
-                            <td>{{ template.osType.description}}</td>
-                            <td>{{ template.zone.name}}</td>
-                            <td><b class="text-danger">{{ template.templateCost[0].cost}} <span>/ day</span></b></td>
+                            <td>{{ template.osCategoryName}}</td>
+                            <td>{{ template.osTypeDescription}}</td>
+                            <td>{{ template.zoneName}}</td>
+                            <td><b class="text-danger">{{ template.templateCost || 0}} <span>/ day</span></b></td>
                             <td>{{ template.status }}</td>
                             <td>
                                 <a class="icon-button" title="<fmt:message key="common.edit" bundle="${msg}" />" ui-sref="servicecatalog.list-apptemplate.list-apptemplate-iso-edit({id: {{ template.id}}})"  ><span class="fa fa-edit"></span></a>
-                                <a has-permission="DELETE_MY_TEMPLATE" class="icon-button" title="<fmt:message key="common.delete" bundle="${msg}" />" data-ng-click="delete('sm', template)" ><span class="fa fa-trash"></span></a>
+                                <a has-permission="DELETE_MY_TEMPLATE" class="icon-button" title="<fmt:message key="common.delete" bundle="${msg}" />" data-ng-click="delete('sm', template.id)" ><span class="fa fa-trash"></span></a>
                             </td>
                         </tr>
                     </tbody>
