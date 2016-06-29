@@ -123,7 +123,19 @@ function infraCtrl($scope, $modal, $log, promiseAjax, localStorageService, notif
     }
 }
 
-function resourceCtrl($scope, $modal, promiseAjax, localStorageService, modalService) {
+function resourceCtrl($scope, $modal, promiseAjax, localStorageService, modalService, appService) {
+
+    $scope.getInfrastructureDetails = function() {
+        var hasResult = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET, appService.globalConfig.APP_URL + "dashboard/infrastructure?filter=" + $scope.filterParamater);
+        hasResult.then(function(result) {  // this is only run after;
+            $scope.infrastructure  = result;
+              $scope.showLoaderOffer = false;
+        });
+      }
+
+    if(appService.globalConfig.sessionValues.type === "ROOT_ADMIN") {
+        $scope.getInfrastructureDetails();
+    }
 
     $scope.configElements = {
         category: "general",

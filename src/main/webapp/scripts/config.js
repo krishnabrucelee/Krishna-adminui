@@ -478,6 +478,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
 
             //Cloud
             .state('cloud', {
+            	abstract: true,
                 url: "/",
                 templateUrl: VIEW_URL +  "views/common/content.jsp",
                 data: {
