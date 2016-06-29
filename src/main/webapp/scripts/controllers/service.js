@@ -56,7 +56,7 @@ if ($scope.vmSearch == null) {
 }
 	if ($scope.vmSearch != null) {
 	$scope.filter = "&searchText=" + $scope.vmSearch;
-  	var hasTemplateList = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listall" +"?lang=" + localStorageService.cookie.get('language')+ $scope.filter +"&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy +"&type=template"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+  	var hasTemplateList = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listalladminpanel" +"?lang=" + localStorageService.cookie.get('language')+ $scope.filter +"&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy +"&type=template"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
 	}
 
 
@@ -105,7 +105,7 @@ if ($scope.vmSearch == null) {
 }
 	if ($scope.vmSearch != null) {
 	$scope.filter = "&searchText=" + $scope.vmSearch;
-  	var hasTemplates = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listall" +"?lang=" + localStorageService.cookie.get('language')+  encodeURI($scope.filter) +"&sortBy="+appService.globalConfig.sort.sortOrder+appService.globalConfig.sort.sortBy +"&type=template"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+  	var hasTemplates = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listalladminpanel" +"?lang=" + localStorageService.cookie.get('language')+  encodeURI($scope.filter) +"&sortBy="+appService.globalConfig.sort.sortOrder+appService.globalConfig.sort.sortBy +"&type=template"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
 	}
         hasTemplates.then(function (result) {  // this is only run after $http completes0
 
@@ -155,7 +155,7 @@ if ($scope.templatequickSearch == null) {
 }
 	if ($scope.templatequickSearch != null) {
 	$scope.filter = "&searchText=" + $scope.templatequickSearch;
-  	var hasIsoList = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listall" +"?lang=" + localStorageService.cookie.get('language')+ $scope.filter +"&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy +"&type=iso"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+  	var hasIsoList = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listalladminpanel" +"?lang=" + localStorageService.cookie.get('language')+ $scope.filter +"&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy +"&type=iso"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
 	}
 
 
@@ -190,7 +190,7 @@ if ($scope.templatequickSearch == null) {
 }
 	if ($scope.templatequickSearch != null) {
 	$scope.filter = "&searchText=" + $scope.templatequickSearch;
-  	var hasIso = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listall" +"?lang=" + localStorageService.cookie.get('language')+ encodeURI($scope.filter) +"&sortBy="+appService.globalConfig.sort.sortOrder+appService.globalConfig.sort.sortBy +"&type=iso"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
+  	var hasIso = appService.promiseAjax.httpTokenRequest( globalConfig.HTTP_GET, globalConfig.APP_URL + "templates/listalladminpanel" +"?lang=" + localStorageService.cookie.get('language')+ encodeURI($scope.filter) +"&sortBy="+appService.globalConfig.sort.sortOrder+appService.globalConfig.sort.sortBy +"&type=iso"+"&limit="+limit, $scope.global.paginationHeaders(pageNumber, limit), {"limit" : limit});
 	}
 
 
