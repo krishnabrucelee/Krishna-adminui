@@ -353,13 +353,38 @@
                                                             <get-login-loader-image data-ng-show="showLoader"></get-login-loader-image>
 
                                         <div class="row dashboard-quota-area" data-ng-hide="showLoader">
-                                            <div class="col-md-4 col-sm-4 col-xs-6 dashboard-quota" data-ng-repeat="quotaLimit in quotaLimits">
+
+                                        <fieldset class="scheduler-border">
+								<legend class="scheduler-border"><fmt:message key="common.vm.quota" bundle="${msg}" /></legend>
+								 <div class="col-md-4 col-sm-4 col-xs-6 dashboard-quota" data-ng-repeat="quotaLimit in quotaLimits">
                                                  <div class="doughnut-fixed-area">
                                                     <div class="doughnutchart-value">{{ quotaLimit.percentage }}%</div>
                                                     <canvas doughnutchart options="doughnutOptions" data="quotaLimit.doughnutData" width="120" height="85"></canvas>
                                                     <div>{{ quotaLimit.label }}</div> <span><fmt:message key="common.allocated" bundle="${msg}" /> {{quotaLimit.usedLimit}} of {{quotaLimit.max}}</span>
                                                 </div>
                                             </div>
+							</fieldset>
+							  <fieldset class="scheduler-border">
+								<legend class="scheduler-border"><fmt:message key="common.network.quota" bundle="${msg}" /></legend>
+								 <div class="col-md-4 col-sm-4 col-xs-6 dashboard-quota" data-ng-repeat="quotaLimit in networkQuotaList">
+                                                 <div class="doughnut-fixed-area">
+                                                    <div class="doughnutchart-value">{{ quotaLimit.percentage }}%</div>
+                                                    <canvas doughnutchart options="doughnutOptions" data="quotaLimit.doughnutData" width="120" height="85"></canvas>
+                                                    <div>{{ quotaLimit.label }}</div> <span><fmt:message key="common.allocated" bundle="${msg}" /> {{quotaLimit.usedLimit}} of {{quotaLimit.max}}</span>
+                                                </div>
+                                            </div>
+							</fieldset>
+							    <fieldset class="scheduler-border">
+								<legend class="scheduler-border"><fmt:message key="common.storage.quota" bundle="${msg}" /></legend>
+								 <div class="col-md-4 col-sm-4 col-xs-6 dashboard-quota" data-ng-repeat="quotaLimit in storageQuotaList">
+                                                 <div class="doughnut-fixed-area">
+                                                    <div class="doughnutchart-value">{{ quotaLimit.percentage }}%</div>
+                                                    <canvas doughnutchart options="doughnutOptions" data="quotaLimit.doughnutData" width="120" height="85"></canvas>
+                                                    <div>{{ quotaLimit.label }}</div> <span><fmt:message key="common.allocated" bundle="${msg}" /> {{quotaLimit.usedLimit}} of {{quotaLimit.max}}</span>
+                                                </div>
+                                            </div>
+							</fieldset>
+
                                            </div>
                                        </div>
                                        <div class="col-md-6">
