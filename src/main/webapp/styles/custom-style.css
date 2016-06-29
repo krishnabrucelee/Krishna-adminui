@@ -168,6 +168,10 @@ ul.footer-custom-links li a:hover{color:#000; text-decoration:none;}
 .cg-notify-close .fa{font-size: 14px;}
 .cg-notify-message {font-size: 15px !important;}
 
+.dashboard-quota-area legend{font-size:15px !important; color: #6a6c6f;}
+.dashboard-quota-area fieldset{margin-bottom:10px; margin-top:4px;}
+.dashboard-quota-area .dashboard-quota{margin:10px 0px;}
+.quota-limit-details .table > thead > tr > th, .quota-limit-details .table > tbody > tr > th, .quota-limit-details .table > tfoot > tr > th, .quota-limit-details .table > thead > tr > td, .quota-limit-details .table > tbody > tr > td, .quota-limit-details .table > tfoot > tr > td{padding:14px 10px;}
 
 
 @media (min-width: 1024px) and (max-width: 1050px){.tab-full{width:100%;}}

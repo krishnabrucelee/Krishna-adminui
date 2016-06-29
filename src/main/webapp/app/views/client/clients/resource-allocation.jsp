@@ -8,7 +8,7 @@
 <form name="resourceAllocationForm" data-ng-submit="save(resourceAllocationForm)" method="post" novalidate="" data-ng-controller="resourceAllocationCtrl">
 
     <div class="row">
-        <div class="col-md-12 col-sm-12">
+        <div class="col-md-12 col-sm-12 quota-limit-details">
                     <div class="panel-body">
 					<div class="row" data-ng-if="(resource=='domain'|| type == 'domain-quota' || resource=='department' || resource=='project') && isResourceDefined == 'defined' ">
 						<div class="col-md-12 col-sm-12">
@@ -53,57 +53,6 @@
 			                    </thead>
 			                    <tbody>
 			                    <tr>
-			  						<td>
-			                         	<label><fmt:message key="max.volumes" bundle="${msg}" />:
-		                                  	<span class="text-danger">*</span></label>
-	                                </td>
-	                                <td>
-	                                	<div class="col-md-8 col-sm-8">
-		                                  <input required="true"
-		                                  type="text" valid-integer name="Volume" data-ng-model="resourceQuota.Volume"
-		                                  class="form-control"
-		                                  data-ng-class="{'error': (resourceAllocationForm.Volume.$invalid && formSubmitted || resourceAllocationField.Volume.$invalid)}" >
-		                                  <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="maximum.volumes.to.be.allocated" bundle="${msg}" />" ></i>
-		                                  	<div class="error-area" data-ng-show="((resourceAllocationForm.Volume.$invalid && formSubmitted) || resourceAllocationField.Volume.$invalid)" >
-		                                  		<i  ng-attr-tooltip="{{ resourceAllocationForm.Volume.errorMessage || '<fmt:message key="max.volumes.are.required" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i>
-	      		         					</div>
-      		         					</div>
-		   							</td>
-									<td>
-                                		<div data-ng-if="resource=='domain' || type == 'domain-quota'" >
-											<label><span>{{hasSumOfDomainMin.Volume || '0'}}</span></label>
-                                		</div>
-                                 		<div data-ng-if="resource=='department'" >
-											<label>
-												<span>{{hasSumOfDepartmentMin.Volume || '0'}}</span>
-                               				</label>
-                                		</div>
-                                   		<div data-ng-if="resource=='project'" >
-											<label>
-												<span>{{hasSumOfProjectMin.Volume || '0' }}</span>
-                                			</label>
-                                		</div>
-
-								</td>
-			    				<td>
-                                	<div data-ng-if="resource=='domain' || type == 'domain-quota'" >
-										<label>
-											<span>{{-1}}</span>
-										</label>
-                                	</div>
-                                 	<div data-ng-if="resource=='department'" >
-										<label>
-											<span>{{hasSumOfDepartmentMax.Volume }}</span>
-										</label>
-                                	</div>
-                                   	<div data-ng-if="resource=='project'" >
-										<label>
-											<span>{{hasSumOfProjectMax.Volume || '0' }}</span></b></label>
-                                		</label>
-                                	</div>
-							</td>
-			       		</tr>
-	                    <tr>
 	                        <td>
 	                        	<label><fmt:message key="max.user.vms" bundle="${msg}" />:
                                    <span class="text-danger">*</span>
@@ -155,8 +104,104 @@
                                 </div>
 
 							</td>
-			           	</tr>
-			 			<tr>
+			           		</tr>
+			           		<tr>
+			               	<td>
+                                <label><fmt:message key="max.cpu.cores" bundle="${msg}" />:
+                                    <span class="text-danger">*</span>
+                                </label>
+							</td>
+                            <td>
+                                <div class="col-md-8 col-sm-8">
+                                    <input required="true" type="text" valid-integer name="CPU"
+                                    data-ng-model="resourceQuota.CPU"  class="form-control"
+                                    data-ng-class="{'error': (resourceAllocationForm.CPU.$invalid && formSubmitted  || resourceAllocationField.CPU.$invalid)}">
+                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="maximum.cpu.cores.to.be.allocated" bundle="${msg}" />" ></i>
+                                    <div class="error-area" data-ng-show="((resourceAllocationForm.CPU.$invalid && formSubmitted)  || resourceAllocationField.CPU.$invalid)" >
+                                    	<i  ng-attr-tooltip="{{ resourceAllocationForm.CPU.errorMessage || '<fmt:message key="max.cpu.cores.are.required" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i></div>
+                                </div>
+							</td>
+			                <td>
+                                 <div data-ng-if="resource=='domain' || type == 'domain-quota'" >
+                                	<label>
+									<span>{{hasSumOfDomainMin.CPU || '0' }}</span>
+									</b></label>
+                                </div>
+                                  <div data-ng-if="resource=='department'" >
+                                	<label>
+									<span>{{hasSumOfDepartmentMin.CPU || '0' }}</span>
+									</b></label>
+                                </div>
+                                 <div data-ng-if="resource=='project'" >
+                                	<label>
+									<span>{{hasSumOfProjectMin.CPU || '0' }}</span>
+									</b></label>
+                                </div>
+			                </td>
+			                <td>
+                                 <div data-ng-if="resource=='domain' || type == 'domain-quota'" >
+                                	<label>
+									<span>{{-1}}</span></b></label>
+                                </div>
+                                  <div data-ng-if="resource=='department'" >
+                                	<label>
+									<span>{{hasSumOfDepartmentMax.CPU }}</span></b></label>
+                                </div>
+                                 <div data-ng-if="resource=='project'" >
+                                	<label>
+									<span>{{hasSumOfProjectMax.CPU || '0' }}</span></b></label>
+                                </div>
+							</td>
+			          	</tr>
+			          	<tr>
+			               	<td>
+                                <label><fmt:message key="max.memory" bundle="${msg}" /> (MiB):
+                                    <span class="text-danger">*</span>
+                                </label>
+							</td>
+                            <td>
+                                <div class="col-md-8 col-sm-8">
+                                    <input required="true" type="text" valid-integer name="Memory"
+                                     data-ng-model="resourceQuota.Memory"  class="form-control"
+                                     data-ng-class="{'error': (resourceAllocationForm.Memory.$invalid && formSubmitted || resourceAllocationField.Memory.$invalid)}">
+                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="maximum.memory.to.be.allocated" bundle="${msg}" />" ></i>
+                                    <div class="error-area" data-ng-show="((resourceAllocationForm.Memory.$invalid && formSubmitted) || resourceAllocationField.Memory.$invalid)" >
+                                    <i  ng-attr-tooltip="{{ resourceAllocationForm.Memory.errorMessage || '<fmt:message key="max.memory.is.required" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i></div>
+                                </div>
+							</td>
+			                <td>
+                                  <div data-ng-if="resource=='domain' || type == 'domain-quota'" >
+                                	<label>
+									<span>{{hasSumOfDomainMin.Memory || '0' }}</span>
+									</b></label>
+                                </div>
+                                  <div data-ng-if="resource=='department'" >
+                                	<label>
+									<span>{{hasSumOfDepartmentMin.Memory || '0' }}</span>
+									</b></label>
+                                </div>
+                                <div data-ng-if="resource=='project'" >
+                                	<label>
+									<span>{{hasSumOfProjectMin.Memory || '0' }}</span>
+									</b></label>
+                                </div>
+			                </td>
+			                <td>
+                                  <div data-ng-if="resource=='domain' || type == 'domain-quota'" >
+                                	<label>
+									<span>{{-1}}</span></b></label>
+                                </div>
+                                  <div data-ng-if="resource=='department'" >
+                                	<label>
+									<span>{{hasSumOfDepartmentMax.Memory }}</span></b></label>
+                                </div>
+                                <div data-ng-if="resource=='project'" >
+                                	<label>
+									<span>{{hasSumOfProjectMax.Memory || '0' }}</span></b></label>
+                                </div>
+							</td>
+			          		</tr>
+			          		<tr>
 			            	<td>
                                 <label><fmt:message key="max.templates" bundle="${msg}" />:
                                     <span class="text-danger">*</span>
@@ -209,59 +254,7 @@
                                 </div>
 			            	</td>
 			        	</tr>
-			       		<tr>
-			    			<td>
-                                <label><fmt:message key="max.networks" bundle="${msg}" />:
-                                    <span class="text-danger">*</span>
-                                	</label>
-                            </td>
-                            <td>
-                                <div class="col-md-8 col-sm-8">
-                                    <input required="true" type="text" valid-integer name="Network"
-                                    data-ng-model="resourceQuota.Network"  class="form-control"
-                                     data-ng-class="{'error': (resourceAllocationForm.Network.$invalid && formSubmitted  || resourceAllocationField.Network.$invalid)}">
-                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="maximum.networks.to.be.allocated" bundle="${msg}" />" ></i>
-                                    <div class="error-area" data-ng-show="((resourceAllocationForm.Network.$invalid && formSubmitted)  || resourceAllocationField.Network.$invalid)" >
-                                    	<i  ng-attr-tooltip="{{ resourceAllocationForm.Network.errorMessage || '<fmt:message key="max.networks.are.required" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i>
-                                    </div>
-                                </div>
-							</td>
-			             	<td>
-								<div  data-ng-if="resource=='domain' || type == 'domain-quota'" >
-                                	<label>
-										<span>{{hasSumOfDomainMin.Network || '0' }}</span>
-									</label>
-                                </div>
-                                 <div data-ng-if="resource=='department'" >
-                                	<label>
-										<span>{{hasSumOfDepartmentMin.Network || '0' }}</span>
-									</label>
-                                </div>
-                                  <div data-ng-if="resource=='project'">
-                                	<label>
-										<span>{{hasSumOfProjectMin.Network || '0' }}</span>
-									</label>
-                                </div>
-							</td>
-			        		<td>
-								<div  data-ng-if="resource=='domain' || type == 'domain-quota'" >
-                                	<label>
-										<span>{{-1}}</span>
-									</label>
-                                </div>
-                                 <div data-ng-if="resource=='department'" >
-                                	<label>
-										<span>{{hasSumOfDepartmentMax.Network }}</span>
-									</label>
-                                </div>
-                                  <div data-ng-if="resource=='project'" >
-                                	<label>
-										<span>{{hasSumOfProjectMax.Network || '0' }}</span>
-									</label>
-                                </div>
-							</td>
-			          	</tr>
-			            <tr>
+			        	<tr>
 			           		<td>
 
                                <label><fmt:message key="max.snapshots" bundle="${msg}" />:
@@ -313,6 +306,59 @@
                                 </div>
 			             	</td>
 			          	</tr>
+			          	<tr>
+			    			<td>
+                                <label><fmt:message key="max.networks" bundle="${msg}" />:
+                                    <span class="text-danger">*</span>
+                                	</label>
+                            </td>
+                            <td>
+                                <div class="col-md-8 col-sm-8">
+                                    <input required="true" type="text" valid-integer name="Network"
+                                    data-ng-model="resourceQuota.Network"  class="form-control"
+                                     data-ng-class="{'error': (resourceAllocationForm.Network.$invalid && formSubmitted  || resourceAllocationField.Network.$invalid)}">
+                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="maximum.networks.to.be.allocated" bundle="${msg}" />" ></i>
+                                    <div class="error-area" data-ng-show="((resourceAllocationForm.Network.$invalid && formSubmitted)  || resourceAllocationField.Network.$invalid)" >
+                                    	<i  ng-attr-tooltip="{{ resourceAllocationForm.Network.errorMessage || '<fmt:message key="max.networks.are.required" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i>
+                                    </div>
+                                </div>
+							</td>
+			             	<td>
+								<div  data-ng-if="resource=='domain' || type == 'domain-quota'" >
+                                	<label>
+										<span>{{hasSumOfDomainMin.Network || '0' }}</span>
+									</label>
+                                </div>
+                                 <div data-ng-if="resource=='department'" >
+                                	<label>
+										<span>{{hasSumOfDepartmentMin.Network || '0' }}</span>
+									</label>
+                                </div>
+                                  <div data-ng-if="resource=='project'">
+                                	<label>
+										<span>{{hasSumOfProjectMin.Network || '0' }}</span>
+									</label>
+                                </div>
+							</td>
+			        		<td>
+								<div  data-ng-if="resource=='domain' || type == 'domain-quota'" >
+                                	<label>
+										<span>{{-1}}</span>
+									</label>
+                                </div>
+                                 <div data-ng-if="resource=='department'" >
+                                	<label>
+										<span>{{hasSumOfDepartmentMax.Network }}</span>
+									</label>
+                                </div>
+                                  <div data-ng-if="resource=='project'" >
+                                	<label>
+										<span>{{hasSumOfProjectMax.Network || '0' }}</span>
+									</label>
+                                </div>
+							</td>
+			          	</tr>
+
 			            <tr>
 			               	<td>
 								<label><fmt:message key="max.public.ips" bundle="${msg}" />:
@@ -410,102 +456,57 @@
                                 </div>
 							</td>
 			          	</tr>
-			          	<tr>
-			               	<td>
-                                <label><fmt:message key="max.cpu.cores" bundle="${msg}" />:
-                                    <span class="text-danger">*</span>
-                                </label>
+			                    <tr>
+			  						<td>
+			                         	<label><fmt:message key="max.volumes" bundle="${msg}" />:
+		                                  	<span class="text-danger">*</span></label>
+	                                </td>
+	                                <td>
+	                                	<div class="col-md-8 col-sm-8">
+		                                  <input required="true"
+		                                  type="text" valid-integer name="Volume" data-ng-model="resourceQuota.Volume"
+		                                  class="form-control"
+		                                  data-ng-class="{'error': (resourceAllocationForm.Volume.$invalid && formSubmitted || resourceAllocationField.Volume.$invalid)}" >
+		                                  <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="maximum.volumes.to.be.allocated" bundle="${msg}" />" ></i>
+		                                  	<div class="error-area" data-ng-show="((resourceAllocationForm.Volume.$invalid && formSubmitted) || resourceAllocationField.Volume.$invalid)" >
+		                                  		<i  ng-attr-tooltip="{{ resourceAllocationForm.Volume.errorMessage || '<fmt:message key="max.volumes.are.required" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i>
+	      		         					</div>
+      		         					</div>
+		   							</td>
+									<td>
+                                		<div data-ng-if="resource=='domain' || type == 'domain-quota'" >
+											<label><span>{{hasSumOfDomainMin.Volume || '0'}}</span></label>
+                                		</div>
+                                 		<div data-ng-if="resource=='department'" >
+											<label>
+												<span>{{hasSumOfDepartmentMin.Volume || '0'}}</span>
+                               				</label>
+                                		</div>
+                                   		<div data-ng-if="resource=='project'" >
+											<label>
+												<span>{{hasSumOfProjectMin.Volume || '0' }}</span>
+                                			</label>
+                                		</div>
+
+								</td>
+			    				<td>
+                                	<div data-ng-if="resource=='domain' || type == 'domain-quota'" >
+										<label>
+											<span>{{-1}}</span>
+										</label>
+                                	</div>
+                                 	<div data-ng-if="resource=='department'" >
+										<label>
+											<span>{{hasSumOfDepartmentMax.Volume }}</span>
+										</label>
+                                	</div>
+                                   	<div data-ng-if="resource=='project'" >
+										<label>
+											<span>{{hasSumOfProjectMax.Volume || '0' }}</span></b></label>
+                                		</label>
+                                	</div>
 							</td>
-                            <td>
-                                <div class="col-md-8 col-sm-8">
-                                    <input required="true" type="text" valid-integer name="CPU"
-                                    data-ng-model="resourceQuota.CPU"  class="form-control"
-                                    data-ng-class="{'error': (resourceAllocationForm.CPU.$invalid && formSubmitted  || resourceAllocationField.CPU.$invalid)}">
-                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="maximum.cpu.cores.to.be.allocated" bundle="${msg}" />" ></i>
-                                    <div class="error-area" data-ng-show="((resourceAllocationForm.CPU.$invalid && formSubmitted)  || resourceAllocationField.CPU.$invalid)" >
-                                    	<i  ng-attr-tooltip="{{ resourceAllocationForm.CPU.errorMessage || '<fmt:message key="max.cpu.cores.are.required" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i></div>
-                                </div>
-							</td>
-			                <td>
-                                 <div data-ng-if="resource=='domain' || type == 'domain-quota'" >
-                                	<label>
-									<span>{{hasSumOfDomainMin.CPU || '0' }}</span>
-									</b></label>
-                                </div>
-                                  <div data-ng-if="resource=='department'" >
-                                	<label>
-									<span>{{hasSumOfDepartmentMin.CPU || '0' }}</span>
-									</b></label>
-                                </div>
-                                 <div data-ng-if="resource=='project'" >
-                                	<label>
-									<span>{{hasSumOfProjectMin.CPU || '0' }}</span>
-									</b></label>
-                                </div>
-			                </td>
-			                <td>
-                                 <div data-ng-if="resource=='domain' || type == 'domain-quota'" >
-                                	<label>
-									<span>{{-1}}</span></b></label>
-                                </div>
-                                  <div data-ng-if="resource=='department'" >
-                                	<label>
-									<span>{{hasSumOfDepartmentMax.CPU }}</span></b></label>
-                                </div>
-                                 <div data-ng-if="resource=='project'" >
-                                	<label>
-									<span>{{hasSumOfProjectMax.CPU || '0' }}</span></b></label>
-                                </div>
-							</td>
-			          	</tr>
-			          	<tr>
-			               	<td>
-                                <label><fmt:message key="max.memory" bundle="${msg}" /> (MiB):
-                                    <span class="text-danger">*</span>
-                                </label>
-							</td>
-                            <td>
-                                <div class="col-md-8 col-sm-8">
-                                    <input required="true" type="text" valid-integer name="Memory"
-                                     data-ng-model="resourceQuota.Memory"  class="form-control"
-                                     data-ng-class="{'error': (resourceAllocationForm.Memory.$invalid && formSubmitted || resourceAllocationField.Memory.$invalid)}">
-                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="maximum.memory.to.be.allocated" bundle="${msg}" />" ></i>
-                                    <div class="error-area" data-ng-show="((resourceAllocationForm.Memory.$invalid && formSubmitted) || resourceAllocationField.Memory.$invalid)" >
-                                    <i  ng-attr-tooltip="{{ resourceAllocationForm.Memory.errorMessage || '<fmt:message key="max.memory.is.required" bundle="${msg}" />' }}" class="fa fa-warning error-icon"></i></div>
-                                </div>
-							</td>
-			                <td>
-                                  <div data-ng-if="resource=='domain' || type == 'domain-quota'" >
-                                	<label>
-									<span>{{hasSumOfDomainMin.Memory || '0' }}</span>
-									</b></label>
-                                </div>
-                                  <div data-ng-if="resource=='department'" >
-                                	<label>
-									<span>{{hasSumOfDepartmentMin.Memory || '0' }}</span>
-									</b></label>
-                                </div>
-                                <div data-ng-if="resource=='project'" >
-                                	<label>
-									<span>{{hasSumOfProjectMin.Memory || '0' }}</span>
-									</b></label>
-                                </div>
-			                </td>
-			                <td>
-                                  <div data-ng-if="resource=='domain' || type == 'domain-quota'" >
-                                	<label>
-									<span>{{-1}}</span></b></label>
-                                </div>
-                                  <div data-ng-if="resource=='department'" >
-                                	<label>
-									<span>{{hasSumOfDepartmentMax.Memory }}</span></b></label>
-                                </div>
-                                <div data-ng-if="resource=='project'" >
-                                	<label>
-									<span>{{hasSumOfProjectMax.Memory || '0' }}</span></b></label>
-                                </div>
-							</td>
-			          	</tr>
+			       		</tr>
 			          	<tr>
 			               	<td>
 								<label><fmt:message key="max.primary" bundle="${msg}" /> (GiB):

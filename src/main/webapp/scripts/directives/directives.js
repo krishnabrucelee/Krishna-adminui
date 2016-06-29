@@ -1,3 +1,4 @@
+
 /**
  * HOMER - Responsive Admin Theme
  * Copyright 2015 Webapplayers.com
@@ -762,7 +763,7 @@ function validCharacters() {
 };
 
 function favIconUrl($window) {
-    var url = 'http://'+ $window.location.hostname +':8080/'  + 'resources/' + 'favicon.ico';
+    var url = REQUEST_PROTOCOL + $window.location.hostname +':8080/'  + 'resources/' + 'favicon.ico';
     return {
         restrict :"A",
         link: function(scope, el, attr) {
