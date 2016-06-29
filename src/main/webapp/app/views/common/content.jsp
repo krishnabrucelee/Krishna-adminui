@@ -41,6 +41,19 @@
 										key="resource.allocation" bundle="${msg}" /></a> <span
 								ng-switch-when="true"><fmt:message key="resource.allocation" bundle="${msg}" /></span>
 							</span>
+							<span ng-if="state.data.pageTitle === 'Cloud'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="common.cloud" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="common.cloud"
+										bundle="${msg}" /></span>
+							</span>
+							<span ng-if="state.data.pageTitle === 'Resource Usage'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="common.resourceusage" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="common.resourceusage" bundle="${msg}" /></span>
+							</span>
 							<span ng-if="state.data.pageTitle === 'Dashboard'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
