@@ -468,7 +468,7 @@ else if( !angular.isUndefined(file))
             var hasThemeList = appService.crudService.listAll("themesettings/listAll");
             hasThemeList.then(function (result) {
                 $scope.themeSettingsList = result[0];
-                localStorageService.cookie.set('themeSettings', $scope.themeSettingsList);
+                localStorageService.set('themeSettings', $scope.themeSettingsList);
                 if (!angular.isUndefined($scope.themeSettingsList) && $scope.themeSettingsList != null) {
                     if ($scope.themeSettingsList.customisation != null  || !angular.isUndefined($scope.themeSettingsList.customisation)) {
                         $scope.footerChoices = $scope.themeSettingsList.footers;
