@@ -468,6 +468,7 @@ else if( !angular.isUndefined(file))
             var hasThemeList = appService.crudService.listAll("themesettings/listAll");
             hasThemeList.then(function (result) {
                 $scope.themeSettingsList = result[0];
+                localStorageService.cookie.set('themeSettings', $scope.themeSettingsList);
                 if (!angular.isUndefined($scope.themeSettingsList) && $scope.themeSettingsList != null) {
                     if ($scope.themeSettingsList.customisation != null  || !angular.isUndefined($scope.themeSettingsList.customisation)) {
                         $scope.footerChoices = $scope.themeSettingsList.footers;
@@ -606,7 +607,7 @@ $scope.themeSettingList();
                                 || ((themeSettingsList.logoImgFile.type != "image/jpeg") && (!angular.isUndefined(themeSettingsList.logoImgFile.type) && (themeSettingsList.logoImgFile != null)))) {
                         appService.notify({message: 'Please upload jpeg files ', classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                         return false;
-                      } 
+                      }
 			var extension = "";
 			if(!angular.isUndefined(themeSettingsList.favIconFile)) {
 			    extension = themeSettingsList.favIconFile.name.split('.').pop();
@@ -614,7 +615,7 @@ $scope.themeSettingList();
 			 if((extension != "ico" ) && (!angular.isUndefined(themeSettingsList.favIconFile)) && (themeSettingsList.favIconFile != null)) {
                 	  appService.notify({message: 'Please upload fav icon files ', classes: 'alert-danger', templateUrl: $scope.global.NOTIFICATION_TEMPLATE });
                         return false;
-                  		
+
 }
                       else {
                           if (((themeSettingsList.headers != "") && (!angular.isUndefined(themeSettingsList.headers)))  || ((themeSettingsList.footers != "") && (!angular.isUndefined(themeSettingsList.footers)))) {
