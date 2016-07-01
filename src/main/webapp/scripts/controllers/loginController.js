@@ -37,11 +37,11 @@ if(localStorageService.cookie.get('language') == null) {
 $scope.themeSettingList = function () {
     return $http({method:'get', url: REQUEST_PROTOCOL  + $window.location.hostname +':8080/home/list'})
     .then(function(result){
-        $scope.themeSettings = result.data;
+        $scope.themeSettings = result.data[0];
         //localStorageService.cookie.set('themeSettings', $scope.themeSettings);
-         $scope.welcomeContent = result.data.welcomeContent;
-         $scope.footerContent = result.data.footerContent;
-         $scope.splashTitle= result.data.splashTitle;
+         $scope.welcomeContent = result.data[0].welcomeContent;
+         $scope.footerContent = result.data[0].footerContent;
+         $scope.splashTitle= result.data[0].splashTitle;
 
          // Used for pageTitle
          localStorageService.set('themeSettings', $scope.themeSettings);
@@ -49,7 +49,7 @@ $scope.themeSettingList = function () {
              document.getElementById("pandaAppPageTitle").innerHTML = $scope.themeSettings.headerTitle;
          }
 
-         $cookies.splashTitle = result.data.splashTitle;
+         $cookies.splashTitle = result.data[0].splashTitle;
 
     });
 };
