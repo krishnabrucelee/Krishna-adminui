@@ -123,12 +123,12 @@ function appCtrl($http, $scope, $timeout, $rootScope, $modal, $window, globalCon
     $scope.themeSettingList = function () {
 	return $http({method:'get', url: REQUEST_PROTOCOL  + $window.location.hostname +':8080/home/list'})
 	.then(function(result){
-		$scope.themeSettings = result;
-		 $scope.welcomeContent = result.data.welcomeContent;
-		 $scope.footerContent = result.data.footerContent;
-		 $scope.splashTitle= result.data.splashTitle;
+		$scope.themeSettings = result.data[0];
+		 $scope.welcomeContent = result.data[0].welcomeContent;
+		 $scope.footerContent = result.data[0].footerContent;
+		 $scope.splashTitle= result.data[0].splashTitle;
 
-		 $cookies.splashTitle = result.data.splashTitle;
+		 $cookies.splashTitle = result.data[0].splashTitle;
 
 	});
 };
