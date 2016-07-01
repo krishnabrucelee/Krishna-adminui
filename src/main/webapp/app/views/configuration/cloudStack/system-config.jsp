@@ -92,7 +92,7 @@
 							<div class="row">
 								<span class="pull-right">
 								<get-loader-image data-ng-show="showLoader"></get-loader-image>
-									<button ng-disabled = "config.id" class="btn btn-info" type="submit"  data-ng-hide="showLoader"
+									<button data-ng-if = "!config.id" class="btn btn-info" type="submit"  data-ng-hide="showLoader"
 										ng-disabled="form.configForm.$invalid">
 
 										<fmt:message key="common.save" bundle="${msg}" />
