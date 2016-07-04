@@ -117,7 +117,9 @@ function webSocket($rootScope, $timeout, webSockets, globalConfig, notify) {
             $rootScope.$broadcast(JSON.parse(message.body).event, JSON.parse(message.body));
         });
        };
-
+       if (globalConfig.sessionValues == null) {
+	       window.location.href = "login";
+	   }
        initStompClient();
 
     return webSocket;

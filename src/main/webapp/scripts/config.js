@@ -742,7 +742,7 @@ angular.module('panda-ui-admin').constant("PANDA_CONFIG", {
            "VIEW_URL" : "app/views/",
         }).factory('myFactory', function($http, globalConfig, AppConstants, $cookies, $window, tokens, localStorageService, utilService) {
             var loginSession = globalConfig.sessionValues;
-            if(loginSession == null || angular.isUndefined(globalConfig.sessionValues) && tokens != null) {
+            if((loginSession == null || angular.isUndefined(globalConfig.sessionValues)) && tokens != null) {
                 globalConfig.sessionValues = tokens;
             	globalConfig.CONTENT_LIMIT = tokens.paginationLimit;
                 globalConfig.sessionValues.token = localStorageService.get('token');
