@@ -640,6 +640,13 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, local
                     pageTitle: 'Network'
                 }
             })
+            .state('servicecatalog.list-servicecatalog', {
+                url: "servicecatalog/list",
+                templateUrl: VIEW_URL +  "views/servicecatalog/servicecategory.jsp",
+                data: {
+                    pageTitle: 'Service category'
+                }
+            })
             .state('servicecatalog.list-storage.list-storage-offer', {
                 url: "storage/offer",
                 templateUrl: VIEW_URL +  "views/servicecatalog/storage-offer.jsp",
