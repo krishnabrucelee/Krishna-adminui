@@ -1,4 +1,4 @@
-function appService(crudService, localStorageService, globalConfig, webSocket, promiseAjax, notify, utilService, dialogService, modalService, sweetAlert, uploadFile, uploadThemeImage) {
+function appService(crudService, localStorageService, globalConfig, webSocket, promiseAjax, notify, utilService, dialogService, modalService, sweetAlert, uploadFile, uploadThemeImage, uploadServicesIcon) {
 
 	var object = {};
 
@@ -12,31 +12,34 @@ function appService(crudService, localStorageService, globalConfig, webSocket, p
     object.globalConfig = globalConfig;
 
     // Application ajax calls goes here
-    object.promiseAjax = promiseAjax
+    object.promiseAjax = promiseAjax;
 
     // Application ajax calls goes here
-    object.uploadFile = uploadFile
+    object.uploadFile = uploadFile;
 
     // Application ajax calls goes here
-    object.uploadThemeImage = uploadThemeImage
+    object.uploadThemeImage = uploadThemeImage;
+
+    // Upload service icon calls goes here
+    object.uploadServicesIcon = uploadServicesIcon;
 
     // Application notification
-    object.notify = notify
+    object.notify = notify;
 
     // Applicaiton Utilities
-    object.utilService = utilService
+    object.utilService = utilService;
 
     // Application ajax calls goes here
-    object.dialogService = dialogService
+    object.dialogService = dialogService;
 
     // Model service calls goes here
-    object.modalService = modalService
+    object.modalService = modalService;
 
     // Sweet alert calls goes here
-    object.sweetAlert = sweetAlert
+    object.sweetAlert = sweetAlert;
 
    // WebSocket service call goes here
-    object.webSocket = webSocket
+    object.webSocket = webSocket;
 
     return object;
 

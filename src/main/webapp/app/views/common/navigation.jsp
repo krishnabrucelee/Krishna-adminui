@@ -50,7 +50,8 @@
                 <li ui-sref-active="active"><a ui-sref="servicecatalog.list-miscellaneous" id="miscellaneous_navigation_button"><fmt:message key="common.miscellaneous" bundle="${msg}" /></a></li>
                 <li ui-sref-active="active"><a ui-sref="servicecatalog.list-templatestore" id="template_store_navigation_button"><fmt:message key="common.templatestore" bundle="${msg}" /></a></li>
                 <li ui-sref-active="active"><a ui-sref="servicecatalog.list-network" id="network_navigation_button"><fmt:message key="common.network" bundle="${msg}" /></a></li>
-				<li ui-sref-active="active"><a ui-sref="servicecatalog.list-servicecatalog" id="servicecatalog_navigation_button"><fmt:message key="common.servicecategory" bundle="${msg}" /></a></li>
+               <li ui-sref-active="active"><a ui-sref="servicecatalog.list-servicecatalog" id="servicecatalog_navigation_button"><fmt:message key="common.servicecategory" bundle="${msg}" /></a></li>
+               <li ui-sref-active="active"><a ui-sref="servicecatalog.list-services" id="services_navigation_button"><fmt:message key="common.services" bundle="${msg}" /></a></li>
 
             </ul>
         </li>

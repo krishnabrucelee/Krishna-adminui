@@ -105,6 +105,13 @@
 								ng-switch-when="true"><fmt:message key="common.servicecategory"
 										bundle="${msg}" /></span>
 							</span>
+							<span ng-if="state.data.pageTitle === 'Services'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="common.services" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="common.services"
+										bundle="${msg}" /></span>
+							</span>
 							<span ng-if="state.data.pageTitle === 'Configuration'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
