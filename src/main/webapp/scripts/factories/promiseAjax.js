@@ -123,7 +123,7 @@ function uploadFile($http){
 function uploadThemeImage($http){
     var uploadTheme = function(backgroundImageFile, logoImageFile, favIconFile, headerChoices, footerChoices,
             welcomeContent,welcomeContentUser,splashTitle,splashTitleUser, footerContent, headerTitle,
-            httpTokenRequest,globalConfig, $cookies, localStorageService) {
+            themeFooterLeft, themeFooterRight, httpTokenRequest,globalConfig, $cookies, localStorageService) {
          var fd = new FormData();
         /**angular.forEach(files,function(file){
         if(!angular.isUndefined(file)) {
@@ -150,6 +150,8 @@ function uploadThemeImage($http){
         fd.append("splashTitleUser",splashTitleUser);
         fd.append('footerContent',footerContent);
         fd.append('headerTitle',headerTitle);
+        fd.append('themeFooterLeft',themeFooterLeft);
+        fd.append('themeFooterRight',themeFooterRight);
         return $http.post(globalConfig.APP_URL + "themesettings/uploadFile", fd, {
             transformRequest : angular.identity,
             headers : {
