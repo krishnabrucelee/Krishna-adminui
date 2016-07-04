@@ -168,6 +168,49 @@ function uploadThemeImage($http){
     }
     return {uploadTheme: uploadTheme};
 };
+
+//Services
+function uploadServicesIcon($http) {
+    var updateService = function(services, httpTokenRequest, globalConfig,
+    		$cookies, localStorageService) {
+        var fd = new FormData();
+        if(!angular.isUndefined(services.serviceIconFile)) {
+            fd.append("serviceIconFile",services.serviceIconFile);
+        }
+        if (angular.isUndefined(services.id)) {
+        	fd.append("id",0);
+        } else {
+            fd.append("id",services.id);
+        }
+        fd.append("serviceCode",services.serviceCode);
+        fd.append('serviceCategoryId',services.serviceCategory.id);
+        fd.append("serviceName",services.serviceName);
+        if (angular.isUndefined(services.description)) {
+        	fd.append("description","");
+        } else {
+            fd.append("description",services.description);
+        }
+        if (angular.isUndefined(services.unitPrice) || services.unitPrice == null) {
+        	fd.append("unitPrice",0);
+        } else {
+            fd.append("unitPrice",services.unitPrice);
+        }
+        return $http.post(globalConfig.APP_URL + "services/saveService", fd, {
+            transformRequest : angular.identity,
+            headers : {
+                'Content-Type' : undefined,
+                'x-auth-token': localStorageService.get('token'),
+                'x-auth-login-token': localStorageService.get('loginToken'),
+                'x-auth-remember': localStorageService.get('rememberMe'),
+                'x-auth-user-id': localStorageService.get('id'),
+                'x-auth-login-time': localStorageService.get('loginTime')
+            }
+        });
+    }
+    return {updateService: updateService};
+};
+
+
 /**
  * Pass function into module
  */
@@ -176,3 +219,4 @@ angular
     .factory('promiseAjax', promiseAjax)
 .factory('uploadFile', uploadFile)
 .factory('uploadThemeImage', uploadThemeImage)
+.factory('uploadServicesIcon', uploadServicesIcon)

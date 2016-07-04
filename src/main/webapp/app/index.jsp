@@ -246,6 +246,7 @@
 <script src="scripts/controllers/domainController.js"></script>
 <script src="scripts/controllers/headerController.js"></script>
 <script src="scripts/controllers/serviceCategory.js"></script>
+<script src="scripts/controllers/serviceController.js"></script>
 
 <script src="scripts/factories/appService.js"></script>
 <script src="scripts/factories/utilService.js"></script>

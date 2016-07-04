@@ -5,7 +5,7 @@ angular
         .module('panda-ui-admin')
         .controller('servicecategoryCtrl', servicecategoryCtrl)
 
-function servicecategoryCtrl($scope, $state, promiseAjax, $http, $window, $modal, $log, $state, $stateParams, crudService, appService, globalConfig, localStorageService, $cookies) {
+function servicecategoryCtrl($scope, promiseAjax, crudService, appService, globalConfig, localStorageService) {
 
 	$scope.sort = appService.globalConfig.sort;
     $scope.changeSorting = appService.utilService.changeSorting;
