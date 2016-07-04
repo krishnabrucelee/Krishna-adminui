@@ -187,6 +187,24 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <div class="row" >
+                                <label class="col-md-2 col-sm-3 control-label "><fmt:message key="theme.page.footer.right" bundle="${msg}" />:</label>
+                                <div class="col-md-5 col-sm-7">
+                                    <input type="text" class="form-control" name="footerRight" required="true" data-ng-model="themeSettingsList.themeFooterRight" >
+                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon " tooltip="<fmt:message key="theme.page.footer.right" bundle="${msg}" />" ></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row" >
+                                <label class="col-md-2 col-sm-3 control-label "><fmt:message key="theme.page.footer.left" bundle="${msg}" />:</label>
+                                <div class="col-md-5 col-sm-7">
+                                    <input type="text" class="form-control" name="footerLeft" required="true" data-ng-model="themeSettingsList.themeFooterLeft" >
+                                    <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon " tooltip="<fmt:message key="theme.page.footer.left" bundle="${msg}" />" ></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-3">
                                 <a class="btn btn-default" href="#/configuration/general"><fmt:message key="common.cancel" bundle="${msg}" /></a>
                                 <button class="btn btn-info" type="submit"><fmt:message key="common.save" bundle="${msg}" /></button>
