@@ -221,7 +221,7 @@ ul.footer-custom-links li a:hover{color:#000; text-decoration:none;}
 .company-panel-content ul.list-group{margin-bottom:0px;}
 
 .company-panel-content a.accordion-toggle span{font-size:13px; font-weight:bold; color:#4c6986;}
-.login-bg{background-repeat: no-repeat !important; background-size: 100% 100% !important;}
+.login-bg{background-repeat: no-repeat !important; background-size: cover !important;}
 
  a.lang{width:150px;}
 .eng-lang{padding-right:15px;}
