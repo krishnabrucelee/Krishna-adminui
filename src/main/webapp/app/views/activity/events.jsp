@@ -16,9 +16,9 @@
 
                     </div>
                 </div>
-                <div class="pull-right">
+                <!-- <div class="pull-right">
                     <panda-quick-search></panda-quick-search>
-                    <div class="clearfix"></div>
+                    <div class="clearfix"></div> -->
 
                     <span class="pull-right m-l-sm m-t-sm">
                        <!--  <span data-ng-hide="activity.oneItemSelected.events">
@@ -29,7 +29,6 @@
                             <a class="btn btn-info" data-ng-click="archive()"><span class="fa fa-file-archive-o"></span> Archive Events</a>
                             <a class="btn btn-info" data-ng-click="delete()"><span class="fa fa-trash"></span> Delete Events</a>
                         </span> -->
-                        <a class="btn btn-info" data-ng-click="getActivityByCategory('events',1)" title="<fmt:message key="common.refresh" bundle="${msg}" />" ><span class="fa fa-refresh fa-lg "></span></a>
                     </span>
                 </div>
             </div>

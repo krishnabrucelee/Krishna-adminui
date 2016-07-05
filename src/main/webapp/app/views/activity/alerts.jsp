@@ -16,10 +16,10 @@
 
                     </div>
                 </div>
-                <div class="pull-right">
+                <!-- <div class="pull-right">
                     <panda-quick-search></panda-quick-search>
                     <div class="clearfix"></div>
-
+ -->
                     <span class="pull-right m-l-sm m-t-sm">
                         <!-- <span data-ng-hide="activity.oneItemSelected.alerts">
                             <a class="btn btn-info" data-ng-click="archiveGlobal()"><span class="fa fa-file-archive-o"></span> Archive Alerts</a>
@@ -29,7 +29,6 @@
                             <a class="btn btn-info" data-ng-click="archive()"><span class="fa fa-file-archive-o"></span> Archive Alerts</a>
                             <a class="btn btn-info" data-ng-click="delete()"><span class="fa fa-trash"></span> Delete Alerts</a>
                         </span> -->
-                        <a class="btn btn-info" data-ng-click="getActivityByCategory('alerts',1)" title="<fmt:message key="common.refresh" bundle="${msg}" />" ><span class="fa fa-refresh fa-lg "></span></a>
                     </span>
                 </div>
             </div>

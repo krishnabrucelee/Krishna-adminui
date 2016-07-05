@@ -16,9 +16,9 @@
 
                     </div>
                 </div>
-                <div class="pull-right">
+               <!--  <div class="pull-right">
                     <panda-quick-search></panda-quick-search>
-                    <div class="clearfix"></div>
+                    <div class="clearfix"></div> -->
 <!--
                     <span class="pull-right m-l-sm m-t-sm">
                         <span data-ng-hide="activity.oneItemSelected.notifications">

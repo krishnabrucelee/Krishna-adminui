@@ -31,7 +31,7 @@
                     <table cellspacing="1" cellpadding="1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th><fmt:message key="common.ips" bundle="${msg}" /></th>
+                        <th><fmt:message key="common.public.ips" bundle="${msg}" /></th>
                         <th><fmt:message key="common.zone" bundle="${msg}" /></th>
                         <th><fmt:message key="common.user" bundle="${msg}" /></th>
                         <th><fmt:message key="common.state" bundle="${msg}" /></th>
