@@ -78,7 +78,7 @@
                                 {{ services.serviceCategory.category}}
                             </td>
                             <td>
-                            <b class="text-danger ng-binding">{{ services.unitPrice}} /<span class="ng-scope"><fmt:message key="service.unit.price.format" bundle="${msg}" /></span></b>
+                            <b class="text-danger ng-binding">{{ services.servicesCost[0].cost || 0}} /<span class="ng-scope"><fmt:message key="service.unit.price.format" bundle="${msg}" /></span></b>
                             </td>
                             <td>
                                 <a class="icon-button test_storage_offerings_edit_button" data-ng-click="editServices('md', services)" title="<fmt:message

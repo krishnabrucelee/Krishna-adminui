@@ -147,13 +147,8 @@ $scope.editServices = function (size, services) {
 	var hasServices = appService.crudService.read("services", services.id);
 	hasServices.then(function (result) {
         $scope.services = result;
-        angular.forEach($scope.formElements.serviceCategoryList, function(obj, key) {
-			if(obj.id == $scope.services.serviceCategory.id) {
-				$scope.services.serviceCategory = obj;
-			}
-		});
-        if ($scope.services.unitPrice == 0) {
-        	$scope.services.unitPrice = null;
+        if ($scope.services.serviceCost == 0) {
+        	$scope.services.serviceCost = null;
         }
         $scope.serviceIconImage = 'http://'+ $window.location.hostname +':8080/'  + 'resources/' + $scope.services.serviceIcon;
     });

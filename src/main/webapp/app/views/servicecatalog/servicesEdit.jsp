@@ -18,19 +18,13 @@
 		    <get-loader-image data-ng-show="showLoader"></get-loader-image>
 		</div>
      	<div data-ng-hide="showLoader">
-	               <div class="form-group" data-ng-class="{ 'text-danger' : servicesForm.serviceCode.$invalid && formSubmitted}">
+	               <div class="form-group">
                         <div class="row">
-                            <label  class="col-md-3 col-xs-12 col-sm-2 control-label"><fmt:message key="service.code" bundle="${msg}" />
-                                <span class="text-danger">*</span>
-                            </label>
+                            <label  class="col-md-3 col-xs-12 col-sm-2 control-label"><fmt:message key="service.code" bundle="${msg}" /></label>
                             <div class="col-md-5 col-xs-12 col-sm-5">
-                                <input required="true" type="text" name="serviceCode" data-ng-model="services.serviceCode" class="form-control" data-ng-class="{'error': servicesForm.serviceCode.$invalid && formSubmitted}" >
-                                <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="service.code" bundle="${msg}" />" ></i>
-                                <div class="error-area" data-ng-show="servicesForm.serviceCode.$invalid && formSubmitted" >
-                                <i ng-attr-tooltip="{{ servicesForm.serviceCode.errorMessage || '<fmt:message key="services.serviceCode.is.required" bundle="${msg}" />' }}"
-									class="fa fa-warning error-icon">
-								</i>
-							</div>
+	                            {{ services.serviceCode }}
+	                            <input type="hidden" id="edit_service_code" name="serviceCode"
+	                            data-ng-model="services.serviceCode" />
                             </div>
                         </div>
                     </div>
@@ -50,22 +44,14 @@
 	                       </div>
 	                   </div>
 	                </div>
-                 <div class="form-group" data-ng-class="{ 'text-danger' : servicesForm.serviceCategory.$invalid && formSubmitted}">
+                 <div class="form-group">
                    <div class="row">
-                       <label  class="col-md-3 col-xs-12 col-sm-2 control-label"><fmt:message key="service.category" bundle="${msg}" />
-                           <span class="text-danger">*</span>
-                       </label>
+                       <label  class="col-md-3 col-xs-12 col-sm-2 control-label"><fmt:message key="service.category" bundle="${msg}" /></label>
                        <div class="col-md-5 col-xs-12 col-sm-5">
-                           <select required="true" class="form-control input-group" name=serviceCategory data-ng-model="services.serviceCategory" ng-options="serviceCategory.category for serviceCategory in formElements.serviceCategoryList" data-ng-class="{'error': servicesForm.serviceCategory.$invalid && formSubmitted}" >
-                               <option value=""><fmt:message key="common.select" bundle="${msg}" /></option>
-                           </select>
-                           <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="service.category" bundle="${msg}" />" ></i>
-                           <div class="error-area" data-ng-show="servicesForm.serviceCategory.$invalid && formSubmitted" >
-                           <i ng-attr-tooltip="{{ servicesForm.serviceCategory.errorMessage || '<fmt:message key="servicecategory.category.is.required" bundle="${msg}" />' }}"
-				           class="fa fa-warning error-icon">
-			               </i>
+                            {{ services.serviceCategory.category }}
+                            <input type="hidden" id="edit_service_category" name="serviceCategory"
+                            data-ng-model="services.serviceCategory" />
 		               </div>
-                       </div>
                    </div>
                 </div>
                 <div class="form-group">
@@ -87,7 +73,7 @@
 	                   <label  class="col-md-3 col-xs-12 col-sm-2 control-label"><fmt:message key="service.unit.price" bundle="${msg}" />(<app-currency
 						class="text-danger"></app-currency>) /<span class="ng-scope"><fmt:message key="service.unit.price.format" bundle="${msg}" /></span></label></label>
 	                   <div class="col-md-5 col-xs-12 col-sm-5">
-	                       <input type="text" valid-price name="unitPrice" data-ng-model="services.unitPrice" class="form-control" data-ng-class="{'error': servicesForm.unitPrice.$invalid && formSubmitted}" >
+	                       <input type="text" valid-price name="serviceCost" data-ng-model="services.servicesCost[0].cost" class="form-control" data-ng-class="{'error': servicesForm.serviceCost.$invalid && formSubmitted}" >
 	                       <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="service.unit.price" bundle="${msg}" />" ></i>
 	                </div>
 	                </div>
