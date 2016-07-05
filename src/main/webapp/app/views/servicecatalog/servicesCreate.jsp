@@ -82,7 +82,7 @@
                       <label  class="col-md-3 col-xs-12 col-sm-2 control-label"><fmt:message key="service.unit.price" bundle="${msg}" />(<app-currency
 								class="text-danger"></app-currency>) /<span class="ng-scope"><fmt:message key="service.unit.price.format" bundle="${msg}" /></span></label>
                       <div class="col-md-5 col-xs-12 col-sm-5">
-                          <input type="text" valid-price name="unitPrice" data-ng-model="services.unitPrice" class="form-control" data-ng-class="{'error': servicesForm.unitPrice.$invalid && formSubmitted}" >
+                          <input type="text" valid-price name="serviceCost" data-ng-model="services.servicesCost[0].cost" class="form-control" data-ng-class="{'error': servicesForm.serviceCost.$invalid && formSubmitted}" >
                           <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="service.unit.price" bundle="${msg}" />" ></i>
 	                  </div>
                    </div>

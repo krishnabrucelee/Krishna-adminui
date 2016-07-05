@@ -57,7 +57,7 @@
                             <th data-ng-click="changeSort('serviceCode',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='serviceCode'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="service.code" bundle="${msg}" /></th>
                             <th data-ng-click="changeSort('serviceName',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='serviceName'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="service.name" bundle="${msg}" /></th>
                             <th data-ng-click="changeSort('serviceCategory.category',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='serviceCategory.category'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="service.category" bundle="${msg}" /></th>
-							<th data-ng-click="changeSort('unitPrice',paginationObject.currentPage)" data-ng-class="sort.descending && sort.column =='unitPrice'? 'sorting_desc' : 'sorting_asc' " ><fmt:message key="service.unit.price" bundle="${msg}" /> (<app-currency class="text-danger ng-binding">¥</app-currency>)</th>
+							<th><fmt:message key="service.unit.price" bundle="${msg}" /> (<app-currency class="text-danger ng-binding">¥</app-currency>)</th>
                         	<th><fmt:message key="common.action" bundle="${msg}" /></th>
                         </tr>
                     </thead>
@@ -78,7 +78,7 @@
                                 {{ services.serviceCategory.category}}
                             </td>
                             <td>
-                            <b class="text-danger ng-binding">{{ services.unitPrice}} /<span class="ng-scope"><fmt:message key="service.unit.price.format" bundle="${msg}" /></span></b>
+                            <b class="text-danger ng-binding">{{ services.servicesCost[0].cost || 0}} /<span class="ng-scope"><fmt:message key="service.unit.price.format" bundle="${msg}" /></span></b>
                             </td>
                             <td>
                                 <a class="icon-button test_storage_offerings_edit_button" data-ng-click="editServices('md', services)" title="<fmt:message
