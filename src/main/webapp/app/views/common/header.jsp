@@ -16,9 +16,6 @@
         <ul class="nav navbar-nav navbar-right round-corner" >
 
 			<li data-ng-repeat="theme in themeSettingsList.headers" ><a class="label-menu-corner" data-ng-if="theme.url != null" target="_blank" href="http://{{theme.url}}" >{{theme.name}}<span class="label label-warning"></span></a></li>
-
-            <li data-ng-class="{active: $state.includes('support')}"><a class="label-menu-corner" ui-sref="support.tickets" ><fmt:message key="common.helpdesk" bundle="${msg}" /><span class="label label-success"></span></a></li>
-
             <li data-ng-class="{active: $state.includes('activity')}" data-ng-if="global.event==0"><a  class="label-menu-corner" ui-sref="activity" ><fmt:message key="common.activity" bundle="${msg}" /><span class="label label-warning"></span></a></li>
             <li data-ng-class="{active: $state.includes('activity')}" data-ng-if="global.event!=0"><a  class="label-menu-corner" ui-sref="activity" ><fmt:message key="common.activity" bundle="${msg}" /><span class="label label-warning">{{global.event }}</span></a></li>
 
