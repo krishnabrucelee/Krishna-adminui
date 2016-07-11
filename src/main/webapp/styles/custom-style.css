@@ -244,6 +244,11 @@ ul.footer-custom-links li a:hover{color:#000; text-decoration:none;}
 .dashboard-resource-usage .carousel-control i, .dashboard-resource-usage .carousel-control i, .dashboard-resource-usage .carousel-control .icon-prev, .dashboard-resource-usage .carousel-control .icon-next{font-size: 18px; padding-top: 9px;}
 .system-summary.panel-active {border: #ddd 1px solid; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.14);}
 
+.admin-dashboard.dashboard-quota-area .doughnut-fixed-area{width:175px;}
+.admin-dashboard.dashboard-quota-area span{font-size:11px;}
+.admin-dashboard-quota{margin:27px 0px 28px 0px;}
+.admin-dashboard-quota .doughnutchart-value{font-size: 15px; margin: 11% 0 0 29%;}
+
 /* Responsive Styles */
 @media (min-width: 1024px) and (max-width: 1050px){.tab-full{width:100%;}}
 

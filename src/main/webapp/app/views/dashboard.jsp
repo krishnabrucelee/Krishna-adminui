@@ -46,125 +46,23 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row dashboard-quota-area">
-                                        <div class="col-md-3 col-sm-4 col-xs-6 dashboard-quota" data-ng-repeat="resource in zoneResources | orderBy:'order'">
+                                    <div class="row" data-ng-show="showZoneInfraLoader">
+                                        <div class="col-md-12 text-center">
+                                            <div class="loader-img-wrapper">
+                                                <div class='uil-ripple-css' style='transform:scale(0.32);'><div></div><div></div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-ng-hide="showZoneInfraLoader" class="row admin-dashboard dashboard-quota-area" data-ng-show="">
+
+                                        <div class="col-md-3 col-sm-4 col-xs-6 admin-dashboard-quota" data-ng-repeat="resource in zoneResources | orderBy:'order'">
                                             <div class="doughnutchart-value">{{ resource.percentused }}%</div>
-                                            <canvas doughnutchart options="doughnutOptions" data="zoneResourceList[resource.type].doughnutData" height="140" responsive=true></canvas>
-                                            {{ resource.label }}<span>Allocat {{ resource.capacityused}} of {{ resource.capacitytotal}}</span>
+                                            <div class="doughnut-fixed-area">
+                                            <canvas doughnutchart options="doughnutOptions" data="zoneResourceList[resource.type].doughnutData"  width="160" height="65"></canvas>
+                                            {{ resource.label }}<span>Allocated {{ resource.capacityused}} of {{ resource.capacitytotal}}</span>
+                                            </div>
                                         </div>
 
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="company-panel-title-area">
-                                                <div class="pull-left">
-                                                    <div class="company-panel-icon label-warning text-center"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
-                                                </div>
-                                                <div class="pull-left company-panel-title font-bold m-l-sm">
-                                                    Second Zone <span>Current Zone</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row dashboard-quota-area">
-                                        <div class="col-md-3 col-sm-4 col-xs-6 dashboard-quota">
-                                            <div class="doughnutchart-value">42.00%</div>
-                                            <canvas doughnutchart options="doughnutOptions" data="doughnutData1" height="140" responsive=true></canvas>
-                                            Public IP Addresses<span>Using 21 of 25</span>
-                                        </div>
-                                        <div class="col-md-3 col-sm-4 col-xs-6 dashboard-quota">
-                                            <div class="doughnutchart-value">73.50%</div>
-                                            <canvas doughnutchart options="doughnutOptions" data="doughnutData2" height="140" responsive=true></canvas>
-                                            Memory<span>Using  5GB of 7.5GB</span>
-                                        </div>
-                                        <div class="col-md-3 col-sm-4 col-xs-6 dashboard-quota">
-                                            <div class="doughnutchart-value">22.35%</div>
-                                            <canvas doughnutchart options="doughnutOptions" data="doughnutData3" height="140" responsive=true></canvas>
-                                            CPU<span>Using 9.51 GHz of  24.74 GHz</span>
-                                        </div>
-                                        <div class="col-md-3 col-sm-4 col-xs-6 dashboard-quota">
-                                            <div class="doughnutchart-value">88.00%</div>
-                                            <canvas doughnutchart options="doughnutOptions" data="doughnutData4" height="140" responsive=true></canvas>
-                                            Mngt IP Addresses<span>Using 04 of 11</span>
-                                        </div>
-                                        <div class="col-md-3 col-sm-4 col-xs-6 dashboard-quota">
-                                            <div class="doughnutchart-value">35.46%</div>
-                                            <canvas doughnutchart options="doughnutOptions" data="doughnutData4" height="140" responsive=true></canvas>
-                                            Secondary Storage<span>Using 118.98 GB of 454.03 GB</span>
-                                        </div>
-                                        <div class="col-md-3 col-sm-4 col-xs-6 dashboard-quota">
-                                            <div class="doughnutchart-value">12.00%</div>
-                                            <canvas doughnutchart options="doughnutOptions" data="doughnutData2" height="140" responsive=true></canvas>
-                                            Primary Storage<span> Using 60.11 GB of 908.07 GB </span>
-                                        </div>
-                                        <div class="col-md-3 col-sm-4 col-xs-6 dashboard-quota">
-                                            <div class="doughnutchart-value">40.20%</div>
-                                            <canvas doughnutchart options="doughnutOptions" data="doughnutData3" height="140" responsive=true></canvas>
-                                            VLAN / VNI<span>Using 4.2 of 10</span>
-                                        </div>
-                                        <div class="col-md-3 col-sm-4 col-xs-6 dashboard-quota">
-                                            <div class="doughnutchart-value">20.00%</div>
-                                            <canvas doughnutchart options="doughnutOptions" data="doughnutData1" height="140" responsive=true></canvas>
-                                            GPU<span>Using 2 of 10</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="company-panel-title-area">
-                                                <div class="pull-left">
-                                                    <div class="company-panel-icon label-warning text-center"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
-                                                </div>
-                                                <div class="pull-left company-panel-title font-bold m-l-sm">
-                                                    Third Zone Name <span>Current Zone</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row dashboard-quota-area">
-                                        <div class="col-md-3 col-sm-4 col-xs-6 dashboard-quota">
-                                            <div class="doughnutchart-value">42.00%</div>
-                                            <canvas doughnutchart options="doughnutOptions" data="doughnutData1" height="140" responsive=true></canvas>
-                                            Public IP Addresses<span>Using 21 of 25</span>
-                                        </div>
-                                        <div class="col-md-3 col-sm-4 col-xs-6 dashboard-quota">
-                                            <div class="doughnutchart-value">73.50%</div>
-                                            <canvas doughnutchart options="doughnutOptions" data="doughnutData2" height="140" responsive=true></canvas>
-                                            Memory<span>Using  5GB of 7.5GB</span>
-                                        </div>
-                                        <div class="col-md-3 col-sm-4 col-xs-6 dashboard-quota">
-                                            <div class="doughnutchart-value">22.35%</div>
-                                            <canvas doughnutchart options="doughnutOptions" data="doughnutData3" height="140" responsive=true></canvas>
-                                            CPU<span>Using 9.51 GHz of  24.74 GHz</span>
-                                        </div>
-                                        <div class="col-md-3 col-sm-4 col-xs-6 dashboard-quota">
-                                            <div class="doughnutchart-value">88.00%</div>
-                                            <canvas doughnutchart options="doughnutOptions" data="doughnutData4" height="140" responsive=true></canvas>
-                                            Mngt IP Addresses<span>Using 04 of 11</span>
-                                        </div>
-                                        <div class="col-md-3 col-sm-4 col-xs-6 dashboard-quota">
-                                            <div class="doughnutchart-value">35.46%</div>
-                                            <canvas doughnutchart options="doughnutOptions" data="doughnutData4" height="140" responsive=true></canvas>
-                                            Secondary Storage<span>Using 118.98 GB of 454.03 GB</span>
-                                        </div>
-                                        <div class="col-md-3 col-sm-4 col-xs-6 dashboard-quota">
-                                            <div class="doughnutchart-value">12.00%</div>
-                                            <canvas doughnutchart options="doughnutOptions" data="doughnutData2" height="140" responsive=true></canvas>
-                                            Primary Storage<span> Using 60.11 GB of 908.07 GB </span>
-                                        </div>
-                                        <div class="col-md-3 col-sm-4 col-xs-6 dashboard-quota">
-                                            <div class="doughnutchart-value">40.20%</div>
-                                            <canvas doughnutchart options="doughnutOptions" data="doughnutData3" height="140" responsive=true></canvas>
-                                            VLAN / VNI<span>Using 4.2 of 10</span>
-                                        </div>
-                                        <div class="col-md-3 col-sm-4 col-xs-6 dashboard-quota">
-                                            <div class="doughnutchart-value">20.00%</div>
-                                            <canvas doughnutchart options="doughnutOptions" data="doughnutData1" height="140" responsive=true></canvas>
-                                            GPU<span>Using 2 of 10</span>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -188,13 +86,21 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12 col-sm-6">
+                            <div class="row" data-ng-show="showHostsLoader">
+                                <div class="col-md-12 text-center">
+                                    <div class="loader-img-wrapper">
+                                        <div class='uil-ripple-css' style='transform:scale(0.32);'><div></div><div></div></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-sm-6" data-ng-hide="showHostsLoader">
                                 <h6>Hypervisors</h6>
                                 <div class="col-md-6 col-sm-6 col-xs-6">
                                     <div class="quick-view-details offline">
                                         <div class="quick-view-icon pull-right"></div>
                                         <div class="clearfix"></div>
-                                        <div class="quick-view-count pull-right">09</div>
+                                        <div class="quick-view-count pull-right">{{systemHealth.hostOfflineCount}}</div>
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="quick-view-title text-center">Offline</div>
@@ -203,19 +109,29 @@
                                     <div class="quick-view-details online">
                                         <div class="quick-view-icon pull-right"></div>
                                         <div class="clearfix"></div>
-                                        <div class="quick-view-count pull-right">06</div>
+                                        <div class="quick-view-count pull-right">{{ systemHealth.hostOnlineCount }}</div>
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="quick-view-title text-center">Online</div>
                                 </div>
                             </div>
-                            <div class="col-md-12 col-sm-6">
+
+
+                            <div class="row" data-ng-show="showSystemVmsLoader">
+                                <div class="col-md-12 text-center">
+                                    <div class="loader-img-wrapper">
+                                        <div class='uil-ripple-css' style='transform:scale(0.32);'><div></div><div></div></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-sm-6" data-ng-hide="showSystemVmsLoader">
                                 <div class="col-md-12"><h6>System VMs</h6></div>
                                 <div class="col-md-6 col-sm-6 col-xs-6">
                                     <div class="quick-view-details offline">
                                         <div class="quick-view-icon pull-right"></div>
                                         <div class="clearfix"></div>
-                                        <div class="quick-view-count pull-right">15</div>
+                                        <div class="quick-view-count pull-right">{{ systemHealth.systemVmOfflineCount }}</div>
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="quick-view-title text-center">Offline</div>
@@ -224,7 +140,7 @@
                                     <div class="quick-view-details online">
                                         <div class="quick-view-icon pull-right"></div>
                                         <div class="clearfix"></div>
-                                        <div class="quick-view-count pull-right">03</div>
+                                        <div class="quick-view-count pull-right">{{ systemHealth.systemVmOnlineCount }}</div>
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="quick-view-title text-center">Online</div>
@@ -250,7 +166,14 @@
                         </div>
                     </div>
                     <div class="slimScroll-175">
-                    <div class="table-responsive">
+                    <div class="row" data-ng-show="showClientResourcesLoader">
+                        <div class="col-md-12 text-center">
+                            <div class="loader-img-wrapper">
+                                <div class='uil-ripple-css' style='transform:scale(0.32);'><div></div><div></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive" data-ng-hide="showClientResourcesLoader">
                         <table cellspacing="1" cellpadding="1" class="table table-bordered table-striped">
                             <thead>
                             <tr>
@@ -264,7 +187,7 @@
                                 <th>Total Public IP</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody data-ng-show="clientResourceList.length > 0" >
                             <tr data-ng-repeat="clientObj in clientResourceList">
                                 <td>{{$index}}</td>
                                 <td>{{clientObj.domainName}}</td>
@@ -275,11 +198,12 @@
                                 <td>{{clientObj.storage}}</td>
                                 <td>{{clientObj.publicIp}}</td>
                             </tr>
-
+                            </div>
                             </tbody>
                         </table>
                     </div>
-                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -293,7 +217,7 @@
 
 <script type="text/javascript">
         $(document).ready(function() {
-        $('.slimScroll').slimScroll();
+        $('.slimScroll,.slimScroll-175').slimScroll();
 
         });
     </script>

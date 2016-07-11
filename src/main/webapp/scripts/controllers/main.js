@@ -596,6 +596,7 @@ $scope.themeSettingList();
     $scope.zoneResourceList= [];
     var zone = {
             getZoneResourceByZone: function(zone) {
+                $scope.showZoneInfraLoader = true;
                 var id = zone.uuid;
                 $scope.zoneName = zone.name;
 
@@ -604,7 +605,9 @@ $scope.themeSettingList();
                                     "Secondary Storage", "Primary Storage Used", "GPU"];
                 var hasZoneResource = appService.crudService.listAll("dashboard/resource/zone/"+ id);
                 hasZoneResource.then(function (result) {
+                    $scope.showZoneInfraLoader = false;
                     if(result.length > 0) {
+
                         zoneResources = result;
                         angular.forEach(zoneResources, function(obj, key) {
                             var total = zoneResources[key].capacitytotal;
@@ -654,8 +657,6 @@ $scope.themeSettingList();
                         })
 
 
-
-
                         zoneResources[1].order = 3;
                         zoneResources[1].label = "CPU";
 
@@ -685,7 +686,6 @@ $scope.themeSettingList();
                     }
                     $scope.zoneResources = zoneResources;
                 });
-
             },
 
             getZoneList: function() {
@@ -699,22 +699,42 @@ $scope.themeSettingList();
     zone.getZoneList();
 
 
-
-    var hypervisors = {
-            getHyperVisorList: function() {
-                var hasHypervisors = appService.crudService.listAll("hypervisors/list");
-                hasHypervisors.then(function (result) {
-                    zone.getZoneResourceByZone(result[0]);
+    $scope.systemHealth = {};
+    var hosts = {
+            hostOfflineCount: 0,
+            hostOnlineCount:0,
+            getHostStatusList: function() {
+                $scope.showHostsLoader = true;
+                var hasResponse = appService.crudService.listAll("dashboard/systemhealth/hosts");
+                hasResponse.then(function (result) {
+                    $scope.showHostsLoader = false;
+                    angular.forEach(result, function(obj, key) {
+                        if(obj.state == "Up") {
+                            hosts.hostOnlineCount++;
+                        }
+                        if(obj.state == "Down" || obj.state == "Disconnected") {
+                            hosts.hostOfflineCount++;
+                        }
+                        $scope.systemHealth.hostOnlineCount = hosts.hostOnlineCount;
+                        $scope.systemHealth.hostOfflineCount = hosts.hostOfflineCount;
+                    });
                 });
             }
     };
+    hosts.getHostStatusList();
+
+
     var clientResourceList = [];
 
     var domains = {
 
             getDomainList: function() {
+                clientResourceList= [];
+                $scope.showClientResourcesLoader=true;
                 var hasDomains = appService.crudService.listAll("domains/list");
                 hasDomains.then(function (result) {
+                     clientResourceList= [];
+                    $scope.showClientResourcesLoader = false;
                     angular.forEach(result, function(obj, key) {
                         domains.getInfrastructureByDomain(obj);
                     });
@@ -734,6 +754,35 @@ $scope.themeSettingList();
 
     domains.getDomainList();
 
+
+
+
+    // System vms
+    var systemVms = {
+            systemVmOfflineCount: 0,
+            systemVmOnlineCount:0,
+            getSystemVmList: function() {
+                $scope.showSystemVmsLoader = true;
+                var hasResponse = appService.crudService.listAll("dashboard/systemhealth/vms");
+                hasResponse.then(function (result) {
+                    $scope.showSystemVmsLoader = false;
+                    angular.forEach(result, function(obj, key) {
+                        if(obj.state == "Running") {
+                            systemVms.systemVmOnlineCount++;
+                        }
+
+                        if(obj.state == "Stopped") {
+                            systemVms.systemVmOfflineCount++;
+                        }
+
+                        $scope.systemHealth.systemVmOnlineCount = systemVms.systemVmOnlineCount;
+                        $scope.systemHealth.systemVmOfflineCount = systemVms.systemVmOfflineCount;
+                    });
+
+                });
+            }
+    }
+    systemVms.getSystemVmList();
 
 
 
