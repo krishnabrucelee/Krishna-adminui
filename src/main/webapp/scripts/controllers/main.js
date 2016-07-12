@@ -6,15 +6,15 @@
 
 angular
         .module('panda-ui-admin').filter('to_trusted', ['$sce', function($sce){
-	        return function(text) {
-	            return $sce.trustAsHtml(text);
-	        };
-	    }]).controller('appCtrl', appCtrl);
+            return function(text) {
+                return $sce.trustAsHtml(text);
+            };
+        }]).controller('appCtrl', appCtrl);
 
 function appCtrl($http, $scope, $timeout, $rootScope, $modal, $window, globalConfig, localStorageService, promiseAjax, $cookies, appService) {
 
-	$scope.global = appService.globalConfig;
-	$scope.owner = {};
+    $scope.global = appService.globalConfig;
+    $scope.owner = {};
     $scope.paginationObject = {};
     $scope.sort = appService.globalConfig.sort;
     $scope.paginationObject.sortOrder = '-';
@@ -26,10 +26,10 @@ function appCtrl($http, $scope, $timeout, $rootScope, $modal, $window, globalCon
     };
 
     if (!angular.isUndefined($scope.global.sessionValues.id)) {
-	    var hasUsers = appService.crudService.read("users", $scope.global.sessionValues.id);
-	    hasUsers.then(function (result) {
-	        $scope.owner = result;
-	    });
+        var hasUsers = appService.crudService.read("users", $scope.global.sessionValues.id);
+        hasUsers.then(function (result) {
+            $scope.owner = result;
+        });
     }
 
     $scope.splashTitle = localStorageService.get('splashTitle');
@@ -40,8 +40,8 @@ function appCtrl($http, $scope, $timeout, $rootScope, $modal, $window, globalCon
         var limit = 10;
             var hasactionServer = appService.promiseAjax.httpTokenRequest($scope.global.HTTP_GET, $scope.global.APP_URL + "events/list/read-event" +"?lang=" + localStorageService.cookie.get('language') + "&sortBy="+$scope.paginationObject.sortOrder+$scope.paginationObject.sortBy+"&limit=10", $scope.global.paginationHeaders(pageNumber, limit), {"limit": limit});
             hasactionServer.then(function (result) {  // this is only run after $http completes
-            	 if(result.length>0){
-                 	$scope.activityList = result[0];
+                 if(result.length>0){
+                     $scope.activityList = result[0];
                      var msg = result[0].message;
                 if (msg.length > 50) {
                     msg =  msg.slice(0, 50) + '...';
@@ -53,7 +53,7 @@ function appCtrl($http, $scope, $timeout, $rootScope, $modal, $window, globalCon
                      $scope.paginationObject.totalItems = result.totalItems;
                      $scope.global.event = result.totalItems;
                      }else{
-                     	$scope.global.event = 0;
+                         $scope.global.event = 0;
                      }
             });
         };
@@ -63,20 +63,20 @@ function appCtrl($http, $scope, $timeout, $rootScope, $modal, $window, globalCon
         $rootScope.deleteEvent = function () {
             var hasServer = appService.crudService.softDelete("events", $scope.activityList);
             hasServer.then(function(){
-        	    $scope.getActivity(1);
+                $scope.getActivity(1);
             });
         }
 
     //List the event
     $rootScope.listEvent = function () {
-    	var hasServer = appService.promiseAjax.httpTokenRequest( $scope.global.HTTP_PUT , $scope.global.APP_URL + "events/event-update"  +"/"+$scope.activityList.id);
-    	hasServer.then(function(){
-    	    $scope.getActivity(1);
+        var hasServer = appService.promiseAjax.httpTokenRequest( $scope.global.HTTP_PUT , $scope.global.APP_URL + "events/event-update"  +"/"+$scope.activityList.id);
+        hasServer.then(function(){
+            $scope.getActivity(1);
         });
     }
 
     $rootScope.showDescriptions = function () {
-    	var hasServer = appService.promiseAjax.httpTokenRequest( $scope.global.HTTP_PUT , $scope.global.APP_URL + "events/event-update"  +"/"+$scope.activityList.id);
+        var hasServer = appService.promiseAjax.httpTokenRequest( $scope.global.HTTP_PUT , $scope.global.APP_URL + "events/event-update"  +"/"+$scope.activityList.id);
         $scope.currentActivity = $scope.activityList;
         $scope.activityList.pageTitle = $scope.pageTitle;
         $scope.activityList.category = $scope.activity.category;
@@ -107,13 +107,13 @@ function appCtrl($http, $scope, $timeout, $rootScope, $modal, $window, globalCon
 
     $scope.appLanguage = function() {
         if(localStorageService.cookie.get('language') == null) {
-        	var hasConfigs = appService.crudService.listAll("generalconfiguration/configlist");
+            var hasConfigs = appService.crudService.listAll("generalconfiguration/configlist");
             hasConfigs.then(function (result) {
                 $scope.generalconfiguration = result[0];
                 if ($scope.generalconfiguration.defaultLanguage == 'Chinese') {
-                	localStorageService.cookie.set('language', 'zh');
+                    localStorageService.cookie.set('language', 'zh');
                 } else {
-                	localStorageService.cookie.set('language', 'en');
+                    localStorageService.cookie.set('language', 'en');
                 }
             });
         }
@@ -121,16 +121,16 @@ function appCtrl($http, $scope, $timeout, $rootScope, $modal, $window, globalCon
     }();
 
     $scope.themeSettingList = function () {
-	return $http({method:'get', url: REQUEST_PROTOCOL  + $window.location.hostname +':8080/home/list'})
-	.then(function(result){
-		$scope.themeSettings = result.data[0];
-		 $scope.welcomeContent = result.data[0].welcomeContent;
-		 $scope.footerContent = result.data[0].footerContent;
-		 $scope.splashTitle= result.data[0].splashTitle;
+    return $http({method:'get', url: REQUEST_PROTOCOL  + $window.location.hostname +':8080/home/list'})
+    .then(function(result){
+        $scope.themeSettings = result.data[0];
+         $scope.welcomeContent = result.data[0].welcomeContent;
+         $scope.footerContent = result.data[0].footerContent;
+         $scope.splashTitle= result.data[0].splashTitle;
 
-		 $cookies.splashTitle = result.data[0].splashTitle;
+         $cookies.splashTitle = result.data[0].splashTitle;
 
-	});
+    });
 };
 $scope.themeSettingList();
 
@@ -335,7 +335,7 @@ $scope.themeSettingList();
 
     // Update language
     $scope.updateLanguage = function(language) {
-    	 localStorageService.cookie.set('language', language);
+         localStorageService.cookie.set('language', language);
          $window.location.reload();
     }
 
@@ -343,7 +343,7 @@ $scope.themeSettingList();
      *  Logout a user.
      */
     $scope.logout = function() {
-    	appService.utilService.logoutApplication("LOGOUT");
+        appService.utilService.logoutApplication("LOGOUT");
     }
 
 
@@ -438,7 +438,7 @@ $scope.themeSettingList();
     ];
 
     $scope.doughnutData2 = [
-	{
+    {
             value: 73,
             color: "#f0ad4e",
             highlight: "#f0ad4e",
@@ -453,7 +453,7 @@ $scope.themeSettingList();
 
     ];
     $scope.doughnutData3 = [
-	{
+    {
             value: 22,
             color: "#48a9da",
             highlight: "#48a9da",
@@ -468,7 +468,7 @@ $scope.themeSettingList();
 
     ];
     $scope.doughnutData4 = [
-	{
+    {
             value: 88,
             color: "#df6457",
             highlight: "#df6457",
@@ -581,18 +581,220 @@ $scope.themeSettingList();
     ];
 
     $scope.updatePagination = function (limit) {
-  	  var hasResult = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET,
-    			appService.globalConfig.APP_URL + "users" +"/paginationLimit/"+limit);
+        var hasResult = appService.promiseAjax.httpTokenRequest(appService.globalConfig.HTTP_GET,
+                appService.globalConfig.APP_URL + "users" +"/paginationLimit/"+limit);
         hasResult.then(function(result) {
-      	  globalConfig.CONTENT_LIMIT = limit;
-      	  var currentSession = JSON.parse($window.sessionStorage.getItem("pandaUserSession"));
-  	      currentSession.paginationLimit = limit;
+            globalConfig.CONTENT_LIMIT = limit;
+            var currentSession = JSON.parse($window.sessionStorage.getItem("pandaUserSession"));
+            currentSession.paginationLimit = limit;
           $window.sessionStorage.setItem("pandaUserSession", JSON.stringify(currentSession));
         });
     };
 
+
+    /** Zone resources */
+    $scope.zoneResourceList= [];
+    var zone = {
+            getZoneResourceByZone: function(zone) {
+                $scope.showZoneInfraLoader = true;
+                var id = zone.uuid;
+                $scope.zoneName = zone.name;
+
+                var zoneResources = [];
+                var resourcesArr = ["CPU", "Memory", "VLAN/VNI", "Mngt IpAddress","Public IpAddress",
+                                    "Secondary Storage", "Primary Storage Used", "GPU"];
+                var hasZoneResource = appService.crudService.listAll("dashboard/resource/zone/"+ id);
+                hasZoneResource.then(function (result) {
+                    $scope.showZoneInfraLoader = false;
+                    if(result.length > 0) {
+
+                        zoneResources = result;
+                        angular.forEach(zoneResources, function(obj, key) {
+                            var total = zoneResources[key].capacitytotal;
+                            var used = zoneResources[key].capacityused;
+                            var label = "";
+                            if(obj.type == 1) {
+                                total = (zoneResources[key].capacitytotal / 1000);
+                                used = (zoneResources[key].capacityused / 1000);
+                                label = " Ghz";
+                            }
+                            if(obj.type == 2 || obj.type == 6 || obj.type == 0) {
+                                total = (zoneResources[key].capacitytotal / (1024 * 1024 * 1024)).toFixed(2);
+                                used = (zoneResources[key].capacityused / (1024 * 1024 * 1024)).toFixed(2);
+                                label = " GB";
+                            }
+
+                            zoneResources[key].capacitytotal = total + label;
+                            zoneResources[key].capacityused = used + label;
+
+
+                            var usedColor = "#48a9da";
+                            if(obj.percentused > 79 && obj.percentused < 90) {
+                                usedColor = "#f0ad4e";
+                            } else if(obj.percentused > 89){
+                                usedColor = "#df6457";
+                            }
+
+                            var unUsed = total - used;
+                            if(angular.isUndefined($scope.zoneResourceList[obj.type])) {
+                                $scope.zoneResourceList[obj.type] = [];
+                            }
+                            $scope.zoneResourceList[obj.type].doughnutData = [
+                                   {
+                                   value: parseInt(used),
+                                   color: usedColor,
+                                   highlight: usedColor,
+                                   label: "Used"
+                                   },
+                                   {
+                                   value: unUsed,
+                                   color: "#ebf1f4",
+                                   highlight: "#ebf1f4",
+                                   label: "UnUsed"
+                                   }];
+
+                            zoneResources[key].color = usedColor;
+                        })
+
+
+                        zoneResources[1].order = 3;
+                        zoneResources[1].label = "CPU";
+
+                        zoneResources[2].order = 2;
+                        zoneResources[2].label = "Memory";
+
+                        zoneResources[3].order = 7;
+                        zoneResources[3].label = "VLAN/VNI";
+
+                        zoneResources[4].order = 4;
+                        zoneResources[4].label = "Mngt IpAddress";
+
+                        zoneResources[5].order = 1;
+                        zoneResources[5].label = "Public IpAddress";
+
+                        zoneResources[6].order = 5;
+                        zoneResources[6].label = "Secondary Storage";
+
+                        zoneResources[7].order = 6;
+                        zoneResources[7].label = "Primary Storage";
+
+                        zoneResources[8].order = 8;
+                        zoneResources[8].label = "GPU";
+                        zoneResources.shift();
+
+
+                    }
+                    $scope.zoneResources = zoneResources;
+                });
+            },
+
+            getZoneList: function() {
+                var hasZones = appService.crudService.listAll("zones/list");
+                hasZones.then(function (result) {
+                    zone.getZoneResourceByZone(result[0]);
+                });
+            }
+    }
+    // Get the zone list
+    zone.getZoneList();
+
+
+    $scope.systemHealth = {};
+    var hosts = {
+            hostOfflineCount: 0,
+            hostOnlineCount:0,
+            getHostStatusList: function() {
+                $scope.showHostsLoader = true;
+                var hasResponse = appService.crudService.listAll("dashboard/systemhealth/hosts");
+                hasResponse.then(function (result) {
+                    $scope.showHostsLoader = false;
+                    angular.forEach(result, function(obj, key) {
+                        if(obj.state == "Up") {
+                            hosts.hostOnlineCount++;
+                        }
+                        if(obj.state == "Down" || obj.state == "Disconnected") {
+                            hosts.hostOfflineCount++;
+                        }
+                        $scope.systemHealth.hostOnlineCount = hosts.hostOnlineCount;
+                        $scope.systemHealth.hostOfflineCount = hosts.hostOfflineCount;
+                    });
+                });
+            }
+    };
+    hosts.getHostStatusList();
+
+
+    var clientResourceList = [];
+
+    var domains = {
+
+            getDomainList: function() {
+                $scope.clientResourceList= [];
+                $scope.showClientResourcesLoader=true;
+                var hasDomains = appService.crudService.listAll("domains/list");
+                hasDomains.then(function (result) {
+                     clientResourceList= [];
+                    $scope.showClientResourcesLoader = false;
+                    angular.forEach(result, function(obj, key) {
+                        domains.getInfrastructureByDomain(obj);
+                    });
+                });
+            },
+
+            getInfrastructureByDomain: function(domain) {
+                var domainId = domain.id;
+                var hasResponse = appService.crudService.listAll("dashboard/infrastructure/domain/"+ domainId);
+                hasResponse.then(function (result) {
+                    result.domainName = domain.name;
+                    $scope.clientResourceList.push(result);
+                });
+            }
+    };
+
+    domains.getDomainList();
+
+    $scope.propertyName = 'domainName';
+    $scope.reverse = true;
+    $scope.domainSortBy = function(propertyName) {
+        $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
+        $scope.propertyName = propertyName;
+    }
+    $scope.domainSortBy ('domainName');
+
+
+
+
+    // System vms
+    var systemVms = {
+            systemVmOfflineCount: 0,
+            systemVmOnlineCount:0,
+            getSystemVmList: function() {
+                $scope.showSystemVmsLoader = true;
+                var hasResponse = appService.crudService.listAll("dashboard/systemhealth/vms");
+                hasResponse.then(function (result) {
+                    $scope.showSystemVmsLoader = false;
+                    angular.forEach(result, function(obj, key) {
+                        if(obj.state == "Running") {
+                            systemVms.systemVmOnlineCount++;
+                        }
+
+                        if(obj.state == "Stopped") {
+                            systemVms.systemVmOfflineCount++;
+                        }
+
+                        $scope.systemHealth.systemVmOnlineCount = systemVms.systemVmOnlineCount;
+                        $scope.systemHealth.systemVmOfflineCount = systemVms.systemVmOfflineCount;
+                    });
+
+                });
+            }
+    }
+    systemVms.getSystemVmList();
+
+
+
     $scope.$on("notification", function(event, args) {
-  	  $scope.getActivity(1);
-  	   	 });
+        $scope.getActivity(1);
+              });
 
 }
