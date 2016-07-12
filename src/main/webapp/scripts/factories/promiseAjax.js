@@ -190,14 +190,12 @@ function uploadServicesIcon($http) {
         } else {
             fd.append("description",services.description);
         }
-        console.log(services.servicesCost);
         if (angular.isUndefined(services.servicesCost) || services.servicesCost == null || services.servicesCost == "") {
         	fd.append("serviceCost",0.0);
         } else {
             fd.append("serviceCost",services.servicesCost[0].cost);
         }
-        console.log(services);
-        console.log(services.servicesCost);
+        fd.append('zoneId',services.zone.id);
         return $http.post(globalConfig.APP_URL + "services/saveService", fd, {
             transformRequest : angular.identity,
             headers : {

@@ -87,6 +87,16 @@
 		               </div>
                    </div>
                 </div>
+                <div class="form-group">
+                   <div class="row">
+                       <label  class="col-md-3 col-xs-12 col-sm-2 control-label"><fmt:message key="common.zonename" bundle="${msg}" /></label>
+                       <div class="col-md-5 col-xs-12 col-sm-5">
+                            {{ services.zone.name }}
+                            <input type="hidden" id="edit_zone" name="zone"
+                            data-ng-model="services.zone" />
+		               </div>
+                   </div>
+                </div>
            	<div class="row form-group text-center">
            		<a class="btn btn-default" ng-click="cancel()"> <fmt:message key="common.cancel" bundle="${msg}" /> </a>
 				<button class="btn btn-info" data-ng-hide="showLoader" type="submit"><fmt:message key="common.update" bundle="${msg}" /></button>
