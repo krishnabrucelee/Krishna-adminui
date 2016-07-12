@@ -165,7 +165,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="slimScroll-175">
                     <div class="row" data-ng-show="showClientResourcesLoader">
                         <div class="col-md-12 text-center">
                             <div class="loader-img-wrapper">
@@ -174,38 +173,40 @@
                         </div>
                     </div>
                     <div class="table-responsive" data-ng-hide="showClientResourcesLoader">
-                        <table cellspacing="1" cellpadding="1" class="table table-bordered table-striped">
+                     <table cellspacing="1" cellpadding="1" class="table dataTable table-bordered table-striped m-b-xs">
                             <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Company Name</th>
-                                <th>Total VMs</th>
-                                <th>Total vCPUs</th>
-                                <th>Total RAM</th>
-                                <th>Total Primary Storage</th>
-                                <th>Total Secondary Storage</th>
-                                <th>Total Public IP</th>
+                                <th class="col-md-3" data-ng-class="reverse && propertyName =='domainName'? 'sorting_desc' : 'sorting_asc' " data-ng-click="domainSortBy('domainName')">Company Name</th>
+                                <th class="col-md-1" data-ng-class="reverse && propertyName =='totalCount'? 'sorting_desc' : 'sorting_asc' " data-ng-click="domainSortBy('totalCount')">Total VMs</th>
+                                <th class="col-md-1" data-ng-class="reverse && propertyName =='vcpu'? 'sorting_desc' : 'sorting_asc' " data-ng-click="domainSortBy('vcpu')">Total vCPUs</th>
+                                <th class="col-md-1" data-ng-class="reverse && propertyName =='ram'? 'sorting_desc' : 'sorting_asc' " data-ng-click="domainSortBy('ram')">Total RAM</th>
+                                <th class="col-md-1" data-ng-class="reverse && propertyName =='storage'? 'sorting_desc' : 'sorting_asc' " data-ng-click="domainSortBy('storage')">Total Primary Storage</th>
+                                <th class="col-md-1" data-ng-class="reverse && propertyName =='secondaryStorage'? 'sorting_desc' : 'sorting_asc' " data-ng-click="domainSortBy('secondaryStorage')">Total Secondary Storage</th>
+                                <th class="col-md-1" data-ng-class="reverse && propertyName =='publicIp'? 'sorting_desc' : 'sorting_asc' " data-ng-click="domainSortBy('publicIp')">Total Public IP</th>
                             </tr>
                             </thead>
+                    </table>
+                    </div>
+                    <div class="slimScroll-175">
+                    <div class="table-responsive" data-ng-hide="showClientResourcesLoader">
+                        <table cellspacing="1" cellpadding="1" class="table table-bordered table-striped">
+
                             <tbody data-ng-show="clientResourceList.length > 0" >
-                            <tr data-ng-repeat="clientObj in clientResourceList">
-                                <td>{{$index}}</td>
-                                <td>{{clientObj.domainName}}</td>
-                                <td>{{clientObj.totalCount}}</td>
-                                <td>{{clientObj.vcpu}}</td>
-                                <td>{{clientObj.ram}}</td>
-                                <td>500 GB</td>
-                                <td>{{clientObj.storage}}</td>
-                                <td>{{clientObj.publicIp}}</td>
+                            <tr data-ng-repeat="clientObj in clientResourceList | orderBy:propertyName:reverse ">
+                                <td class="col-md-3">{{clientObj.domainName}}</td>
+                                <td class="col-md-1">{{clientObj.totalCount}}</td>
+                                <td class="col-md-1">{{clientObj.vcpu}}</td>
+                                <td class="col-md-1">{{clientObj.ram}}</td>
+                                <td class="col-md-1">{{clientObj.storage}}</td>
+                                <td class="col-md-1">{{clientObj.secondaryStorage}}</td>
+                                <td class="col-md-1">{{clientObj.publicIp}}</td>
                             </tr>
-                            </div>
                             </tbody>
                         </table>
                     </div>
-
+                    </div>
 
                 </div>
-            </div>
         </div>
 
 

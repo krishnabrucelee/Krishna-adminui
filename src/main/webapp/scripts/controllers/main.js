@@ -729,7 +729,7 @@ $scope.themeSettingList();
     var domains = {
 
             getDomainList: function() {
-                clientResourceList= [];
+                $scope.clientResourceList= [];
                 $scope.showClientResourcesLoader=true;
                 var hasDomains = appService.crudService.listAll("domains/list");
                 hasDomains.then(function (result) {
@@ -746,13 +746,20 @@ $scope.themeSettingList();
                 var hasResponse = appService.crudService.listAll("dashboard/infrastructure/domain/"+ domainId);
                 hasResponse.then(function (result) {
                     result.domainName = domain.name;
-                    clientResourceList.push(result);
-                    $scope.clientResourceList = clientResourceList;
+                    $scope.clientResourceList.push(result);
                 });
             }
     };
 
     domains.getDomainList();
+
+    $scope.propertyName = 'domainName';
+    $scope.reverse = true;
+    $scope.domainSortBy = function(propertyName) {
+        $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
+        $scope.propertyName = propertyName;
+    }
+    $scope.domainSortBy ('domainName');
 
 
 
