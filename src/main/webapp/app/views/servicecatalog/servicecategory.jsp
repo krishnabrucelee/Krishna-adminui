@@ -65,30 +65,10 @@
                             <td>
                                 {{ servicecategory.description}}
                             </td>
-                    <%--                                         <td>
-                                    <a class="icon-button test_storage_offerings_edit_button" id="storage_offerings_edit_button_{{storage.id}}" data-unique-field="{{storage.name}}"  ui-sref="servicecatalog.list-storage.list-view-storage-offer({id: {{ storage.id}}})" title="<fmt:message
-									key="common.edit" bundle="${msg}" />"  ><span class="fa fa-edit m-r"></span></a>
-<!--                                     <a class="icon-button" title="Enable" data-ng-hide="storage.state == 'Enable'">
-                                        <span class="fa fa-play m-r" ></span>
-                                    </a> -->
-<!--                                     <a class="icon-button" title="Disable" data-ng-show="storage.state == 'Disable'">
-                                        <span class="fa fa-ban m-r" ></span>
-                                    </a> -->
-
-                                    <a class="icon-button test_storage_offerings_delete_button" id="storage_offerings_delete_button_{{storage.id}}" data-unique-field="{{storage.name}}" title="<fmt:message
-									key="common.delete" bundle="${msg}" />" data-ng-click="delete('sm', storage)" ><span class="fa fa-trash"></span></a>
-                                </td> --%>
                                 <td>
-                                    <a class="icon-button test_storage_offerings_edit_button" data-ng-click="editServicecategory('md', servicecategory)" title="<fmt:message
+                                    <a data-ng-if = "servicecategory.category != 'INFRASTRUCTURE'" class="icon-button test_storage_offerings_edit_button" data-ng-click="editServicecategory('md', servicecategory)" title="<fmt:message
 									key="common.edit" bundle="${msg}" />"  ><span class="fa fa-edit m-r"></span></a>
-<!--                                     <a class="icon-button" title="Enable" data-ng-hide="storage.state == 'Enable'">
-                                        <span class="fa fa-play m-r" ></span>
-                                    </a> -->
-<!--                                     <a class="icon-button" title="Disable" data-ng-show="storage.state == 'Disable'">
-                                        <span class="fa fa-ban m-r" ></span>
-                                    </a> -->
-
-                                    <a class="icon-button test_storage_offerings_delete_button" title="<fmt:message
+                                    <a data-ng-if = "servicecategory.category != 'INFRASTRUCTURE'" class="icon-button test_storage_offerings_delete_button" title="<fmt:message
 									key="common.delete" bundle="${msg}" />" data-ng-click="delete('sm', servicecategory)" ><span class="fa fa-trash"></span></a>
                                 </td>
                         </tr>

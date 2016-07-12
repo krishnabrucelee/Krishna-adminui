@@ -74,6 +74,13 @@ hasServiceCategory.then(function (result) {
 	$scope.formElements.serviceCategoryList = result;
 });
 
+//Zone list from server
+$scope.zones = {};
+var haszoneList = appService.crudService.listAll("zones/list");
+haszoneList.then(function (result) {
+	$scope.formElements.zoneList = result;
+});
+
 // Services List
 $scope.list = function (pageNumber) {
     appService.globalConfig.sort.sortOrder = $scope.paginationObject.sortOrder;
@@ -112,7 +119,20 @@ $scope.addServices = function (size) {
         // Create a services
         $scope.save = function (form, services) {
         	$scope.formSubmitted = true;
-            if (form.$valid) {
+        	$scope.duplicateCheck = true;
+        	angular.forEach($scope.servicesList, function(obj, key) {
+                if (obj.serviceCode == services.serviceCode) {
+                	$scope.duplicateCheck = false;
+                	$scope.servicesForm["serviceCode"].$invalid = true;
+                	$scope.servicesForm["serviceCode"].errorMessage = "Service code already exist";
+                }
+                if (obj.serviceName == services.serviceName) {
+                	$scope.duplicateCheck = false;
+                	$scope.servicesForm["serviceName"].$invalid = true;
+                	$scope.servicesForm["serviceName"].errorMessage = "Service name already exist";
+                }
+            });
+            if (form.$valid && $scope.duplicateCheck) {
             	$scope.showLoader = true;
             	var hasServices = appService.uploadServicesIcon.updateService(services, appService.promiseAjax.httpTokenRequest, appService.globalConfig,
             			$cookies,localStorageService);
@@ -144,9 +164,11 @@ $scope.addServices = function (size) {
 
 $scope.editServices = function (size, services) {
     $scope.services = {};
+    $scope.servicesCopy = {};
 	var hasServices = appService.crudService.read("services", services.id);
 	hasServices.then(function (result) {
         $scope.services = result;
+        $scope.servicesCopy = angular.copy(result);
         if ($scope.services.serviceCost == 0) {
         	$scope.services.serviceCost = null;
         }
@@ -157,7 +179,15 @@ $scope.editServices = function (size, services) {
         // Edit services
         $scope.edit = function (form, services) {
             $scope.formSubmitted = true;
-            if (form.$valid) {
+            $scope.duplicateCheck = true;
+        	angular.forEach($scope.servicesList, function(obj, key) {
+                if (obj.serviceName == services.serviceName && $scope.servicesCopy.serviceName != services.serviceName) {
+                	$scope.duplicateCheck = false;
+                	$scope.servicesForm["serviceName"].$invalid = true;
+                	$scope.servicesForm["serviceName"].errorMessage = "Service name already exist";
+                }
+            });
+            if (form.$valid && $scope.duplicateCheck) {
             	$scope.showLoader = true;
             	var hasServices = appService.uploadServicesIcon.updateService(services, appService.promiseAjax.httpTokenRequest, appService.globalConfig,
             			$cookies,localStorageService);

@@ -93,10 +93,28 @@
                            <div class="col-md-5 col-xs-12 col-sm-5">
                                <input type="text" name="description" data-ng-model="services.description" class="form-control">
                                <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="common.description" bundle="${msg}" />" ></i>
-						       </div>
-                           </div>
+			               </div>
                        </div>
                 </div>
+                <div class="form-group" data-ng-class="{ 'text-danger' : servicesForm.zone.$invalid && formSubmitted}">
+                   <div class="row">
+                       <label  class="col-md-3 col-xs-12 col-sm-2 control-label"><fmt:message key="common.zonename" bundle="${msg}" />
+                           <span class="text-danger">*</span>
+                       </label>
+                       <div class="col-md-5 col-xs-12 col-sm-5">
+                           <select required="true" class="form-control input-group" name="zone" data-ng-model="services.zone" ng-options="zone.name for zone in formElements.zoneList" data-ng-class="{'error': servicesForm.zone.$invalid && formSubmitted}" >
+                               <option value=""><fmt:message key="common.select" bundle="${msg}" /></option>
+                           </select>
+                           <i class="pe-7s-help1 pe-lg m-l-n-sm tooltip-icon" tooltip="<fmt:message key="common.zonename" bundle="${msg}" />" ></i>
+                           <div class="error-area" data-ng-show="servicesForm.zone.$invalid && formSubmitted" >
+                           <i ng-attr-tooltip="{{ servicesForm.zone.errorMessage || '<fmt:message key="zone.is.required" bundle="${msg}" />' }}"
+				           class="fa fa-warning error-icon">
+			               </i>
+		               </div>
+                       </div>
+                   </div>
+                </div>
+            </div>
            	<div class="row form-group text-center">
            		<a class="btn btn-default" ng-click="cancel()"> <fmt:message key="common.cancel" bundle="${msg}" /> </a>
 				<button class="btn btn-info" data-ng-hide="showLoader" type="submit"><fmt:message key="common.add" bundle="${msg}" /></button>

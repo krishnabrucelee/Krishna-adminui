@@ -12,6 +12,7 @@ function servicecategoryCtrl($scope, promiseAjax, crudService, appService, globa
 
     $scope.default_option = true
     $scope.servicecategoryList = {};
+    $scope.servicecategoryCopy = {};
     $scope.revokes = false;
     $scope.paginationObject = {};
     $scope.global = crudService.globalConfig;
@@ -119,11 +120,18 @@ function servicecategoryCtrl($scope, promiseAjax, crudService, appService, globa
 	appService.dialogService.openDialog($scope.global.VIEW_URL + "servicecatalog/servicecategoryCreate.jsp", size, $scope, ['$scope', '$modalInstance', '$rootScope',
                                                                                              function ($scope, $modalInstance, $rootScope) {
 
-
             // Create a new application
             $scope.save = function (form, servicecategory) {
             	$scope.formSubmitted = true;
-                if (form.$valid) {
+            	$scope.duplicateCheck = true;
+            	angular.forEach($scope.servicecategoryList, function(obj, key) {
+	                if (obj.category == servicecategory.category) {
+	                	$scope.duplicateCheck = false;
+	                	$scope.servicecategoryForm["category"].$invalid = true;
+                    	$scope.servicecategoryForm["category"].errorMessage = "Category name already exist";
+	                }
+                });
+                if (form.$valid && $scope.duplicateCheck) {
                 	$scope.showLoader = true;
                 	var hasServicecategory = appService.crudService.add("serviceCategory", servicecategory);
                     hasServicecategory.then(function (result) {
@@ -159,6 +167,7 @@ $scope.editServicecategory = function (size, servicecategory) {
 	var hasServicecategory = appService.crudService.read("serviceCategory", servicecategory.id);
 	hasServicecategory.then(function (result) {
         $scope.servicecategory = result;
+        $scope.servicecategoryCopy = angular.copy(result);
     });
 	appService.dialogService.openDialog($scope.global.VIEW_URL + "servicecatalog/servicecategoryEdit.jsp", size, $scope, ['$scope', '$modalInstance', '$rootScope',
                                                                                              function ($scope, $modalInstance, $rootScope) {
@@ -167,7 +176,15 @@ $scope.editServicecategory = function (size, servicecategory) {
             // Create a new application
             $scope.edit = function (form, servicecategory) {
                 $scope.formSubmitted = true;
-                if (form.$valid) {
+                $scope.duplicateCheck = true;
+            	angular.forEach($scope.servicecategoryList, function(obj, key) {
+	                if (obj.category == servicecategory.category && $scope.servicecategoryCopy.category != servicecategory.category) {
+	                	$scope.duplicateCheck = false;
+	                	$scope.servicecategoryForm["category"].$invalid = true;
+                    	$scope.servicecategoryForm["category"].errorMessage = "Category name already exist";
+	                }
+                });
+                if (form.$valid && $scope.duplicateCheck) {
                 	$scope.showLoader = true;
                     var hasServicecategory = appService.crudService.update("serviceCategory", servicecategory);
                     hasServicecategory.then(function (result) {
