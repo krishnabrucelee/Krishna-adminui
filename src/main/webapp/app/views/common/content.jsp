@@ -332,6 +332,14 @@
 										bundle="${msg}" />
 							</span>
 							</span>
+							<span ng-if="state.data.pageTitle === 'Theme Settings'"> <a
+								ng-switch-when="false"
+								href="{{'#' + state.url.format($state.params)}}"><fmt:message
+										key="theme.settings" bundle="${msg}" /></a> <span
+								ng-switch-when="true"><fmt:message key="theme.settings"
+										bundle="${msg}" />
+							</span>
+							</span>
 							<span ng-if="state.data.pageTitle === 'Login Security'"> <a
 								ng-switch-when="false"
 								href="{{'#' + state.url.format($state.params)}}"><fmt:message
